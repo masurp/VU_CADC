@@ -1,3 +1,13 @@
 # Computational Analysis of Digital Communication
 
-Material for the course "Computational Analysis of Digital Communication" at the VU Amsterdam
+
+
+This course introduces data science technologies and techniques to study communication processes and effects in novel and innovative ways. Learning data science and computational methods is useful because it provides new skills and much thought-after qualifications in the job market, but also allows us to tap into new areas of research and to gain a better understanding of today’s society. 
+
+On the one hand, this both enables and incentivizes us to expand our methodological toolkit. To study political communication, we can now turn our gaze to countless communication artifacts from political parties and organizations. In media psychological research, we can make use of log data and advanced analytical procedures to measure effects at new and fine-grained levels. In the field of corporate communication, the rise of social media as central communication platforms not only requires our attention, but also enables new ways to study marketing and public relations in a natural setting and on a massive scale.
+
+On the other hand, the digital era has also given way to new key phenomena in communication that are difficult to understand without a general understanding of data science technologies. Indeed, scientists are not the only ones using these technologies. More and more facets of digital life are becoming at least partially managed by algorithms. Decisions of journalists, politicians, and organizations are increasingly based on metrics of collective human behavior. In the best cases, these developments can enhance lives. In the worst cases, they can foster fake news and undermine democracy. In all cases, it is becoming increasingly difficult to understand the impact of these developments without knowing the possibilities and limits of computers.
+
+In the course, students will learn about common computational methods in Communication Science. They will learn how to use the statistical programming environment R to a) import various data formats as well as gather data from online sources, b) transform and wrangle data to get it ready for analysis, c) perform text analysis (including machine learning approaches), d) perform advanced statistical methods in line with their chosen specialization (e.g., time series analysis, multilevel analysis, factor analyses and structural equation modeling, analysis of variance based on experimental data).
+Based on a problem-based learning approach, each lecture introduces a new empirical problem and discusses methods and statistical approaches that can solve the problem. Students then learn how to conduct these methodological solutions in the practical sessions and are given the opportunity to further practice these approaches in further homework assignments. 
+
