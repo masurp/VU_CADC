@@ -10,6 +10,8 @@ navbar:
       href: overview.html
     - text: "Material"
       href: material.html
+    - text: "Contact"
+      href: contact.html
 output:
   html_document:
   theme: cosmo
