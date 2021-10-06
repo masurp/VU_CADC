@@ -1,0 +1,13 @@
+name: "vu_cadc"
+output_dir: "."
+navbar:
+  title: "Home"
+  type: inverse
+  left:
+    - text: "Content & Learning Goals"
+      href: content.html
+    - text: "Course Overview"
+      href: overview.html
+output:
+  html_document:
+  theme: cosmo
