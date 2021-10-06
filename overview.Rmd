@@ -2,10 +2,21 @@
 title: "Course Overview"
 ---
 
+The course consists of one lecture (starting from the 1st of November 2021) and two practical sessions. For the practical sessions, the group will be split into six groups of equal size. 
 
-Lectures are held in room: HG-14A00
+<br>
+#### Rooms and Times
 
-<br><br>
+- Lectures: **HG-14A00** (Monday, 9:00am)
+- Practical session 1: **HG-01A32** (Tuesday, 9:00), **HG-11A22** (Thursday, 13:30)
+- Practical session 2: **HG-11A36** (Tuesday, 9:00 & Thursday, 13:30)
+- Practical session 3: **HG-02A37** (Tuesday, 9:00 & Thursday, 13:30am)
+- Practical session 4: **HG-01A32** (Tuesday, 11:00), **HG-11A22** (Thursday, 15:30am)
+- Practical session 5: **HG-11A36** (Tuesday, 11:00 & Thursday, 15:30am)
+- Practical session 6: **HG-02A37** (Tuesday, 11:00 & Thursday, 15:30am)
+
+
+<br>
 
 ### Cycle 1: Data Wrangling
 
@@ -18,7 +29,8 @@ Lectures are held in room: HG-14A00
 | 09/11/21 | 2 | Practical session | Importing different data into R | Van Atteveldt et al., 2021 (chap. 5.1, 5.2) | - |
 | 11/11/21 | 2 | Practical session | Web scraping | Van Atteveldt et al., 2021 (chap. 5.3 & 12) | Homework Assignment 2 |
 
-<br><br>
+<br>
+
 ### Cycle 2: Text Analysis and Machine Learning
 
 | Date | Week | Type | Content | Required Readings | Assignments |
@@ -30,17 +42,17 @@ Lectures are held in room: HG-14A00
 | 23/11/21 | 4 | Practical session | Supervised learning | Van Atteveldt et al., 2021 (chap. 11.3) | - |
 | 25/11/21 | 4 | Practical session | Unsupervised learning | Van Atteveldt et al., 2021 (chap. 11.4) | Homework Assignment 4 |
 
-<br><br>
+<br>
 
 ### Exam week
 
 The written exam will take place on the *3rd of December 2021* at *08:30am*. 
 
-<br><br>
+<br>
 
 ### Cycle 3: Spezializations
 
-*Alternative 1*
+#### Alternative 1
 
 | Date | Week | Type | Content | Required Readings | Assignments |
 |---|--|----| ---------- | ------- | ------- |
@@ -51,9 +63,9 @@ The written exam will take place on the *3rd of December 2021* at *08:30am*.
 | 14/12/21 | 7 | Practical session | Structural equation modeling I | Example: Masur et al., 2021 | - |
 | 16/12/21 | 7 |  Practical session | Structural equation modeling II | Example: Veldhuis et al., 2020 | - |
 
-<br><br>
+<br>
 
-*Alternative 2*
+#### Alternative 2
 
 | Date | Week | Type | Content | Required Readings | Assignments |
 |---|--|----| ---------- | ------- | ------- |
@@ -67,7 +79,7 @@ The written exam will take place on the *3rd of December 2021* at *08:30am*.
 
 <br><br>
 
-*Alternative 3*
+#### Alternative 3
 
 | Date | Week | Type | Content | Required Readings | Assignments |
 |---|--|----| ---------- | ------- | ------- |
@@ -79,7 +91,7 @@ The written exam will take place on the *3rd of December 2021* at *08:30am*.
 | 16/12/21 | 7 | Practical session | Time Series Analysis II | Example: Boomgarden & Vliegenthart, 2009 | - |
 
 
-<br><br>
+<br>
 
 ### Mini-Conference
 
