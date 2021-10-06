@@ -3,7 +3,7 @@ output_dir: "."
 navbar:
   title: "Home"
   type: inverse
-  left:
+  right:
     - text: "Content & Learning Goals"
       href: content.html
     - text: "Overview"
