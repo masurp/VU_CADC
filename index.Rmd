@@ -2,4 +2,14 @@
 title: "Computational Analysis of Digital Communication"
 ---
 
-This page contains all materials for the course "Computational Analysis of Digital Communication (CADC)" developed at the Vrije Universiteit Amsterdam. 
+This page contains all information and materials for the course "Computational Analysis of Digital Communication (CADC)" developed at the Vrije Universiteit Amsterdam. 
+
+In the course, students will learn about common computational methods in Communication Science. They will learn how to use the statistical programming environment R to a) import various data formats as well as gather data from online sources, b) transform and wrangle data to get it ready for analysis, c) perform text analysis (including machine learning approaches), d) perform advanced statistical methods in line with their chosen specialization (e.g., time series analysis, multilevel analysis, factor analyses and structural equation modeling, analysis of variance based on experimental data). A detailed course description and learning goals can be accessed [here](https://masurp.github.io/VU_CADC/content.html).
+
+# Short Overview
+
+The course consists of three cycles (1. Introduction and data wrangling, 2. Text analysis, 3. Specialization). Each cycle covers two weeks. Each week includes one lecture and two practical sessions. A detailed course overview can be found [here](https://masurp.github.io/VU_CADC/overview.html). 
+
+- Lectures are every Monday from 9:00 to 11:15 (starting from the 1st of November 2021).  
+- Practical sessions are every Tuesday and Thursday, either form 9:00 to 10:30 (3 parallel courses) or from 11:00 to 12:30 (3 parallel courses).
+
