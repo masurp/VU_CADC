@@ -6,8 +6,10 @@ navbar:
   left:
     - text: "Content & Learning Goals"
       href: content.html
-    - text: "Course Overview"
+    - text: "Overview"
       href: overview.html
+    - text: "Material"
+      href: material.html
 output:
   html_document:
   theme: cosmo
