@@ -1,5 +1,6 @@
 # Computational Analysis of Digital Communication
 
+This page contains all materials for the course "Computational Analysis of Digital Communication (CADC)" developed at the Vrije Universiteit Amsterdam. 
 
 ## Content 
 
@@ -30,4 +31,8 @@ With regard to the specific methods being taught, after completion of the course
 - perform advanced statistical analyses in line with their chosen specialization (e.g., time series analysis, structural equation modeling, analysis of variance, linkage analysis…)
 - read, understand, interpret, and critically evaluate methods used in typical communication research articles
 
+## Contact
+
+Dr. Philipp K. Masur
+Mail: p.k.masur@vu.nl
 
