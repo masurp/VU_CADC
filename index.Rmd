@@ -12,10 +12,9 @@ In the course, students will learn about common computational methods in Communi
 
 The course consists of three cycles (1. Introduction and data wrangling, 2. Text analysis, 3. Specialization). Each cycle covers two weeks. Each week includes one lecture and two practical sessions. 
 
-<br>
 
 
-```{r, warning=F, message = F}
+```{r, warning=F, message =F}
 library(tidyverse)
 tibble(x = rnorm(100, 2, 1),
        y = 2.5*x + rnorm(100, 0, 5)) %>%
