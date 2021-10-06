@@ -12,6 +12,8 @@ On the other hand, the digital era has also given way to new key phenomena in co
 In the course, students will learn about common computational methods in Communication Science. They will learn how to use the statistical programming environment R to a) import various data formats as well as gather data from online sources, b) transform and wrangle data to get it ready for analysis, c) perform text analysis (including machine learning approaches), d) perform advanced statistical methods in line with their chosen specialization (e.g., time series analysis, multilevel analysis, factor analyses and structural equation modeling, analysis of variance based on experimental data).
 Based on a problem-based learning approach, each lecture introduces a new empirical problem and discusses methods and statistical approaches that can solve the problem. Students then learn how to conduct these methodological solutions in the practical sessions and are given the opportunity to further practice these approaches in further homework assignments. 
 
+<br>
+
 ## Learning goals
 
 After completion of the course, students will:
