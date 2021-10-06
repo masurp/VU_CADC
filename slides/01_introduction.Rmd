@@ -1,0 +1,40 @@
+---
+title: "Computational Analysis of Digital Communication"
+subtitle: "Introduction"
+author: "Dr. Philipp K. Masur | p.k.masur@vu.nl"
+institute: ""
+date: "23. Januar 2020"
+output:
+  xaringan::moon_reader:
+    css: xaringan-themer.css
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: false
+      countIncrementalSlides: false
+      ratio: 16:9
+      titleSlideClass: [left, middle]
+---
+
+```{r child = 'theme.rmd'}
+```
+
+# Ablauf
+
+```{r, echo = F}
+tribble(
+  ~Uhrzeit, ~Thema,
+  "[10:00 - 10:45:](#s1)" , "Einführung", 
+  "[10:45 - 11:30:](#s2)" , "Erstmal alles genau anschauen.",  
+  "[11:30 - 13:00.](#s3)" , "Strukturen entdecken -- leicht gemacht?",	
+  "13:00 - 14:00:" , "Mittagessen",	
+  "[14:00 - 14:45:](#s4)" , "Aber es gibt doch Theorie!",	
+  "[14:45 - 15:30:](#s5)" , "Alles eine Frage der Güte, oder?", 
+  "15:30 - 16:00:" , "Kaffeepause",
+  "[16:00 - 17:00:](#s6)" , "Probabili-was?"
+) %>% kable(format = "markdown")
+```
+
+
+---
+
