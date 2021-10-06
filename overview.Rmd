@@ -5,12 +5,30 @@ title: "Course Overview"
 
 Lectures are held in room: HG-14A00
 
+<br><br>
+
 # Semester plan
+
+## Cycle 1: Data Wrangling
 
 | Date | Week | Type | Content | Required Readings | Assignments |
 |---|--|----| ---------- | ------- | ------- |
 | 01/11/21 | 1 | Lecture | Introduction to computational methods | - | - |
 | 02/11/21 | 1 | Practical session | Introduction to R and the tidyverse | - | - |
 | 04/11/21 | 1 | Practical session | Data wrangling and visualization | Van Atteveld et al., 2021 (chap. 6) | Homework Assignment 1 |
+| 08/11/21 | 2 | Lecture | Data collection and web scraping | - | - |
+| 09/11/21 | 2 | Practical session | Importing different data into R | Van Atteveldt et al., 2021 (chap. 5.1, 5.2) | - |
+| 11/11/21 | 2 | Practical session | Web scraping | Van Atteveldt et al., 2021 (chap. 5.3 & 12) | Homework Assignment 2 |
 
+
+## Cycle 2: Text Analysis and Machine Learning
+
+| Date | Week | Type | Content | Required Readings | Assignments |
+|---|--|----| ---------- | ------- | ------- |
+| 15/11/21 | 3 | Lecture | Introduction to text as data and related challenges |-|-|
+| 16/11/21 | 3 | Practical session | Text preprocessing and descriptive analyses | Van Atteveldt et al., 2021 (chap. 9 & 10) | - |
+| 18/11/21 | 3 | Practical session | Dictionary approaches | Atteveldt et al., 2021 (chap. 11.1 & 11.2) | Homework Assignment 3 |
+| 22/11/21 | 4 | Lecture | Introduction to machine learning | - | - |
+| 23/11/21 | 4 | Practical session | Supervised learning | Van Atteveldt et al., 2021 (chap. 11.3) | - |
+| 25/11/21 | 4 | Practical session | Unsupervised learning | Van Atteveldt et al., 2021 (chap. 11.4) | Homework Assignment 4 |
 
