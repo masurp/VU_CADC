@@ -2,4 +2,15 @@
 title: "Course Overview"
 ---
 
-t.b.a.
+
+Lectures are held in room: HG-14A00
+
+# Semester plan
+
+| Date | Week | Type | Content | Required Readings | Assignments |
+|---|--|----| ---------- | ------- | ------- |
+| 01/11/21 | 1 | Lecture | Introduction to computational methods | - | - |
+| 02/11/21 | 1 | Practical session | Introduction to R and the tidyverse | - | - |
+| 04/11/21 | 1 | Practical session | Data wrangling and visualization | Van Atteveld et al., 2021 (chap. 6) | Homework Assignment 1 |
+
+
