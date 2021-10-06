@@ -22,7 +22,7 @@ The course consists of one lecture (starting from the 1st of November 2021) and 
 ### Cycle 1: Data Wrangling
 
 | Date | Week | Type | Content | Required Readings | Assignments |
-|---|--|----| ---------- | ------- | ------- |
+|---|--|----| -------- | ------- | ------- |
 | 01/11/21 | 1 | Lecture | Introduction to computational methods | - | - |
 | 02/11/21 | 1 | Practical session | Introduction to R and the tidyverse | - | - |
 | 04/11/21 | 1 | Practical session | Data wrangling and visualization | Van Atteveld et al., 2021 (chap. 6) | Homework Assignment 1 |
@@ -35,7 +35,7 @@ The course consists of one lecture (starting from the 1st of November 2021) and 
 ### Cycle 2: Text Analysis and Machine Learning
 
 | Date | Week | Type | Content | Required Readings | Assignments |
-|---|--|----| ---------- | ------- | ------- |
+|---|--|----| -------- | ------- | ------- |
 | 15/11/21 | 3 | Lecture | Introduction to text as data and related challenges |-|-|
 | 16/11/21 | 3 | Practical session | Text preprocessing and descriptive analyses | Van Atteveldt et al., 2021 (chap. 9 & 10) | - |
 | 18/11/21 | 3 | Practical session | Dictionary approaches | Atteveldt et al., 2021 (chap. 11.1 & 11.2) | Homework Assignment 3 |
@@ -56,7 +56,7 @@ The written exam will take place on the *3rd of December 2021* at *08:30am*.
 #### Alternative 1
 
 | Date | Week | Type | Content | Required Readings | Assignments |
-|---|--|----| ---------- | ------- | ------- |
+|---|--|----| -------- | ------- | ------- |
 | 06/12/21 | 6 | Lecture | The challenge of measuring psychological concepts: How to measure latent variables? An Introduction to Classic Test Theory | - | Creation of small project groups |
 | 07/12/21 | 6 | Practical session | Factor analysis I |Example: Reinecke et al., 2018 (Study 1) | - |
 | 09/12/21 | 6 | Practical session | Factor analysis II | Example: Reinecke et al., 2018 (Study 2) | - |
@@ -64,12 +64,10 @@ The written exam will take place on the *3rd of December 2021* at *08:30am*.
 | 14/12/21 | 7 | Practical session | Structural equation modeling I | Example: Masur et al., 2021 | - |
 | 16/12/21 | 7 |  Practical session | Structural equation modeling II | Example: Veldhuis et al., 2020 | - |
 
-<br>
-
 #### Alternative 2
 
 | Date | Week | Type | Content | Required Readings | Assignments |
-|---|--|----| ---------- | ------- | ------- |
+|---|--|----| -------- | ------- | ------- |
 | 06/12/21 | 6 | Lecture | Understanding and using social media data to study campaign effectiveness I | - | Creation of small project groups |
 | 07/12/21 | 6 | Practical session | Scraping social media data using the Academic Twitter API | Example: Dijkmans et al. 2020 | - |
 | 09/12/21 | 6 | Practical session | Content analysis and descriptive analyses | Example: Bol et al., 2020 | - |
@@ -77,13 +75,10 @@ The written exam will take place on the *3rd of December 2021* at *08:30am*.
 | 14/12/21 | 7 | Practical session | Mediation analysis | Background: Rohrer, 2018 | - |
 |16/12/21 | 7 | Practical session | Moderation analysis | Example: Vermeulen & Seegers, 2008 | - |
 
-
-<br><br>
-
 #### Alternative 3
 
 | Date | Week | Type | Content | Required Readings | Assignments |
-|---|--|----| ---------- | ------- | ------- |
+|---|--|----| -------- | ------- | ------- |
 | 06/12/21 | 6 | Lecture | Studying media effects on public opinion I | - | Creation of small project groups |
 | 07/12/21 | 6 | Practical session | Content analysis to create time series data | Background: Van Atteveldt et al., (2019) | - |
 | 09/12/21 | 6 | Practical session | Linking media and public opinion data | Example: Kleinnijenhuis et al., 2019 | - |
