@@ -8,62 +8,101 @@ output:
     df_print: paged
 ---
 
+On this page, you'll find all materials (e.g., slides, handouts, R-syntax, etc.) for this course. You can also download all materials in a single zip-file [here].  
 
-## Week 1: Introduction and Data Wrangling
+<br>
 
-### Lecture
+### Preparation
+
+*1. Install R and RStudio* 
+
+Before the first practical session (2nd of November), please make sure that you have R and Rstudio installed on your computer and have played around a little with it (it is open source and free to use!). To do so, please work through the steps outlined in this [worksheet](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R_basics_1_getting_started_short.md). Don't worry if some things don't work or produce errors. We will make sure that R is running smoothly in the first sessions. 
+
+<br>
+
+*2. Get acquainted with the book*
+
+The course is primarily based on the following book, which will be made available from https://cssbook.net:
+
+- Van Atteveldt, W., & Trilling, D. & Arcila, C. (2021). *Computational Analysis of Communication: A practical introduction to the analysis of text, networks, and images with code examples in Python and R.* Wiley. 
+
+<br>
+
+*3. Familiarize yourself with the course*
+
+Lectures are every Monday from 9:00 to 11:15 (on campus!). In these lectures, a particular "research problem" will be introduced and we will discuss potential (methodological) solutions. We will get to know respective computational methods and contextualize them within the broader research process. We expect you to:
+
+- think, participate, discuss
+- ask questions!
+
+Practical sessions are every Tuesday and Thursday (on campus!), either form 9:00 to 10:30 (3 parallel courses) or from 11:00 to 12:30 (3 parallel courses). For the practical sessions, the class will be split into 6 groups of equal size. In these practical sessions, we will work with RStudio and ran analyses on real-world data sets. We therefore engage in various data analytical exercises. We expect you to: 
+
+- Bring your computer (on which R and RStudio is [installed](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R_basics_1_getting_started_short.md))
+- Run the scripts and work through the code (see handouts for each week further below)
+- Ask questions!
+
+In the third cycle, students have the possibility to choose a certain specialization (between three alternatives). Material for *ALL* alternatives will be provided to all students. We encourage you to also engage with the material from other specializations!
+
+
+<br>
+
+### Week 1: Introduction and Data Wrangling
+
+#### Lecture
 
 - Slides
 
-### Practical Session 1
+#### Practical Session 1
 
 - Handout
 
-### Practical Session 2
+#### Practical Session 2
 
 - Handout
 
-## Week 2: Data Visualization and Web Scraping
+### Week 2: Data Visualization and Web Scraping
 
-### Lecture: Introduction
+#### Lecture: Introduction
 
-### Practical Session 1
+#### Practical Session 1
 
-### Practical Session 2 
+#### Practical Session 2 
 
-## Week 3: Text Analysis
+### Week 3: Text Analysis
 
-### Lecture
+#### Lecture
 
-### Practical Session 1
+#### Practical Session 1
 
-### Practical Session 2 
+#### Practical Session 2 
 
-## Week 4: Machine Learning
+### Week 4: Machine Learning
 
-### Lecture
+#### Lecture
 
-### Practical Session 1
+#### Practical Session 1
 
-### Practical Session 2
+#### Practical Session 2
 
 
-## Week 5
+### Week 5
 
 Exam week.
 
-## Week 6
+### Week 6
 
 ### Lecture
 
-### Practical Session 1
+#### Practical Session 1
 
-### Practical Session 2
+#### Practical Session 2
 
-## Week 7
+### Week 7
 
-### Lecture
+#### Lecture
 
-### Practical Session 1
+#### Practical Session 1
 
-### Practical Session 2
+#### Practical Session 2
+
+### Week 8
