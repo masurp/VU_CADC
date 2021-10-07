@@ -16,4 +16,3 @@ navbar:
       href: "https://github.com/masurp/VU_CADC"
 output:
   html_document:
-  theme: cosmo

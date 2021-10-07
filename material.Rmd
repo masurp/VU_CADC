@@ -1,19 +1,45 @@
 ---
 title: "Materials"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 5
+    df_print: paged
 ---
 
 
-### Week 1: Introduction and Data Wrangling
+## Week 1: Introduction and Data Wrangling
 
+### Lecture: Introduction
 
-### Week 2: Data Visualization and Web Scraping
+### Practical Session 1:
 
+### Practical Session 2: 
 
-### Week 3: Text Analysis
+## Week 2: Data Visualization and Web Scraping
 
+### Lecture: Introduction
 
-### Week 4: Machine Learning
+### Practical Session 1:
 
+### Practical Session 2: 
+
+## Week 3: Text Analysis
+
+### Lecture: Introduction
+
+### Practical Session 1:
+
+### Practical Session 2: 
+
+## Week 4: Machine Learning
+
+### Lecture: Introduction
+
+### Practical Session 1:
+
+### Practical Session 2: 
 
 
 ### Week 5: Exam
