@@ -11,36 +11,59 @@ output:
 
 ## Week 1: Introduction and Data Wrangling
 
-### Lecture: Introduction
+### Lecture
 
-### Practical Session 1:
+- Slides
 
-### Practical Session 2: 
+### Practical Session 1
+
+- Handout
+
+### Practical Session 2
+
+- Handout
 
 ## Week 2: Data Visualization and Web Scraping
 
 ### Lecture: Introduction
 
-### Practical Session 1:
+### Practical Session 1
 
-### Practical Session 2: 
+### Practical Session 2 
 
 ## Week 3: Text Analysis
 
-### Lecture: Introduction
+### Lecture
 
-### Practical Session 1:
+### Practical Session 1
 
-### Practical Session 2: 
+### Practical Session 2 
 
 ## Week 4: Machine Learning
 
-### Lecture: Introduction
+### Lecture
 
-### Practical Session 1:
+### Practical Session 1
 
-### Practical Session 2: 
+### Practical Session 2
 
 
-### Week 5: Exam
+## Week 5
 
+Exam week.
+
+## Week 6
+
+### Lecture
+
+### Practical Session 1
+
+### Practical Session 2
+
+## Week 7
+
+### Lecture
+
+### Practical Session 1
+
+### Practical Session 2
