@@ -1,5 +1,20 @@
 ---
-title: "Material"
+title: "Materials"
 ---
 
-t.b.a.
+
+### Week 1: Introduction and Data Wrangling
+
+
+### Week 2: Data Visualization and Web Scraping
+
+
+### Week 3: Text Analysis
+
+
+### Week 4: Machine Learning
+
+
+
+### Week 5: Exam
+
