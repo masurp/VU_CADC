@@ -20,5 +20,9 @@ tibble(x = rnorm(100, 2, 1),
   theme_classic()
 ```
 
+<hr>
 
+<p style = "margin-left: auto; margin-right: 0;">
+This course is published under the following [license](https://github.com/masurp/VU_CADC/blob/main/LICENSE.md). 
+</p>
 
