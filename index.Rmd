@@ -2,9 +2,12 @@
 title: "Computational Analysis of Digital Communication"
 ---
 
-This page contains all information and materials for the course "Computational Analysis of Digital Communication (CADC)" developed at the Vrije Universiteit Amsterdam. 
+This page contains all information and materials for the course "Computational Analysis of Digital Communication (CADC)" developed at the Vrije Universiteit Amsterdam. In the course, students will learn about common computational methods in Communication Science. They will learn how to use the [statistical programming environment R](https://www.r-project.org/) to 
 
-In the course, students will learn about common computational methods in Communication Science. They will learn how to use the statistical programming environment R to a) import various data formats as well as gather data from online sources, b) transform and wrangle data to get it ready for analysis, c) perform text analysis (including machine learning approaches), d) perform advanced statistical methods in line with their chosen specialization (e.g., time series analysis, multilevel analysis, factor analyses and structural equation modeling, analysis of variance based on experimental data). 
+- import various data formats as well as gather data from online sources, 
+- transform and wrangle data to get it ready for analysis, 
+- perform text analysis (including machine learning approaches), 
+- perform advanced statistical methods (e.g., time series analysis, multilevel analysis, factor analyses and structural equation modeling, analysis of variance based on experimental data). 
 
 <br>
 
