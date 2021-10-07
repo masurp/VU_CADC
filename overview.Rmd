@@ -6,93 +6,62 @@ The course consists of one lecture (starting from the 1st of November 2021) and 
 
 <br>
 
-#### Rooms and Times
+## Rooms and Times
 
-- Lectures: **HG-14A00** (Monday, 9:00am)
-- Practical session 1: **HG-01A32** (Tuesday, 9:00), **HG-11A22** (Thursday, 13:30)
-- Practical session 2: **HG-11A36** (Tuesday, 9:00 & Thursday, 13:30)
-- Practical session 3: **HG-02A37** (Tuesday, 9:00 & Thursday, 13:30am)
-- Practical session 4: **HG-01A32** (Tuesday, 11:00), **HG-11A22** (Thursday, 15:30am)
-- Practical session 5: **HG-11A36** (Tuesday, 11:00 & Thursday, 15:30am)
-- Practical session 6: **HG-02A37** (Tuesday, 11:00 & Thursday, 15:30am)
-
-
-<br>
-
-### Cycle 1: Data Wrangling
-
-| Date | Week | Type | Content | Required Readings | Assignments |
-|---|--|----| -------- | ------- | ------- |
-| 01/11/21 | 1 | Lecture | Introduction to computational methods | - | - |
-| 02/11/21 | 1 | Practical session | Introduction to R and the tidyverse | - | - |
-| 04/11/21 | 1 | Practical session | Data wrangling and visualization | Van Atteveld et al., 2021 (chap. 6) | Homework Assignment 1 |
-| 08/11/21 | 2 | Lecture | Data collection and web scraping | - | - |
-| 09/11/21 | 2 | Practical session | Importing different data into R | Van Atteveldt et al., 2021 (chap. 5.1, 5.2) | - |
-| 11/11/21 | 2 | Practical session | Web scraping | Van Atteveldt et al., 2021 (chap. 5.3 & 12) | Homework Assignment 2 |
+| Class | Room & Time |
+| :-- | :------- |
+| Lectures            | **HG-14A00** (Monday, 9:00am) |
+| Practical session 1 | **HG-01A32** (Tuesday, 9:00), **HG-11A22** (Thursday, 13:30) |
+| Practical session 2 | **HG-11A36** (Tuesday, 9:00 & Thursday, 13:30) |
+| Practical session 3 | **HG-02A37** (Tuesday, 9:00 & Thursday, 13:30am) |
+| Practical session 4 | **HG-01A32** (Tuesday, 11:00), **HG-11A22** (Thursday, 15:30am) |
+| Practical session 5 | **HG-11A36** (Tuesday, 11:00 & Thursday, 15:30am) |
+| Practical session 6 | **HG-02A37** (Tuesday, 11:00 & Thursday, 15:30am)| 
 
 <br>
 
-### Cycle 2: Text Analysis and Machine Learning
+## Overview
 
-| Date | Week | Type | Content | Required Readings | Assignments |
-|---|--|----| -------- | ------- | ------- |
-| 15/11/21 | 3 | Lecture | Introduction to text as data and related challenges |-|-|
-| 16/11/21 | 3 | Practical session | Text preprocessing and descriptive analyses | Van Atteveldt et al., 2021 (chap. 9 & 10) | - |
-| 18/11/21 | 3 | Practical session | Dictionary approaches | Atteveldt et al., 2021 (chap. 11.1 & 11.2) | Homework Assignment 3 |
-| 22/11/21 | 4 | Lecture | Introduction to machine learning | - | - |
-| 23/11/21 | 4 | Practical session | Supervised learning | Van Atteveldt et al., 2021 (chap. 11.3) | - |
-| 25/11/21 | 4 | Practical session | Unsupervised learning | Van Atteveldt et al., 2021 (chap. 11.4) | Homework Assignment 4 |
-
-<br>
-
-### Exam week
-
-The written exam will take place on the *3rd of December 2021* at *08:30am*. 
-
-<br>
-
-### Cycle 3: Spezializations
-
-#### Alternative 1
-
-| Date | Week | Type | Content | Required Readings | Assignments |
-|---|--|----| -------- | ------- | ------- |
-| 06/12/21 | 6 | Lecture | The challenge of measuring psychological concepts: How to measure latent variables? An Introduction to Classic Test Theory | - | Creation of small project groups |
-| 07/12/21 | 6 | Practical session | Factor analysis I |Example: Reinecke et al., 2018 (Study 1) | - |
-| 09/12/21 | 6 | Practical session | Factor analysis II | Example: Reinecke et al., 2018 (Study 2) | - |
-| 13/12/21 | 7 | Lecture | Correlation vs. Causality: Advanced approaches to analyzing experimental data | - | - |
-| 14/12/21 | 7 | Practical session | Structural equation modeling I | Example: Masur et al., 2021 | - |
-| 16/12/21 | 7 |  Practical session | Structural equation modeling II | Example: Veldhuis et al., 2020 | - |
-
-#### Alternative 2
-
-| Date | Week | Type | Content | Required Readings | Assignments |
-|---|--|----| -------- | ------- | ------- |
-| 06/12/21 | 6 | Lecture | Understanding and using social media data to study campaign effectiveness I | - | Creation of small project groups |
-| 07/12/21 | 6 | Practical session | Scraping social media data using the Academic Twitter API | Example: Dijkmans et al. 2020 | - |
-| 09/12/21 | 6 | Practical session | Content analysis and descriptive analyses | Example: Bol et al., 2020 | - |
-| 13/12/21 | 7 | Lecture | Understanding and using social media data to study campaign effectiveness II | - | - |
-| 14/12/21 | 7 | Practical session | Mediation analysis | Background: Rohrer, 2018 | - |
-|16/12/21 | 7 | Practical session | Moderation analysis | Example: Vermeulen & Seegers, 2008 | - |
-
-#### Alternative 3
-
-| Date | Week | Type | Content | Required Readings | Assignments |
-|---|--|----| -------- | ------- | ------- |
-| 06/12/21 | 6 | Lecture | Studying media effects on public opinion I | - | Creation of small project groups |
-| 07/12/21 | 6 | Practical session | Content analysis to create time series data | Background: Van Atteveldt et al., (2019) | - |
-| 09/12/21 | 6 | Practical session | Linking media and public opinion data | Example: Kleinnijenhuis et al., 2019 | - |
-| 13/12/21 | 7 | Lecture | Studying media effects on public opinion II | - | - |
-| 14/12/21 | 7 | Practical session | Time Series Analysis I | Example: Meraz, 2011 | - |
-| 16/12/21 | 7 | Practical session | Time Series Analysis II | Example: Boomgarden & Vliegenthart, 2009 | - |
-
-
-<br>
-
-### Mini-Conference
-
-Each working group will present their results at a mini-conference that takes places on the *20th of December 2021* starting at 9:00am. 
-
+| Date | Week | Type | Content | Assignments |
+|:---|:--|:----| :---------- |:----- | 
+|  |  | | **Cycle 1: Introduction and Data Wrangling** |  |
+| 01/11/21 | 1 | Lecture | Introduction to computational methods | - | 
+| 02/11/21 | 1 | Practical session | Introduction to R and the tidyverse | - | 
+| 04/11/21 | 1 | Practical session | Data wrangling and visualization |  Homework Assignment 1 |
+| 08/11/21 | 2 | Lecture | Data collection and web scraping | - | 
+| 09/11/21 | 2 | Practical session | Importing different data into R | - |
+| 11/11/21 | 2 | Practical session | Web scraping |  Homework Assignment 2 |
+|  |  | | **Cycle 2: Text Analysis and Machine Learning** |  |
+| 15/11/21 | 3 | Lecture | Introduction to text as data and related challenges |-|
+| 16/11/21 | 3 | Practical session | Text preprocessing and descriptive analyses | - |
+| 18/11/21 | 3 | Practical session | Dictionary approaches |  Homework Assignment 3 |
+| 22/11/21 | 4 | Lecture | Introduction to machine learning | - | 
+| 23/11/21 | 4 | Practical session | Supervised learning |  - |
+| 25/11/21 | 4 | Practical session | Unsupervised learning |  Homework Assignment 4 |
+| 03/12/21 | 5 | Written Exam | Content of Cycle 1 & 2 | |
+|  |  | | **Cycle 3: Specialization** |  |
+|  |  | | *Alternative 1* |  |
+| 06/12/21 | 6 | Lecture | The challenge of measuring psychological concepts: How to measure latent variables? An Introduction to Classic Test Theory | Creation of small project groups |
+| 07/12/21 | 6 | Practical session | Factor analysis I | - |
+| 09/12/21 | 6 | Practical session | Factor analysis II |  - |
+| 13/12/21 | 7 | Lecture | Correlation vs. Causality: Advanced approaches to analyzing experimental data | - |
+| 14/12/21 | 7 | Practical session | Structural equation modeling I |  - |
+| 16/12/21 | 7 |  Practical session | Structural equation modeling II |  - |
+|  |  | | *Alternative 2* |  |
+| 06/12/21 | 6 | Lecture | Understanding and using social media data to study campaign effectiveness I |  Creation of small project groups |
+| 07/12/21 | 6 | Practical session | Scraping social media data using the Academic Twitter API |  - |
+| 09/12/21 | 6 | Practical session | Content analysis and descriptive analyses |  - |
+| 13/12/21 | 7 | Lecture | Understanding and using social media data to study campaign effectiveness II |  - |
+| 14/12/21 | 7 | Practical session | Mediation analysis |  - |
+|16/12/21 | 7 | Practical session | Moderation analysis | - |
+|  |  | | *Alternative 2* |  |
+| 06/12/21 | 6 | Lecture | Studying media effects on public opinion I |  Creation of small project groups |
+| 07/12/21 | 6 | Practical session | Content analysis to create time series data | - |
+| 09/12/21 | 6 | Practical session | Linking media and public opinion data |  - |
+| 13/12/21 | 7 | Lecture | Studying media effects on public opinion II | - |
+| 14/12/21 | 7 | Practical session | Time Series Analysis I |  - |
+| 16/12/21 | 7 | Practical session | Time Series Analysis II |  - |
+| 20/12/21 | 8 | Mini-Conference |  | Each project group presents results |
 
 
 
