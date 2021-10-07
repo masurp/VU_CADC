@@ -13,17 +13,17 @@ The course consists of one lecture (starting from the 1st of November 2021) and 
 | Lectures            | **HG-14A00** (Monday, 9:00am) |
 | Practical session 1 | **HG-01A32** (Tuesday, 9:00), **HG-11A22** (Thursday, 13:30) |
 | Practical session 2 | **HG-11A36** (Tuesday, 9:00 & Thursday, 13:30) |
-| Practical session 3 | **HG-02A37** (Tuesday, 9:00 & Thursday, 13:30am) |
-| Practical session 4 | **HG-01A32** (Tuesday, 11:00), **HG-11A22** (Thursday, 15:30am) |
-| Practical session 5 | **HG-11A36** (Tuesday, 11:00 & Thursday, 15:30am) |
-| Practical session 6 | **HG-02A37** (Tuesday, 11:00 & Thursday, 15:30am)| 
+| Practical session 3 | **HG-02A37** (Tuesday, 9:00 & Thursday, 13:30) |
+| Practical session 4 | **HG-01A32** (Tuesday, 11:00), **HG-11A22** (Thursday, 15:30) |
+| Practical session 5 | **HG-11A36** (Tuesday, 11:00 & Thursday, 15:30) |
+| Practical session 6 | **HG-02A37** (Tuesday, 11:00 & Thursday, 15:30)| 
 
 <br>
 
 ## Overview
 
 | Date | Week | Type | Content | Assignments |
-|:---|:--|:----| :---------- |:----- | 
+|:-:|:-:|:---| :---------- |:------ | 
 |  |  | | **Cycle 1: Introduction and Data Wrangling** |  |
 | 01/11/21 | 1 | Lecture | Introduction to computational methods | - | 
 | 02/11/21 | 1 | Practical session | Introduction to R and the tidyverse | - | 
