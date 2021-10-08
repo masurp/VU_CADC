@@ -4,18 +4,19 @@ title: "Contact"
 
 Questions?
 
+<br>
 
-## Coordinator
+### Coordinator
 
 - Philipp Masur | p.k.masur@vu.nl
 
-## Teachers
+### Teachers
 
 - Philipp Masur 
 - Paulina Pankowska
 - Kasper Welbers
 
-## Teaching assistants
+### Teaching assistants
 
 Meryam Boufouchk 
 Gianni Quaedvlieg 
