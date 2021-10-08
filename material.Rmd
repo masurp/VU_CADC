@@ -46,33 +46,42 @@ In the third cycle, students have the possibility to choose a certain specializa
 
 <br>
 
-### Week 1: Introduction and Data Wrangling
-
-#### Lecture
-
-- Slides
-
-#### Practical Session 1
-
-- Handout
-
-#### Practical Session 2
-
-- Handout
-
-### Week 2: Data Visualization and Web Scraping
+### Week 1
 
 #### Lecture: Introduction
 
-#### Practical Session 1
+- [Slides](slides/01_introduction.html)
 
-#### Practical Session 2 
+#### Practical Session 1: Introduction to R and RStudio
+
+- Handouts: [Getting Started](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R_basics_1_getting_started.md); [Data and functions](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R_basics_2_data_and_functions.md)
+
+#### Practical Session 2: Tidyverse I & II
+
+- Handout: [Transforming data](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R-tidy-5-transformation.md); [Summarizing data](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R-tidy-5b-groupby.md)
+
+### Week 2
+
+#### Lecture: Data Visualization and Web Scraping
+
+- Slides (will be uploaded)
+
+#### Practical Session 1: Reshaping and data visualization
+
+- Handouts: [Reshaping](https://www.youtube.com/watch?v=j4lZWJ3Osr8&list=PLjXODJ_lGN_V2ntvV2CN_GvzZ6Qm5km9L&index=5); [Data visualization with GGplot2](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/r-tidy-3_7-visualization.md)
+
+#### Practical Session 2: Webscraping, frequencies, and visualization
+
+- Handouts (will be uploaded)
+
 
 ### Week 3: Text Analysis
 
 #### Lecture
 
 #### Practical Session 1
+
+- Handouts: [Merging data sets](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R-tidy-13a-joining.md)
 
 #### Practical Session 2 
 
