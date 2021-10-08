@@ -14,31 +14,23 @@ On this page, you'll find all materials (e.g., slides, handouts, R-syntax, etc.)
 
 ### Preparation
 
-*1. Install R and RStudio* 
+#### Install R and RStudio
 
-Before the first practical session (2nd of November), please make sure that you have R and Rstudio installed on your computer and have played around a little with it (it is open source and free to use!). To do so, please work through the steps outlined in this [worksheet](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R_basics_1_getting_started_short.md). Don't worry if some things don't work or produce errors. We will make sure that R is running smoothly in the first sessions. 
+Before the first practical session (2nd of November), please make sure that you have R and Rstudio installed on your computer and have played around a little with it (it is open source and free to use!). Please work through the initial steps outlined in this worksheet:
 
-<br>
+- [Installing R and RStudi](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R_basics_1_getting_started_short.md). 
 
-*2. Get acquainted with the book*
-
-The course is primarily based on the following book, which will be made available from https://cssbook.net:
-
-- Van Atteveldt, W., & Trilling, D. & Arcila, C. (2021). *Computational Analysis of Communication: A practical introduction to the analysis of text, networks, and images with code examples in Python and R.* Wiley. 
-
-<br>
-
-*3. Familiarize yourself with the course*
+#### Familiarize yourself with the course*
 
 Lectures are every Monday from 9:00 to 11:15 (on campus!). In these lectures, a particular "research problem" will be introduced and we will discuss potential (methodological) solutions. We will get to know respective computational methods and contextualize them within the broader research process. We expect you to:
 
 - think, participate, discuss
 - ask questions!
 
-Practical sessions are every Tuesday and Thursday (on campus!), either form 9:00 to 10:30 (3 parallel courses) or from 11:00 to 12:30 (3 parallel courses). For the practical sessions, the class will be split into 6 groups of equal size. In these practical sessions, we will work with RStudio and ran analyses on real-world data sets. We therefore engage in various data analytical exercises. We expect you to: 
+Practical sessions are every Tuesday and Thursday (on campus!), either form 9:00 to 10:30 (3 parallel courses) or from 11:00 to 12:30 (3 parallel courses). For the practical sessions, the class will be split into 6 groups of equal size (this will happen in the first lecture). In these practical sessions, we will work with RStudio and ran analyses on real-world data sets. We therefore engage in various data analytical exercises. We expect you to: 
 
-- Bring your computer (on which R and RStudio is [installed](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R_basics_1_getting_started_short.md))
-- Run the scripts and work through the code (see handouts for each week further below)
+- Bring your computer
+- Run the scripts and work through the code 
 - Ask questions!
 
 In the third cycle, students have the possibility to choose a certain specialization (between three alternatives). Material for *ALL* alternatives will be provided to all students. We encourage you to also engage with the material from other specializations!
@@ -51,15 +43,22 @@ In the third cycle, students have the possibility to choose a certain specializa
 
 #### Lecture: Introduction
 
-- [Slides](slides/01_introduction.html)
+- Slides:
+    - [Download Slides](slides/01_introduction.html)
 
 #### Practical Session 1: Introduction to R and RStudio
 
-- Handouts: [Getting Started](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R_basics_1_getting_started.md); [Data and functions](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R_basics_2_data_and_functions.md)
+- Handouts: 
+    - [Getting Started](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R_basics_1_getting_started.md)
+    - [Data and functions](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R_basics_2_data_and_functions.md)
 
 #### Practical Session 2: Tidyverse I & II
 
-- Handout: [Transforming data](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R-tidy-5-transformation.md); [Summarizing data](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R-tidy-5b-groupby.md)
+- Handout: 
+    - [Transforming data](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R-tidy-5-transformation.md)
+    - [Summarizing data](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R-tidy-5b-groupby.md)
+- Additional resources: 
+    - [Online book "R for Data Science"](https://r4ds.had.co.nz/)
 
 <br>
 <hr>
@@ -72,7 +71,13 @@ In the third cycle, students have the possibility to choose a certain specializa
 
 #### Practical Session 1: Reshaping and data visualization
 
-- Handouts: [Reshaping](https://www.youtube.com/watch?v=j4lZWJ3Osr8&list=PLjXODJ_lGN_V2ntvV2CN_GvzZ6Qm5km9L&index=5); [Data visualization with GGplot2](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/r-tidy-3_7-visualization.md)
+- Handouts:
+    - [Reshaping](https://www.youtube.com/watch?v=j4lZWJ3Osr8&list=PLjXODJ_lGN_V2ntvV2CN_GvzZ6Qm5km9L&index=5)
+    - [Data visualization with GGplot2](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/r-tidy-3_7-visualization.md)
+- Additional resources: 
+    - [Online book "Data Visualization" by Kieran Healy](https://socviz.co/)
+    - [Website "Data-To-Viz" (great overview on visualizations with code examples)](https://www.data-to-viz.com/)
+    - [The R Graph Gallery](https://www.r-graph-gallery.com/)
 
 #### Practical Session 2: Webscraping, frequencies, and visualization
 
@@ -81,22 +86,23 @@ In the third cycle, students have the possibility to choose a certain specializa
 <br>
 <hr>
 
-### Week 3: Text Analysis
+### Week 3
 
-#### Lecture
+#### Lecture: : Text Analysis
 
 #### Practical Session 1
 
-- Handouts: [Merging data sets](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R-tidy-13a-joining.md)
+- Handouts: 
+    - [Merging data sets](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R-tidy-13a-joining.md); []
 
 #### Practical Session 2 
 
 <br>
 <hr>
 
-### Week 4: Machine Learning
+### Week 4
 
-#### Lecture
+#### Lecture: Machine Learning
 
 #### Practical Session 1
 
@@ -107,7 +113,7 @@ In the third cycle, students have the possibility to choose a certain specializa
 
 ### Week 5
 
-Exam week.
+Exam week. More information soon. 
 
 <br>
 <hr>
