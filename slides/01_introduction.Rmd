@@ -231,7 +231,7 @@ Shit, we have to learn a programming language?
 .pull-left[
 
 ```{r, echo = F}
-set.seed(100)
+set.seed(101)
 ```
 
 
@@ -253,7 +253,7 @@ ggplot(NULL,
 
 .pull-right[
 
-```{r plot-label-out1, message = F, warning = F, ref.label="plot1", echo=FALSE}
+```{r plot-label-out1, ref.label="plot1", echo=FALSE}
 
 
 
@@ -340,7 +340,7 @@ How this course is going to work?
 
 ---
 
-# Teaching assistants & Help Desk
+# Teaching assistants & Help desk
 
 
 
@@ -353,7 +353,7 @@ How this course is going to work?
 
 ---
 
-# Learning goals I
+# Learning goals 
 
 After completion of the course, you will…
 
@@ -480,5 +480,7 @@ class: inverse, center, middle
 - Blumenstock, J. E., Cadamuro, G. , and On, R. (2015). Predicting Poverty and Wealth from Mobile Phone Metadata. Science, 350(6264), 1073–6. https://doi.org/10.1126/science.aac4420.
 
 - Jacobi,C., van Atteveldt, W. & Welbers, K. (2016) Quantitative analysis of large amounts of journalistic texts using topic modelling. Digital Journalism, 4(1), 89-106, DOI: 10.1080/21670811.2015.1093271
+
+- Jürgens, P., Meltzer, C., & Scharkow, M. (2021, in press). Age and Gender Representation on German TV: A Longitudinal Computational Analysis. Computational Communication Research. 
 
 - Van Atteveldt, W., & Peng, T.-Q. (2018). When communication meets computation: Opportunities, challenges, and pitfalls in computational communication science. Communication Methods and Measures, 12(2-3), 81–92. https://doi.org/10.1080/19312458.2018.1458084
