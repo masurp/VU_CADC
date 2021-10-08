@@ -45,6 +45,7 @@ In the third cycle, students have the possibility to choose a certain specializa
 
 
 <br>
+<hr>
 
 ### Week 1
 
@@ -60,6 +61,9 @@ In the third cycle, students have the possibility to choose a certain specializa
 
 - Handout: [Transforming data](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R-tidy-5-transformation.md); [Summarizing data](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R-tidy-5b-groupby.md)
 
+<br>
+<hr>
+
 ### Week 2
 
 #### Lecture: Data Visualization and Web Scraping
@@ -74,6 +78,8 @@ In the third cycle, students have the possibility to choose a certain specializa
 
 - Handouts (will be uploaded)
 
+<br>
+<hr>
 
 ### Week 3: Text Analysis
 
@@ -85,6 +91,9 @@ In the third cycle, students have the possibility to choose a certain specializa
 
 #### Practical Session 2 
 
+<br>
+<hr>
+
 ### Week 4: Machine Learning
 
 #### Lecture
@@ -93,25 +102,46 @@ In the third cycle, students have the possibility to choose a certain specializa
 
 #### Practical Session 2
 
+<br>
+<hr>
 
 ### Week 5
 
 Exam week.
 
+<br>
+<hr>
+
 ### Week 6
 
 ### Lecture
 
+- Alternative 1: Slides (will be uploaded)
+- Alternative 2: Slides (will be uploaded)
+- Alternative 3: Slides (will be uploaded)
+
 #### Practical Session 1
 
 #### Practical Session 2
+
+<br>
+<hr>
 
 ### Week 7
 
 #### Lecture
 
+- Alternative 1: Slides (will be uploaded)
+- Alternative 2: Slides (will be uploaded)
+- Alternative 3: Slides (will be uploaded)
+
 #### Practical Session 1
 
 #### Practical Session 2
 
+<br>
+<hr>
+
 ### Week 8
+
+There will be a mini-conference this week where all research groups present their findings. 
