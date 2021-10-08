@@ -16,7 +16,7 @@ mono_accent(
   base_color = "#576ec2",
   text_color = "#3c3c3c",
   link_color = "#576ec2",
-  text_font_size = "35px",
+  text_font_size = "29px",
   background_color = "#ffffff",
   header_color = "#576ec2",
   header_h1_font_size = "55px",
