@@ -38,6 +38,7 @@ mono_accent(
   extra_css = list( ".small code" = list("font-size"="16px"), ".remark-slide thead" = list("background"="none"),
                     ".hljs-github .hljs"  = list("background-color"="#e8e8e8", "padding"="2"),
                     ".pull-left code" = list("border-right"="1px dashed #ccc", "height" = "450px"),
-                    ".remark-slide tr:nth-child(even)" = list("background-color"="#f8f8f8"))
+                    ".remark-slide tr:nth-child(even)" = list("background-color"="#f8f8f8"),
+                    ".title-slide" = list("background"= "url(https://www.hbes.com/wp-content/uploads/2019/11/vu.png) right top no-repeat #fff", "background-size" = "350px; 100px"))
 )
 ```
