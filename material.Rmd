@@ -24,8 +24,8 @@ Before the first practical session (2nd of November), please make sure that you 
 
 Lectures are every Monday from 9:00 to 11:15 (on campus!). In these lectures, a particular "research problem" will be introduced and we will discuss potential (methodological) solutions. We will get to know respective computational methods and contextualize them within the broader research process. We expect you to:
 
-- think, participate, discuss
-- ask questions!
+- Think, participate, discuss
+- Ask questions!
 
 Practical sessions are every Tuesday and Thursday (on campus!), either form 9:00 to 10:30 (3 parallel courses) or from 11:00 to 12:30 (3 parallel courses). For the practical sessions, the class will be split into 6 groups of equal size (this will happen in the first lecture). In these practical sessions, we will work with RStudio and ran analyses on real-world data sets. We therefore engage in various data analytical exercises. We expect you to: 
 
@@ -72,16 +72,18 @@ In the third cycle, students have the possibility to choose a certain specializa
 #### Practical Session 1: Reshaping and data visualization
 
 - Handouts:
-    - [Reshaping](https://www.youtube.com/watch?v=j4lZWJ3Osr8&list=PLjXODJ_lGN_V2ntvV2CN_GvzZ6Qm5km9L&index=5)
+    - [Reshaping](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/r-tidy-12-reshaping.md)
     - [Data visualization with GGplot2](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/r-tidy-3_7-visualization.md)
 - Additional resources: 
     - [Online book "Data Visualization" by Kieran Healy](https://socviz.co/)
     - [Website "Data-To-Viz" (great overview on visualizations with code examples)](https://www.data-to-viz.com/)
     - [The R Graph Gallery](https://www.r-graph-gallery.com/)
 
-#### Practical Session 2: Webscraping, frequencies, and visualization
+#### Practical Session 2: Webscraping, frequencies, and data wrangling
 
-- Handouts (will be uploaded)
+- Handouts:
+    - [Webscraping]  
+    - [Merging data sets](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R-tidy-13a-joining.md)
 
 <br>
 <hr>
@@ -93,20 +95,30 @@ In the third cycle, students have the possibility to choose a certain specializa
 #### Practical Session 1
 
 - Handouts: 
-    - [Merging data sets](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R-tidy-13a-joining.md); []
-
+    - [String handling](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R-tidy-14-strings.md)
+    - [Basic text analysis](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R_text_3_quanteda.md)
 #### Practical Session 2 
+
+- Handouts: 
+
+    - [LDA topic modeling](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/r_text_lda.md)
 
 <br>
 <hr>
 
 ### Week 4
 
-#### Lecture: Machine Learning
+#### Lecture: Supervised Machine Learning
 
 #### Practical Session 1
 
+- Handouts: 
+    - [Supervised text classification I](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/r_text_ml.md)  
+
 #### Practical Session 2
+
+- Handouts:
+    - [Supervised text classification II]
 
 <br>
 <hr>
@@ -128,7 +140,17 @@ Exam week. More information soon.
 
 #### Practical Session 1
 
+- Handouts: 
+  - Alternative 1: 
+  - Alternative 2:
+  - Alternative 3:
+
 #### Practical Session 2
+
+- Handouts: 
+  - Alternative 1: 
+  - Alternative 2:
+  - Alternative 3:
 
 <br>
 <hr>
@@ -143,7 +165,17 @@ Exam week. More information soon.
 
 #### Practical Session 1
 
+- Handouts: 
+  - Alternative 1: 
+  - Alternative 2:
+  - Alternative 3:
+
 #### Practical Session 2
+
+- Handouts: 
+  - Alternative 1: 
+  - Alternative 2:
+  - Alternative 3:
 
 <br>
 <hr>
