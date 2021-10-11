@@ -44,20 +44,20 @@
 
   /* Colors */
   --text-color: #3c3c3c;
-  --header-color: #576ec2;
+  --header-color: #0089cf;
   --background-color: #ffffff;
-  --link-color: #576ec2;
-  --text-bold-color: #576ec2;
+  --link-color: #0089cf;
+  --text-bold-color: #0089cf;
   --code-highlight-color: rgba(255,255,0,0.5);
   --inverse-text-color: #FFFFFF;
-  --inverse-background-color: #576ec2;
+  --inverse-background-color: #0089cf;
   --inverse-header-color: #FFFFFF;
-  --inverse-link-color: #576ec2;
+  --inverse-link-color: #0089cf;
   --title-slide-background-color: #ffffff;
   --title-slide-text-color: #3c3c3c;
-  --header-background-color: #576ec2;
+  --header-background-color: #0089cf;
   --header-background-text-color: #ffffff;
-  --base: #576ec2;
+  --base: #0089cf;
   --white: #FFFFFF;
   --black: #272822;
 }
@@ -100,12 +100,12 @@ h1, h2, h3 {
 }
 .remark-inline-code {
   font-size: var(--code-inline-font-size);
-  color: #576ec2;
+  color: #0089cf;
 }
 .remark-slide-number {
-  color: #3c3c3c;
+  color: #0089cf;
   opacity: 1;
-  font-size: .5em;
+  font-size: 1em;
 }
 strong { color: var(--text-bold-color); }
 a, a > code {
@@ -148,10 +148,10 @@ a, a > code {
   float: left;
 }
 .left-column h2, .left-column h3 {
-  color: #576ec299;
+  color: #0089cf99;
 }
 .left-column h2:last-of-type, .left-column h3:last-child {
-  color: #576ec2;
+  color: #0089cf;
 }
 .right-column {
   width: 75%;
@@ -173,7 +173,7 @@ img, video, iframe {
   max-width: 100%;
 }
 blockquote {
-  border-left: solid 5px #576ec280;
+  border-left: solid 5px #0089cf80;
   padding-left: 1em;
 }
 .remark-slide table {
@@ -188,7 +188,7 @@ th, td {
   padding: 5px;
 }
 .remark-slide thead, .remark-slide tfoot, .remark-slide tr:nth-child(even) {
-  background: #DDE2F2;
+  background: #CCE7F5;
 }
 table.dataTable tbody {
   background-color: var(--background-color);
@@ -198,7 +198,7 @@ table.dataTable.display tbody tr.odd {
   background-color: var(--background-color);
 }
 table.dataTable.display tbody tr.even {
-  background-color: #DDE2F2;
+  background-color: #CCE7F5;
 }
 table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {
   background-color: rgba(255, 255, 255, 0.5);
@@ -278,6 +278,6 @@ table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {
   background-color: #f8f8f8;
 }
 .title-slide {
-  background: url(https://www.hbes.com/wp-content/uploads/2019/11/vu.png) right top no-repeat #fff;
+  background: url(https://wwwen.uni.lu/var/storage/images/media/images/lcl_images/vrije_universiteit_amsterdam/1384644-1-fre-FR/vrije_universiteit_amsterdam.png) right bottom no-repeat #fff;
   background-size: 350px; 100px;
 }

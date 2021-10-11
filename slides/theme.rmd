@@ -13,12 +13,12 @@ opts_chunk$set(
 ```{r xaringan-themer, include = FALSE}
 library(xaringanthemer)
 mono_accent(
-  base_color = "#576ec2",
+  base_color = "#0089cf",
   text_color = "#3c3c3c",
-  link_color = "#576ec2",
+  link_color = "#0089cf",
   text_font_size = "29px",
   background_color = "#ffffff",
-  header_color = "#576ec2",
+  header_color = "#0089cf",
   header_h1_font_size = "55px",
   #  header_h2_font_size = "42px",
   #  header_h3_font_size = "36px",
@@ -32,13 +32,13 @@ mono_accent(
   code_font_size = "16px",
   title_slide_text_color = "#3c3c3c",
   title_slide_background_color = "#ffffff",
-  text_slide_number_font_size = ".5em",
-  text_slide_number_color = "#3c3c3c",
+  text_slide_number_font_size = "1em",
+  text_slide_number_color = "#0089cf",
   padding = "0em 2em .5em 2em",
   extra_css = list( ".small code" = list("font-size"="16px"), ".remark-slide thead" = list("background"="none"),
                     ".hljs-github .hljs"  = list("background-color"="#e8e8e8", "padding"="2"),
                     ".pull-left code" = list("border-right"="1px dashed #ccc", "height" = "450px"),
                     ".remark-slide tr:nth-child(even)" = list("background-color"="#f8f8f8"),
-                    ".title-slide" = list("background"= "url(https://www.hbes.com/wp-content/uploads/2019/11/vu.png) right top no-repeat #fff", "background-size" = "350px; 100px"))
+                    ".title-slide" = list("background"= "url(https://wwwen.uni.lu/var/storage/images/media/images/lcl_images/vrije_universiteit_amsterdam/1384644-1-fre-FR/vrije_universiteit_amsterdam.png) right bottom no-repeat #fff", "background-size" = "350px; 100px"))
 )
 ```
