@@ -36,9 +36,20 @@ class: inverse, center, middle
   float: right;
   width: 60%;
 }
+
+.pull-left3 {
+  float: left;
+  width: 45%;
+  padding-right: 5% 
+}
+.pull-right3 {
+  float: right;
+  width: 45%;
+  padding-left: 5% 
+}
 ```
 
-# Harnessing surprising sources of information
+# Example: Harnessing surprising sources of information
 
 .pull-left[
 - In 2009, Blumenstock and colleagues (2015, Science) wanted to study wealth and poverty in Rwanda. 
@@ -52,6 +63,8 @@ class: inverse, center, middle
 - Combining both data sources, they used the survey data to "train" a machine learning model to predict a person's wealth based on their call records.
 - They also estimated the places of residence based on the geographic information embedded in call records. 
 ]
+
+_Blumenstock, Cadamura, & On, 2015_
 
 ---
 
@@ -71,7 +84,7 @@ _Blumenstock, Cadamura, & On, 2015_
 
 ---
 
-# Better prediction
+# Example: Better prediction
 
 .pull-left2[
 ![](https://www.pluggedin.com/wp-content/uploads/2019/12/minority-report-1024x677.jpg)
@@ -195,8 +208,10 @@ _Van Atteveldt & Peng, 2017_
 - Google spotlights counselling services as helpful resources when users query for suicide-related search terms. 
 - However, the search engine does so at varying display rates, depending on terms used
 - Display rates in the drug-overdose deaths domain are unknown.
-- Haim et al (2021) emulated suicide-related potentially harmful searches at large scale across the U.S. to explore Google’s response to search queries including or excluding additional drug-related terms
+- Haim and colleagues (2021) emulated suicide-related potentially harmful searches at large scale across the U.S. to explore Google’s response to search queries including or excluding additional drug-related terms
 
+
+_Haim, Scherr, & Arendt, 2021_
 ---
 
 # Simulating behavior and analyzing responses
@@ -212,12 +227,13 @@ _Van Atteveldt & Peng, 2017_
 ![](img/haim_searchqueries.jpg)
 ]
 
+_Haim, Scherr, & Arendt, 2021_
 ---
 
 # Example: Analyzing and aggregating news coverage
 
 .pull-left[
-- Jacobi and colleagues analyzed the coverage of nuclear technology from 1945 to the present in the New York Times
+- Jacobi and colleagues (2016) analyzed the coverage of nuclear technology from 1945 to the present in the New York Times
 - Analysis of 51,528 news stories (headline and lead): Way too much for human coding!
 - Used "topic modelling" to extract latent topics and analyzed their occurence over time
 ]
@@ -225,6 +241,8 @@ _Van Atteveldt & Peng, 2017_
 .pull-right[
 ![](img/Jacobi_topicmodelling.png)
 ]
+
+_Jacobi, Welbers, & Van Atteveldt, 2016_
 
 ---
 
@@ -235,50 +253,49 @@ _Van Atteveldt & Peng, 2017_
 - Instead, they used neural networks to detect gender in shown faces
 
 ![](img/juergen_face.png)
+
+
 ---
 
 # Underrepresentation of women in German TV
 
-.pull-left2[
+.pull-left[
 - Women on average remained underrepresented on TV, with 6.3 million female faces out of 16 million total
 (estimated proportion .39, 95% CI: .37-.42)
 - This strong overall bias was mirrored across specific subsamples (news, sports, advertising...)
+
+_Jürgens, Meltzer, & Scharkow, 2021_
 ]
 
-.pull-right2[
+.pull-right[
 ![](img/juergen_face2.png)
 ]
+
+
 
 ---
 
 # Ethics of 'Big Data' and Computational Research
 
-.pull-left[
+.pull-left3[
 
-<div style = "background: #c3dbe6; padding: 10px">
+<p style = "background: #c3dbe6; padding: 10px; height: 8em; ">
 
-700,000 Facebook users were put into an experiment that may have altered their emotions. The participants did not give consent and the study was not subject to third party ethical oversight
+700,000 Facebook users were put into an experiment that may have altered their emotions. The participants did not give consent and the study was not subject to third party ethical oversight. (Kramer et al., 2014)
 
-_Kramer et al., 2014_
-
-</div>
+</p>
 
 ]
 
-.pull-left[
+.pull-left3[
 
-<div style = "background: #c3dbe6; padding: 10px">
+<p style = "background: #c3dbe6; padding: 10px; height: 8em;">
 
-Researcher scraped students' data from Facebook, merged it with university records, used these data for research and then shared them with other researchers. 
+Researcher scraped students' data from Facebook, merged it with university records, used these data for research and then shared them with other researchers (Wimmer & Lewis, 2010).
 
-_Wimmer & Lewis, 2010_
-
-</div>
+</p>
 
 ]
-
-
-_Salganik, 2018, pp. 284-285_
 
 ---
 
@@ -296,6 +313,8 @@ _Salganik, 2018, pp. 284-285_
     - Respect for law and public interest
 
 
+
+_Salganik, 2018, chap. 6_
 ---
 
 # Preliminary summary
@@ -313,7 +332,7 @@ class: inverse, center, middle
 
 # The trouble with 'R'
 
-Sh***, we have to learn a programming language?
+We have to learn a programming language???
 
 ---
 
@@ -331,7 +350,7 @@ set.seed(100)
 library(ggplot2)
 
 # Create vector
-variable <- rnorm(100, 2, 4)
+variable <- rnorm(100, 3, 4)
 
 # Plot Histogram
 ggplot(NULL, 
@@ -464,9 +483,8 @@ How this course is going to work?
 
 # Teaching assistants & Help desk
 
-
 .pull-left[
-## Teaching assistants
+### Teaching assistants
 
 Not everything will work at the first time. Because we work with code, tiny mistakes can produce errors. During the practical sessions, these three assistants are there to help you:
 
@@ -479,13 +497,12 @@ Not everything will work at the first time. Because we work with code, tiny mist
 ]
 
 .pull-right[
-## R Help Desk
+### R Help Desk
 
 If you have any further problems related to installing software, running packages or code, or simply an error message you do not understand, you can address the R Help Desk:
 
 - Henry Lachman
 - Sarah Sramota
-
 
 
 ]
@@ -533,12 +550,16 @@ Here, you will find all necessary information, the course overview, and material
 
 # Course structure
 
-## Lectures
+.pull-left[
+### Lectures
 
 - Every Monday from 9:00 to 11.15
 - Introduction of research problems and computational solutions
 
-## Practical sessions
+]
+
+.pull-right[
+### Practical sessions
 
 - Course will be split in 5 groups
 - Practical sessions take place twice a week
@@ -548,6 +569,7 @@ Here, you will find all necessary information, the course overview, and material
 
 *Note:* All lectures and practical sessions are taught **on campus**!
 
+]
 ---
 
 # Overview of Lectures
@@ -619,7 +641,11 @@ class: inverse, center, middle
 
 # References
 
+<p style = "font-size: 20px">
+
 - Blumenstock, J. E., Cadamuro, G. , and On, R. (2015). Predicting Poverty and Wealth from Mobile Phone Metadata. Science, 350(6264), 1073–6. https://doi.org/10.1126/science.aac4420.
+
+- Haim, M., Scherr, S., & Arendt, F. (2021). How search engines may help reduce drug-related suicides. Drug and Alcohol Dependence, 226(108874). https://dx.doi.org/10.1016/j.drugalcdep.2021.108874 
 
 - Jacobi,C., van Atteveldt, W. & Welbers, K. (2016) Quantitative analysis of large amounts of journalistic texts using topic modelling. Digital Journalism, 4(1), 89-106, DOI: 10.1080/21670811.2015.1093271
 
@@ -632,3 +658,5 @@ class: inverse, center, middle
 - Van Atteveldt, W., & Peng, T.-Q. (2018). When communication meets computation: Opportunities, challenges, and pitfalls in computational communication science. Communication Methods and Measures, 12(2-3), 81–92. https://doi.org/10.1080/19312458.2018.1458084
 
 - Wimmer, A. & Lewis, K., (2010). Beyond and Below Racial Homophily: ERG Models of a Friendship Network Documented on Facebook. American Journal of Sociology, 116(2), 583-642. 
+
+</p>
