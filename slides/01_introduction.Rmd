@@ -27,6 +27,17 @@ class: inverse, center, middle
 
 ---
 
+```{css echo=FALSE}
+.pull-left2 {
+  float: left;
+  width: 30%;
+}
+.pull-right2 {
+  float: right;
+  width: 60%;
+}
+```
+
 # Harnessing surprising sources of information
 
 .pull-left[
@@ -62,15 +73,15 @@ _Blumenstock, Cadamura, & On, 2015_
 
 # Better prediction
 
-.pull-left[
+.pull-left2[
 ![](https://www.pluggedin.com/wp-content/uploads/2019/12/minority-report-1024x677.jpg)
 ]
 
-.pull-right[
+.pull-right2[
 
-- Already years ago, police departments have started to a system called CRUSH (Criminal Reduction Utilizing Statistical History) 
-- It evaluates patterns of past and present crime incidents and combines it with a range of data including crime reports, offender behavior profiles, weather forecasts...
-- This combination of data is then used to predict potential hot spots and flashpoints and allocate resources to areas where particular crimes are most likely to occur.
+- Already years ago, police departments have started to use a system called CRUSH (Criminal Reduction Utilizing Statistical History) 
+- It evaluates patterns of past crime incidents and combines it with a range of data including crime reports, offender behavior profiles, or weather forecasts
+- This combination of data is then used to predict potential hot spots and allocate resources to areas where particular crimes are most likely to occur.
 
 
 ]
@@ -80,10 +91,15 @@ _Blumenstock, Cadamura, & On, 2015_
 # Why is this important now?
 
 - In the past, collecting data was expensive (surveys, observations...)
+
 - In the digital age, the behaviors of billions of people are recorded, stored, and therefore analyzable
-- For example, every time you click on a website, make a call on your mobile phone, or pay for something with your credit card, a digital record of your behavior is created and stored 
+
+- For example, every time you click on a website, make a call on your mobile phone, or pay for something with your credit card, a digital record of your behavior is created and stored
+
 - Because (meta-)data are a byproduct of people’s everyday actions, they are often called **digital traces**. 
+
 - Governments also have incredibly rich data about both people and businesses
+
 - Large-scale records of persons or business are often called **big data**.
 
 ---
@@ -92,27 +108,27 @@ _Blumenstock, Cadamura, & On, 2015_
 
 
 .pull-left[
-1. Big
+- Big
 
-2. Always-On
+- Always-On
 
-3. Nonreactive
+- Nonreactive
 
-4. Incomplete
+- Incomplete
 
-5. Inaccessible
+- Inaccessible
 ]
 
 .pull-right[
-6. Nonrepresentative
+- Nonrepresentative
 
-7. Drifting
+- Drifting
 
-8. Algorithmically confounded
+- Algorithmically confounded
 
-9. Dirty
+- Dirty
 
-10. Sensitive
+- Sensitive
 ]
 
 <br>
@@ -123,11 +139,13 @@ _Salganik, 2017, chap. 2.3_
 
 # Typical computational research strategies
 
-1. Counting things
+<br>
 
-2. Forecasting and nowcasting
+- Counting things
 
-3. Approximating experiments
+- Forecasting and nowcasting
+
+- Approximating experiments
 
 <br>
 
@@ -139,7 +157,7 @@ class: inverse, center, middle
 
 # Computational Communication Science
 
-A definition.
+Why computational methods are important for future communication research. 
 
 ---
 
@@ -156,7 +174,22 @@ A definition.
 
 ---
 
-# Simulating search queries
+# Promises of computational communication research
+
+The recent acceleration in the promise and use of computational methods for communication
+science is primarily fueled by the confluence of at least three developments:
+
+- vast amounts of digitally available data, ranging from social media messages and other “digital traces” to web archives and newly digitized newspaper and other historical archives
+- improved tools to analyze this data, including **network analysis methods** and **automatic text analysis methods** such as supervised **text classification**, **topic modelling**, **word embeddings**, and **syntactic methods**
+- powerful and cheap processing power, and easy to use computing infrastructure for processing these data, including scientific and commercial cloud computing, sharing platforms such as Github and Dataverse, and crowd coding platforms such as
+Amazon MTurk and Crowdflower
+
+_Van Atteveldt & Peng, 2017_
+
+
+---
+
+# Example: Simulating search queries
 
 - Numbers of drug-overdose deaths have been increasing in the United States.
 - Google spotlights counselling services as helpful resources when users query for suicide-related search terms. 
@@ -181,7 +214,7 @@ A definition.
 
 ---
 
-# Analyzing and aggregating news coverage
+# Example: Analyzing and aggregating news coverage
 
 .pull-left[
 - Jacobi and colleagues analyzed the coverage of nuclear technology from 1945 to the present in the New York Times
@@ -195,7 +228,7 @@ A definition.
 
 ---
 
-# Analyzing gender representation in TV
+# Example: Analyzing gender representation in TV
 
 - Jürgens et al (2021) investigated gender representations in over ten years of daytime TV programming
 - Usually, this would have required hours and hours (!) of manual coding (i.e., watching a hell lot of TV)
@@ -206,23 +239,81 @@ A definition.
 
 # Underrepresentation of women in German TV
 
-.pull-left[
+.pull-left2[
 - Women on average remained underrepresented on TV, with 6.3 million female faces out of 16 million total
 (estimated proportion .39, 95% CI: .37-.42)
 - This strong overall bias was mirrored across specific subsamples (news, sports, advertising...)
 ]
 
-.pull-right[
+.pull-right2[
 ![](img/juergen_face2.png)
 ]
 
+---
+
+# Ethics of 'Big Data' and Computational Research
+
+.pull-left[
+
+<div style = "background: #c3dbe6; padding: 10px">
+
+700,000 Facebook users were put into an experiment that may have altered their emotions. The participants did not give consent and the study was not subject to third party ethical oversight
+
+_Kramer et al., 2014_
+
+</div>
+
+]
+
+.pull-left[
+
+<div style = "background: #c3dbe6; padding: 10px">
+
+Researcher scraped students' data from Facebook, merged it with university records, used these data for research and then shared them with other researchers. 
+
+_Wimmer & Lewis, 2010_
+
+</div>
+
+]
+
+
+_Salganik, 2018, pp. 284-285_
+
+---
+
+# Ethical problems
+
+- More power over participants than in the past
+
+- Example: Observation of participants without their knowledge or consent
+
+- Guiding principles
+
+    - Respect for persons: Treating people as autonomous and honoring their wishes
+    - Beneficence: Understanding and improving the risk/benefit profile of a study
+    - Justice: Risks and benefits should be evenly distributed
+    - Respect for law and public interest
+
+
+---
+
+# Preliminary summary
+
+- Computational communication research holds manifold promises
+
+- We can harness unusual sources of information and large amounts of data, particularly as people leave digital traces
+
+- New methods allow to structure, aggregate and make sense of these data and extract meaningful information to study communication behavior and phenomena
+
+- However, computational communication research comes with ethical challenges related to consent, privacy, and autonomy of the participants
 
 ---
 class: inverse, center, middle
 
 # The trouble with 'R'
 
-Shit, we have to learn a programming language?
+Sh***, we have to learn a programming language?
 
 ---
 
@@ -231,7 +322,7 @@ Shit, we have to learn a programming language?
 .pull-left[
 
 ```{r, echo = F}
-set.seed(101)
+set.seed(100)
 ```
 
 
@@ -240,7 +331,7 @@ set.seed(101)
 library(ggplot2)
 
 # Create vector
-variable <- rnorm(500, 2, 4)
+variable <- rnorm(100, 2, 4)
 
 # Plot Histogram
 ggplot(NULL, 
@@ -291,17 +382,48 @@ ggplot(NULL,
 
 - There are thousand additional packages for almost any statistical procedure
 - Allows for flexible programming and is adaptive to own needs
-- Encourages replicable analyses
+- Encourages replicible analyses
 
 ---
 
 # Advantages of R
 
+.pull-left2[
 ### Graphic and other output possibilities
 
 - Allows to produce publication-ready figures and visualizations
 - Allows to combine analyses and writing to produces diverse output formats (e.g., these slides)
 
+]
+
+.pull-right2[
+
+```{r, echo = F, fig.height = 6, fig.width = 10}
+# Libraries
+library(tidyverse)
+library(hrbrthemes)
+library(viridis)
+library(gridExtra)
+library(ggrepel)
+
+# The dataset is provided in the gapminder library
+library(gapminder)
+data <- gapminder %>% filter(year=="2007") %>% dplyr::select(-year)
+
+# Show a bubbleplot
+data %>%
+  mutate(pop=pop/1000000) %>%
+  arrange(desc(pop)) %>%
+  mutate(country = factor(country, country)) %>%
+  ggplot( aes(x=gdpPercap, y=lifeExp, size = pop, color = continent)) +
+    geom_point(alpha=0.7) +
+    scale_size(range = c(1.4, 19), name="Population (M)") +
+    scale_color_viridis(discrete=TRUE) +
+    theme_ipsum() +
+    labs(color = "Continent")
+```
+
+]
 ---
 
 # Conclusion
@@ -343,12 +465,30 @@ How this course is going to work?
 # Teaching assistants & Help desk
 
 
+.pull-left[
+## Teaching assistants
+
+Not everything will work at the first time. Because we work with code, tiny mistakes can produce errors. During the practical sessions, these three assistants are there to help you:
 
 - Meryam Boufouchk
 
 - Daniel Huisman
 
 - Gianni Quaedvlieg
+
+]
+
+.pull-right[
+## R Help Desk
+
+If you have any further problems related to installing software, running packages or code, or simply an error message you do not understand, you can address the R Help Desk:
+
+- Henry Lachman
+- Sarah Sramota
+
+
+
+]
 
 
 ---
@@ -396,6 +536,7 @@ Here, you will find all necessary information, the course overview, and material
 ## Lectures
 
 - Every Monday from 9:00 to 11.15
+- Introduction of research problems and computational solutions
 
 ## Practical sessions
 
@@ -403,8 +544,9 @@ Here, you will find all necessary information, the course overview, and material
 - Practical sessions take place twice a week
 - Every Tuesday (either 9:00 to 10:30 or 11:00 to 12:30)
 - Every Thursday (with 13.30 to 15:00 or 15:30 to 17:00)
+- Here, you will learn to run code in RStudio!
 
-*Note:* All lectures and practical sessions are taught on campus!
+*Note:* All lectures and practical sessions are taught **on campus**!
 
 ---
 
@@ -483,4 +625,10 @@ class: inverse, center, middle
 
 - Jürgens, P., Meltzer, C., & Scharkow, M. (2021, in press). Age and Gender Representation on German TV: A Longitudinal Computational Analysis. Computational Communication Research. 
 
+- Kramer, A. D. I., Guillory, J. E, & Hancock, J. (2014). Experimental Evidence of Massive-Scale Emotional Contagion Through Social Networks. Proceedings of the National Academy of Sciences, 111(24), 8788-8790.
+
+- Salganik, M. J. (2018). Bit by Bit: Social Research in the Digital Age. Princeton University Press. 
+
 - Van Atteveldt, W., & Peng, T.-Q. (2018). When communication meets computation: Opportunities, challenges, and pitfalls in computational communication science. Communication Methods and Measures, 12(2-3), 81–92. https://doi.org/10.1080/19312458.2018.1458084
+
+- Wimmer, A. & Lewis, K., (2010). Beyond and Below Racial Homophily: ERG Models of a Friendship Network Documented on Facebook. American Journal of Sociology, 116(2), 583-642. 
