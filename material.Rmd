@@ -57,6 +57,7 @@ In the third cycle, students have the possibility to choose a certain specializa
 - Handout: 
     - [Transforming data](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R-tidy-5-transformation.md)
     - [Summarizing data](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R-tidy-5b-groupby.md)
+    - [Reshaping](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/r-tidy-12-reshaping.md)
 
 #### Additional resources: 
 
@@ -69,19 +70,21 @@ In the third cycle, students have the possibility to choose a certain specializa
 
 #### Lecture: Data Visualization and Web Scraping
 
-- Slides (will be uploaded)
+- Slides:
+    - Download Slides (will be uploaded soon)
 
 #### Practical Session 1: Reshaping and data visualization
 
 - Handouts:
-    - [Reshaping](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/r-tidy-12-reshaping.md)
-    - [Data visualization with GGplot2](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/r-tidy-3_7-visualization.md)
+    - [Merging data sets](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R-tidy-13a-joining.md)
+    - [Data visualization](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/r-tidy-3_7-visualization.md)
 
-#### Practical Session 2: Webscraping, frequencies, and data wrangling
+#### Practical Session 2: Webscraping, frequencies, and simple statistics
 
 - Handouts:
-    - [Webscraping]  
-    - [Merging data sets](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R-tidy-13a-joining.md)
+    - [Webscraping] 
+    - [Frequencies and Statistics]
+
 
 #### Additional resources: 
     
@@ -95,6 +98,9 @@ In the third cycle, students have the possibility to choose a certain specializa
 ### Week 3
 
 #### Lecture: : Text Analysis
+
+- Slides:
+    - Download Slides (will be uploaded soon)
 
 #### Practical Session 1
 
@@ -115,6 +121,9 @@ In the third cycle, students have the possibility to choose a certain specializa
 ### Week 4
 
 #### Lecture: Supervised Machine Learning
+
+- Slides:
+    - Download Slides (will be uploaded soon)
 
 #### Practical Session 1
 
@@ -140,9 +149,9 @@ Exam week. More information soon.
 
 #### Lecture
 
-- Alternative 1: Slides (will be uploaded)
-- Alternative 2: Slides (will be uploaded)
-- Alternative 3: Slides (will be uploaded)
+- Alternative 1: Download Slides (will be uploaded soon)
+- Alternative 2: Download Slides (will be uploaded soon)
+- Alternative 3: Download Slides (will be uploaded soon)
 
 #### Practical Session 1
 
@@ -154,7 +163,7 @@ Exam week. More information soon.
 #### Practical Session 2
 
 - Handouts: 
-  - Alternative 1: [Confirmatory factor analaysis]; [Reliability]
+  - Alternative 1: [Confirmatory factor analysis]; [Reliability]
   - Alternative 2:
   - Alternative 3:
 
@@ -165,9 +174,9 @@ Exam week. More information soon.
 
 #### Lecture
 
-- Alternative 1: Slides (will be uploaded)
-- Alternative 2: Slides (will be uploaded)
-- Alternative 3: Slides (will be uploaded)
+- Alternative 1: Download Slides (will be uploaded soon)
+- Alternative 2: Download Slides (will be uploaded soon)
+- Alternative 3: Download Slides (will be uploaded soon)
 
 #### Practical Session 1
 
