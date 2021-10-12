@@ -11,7 +11,7 @@
 class: left, middle, title-slide
 
 # Computational Analysis of Digital Communication
-## Introduction
+## Week 1: Introduction
 ### 
 ### Dr. Philipp K. Masur | <a href="mailto:p.k.masur@vu.nl" class="email">p.k.masur@vu.nl</a>
 
@@ -51,22 +51,36 @@ class: inverse, center, middle
   width: 45%;
   padding-left: 5% 
 }
+
+.my-one-page-font {
+  font-size: 17px;
+}
 &lt;/style&gt;
 
 # Example: Harnessing surprising sources of information
 
 .pull-left[
+
 - In 2009, Blumenstock and colleagues (2015, Science) wanted to study wealth and poverty in Rwanda. 
+
 - They conducted a survey with a random sample of 1,000 customers of the largest mobile phone provider
+
 - They collected demographics, social, and economic characteristics 
+
 - Traditional social science survey, right?
 ]
 
+--
+
 .pull-right[
 - The authors also had access to complete call records from 1.5 million people
+
 - Combining both data sources, they used the survey data to "train" a machine learning model to predict a person's wealth based on their call records.
+
 - They also estimated the places of residence based on the geographic information embedded in call records. 
 ]
+
+&lt;br&gt;
 
 _Blumenstock, Cadamura, &amp; On, 2015_
 
@@ -80,15 +94,16 @@ _Blumenstock, Cadamura, &amp; On, 2015_
 
 .pull-right[
 
-- All together, they were able to produce a high-resolution map of the geographic distribution of wealth in Rwanda.
-- Problem: Results were hard to validate - there were simply no comparable estimates for all geographic areas in Rwanda
+- All together, they were able to produce a high-resolution map of the geographic distribution of wealth (and poverty) in Rwanda.
+
+- Interesting side effect: Results were hard to validate - there were simply no comparable estimates for all geographic areas in Rwanda
 ]
 
 _Blumenstock, Cadamura, &amp; On, 2015_
 
 ---
 
-# Example: Better prediction
+# Example: Crime prediction
 
 .pull-left2[
 ![](https://www.pluggedin.com/wp-content/uploads/2019/12/minority-report-1024x677.jpg)
@@ -97,7 +112,9 @@ _Blumenstock, Cadamura, &amp; On, 2015_
 .pull-right2[
 
 - Already years ago, police departments have started to use a system called CRUSH (Criminal Reduction Utilizing Statistical History) 
+
 - It evaluates patterns of past crime incidents and combines it with a range of data including crime reports, offender behavior profiles, or weather forecasts
+
 - This combination of data is then used to predict potential hot spots and allocate resources to areas where particular crimes are most likely to occur.
 
 
@@ -107,15 +124,13 @@ _Blumenstock, Cadamura, &amp; On, 2015_
 
 # Why is this important now?
 
-- In the past, collecting data was expensive (surveys, observations...)
+- In the past, collecting data was **expensive** (surveys, observations...)
 
-- In the digital age, the behaviors of billions of people are recorded, stored, and therefore analyzable
+- In the digital age, the behaviors of billions of people are **recorded**, **stored**, and therefore **analyzable**
 
-- For example, every time you click on a website, make a call on your mobile phone, or pay for something with your credit card, a digital record of your behavior is created and stored
+- Every time you click on a website, make a call on your mobile phone, or pay for something with your credit card, a **digital record of your behavior** is created and stored
 
-- Because (meta-)data are a byproduct of people’s everyday actions, they are often called **digital traces**. 
-
-- Governments also have incredibly rich data about both people and businesses
+- Because (meta-)data are a byproduct of people’s everyday actions, they are often called **digital traces**
 
 - Large-scale records of persons or business are often called **big data**.
 
@@ -123,32 +138,33 @@ _Blumenstock, Cadamura, &amp; On, 2015_
 
 # 10 Characteristics of Big Data
 
+&lt;style&gt;
+td {
+  font-size: 22px
+}
+&lt;/style&gt;
 
-.pull-left[
-- Big
+|  |  Characteristic | Description |
+| - | :----------- | :------------------------ | 
+| 1 | Big | The scale or volume of some current datasets is often impressive. However, big datasets are not an end in themselves, but they can enable certain kinds of research including the study of rare events, the estimation of heterogeneity, and the detection of small differences |
+| 2 | Always-on | Many big data systems are constantly collecting data and thus enable to study unexpected events and allow for real-time measurement  |
+| 3 | Nonreactive | Participants are generally not aware that their data are being captured or they have become so accustomed to this data collection that it no longer changes their behavior. |
+| 4 | Incomplete | Most big data sources are incomplete, in the sense that they don’t have the information that you will want for your research. This is a common feature of data that were created for purposes other than research. |
+| 5 | Inaccessible | Data held by companies and governments are difficult for researchers to access. |
 
-- Always-On
+_Salganik, 2017, chap. 2.3_
 
-- Nonreactive
+---
 
-- Incomplete
+# 10 Characteristics of Big Data
 
-- Inaccessible
-]
-
-.pull-right[
-- Nonrepresentative
-
-- Drifting
-
-- Algorithmically confounded
-
-- Dirty
-
-- Sensitive
-]
-
-&lt;br&gt;
+|  |  Characteristic | Description |
+| - | :----------- | :------------------------ | 
+| 6 | Nonrepresentative | Most big datasets are nonetheless not representative of certain populations. Out-of-sample generalizations are hence difficult or impossible. |
+| 7 | Drifting | Many big data systems are changing constantly, thus making it difficult to study long-term trends |
+| 8 | Algorithmically confounded | Behavior in big data systems is not natural; it is driven by the engineering goals of the systems. |
+| 9 | Dirty | Big data often includes a lot of noise (e.g., junk, spam, spurious data points...) |
+| 10 | Sensitive | Some of the information that companies and governments have is sensitive. |
 
 _Salganik, 2017, chap. 2.3_
 
@@ -158,13 +174,32 @@ _Salganik, 2017, chap. 2.3_
 
 &lt;br&gt;
 
-- Counting things
+### 1. Counting things
 
-- Forecasting and nowcasting
+In the age of big data, researcher can "count" more than ever:
 
-- Approximating experiments
+- Are women underrepresented in TV?
+- How many likes to certain post get?
 
-&lt;br&gt;
+--
+
+### 2. Forecasting and nowcasting
+
+Big data allow for more accurate predictions both in the present and in the future
+
+- Where can we expect crimes?
+- Who will win the election?
+
+
+--
+
+### 3. Approximating experiments
+
+Computational methods provide opportunities to conduct "natural experiments"
+
+--
+
+&lt;br&gt;&lt;br&gt;
 
 _Salganik, 2017, chap. 2.4_
 
@@ -174,7 +209,7 @@ class: inverse, center, middle
 
 # Computational Communication Science
 
-Why computational methods are important for future communication research. 
+Why computational methods are important for (future) communication research. 
 
 ---
 
@@ -193,12 +228,14 @@ Why computational methods are important for future communication research.
 
 # Promises of computational communication research
 
-The recent acceleration in the promise and use of computational methods for communication
+The recent acceleration in the use of computational methods for communication
 science is primarily fueled by the confluence of at least three developments:
 
-- vast amounts of digitally available data, ranging from social media messages and other “digital traces” to web archives and newly digitized newspaper and other historical archives
+- vast **amounts of digitally available data**, ranging from social media messages and other “digital traces” to web archives and newly digitized newspaper and other historical archives
+
 - improved tools to analyze this data, including **network analysis methods** and **automatic text analysis methods** such as supervised **text classification**, **topic modelling**, **word embeddings**, and **syntactic methods**
-- powerful and cheap processing power, and easy to use computing infrastructure for processing these data, including scientific and commercial cloud computing, sharing platforms such as Github and Dataverse, and crowd coding platforms such as
+
+- powerful and cheap **processing power**, and easy to use **computing infrastructure** for processing these data, including scientific and commercial cloud computing, sharing platforms such as Github and Dataverse, and crowd coding platforms such as
 Amazon MTurk and Crowdflower
 
 _Van Atteveldt &amp; Peng, 2017_
@@ -208,14 +245,20 @@ _Van Atteveldt &amp; Peng, 2017_
 
 # Example: Simulating search queries
 
-- Numbers of drug-overdose deaths have been increasing in the United States.
-- Google spotlights counselling services as helpful resources when users query for suicide-related search terms. 
+- Numbers of drug-overdose deaths have been increasing in the United States
+
+- Google spotlights counselling services as helpful resources when users query for suicide-related search terms
+
 - However, the search engine does so at varying display rates, depending on terms used
-- Display rates in the drug-overdose deaths domain are unknown.
+
+- Display rates in the drug-overdose deaths domain are unknown
+
 - Haim and colleagues (2021) emulated suicide-related potentially harmful searches at large scale across the U.S. to explore Google’s response to search queries including or excluding additional drug-related terms
 
+&lt;br&gt;
 
 _Haim, Scherr, &amp; Arendt, 2021_
+
 ---
 
 # Simulating behavior and analyzing responses
@@ -223,7 +266,9 @@ _Haim, Scherr, &amp; Arendt, 2021_
 .pull-left[
 
 - They conducted 215,999 search requests with varying combinations of search terms
-- Counseling services were displayed at high rates after suicide-related potentially harmful search queries (e.g., “how to commit suicide”). 
+
+- Counseling services were displayed at high rates after suicide-related potentially harmful search queries (e.g., “how to commit suicide”)
+
 - Display rates were substantially lower when drug-related terms, indicative of users’ suicidal overdosing tendencies, were added (e.g., “how to commit suicide fentanyl”)
 ]
 
@@ -238,7 +283,9 @@ _Haim, Scherr, &amp; Arendt, 2021_
 
 .pull-left[
 - Jacobi and colleagues (2016) analyzed the coverage of nuclear technology from 1945 to the present in the New York Times
+
 - Analysis of 51,528 news stories (headline and lead): Way too much for human coding!
+
 - Used "topic modelling" to extract latent topics and analyzed their occurence over time
 ]
 
@@ -253,8 +300,8 @@ _Jacobi, Welbers, &amp; Van Atteveldt, 2016_
 # Example: Analyzing gender representation in TV
 
 - Jürgens et al (2021) investigated gender representations in over ten years of daytime TV programming
-- Usually, this would have required hours and hours (!) of manual coding (i.e., watching a hell lot of TV)
-- Instead, they used neural networks to detect gender in shown faces
+
+- Usually, this would have required hours and hours (!) of manual coding (i.e., watching a hell lot of TV), but they used neural networks to automatically detect gender in shown faces
 
 ![](img/juergen_face.png)
 
@@ -264,9 +311,11 @@ _Jacobi, Welbers, &amp; Van Atteveldt, 2016_
 # Underrepresentation of women in German TV
 
 .pull-left[
-- Women on average remained underrepresented on TV, with 6.3 million female faces out of 16 million total
-(estimated proportion .39, 95% CI: .37-.42)
+- Women on average remained underrepresented on TV, with 6.3 million female faces out of 16 million total (estimated proportion .39, 95% CI: .37-.42)
+
 - This strong overall bias was mirrored across specific subsamples (news, sports, advertising...)
+
+&lt;br&gt;&lt;br&gt;
 
 _Jürgens, Meltzer, &amp; Scharkow, 2021_
 ]
@@ -274,7 +323,6 @@ _Jürgens, Meltzer, &amp; Scharkow, 2021_
 .pull-right[
 ![](img/juergen_face2.png)
 ]
-
 
 
 ---
@@ -285,7 +333,7 @@ _Jürgens, Meltzer, &amp; Scharkow, 2021_
 
 &lt;p style = "background: #c3dbe6; padding: 10px; height: 8em; "&gt;
 
-700,000 Facebook users were put into an experiment that may have altered their emotions. The participants did not give consent and the study was not subject to third party ethical oversight. (Kramer et al., 2014)
+700,000 Facebook users were put into an experiment that may have altered their emotions. The participants did not give consent and the study was not subject to third party ethical oversight (Kramer et al., 2014)
 
 &lt;/p&gt;
 
@@ -301,6 +349,12 @@ Researcher scraped students' data from Facebook, merged it with university recor
 
 ]
 
+--
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+**Question:** Do you think these studies are problematic?
+
 ---
 
 # Ethical problems
@@ -311,25 +365,34 @@ Researcher scraped students' data from Facebook, merged it with university recor
 
 - Guiding principles
 
-    - Respect for persons: Treating people as autonomous and honoring their wishes
-    - Beneficence: Understanding and improving the risk/benefit profile of a study
-    - Justice: Risks and benefits should be evenly distributed
-    - Respect for law and public interest
+    - **Respect for persons:** Treating people as autonomous and honoring their wishes
+    - **Beneficence:** Understanding and improving the risk/benefit profile of a study
+    - **Justice:** Risks and benefits should be evenly distributed
+    - **Respect for law and public interest**
 
 
+&lt;br&gt;
 
 _Salganik, 2018, chap. 6_
+
 ---
 
 # Preliminary summary
 
-- Computational communication research holds manifold promises
+.pull-left2[
 
-- We can harness unusual sources of information and large amounts of data, particularly as people leave digital traces
+![](img/pexels-omkar-patyane-238480.jpg)
+]
 
-- New methods allow to structure, aggregate and make sense of these data and extract meaningful information to study communication behavior and phenomena
+.pull-right2[
+- Computational communication research holds **manifold promises**
 
-- However, computational communication research comes with ethical challenges related to consent, privacy, and autonomy of the participants
+- We can harness unusual sources of information and **large amounts of data**, particularly because people constantly leave **digital traces**
+
+- New methods allow to **structure**, **aggregate** and **make sense** of these data and extract meaningful information to study communication behavior and phenomena
+
+- However, computational communication research comes with **ethical challenges** related to consent, privacy, and autonomy of the participants
+]
 
 ---
 class: inverse, center, middle
@@ -378,6 +441,7 @@ ggplot(NULL,
 
 - R is a programming language, not just a software for statistical analyses
 - Yet, primarily developed for conducting statistical analyses
+- Open source (free of cost!)
 
 
 ### Infrastructure
@@ -407,12 +471,14 @@ ggplot(NULL,
 # Advantages of R
 
 .pull-left2[
-### Graphic and other output possibilities
+### Visualization
 
 - Allows to produce publication-ready figures and visualizations
 - Allows to combine analyses and writing to produces diverse output formats (e.g., these slides)
 
 ]
+
+--
 
 .pull-right2[
 
@@ -449,15 +515,15 @@ How this course is going to work?
 
 # Teachers
 
-| Dr. Philipp K. Masur | Dr. Paulina Pankowska | Dr. Kaspar Welbers |
-|:---------------------:|:---------------------:|:---------------------:|
-|![](img/Masur.jpg) | ![](img/Pankowska.png)  |  ![](img/Welbers.png) |
-| Lecture &amp; Course Coordinator | Lecturer | Lecturer |
+| Dr. Philipp K. Masur | | Dr. Paulina Pankowska | | Dr. Kaspar Welbers |
+|:---------------------:| -- |:---------------------:|-- |:---------------------:|
+|![](img/Masur.jpg) | | ![](img/Pankowska.png)  | |  ![](img/Welbers.png) |
+| Lecture &amp; Course Coordinator | | Lecturer | | Lecturer |
 
 
 ---
 
-# Teaching assistants &amp; Help desk
+# Teaching assistants &amp; R help desk
 
 .pull-left[
 ### Teaching assistants
@@ -473,11 +539,13 @@ Not everything will work at the first time. Because we work with code, tiny mist
 ]
 
 .pull-right[
+
 ### R Help Desk
 
 If you have any further problems related to installing software, running packages or code, or simply an error message you do not understand, you can address the R Help Desk:
 
 - Henry Lachman
+
 - Sarah Sramota
 
 
@@ -500,7 +568,7 @@ After completion of the course, you will…
 
 # Skills and methods
 
-With regard to the specific methods being taught in **R**, you will be able to…
+With regard to the specific methods being taught in R, you will be able to…
 
 - gather, scrape, and import data from different file types, APIs, and websites
 
@@ -516,12 +584,16 @@ With regard to the specific methods being taught in **R**, you will be able to�
 
 # Information and Materials
 
+.pull-left[
 The major hub for this course is the following website:
 
 - https://masurp.github.io/VU_CADC/
 
-Here, you will find all necessary information, the course overview, and materials needed to complete this course.
+]
 
+.pull-left[
+![](img/course_screenshot.png)
+]
 ---
 
 # Course structure
@@ -543,31 +615,39 @@ Here, you will find all necessary information, the course overview, and material
 - Every Thursday (with 13.30 to 15:00 or 15:30 to 17:00)
 - Here, you will learn to run code in RStudio!
 
-*Note:* All lectures and practical sessions are taught **on campus**!
 
 ]
+
+&lt;br&gt;&lt;br&gt;
+
+*Note:* All lectures and practical sessions are taught **on campus**!
+
 ---
 
 # Overview of Lectures
 
-- Cycle 1: Introduction and Data Wrangling
+- **Cycle 1:** Introduction and Data Wrangling
 
-- Cycle 2: Text Analysis and Machine Learning
+- **Cycle 2:** Text Analysis and Machine Learning
 
-- Cycle 3: Specialization
+- **Cycle 3:** Specialization
 
   - Alternative 1: Assessing psychological concepts and their relations
   - Alternative 2: Campaign effectiveness using web scraping
   - Alternative 3: Media effects on publication opinion using linkage Analysis
+
+&lt;br&gt;
 
 *Note:* In cycle 3, you can choose one of the three alternatives. Yet, material will be provided for all specializations and you are encouraged to go through them by yourself. 
 ---
 
 # Attendance
 
-- Attendance during the regular lectures is **not compulsory** but highly recommended. 
+- Attendance during the regular lectures is not compulsory but highly recommended. 
 
-- Attendance of the practical sessions is **mandatory**. One absence from one of the workgroup sessions, for serious health, family, or work reasons, can be excused if the instructor is advised in advance.  
+- Attendance of the practical sessions is mandatory. 
+
+- One absence from one of the workgroup sessions, for serious health, family, or work reasons, can be excused if the instructor is advised in advance.  
 
 
 ---
@@ -577,47 +657,52 @@ Here, you will find all necessary information, the course overview, and material
 After the first two cycles, there will be a written exam (**70% of the final grade**):
 
 - The exam will consist of ~60 multiple choice questions and ~6 open-ended questions
-- Exam questions will be based on all material discussed in the first two cycles, including lecture content, class materials, and required readings.
-- Example questions will be provided throughout the course. 
-- Please register for the exam via VUweb. 
+
+- Exam questions will be based on all material discussed in the first two cycles, including lecture content, class materials, and required readings
+
+- Example questions will be provided throughout the course
+
+- Please register for the exam via VUweb
 
 
 ---
 
-# Homework Assignment
+# Homework
 
 After each week, students are required to hand in a “homework”, which represents a practical application of some of the taught analysis methods (e.g. with a new data set, specific research question) pass (**10% of the final grade**):
 
-- Each week’s assignment requires students to apply the methods they have learned to a new data set. 
-- Students will receive an RMarkdown template for their code and the respective data set(s).
+- Each week’s assignment requires students to apply the methods they have learned to a new data set
+
+- Students will receive an RMarkdown template for their code and the respective data set(s)
+
 - Students are required to hand in the RMarkdown file and a compiled html on Tuesday (24:00) the week after. All homework assignments must be submitted to pass. 
 
 ---
 
 # Group presentation
 
-During the third cycle, students will be assigned to small working groups in which they independently conduct a research project. The assignment requires them to present results from their working groups in a mini-conference. This presentation will be graded per group (**20% of the final grade**).
+In the third cycle, students will be assigned to small working groups in which they independently conduct a research project. A final presentation will be graded per group (**20% of the final grade**).
 
-- Students need to prepare and give a 10-minute talk (including appropriate slides) in which they,
-- introduce the research project (1-2 slides),
-- describe theory and hypotheses (1 slide),
-- explain the methods (1 slide),
-- present the results (2 slides), and
-- discuss the findings (1-2 slides).
+- A 10-minute talk (including appropriate slides) in which you:
+    - introduce the research project (1-2 slides)
+    - describe theory and hypotheses (1 slide)
+    - explain the methods (1 slide)
+    - present the results (2 slides)
+    - discuss the findings (1-2 slides)
 
-Students are required to hand in the RMarkdown, a compiled output and the slides beforehand (Deadline: 19th of December 2021 at 12:00). 
+Students are required to hand in the slides and analyses beforehand (Deadline: 19th of December 2021 at 12:00). 
 
 ---
 
 class: inverse, center, middle
 
-# Any Questions?
+# Any further questions?
 
 ---
 
-# References
+class: my-one-page-font
 
-&lt;p style = "font-size: 20px"&gt;
+# References
 
 - Blumenstock, J. E., Cadamuro, G. , and On, R. (2015). Predicting Poverty and Wealth from Mobile Phone Metadata. Science, 350(6264), 1073–6. https://doi.org/10.1126/science.aac4420.
 
@@ -634,8 +719,6 @@ class: inverse, center, middle
 - Van Atteveldt, W., &amp; Peng, T.-Q. (2018). When communication meets computation: Opportunities, challenges, and pitfalls in computational communication science. Communication Methods and Measures, 12(2-3), 81–92. https://doi.org/10.1080/19312458.2018.1458084
 
 - Wimmer, A. &amp; Lewis, K., (2010). Beyond and Below Racial Homophily: ERG Models of a Friendship Network Documented on Facebook. American Journal of Sociology, 116(2), 583-642. 
-
-&lt;/p&gt;
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
