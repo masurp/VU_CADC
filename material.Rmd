@@ -147,50 +147,11 @@ Exam week. More information soon.
 
 ### Week 6
 
-#### Lecture
-
-- Alternative 1: Download Slides (will be uploaded soon)
-- Alternative 2: Download Slides (will be uploaded soon)
-- Alternative 3: Download Slides (will be uploaded soon)
-
-#### Practical Session 1
-
-- Handouts: 
-  - Alternative 1: [Exploratory factor analysis]; [Reliability]
-  - Alternative 2:
-  - Alternative 3:
-
-#### Practical Session 2
-
-- Handouts: 
-  - Alternative 1: [Confirmatory factor analysis]; [Reliability]
-  - Alternative 2:
-  - Alternative 3:
-
 <br>
 <hr>
 
+
 ### Week 7
-
-#### Lecture
-
-- Alternative 1: Download Slides (will be uploaded soon)
-- Alternative 2: Download Slides (will be uploaded soon)
-- Alternative 3: Download Slides (will be uploaded soon)
-
-#### Practical Session 1
-
-- Handouts: 
-  - Alternative 1: [Structural equation modeling I]
-  - Alternative 2:
-  - Alternative 3:
-
-#### Practical Session 2
-
-- Handouts: 
-  - Alternative 1: [Structural equation modeling II]
-  - Alternative 2:
-  - Alternative 3:
 
 <br>
 <hr>
