@@ -29,7 +29,7 @@ mono_accent(
   header_font_google = google_font("Open Sans Condensed", 300) ,
   header_font_weight = "300",
   code_font_google = google_font("Roboto Mono", 300),
-  code_font_size = "17px",
+  code_font_size = "16px",
   title_slide_text_color = "#3c3c3c",
   title_slide_background_color = "#ffffff",
   text_slide_number_font_size = "1em",
