@@ -40,7 +40,7 @@ The course consists of one lecture (starting from the 1st of November 2021) and 
 | 25/11/21 | 4 | Practical session | Unsupervised learning |  Homework Assignment 4 |
 | 03/12/21 | 5 | Written Exam | Content of Cycle 1 & 2 | |
 |  |  | | **Cycle 3: Specialization** |  |
-| 06/12/21 | 6 | Lecture | Introduction to the group projects and potential methods | |
+| 06/12/21 | 6 | Lecture | Introduction to the group projects and advanced methods | |
 | 07/12/21 | 6 | Practical session | Meeting with teacher |  |
 | 09/12/21 | 6 | Practical session | Meeting with teacher |  |
 | 13/12/21 | 7 |  - | No lecture | | 
