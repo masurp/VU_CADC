@@ -511,14 +511,58 @@ The major hub for this course is the following website:
 
 <br>
 
+.pull-left[
+
 - **Cycle 1:** Data Wrangling And Data Visualization
+
+    - Introduction to computational methods
+    - Data wrangling and data visualizations
 
 - **Cycle 2:** Text Analysis and Machine Learning
 
+    - Text as data: Introduction to text analysis and dictionary approaches
+    - Automated text analysis: Supervised machine learning approaches
+    
+]
+
+.pull-right[
+
 - **Cycle 3:** Specialization and Group Projects
 
-<br>
+    - In this circle, we offer online resources for a range of additional methods and approaches
+    - Your task is to develop an independent research project and apply these methods
 
+]
+
+---
+
+# Overview of practical sessions
+
+.pull-left[
+
+- **Cycle 1:** Data Wrangling And Data Visualization
+
+    - Introduction to R
+    - Tidyverse I
+    - Tidyverse II
+    - Data visualization
+
+- **Cycle 2:** Text Analysis and Machine Learning
+
+    - Basics of text analysis
+    - Dictionary approaches
+    - Supervised text analysis I
+    - Supervised text analysis II
+    
+]
+
+.pull-right[
+
+- **Cycle 3:** Specialization and Group Projects
+
+    - In this cycle, the practical sessions will be used to discuss your project with one of the teachers
+
+]
 
 ---
 
