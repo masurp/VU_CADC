@@ -105,7 +105,6 @@ In the third cycle, students have the possibility to choose a certain specializa
 #### Practical Session 1
 
 - Handouts: 
-    - [String handling](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R-tidy-14-strings.md)
     - [Basic text analysis](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R_text_3_quanteda.md)
 
 #### Practical Session 2 
