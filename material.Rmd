@@ -70,8 +70,8 @@ In the third cycle, students have the possibility to choose a certain specializa
 #### Lecture: Data Wrangling and Data Visualization
 
 - Slides:
-    - Download Slides (will be uploaded soon)
-
+    - [Download Slides](slides/02_dataviz.html)
+    
 #### Practical Session 1: Tidyverse II
 
 - Handouts:
