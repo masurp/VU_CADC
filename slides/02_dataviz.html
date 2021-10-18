@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Computational Analysis of Digital Communication</title>
+    <meta charset="utf-8" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: left, middle, title-slide
+
+# Computational Analysis of Digital Communication
+## Week 2: Data Wrangling and Data Visualization
+### 
+### Dr. Philipp K. Masur | <a href="mailto:p.k.masur@vu.nl" class="email">p.k.masur@vu.nl</a>
+
+---
+
+
+
+
+
+
+
+
+
+&lt;style type="text/css"&gt;
+.pull-left2 {
+  float: left;
+  width: 30%;
+}
+.pull-right2 {
+  float: right;
+  width: 60%;
+}
+
+.pull-left2b {
+  float: left;
+  width: 55%;
+}
+.pull-right2b {
+  float: right;
+  width: 40%;
+}
+
+.pull-left3 {
+  float: left;
+  width: 45%;
+  padding-right: 5% 
+}
+.pull-right3 {
+  float: right;
+  width: 45%;
+  padding-left: 5% 
+}
+
+.my-one-page-font {
+  font-size: 17px;
+}
+&lt;/style&gt;
+
+
+
+
+
+# Content of this lecture
+
+1. From Raw Data to Tidy Data
+
+2. Why we should look at data
+
+3. Theories of Perception
+
+4. Principles of data visualization
+
+5. Examples for different methods
+
+
+---
+
+class: inverse, center, middle
+
+# From Raw Data to Tidy Data
+
+Preprocessing and Data Wrangling. 
+
+---
+
+# A General Model of Data Science
+
+![](img/datascience_model.png)
+_see Wickham &amp; Grolemund, 2014_
+
+---
+
+# 1. Importing data
+
+.pull-left[
+- Data comes in different forms (two- or multidimensional, text or numbers...) and formats (.csv, .txt, .sav, .stata, .html...)
+
+- Firs, we must hence find a way to import this data into R
+
+- This typically means that you take data stored in a file, database, or web application programming interface (API), and load it into a data frame in R
+
+- Imagine we would have found the following table on wikipedia and would want to get it into R...
+]
+
+.pull-right[
+
+![](img/wikipage.png)
+]
+
+---
+
+# 1. Importing data: Scraping a webpage
+
+- There is indeed an R-package that can download the entire html and css code of a website
+
+- The resulting object, however, is not really in a tidy format
+
+
+
+
+
+```r
+library(tidyverse)
+library(rvest)
+wikipage &lt;- read_html("https://en.wikipedia.org/wiki/COVID-19_pandemic_by_country_and_territory")
+wikipage
+```
+
+```
+{html_document}
+&lt;html class="client-nojs" lang="en" dir="ltr"&gt;
+[1] &lt;head&gt;\n&lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8 ...
+[2] &lt;body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject  ...
+```
+
+
+---
+
+# 2. Tidy
+
+- Tidying your data means storing it in a consistent form that matches the semantics of the dataset with the way it is stored. 
+
+- In brief, when your data is tidy, each column is a variable, and each row is an observation.
+
+
+```r
+tidy_covid &lt;- wikipage %&gt;%
+  html_element(xpath = ".//*[contains(@id, 'table65150380')]") %&gt;%   # extracting the right html table
+  html_table(fill = T) %&gt;%                                           # transform into a tibble
+  dplyr::select(2:5)                                                 # remove unnecessary columns
+head(tidy_covid)
+```
+
+```
+# A tibble: 6 x 4
+  Country                `Deaths/million` Deaths    Cases      
+  &lt;chr&gt;                  &lt;chr&gt;            &lt;chr&gt;     &lt;chr&gt;      
+1 World[a]               621              4,894,860 240,402,906
+2 Peru                   5,988            199,775   2,187,368  
+3 Bosnia and Herzegovina 3,404            11,110    243,914    
+4 North Macedonia        3,323            6,922     196,762    
+5 Bulgaria               3,223            22,231    539,619    
+6 Montenegro             3,216            2,020     137,401    
+```
+
+
+
+---
+
+# 3. Transform
+
+
+```r
+subset_covid &lt;- tidy_covid %&gt;% 
+  mutate(Deaths_million = as.numeric(gsub(",","",`Deaths/million`)),  # transform character into numeric values
+         Deaths = as.numeric(gsub(",","", Deaths)),
+         Cases = as.numeric(gsub(",","", Cases)),
+         Mortality = (Deaths/Cases)*100) %&gt;%                          # estimate mortality
+  filter(Country %in% c("United States", "Germany",                   # filter specific countries
+                        "Netherlands", "United Kingdom",
+                        "Spain", "Italy", "Sweden", "France")) %&gt;%
+  mutate(highlight = ifelse(Country == "Germany", 0, 1))
+head(subset_covid)
+```
+
+```
+# A tibble: 6 x 7
+  Country     `Deaths/million` Deaths   Cases Deaths_million Mortality highlight
+  &lt;chr&gt;       &lt;chr&gt;             &lt;dbl&gt;   &lt;dbl&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+1 Italy       2,178            131517  4.72e6           2178      2.79         1
+2 United Sta… 2,175            724153  4.49e7           2175      1.61         1
+3 United Kin… 2,037            138940  8.44e6           2037      1.65         1
+4 Spain       1,860             86974  4.98e6           1860      1.74         1
+5 France      1,749            118173  7.19e6           1749      1.64         1
+6 Sweden      1,472             14956  1.16e6           1472      1.29         1
+```
+
+
+---
+
+# 4. Visualization
+
+.pull-left[
+
+
+```r
+ggplot(subset_covid) +
+  geom_bar(aes(x = fct_reorder(Country, Mortality), 
+               y = Mortality, 
+               fill = highlight), 
+           stat = "identity") +
+  coord_flip() +
+  theme_ipsum() +
+  theme(legend.position = "none") +
+  labs(y = "Mortality (Deaths/Cases)", x = "")
+```
+
+]
+
+.pull-right[
+
+&lt;img src="02_dataviz_files/figure-html/plot-label-out1-1.png" width="100%" /&gt;
+
+]
+
+---
+
+# 4. Visualization
+.pull-left[
+
+
+```r
+ggplot(subset_covid) +
+  geom_bar(aes(x = fct_reorder(Country, Deaths_million), 
+               y = Deaths_million, 
+               fill = highlight), 
+           stat = "identity") +
+  theme(legend.position = "none") +
+  coord_flip() +
+  theme_ipsum() +
+  theme(legend.position = "none") +
+  labs(y = "Deaths per million", x = "")
+```
+
+]
+
+.pull-right[
+
+&lt;img src="02_dataviz_files/figure-html/plot-label-out2-1.png" width="100%" /&gt;
+
+]
+
+---
+
+# 5. Model 
+
+- Once we have made our research questions sufficiently precise, we can use a model to answer them (remember P1?) 
+
+- Models are a fundamentally mathematical or computational tool, so they generally scale well 
+
+- But every model makes assumptions, and by its very nature a model cannot question its own assumptions. 
+
+---
+
+# 6. Communicate
+
+- A critical part of any data analysis project is "communication"
+
+- It doesn’t matter how well our models and visualisation have led us to understand the data unless we can also communicate your results to others.
+
+- Because of the crucial role of data visualization, we will discuss principles and aspects of it in more detail!
+
+---
+
+
+class: inverse, center, middle
+
+# Data visualization
+
+Understanding visualizations of data.
+
+
+---
+
+
+# Which figure is more informative?
+
+.pull-left[
+&lt;img src="02_dataviz_files/figure-html/unnamed-chunk-7-1.png" width="100%" /&gt;
+]
+
+
+.pull-right[
+&lt;img src="02_dataviz_files/figure-html/unnamed-chunk-8-1.png" width="100%" /&gt;
+
+]
+---
+
+# Which figure works better?
+
+&lt;img src="02_dataviz_files/figure-html/unnamed-chunk-9-1.png" width="100%" /&gt;
+
+
+---
+
+# Which figure tells a better story?
+
+.pull-left[
+&lt;img src="02_dataviz_files/figure-html/unnamed-chunk-10-1.png" width="100%" /&gt;
+]
+
+.pull-right[
+
+&lt;img src="02_dataviz_files/figure-html/unnamed-chunk-11-1.png" width="100%" /&gt;
+
+]
+
+---
+
+class: inverse, center, middle
+
+# Why we should look at data.
+
+When data visualization is useful (and when it is not). 
+
+---
+
+# Anscombe's Quartett 
+
+.pull-left[
+- This quartett (Anscombe, 1973; Chatterjee &amp; Firat, 2007) presents a good argument for looking at data in visual form. 
+
+- A series of four scatterplots show the relationship between two quantities, such as height and weight, age and income, or time and unemployment.
+
+- Catch: The numerical properties of each pair of x and y variables are identical.
+
+- But when visualized as a scatterplot, plotting the x variables on the horizontal axis and the y variable on the vertical, the differences between them are readily apparent.
+
+_Healy, 2019, chap. 1.1_
+]
+
+.pull-right[
+
+&lt;img src="02_dataviz_files/figure-html/unnamed-chunk-12-1.png" width="100%" /&gt;
+
+]
+
+---
+# Visualization helps to identify problems in data
+
+![](img/correlations.png)
+_(Figure adapted from code by Jan Vanhove: "http://janhove.github.io/RCode/plot_r.R")_
+
+---
+
+class: inverse, center, middle
+
+# Perception and visual decoding
+
+How we perceive the world. 
+
+---
+
+# Edges, Contrast, and Colors
+
+.pull-left[
+- Looking at figures means looking at lines, shapes, and colors
+
+- But due to our visual systems, some things are easier for us to see than others
+
+- Sometimes, we perceive differences where there actually none
+
+]
+
+
+.pull-right[
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Checker_shadow_illusion.svg/1024px-Checker_shadow_illusion.svg.png)
+
+]
+
+_Adelson's check illusion_
+---
+
+# Contrast
+
+.pull-left2b[
+
+- Herman Grid Effect
+
+- Ghostly blobs seem to appear at the intersections in the grid but only as long as one is not looking at them directly
+
+- Our visual system is attracted to edges, and we assess contrast and brightness in terms of relative rather than absolute values
+
+&lt;br&gt;
+
+_Healy, 2019, chap. 1.3.2_
+
+]
+
+
+.pull-right2b[
+![](https://upload.wikimedia.org/wikipedia/commons/b/be/HermannGrid.svg)
+]
+
+
+
+---
+
+# Preattentive perception
+
+![](https://socviz.co/dataviz-pdfl_files/figure-html4/ch-01-dual-search-1.png)
+
+_Healy, 2019, chap. 1.3.2_
+
+---
+
+# Visual decoding
+
+- In the 1980s, Cleveland and McGill conducted some experiments identifying and ranking theses tasks for different types of graphics
+
+
+![](https://socviz.co/assets/ch-01-cleveland-task-types.png)
+
+- Participatns were asked to estimate two values within a chart (e.g., two bars in a bar chart, or two slices of a pie chart), or compare values between charts (e.g. two areas in adjacent stacked bar charts).
+
+_Cleveland &amp; McGill, 1984, 1987_
+
+---
+
+# Visual decoding task results
+
+.pull-left2b[
+
+- performance declined as we move away from comparison on a common scale to length-based comparisons to angles and finally areas
+
+- Area comparisons perform even worse than the often criticized pie chart!
+
+
+_Healy, 2019, chap. 1.3.2_
+
+]
+
+
+.pull-right2b[
+
+![](https://socviz.co/assets/ch-01-heer-bostock-results.png)
+
+]
+
+---
+class: inverse, center, middle
+
+# Principles of Data Visualization
+
+Some guidelines to work with
+
+---
+
+# Some words of caution
+
+- As we've seen, some visualizations are better than others
+
+- But the process of making a really good or really useful figure cannot be boiled down to a list of simple rules
+
+- Even though guidelines exists (and we will discuss them), they should not be followed in all circumstances
+
+- Some visualizations work well because they depend in part on some strong aesthetic judgments about what will be effective, but that sort of good judgment is hard to systematize
+
+- However, data visualization is not simply a matter of competing standards of good taste
+
+- Some approaches work better for reasons that have to do more to do with how human visual perception works.
+
+&lt;br&gt;
+
+_Healy, 2019, chap. 1_
+
+---
+
+# "Tell the truth" and "Show as much data as possible"
+
+.pull-left[
+![](img/alldata.gif)
+]
+
+.pull-right[
+
+- these two principles were advocated by Edward Tufte (1983), a pioneer in data visualization
+
+- like any descriptive statistic, data visualization is a *simplification* of your data and they can mask meaningful underlying variation
+
+- to the extent that you include more fine-grained information, you can better convey the actual patterns within your data
+
+]
+
+_Hehman &amp; Xie, 2021_
+
+---
+
+# Tell the truth
+
+.pull-left[
+![](img/piechart.jpeg)
+]
+
+.pull-left[
+
+- Graphs and figures should **always** be based on real data
+
+
+
+
+]
+---
+
+# Keep it simple - minimalism
+
+.pull-left[
+
+- Overwhelmingly complex figures impede the overarching goal of science communication: to convey information clearly!
+
+- Signal-to-noise ratio: signal is the information being conveyed and noise is anything else
+
+- Features not conveying information or allowing readers to assess the patterns more easily should be removed (e.g., excessive grid lines, unncessary colorization...) 
+]
+
+.pull-right[
+
+![](img/complex.gif)
+]
+
+_Hehman &amp; Xie, 2021_
+
+---
+# Don't inverse charts
+
+.pull-left[
+![](img/gun_deaths.jpg)
+]
+
+.pull-right[
+
+- Inversing is problematic because the figure thereby becomes counter-intuitive
+
+- On first impression, it looks like that the "Stand your ground"-Law enactement reduced the number of gun deaths. Yet, the opposite is true!
+
+]
+
+---
+
+# Don't truncate chart axes
+
+.pull-left[
+
+- Truncating a chart axis refers to showing only a small part of the entire axis
+
+- Here, we see only values between 58% and 78%
+
+- The difference would look less strong, if the axis would range from 0 to 100%
+
+]
+
+
+.pull-right[
+![](img/fox_news.jpeg)
+]
+
+---
+
+# Don't truncate chart axes
+
+.pull-left[
+&lt;img src="02_dataviz_files/figure-html/unnamed-chunk-13-1.png" width="100%" /&gt;
+]
+
+.pull-right[
+&lt;img src="02_dataviz_files/figure-html/unnamed-chunk-14-1.png" width="100%" /&gt;
+
+]
+
+---
+
+# Find the right aspect ratio
+
+![](https://socviz.co/dataviz-pdfl_files/figure-html4/ch-01-perception-curves-1.png)
+
+---
+
+# Maximize the data-ink ratio
+
+.pull-left[
+&lt;img src="02_dataviz_files/figure-html/unnamed-chunk-15-1.png" width="100%" /&gt;
+]
+
+.pull-right[
+&lt;img src="02_dataviz_files/figure-html/unnamed-chunk-16-1.png" width="100%" /&gt;
+
+]
+
+---
+
+# Be clear about uncertainty
+
+&lt;img src="02_dataviz_files/figure-html/unnamed-chunk-17-1.png" width="100%" /&gt;
+
+
+---
+# Uncertainty
+
+.pull-right2[
+
+![](https://scied.ucar.edu/sites/default/files/images/long-content-page/5.3.1.jpg)
+
+
+_UCAR - Center for Science Education: https://scied.ucar.edu/learning-zone/climate-change-impacts/predictions-future-global-climate_
+
+]
+
+---
+
+# The issue with "embellishment"
+
+.pull-left[
+![](https://socviz.co/assets/ch-01-holmes-monstrous-only.png)
+
+]
+
+.pull-right[
+
+&lt;img src="02_dataviz_files/figure-html/unnamed-chunk-18-1.png" width="100%" /&gt;
+
+]
+
+_Monstrous Costs by Nigel Holmes_
+
+---
+
+# Embellishment
+
+- Generally speaking, we want to make a graph as clear as possible
+
+- Embellishment can be distracting and deceiving
+
+- However, it may increase recall 
+
+- If done right, it can help to gain attention and increase recall!
+
+---
+
+# Label your figure correctly
+
+.pull-left[
+
+- Always include axes
+
+- Always label axes
+
+- Provide a meaningful title
+
+- If needed: Provide an explanation for how to read the figure in a note!
+
+]
+
+.pull-right[
+
+![](img/covid_biden.jpeg)
+]
+
+---
+
+# Conclusion
+
+.pull-left[
+
+**1.** Tell the truth
+
+**2.** Show as much data as possible
+
+**3.** Keep it simple
+
+**4.** Do not inverse charts
+
+**5.** Do not truncate chart axes
+
+]
+
+.pull-right[
+
+**6.** Find the right aspect-ratio
+
+**7.** Maximize data-ink ratio (but not too much!)
+
+**8.** Be clear about uncertainty
+
+**9.** Be careful with embellishment
+
+**10.** Label your axes and figure
+
+]
+
+---
+
+class: inverse, center, middle
+
+# Examples for different methods
+
+What figure works with what method.
+
+---
+
+# Selecting the right kind of chart...
+
+![](img/overview_viz.png)
+_www.data-to-viz.com_
+
+
+---
+
+class: my-one-page-font
+
+# References
+
+- Anderson, E.W., Potter, K.C., Matzen, L.E., Shepherd, J.F., Preston, G.A. and Silva, C.T. (2011), A User Study of Visualization Effectiveness Using EEG and Cognitive Load. Computer Graphics Forum, 30: 791-800. https://doi-org.vu-nl.idm.oclc.org/10.1111/j.1467-8659.2011.01928.x
+
+- Anscombe, F. J. (1973). Graphs in statistical analysis. The American Statistician, 27(1), 17–21.
+
+- Cleveland, W. S., &amp; McGill, R. (1984). Graphical perception: Theory, experimentation, and application to the development of graphical methods. Journal of the American Statistical Association, 79, 531–534.
+
+- Cleveland, W. S., &amp; McGill, R. (1987). Graphical perception: The visual decoding of quantitative information on graphical displays of data. Journal of the Royal Statistical Society Series A, 150, 192–229.
+
+- Healy, K. (2019). Data Visualization: A practical Introduction. Princeton University Press. https://socviz.co/
+
+- Hehman, E., &amp; Xie, S. Y. (2021). Doing Better Data Visualization. Advances in Methods and Practices in Psychological Science. https://doi.org/10.1177/25152459211045334
+
+- Tufte, E. R. (1983). The visual display of quantitative information. Graphics Press.
+
+- Wickham, H., Grolemund, G. (2017). R for Data Science. O'Reilly Media https://r4ds.had.co.nz/
+
+
+
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": false,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
