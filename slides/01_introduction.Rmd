@@ -386,6 +386,200 @@ _Salganik, 2018, chap. 6_
 ]
 
 ---
+
+class: inverse, center, middle
+
+# Formalities
+
+How this course is going to work?
+
+
+---
+
+# Teachers
+
+| Dr. Philipp K. Masur | | Dr. Paulina Pankowska | | Dr. Kaspar Welbers |
+|:---------------------:| -- |:---------------------:|-- |:---------------------:|
+|![](img/Masur.jpg) | | ![](img/Pankowska.png)  | |  ![](img/Welbers.png) |
+| Lecture & Course Coordinator | | Lecturer | | Lecturer |
+
+
+---
+
+# Teaching assistants & R help desk
+
+.pull-left[
+### Teaching assistants
+
+Not everything will work at the first time. Because we work with code, tiny mistakes can produce errors. During the practical sessions, these three assistants are there to help you:
+
+- Meryam Boufouchk
+
+- Daniel Huisman
+
+- Gianni Quaedvlieg
+
+]
+
+.pull-right[
+
+### R Help Desk
+
+If you have any further problems related to installing software, running packages or code, or simply an error message you do not understand, you can address the R Help Desk:
+
+- Henry Lachman
+
+- Sarah Sramota
+
+
+]
+
+
+---
+
+# Learning goals 
+
+After completion of the course, you will…
+
+- know some of the most important (computational) methods to analyze digital communication
+
+- be able to identify data analytical problems, analyze them critically, and find appropriate solutions
+
+- be able to read, understand, and criticize recent communication research
+
+---
+
+# Skills and methods
+
+With regard to the specific methods being taught in R, you will be able to…
+
+- gather, scrape, and import data from different file types, APIs, and websites
+
+- link data from different sources to create new insights
+
+- clean and transform messy data into a tidy data format ready for analysis
+
+- conduct computational text analysis and use machine learning to extract information from textual data
+
+- perform advanced statistical analyses 
+
+---
+
+# Information and Materials
+
+.pull-left[
+The major hub for this course is the following website:
+
+- https://masurp.github.io/VU_CADC/
+
+]
+
+.pull-left[
+![](img/course_screenshot.png)
+]
+---
+
+# Course structure
+
+.pull-left[
+### Lectures
+
+- Every Monday from 9:00 to 11.15
+- Introduction of research problems and computational solutions
+
+]
+
+.pull-right[
+### Practical sessions
+
+- Course will be split in 5 groups
+- Practical sessions take place twice a week
+- Every Tuesday (either 9:00 to 10:30 or 11:00 to 12:30)
+- Every Thursday (with 13.30 to 15:00 or 15:30 to 17:00)
+- Here, you will learn to run code in RStudio!
+
+
+]
+
+<br><br>
+
+*Note:* All lectures and practical sessions are taught **on campus**!
+
+---
+
+# Overview of Lectures
+
+<br>
+
+- **Cycle 1:** Data Wrangling And Data Visualization
+
+- **Cycle 2:** Text Analysis and Machine Learning
+
+- **Cycle 3:** Specialization and Group Projects
+
+<br>
+
+
+---
+
+# Attendance
+
+- Attendance during the regular lectures is not compulsory but highly recommended. 
+
+- Attendance of the practical sessions is mandatory. 
+
+- One absence from one of the workgroup sessions, for serious health, family, or work reasons, can be excused if the instructor is advised in advance.  
+
+
+---
+
+# Exam
+
+After the first two cycles, there will be a written exam (**70% of the final grade**):
+
+- The exam will consist of ~60 multiple choice questions and ~6 open-ended questions
+
+- Exam questions will be based on all material discussed in the first two cycles, including lecture content, class materials, and required readings
+
+- Example questions will be provided throughout the course
+
+- Please register for the exam via VUweb
+
+
+---
+
+# Homework
+
+After each week, students are required to hand in a “homework”, which represents a practical application of some of the taught analysis methods (e.g. with a new data set, specific research question) pass (**10% of the final grade**):
+
+- Each week’s assignment requires students to apply the methods they have learned to a new data set
+
+- Students will receive an RMarkdown template for their code and the respective data set(s)
+
+- Students are required to hand in the RMarkdown file and a compiled html on Tuesday (24:00) the week after. All homework assignments must be submitted to pass. 
+
+---
+
+# Group presentation
+
+In the third cycle, students will be assigned to small working groups in which they independently conduct a research project. A final presentation will be graded per group (**20% of the final grade**).
+
+- A 10-minute talk (including appropriate slides) in which you:
+    - introduce the research project (1-2 slides)
+    - describe theory and hypotheses (1 slide)
+    - explain the methods (1 slide)
+    - present the results (2 slides)
+    - discuss the findings (1-2 slides)
+
+Students are required to hand in the slides and analyses beforehand (Deadline: 19th of December 2021 at 12:00). 
+
+---
+
+class: inverse, center, middle
+
+# Any further questions?
+
+---
 class: inverse, center, middle
 
 # The trouble with 'R'
@@ -521,202 +715,6 @@ data %>%
 - reproducable and comprehensible analyses
 - us to have fun with programming and coding!
 
-
-
----
-class: inverse, center, middle
-
-# Formalities
-
-How this course is going to work?
-
-
----
-
-# Teachers
-
-| Dr. Philipp K. Masur | | Dr. Paulina Pankowska | | Dr. Kaspar Welbers |
-|:---------------------:| -- |:---------------------:|-- |:---------------------:|
-|![](img/Masur.jpg) | | ![](img/Pankowska.png)  | |  ![](img/Welbers.png) |
-| Lecture & Course Coordinator | | Lecturer | | Lecturer |
-
-
----
-
-# Teaching assistants & R help desk
-
-.pull-left[
-### Teaching assistants
-
-Not everything will work at the first time. Because we work with code, tiny mistakes can produce errors. During the practical sessions, these three assistants are there to help you:
-
-- Meryam Boufouchk
-
-- Daniel Huisman
-
-- Gianni Quaedvlieg
-
-]
-
-.pull-right[
-
-### R Help Desk
-
-If you have any further problems related to installing software, running packages or code, or simply an error message you do not understand, you can address the R Help Desk:
-
-- Henry Lachman
-
-- Sarah Sramota
-
-
-]
-
-
----
-
-# Learning goals 
-
-After completion of the course, you will…
-
-- know some of the most important (computational) methods to analyze digital communication
-
-- be able to identify data analytical problems, analyze them critically, and find appropriate solutions
-
-- be able to read, understand, and criticize recent communication research
-
----
-
-# Skills and methods
-
-With regard to the specific methods being taught in R, you will be able to…
-
-- gather, scrape, and import data from different file types, APIs, and websites
-
-- link data from different sources to create new insights
-
-- clean and transform messy data into a tidy data format ready for analysis
-
-- conduct computational text analysis and use machine learning to extract information from textual data
-
-- perform advanced statistical analyses 
-
----
-
-# Information and Materials
-
-.pull-left[
-The major hub for this course is the following website:
-
-- https://masurp.github.io/VU_CADC/
-
-]
-
-.pull-left[
-![](img/course_screenshot.png)
-]
----
-
-# Course structure
-
-.pull-left[
-### Lectures
-
-- Every Monday from 9:00 to 11.15
-- Introduction of research problems and computational solutions
-
-]
-
-.pull-right[
-### Practical sessions
-
-- Course will be split in 5 groups
-- Practical sessions take place twice a week
-- Every Tuesday (either 9:00 to 10:30 or 11:00 to 12:30)
-- Every Thursday (with 13.30 to 15:00 or 15:30 to 17:00)
-- Here, you will learn to run code in RStudio!
-
-
-]
-
-<br><br>
-
-*Note:* All lectures and practical sessions are taught **on campus**!
-
----
-
-# Overview of Lectures
-
-- **Cycle 1:** Introduction and Data Wrangling
-
-- **Cycle 2:** Text Analysis and Machine Learning
-
-- **Cycle 3:** Specialization
-
-  - Alternative 1: Assessing psychological concepts and their relations
-  - Alternative 2: Campaign effectiveness using web scraping
-  - Alternative 3: Media effects on publication opinion using linkage Analysis
-
-<br>
-
-*Note:* In cycle 3, you can choose one of the three alternatives. Yet, material will be provided for all specializations and you are encouraged to go through them by yourself. 
----
-
-# Attendance
-
-- Attendance during the regular lectures is not compulsory but highly recommended. 
-
-- Attendance of the practical sessions is mandatory. 
-
-- One absence from one of the workgroup sessions, for serious health, family, or work reasons, can be excused if the instructor is advised in advance.  
-
-
----
-
-# Exam
-
-After the first two cycles, there will be a written exam (**70% of the final grade**):
-
-- The exam will consist of ~60 multiple choice questions and ~6 open-ended questions
-
-- Exam questions will be based on all material discussed in the first two cycles, including lecture content, class materials, and required readings
-
-- Example questions will be provided throughout the course
-
-- Please register for the exam via VUweb
-
-
----
-
-# Homework
-
-After each week, students are required to hand in a “homework”, which represents a practical application of some of the taught analysis methods (e.g. with a new data set, specific research question) pass (**10% of the final grade**):
-
-- Each week’s assignment requires students to apply the methods they have learned to a new data set
-
-- Students will receive an RMarkdown template for their code and the respective data set(s)
-
-- Students are required to hand in the RMarkdown file and a compiled html on Tuesday (24:00) the week after. All homework assignments must be submitted to pass. 
-
----
-
-# Group presentation
-
-In the third cycle, students will be assigned to small working groups in which they independently conduct a research project. A final presentation will be graded per group (**20% of the final grade**).
-
-- A 10-minute talk (including appropriate slides) in which you:
-    - introduce the research project (1-2 slides)
-    - describe theory and hypotheses (1 slide)
-    - explain the methods (1 slide)
-    - present the results (2 slides)
-    - discuss the findings (1-2 slides)
-
-Students are required to hand in the slides and analyses beforehand (Deadline: 19th of December 2021 at 12:00). 
-
----
-
-class: inverse, center, middle
-
-# Any further questions?
 
 ---
 

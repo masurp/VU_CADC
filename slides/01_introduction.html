@@ -390,116 +390,7 @@ _Salganik, 2018, chap. 6_
 ]
 
 ---
-class: inverse, center, middle
 
-# The trouble with 'R'
-
-We have to learn a programming language???
-
----
-
-# What is 'R'?
-
-.pull-left[
-
-
-
-
-
-```r
-# Load package
-library(ggplot2)
-
-# Create vector
-variable &lt;- rnorm(100, 2, 4)
-
-# Plot Histogram
-ggplot(NULL, 
-       aes(variable)) + 
-  geom_histogram(color = "white", 
-                 fill = "lightblue")
-```
-
-]
-
-.pull-right[
-
-&lt;img src="01_introduction_files/figure-html/plot-label-out1-1.png" width="100%" /&gt;
-
-]
-
----
-
-
-# What is 'R' vs 'RStudio'?
-
-### Basics
-
-- R is a programming language, not just a software for statistical analyses
-- Yet, primarily developed for conducting statistical analyses
-- Open source (free of cost!)
-
-
-### Infrastructure
-
-- R is the programming language
-- R shares some similarities with Python, S and Scheme
-- RStudio is the software that is mostly used
-
----
-
-# Advantages of R
-
-### The future of scientific data analysis
-
-- R is international and interdisciplinary
-- Constant development and improvement by a huge online community
-- Allows to work with complex and messy data structures
-
-### Flexibility
-
-- There are thousand additional packages for almost any statistical procedure
-- Allows for flexible programming and is adaptive to own needs
-- Encourages replicible analyses
-
----
-
-# Advantages of R
-
-.pull-left2[
-### Visualization
-
-- Allows to produce publication-ready figures and visualizations
-- Allows to combine analyses and writing to produces diverse output formats (e.g., these slides)
-
-]
-
---
-
-.pull-right2[
-
-&lt;img src="01_introduction_files/figure-html/unnamed-chunk-4-1.png" width="100%" /&gt;
-
-]
----
-
-# Conclusion
-
-### R allows...
-
-- flexible and comprehensive programming
-- complex data management
-- advanced analyses with large or messy data
-- to produce publication-ready figures and documents
-
-### R encourages...
-
-- reproducable and comprehensible analyses
-- us to have fun with programming and coding!
-
-
-
----
 class: inverse, center, middle
 
 # Formalities
@@ -622,19 +513,17 @@ The major hub for this course is the following website:
 
 # Overview of Lectures
 
-- **Cycle 1:** Introduction and Data Wrangling
+&lt;br&gt;
+
+- **Cycle 1:** Data Wrangling And Data Visualization
 
 - **Cycle 2:** Text Analysis and Machine Learning
 
-- **Cycle 3:** Specialization
-
-  - Alternative 1: Assessing psychological concepts and their relations
-  - Alternative 2: Campaign effectiveness using web scraping
-  - Alternative 3: Media effects on publication opinion using linkage Analysis
+- **Cycle 3:** Specialization and Group Projects
 
 &lt;br&gt;
 
-*Note:* In cycle 3, you can choose one of the three alternatives. Yet, material will be provided for all specializations and you are encouraged to go through them by yourself. 
+
 ---
 
 # Attendance
@@ -693,6 +582,115 @@ Students are required to hand in the slides and analyses beforehand (Deadline: 1
 class: inverse, center, middle
 
 # Any further questions?
+
+---
+class: inverse, center, middle
+
+# The trouble with 'R'
+
+We have to learn a programming language???
+
+---
+
+# What is 'R'?
+
+.pull-left[
+
+
+
+
+
+```r
+# Load package
+library(ggplot2)
+
+# Create vector
+variable &lt;- rnorm(100, 2, 4)
+
+# Plot Histogram
+ggplot(NULL, 
+       aes(variable)) + 
+  geom_histogram(color = "white", 
+                 fill = "lightblue")
+```
+
+]
+
+.pull-right[
+
+&lt;img src="01_introduction_files/figure-html/plot-label-out1-1.png" width="100%" /&gt;
+
+]
+
+---
+
+
+# What is 'R' vs 'RStudio'?
+
+### Basics
+
+- R is a programming language, not just a software for statistical analyses
+- Yet, primarily developed for conducting statistical analyses
+- Open source (free of cost!)
+
+
+### Infrastructure
+
+- R is the programming language
+- R shares some similarities with Python, S and Scheme
+- RStudio is the software that is mostly used
+
+---
+
+# Advantages of R
+
+### The future of scientific data analysis
+
+- R is international and interdisciplinary
+- Constant development and improvement by a huge online community
+- Allows to work with complex and messy data structures
+
+### Flexibility
+
+- There are thousand additional packages for almost any statistical procedure
+- Allows for flexible programming and is adaptive to own needs
+- Encourages replicible analyses
+
+---
+
+# Advantages of R
+
+.pull-left2[
+### Visualization
+
+- Allows to produce publication-ready figures and visualizations
+- Allows to combine analyses and writing to produces diverse output formats (e.g., these slides)
+
+]
+
+--
+
+.pull-right2[
+
+&lt;img src="01_introduction_files/figure-html/unnamed-chunk-4-1.png" width="100%" /&gt;
+
+]
+---
+
+# Conclusion
+
+### R allows...
+
+- flexible and comprehensive programming
+- complex data management
+- advanced analyses with large or messy data
+- to produce publication-ready figures and documents
+
+### R encourages...
+
+- reproducable and comprehensible analyses
+- us to have fun with programming and coding!
+
 
 ---
 
