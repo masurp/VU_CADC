@@ -25,43 +25,29 @@ The course consists of one lecture (starting from the 1st of November 2021) and 
 | Date | Week | Type | Content | Assignments |
 |:-:|:-:|:---| :---------- |:------ | 
 |  |  | | **Cycle 1: Introduction and Data Wrangling** |  |
-| 01/11/21 | 1 | Lecture | Introduction to computational methods | - | 
-| 02/11/21 | 1 | Practical session | Introduction to R and the tidyverse | - | 
+| 01/11/21 | 1 | Lecture | Introduction to computational methods |  | 
+| 02/11/21 | 1 | Practical session | Introduction to R and the tidyverse |  | 
 | 04/11/21 | 1 | Practical session | Data wrangling and visualization |  Homework Assignment 1 |
 | 08/11/21 | 2 | Lecture | Data collection and web scraping | - | 
-| 09/11/21 | 2 | Practical session | Importing different data into R | - |
+| 09/11/21 | 2 | Practical session | Importing different data into R |  |
 | 11/11/21 | 2 | Practical session | Web scraping |  Homework Assignment 2 |
 |  |  | | **Cycle 2: Text Analysis and Machine Learning** |  |
-| 15/11/21 | 3 | Lecture | Introduction to text as data and related challenges |-|
-| 16/11/21 | 3 | Practical session | Text preprocessing and descriptive analyses | - |
+| 15/11/21 | 3 | Lecture | Introduction to text as data and related challenges | |
+| 16/11/21 | 3 | Practical session | Text preprocessing and descriptive analyses |  |
 | 18/11/21 | 3 | Practical session | Dictionary approaches |  Homework Assignment 3 |
-| 22/11/21 | 4 | Lecture | Introduction to machine learning | - | 
-| 23/11/21 | 4 | Practical session | Supervised learning |  - |
+| 22/11/21 | 4 | Lecture | Introduction to machine learning |  | 
+| 23/11/21 | 4 | Practical session | Supervised learning |   |
 | 25/11/21 | 4 | Practical session | Unsupervised learning |  Homework Assignment 4 |
 | 03/12/21 | 5 | Written Exam | Content of Cycle 1 & 2 | |
 |  |  | | **Cycle 3: Specialization** |  |
-|  |  | | *Alternative 1* |  |
-| 06/12/21 | 6 | Lecture | The challenge of measuring psychological concepts: How to measure latent variables? An Introduction to Classic Test Theory | Creation of small project groups |
-| 07/12/21 | 6 | Practical session | Factor analysis I | - |
-| 09/12/21 | 6 | Practical session | Factor analysis II |  - |
-| 13/12/21 | 7 | Lecture | Correlation vs. Causality: Advanced approaches to analyzing experimental data | - |
-| 14/12/21 | 7 | Practical session | Structural equation modeling I |  - |
-| 16/12/21 | 7 |  Practical session | Structural equation modeling II |  - |
-|  |  | | *Alternative 2* |  |
-| 06/12/21 | 6 | Lecture | Understanding and using social media data to study campaign effectiveness I |  Creation of small project groups |
-| 07/12/21 | 6 | Practical session | Scraping social media data using the Academic Twitter API |  - |
-| 09/12/21 | 6 | Practical session | Content analysis and descriptive analyses |  - |
-| 13/12/21 | 7 | Lecture | Understanding and using social media data to study campaign effectiveness II |  - |
-| 14/12/21 | 7 | Practical session | Mediation analysis |  - |
-|16/12/21 | 7 | Practical session | Moderation analysis | - |
-|  |  | | *Alternative 2* |  |
-| 06/12/21 | 6 | Lecture | Studying media effects on public opinion I |  Creation of small project groups |
-| 07/12/21 | 6 | Practical session | Content analysis to create time series data | - |
-| 09/12/21 | 6 | Practical session | Linking media and public opinion data |  - |
-| 13/12/21 | 7 | Lecture | Studying media effects on public opinion II | - |
-| 14/12/21 | 7 | Practical session | Time Series Analysis I |  - |
-| 16/12/21 | 7 | Practical session | Time Series Analysis II |  - |
-| 20/12/21 | 8 | Mini-Conference |  | Each project group presents results |
+| 06/12/21 | 6 | Lecture | Introduction to the group projects and potential methods | |
+| 07/12/21 | 6 | Practical session | Meeting with teacher |  |
+| 09/12/21 | 6 | Practical session | Meeting with teacher |  |
+| 13/12/21 | 7 |  - | No lecture | | 
+| 14/12/21 | 7 | Practical session | Meeting with teacher |   |
+| 16/12/21 | 7 | Practical session | Meeting with teacher |   |
+|  |  | | **Mini-Conference** |  |
+| 20/12/21 | 8 | Presentations |  |Each project group presents results |
 
 
 
