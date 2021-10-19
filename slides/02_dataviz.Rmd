@@ -58,20 +58,65 @@ output:
 ```
 
 
+.pull-left[
+```{r, echo = F, fig.height=8.5, fig.width = 6.75}
+library(tidyverse)
+left_join(
+  tibble(weeks = rep(c(1:52), times = 100),
+         years = rep(c(1:100), each = 52),
+         life = c(rep("blue", 52*32+42), rep("white", 3494))),
+  tibble(years = c(1:100),
+         decades = rep(c("white", "grey"), each = 10, times = 5))) %>%
+  ggplot(aes(x = weeks, y = years)) +
+  geom_point(shape = 15, aes(color = life)) +
+  scale_x_continuous(breaks = seq(0, 52, by = 4)) +
+  scale_y_continuous(breaks = seq(0, 100, by = 10)) +
+  geom_point(aes(x = 17, y = 26), shape = 1, size = 3, color = "blue") +
+  geom_point(aes(x = 25, y = 80), shape = 1, size = 3) +
+  geom_point(aes(x = 10, y = 83), shape = 1, size = 3) +
+  theme_ipsum() +
+  theme(legend.position = "none",
+        axis.title.x = element_text(),
+        axis.title.y = element_text())  +
+  labs(x = "Weeks of the year", y = "Age in years")
+```
+]
 
+--
+
+.pull-right[
+
+<br><br>
+
+- Red: My life so far
+
+- Black dots: Life expectancy for men and women respectively
+
+- Blue circle: Einstein publishes his theory of special relativity
+
+- Isn't this a very powerful visualizations?
+
+<br><br><br>
+
+Idea: https://waitbutwhy.com/2014/05/life-weeks.html
+]
+
+---
 
 
 # Content of this lecture
 
-1. From Raw Data to Tidy Data
+<br>
 
-2. Why we should look at data
+**1.** From Raw Data to Tidy Data
 
-3. Theories of Perception
+**2.** Why we should look at data
 
-4. Principles of data visualization
+**3.** Theories of Perception
 
-5. Examples for different methods
+**4.** Principles of data visualization
+
+**5.** Examples for different methods
 
 
 ---
@@ -834,6 +879,12 @@ What figure works with what method.
 
 ![](img/overview_viz.png)
 _www.data-to-viz.com_
+
+---
+
+class: inverse, center, middle
+
+# Thank you for your attention!
 
 
 ---
