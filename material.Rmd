@@ -20,7 +20,7 @@ Before the first practical session (2nd of November), please make sure that you 
 
 - [Installing R and RStudio](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R_basics_1_getting_started_short.md). 
 
-#### Familiarize yourself with the course*
+#### Familiarize yourself with the course
 
 Lectures are every Monday from 9:00 to 11:15 (on campus!). In these lectures, a particular "research problem" will be introduced and we will discuss potential (methodological) solutions. We will get to know respective computational methods and contextualize them within the broader research process. We expect you to:
 
@@ -100,7 +100,7 @@ In the third cycle, students have the possibility to choose a certain specializa
 #### Lecture: : Text as Data
 
 - Slides:
-    - Download Slides (will be uploaded soon)
+    - [Download Slides](slides/03_textanalysis.html)
 
 #### Practical Session 1
 
@@ -122,7 +122,7 @@ In the third cycle, students have the possibility to choose a certain specializa
 #### Lecture: Supervised Machine Learning
 
 - Slides:
-    - Download Slides (will be uploaded soon)
+    - [Download Slides](slides/04_supervisedlearning.html)
 
 #### Practical Session 1
 
@@ -133,6 +133,10 @@ In the third cycle, students have the possibility to choose a certain specializa
 
 - Handouts:
     - Supervised text classification II
+    
+#### Additional resources: 
+
+- [Supervised Machine Learning for Text Analysis in R](https://smltar.com/)
 
 <br>
 <hr>
@@ -146,11 +150,15 @@ Exam week. More information soon.
 
 ### Week 6
 
+Group projects.
+
 <br>
 <hr>
 
 
 ### Week 7
+
+Group projects.
 
 <br>
 <hr>
