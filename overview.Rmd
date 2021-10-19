@@ -28,7 +28,7 @@ The course consists of one lecture (starting from the 1st of November 2021) and 
 | 01/11/21 | 1 | Lecture | Introduction to computational methods |  | 
 | 02/11/21 | 1 | Practical session | Introduction to R and the tidyverse |  | 
 | 04/11/21 | 1 | Practical session | Data wrangling and visualization |  Homework Assignment 1 |
-| 08/11/21 | 2 | Lecture | Data collection and web scraping | - | 
+| 08/11/21 | 2 | Lecture | Data collection and web scraping |  | 
 | 09/11/21 | 2 | Practical session | Importing different data into R |  |
 | 11/11/21 | 2 | Practical session | Web scraping |  Homework Assignment 2 |
 |  |  | | **Cycle 2: Text Analysis and Machine Learning** |  |
@@ -38,16 +38,17 @@ The course consists of one lecture (starting from the 1st of November 2021) and 
 | 22/11/21 | 4 | Lecture | Introduction to machine learning |  | 
 | 23/11/21 | 4 | Practical session | Supervised learning |   |
 | 25/11/21 | 4 | Practical session | Unsupervised learning |  Homework Assignment 4 |
-| 03/12/21 | 5 | Written Exam | Content of Cycle 1 & 2 | |
+|  |  | | **Exam** |  |
+| 03/12/21 | 5 | Written Exam (Multiple-Choice) | Content of Cycle 1 & 2 | |
 |  |  | | **Cycle 3: Specialization** |  |
 | 06/12/21 | 6 | Lecture | Introduction to the group projects and advanced methods | |
 | 07/12/21 | 6 | Practical session | Meeting with teacher |  |
 | 09/12/21 | 6 | Practical session | Meeting with teacher |  |
-| 13/12/21 | 7 |  - | No lecture | | 
+| 13/12/21 | 7 |   | *No lecture* | | 
 | 14/12/21 | 7 | Practical session | Meeting with teacher |   |
 | 16/12/21 | 7 | Practical session | Meeting with teacher |   |
 |  |  | | **Mini-Conference** |  |
-| 20/12/21 | 8 | Presentations |  |Each project group presents results |
+| 20/12/21 | 8 | Different sessions | Presentations of group projects  | 12-min talk |
 
 
 
