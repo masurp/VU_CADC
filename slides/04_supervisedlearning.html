@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Computational Analysis of Digital Communication</title>
+    <meta charset="utf-8" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: left, middle, title-slide
+
+# Computational Analysis of Digital Communication
+## Week 4: Machine Learning - Supervised Text Classification
+### 
+### Dr. Philipp K. Masur | <a href="mailto:p.k.masur@vu.nl" class="email">p.k.masur@vu.nl</a>
+
+---
+
+
+
+
+
+
+
+
+
+&lt;style type="text/css"&gt;
+.pull-left2 {
+  float: left;
+  width: 30%;
+}
+.pull-right2 {
+  float: right;
+  width: 60%;
+}
+
+.pull-left2b {
+  float: left;
+  width: 60%;
+}
+.pull-right2b {
+  float: right;
+  width: 30%;
+}
+
+.pull-left3 {
+  float: left;
+  width: 45%;
+  padding-right: 5% 
+}
+.pull-right3 {
+  float: right;
+  width: 45%;
+  padding-left: 5% 
+}
+
+.my-one-page-font {
+  font-size: 17px;
+}
+&lt;/style&gt;
+
+# Machine Learning?
+
+![](img/thematrix.jpeg)
+---
+
+# What are we actually talking about?
+
+- Machine learning is the study of computer algorithms that can improve automatically through experience and by the use of data.
+
+- Due to the "black box" nature of the algorithm's operations, it is often seen as a form of artificial intelligence. 
+
+- Key idea: machine learning algorithms build a model based on sample data, known as "training data", in order to make predictions or decisions without being explicitly programmed to do so.
+
+- Machine learning is used in a wide variety of applications, such as in medicine (e.g., pattern detection), email filtering (e.g., spam detection), speech recognition, and computer vision.
+
+---
+
+# The problem: What has this to do with text analysis?
+
+- A common task in communication science involves hand-labeling sets of documents for specific variables (e.g. manual coding)
+
+- In the past, this required hiring research assistants and training them to read and evaluate text by hand
+
+- Disadvantages: It was expensive, prone to error, required extensive data quality checks, and was unfeasible if you had an extremely large corpus of texts
+
+---
+
+# Enter machine learning!
+
+We can now use machine learning models to classify text into specific sets of categories. This is known as **supervised learning**. The basic process is:
+
+&lt;br&gt;
+
+**1.** Hand-code a small set of documents (say N = 1,000) for whatever variable(s) you care about
+
+**2.** Train a machine learning model on the hand-coded data, using the variable as the outcome of interest and the text features of the documents as the predictors
+
+**3.** Evaluate the effectiveness of the machine learning model via cross-validation
+
+**4.** Once you have trained a model with sufficient predictive accuracy, apply the model to the remaining set of documents that have never been hand-coded (say N = 100,000)
+
+---
+
+# Content of this lecture
+
+&lt;br&gt;
+
+**1.** What is machine learning?
+
+**2.** Principles
+
+**3.** Validation
+
+**4.** Examples from the literature
+
+---
+
+
+
+class: inverse, center, middle
+
+# Thank you for your attention!
+
+
+---
+
+class: my-one-page-font
+
+# References
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": false,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
