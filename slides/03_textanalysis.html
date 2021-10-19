@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Computational Analysis of Digital Communication</title>
+    <meta charset="utf-8" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: left, middle, title-slide
+
+# Computational Analysis of Digital Communication
+## Week 3: Text as Data - Basics of Automatic Text Analysis
+### 
+### Dr. Philipp K. Masur | <a href="mailto:p.k.masur@vu.nl" class="email">p.k.masur@vu.nl</a>
+
+---
+
+
+
+
+
+
+
+
+
+&lt;style type="text/css"&gt;
+.pull-left2 {
+  float: left;
+  width: 30%;
+}
+.pull-right2 {
+  float: right;
+  width: 60%;
+}
+
+.pull-left2b {
+  float: left;
+  width: 60%;
+}
+.pull-right2b {
+  float: right;
+  width: 30%;
+}
+
+.pull-left3 {
+  float: left;
+  width: 45%;
+  padding-right: 5% 
+}
+.pull-right3 {
+  float: right;
+  width: 45%;
+  padding-left: 5% 
+}
+
+.my-one-page-font {
+  font-size: 17px;
+}
+&lt;/style&gt;
+
+# Much of what we know about human behavior...
+
+...is based on what people are telling us:
+
+- via self-reports in surveys
+
+- via responses in experimental research
+
+- in qualitative interviews
+
+---
+
+# But a lot of communication content looks like this...
+
+![](img/nyt_page.png)
+---
+
+# ...or is based on user-generated content...
+
+![](img/socialmedia.jpg)
+---
+
+# Increasing amount of (text) data available online
+
+![](img/hilbert_lopez.png)
+
+_Hilbert &amp; Lopez, 2011_
+
+---
+
+# Problem or opportunity?
+
+- A lot of communication (except for fleeting face-to-face communication) is encoded in texts
+
+- But text does not look like data we can easily analyze...
+
+.pull-left[
+
+**Experimental data**
+
+
+```
+# A tibble: 6 x 5
+     id condition sns_use well_being
+  &lt;int&gt; &lt;chr&gt;       &lt;dbl&gt;      &lt;dbl&gt;
+1     1 A            4.30       5.04
+2     2 B            2.82       2.23
+3     3 A            2.99       3.55
+4     4 B            4.82       6.25
+5     5 A            4.26       2.90
+6     6 B            4.73       1.65
+# … with 1 more variable: pers1 &lt;dbl&gt;
+```
+]
+
+.pull-right[
+
+**Text data**
+
+
+```
+# A tibble: 6 x 1
+  text                                  
+  &lt;chr&gt;                                 
+1 "North Korea launched a ballistic mis…
+2 "Tributes poured in for former Republ…
+3 "An Indian couple have arrived for th…
+4 "Unique events that led to civilisati…
+5 "Billionaire Peter Thiel is facing op…
+6 "In some ways, accounts of “human ori…
+```
+]
+
+---
+
+# Traditional content/text analysis
+
+Typical steps in a classic *content/text* analysis:
+
+**1.** Selecting the content one wants to analyze
+
+**2.** Choosing the texts that contain the content and one wants to analyze
+
+**3.** Define the units and categories of analysis
+
+**4.** Develop a set of rules for the manual coding process
+
+**5.** Coding the text according to the rules
+
+**6.** Analyze frequencies, relationships, differences, similarities between units/codes
+
+--
+
+**Problem:** Requires a lot of work and there are always more texts than humans can possibly code manually!
+
+---
+
+# Solution: Automation
+
+
+&lt;iframe width="760" height="415" src="https://www.youtube.com/embed/DfGs2Y5WJ14?autoplay=1&amp;controls=0&amp;amp;start=19&amp;mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen&gt;&lt;/iframe&gt;
+
+
+---
+
+# Content of this lecture
+
+&lt;br&gt;
+
+**1.** Text as Data
+
+**2.** Automated Text Analysis
+
+**3.** Dictionary Approaches
+
+**4.** Examples from the literature
+
+---
+
+class: inverse, center, middle
+
+# Text as Data
+
+How can we analyze texts with computers?
+
+---
+
+# Definition
+
+.pull-left[
+&gt; Text analysis is “a research technique for making replicable and valid inferences from texts (or other meaningful matter) to the contexts of their use” 
+&gt;
+&gt;Krippendorff, 2004
+
+]
+
+.pull-right2b[
+
+![](https://www.asc.upenn.edu/sites/default/files/styles/360x360/public/2020-09/Klaus_Krippendorff_360_0.jpg?h=5273c5c2&amp;itok=d-IFcUP8)
+
+]
+
+---
+
+# What is text?
+
+
+.pull-left[
+
+![](img/symbols.jpg)
+
+]
+
+.pull-right[
+
+![](img/symbols2.png)
+
+]
+
+---
+
+# Symbols and Meaning
+
+- Text or more generally language consists of *symbols*
+
+- Symbols by themselves do not have meaning
+
+- A symbol itself is a mark, sign, or word that indicates, signifies, or is understood as representing an idea, object, or relationship
+
+- Symbols thereby allow people to go beyond what is known or seen by creating linkages between otherwise very different concepts and experiences 
+
+- Text (a collection of symbols) only attains meaning when interpreted (in its context)
+
+- Main challenge in Automatic Text Analysis: Bridge the gap from symbols to meaningful interpretation
+
+---
+
+# Understanding language
+
+&lt;br&gt;
+
+
+.pull-left2b[
+
+&gt;"As natural language processing (NLP) practitioners, we bring our assumptions about what language is and how language works into the task of creating modeling features from natural language and using those features as inputs to statistical models. This is true even when we don't think about how language works very deeply or when our understanding is unsophisticated or inaccurate; speaking a language is not the same as having an explicit knowledge of how that language works. We can improve our machine learning models for text by heightening that knowledge."
+&gt;
+&gt;_Hvitfeldt &amp; Silge, 2021_
+
+]
+
+.pull-right2b[
+
+![](img/hvitfeld_book.png)
+]
+
+---
+
+# A short overview of linguistics
+
+.pull-left[
+
+
+- Each field studies a *different level* at which language exhibits organization
+
+- When we engage in text analysis, we use these levels of organization to create language features
+
+- They often depend on the morphological characteristics of language, such as when text is broken into sequences of characters
+
+_Hvitfeldt &amp; Silge, 2021, chap. 1_
+
+]
+
+.pull-right[
+
+| Subfield |	What does it focus on? |
+|:--------- |:---------|
+| Phonetics	      |  Sounds that people use in language |
+| Phonology	      |  Systems of sounds in particular languages |
+| Morphology	    |  How words are formed |
+| Syntax	        |  How sentences are formed from words |
+| Semantics	      |  What sentences mean |
+| Pragmatics	    |  How language is used in context |
+
+]
+
+
+---
+
+class: inverse, center, middle
+
+# Automatic Text Analysis
+
+How we can study large quantities of documents and texts?
+
+---
+
+# Steps in Automatic Text Analysis
+
+&lt;br&gt;&lt;br&gt;
+
+![](img/textanalysis.png)
+&lt;br&gt;&lt;br&gt;
+
+_van Atteveldt, Welbers, &amp; Van der Velden, 2019_
+---
+
+# (1) Obtaining texts
+
+- Publicly available data sets
+  - E.g.: Political texts, news from publisher / library
+  - Great if you can find it, often not available
+
+- Scraping primary sources
+  - E.g.: Press releases from party website, existing archives
+  - Writing scrapers can be trivial or very complex depending on web site
+  - Make sure to check legal issues
+
+- Proprietary texts from third parties:
+  - E.g.: digital archives (LexisNexis, factiva etc.), social media APIs)
+  - Often custom format, API restrictions, API changes
+  - Terms of use not conducive to research, sharing
+
+---
+
+# (2) From text to data
+
+- Algorithms process numbers, they don’t read text
+
+- First step in any analysis is to convert text to series of numbers
+
+- This is done through a number of steps (also know as preprocessing) which include: 
+
+    - Tokenization 
+    - Removing stopwords 
+    - Normalization 
+    - Frequency trimming
+
+- The resulting structured text is then used to create a document-feature matrix (DTM)
+
+    - Table containing frequency of each word in each document
+    - Called “bag of words” -&gt; ignores word order
+
+---
+
+# Text cleaning, stemming, lemmatizing
+
+- Text contains a lot of noise
+    - Very uncommon words
+    - Spelling, scraping mistakes (HTML code, boilerplate, etc)
+    - Stop words (e.g., a, the, I, will)
+    - Conjugations of the same word (want, wants)
+    - Near synonyms (wants, loves)
+    - Of course, what is noise depends on your RQ!
+
+- Cleaning steps needed to reduce noise:
+    - Removing unnecessary symbols (e.g., punctuations, numbers...)
+    - Removing stopwords (e.g., 'a', 'the'...)
+    - Normalization: Stemming (wants -&gt; want) OR lemmatizing (ran -&gt; run)
+    - Frequency trimming (removing rare words)
+    
+---
+
+
+# Tokenization
+
+- We take an input (a string) and a token type (a meaningful unit of text, such as a word) and we split the input (string) into pieces (tokens) that correspond to the type (e.g., word) 
+
+
+```r
+library(quanteda)
+text &lt;- "This is an Example of Preprocessing Techniques. This is what happens during the preprocessing procedure!1!"
+text
+```
+
+```
+[1] "This is an Example of Preprocessing Techniques. This is what happens during the preprocessing procedure!1!"
+```
+
+--
+
+
+```r
+toks &lt;- tokens(text, remove_punct = TRUE, remove_numbers = TRUE) # tokenize into unigrams, remove punctuation
+toks
+```
+
+```
+Tokens consisting of 1 document.
+text1 :
+ [1] "This"          "is"            "an"            "Example"      
+ [5] "of"            "Preprocessing" "Techniques"    "This"         
+ [9] "is"            "what"          "happens"       "during"       
+[ ... and 3 more ]
+```
+
+_Manning, Raghavan, and Schütze 2008_
+
+---
+
+# Types of Tokens
+
+- Thinking of a token as a **word** is a useful start (and mostly used approach -&gt; bag-of-words approach)
+
+- However, we can generalize the idea of a token beyond only a single word to other units of text:
+
+    - characters
+    - words
+    - sentences
+    - lines
+    - paragraphs, and
+    - n-grams
+
+&lt;br&gt;&lt;br&gt;
+
+_Hvitfeldt &amp; Silge, 2021, chap. 2.2_
+
+---
+
+# Removing stopwords
+
+- Once we have split text into tokens, it often becomes clear that not all words carry the same amount of information
+
+- Common words that carry little (or perhaps no) meaningful information are called **stop words** (e.g., 'a', 'the', 'didn't', 'of'...)
+
+- It is common advice and practice to remove stop words for various text analysis tasks, but stop word removal is more nuanced than many resources may lead you to believe
+
+
+
+```r
+# removing stopwords
+toks &lt;- tokens_remove(toks, stopwords("en"))
+toks
+```
+
+```
+Tokens consisting of 1 document.
+text1 :
+[1] "Example"       "Preprocessing" "Techniques"    "shows"        
+[5] "happens"       "preprocessing" "procedure"    
+```
+
+_Hvitfeldt &amp; Silge, 2021, chap. 2.2_
+
+---
+
+# Normalization
+
+- Before we move to the more sophisticated normalization, including stemming or lemmatizing, we need to align similar words. 
+
+- R does differ between lower and upper case letters. We hence need to transfrom to lower case to make words comparable. 
+
+
+```r
+toks &lt;- tokens_tolower(toks) # lowercasing
+toks
+```
+
+```
+Tokens consisting of 1 document.
+text1 :
+[1] "example"       "preprocessing" "techniques"    "shows"        
+[5] "happens"       "preprocessing" "procedure"    
+```
+
+---
+
+# Stemming
+
+- What if we aren’t interested in the difference between e.g., "trees" and "tree" and we want to treat both together? 
+
+- Stemming refers to the process of identifying the base word (or stem) for a data set of words and is thus concerned with the linguistics subfield of morphology (i.e., how words are formed). 
+
+
+```r
+toks # original tokens
+```
+
+```
+Tokens consisting of 1 document.
+text1 :
+[1] "example"       "preprocessing" "techniques"    "shows"        
+[5] "happens"       "preprocessing" "procedure"    
+```
+
+--
+
+
+```r
+final_toks &lt;- tokens_wordstem(toks) 
+final_toks # after stemming
+```
+
+```
+Tokens consisting of 1 document.
+text1 :
+[1] "exampl"     "preprocess" "techniqu"   "show"       "happen"    
+[6] "preprocess" "procedur"  
+```
+
+---
+
+# Lemmatization
+
+- Instead of using set rules to cut words down to their stems, lemmatization uses knowledge about a language's structure to reduce words down to their lemmas, the canonical or dictionary forms of words
+
+- Lemmatizers often use a rich lexical database like 'WordNet' as a way to look up word meanings for a given part-of-speech use (Miller 1995)
+
+
+
+```r
+toks # original tokens
+```
+
+```
+Tokens consisting of 1 document.
+text1 :
+[1] "example"       "preprocessing" "techniques"    "shows"        
+[5] "happens"       "preprocessing" "procedure"    
+```
+
+--
+
+
+```r
+# Lemmatization
+tokens_replace(toks, pattern = lexicon::hash_lemmas$token, replacement = lexicon::hash_lemmas$lemma)
+```
+
+```
+Tokens consisting of 1 document.
+text1 :
+[1] "example"    "preprocess" "technique"  "show"       "happen"    
+[6] "preprocess" "procedure" 
+```
+
+
+
+---
+
+# Document-term matrix or document-feature matrix
+
+- Finally, we create a representation 
+
+- Refers to a mathematical matrix that describes the frequency of terms that occur in a collection of documents
+
+- In a document-term matrix, rows correspond to documents in the collection and columns correspond to terms.
+
+
+```r
+dtm &lt;- dfm(final_toks)
+dtm
+```
+
+```
+Document-feature matrix of: 1 document, 6 features (0.00% sparse) and 0 docvars.
+       features
+docs    exampl preprocess techniqu show happen procedur
+  text1      1          2        1    1      1        1
+```
+
+---
+
+# Word frequencies
+
+&lt;img src="03_textanalysis_files/figure-html/unnamed-chunk-14-1.png" width="100%" /&gt;
+
+
+---
+
+# (3) Analyzing the structured data
+
+.pull-left[
+- Rule-based analyses 
+    - Assigns meaning by researcher
+    - “if word X occurs, the text means Y”
+    
+- Supervised machine learning (will be discussed in the next lecture)
+    - Train a model on coded training examples
+    - Generalizes meaning in human coding of training material
+    - “Text X is like other texts that were negative, so X is probably negative”
+]
+
+--
+.pull-right[
+- Unsupervised machine learning (will be an optional method in cycle 3)
+    - Find clusters of words that co-occur
+    - Meaning is assigned afterwards by researcher interpretation
+    - “These words form a pattern, which I think means X”
+]
+
+_Boumans &amp; Trilling, 2016_
+
+---
+
+# (4) Evaluating the validity of the analysis
+
+- Many text analysis processes are 'black boxes'
+    - even manual coding, dictionaries are ultimately opaque
+
+- Computer does not 'understand' natural language 
+
+- Need to prove to reader that analysis is valid
+    - Validate by comparing to known good (often manual annotation of 'gold standard')
+
+--
+
+- We will talk about different validation approaches when we discuss rule-based and supervised learning methods
+
+---
+
+
+class: inverse, center, middle
+
+# Dictionary Approaches
+
+Using fixed set of terms per concept to automatically code texts.
+
+---
+
+# Basic idea
+
+.pull-left[
+
+- Dictionaries or lexicons contain a lot of information about links between words and meanings
+
+- This approach makes use if this by counting the number of words that appear in each document that have been assigned a particular meaning or value by the researcher 
+
+- Key idea: if a term from the dictionary occurs, assign it that code
+
+    - E.g. positive = {good, happy, nice}, negative = {bad, stupid, expensive}
+
+]
+
+.pull-right[
+![](img/lexicon.jpg)
+]
+  
+
+---
+
+
+```r
+library(tidyverse)
+load("slides/data/supercorpus.RData")
+
+dtm &lt;- supercorpus %&gt;%
+  tokens() %&gt;%
+  tokens_remove(stopwords("en")) %&gt;%
+  dfm()
+
+populism.liberalism &lt;- dictionary(
+  list(
+    populism = c("elit*", "consensus*", "undemocratic*", "referend*", "corrupt*", "propagand", "politici*", "*deceit*", "*deceiv*", "*betray*", "shame*", "scandal*", "truth*", "dishonest*", "establishm*", "ruling*"),
+    liberalism = c("liber*", "free*", "indiv*", "open*", "law*", "rules", "order", "rights", "trade", "global", "inter*", "trans*", "minori*", "exchange", "market*")))
+populism.liberalism
+
+result = dtm %&gt;% dfm_lookup(populism.liberalism) %&gt;% convert(to = "data.frame") %&gt;% as_tibble
+result = result %&gt;% mutate(length=ntoken(dtm))
+result %&gt;%
+  mutate()
+```
+
+
+---
+
+
+```r
+populism.liberalism &lt;- dictionary(
+  list(
+    populism = c("elit*", "consensus*", "undemocratic*", "referend*", "corrupt*", "propagand", "politici*", "*deceit*", "*deceiv*", "*betray*", "shame*", "scandal*", "truth*", "dishonest*", "establishm*", "ruling*"),
+    liberalism = c("liber*", "free*", "indiv*", "open*", "law*", "rules", "order", "rights", "trade", "global", "inter*", "trans*", "minori*", "exchange", "market*")))
+populism.liberalism
+```
+
+
+
+```r
+dfm.eu &lt;- dfm(supercorpus, groups = "country", dictionary = populism.liberalism)
+meine.dfm.eu.prop &lt;- dfm_weight(meine.dfm.eu, scheme = "prop")
+convert(meine.dfm.eu.prop, "data.frame")
+```
+
+
+---
+# Advantages and disadvantages
+
+- Fixed set of terms per concept (wildcards, synonyms, conditions, proximity)
+
+- Advantages: 
+    - Technically easy
+    - Transparent
+    - Few resources needed
+
+- Disadvantages:
+    - Low validity for non-trivial concepts (sentiment, frames, specific topics)
+    - Difficult to create/maintain large dictionaries
+    - Can encode biases 
+
+---
+
+class: inverse, center, middle
+
+# Thank you for your attention!
+
+
+---
+class: my-one-page-font
+
+# References
+
+- Boumans, J. W., &amp; Trilling, D. (2016). Taking stock of the toolkit: An overview of relevant automated content analysis approaches and techniques for digital journalism scholars. Digital journalism, 4(1), 8-23.
+
+- Hilbert, M., &amp; López, P. (2011). The World’s Technological Capacity to Store, Communicate, and Compute Information. Science, 332(6025), 60 –65. https://doi.org/10.1126/science.1200970
+
+- Hvitfeld, E. &amp; Silge, J. (2021). Supervised Machine Learning for Text Analysis in R. CRC Press. https://smltar.com/
+
+- Krippendorff, K. (2004). Content Analysis. Sage. 
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": false,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
