@@ -6,3 +6,4 @@
 *.Rproj
 /slides/libs
 /slides/*cache
+/data/
