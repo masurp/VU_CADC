@@ -49,14 +49,12 @@ In the third cycle, students will work on their own research projects. Resources
 #### Practical Session 1: Introduction to R and RStudio
 
 - Handouts: 
-    - [Getting Started](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R_basics_1_getting_started.md)
-    - [Data and functions](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R_basics_2_data_and_functions.md)
-
+    - Getting Started (to be uploaded soon)
+    
 #### Practical Session 2: Tidyverse I 
 
 - Handout: 
-    - [Transforming data](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R-tidy-5-transformation.md)
-    - [Summarizing data](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R-tidy-5b-groupby.md)
+    - Introduction to Tidyverse (to be uploaded soon)
 
 #### Additional resources: 
 
@@ -75,14 +73,12 @@ In the third cycle, students will work on their own research projects. Resources
 #### Practical Session 1: Tidyverse II
 
 - Handouts:
-    - [Merging data sets](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R-tidy-13a-joining.md)
-    - [Reshaping](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/r-tidy-12-reshaping.md)
+    - Data Wrangling (to be uploaded soon)
     
-
 #### Practical Session 2: Data visualization
 
 - Handouts:
-    - [Data visualization](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/r-tidy-3_7-visualization.md)
+    - Data visualization (to be uploaded soon)
 
 
 #### Additional resources: 
