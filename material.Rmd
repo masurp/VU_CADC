@@ -41,7 +41,7 @@ In the third cycle, students will work on their own research projects. Resources
 
 ### Week 1
 
-#### Lecture: Introduction
+#### Lecture: Introduction to Computational Methods
 
 - Slides:
     - [Download Slides](slides/01_introduction.html)
@@ -93,7 +93,7 @@ In the third cycle, students will work on their own research projects. Resources
 
 ### Week 3
 
-#### Lecture: : Text as Data
+#### Lecture: Text as Data - Basics of Automatic Text Analysis
 
 - Slides:
     - Download Slides (to be uploaded soon)
@@ -115,7 +115,7 @@ In the third cycle, students will work on their own research projects. Resources
 
 ### Week 4
 
-#### Lecture: Supervised Machine Learning
+#### Lecture: Machine Learning - Supervised Text Classification
 
 - Slides:
     - Download Slides (to be uploaded soon)
