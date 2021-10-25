@@ -30,45 +30,6 @@ class: inverse, center, middle
 My name is Philipp Masur, I am an Assistant Professor for Persuasive Communication.
 
 
----
-
-
-```r
-# Getting the mpg data set (classic data set for illustrations)
-data(mpg, package="ggplot2")
-head(mpg)
-
-# Simple bar chart
-ggplot(mpg, 
-       aes(manufacturer)) +
-  geom_bar() + 
-  theme_minimal()
-
-# Stacked frequency bars
-bar_chart &lt;- ggplot(mpg, 
-            aes(manufacturer)) +
-  geom_bar(aes(fill = class), 
-           width = 0.5) + 
-  theme_minimal() +
-  labs(title = "Amount of classes per manufacturer")
-bar_chart
-
-# Change color palette and rotate labels
-bar_chart + 
-  scale_fill_brewer(palette = "Blues") +
-  theme(axis.text.x = element_text(angle = 45, 
-                                   vjust = 0.6))
-
-# Simulation
-x &lt;- rnorm(1000, 5, 2.5)
-m &lt;- rep(c(1,0), 500)
-y &lt;- 6 + 3*x + 2.5*m + 3*(x*m) + rnorm(1000, 7, 12.6)
-data &lt;- data.frame(homework = x, parental_mediation = m, exam = y) %&gt;%
-  as.tibble
-
-# Check data
-head(data)
-```
 
 ---
 
@@ -499,9 +460,10 @@ If you have any further problems related to installing software, running package
 
 - Sarah Sramota
 
+**Office Hours:** Tuesdays (3-5pm) and Thursdays (10-12am)
+
 
 ]
-
 
 ---
 
@@ -780,7 +742,7 @@ ggplot(NULL,
 
 .pull-right2[
 
-&lt;img src="01_introduction_files/figure-html/unnamed-chunk-5-1.png" width="100%" /&gt;
+&lt;img src="01_introduction_files/figure-html/unnamed-chunk-4-1.png" width="100%" /&gt;
 
 ]
 ---
