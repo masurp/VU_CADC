@@ -446,7 +446,7 @@ d$score_t1[d$gender == "F"]       ## identical, but first select column vector, 
 
 ### Subsetting, adding and modifying data
 
-**Exercise:** With the selection techniques you already learned how to
+*Exercise 1:* With the selection techniques you already learned how to
 create a subset of the data. Try to subset the data so that only
 participants in the condition “E” are included. Assign this subset to a
 new name. Create a second subset in which only the variables *id*,
@@ -692,7 +692,7 @@ In the output we see a document-feature matrix. The words are still made
 lowercase, since we passed `TRUE` to `tolower`, which was also the
 default value.
 
-*Exercise*: Copy a longer text from the internet and save it as a text
+*Exercise 2*: Copy a longer text from the internet and save it as a text
 object in R. Use the function `tokens()` to separate each word (make
 sure punctuations and numbers are removed) and create a
 document-feature-matrix with `dfm()`. Try if you can further install the
