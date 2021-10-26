@@ -49,12 +49,12 @@ In the third cycle, students will work on their own research projects. Resources
 #### Practical Session 1: Introduction to R and RStudio
 
 - Handouts: 
-    - Getting Started (to be uploaded soon)
+    - [R Basics: Getting Started](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_basics_introduction.md)
     
 #### Practical Session 2: Tidyverse I 
 
 - Handout: 
-    - Introduction to Tidyverse (to be uploaded soon)
+    - [Tidyverse: Transforming and Summarizing](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_tidy_transforming-and-summarizing.md)
 
 #### Additional resources: 
 
@@ -73,12 +73,12 @@ In the third cycle, students will work on their own research projects. Resources
 #### Practical Session 1: Tidyverse II
 
 - Handouts:
-    - Data Wrangling (to be uploaded soon)
+    - Tidyverse: Reshaping and Joining (to be uploaded soon)
     
 #### Practical Session 2: Data visualization
 
 - Handouts:
-    - Data visualization (to be uploaded soon)
+    - Tidyverse: Data Visualization (to be uploaded soon)
 
 
 #### Additional resources: 
