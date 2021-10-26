@@ -1,5 +1,5 @@
 ---
-title: 'R Tidyverse: Data transformation'
+title: 'R Tidyverse: Data Transformation & Summarization'
 author: "Kasper Welbers, Wouter van Atteveldt & Philipp Masur"
 date: "2021-10"
 output: 
@@ -56,18 +56,26 @@ which is functionally (almost) equivalent to a data frame but is more efficient 
 As a very simply example, the following code creates a tibble containing respondents, their gender, and their height:
 
 ```{r}
-tibble(resp = c(1,2,3), 
-       gender = c("M","M","F"), 
-       height = c(176, 165, 172))
+data <- tibble(resp = c(1,2,3), 
+               gender = c("M","F","F"), 
+               height = c(176, 165, 172))
+data
 ```
 
-## Reading data: read_csv
+**Exercise 1:** How could we create a subset that contains only female participants?
+
+```{r}
+# Code here
+```
+
+
+## Reading data 
 
 The example above manually created a data set, but in most cases you will start with data that you get from elsewhere,
 such as a csv file (e.g. downloaded from an online dataset or exported from excel) or an SPSS or Stata data file.
 
 Tidyverse contains a function `read_csv` that allows you to read a csv file directly into a data frame.
-You specify the location of the file, either on your local drive or directly from the Internet!
+You specify the location of the file, either on your local drive (as we did in the last practical session) or directly from the Internet!
 
 The example below downloads an overview of gun polls from the [data analytics site 538](https://fivethirtyeight.com/),
 and reads it into a tibble using the read_csv function:
@@ -184,7 +192,6 @@ age21 <- arrange(age21, Population, -Support)
 
 To transform (recode) a variable in the same column, you can simply use an existing name in `mutate()` to overwrite it.
 
-
 # Working with Pipes
 
 If you look at the code above, you notice that the result of each function is stored as an object, 
@@ -225,6 +232,12 @@ Of course, you probably don't want to replace your whole script with a single pi
 For example, you might want to download, clean, and subset a data set before doing multiple analyses with it.
 In that case, you probably want to store the result of downloading, cleaning, and subsetting as a variable, and use that in your analyses.
 
+**Exercise 2:** Create a subset of the tibble `d` in which only polls with the question "arm-teacher" are included. Select only the variables *Pollster*, *Population*, and *Support* (feel free to rename them to more shorter abbreviations at the same time). Recode the variable Support so that it ranges from 0 to 1. Recode the variable *Population* so that the values reader *reg* and *adu* (tip: use the function `recode()` within a `mutate()` command. If you don't know how the `recode` function works, use the help function `?`!)
+
+```{r}
+# Code here
+```
+
 
 # Data Summarization
 
@@ -232,8 +245,6 @@ The functions used in the earlier part on data preparation worked on individual 
 Sometimes, you need to compute properties of groups of rows (cases).
 This is called aggregation (or summarization) and in tidyverse uses the `group_by` function
 followed by either `summarize` or `mutate`. 
-
-# Simple data summarization
 
 Let's again work with the gun-poll data, remove the URL and rename some variables. 
 
@@ -267,9 +278,9 @@ For example, the following computes the average support per question
 
 ```{r}
 d %>% 
-  group_by(Question) %>%                    # group by "Questions"
-  summarize(Support = mean(Support)) %>%    # average "Support" per group
-  arrange(-Support)                         # sort based on "Support"
+  group_by(Question) %>%                    ## group by "Questions"
+  summarize(Support = mean(Support)) %>%    ## average "Support" per group
+  arrange(-Support)                         ## sort based on "Support"
 ```
 
 As you can see, summarize drastically changes the shape of the data. There are now rows equal to the number of groups (8), and the only columns left are the grouping variables and the summarized values. 
@@ -370,6 +381,7 @@ Can you find a way to add the micro-average as well (i.e. the mean of the indivi
 # Missing values
 
 Summary functions in R by default return `NA` if any of the values to be summarized are `NA`:
+
 ```{r}
 mean(c(3,4,NA,6))
 ```
@@ -401,6 +413,32 @@ d2 %>%
   summarize(Support = mean(Support, na.rm = T))
 ```
 
+
+*Exercise 2:* The following data set stems from an experiment conducted by [Masur, DiFranzo and Bazarova (2021)](https://doi.org/10.1371/journal.pone.0254670) in which participant were exposed to  social media feeds that differed with regard to how many of the (simulated) users showed themselves visually in the posts and profile pictures. The experiement a 3 (norm: 0%, 20%, 80% of the posts contained faces) x 3 (profile: 0%, 20%, 80% of the profile pictures contained faces) between-subject design. The authors were interested whether these manipulations led to different norm perceptions and different intentions to disclose onself. The full data set can be downloaded here: https://osf.io/kfm6x/. This subset contains the following variables:
+
+- **id**: participants' unique identifiers
+- **condition**: the condition they were randomly assigned.
+- **norm**: The first manipulated factor, i.e., number of posts that contained faces.
+- **profile**: The second manipulated factor, i.e., the number of profile pictures that contained faces
+- **age**: Age of the participants
+-**gender**: Gender of the participants
+-**norm_perc**: A scale measuring how strongly participants perceived the social norm to disclose oneself on the platform.
+-**disclosure**: Their intention to disclose themselves on the platform
+
+Using the functions of the tidyverse, try to answer the following questions: 
+
+1. On average, does age differ across the nine conditions?
+
+2. How did the two manipulations affect subsequent norm perceptions and disclosure intentions?
+
+
+```{r}
+d <- read_csv("https://raw.githubusercontent.com/masurp/VU_CADC/main/tutorials/data/masur-et-al_data.csv")
+
+# Solution here
+
+
+```
 
 
 
