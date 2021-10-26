@@ -143,8 +143,6 @@ in new commands.
 x * 5
 ```
 
-    ## [1] 10
-
 # Data types
 
 Data types concern the different types that single values in data can
@@ -167,33 +165,12 @@ and love.
 ``` r
 x <- 5     ## assign a number to the name x
 class(x)   ## view the class of the value assigned to x
-```
 
-    ## [1] "numeric"
-
-``` r
 x + 3
-```
-
-    ## [1] 8
-
-``` r
 x / 2
-```
-
-    ## [1] 2.5
-
-``` r
 log(x)     ## logarithm
-```
-
-    ## [1] 1.609438
-
-``` r
 sqrt(x)    ## square root
 ```
-
-    ## [1] 2.236068
 
 ## Character
 
@@ -205,8 +182,6 @@ x <- "Some text"  ## assign text to the name x
 class(x)          ## view the class of the value assigned to x
 ```
 
-    ## [1] "character"
-
 It’s important to recognize the distinction between names and character
 values. In the above example, x is the name to which the text “some
 text” has been assigned. Whether a word is a name or a character value
@@ -214,15 +189,8 @@ is indicated with quotes.
 
 ``` r
 x       ## get value assigned to the name x
-```
-
-    ## [1] "Some text"
-
-``` r
 "x"     ## the text "x"
 ```
-
-    ## [1] "x"
 
 Naturally, you cannot perform math with character data. Using the wrong
 data type will generally yield an error, as seen here.
@@ -305,8 +273,6 @@ vector, R will convert the numerical values to character values.
 c(1, 2, "c")            ## becomes a character vector of length 3
 ```
 
-    ## [1] "1" "2" "c"
-
 Since vectors can only have one type, we can perform type specific
 operations with them. In many ways, we can work with them in the same
 way as we can work with single values. In fact, single values are
@@ -317,15 +283,8 @@ numeric type, also called a numeric vector, we can perform calculations.
 x <- c( 1, 2, 3, 4, 5)
 y <- c(10,20,30,40,50)
 x + y     ## for 2 vectors of same size calculations are pairwise (1 + 10, 2 + 20, etc.)
-```
-
-    ## [1] 11 22 33 44 55
-
-``` r
 x + 10    ## for a vector and single value, the value is repeated (1 + 10, 2 + 10, etc.)
 ```
-
-    ## [1] 11 12 13 14 15
 
 ### Selecting elements
 
@@ -337,21 +296,9 @@ themselves are given as a numeric vector.
 ``` r
 x <- c('a','b','c','d','e','f','g')  
 x[5]            ## select the fifth element
-```
-
-    ## [1] "e"
-
-``` r
 x[c(1,3)]       ## select the first and third elements
-```
-
-    ## [1] "a" "c"
-
-``` r
 x[2:5]          ## select elements two to five
 ```
-
-    ## [1] "b" "c" "d" "e"
 
 If you select with indices, the specific order of the indices is used,
 and you can also repeat indices. This can for instance be used to sort
@@ -359,30 +306,16 @@ data.
 
 ``` r
 x[5:1]          ## select elements in positions 5 to 1
-```
-
-    ## [1] "e" "d" "c" "b" "a"
-
-``` r
 x[c(5,5,5)]     ## select the element in position 5 multiple times
 ```
-
-    ## [1] "e" "e" "e"
 
 You can also use negative indices to select everything except the
 specified elements.
 
 ``` r
 x[-5]            ## select every element except the fifth
-```
-
-    ## [1] "a" "b" "c" "d" "f" "g"
-
-``` r
 x[-c(1,3)]       ## select every element other than the first and third
 ```
-
-    ## [1] "b" "d" "e" "f" "g"
 
 ## Data.frame
 
@@ -460,70 +393,14 @@ Let’s put this to practice, starting with columns:
 ``` r
 ## selecting a single column returns a vector
 d[,1]             ## select the first column by index 
-```
-
-    ##  [1]  1  2  3  4  5  6  7  8  9 10
-
-``` r
 d[,"id"]          ## select the id column by name
-```
-
-    ##  [1]  1  2  3  4  5  6  7  8  9 10
-
-``` r
 d$id              ## select the id column using the dollar sign
-```
 
-    ##  [1]  1  2  3  4  5  6  7  8  9 10
-
-``` r
 ## selecting multiple columns returns a data.frame
 d[,1:2]           ## select the first two columns by indices
-```
-
-    ##    id condition
-    ## 1   1         E
-    ## 2   2         E
-    ## 3   3         C
-    ## 4   4         C
-    ## 5   5         C
-    ## 6   6         E
-    ## 7   7         E
-    ## 8   8         E
-    ## 9   9         C
-    ## 10 10         C
-
-``` r
 d[,c("id","age")] ## select the "id" and "age" columns by name
-```
-
-    ##    id age
-    ## 1   1  17
-    ## 2   2  19
-    ## 3   3  22
-    ## 4   4  18
-    ## 5   5  16
-    ## 6   6  21
-    ## 7   7  18
-    ## 8   8  17
-    ## 9   9  26
-    ## 10 10  18
-
-``` r
 d[,-1]            ## select every column except for the first  
 ```
-
-    ##    condition gender age score_t1 score_t2
-    ## 1          E      M  17      8.0      8.3
-    ## 2          E      M  19      6.0      6.4
-    ## 3          C      F  22      7.5      7.7
-    ## 4          C      M  18      6.8      6.3
-    ## 5          C      F  16      8.0      7.5
-    ## 6          E      F  21      6.4      6.4
-    ## 7          E      F  18      6.0      6.2
-    ## 8          E      M  17      3.2      3.6
-    ## 9          C      M  26      7.3      7.0
-    ## 10         C      F  18      6.8      6.5
 
 #### selecting rows
 
@@ -535,13 +412,6 @@ their matched positions intact.
 d[1:5,]    ## select first 5 rows
 ```
 
-    ##   id condition gender age score_t1 score_t2
-    ## 1  1         E      M  17      8.0      8.3
-    ## 2  2         E      M  19      6.0      6.4
-    ## 3  3         C      F  22      7.5      7.7
-    ## 4  4         C      M  18      6.8      6.3
-    ## 5  5         C      F  16      8.0      7.5
-
 A very useful additional trick is that you can use all the columns to
 make comparisons. For example, we can use the gender column to look up
 all elements for which the value is “M” (male), and use this to select
@@ -551,13 +421,6 @@ rows.
 d[d$gender == "M", ]       
 ```
 
-    ##   id condition gender age score_t1 score_t2
-    ## 1  1         E      M  17      8.0      8.3
-    ## 2  2         E      M  19      6.0      6.4
-    ## 4  4         C      M  18      6.8      6.3
-    ## 8  8         E      M  17      3.2      3.6
-    ## 9  9         C      M  26      7.3      7.0
-
 You can combine this with the logical operators to make a selection
 using multiple columns. Logical operators are explained in detail at the
 bottom of this document. For now, you only need to understand that we
@@ -566,21 +429,8 @@ be TRUE (d$gender == “F” AND d$age == 21).
 
 ``` r
 d[d$gender == "F" & d$age == 21, ]    ## 21 year old female participant(s)
-```
-
-    ##   id condition gender age score_t1 score_t2
-    ## 6  6         E      F  21      6.4      6.4
-
-``` r
 d[d$score_t1 < d$score_t2,]           ## participants that scored higher after the condition
 ```
-
-    ##   id condition gender age score_t1 score_t2
-    ## 1  1         E      M  17      8.0      8.3
-    ## 2  2         E      M  19      6.0      6.4
-    ## 3  3         C      F  22      7.5      7.7
-    ## 7  7         E      F  18      6.0      6.2
-    ## 8  8         E      M  17      3.2      3.6
 
 #### selecting rows and columns
 
@@ -590,21 +440,9 @@ can combine the different selection methods.
 
 ``` r
 d[d$gender == "F", "score_t1"]    ## get the score_t1 column for female participants
-```
-
-    ## [1] 7.5 8.0 6.4 6.0 6.8
-
-``` r
 d[d$gender == "F",]$score_t1      ## identical, but first subset data.frame, then select column
-```
-
-    ## [1] 7.5 8.0 6.4 6.0 6.8
-
-``` r
 d$score_t1[d$gender == "F"]       ## identical, but first select column vector, then subset vector
 ```
-
-    ## [1] 7.5 8.0 6.4 6.0 6.8
 
 ### Subsetting, adding and modifying data
 
@@ -695,8 +533,6 @@ root) function.
 sqrt(5)
 ```
 
-    ## [1] 2.236068
-
 In this example, the function name is `sqrt`. The input is the single
 argument `5`. If you run this code, it produces the output `2.236068`.
 Currently, R will simply print this output in your Console, but as you
@@ -723,8 +559,6 @@ this function here:
 ``` r
 mean(x = c(1, 2, NA, 1, 2, 5), na.rm = TRUE)
 ```
-
-    ## [1] 2.2
 
 This function, with the name `mean`, is given several arguments here:
 `x` and `na.rm`. Given this input, many operations are performed behind
@@ -783,8 +617,6 @@ value like above (recall that in R this is actually a vector of length
 sqrt(c(1,2,3,4,5))
 ```
 
-    ## [1] 1.000000 1.414214 1.732051 2.000000 2.236068
-
 There are more parts to the documentation that we’ll ignore for now.
 Notable parts to look into for yourself are **Details**, that provides
 more information, and the **Examples** section at the very bottom, which
@@ -823,25 +655,8 @@ with the default settings by only entering the `x` argument.
 ``` r
 example_texts <- c("Some example text.", "Some more text!")
 tokens(example_texts)
-```
-
-    ## Tokens consisting of 2 documents.
-    ## text1 :
-    ## [1] "Some"    "example" "text"    "."      
-    ## 
-    ## text2 :
-    ## [1] "Some" "more" "text" "!"
-
-``` r
 tokens(example_texts, remove_punct = TRUE)
 ```
-
-    ## Tokens consisting of 2 documents.
-    ## text1 :
-    ## [1] "Some"    "example" "text"   
-    ## 
-    ## text2 :
-    ## [1] "Some" "more" "text"
 
 If we run this line of code, it returns a serialized list of integers
 corresponding to a vector of types. Note that in the second example,
@@ -870,23 +685,8 @@ the tokenized text, but with an implicit input for `tolower`.
 
 ``` r
 dfm(tokens(example_texts))
-```
-
-    ## Document-feature matrix of: 2 documents, 6 features (33.33% sparse) and 0 docvars.
-    ##        features
-    ## docs    some example text . more !
-    ##   text1    1       1    1 1    0 0
-    ##   text2    1       0    1 0    1 1
-
-``` r
 dfm(tokens(example_texts, remove_punct = TRUE), TRUE)
 ```
-
-    ## Document-feature matrix of: 2 documents, 4 features (25.00% sparse) and 0 docvars.
-    ##        features
-    ## docs    some example text more
-    ##   text1    1       1    1    0
-    ##   text2    1       0    1    1
 
 In the output we see a document-feature matrix. The words are still made
 lowercase, since we passed `TRUE` to `tolower`, which was also the
