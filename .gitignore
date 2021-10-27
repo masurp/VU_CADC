@@ -7,3 +7,5 @@
 /slides/libs
 /slides/*cache
 /slides/data/
+/homework/*.csv
+/homework/*_complete.*
