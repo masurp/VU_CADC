@@ -768,7 +768,7 @@ cowplot::plot_grid(p1, p2, p3, nrow = 1, align = "v")
 ---
 # Uncertainty
 
-.pull-right2[
+.pull-left2b[
 
 ![](https://scied.ucar.edu/sites/default/files/images/long-content-page/5.3.1.jpg)
 
@@ -873,7 +873,7 @@ class: inverse, center, middle
 
 # Examples for different methods
 
-What figure works with what method.
+What figure works with what method?
 
 ---
 
@@ -881,6 +881,293 @@ What figure works with what method.
 
 ![](img/overview_viz.png)
 _www.data-to-viz.com_
+
+
+---
+
+# One numeric variable: Histogram or Density
+
+.pull-left[
+```{r, echo = F}
+# Load dataset from github
+data <- read.table("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/1_OneNum.csv", header=TRUE)
+
+# Make the histogram
+data %>%
+  filter(price<300 ) %>%
+  ggplot(aes(x=price)) +
+    geom_histogram(breaks=seq(0,300,10), fill="#69b3a2", color="white", alpha=0.9) +
+    ggtitle("Night price distribution of Airbnb appartements") +
+    theme_ipsum()
+```
+
+]
+
+.pull-right[
+
+```{r, echo = F}
+data %>%
+  filter(price<300) %>%
+  ggplot(aes(x=price)) +
+    geom_density(breaks=seq(0,300,10), fill="#69b3a2", alpha=0.5) +
+    ggtitle("Night price distribution of Airbnb appartements") +
+    theme_ipsum()
+```
+
+]
+
+---
+
+# Group differences: Boxplots
+
+.pull-left[
+```{r, echo = F}
+data <- data.frame(
+  name=c( rep("A",500), rep("B",500), rep("B",500), rep("C",20), rep('D', 100)  ),
+  value=c( rnorm(500, 10, 5), rnorm(500, 13, 1), rnorm(500, 18, 1), rnorm(20, 25, 4), rnorm(100, 12, 1) )
+)
+
+# Plot
+data %>%
+  ggplot( aes(x=name, y=value, fill=name)) +
+    geom_boxplot() +
+    scale_fill_brewer(palette = "Dark2") +
+    theme_ipsum() +
+    theme(
+      legend.position="none",
+      plot.title = element_text(size=11)
+    ) +
+    ggtitle("A typical boxplot") +
+    xlab("")
+```
+
+]
+
+
+.pull-right[
+
+```{r, echo = F}
+data %>%
+  ggplot( aes(x=name, y=value, fill=name)) +
+    geom_boxplot() +
+  geom_jitter(alpha = .2, size = .75) +
+    scale_fill_brewer(palette = "Dark2") +
+    theme_ipsum() +
+    theme(
+      legend.position="none",
+      plot.title = element_text(size=11)
+    ) +
+    ggtitle("A better boxplot?") +
+    xlab("")
+```
+
+
+]
+---
+
+# Boxplot explained
+
+![](https://lsc.studysixsigma.com/wp-content/uploads/sites/6/2015/12/1435.png)
+_Image Source: https://www.leansigmacorporation.com/box-plot-with-minitab/_
+
+---
+
+# Relationships between numeric variables: Scatterplot
+
+.pull-left[
+```{r, echo = F}
+# Load dataset from github
+data <- read.table("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/2_TwoNum.csv", header=T, sep=",") %>% dplyr::select(GrLivArea, SalePrice)
+
+# plot
+data %>% 
+  ggplot( aes(x=GrLivArea, y=SalePrice/1000)) +
+    geom_point(color="#69b3a2", alpha=0.8) +
+    ggtitle("Ground living area partially explains sale price of apartments") +
+    theme_ipsum() +
+    theme(
+      plot.title = element_text(size=12)
+    ) +
+    ylab('Sale price (k$)') +
+    xlab('Ground living area')
+```
+
+]
+
+.pull-right[
+
+```{r, echo = F}
+data %>% 
+  ggplot( aes(x=GrLivArea, y=SalePrice/1000)) +
+    geom_point(color="#69b3a2", alpha=0.8, size = .7) +
+    geom_smooth(se = F, linetype = "dashed", color = "black") +
+    geom_smooth(method = "lm", color = "red") +
+    ggtitle("Ground living area partially explains sale price of apartments") +
+    theme_ipsum() +
+    theme(
+      plot.title = element_text(size=12)
+    ) +
+    ylab('Sale price (k$)') +
+    xlab('Ground living area')
+```
+
+]
+
+---
+
+# Time series: Line plot
+
+```{r, echo = F, fig.height = 4, fig.width = 10}
+# Load dataset from github
+data <- read.table("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/3_TwoNumOrdered.csv", header=T)
+data$date <- as.Date(data$date)
+
+# plot
+data %>%
+  ggplot( aes(x=date, y=value)) +
+    geom_line(color="#69b3a2") +
+    ggtitle("Evolution of Bitcoin price") +
+    ylab("bitcoin price ($)") +
+    theme_ipsum()
+```
+
+---
+
+# Coefficient plots
+
+![](img/masur_2016.png)
+_Masur & Scharkow, 2016_
+
+---
+
+class: inverse, center, middle
+
+# Creating visualization in R
+
+ggplot2: The grammar of Graphics
+
+---
+
+# A Layered Grammar of Graphics
+
+![](img/grammar1.png)
+
+---
+
+# A Layered Grammar of Graphics
+
+.pull-left[
+
+- In R, we mostly use the package **ggplot2** to plot graphs and figures
+
+- It uses a layered grammar of graphics, i.e., each part of a figure (coordinate system, plot annotations, geometrical objects, aesthetics...) are an individual layer that can be added and removed.
+
+- Understanding this grammar is a powerful for creating great visualizations
+
+
+]
+
+
+.pull-right[
+
+![](img/grammar2.png)
+]
+
+---
+
+# Layers
+
+.pull-left[
+
+```{r, echo = F}
+# Load dataset from github
+data <- read.table("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/2_TwoNum.csv", header=T, sep=",") %>% dplyr::select(GrLivArea, SalePrice)
+
+# plot
+p <- data %>% 
+  ggplot( aes(x=GrLivArea, y=SalePrice/1000)) 
+p
+```
+
+]
+
+--
+
+.pull-right[
+
+```{r, echo = F}
+p + 
+    geom_point()
+```
+
+]
+
+---
+# Layers
+
+.pull-left[
+
+```{r, echo = F}
+p + 
+    geom_point(alpha = .5, color="#69b3a2", size = .7) +
+    ggtitle("Ground living area partially explains sale price of apartments") +
+    ylab('Sale price (k$)') +
+    xlab('Ground living area') +
+  theme_ipsum() +
+  theme(
+      plot.title = element_text(size=12)
+    ) 
+
+
+```
+
+]
+
+--
+
+.pull-right[
+
+```{r, echo = F}
+p + 
+    geom_point(alpha = .5, color="#69b3a2", size = .7) +
+  geom_smooth(color = "black") +
+    ggtitle("Ground living area partially explains sale price of apartments") +
+    ylab('Sale price (k$)') +
+    xlab('Ground living area') +
+  theme_ipsum() +
+  theme(
+      plot.title = element_text(size=12)
+    ) 
+```
+
+]
+---
+
+# Layers and components
+
+.pull-right2[
+
+![](https://miro.medium.com/max/2000/1*mcLnnVdHNg-ikDbHJfHDNA.png)
+_Sarkar, 2018_
+
+]
+
+
+---
+
+# Conclusion
+
+- Data visualization is a powerful tool
+
+- A lot of times, we can convey insights better in charts or figures
+
+- However, there are many caveats and sometimes a classic table does the job
+
+- The appropriate graph is always determined by the *type of data* and the *context*/*research question*
+
+- In the next practical session, we will learn how to produce nice figures in R!
+
+
 
 ---
 
@@ -906,6 +1193,10 @@ class: my-one-page-font
 - Healy, K. (2019). Data Visualization: A practical Introduction. Princeton University Press. https://socviz.co/
 
 - Hehman, E., & Xie, S. Y. (2021). Doing Better Data Visualization. Advances in Methods and Practices in Psychological Science. https://doi.org/10.1177/25152459211045334
+
+- Masur, P. K & Scharkow, M. (2016). Disclosure management on social network sites: Individual privacy perceptions and user-directed privacy strategies. Social Media + Society, 2(1), 1-13. https://doi.org/10.1177/2056305116634368
+
+- Sakar, D. (2018). A Comprehensive Guide to the Grammar of Graphics for Effective Visualization of Multi-dimensional Data. https://towardsdatascience.com/a-comprehensive-guide-to-the-grammar-of-graphics-for-effective-visualization-of-multi-dimensional-1f92b4ed4149
 
 - Tufte, E. R. (1983). The visual display of quantitative information. Graphics Press.
 

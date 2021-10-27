@@ -184,12 +184,12 @@ head(tidy_covid)
 # A tibble: 6 x 4
   Country                `Deaths/million` Deaths    Cases      
   &lt;chr&gt;                  &lt;chr&gt;            &lt;chr&gt;     &lt;chr&gt;      
-1 World[a]               622              4,898,668 240,680,365
-2 Peru                   5,989            199,816   2,189,165  
-3 Bosnia and Herzegovina 3,404            11,110    243,914    
-4 North Macedonia        3,332            6,940     197,091    
-5 Bulgaria               3,229            22,274    540,619    
-6 Montenegro             3,221            2,023     137,769    
+1 World[a]               629              4,954,956 244,074,377
+2 Peru                   5,996            200,052   2,195,859  
+3 Bosnia and Herzegovina 3,492            11,397    249,349    
+4 North Macedonia        3,390            7,062     199,901    
+5 Bulgaria               3,380            23,316    575,306    
+6 Montenegro             3,297            2,071     141,292    
 ```
 
 
@@ -216,12 +216,12 @@ head(subset_covid)
 # A tibble: 6 x 7
   Country     `Deaths/million` Deaths   Cases Deaths_million Mortality highlight
   &lt;chr&gt;       &lt;chr&gt;             &lt;dbl&gt;   &lt;dbl&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
-1 Italy       2,179            131541  4.72e6           2179      2.79         1
-2 United Sta… 2,175            724317  4.49e7           2175      1.61         1
-3 United Kin… 2,037            138997  8.49e6           2037      1.64         1
-4 Spain       1,860             86974  4.98e6           1860      1.74         1
-5 France      1,749            118183  7.19e6           1749      1.64         1
-6 Sweden      1,472             14956  1.16e6           1472      1.29         1
+1 United Sta… 2,214            737342  4.55e7           2214      1.62         1
+2 Italy       2,184            131856  4.74e6           2184      2.78         1
+3 United Kin… 2,052            139990  8.85e6           2052      1.58         1
+4 Spain       1,865             87186  5.00e6           1865      1.74         1
+5 France      1,753            118452  7.23e6           1753      1.64         1
+6 Sweden      1,475             14993  1.17e6           1475      1.29         1
 ```
 
 
@@ -635,7 +635,7 @@ _Hehman &amp; Xie, 2021_
 ---
 # Uncertainty
 
-.pull-right2[
+.pull-left2b[
 
 ![](https://scied.ucar.edu/sites/default/files/images/long-content-page/5.3.1.jpg)
 
@@ -732,7 +732,7 @@ class: inverse, center, middle
 
 # Examples for different methods
 
-What figure works with what method.
+What figure works with what method?
 
 ---
 
@@ -740,6 +740,170 @@ What figure works with what method.
 
 ![](img/overview_viz.png)
 _www.data-to-viz.com_
+
+
+---
+
+# One numeric variable: Histogram or Density
+
+.pull-left[
+&lt;img src="02_dataviz_files/figure-html/unnamed-chunk-20-1.png" width="100%" /&gt;
+
+]
+
+.pull-right[
+
+&lt;img src="02_dataviz_files/figure-html/unnamed-chunk-21-1.png" width="100%" /&gt;
+
+]
+
+---
+
+# Group differences: Boxplots
+
+.pull-left[
+&lt;img src="02_dataviz_files/figure-html/unnamed-chunk-22-1.png" width="100%" /&gt;
+
+]
+
+
+.pull-right[
+
+&lt;img src="02_dataviz_files/figure-html/unnamed-chunk-23-1.png" width="100%" /&gt;
+
+
+]
+---
+
+# Boxplot explained
+
+![](https://lsc.studysixsigma.com/wp-content/uploads/sites/6/2015/12/1435.png)
+_Image Source: https://www.leansigmacorporation.com/box-plot-with-minitab/_
+
+---
+
+# Relationships between numeric variables: Scatterplot
+
+.pull-left[
+&lt;img src="02_dataviz_files/figure-html/unnamed-chunk-24-1.png" width="100%" /&gt;
+
+]
+
+.pull-right[
+
+&lt;img src="02_dataviz_files/figure-html/unnamed-chunk-25-1.png" width="100%" /&gt;
+
+]
+
+---
+
+# Time series: Line plot
+
+&lt;img src="02_dataviz_files/figure-html/unnamed-chunk-26-1.png" width="100%" /&gt;
+
+---
+
+# Coefficient plots
+
+![](img/masur_2016.png)
+_Masur &amp; Scharkow, 2016_
+
+---
+
+class: inverse, center, middle
+
+# Creating visualization in R
+
+ggplot2: The grammar of Graphics
+
+---
+
+# A Layered Grammar of Graphics
+
+![](img/grammar1.png)
+
+---
+
+# A Layered Grammar of Graphics
+
+.pull-left[
+
+- In R, we mostly use the package **ggplot2** to plot graphs and figures
+
+- It uses a layered grammar of graphics, i.e., each part of a figure (coordinate system, plot annotations, geometrical objects, aesthetics...) are an individual layer that can be added and removed.
+
+- Understanding this grammar is a powerful for creating great visualizations
+
+
+]
+
+
+.pull-right[
+
+![](img/grammar2.png)
+]
+
+---
+
+# Layers
+
+.pull-left[
+
+&lt;img src="02_dataviz_files/figure-html/unnamed-chunk-27-1.png" width="100%" /&gt;
+
+]
+
+--
+
+.pull-right[
+
+&lt;img src="02_dataviz_files/figure-html/unnamed-chunk-28-1.png" width="100%" /&gt;
+
+]
+
+---
+# Layers
+
+.pull-left[
+
+&lt;img src="02_dataviz_files/figure-html/unnamed-chunk-29-1.png" width="100%" /&gt;
+
+]
+
+--
+
+.pull-right[
+
+&lt;img src="02_dataviz_files/figure-html/unnamed-chunk-30-1.png" width="100%" /&gt;
+
+]
+---
+
+# Layers and components
+
+.pull-right2[
+
+![](https://miro.medium.com/max/2000/1*mcLnnVdHNg-ikDbHJfHDNA.png)
+_Sarkar, 2018_
+
+]
+
+
+---
+
+# Conclusion
+
+- Data visualization is a powerful tool
+
+- A lot of times, we can convey insights better in charts or figures
+
+- However, there are many caveats and sometimes a classic table does the job
+
+- The appropriate graph is always determined by the *type of data* and the *context*/*research question*
+
+- In the next practical session, we will learn how to produce nice figures in R!
+
+
 
 ---
 
@@ -765,6 +929,10 @@ class: my-one-page-font
 - Healy, K. (2019). Data Visualization: A practical Introduction. Princeton University Press. https://socviz.co/
 
 - Hehman, E., &amp; Xie, S. Y. (2021). Doing Better Data Visualization. Advances in Methods and Practices in Psychological Science. https://doi.org/10.1177/25152459211045334
+
+- Masur, P. K &amp; Scharkow, M. (2016). Disclosure management on social network sites: Individual privacy perceptions and user-directed privacy strategies. Social Media + Society, 2(1), 1-13. https://doi.org/10.1177/2056305116634368
+
+- Sakar, D. (2018). A Comprehensive Guide to the Grammar of Graphics for Effective Visualization of Multi-dimensional Data. https://towardsdatascience.com/a-comprehensive-guide-to-the-grammar-of-graphics-for-effective-visualization-of-multi-dimensional-1f92b4ed4149
 
 - Tufte, E. R. (1983). The visual display of quantitative information. Graphics Press.
 
