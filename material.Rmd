@@ -69,16 +69,17 @@ In the third cycle, students will work on their own research projects. Resources
 
 - Slides:
     - [Download Slides](slides/02_dataviz.html)
-    
-#### Practical Session 1: Tidyverse II
+
+#### Practical Session 1: Data visualization
+
+- Handouts:
+    - Basics of Data Visualization (to be uploaded soon)
+
+#### Practical Session 2: Tidyverse II
 
 - Handouts:
     - Tidyverse: Reshaping and Joining (to be uploaded soon)
     
-#### Practical Session 2: Data visualization
-
-- Handouts:
-    - Tidyverse: Data Visualization (to be uploaded soon)
 
 
 #### Additional resources: 
