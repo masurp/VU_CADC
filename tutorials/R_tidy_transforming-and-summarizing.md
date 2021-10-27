@@ -23,7 +23,7 @@ Kasper Welbers, Wouter van Atteveldt & Philipp Masur
 
 # Introduction
 
-The goal of this tutorial is to get you acquainted with the
+The goal of this practical session is to get you acquainted with the
 [Tidyverse](https://www.tidyverse.org/). Tidyverse is a collection of
 packages that have been designed around a singular and clearly defined
 set of principles about what data should look like and how we should
@@ -89,7 +89,7 @@ data <- tibble(resp = c(1,2,3),
 data
 ```
 
-**Exercise 1:** How could we create a subset that contains only female
+**Exercise 1:** How would you create a subset that contains only female
 participants?
 
 ``` r
@@ -395,8 +395,8 @@ d %>%
   group_by(Question) %>% 
   summarize(Dem = mean(Dem), 
             Rep = mean(Rep), 
-            diff = mean(Dem-Rep)) %>% 
-  arrange(-diff)
+            Diff = mean(Dem-Rep)) %>% 
+  arrange(-Diff)
 ```
 
 So, Democrats are more in favor of all proposed gun laws except arming
@@ -476,26 +476,6 @@ This results in a data set with one row per unique group,
 i.e. combination of Question and Population, and with separate columns
 for each grouping column and the summary values.
 
-As you can see from the example above, the resulting data set is still
-grouped by, but only by `Question`. Keeping the groups intact after
-summarization would not be useful, as you would never want to compute a
-summary of the same groups: each of the old groups is now a single row.
-Thus, while mutate keeps the grouping information intact, *summarize
-drops the outermost grouping column*, in this case Population.
-
-This allows you to compute the the (macro-)average support per question:
-(i.e. the mean of the summaries per population)
-
-``` r
-d %>% 
-  group_by(Question, Population) %>% 
-  summarize(Support = mean(Support)) %>% 
-  mutate(avg_support = mean(Support))
-```
-
-Can you find a way to add the micro-average as well (i.e. the mean of
-the individual polls)?
-
 # Missing values
 
 Summary functions in R by default return `NA` if any of the values to be
@@ -569,8 +549,14 @@ questions:
 
 1.  On average, does age differ across the nine conditions?
 
-2.  How did the two manipulations affect subsequent norm perceptions and
-    disclosure intentions?
+2.  How did the two manipulations (*norm* and *profile*) affect
+    subsequent *norm perceptions* and *disclosure intentions*? Think
+    about how you can compute the difference across conditions for both
+    factors independently as well as at the same time.
+
+3.  Bonus question: How strongly are norm perceptions and intentions
+    correlated (tip: try `?cor.test` to learn how to compute
+    correlations)?
 
 ``` r
 d <- read_csv("https://raw.githubusercontent.com/masurp/VU_CADC/main/tutorials/data/masur-et-al_data.csv")
