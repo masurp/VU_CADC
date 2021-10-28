@@ -11,17 +11,9 @@ This page contains all information and materials for the course "Computational A
 
 <br>
 
+![](https://socialsciences.nature.com/cdn-cgi/image/quality=90/https://images.zapnito.com/uploads/d39ae7f9b96dbb3ee350deac50fd4bfa/e0e2211b-d13c-462a-bf5b-d5998b04ba84.jpeg)
 
-```{r, warning=F, message =F}
-library(tidyverse)
-tibble(x = rnorm(100, 2, 1),
-       c = rep(c(0,1), 50),
-       y = 2.5*x + -3*(x*c) + rnorm(100, 0, 4)) %>%
-  ggplot(aes(x, y)) +
-  geom_point() +
-  geom_smooth() +
-  theme_classic()
-```
+_[Image source: Sutherland, 2019](https://socialsciences.nature.com/posts/54262-computational-social-science-heralds-the-age-of-interdisciplinary-science)_
 
 <hr>
 
