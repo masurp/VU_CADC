@@ -24,7 +24,7 @@ e.g., 01_homework_assignment_NAME-LASTNAME.html
 
 # Instructions
 
-In this homework assignment, you are going to practice what you have learned in the past two practical sessions. To do soe, we need to get some data into R. On Canvas, you will find a module called "Data Sets". Within this module, there are several data sets that we will use throughout the course. For this assignment, download the data set **norm_data.csv**. This data set stems from an online survey on social media use and norm perceptions. 
+In this homework assignment, you are going to practice what you have learned in the past two practical sessions. To do so, we need to get some data into R. On Canvas, you will find a module called "Data Sets". Within this module, there are several data sets that we will use throughout the course. For this assignment, download the data set **norm_data.csv**. This data set stems from an online survey on social media use and norm perceptions. 
 
 If you have set the working directory to the location of this RMarkdown Script and you put the csv-file in the same folder, you can load that data set without specifying a specific path. 
 
@@ -66,4 +66,16 @@ d <- d %>%
 # Solution here
 ```
 
+
+## Task 3: Norm perceptions on Instagram
+
+The data set contains some variables that measure norm perceptions in relation to visual self-disclosure on Instagram (12 items starting with "INV_NOR_"). 
+
+- Create the mean across all these item per person and add it as a new column to the data set.
+- Do norm perceptions differ depending on gender?
+
+
+```{r}
+# Solution here
+```
 
