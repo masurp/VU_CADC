@@ -55,10 +55,18 @@ In the third cycle, students will work on their own research projects. Resources
 
 - Handout: 
     - [Tidyverse: Transforming and Summarizing](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_tidy_transforming-and-summarizing.md)
+    
+#### Homework
+
+- Work through this tutorial: 
+    - [R Markdown: Basics](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_basics_r-markdown.md)
+- Complete this assignment (copy the entire code into a RMarkdown file)
+    - [Homework: Basic Data Wrangling](https://github.com/masurp/VU_CADC/blob/main/homework/01_homework_assignment.Rmd)
 
 #### Additional resources: 
 
 - [Online book "R for Data Science"](https://r4ds.had.co.nz/)
+- [Online book "R Markdown: The Definitive Guide"](https://bookdown.org/yihui/rmarkdown/)
 
 <br>
 <hr>
