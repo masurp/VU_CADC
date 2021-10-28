@@ -2,7 +2,9 @@
 title: "Content"
 ---
 
-<img src="https://images.pexels.com/photos/4769486/pexels-photo-4769486.jpeg" width="270" align= "right"/>
+img
+
+<img src="https://images.pexels.com/photos/4769486/pexels-photo-4769486.jpeg" width="270" align= "right" style = "padding-left: 10px; padding-bottm: 10px;"/>
 
 This course introduces **data science** technologies and techniques to study communication processes and effects in novel and innovative ways. Learning data science and computational methods is useful because it provides new skills and much thought-after qualifications in the job market, but also allows us to tap into new areas of research and to gain a better understanding of today’s society. 
 
@@ -31,3 +33,9 @@ With regard to the specific methods being taught, students will be able to...
 - clean and transform messy data into a tidy data format ready for analysis
 - conduct computational text analysis and use machine learning techniques to extract useful information from textual data
 - perform advanced statistical analyses (e.g., time series analysis, structural equation modeling, linkage analysis…)
+
+<hr>
+
+<p style = "margin-left: auto; margin-right: 0;">
+This course is published under the following [license](https://github.com/masurp/VU_CADC/blob/main/LICENSE.md). 
+</p>

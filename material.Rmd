@@ -12,7 +12,7 @@ On this page, you'll find all materials (e.g., slides, handouts, R-syntax, etc.)
 
 <br>
 
-### Preparation
+## Preparation
 
 #### Install R and RStudio
 
@@ -39,7 +39,7 @@ In the third cycle, students will work on their own research projects. Resources
 <br>
 <hr>
 
-### Week 1
+## Week 1
 
 #### Lecture: Introduction to Computational Methods
 
@@ -71,7 +71,7 @@ In the third cycle, students will work on their own research projects. Resources
 <br>
 <hr>
 
-### Week 2
+## Week 2
 
 #### Lecture: Data Wrangling and Data Visualization
 
@@ -89,7 +89,6 @@ In the third cycle, students will work on their own research projects. Resources
     - Tidyverse: Reshaping and Joining (to be uploaded soon)
     
 
-
 #### Additional resources: 
 
 - [Online book "R for Data Science"](https://r4ds.had.co.nz/) 
@@ -100,7 +99,7 @@ In the third cycle, students will work on their own research projects. Resources
 <br>
 <hr>
 
-### Week 3
+## Week 3
 
 #### Lecture: Text as Data - Basics of Automatic Text Analysis
 
@@ -122,7 +121,7 @@ In the third cycle, students will work on their own research projects. Resources
 <br>
 <hr>
 
-### Week 4
+## Week 4
 
 #### Lecture: Machine Learning - Supervised Text Classification
 
@@ -146,14 +145,14 @@ In the third cycle, students will work on their own research projects. Resources
 <br>
 <hr>
 
-### Week 5
+## Week 5
 
 Exam week. More information soon. 
 
 <br>
 <hr>
 
-### Week 6
+## Week 6 & 7
 
 Group projects.
 
@@ -161,13 +160,14 @@ Group projects.
 <hr>
 
 
-### Week 7
 
-Group projects.
-
-<br>
-<hr>
-
-### Week 8
+## Week 8
 
 There will be a mini-conference this week where all research groups present their findings. 
+
+
+<hr>
+
+<p style = "margin-left: auto; margin-right: 0;">
+This course is published under the following [license](https://github.com/masurp/VU_CADC/blob/main/LICENSE.md). 
+</p>
