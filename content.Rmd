@@ -2,7 +2,7 @@
 title: "Content"
 ---
 
-<iframe src="https://giphy.com/embed/ftAyb0CG1FNAIZt4SO" width="480" height="270" align= "right" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+<img src="https://images.pexels.com/photos/4769486/pexels-photo-4769486.jpeg" width="270" align= "right"/>
 
 This course introduces **data science** technologies and techniques to study communication processes and effects in novel and innovative ways. Learning data science and computational methods is useful because it provides new skills and much thought-after qualifications in the job market, but also allows us to tap into new areas of research and to gain a better understanding of today’s society. 
 
