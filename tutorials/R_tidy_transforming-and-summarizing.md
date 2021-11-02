@@ -19,7 +19,6 @@ Kasper Welbers, Wouter van Atteveldt & Philipp Masur
     -   [Using mutate with group\_by](#using-mutate-with-group_by)
     -   [Ungrouping](#ungrouping)
 -   [Multiple grouping variables](#multiple-grouping-variables)
--   [Missing values](#missing-values)
 
 # Introduction
 
@@ -104,7 +103,7 @@ will start with data that you get from elsewhere, such as a csv file
 SPSS or Stata data file.
 
 Tidyverse contains a function `read_csv` that allows you to read a csv
-file directly into a data frame. You specify the location of the file,
+file directly into a tibble. You specify the location of the file,
 either on your local drive (as we did in the last practical session) or
 directly from the Internet!
 
@@ -475,49 +474,6 @@ d %>%
 This results in a data set with one row per unique group,
 i.e. combination of Question and Population, and with separate columns
 for each grouping column and the summary values.
-
-# Missing values
-
-Summary functions in R by default return `NA` if any of the values to be
-summarized are `NA`:
-
-``` r
-mean(c(3,4,NA,6))
-```
-
-As a result, if you summarize over rows that contain a missing value, it
-will set the summary value to NA. Let’s first use `ifelse` to introduce
-a NA value: we set Support to NA for any CBS News polls:
-
-Note: Ifelse takes 3 values:
-`ifelse(test, value-if-true, value-if-false)`, which will set each row
-according to the test. In this case, we test whether Pollster equals
-CBS, and if true, set support to NA, otherwise set support to support
-(i.e. keep it unchanged)
-
-``` r
-d2 <- d %>% 
-  mutate(Support = ifelse(Pollster == "CBS News", NA, Support))
-```
-
-Now, if we take the mean support per question it will return NA for any
-questions on which CBS was part of the set:
-
-``` r
-d2 %>% 
-  group_by(Question) %>% 
-  summarize(Support = mean(Support))
-```
-
-While this is a very ‘correct’ way to treat missing values, in many
-cases we simply want to ignore this. So, we add `na.rm=T` to the mean
-function:
-
-``` r
-d2 %>% 
-  group_by(Question) %>% 
-  summarize(Support = mean(Support, na.rm = T))
-```
 
 *Exercise 2:* The following data set stems from an experiment conducted
 by [Masur, DiFranzo and Bazarova
