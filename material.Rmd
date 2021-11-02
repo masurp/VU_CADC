@@ -65,6 +65,8 @@ In the third cycle, students will work on their own research projects. Resources
 
 #### Additional resources: 
 
+
+- Chapter 5 & 6 in "Computational Analysis of Communication" by Van Atteveldt et al. (see Canvas)
 - [Online book "R for Data Science"](https://r4ds.had.co.nz/)
 - [Online book "R Markdown: The Definitive Guide"](https://bookdown.org/yihui/rmarkdown/)
 
@@ -87,10 +89,15 @@ In the third cycle, students will work on their own research projects. Resources
 
 - Handouts:
     - Tidyverse: Reshaping and Joining (to be uploaded soon)
-    
+
+#### Homework
+
+- Complete this assignment (copy the entire code into a RMarkdown file)
+    - Homework: Tidyverse and Data Visualization
 
 #### Additional resources: 
 
+- Chapter 6 in "Computational Analysis of Communication" by Van Atteveldt et al. (see Canvas)
 - [Online book "R for Data Science"](https://r4ds.had.co.nz/) 
 - [Online book "Data Visualization" by Kieran Healy](https://socviz.co/)
 - [Website "Data-To-Viz" (great overview on visualizations with code examples)](https://www.data-to-viz.com/)
@@ -117,6 +124,14 @@ In the third cycle, students will work on their own research projects. Resources
 
   - Dictionary approaches (to be uploaded soon)
 
+#### Homework
+
+- Complete this assignment (copy the entire code into a RMarkdown file)
+    - Homework: Dictionary Approaches
+
+#### Additional resources
+
+- Chapter 9 & 10 in "Computational Analysis of Communication" by Van Atteveldt et al. (see Canvas)
 
 <br>
 <hr>
@@ -138,8 +153,15 @@ In the third cycle, students will work on their own research projects. Resources
 - Handouts:
     - Supervised text classification II (to be uploaded soon)
     
+
+#### Homework
+
+- Complete this assignment (copy the entire code into a RMarkdown file)
+    - Homework: Supervised text classification
+    
 #### Additional resources: 
 
+- Chapter 8 in "Computational Analysis of Communication" by Van Atteveldt et al. (see Canvas)
 - [Supervised Machine Learning for Text Analysis in R](https://smltar.com/)
 
 <br>
