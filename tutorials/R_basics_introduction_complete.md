@@ -91,12 +91,39 @@ don’t bother understanding the syntax itself. Just focus on running it.
 
 ``` r
 3 + 3
+```
+
+    ## [1] 6
+
+``` r
 2 * 5
+```
+
+    ## [1] 10
+
+``` r
 (6 / 2) * 3
+```
+
+    ## [1] 9
+
+``` r
 "some text"
+```
+
+    ## [1] "some text"
+
+``` r
 "some more text"
+```
+
+    ## [1] "some more text"
+
+``` r
 sum(1,2,3,4,5)   ## using a function
 ```
+
+    ## [1] 15
 
 You can **run** parts of the code in an R script by pressing Ctrl +
 Enter (on mac this is command + Enter). This can be done in two ways:

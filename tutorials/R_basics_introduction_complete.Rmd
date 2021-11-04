@@ -43,7 +43,7 @@ This allows you to keep track of what you are doing and save every step.
 
 Copy and paste the following example code into your R Script. For now, don't bother understanding the syntax itself. Just focus on running it. 
 
-```{r, eval=F}
+```{r, eval=T}
 3 + 3
 2 * 5
 (6 / 2) * 3
