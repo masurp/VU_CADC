@@ -410,7 +410,7 @@ Using the functions of the tidyverse, try to answer the following questions:
 d <- read_csv("https://raw.githubusercontent.com/masurp/VU_CADC/main/tutorials/data/masur-et-al_data.csv")
 
 # Check out data set
-d
+head(d)
 
 ## 1: Does age differ across the nine conditions
 
