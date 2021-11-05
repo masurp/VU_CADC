@@ -54,7 +54,7 @@ In the third cycle, students will work on their own research projects. Resources
 #### Practical Session 2: Tidyverse I 
 
 - Handout: 
-    - [Tidyverse: Transforming and Summarizing](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_tidy_transforming-and-summarizing.md)
+    - [Tidyverse: Transforming and Summarizing](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_tidy_transforming-and-summarizing.md) ([Version with solutions](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_tidy_transforming-and-summarizing_complete.md))
     
 #### Homework
 
