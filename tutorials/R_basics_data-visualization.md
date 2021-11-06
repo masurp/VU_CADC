@@ -368,19 +368,18 @@ time. First, we combine the results per state with the primary schedule:
 
 ``` r
 # dataset 1
-schedule  <- read_csv(paste(csv_folder_url, "primary_schedule.csv", sep="/"))
-schedule <- schedule %>% 
+schedule  <- read_csv(paste(csv_folder_url, "primary_schedule.csv", sep="/")) %>% 
   mutate(date = as.Date(date, format="%m/%d/%y"))
 schedule
 
 # dataset 2
-trump = results_state %>% 
+trump <- results_state %>% 
   group_by(state, party) %>% 
   mutate(vote_prop=votes/sum(votes)) %>% 
   filter(candidate=="Donald Trump")
 trump
 
-# join the two data sets
+# join the two data sets (more next sessions)
 trump <- left_join(trump, schedule) %>% 
   group_by(date) %>% 
   summarize(vote_prop = mean(vote_prop))
@@ -396,26 +395,6 @@ data.
 ggplot(trump) + 
   geom_line(aes(x = date, y = vote_prop))
 ```
-
-We can do the same for multiple candidates as well, for example for the
-democratic candidates:
-
-``` r
-dems <- results_state %>% 
-  filter(party == "Democrat") %>% 
-  left_join(schedule)
-dems <- dems %>% 
-  group_by(date, candidate) %>% 
-  summarize(votes = sum(votes)) %>% 
-  mutate(vote_prop = votes / sum(votes))
-ggplot(dems) + 
-  geom_line(aes(x = date, y = vote_prop, colour = candidate))
-```
-
-Bonus question: in the code for Trump, the proportion was calculated in
-two statements (first per state, then per date), but in this code it is
-calculated only per date. How does that matter? Is either calculation
-more correct than the other?
 
 # Multiple ‘faceted’ plots
 
@@ -459,7 +438,8 @@ it to the plot:
 library(ggthemes)
 ggplot(trump) + 
   geom_line(aes(x = date, y = vote_prop)) + 
-  theme_economist()
+  theme_economist() +
+  labs(x = "", y = "Percentage that voted for Trump")
 ```
 
 Some links for learning more about themes:
@@ -513,9 +493,9 @@ ethnicity:
 
 ``` r
 states <- facts_state %>% 
-  mutate(region=tolower(area_name)) %>% 
+  mutate(region = tolower(area_name)) %>% 
   select(region, white) %>% 
-  inner_join(states)
+  inner_join(states)  # again, we will talk about this more next sessions
 
 ggplot(data = states) + 
   geom_polygon(aes(x = long, y = lat, fill = white, group = group), color = "white") + 
