@@ -83,12 +83,12 @@ In the third cycle, students will work on their own research projects. Resources
 #### Practical Session 1: Data visualization
 
 - Handouts:
-    - Basics of Data Visualization (to be uploaded soon)
+    - [Basics of Data Visualization](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_basics_data-visualization.md)
 
 #### Practical Session 2: Tidyverse II
 
 - Handouts:
-    - Tidyverse: Reshaping and Joining (to be uploaded soon)
+    - [Tidyverse: Reshaping and Joining](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_tidy_reshaping-and-joining.md)
 
 #### Homework
 
