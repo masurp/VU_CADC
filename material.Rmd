@@ -78,7 +78,7 @@ In the third cycle, students will work on their own research projects. Resources
 #### Lecture: Data Wrangling and Data Visualization
 
 - Slides:
-    - Download Slides (to be uploaded soon)
+    - [Download Slides](slides/02_dataviz.html)
 
 #### Practical Session 1: Data visualization
 
