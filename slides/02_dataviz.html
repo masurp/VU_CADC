@@ -44,6 +44,15 @@ class: left, middle, title-slide
   width: 40%;
 }
 
+.pull-left2c {
+  float: left;
+  width: 65%;
+}
+.pull-right2c {
+  float: right;
+  width: 30%;
+}
+
 .pull-left3 {
   float: left;
   width: 45%;
@@ -61,6 +70,11 @@ class: left, middle, title-slide
 &lt;/style&gt;
 
 
+&lt;iframe width="1060" height="715" src="https://www.youtube.com/embed/cq2zuE3ISYU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen&gt;&lt;/iframe&gt;
+
+
+---
+
 .pull-left[
 &lt;img src="02_dataviz_files/figure-html/unnamed-chunk-3-1.png" width="100%" /&gt;
 ]
@@ -71,35 +85,44 @@ class: left, middle, title-slide
 
 &lt;br&gt;&lt;br&gt;
 
-- Red: My life so far
+- Dark blue squares: My life until now
 
-- Blue circle: Life expectancy for men and women respectively
+- Blue circles: Life expectancy on the Netherlands for men and women respectively
 
-- Black circle: Einstein publishes his theory of special relativity
+- Red circle: Einstein publishes his theory of special relativity
+
+---
 
 - Why is this visualization powerful?
 
 &lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
 
-Idea: https://waitbutwhy.com/2014/05/life-weeks.html
+_Idea: https://waitbutwhy.com/2014/05/life-weeks.html_
 ]
 
 ---
 
+class: inverse, center, middle
 
+# Problem: How to transform data to produce good visualizations?
+
+
+---
 # Content of this lecture
 
 &lt;br&gt;
 
-**1.** From Raw Data to Tidy Data
+**1.** From raw data to tidy Data
 
 **2.** Why we should look at data
 
-**3.** Theories of Perception
+**3.** Visualization examples for different methods
 
-**4.** Principles of data visualization
+**4.** Theories of Perception
 
-**5.** Examples for different methods
+**5.** Principles of data visualization
+
+
 
 
 ---
@@ -124,7 +147,7 @@ _see Wickham &amp; Grolemund, 2014_
 .pull-left[
 - Data comes in different forms (two- or multidimensional, text or numbers...) and formats (.csv, .txt, .sav, .stata, .html...)
 
-- Firs, we must hence find a way to import this data into R
+- First, we must find a way to import this data into R
 
 - This typically means that you take data stored in a file, database, or web application programming interface (API), and load it into a data frame in R
 
@@ -167,7 +190,7 @@ wikipage
 
 # 2. Tidy
 
-- Tidying your data means storing it in a consistent form that matches the semantics of the dataset with the way it is stored. 
+- Tidying your data means storing it in a consistent form that matches the semantics of the data set with the way it is stored. 
 
 - In brief, when your data is tidy, each column is a variable, and each row is an observation.
 
@@ -184,12 +207,12 @@ head(tidy_covid)
 # A tibble: 6 x 4
   Country                `Deaths/million` Deaths    Cases      
   &lt;chr&gt;                  &lt;chr&gt;            &lt;chr&gt;     &lt;chr&gt;      
-1 World[a]               629              4,954,956 244,074,377
-2 Peru                   5,996            200,052   2,195,859  
-3 Bosnia and Herzegovina 3,492            11,397    249,349    
-4 North Macedonia        3,390            7,062     199,901    
-5 Bulgaria               3,380            23,316    575,306    
-6 Montenegro             3,297            2,071     141,292    
+1 World[a]               639              5,038,372 249,134,481
+2 Peru                   6,006            200,373   2,205,486  
+3 Bulgaria               3,616            24,940    628,680    
+4 Bosnia and Herzegovina 3,590            11,717    257,401    
+5 North Macedonia        3,459            7,204     205,022    
+6 Montenegro             3,407            2,140     147,401    
 ```
 
 
@@ -216,12 +239,12 @@ head(subset_covid)
 # A tibble: 6 x 7
   Country     `Deaths/million` Deaths   Cases Deaths_million Mortality highlight
   &lt;chr&gt;       &lt;chr&gt;             &lt;dbl&gt;   &lt;dbl&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
-1 United Sta… 2,214            737342  4.55e7           2214      1.62         1
-2 Italy       2,184            131856  4.74e6           2184      2.78         1
-3 United Kin… 2,052            139990  8.85e6           2052      1.58         1
-4 Spain       1,865             87186  5.00e6           1865      1.74         1
-5 France      1,753            118452  7.23e6           1753      1.64         1
-6 Sweden      1,475             14993  1.17e6           1475      1.29         1
+1 United Sta… 2,264            753926  4.64e7           2264      1.62         1
+2 Italy       2,192            132334  4.80e6           2192      2.76         1
+3 United Kin… 2,082            142019  9.29e6           2082      1.53         1
+4 Spain       1,871             87504  5.03e6           1871      1.74         1
+5 France      1,758            118830  7.30e6           1758      1.63         1
+6 Sweden      1,481             15057  1.18e6           1481      1.28         1
 ```
 
 
@@ -287,7 +310,8 @@ ggplot(subset_covid) +
 
 - Models are a fundamentally mathematical or computational tool, so they generally scale well 
 
-- But every model makes assumptions, and by its very nature a model cannot question its own assumptions. 
+- But every model makes assumptions, and by its very nature a model cannot question its own assumptions 
+
 
 ---
 
@@ -295,9 +319,9 @@ ggplot(subset_covid) +
 
 - A critical part of any data analysis project is "communication"
 
-- It doesn’t matter how well our models and visualisation have led us to understand the data unless we can also communicate your results to others.
+- It does not matter how well our models and visualizations have led us to understand the data unless we can also communicate your results to others
 
-- Because of the crucial role of data visualization, we will discuss principles and aspects of it in more detail!
+- Because of the crucial role of data visualization, we will discuss principles and aspects of it in more detail
 
 ---
 
@@ -306,7 +330,7 @@ class: inverse, center, middle
 
 # Data visualization
 
-Understanding visualizations of data.
+Understanding representations of data.
 
 
 ---
@@ -357,13 +381,13 @@ When data visualization is useful (and when it is not).
 # Anscombe's Quartett 
 
 .pull-left[
-- This quartett (Anscombe, 1973; Chatterjee &amp; Firat, 2007) presents a good argument for looking at data in visual form. 
+- This quartett (Anscombe, 1973; Chatterjee &amp; Firat, 2007) presents a good argument for looking at data in visual form
 
-- A series of four scatterplots show the relationship between two quantities, such as height and weight, age and income, or time and unemployment.
+- A series of four scatterplots show the relationship between two quantities, such as height and weight, age and income, or time and unemployment
 
-- Catch: The numerical properties of each pair of x and y variables are identical.
+- Catch: The numerical properties of each pair of x and y variables are identical
 
-- But when visualized as a scatterplot, plotting the x variables on the horizontal axis and the y variable on the vertical, the differences between them are readily apparent.
+- But when visualized as a scatterplot, plotting the x variables on the horizontal axis and the y variable on the vertical, the differences between them are readily apparent
 
 _Healy, 2019, chap. 1.1_
 ]
@@ -378,7 +402,310 @@ _Healy, 2019, chap. 1.1_
 # Visualization helps to identify problems in data
 
 ![](img/correlations.png)
-_(Figure adapted from code by Jan Vanhove: "http://janhove.github.io/RCode/plot_r.R")_
+_(Adapted from Jan Vanhove: "http://janhove.github.io/RCode/plot_r.R")_
+
+---
+
+class: inverse, center, middle
+
+# Examples for different methods
+
+What figure works with what method?
+
+---
+
+# Selecting the right kind of chart...
+
+![](img/overview_viz.png)
+_www.data-to-viz.com_
+
+
+---
+
+# One numeric variable: Histogram or Density
+
+.pull-left[
+&lt;img src="02_dataviz_files/figure-html/unnamed-chunk-14-1.png" width="100%" /&gt;
+
+]
+
+.pull-right[
+
+&lt;img src="02_dataviz_files/figure-html/unnamed-chunk-15-1.png" width="100%" /&gt;
+
+]
+
+---
+
+# Histogram: Summary
+
+- Histograms demonstrate how many of a certain type of variable occur within a specific range
+
+- The variable is cut into several bins, and the number of observation per bin is represented by the height of the bar
+
+- They thus are an accurate graphical representation of the distribution of *numeric* data
+
+--
+
+### When to use?
+
+- When the underlying variable is numerical
+
+- When you want to see the shape of the data's distribution, especially when determining whether the variable is normally distributed
+
+
+---
+
+# Group differences: Boxplots
+
+.pull-left[
+&lt;img src="02_dataviz_files/figure-html/unnamed-chunk-16-1.png" width="100%" /&gt;
+
+]
+
+
+.pull-right[
+
+&lt;img src="02_dataviz_files/figure-html/unnamed-chunk-17-1.png" width="100%" /&gt;
+
+
+]
+---
+
+# Boxplot explained
+
+![](img/boxplot.png)
+&lt;br&gt;
+
+_Image Source: https://towardsdatascience.com/understanding-boxplots-5e2df7bcbd51_
+
+---
+
+# Boxplot: Summary
+
+- A boxplot gives a summary of one or more numeric variables (including median, interquartile range, extremes, and outliers)
+
+- It thereby provides a visual representation of a distribution without showing the raw data
+
+- Often used to show group differences
+
+--
+
+## When to use?
+
+- When the independent variable is categorical and the dependent variable is numerical
+
+- To highlight differences without loosing too much information (e.g., variance in the data)
+
+- Very important first step to understand the raw data (helps to spot problems)
+
+
+---
+# Group differences: Bar charts with errorbars
+
+
+
+
+.pull-left[
+&lt;img src="02_dataviz_files/figure-html/unnamed-chunk-19-1.png" width="100%" /&gt;
+
+]
+
+.pull-right[
+&lt;img src="02_dataviz_files/figure-html/unnamed-chunk-20-1.png" width="100%" /&gt;
+
+]
+
+---
+
+# Short reminder: Whast is a 95% confidence interval?
+
+
+.pull-left2[
+
+![](img/cis.png)
+
+]
+
+.pull-right2[
+
+- Confidence intervals are often used as an alternative to standard null-hypothesis testing (i.e., the p-value)
+
+- Confidence intervals describe the range of possible values for an unknown parameter (e.g., a population mean)
+
+- Depending on the level of significance, we call it a (1-alpha)% confidence interval
+
+- In this case, if we would run the experiment again with random samples from the population, 95% of the times, we would find a mean that lies within this range
+]
+
+---
+
+# Bar chart with CIs: Summary
+
+- In most experimental research, we want to visualize differences between groups (e.g., an experimental and a control group)
+
+- A simply bar chart can highlight these difference by comparing the height of the bars
+
+- Adding 95% confidence intervals provides a visual representation of the significance test (i.e., when the intervals of two groups do not overlap, the difference can be considered statistically significant)
+
+
+--
+
+### When to use?
+
+- When the independent variable is categorical and the dependent variable is numerical
+
+- To highlight differences between groups (despite loosing some information)
+
+- To visualize statistical signficance
+
+
+---
+
+# Relationships: Regression vs. Scatterplot
+
+
+.pull-left2[
+
+
+```
+# A tibble: 1,460 x 2
+   GrLivArea SalePrice
+       &lt;int&gt;     &lt;int&gt;
+ 1      1710    208500
+ 2      1262    181500
+ 3      1786    223500
+ 4      1717    140000
+ 5      2198    250000
+ 6      1362    143000
+ 7      1694    307000
+ 8      2090    200000
+ 9      1774    129900
+10      1077    118000
+# … with 1,450 more rows
+```
+
+]
+
+.pull-right2[
+
+
+```r
+# Linear regression model
+m &lt;- summary(lm(SalePrice/1000 ~ GrLivArea, data))
+round(m$coef, 2)
+```
+
+```
+            Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept)    18.57       4.48    4.14        0
+GrLivArea       0.11       0.00   38.35        0
+```
+
+]
+
+---
+
+# Scatterplot with regression line
+
+.pull-left[
+&lt;img src="02_dataviz_files/figure-html/unnamed-chunk-23-1.png" width="100%" /&gt;
+
+]
+
+.pull-right[
+
+&lt;img src="02_dataviz_files/figure-html/unnamed-chunk-24-1.png" width="100%" /&gt;
+
+]
+
+---
+
+# Scatterplot: Summary
+
+- A scatterplot displays the relationship between 2 numeric variables
+
+- For each data point, the value of its first variable is represented on the X axis, the second on the Y axis
+
+--
+
+### When to use?
+
+- A scatterplot is mostly used to study the relationship between 2 variables. It is thus often accompanied by a correlation or regression coefficient calculation, thattries to estimate the size of a linear relationship.
+
+- However, this visualization can be used to detect other types of relationships (e.g., curvilinear, exponential...; see Ancombe's Quartett)
+
+- Visualizing relationships can be a very helpful tool during the data analysis (e.g., to spot problems)
+
+---
+
+# Time series: Line plot
+
+&lt;img src="02_dataviz_files/figure-html/unnamed-chunk-25-1.png" width="100%" /&gt;
+
+---
+
+# Line plot: Summary
+
+- A line chart or line graph displays the evolution of one or several numeric variables
+
+- Data points are connected by a straight line 
+
+- It is similar to a scatter plot except that the measurement points are ordered (typically by their x-axis value)
+
+--
+
+### When to use?
+
+- A line chart is often used to visualize a trend in data over intervals of time (a time series)
+
+
+---
+
+# Visualizing results: Coefficient plots
+
+
+![](img/casasetal_cis.png)
+
+
+_Casas &amp; Williams, 2019_
+
+---
+
+# Coefficient plots: Summary
+
+- A so-called coefficient plots visualizes results of (regression) models by plotting the estimate (point) and its confidence intervals (line around point)
+
+- It often helps to reduce the complexity of a regression table and highlight differences between predictors
+
+
+--
+
+### When to use?
+
+- To visualize complex model results 
+
+- To highlight differences across predictors (e.g., whether predictor is stronger than another)
+
+---
+
+# Multiple groups: Facetting
+
+&lt;img src="02_dataviz_files/figure-html/unnamed-chunk-26-1.png" width="100%" /&gt;
+
+---
+
+# Facetted plots: Summary
+
+- Sometimes data may be hierarchical, i.e., units are nested within groups
+
+- In such cases, it can be meaningful to plot so-called "facets", that is the same representation of e.g., a relationship across several groups
+
+--
+
+### When to use?
+
+- To highlight differences between higher-level groups (e.g., countries in continents, pupils in schools, articles in newspapers,...)
 
 ---
 
@@ -386,7 +713,7 @@ class: inverse, center, middle
 
 # Perception and visual decoding
 
-How we perceive the world. 
+How we perceive the world and how this affects understanding. 
 
 ---
 
@@ -450,7 +777,7 @@ _Healy, 2019, chap. 1.3.2_
 
 ![](https://socviz.co/assets/ch-01-cleveland-task-types.png)
 
-- Participatns were asked to estimate two values within a chart (e.g., two bars in a bar chart, or two slices of a pie chart), or compare values between charts (e.g. two areas in adjacent stacked bar charts).
+- Participants were asked to estimate two values within a chart (e.g., two bars in a bar chart, or two slices of a pie chart), or compare values between charts (e.g. two areas in adjacent stacked bar charts).
 
 _Cleveland &amp; McGill, 1984, 1987_
 
@@ -460,9 +787,9 @@ _Cleveland &amp; McGill, 1984, 1987_
 
 .pull-left2b[
 
-- performance declined as we move away from comparison on a common scale to length-based comparisons to angles and finally areas
+- Performance declined as we move away from comparison on a common scale to length-based comparisons to angles and finally areas
 
-- Area comparisons perform even worse than the often criticized pie chart!
+- Area comparisons perform even worse than the often criticized pie chart
 
 
 _Healy, 2019, chap. 1.3.2_
@@ -481,7 +808,7 @@ class: inverse, center, middle
 
 # Principles of Data Visualization
 
-Some guidelines to work with
+Some guidelines to work with. 
 
 ---
 
@@ -505,7 +832,7 @@ _Healy, 2019, chap. 1_
 
 ---
 
-# "Tell the truth" and "Show as much data as possible"
+# Show as much data as possible
 
 .pull-left[
 ![](img/alldata.gif)
@@ -533,15 +860,19 @@ _Hehman &amp; Xie, 2021_
 
 .pull-left[
 
-- Graphs and figures should **always** be based on real data
+- Graphs and figures should always be based on real data and should not just be "approximated"
 
+- In the example on the left, the percentages do not correspond to the actual areas in the pie chart
 
+- Even worse: the percentages do not add up to 100%
+
+- We produce figures from data, not data that "roughly" aligns with the data!
 
 
 ]
 ---
 
-# Keep it simple - minimalism
+# Keep it simple
 
 .pull-left[
 
@@ -549,7 +880,7 @@ _Hehman &amp; Xie, 2021_
 
 - Signal-to-noise ratio: signal is the information being conveyed and noise is anything else
 
-- Features not conveying information or allowing readers to assess the patterns more easily should be removed (e.g., excessive grid lines, unncessary colorization...) 
+- Features not conveying information or allowing readers to assess the patterns more easily should be removed (e.g., excessive grid lines, unnecessary colorization...) 
 ]
 
 .pull-right[
@@ -568,9 +899,9 @@ _Hehman &amp; Xie, 2021_
 
 .pull-right[
 
-- Inversing is problematic because the figure thereby becomes counter-intuitive
+- Inversion is problematic because the figure thereby becomes counter-intuitive
 
-- On first impression, it looks like that the "Stand your ground"-Law enactement reduced the number of gun deaths. Yet, the opposite is true!
+- It almost looks like the enactment of the "Stand Your Ground" law lowered gun deaths - the opposite is true!
 
 ]
 
@@ -598,11 +929,11 @@ _Hehman &amp; Xie, 2021_
 # Don't truncate chart axes
 
 .pull-left[
-&lt;img src="02_dataviz_files/figure-html/unnamed-chunk-14-1.png" width="100%" /&gt;
+&lt;img src="02_dataviz_files/figure-html/unnamed-chunk-27-1.png" width="100%" /&gt;
 ]
 
 .pull-right[
-&lt;img src="02_dataviz_files/figure-html/unnamed-chunk-15-1.png" width="100%" /&gt;
+&lt;img src="02_dataviz_files/figure-html/unnamed-chunk-28-1.png" width="100%" /&gt;
 
 ]
 
@@ -612,16 +943,18 @@ _Hehman &amp; Xie, 2021_
 
 ![](https://socviz.co/dataviz-pdfl_files/figure-html4/ch-01-perception-curves-1.png)
 
+_Healy, 2019_
+
 ---
 
 # Maximize the data-ink ratio
 
 .pull-left[
-&lt;img src="02_dataviz_files/figure-html/unnamed-chunk-16-1.png" width="100%" /&gt;
+&lt;img src="02_dataviz_files/figure-html/unnamed-chunk-29-1.png" width="100%" /&gt;
 ]
 
 .pull-right[
-&lt;img src="02_dataviz_files/figure-html/unnamed-chunk-17-1.png" width="100%" /&gt;
+&lt;img src="02_dataviz_files/figure-html/unnamed-chunk-30-1.png" width="100%" /&gt;
 
 ]
 
@@ -629,7 +962,7 @@ _Hehman &amp; Xie, 2021_
 
 # Be clear about uncertainty
 
-&lt;img src="02_dataviz_files/figure-html/unnamed-chunk-18-1.png" width="100%" /&gt;
+&lt;img src="02_dataviz_files/figure-html/unnamed-chunk-31-1.png" width="100%" /&gt;
 
 
 ---
@@ -640,7 +973,7 @@ _Hehman &amp; Xie, 2021_
 ![](https://scied.ucar.edu/sites/default/files/images/long-content-page/5.3.1.jpg)
 
 
-_UCAR - Center for Science Education: https://scied.ucar.edu/learning-zone/climate-change-impacts/predictions-future-global-climate_
+_UCAR - Center for Science Education_
 
 ]
 
@@ -655,7 +988,7 @@ _UCAR - Center for Science Education: https://scied.ucar.edu/learning-zone/clima
 
 .pull-right[
 
-&lt;img src="02_dataviz_files/figure-html/unnamed-chunk-19-1.png" width="100%" /&gt;
+&lt;img src="02_dataviz_files/figure-html/unnamed-chunk-32-1.png" width="100%" /&gt;
 
 ]
 
@@ -671,25 +1004,33 @@ _Monstrous Costs by Nigel Holmes_
 
 - However, it may increase recall 
 
-- If done right, it can help to gain attention and increase recall!
+- If done right, it can help to gain attention and help people to remember the figure
 
 ---
 
 # Label your figure correctly
 
-.pull-left[
+.pull-left2c[
 
-- Always include axes
+- **title** - a clear short title letting the reader know what they’re looking at
+    - e.g., *Relationship between experience and social media literacy by gender*
+- **subtitle** - an optional second (smaller font) title giving additional information
+    - e.g., *Years 2016-2018*
+- **caption** - source attribution for the data
+    - e.g., *source: US Department of Labor - www.bls.gov/bls/blswage.htm*
+- **axis labels** - clear labels for the x and y axes
+    - short but descriptive
+    - include units of measurement
+        - e.g., *Internet use (minutes per day)*
+- **legend** - short informative title and labels
+    - e.g., *Male and Female* (not 0 and 1)
+- **lines and bars** - label any trend lines, annotation lines, and error bars
 
-- Always label axes
-
-- Provide a meaningful title
-
-- If needed: Provide an explanation for how to read the figure in a note!
+_Kabakoff, 2020_
 
 ]
 
-.pull-right[
+.pull-right2c[
 
 ![](img/covid_biden.jpeg)
 ]
@@ -730,88 +1071,6 @@ _Monstrous Costs by Nigel Holmes_
 
 class: inverse, center, middle
 
-# Examples for different methods
-
-What figure works with what method?
-
----
-
-# Selecting the right kind of chart...
-
-![](img/overview_viz.png)
-_www.data-to-viz.com_
-
-
----
-
-# One numeric variable: Histogram or Density
-
-.pull-left[
-&lt;img src="02_dataviz_files/figure-html/unnamed-chunk-20-1.png" width="100%" /&gt;
-
-]
-
-.pull-right[
-
-&lt;img src="02_dataviz_files/figure-html/unnamed-chunk-21-1.png" width="100%" /&gt;
-
-]
-
----
-
-# Group differences: Boxplots
-
-.pull-left[
-&lt;img src="02_dataviz_files/figure-html/unnamed-chunk-22-1.png" width="100%" /&gt;
-
-]
-
-
-.pull-right[
-
-&lt;img src="02_dataviz_files/figure-html/unnamed-chunk-23-1.png" width="100%" /&gt;
-
-
-]
----
-
-# Boxplot explained
-
-![](https://lsc.studysixsigma.com/wp-content/uploads/sites/6/2015/12/1435.png)
-_Image Source: https://www.leansigmacorporation.com/box-plot-with-minitab/_
-
----
-
-# Relationships between numeric variables: Scatterplot
-
-.pull-left[
-&lt;img src="02_dataviz_files/figure-html/unnamed-chunk-24-1.png" width="100%" /&gt;
-
-]
-
-.pull-right[
-
-&lt;img src="02_dataviz_files/figure-html/unnamed-chunk-25-1.png" width="100%" /&gt;
-
-]
-
----
-
-# Time series: Line plot
-
-&lt;img src="02_dataviz_files/figure-html/unnamed-chunk-26-1.png" width="100%" /&gt;
-
----
-
-# Coefficient plots
-
-![](img/masur_2016.png)
-_Masur &amp; Scharkow, 2016_
-
----
-
-class: inverse, center, middle
-
 # Creating visualization in R
 
 ggplot2: The grammar of Graphics
@@ -832,7 +1091,7 @@ ggplot2: The grammar of Graphics
 
 - It uses a layered grammar of graphics, i.e., each part of a figure (coordinate system, plot annotations, geometrical objects, aesthetics...) are an individual layer that can be added and removed.
 
-- Understanding this grammar is a powerful for creating great visualizations
+- Understanding this grammar is powerful for creating great visualizations
 
 
 ]
@@ -849,7 +1108,7 @@ ggplot2: The grammar of Graphics
 
 .pull-left[
 
-&lt;img src="02_dataviz_files/figure-html/unnamed-chunk-27-1.png" width="100%" /&gt;
+&lt;img src="02_dataviz_files/figure-html/unnamed-chunk-33-1.png" width="100%" /&gt;
 
 ]
 
@@ -857,7 +1116,7 @@ ggplot2: The grammar of Graphics
 
 .pull-right[
 
-&lt;img src="02_dataviz_files/figure-html/unnamed-chunk-28-1.png" width="100%" /&gt;
+&lt;img src="02_dataviz_files/figure-html/unnamed-chunk-34-1.png" width="100%" /&gt;
 
 ]
 
@@ -866,7 +1125,7 @@ ggplot2: The grammar of Graphics
 
 .pull-left[
 
-&lt;img src="02_dataviz_files/figure-html/unnamed-chunk-29-1.png" width="100%" /&gt;
+&lt;img src="02_dataviz_files/figure-html/unnamed-chunk-35-1.png" width="100%" /&gt;
 
 ]
 
@@ -874,20 +1133,9 @@ ggplot2: The grammar of Graphics
 
 .pull-right[
 
-&lt;img src="02_dataviz_files/figure-html/unnamed-chunk-30-1.png" width="100%" /&gt;
+&lt;img src="02_dataviz_files/figure-html/unnamed-chunk-36-1.png" width="100%" /&gt;
 
 ]
----
-
-# Layers and components
-
-.pull-right2[
-
-![](https://miro.medium.com/max/2000/1*mcLnnVdHNg-ikDbHJfHDNA.png)
-_Sarkar, 2018_
-
-]
-
 
 ---
 
@@ -897,11 +1145,11 @@ _Sarkar, 2018_
 
 - A lot of times, we can convey insights better in charts or figures
 
-- However, there are many caveats and sometimes a classic table does the job
+- However, there are many caveats and sometimes a classic results table does the job
 
 - The appropriate graph is always determined by the *type of data* and the *context*/*research question*
 
-- In the next practical session, we will learn how to produce nice figures in R!
+- In the next practical session(s), we will learn how to produce nice figures in R!
 
 
 
@@ -922,6 +1170,8 @@ class: my-one-page-font
 
 - Anscombe, F. J. (1973). Graphs in statistical analysis. The American Statistician, 27(1), 17–21.
 
+- Casas, A., &amp; Williams, N. W. (2019). Images that matter: Online protests and the mobilizing role of pictures. Political Research Quarterly 72 (2), 360-375. 
+
 - Cleveland, W. S., &amp; McGill, R. (1984). Graphical perception: Theory, experimentation, and application to the development of graphical methods. Journal of the American Statistical Association, 79, 531–534.
 
 - Cleveland, W. S., &amp; McGill, R. (1987). Graphical perception: The visual decoding of quantitative information on graphical displays of data. Journal of the Royal Statistical Society Series A, 150, 192–229.
@@ -930,7 +1180,17 @@ class: my-one-page-font
 
 - Hehman, E., &amp; Xie, S. Y. (2021). Doing Better Data Visualization. Advances in Methods and Practices in Psychological Science. https://doi.org/10.1177/25152459211045334
 
+- Kabakoff, R. (2020). Data Visualization with R. https://rkabacoff.github.io/datavis/
+
 - Masur, P. K &amp; Scharkow, M. (2016). Disclosure management on social network sites: Individual privacy perceptions and user-directed privacy strategies. Social Media + Society, 2(1), 1-13. https://doi.org/10.1177/2056305116634368
+
+
+
+---
+
+class: my-one-page-font
+
+# References
 
 - Sakar, D. (2018). A Comprehensive Guide to the Grammar of Graphics for Effective Visualization of Multi-dimensional Data. https://towardsdatascience.com/a-comprehensive-guide-to-the-grammar-of-graphics-for-effective-visualization-of-multi-dimensional-1f92b4ed4149
 

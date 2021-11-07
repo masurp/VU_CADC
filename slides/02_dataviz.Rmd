@@ -41,6 +41,15 @@ output:
   width: 40%;
 }
 
+.pull-left2c {
+  float: left;
+  width: 65%;
+}
+.pull-right2c {
+  float: right;
+  width: 30%;
+}
+
 .pull-left3 {
   float: left;
   width: 45%;
@@ -58,6 +67,11 @@ output:
 ```
 
 
+<iframe width="1060" height="715" src="https://www.youtube.com/embed/cq2zuE3ISYU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+---
+
 .pull-left[
 ```{r, echo = F, fig.height=8.5, fig.width = 6.75}
 library(tidyverse)
@@ -72,10 +86,10 @@ left_join(
   geom_point(shape = 15, alpha = .8, aes(color = life)) +
   scale_x_continuous(breaks = seq(0, 52, by = 4)) +
   scale_y_continuous(breaks = seq(0, 100, by = 10)) +
-  scale_colour_discrete() +
-  geom_point(aes(x = 17, y = 26), shape = 1, size = 3, color = "black") +
-  geom_point(aes(x = 25, y = 80), shape = 1, size = 3, color = "blue") +
-  geom_point(aes(x = 10, y = 83), shape = 1, size = 3, color = "blue") +
+  scale_colour_manual(values = c("#1E5480", "#90BBDE")) +
+  geom_point(aes(x = 17, y = 26), shape = 1, size = 3, color = "#B94949") +
+  geom_point(aes(x = 25, y = 80), shape = 1, size = 3, color = "#1E5480") +
+  geom_point(aes(x = 10, y = 83), shape = 1, size = 3, color = "#1E5480") +
   theme_ipsum() +
   theme(legend.position = "none",
         axis.title.x = element_text(),
@@ -90,35 +104,44 @@ left_join(
 
 <br><br>
 
-- Red: My life so far
+- Dark blue squares: My life until now
 
-- Blue circle: Life expectancy for men and women respectively
+- Blue circles: Life expectancy on the Netherlands for men and women respectively
 
-- Black circle: Einstein publishes his theory of special relativity
+- Red circle: Einstein publishes his theory of special relativity
+
+---
 
 - Why is this visualization powerful?
 
 <br><br><br><br>
 
-Idea: https://waitbutwhy.com/2014/05/life-weeks.html
+_Idea: https://waitbutwhy.com/2014/05/life-weeks.html_
 ]
 
 ---
 
+class: inverse, center, middle
 
+# Problem: How to transform data to produce good visualizations?
+
+
+---
 # Content of this lecture
 
 <br>
 
-**1.** From Raw Data to Tidy Data
+**1.** From raw data to tidy Data
 
 **2.** Why we should look at data
 
-**3.** Theories of Perception
+**3.** Visualization examples for different methods
 
-**4.** Principles of data visualization
+**4.** Theories of Perception
 
-**5.** Examples for different methods
+**5.** Principles of data visualization
+
+
 
 
 ---
@@ -143,7 +166,7 @@ _see Wickham & Grolemund, 2014_
 .pull-left[
 - Data comes in different forms (two- or multidimensional, text or numbers...) and formats (.csv, .txt, .sav, .stata, .html...)
 
-- Firs, we must hence find a way to import this data into R
+- First, we must find a way to import this data into R
 
 - This typically means that you take data stored in a file, database, or web application programming interface (API), and load it into a data frame in R
 
@@ -181,7 +204,7 @@ wikipage
 
 # 2. Tidy
 
-- Tidying your data means storing it in a consistent form that matches the semantics of the dataset with the way it is stored. 
+- Tidying your data means storing it in a consistent form that matches the semantics of the data set with the way it is stored. 
 
 - In brief, when your data is tidy, each column is a variable, and each row is an observation.
 
@@ -277,7 +300,8 @@ ggplot(subset_covid) +
 
 - Models are a fundamentally mathematical or computational tool, so they generally scale well 
 
-- But every model makes assumptions, and by its very nature a model cannot question its own assumptions. 
+- But every model makes assumptions, and by its very nature a model cannot question its own assumptions 
+
 
 ---
 
@@ -285,9 +309,9 @@ ggplot(subset_covid) +
 
 - A critical part of any data analysis project is "communication"
 
-- It doesn’t matter how well our models and visualisation have led us to understand the data unless we can also communicate your results to others.
+- It does not matter how well our models and visualizations have led us to understand the data unless we can also communicate your results to others
 
-- Because of the crucial role of data visualization, we will discuss principles and aspects of it in more detail!
+- Because of the crucial role of data visualization, we will discuss principles and aspects of it in more detail
 
 ---
 
@@ -296,7 +320,7 @@ class: inverse, center, middle
 
 # Data visualization
 
-Understanding visualizations of data.
+Understanding representations of data.
 
 
 ---
@@ -419,13 +443,13 @@ When data visualization is useful (and when it is not).
 # Anscombe's Quartett 
 
 .pull-left[
-- This quartett (Anscombe, 1973; Chatterjee & Firat, 2007) presents a good argument for looking at data in visual form. 
+- This quartett (Anscombe, 1973; Chatterjee & Firat, 2007) presents a good argument for looking at data in visual form
 
-- A series of four scatterplots show the relationship between two quantities, such as height and weight, age and income, or time and unemployment.
+- A series of four scatterplots show the relationship between two quantities, such as height and weight, age and income, or time and unemployment
 
-- Catch: The numerical properties of each pair of x and y variables are identical.
+- Catch: The numerical properties of each pair of x and y variables are identical
 
-- But when visualized as a scatterplot, plotting the x variables on the horizontal axis and the y variable on the vertical, the differences between them are readily apparent.
+- But when visualized as a scatterplot, plotting the x variables on the horizontal axis and the y variable on the vertical, the differences between them are readily apparent
 
 _Healy, 2019, chap. 1.1_
 ]
@@ -452,7 +476,420 @@ anscombe %>%
 # Visualization helps to identify problems in data
 
 ![](img/correlations.png)
-_(Figure adapted from code by Jan Vanhove: "http://janhove.github.io/RCode/plot_r.R")_
+_(Adapted from Jan Vanhove: "http://janhove.github.io/RCode/plot_r.R")_
+
+---
+
+class: inverse, center, middle
+
+# Examples for different methods
+
+What figure works with what method?
+
+---
+
+# Selecting the right kind of chart...
+
+![](img/overview_viz.png)
+_www.data-to-viz.com_
+
+
+---
+
+# One numeric variable: Histogram or Density
+
+.pull-left[
+```{r, echo = F}
+# Load dataset from github
+data <- read.table("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/1_OneNum.csv", header=TRUE)
+
+# Make the histogram
+data %>%
+  filter(price<300 ) %>%
+  ggplot(aes(x=price)) +
+    geom_histogram(breaks=seq(0,300,10), fill="#69b3a2", color="white", alpha=0.9) +
+    ggtitle("Night price distribution of Airbnb appartements") +
+    theme_ipsum()
+```
+
+]
+
+.pull-right[
+
+```{r, echo = F}
+data %>%
+  filter(price<300) %>%
+  ggplot(aes(x=price)) +
+    geom_density(breaks=seq(0,300,10), fill="#69b3a2", alpha=0.5) +
+    ggtitle("Night price distribution of Airbnb appartements") +
+    theme_ipsum()
+```
+
+]
+
+---
+
+# Histogram: Summary
+
+- Histograms demonstrate how many of a certain type of variable occur within a specific range
+
+- The variable is cut into several bins, and the number of observation per bin is represented by the height of the bar
+
+- They thus are an accurate graphical representation of the distribution of *numeric* data
+
+--
+
+### When to use?
+
+- When the underlying variable is numerical
+
+- When you want to see the shape of the data's distribution, especially when determining whether the variable is normally distributed
+
+
+---
+
+# Group differences: Boxplots
+
+.pull-left[
+```{r, echo = F}
+data <- data.frame(
+  name=c( rep("A",500), rep("B",500), rep("B",500), rep("C",20), rep('D', 100)  ),
+  value=c( rnorm(500, 10, 5), rnorm(500, 13, 1), rnorm(500, 18, 1), rnorm(20, 25, 4), rnorm(100, 12, 1) )
+)
+
+# Plot
+data %>%
+  ggplot( aes(x=name, y=value, fill=name)) +
+    geom_boxplot() +
+    scale_fill_brewer(palette = "Dark2") +
+    theme_ipsum() +
+    theme(
+      legend.position="none",
+      plot.title = element_text(size=11)
+    ) +
+    ggtitle("A typical boxplot") +
+    xlab("")
+```
+
+]
+
+
+.pull-right[
+
+```{r, echo = F}
+data %>%
+  ggplot( aes(x=name, y=value, fill=name)) +
+    geom_boxplot() +
+  geom_jitter(alpha = .2, size = .75) +
+    scale_fill_brewer(palette = "Dark2") +
+    theme_ipsum() +
+    theme(
+      legend.position="none",
+      plot.title = element_text(size=11)
+    ) +
+    ggtitle("A better boxplot?") +
+    xlab("")
+```
+
+
+]
+---
+
+# Boxplot explained
+
+![](img/boxplot.png)
+<br>
+
+_Image Source: https://towardsdatascience.com/understanding-boxplots-5e2df7bcbd51_
+
+---
+
+# Boxplot: Summary
+
+- A boxplot gives a summary of one or more numeric variables (including median, interquartile range, extremes, and outliers)
+
+- It thereby provides a visual representation of a distribution without showing the raw data
+
+- Often used to show group differences
+
+--
+
+## When to use?
+
+- When the independent variable is categorical and the dependent variable is numerical
+
+- To highlight differences without loosing too much information (e.g., variance in the data)
+
+- Very important first step to understand the raw data (helps to spot problems)
+
+
+---
+# Group differences: Bar charts with errorbars
+
+
+```{r, echo = F}
+d <- tibble(group = rep(c("Experimental group", "Control group"), 100),
+       outcome = rnorm(200, c(3, 4), c(4, 5)))
+```
+
+.pull-left[
+```{r, echo = F}
+d %>%
+  group_by(group) %>%
+  summarize(m = mean(outcome),
+            se = psych::describe(outcome)$se,
+            ll = m - 1.96*se,
+            ul = m + 1.96*se) %>%
+  ggplot(aes(x = group, y = m, ymin = ll, ymax = ul, fill = group)) +
+  geom_bar(stat = "identity") +
+  geom_errorbar(width=.2, position=position_dodge(.9)) +
+  ylim(0, 7) +
+  theme_ipsum() +
+  labs(x = "", y = "outcome") +
+  theme(legend.position = "none")
+```
+
+]
+
+.pull-right[
+```{r, echo = F}
+d %>%
+  group_by(group) %>%
+  summarize(m = mean(outcome),
+            se = psych::describe(outcome)$se,
+            ll = m - 1.96*se,
+            ul = m + 1.96*se) %>%
+  ggplot(aes(x = group, y = m, ymin = ll, ymax = ul, fill = group, group = 1)) +
+  geom_line() +
+  geom_errorbar(width=.1, position=position_dodge(.9)) +
+  geom_point(shape=21, size=3, fill="white") +
+  ylim(0, 7) +
+  theme_ipsum() +
+  labs(x = "", y = "outcome")
+```
+
+]
+
+---
+
+# Short reminder: Whast is a 95% confidence interval?
+
+
+.pull-left2[
+
+![](img/cis.png)
+
+]
+
+.pull-right2[
+
+- Confidence intervals are often used as an alternative to standard null-hypothesis testing (i.e., the p-value)
+
+- Confidence intervals describe the range of possible values for an unknown parameter (e.g., a population mean)
+
+- Depending on the level of significance, we call it a (1-alpha)% confidence interval
+
+- In this case, if we would run the experiment again with random samples from the population, 95% of the times, we would find a mean that lies within this range
+]
+
+---
+
+# Bar chart with CIs: Summary
+
+- In most experimental research, we want to visualize differences between groups (e.g., an experimental and a control group)
+
+- A simply bar chart can highlight these difference by comparing the height of the bars
+
+- Adding 95% confidence intervals provides a visual representation of the significance test (i.e., when the intervals of two groups do not overlap, the difference can be considered statistically significant)
+
+
+--
+
+### When to use?
+
+- When the independent variable is categorical and the dependent variable is numerical
+
+- To highlight differences between groups (despite loosing some information)
+
+- To visualize statistical signficance
+
+
+---
+
+# Relationships: Regression vs. Scatterplot
+
+
+.pull-left2[
+
+```{r, echo = F}
+# Load dataset from github
+data <- read.table("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/2_TwoNum.csv", header=T, sep=",") %>% dplyr::select(GrLivArea, SalePrice) %>% as_tibble
+
+data
+```
+
+]
+
+.pull-right2[
+
+```{r, R.options = list(width = 80)}
+# Linear regression model
+m <- summary(lm(SalePrice/1000 ~ GrLivArea, data))
+round(m$coef, 2)
+```
+
+]
+
+---
+
+# Scatterplot with regression line
+
+.pull-left[
+```{r, echo = F}
+# plot
+data %>% 
+  ggplot( aes(x=GrLivArea, y=SalePrice/1000)) +
+    geom_point(color="#69b3a2", alpha=0.8) +
+    ggtitle("Ground living area partially explains sale price of apartments") +
+    theme_ipsum() +
+    theme(
+      plot.title = element_text(size=12)
+    ) +
+    ylab('Sale price (k$)') +
+    xlab('Ground living area')
+```
+
+]
+
+.pull-right[
+
+```{r, echo = F}
+data %>% 
+  ggplot( aes(x=GrLivArea, y=SalePrice/1000)) +
+    geom_point(color="#69b3a2", alpha=0.8, size = .7) +
+    geom_smooth(linetype = "dashed", color = "black") +
+    geom_smooth(method = "lm", color = "red", se = F) +
+    ggtitle("Ground living area partially explains sale price of apartments") +
+    theme_ipsum() +
+    theme(
+      plot.title = element_text(size=12)
+    ) +
+    ylab('Sale price (k$)') +
+    xlab('Ground living area')
+```
+
+]
+
+---
+
+# Scatterplot: Summary
+
+- A scatterplot displays the relationship between 2 numeric variables
+
+- For each data point, the value of its first variable is represented on the X axis, the second on the Y axis
+
+--
+
+### When to use?
+
+- A scatterplot is mostly used to study the relationship between 2 variables. It is thus often accompanied by a correlation or regression coefficient calculation, thattries to estimate the size of a linear relationship.
+
+- However, this visualization can be used to detect other types of relationships (e.g., curvilinear, exponential...; see Ancombe's Quartett)
+
+- Visualizing relationships can be a very helpful tool during the data analysis (e.g., to spot problems)
+
+---
+
+# Time series: Line plot
+
+```{r, echo = F, fig.height = 4, fig.width = 10}
+# Load dataset from github
+data <- read.table("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/3_TwoNumOrdered.csv", header=T)
+data$date <- as.Date(data$date)
+
+# plot
+data %>%
+  ggplot( aes(x=date, y=value)) +
+    geom_line(color="#69b3a2") +
+    ggtitle("Evolution of Bitcoin price") +
+    ylab("bitcoin price ($)") +
+    theme_ipsum()
+```
+
+---
+
+# Line plot: Summary
+
+- A line chart or line graph displays the evolution of one or several numeric variables
+
+- Data points are connected by a straight line 
+
+- It is similar to a scatter plot except that the measurement points are ordered (typically by their x-axis value)
+
+--
+
+### When to use?
+
+- A line chart is often used to visualize a trend in data over intervals of time (a time series)
+
+
+---
+
+# Visualizing results: Coefficient plots
+
+
+![](img/casasetal_cis.png)
+
+
+_Casas & Williams, 2019_
+
+---
+
+# Coefficient plots: Summary
+
+- A so-called coefficient plots visualizes results of (regression) models by plotting the estimate (point) and its confidence intervals (line around point)
+
+- It often helps to reduce the complexity of a regression table and highlight differences between predictors
+
+
+--
+
+### When to use?
+
+- To visualize complex model results 
+
+- To highlight differences across predictors (e.g., whether predictor is stronger than another)
+
+---
+
+# Multiple groups: Facetting
+
+```{r, echo = F, fig.height=6, fig.width = 18}
+
+library(gapminder)
+p <- ggplot(data = gapminder, mapping = aes(x = year, y = lifeExp))
+p + geom_line(color="gray70", aes(group = country)) +
+    geom_smooth(size = 1.1, method = "loess", se = FALSE) +
+    facet_wrap(~ continent, ncol = 5) +
+    labs(x = "Year",
+         y = "Life Expectancy",
+         title = "Life Expectancy on Five Continents") +
+  theme_ipsum()
+```
+
+---
+
+# Facetted plots: Summary
+
+- Sometimes data may be hierarchical, i.e., units are nested within groups
+
+- In such cases, it can be meaningful to plot so-called "facets", that is the same representation of e.g., a relationship across several groups
+
+--
+
+### When to use?
+
+- To highlight differences between higher-level groups (e.g., countries in continents, pupils in schools, articles in newspapers,...)
 
 ---
 
@@ -460,7 +897,7 @@ class: inverse, center, middle
 
 # Perception and visual decoding
 
-How we perceive the world. 
+How we perceive the world and how this affects understanding. 
 
 ---
 
@@ -524,7 +961,7 @@ _Healy, 2019, chap. 1.3.2_
 
 ![](https://socviz.co/assets/ch-01-cleveland-task-types.png)
 
-- Participatns were asked to estimate two values within a chart (e.g., two bars in a bar chart, or two slices of a pie chart), or compare values between charts (e.g. two areas in adjacent stacked bar charts).
+- Participants were asked to estimate two values within a chart (e.g., two bars in a bar chart, or two slices of a pie chart), or compare values between charts (e.g. two areas in adjacent stacked bar charts).
 
 _Cleveland & McGill, 1984, 1987_
 
@@ -534,9 +971,9 @@ _Cleveland & McGill, 1984, 1987_
 
 .pull-left2b[
 
-- performance declined as we move away from comparison on a common scale to length-based comparisons to angles and finally areas
+- Performance declined as we move away from comparison on a common scale to length-based comparisons to angles and finally areas
 
-- Area comparisons perform even worse than the often criticized pie chart!
+- Area comparisons perform even worse than the often criticized pie chart
 
 
 _Healy, 2019, chap. 1.3.2_
@@ -555,7 +992,7 @@ class: inverse, center, middle
 
 # Principles of Data Visualization
 
-Some guidelines to work with
+Some guidelines to work with. 
 
 ---
 
@@ -579,7 +1016,7 @@ _Healy, 2019, chap. 1_
 
 ---
 
-# "Tell the truth" and "Show as much data as possible"
+# Show as much data as possible
 
 .pull-left[
 ![](img/alldata.gif)
@@ -607,15 +1044,19 @@ _Hehman & Xie, 2021_
 
 .pull-left[
 
-- Graphs and figures should **always** be based on real data
+- Graphs and figures should always be based on real data and should not just be "approximated"
 
+- In the example on the left, the percentages do not correspond to the actual areas in the pie chart
 
+- Even worse: the percentages do not add up to 100%
+
+- We produce figures from data, not data that "roughly" aligns with the data!
 
 
 ]
 ---
 
-# Keep it simple - minimalism
+# Keep it simple
 
 .pull-left[
 
@@ -623,7 +1064,7 @@ _Hehman & Xie, 2021_
 
 - Signal-to-noise ratio: signal is the information being conveyed and noise is anything else
 
-- Features not conveying information or allowing readers to assess the patterns more easily should be removed (e.g., excessive grid lines, unncessary colorization...) 
+- Features not conveying information or allowing readers to assess the patterns more easily should be removed (e.g., excessive grid lines, unnecessary colorization...) 
 ]
 
 .pull-right[
@@ -642,9 +1083,9 @@ _Hehman & Xie, 2021_
 
 .pull-right[
 
-- Inversing is problematic because the figure thereby becomes counter-intuitive
+- Inversion is problematic because the figure thereby becomes counter-intuitive
 
-- On first impression, it looks like that the "Stand your ground"-Law enactement reduced the number of gun deaths. Yet, the opposite is true!
+- It almost looks like the enactment of the "Stand Your Ground" law lowered gun deaths - the opposite is true!
 
 ]
 
@@ -688,10 +1129,8 @@ tibble(time = c(2016:2021),
 tibble(time = c(2016:2021),
        perc = c(72, 67, 71, 76, 78, 75)) %>%
   ggplot(aes(x = time, y = perc)) +
-  geom_smooth(method = "lm", linetype = "dashed", se = F, color = "red", size = .8) +
   geom_point(size = 4, color = "#405e8f") +
   geom_line(group = 1, size = 2, color = "#405e8f") +
-  
   ylim(0, 100) +
   theme_ipsum()
 ```
@@ -703,6 +1142,8 @@ tibble(time = c(2016:2021),
 # Find the right aspect ratio
 
 ![](https://socviz.co/dataviz-pdfl_files/figure-html4/ch-01-perception-curves-1.png)
+
+_Healy, 2019_
 
 ---
 
@@ -773,7 +1214,7 @@ cowplot::plot_grid(p1, p2, p3, nrow = 1, align = "v")
 ![](https://scied.ucar.edu/sites/default/files/images/long-content-page/5.3.1.jpg)
 
 
-_UCAR - Center for Science Education: https://scied.ucar.edu/learning-zone/climate-change-impacts/predictions-future-global-climate_
+_UCAR - Center for Science Education_
 
 ]
 
@@ -812,25 +1253,33 @@ _Monstrous Costs by Nigel Holmes_
 
 - However, it may increase recall 
 
-- If done right, it can help to gain attention and increase recall!
+- If done right, it can help to gain attention and help people to remember the figure
 
 ---
 
 # Label your figure correctly
 
-.pull-left[
+.pull-left2c[
 
-- Always include axes
+- **title** - a clear short title letting the reader know what they’re looking at
+    - e.g., *Relationship between experience and social media literacy by gender*
+- **subtitle** - an optional second (smaller font) title giving additional information
+    - e.g., *Years 2016-2018*
+- **caption** - source attribution for the data
+    - e.g., *source: US Department of Labor - www.bls.gov/bls/blswage.htm*
+- **axis labels** - clear labels for the x and y axes
+    - short but descriptive
+    - include units of measurement
+        - e.g., *Internet use (minutes per day)*
+- **legend** - short informative title and labels
+    - e.g., *Male and Female* (not 0 and 1)
+- **lines and bars** - label any trend lines, annotation lines, and error bars
 
-- Always label axes
-
-- Provide a meaningful title
-
-- If needed: Provide an explanation for how to read the figure in a note!
+_Kabakoff, 2020_
 
 ]
 
-.pull-right[
+.pull-right2c[
 
 ![](img/covid_biden.jpeg)
 ]
@@ -871,177 +1320,6 @@ _Monstrous Costs by Nigel Holmes_
 
 class: inverse, center, middle
 
-# Examples for different methods
-
-What figure works with what method?
-
----
-
-# Selecting the right kind of chart...
-
-![](img/overview_viz.png)
-_www.data-to-viz.com_
-
-
----
-
-# One numeric variable: Histogram or Density
-
-.pull-left[
-```{r, echo = F}
-# Load dataset from github
-data <- read.table("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/1_OneNum.csv", header=TRUE)
-
-# Make the histogram
-data %>%
-  filter(price<300 ) %>%
-  ggplot(aes(x=price)) +
-    geom_histogram(breaks=seq(0,300,10), fill="#69b3a2", color="white", alpha=0.9) +
-    ggtitle("Night price distribution of Airbnb appartements") +
-    theme_ipsum()
-```
-
-]
-
-.pull-right[
-
-```{r, echo = F}
-data %>%
-  filter(price<300) %>%
-  ggplot(aes(x=price)) +
-    geom_density(breaks=seq(0,300,10), fill="#69b3a2", alpha=0.5) +
-    ggtitle("Night price distribution of Airbnb appartements") +
-    theme_ipsum()
-```
-
-]
-
----
-
-# Group differences: Boxplots
-
-.pull-left[
-```{r, echo = F}
-data <- data.frame(
-  name=c( rep("A",500), rep("B",500), rep("B",500), rep("C",20), rep('D', 100)  ),
-  value=c( rnorm(500, 10, 5), rnorm(500, 13, 1), rnorm(500, 18, 1), rnorm(20, 25, 4), rnorm(100, 12, 1) )
-)
-
-# Plot
-data %>%
-  ggplot( aes(x=name, y=value, fill=name)) +
-    geom_boxplot() +
-    scale_fill_brewer(palette = "Dark2") +
-    theme_ipsum() +
-    theme(
-      legend.position="none",
-      plot.title = element_text(size=11)
-    ) +
-    ggtitle("A typical boxplot") +
-    xlab("")
-```
-
-]
-
-
-.pull-right[
-
-```{r, echo = F}
-data %>%
-  ggplot( aes(x=name, y=value, fill=name)) +
-    geom_boxplot() +
-  geom_jitter(alpha = .2, size = .75) +
-    scale_fill_brewer(palette = "Dark2") +
-    theme_ipsum() +
-    theme(
-      legend.position="none",
-      plot.title = element_text(size=11)
-    ) +
-    ggtitle("A better boxplot?") +
-    xlab("")
-```
-
-
-]
----
-
-# Boxplot explained
-
-![](https://lsc.studysixsigma.com/wp-content/uploads/sites/6/2015/12/1435.png)
-_Image Source: https://www.leansigmacorporation.com/box-plot-with-minitab/_
-
----
-
-# Relationships between numeric variables: Scatterplot
-
-.pull-left[
-```{r, echo = F}
-# Load dataset from github
-data <- read.table("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/2_TwoNum.csv", header=T, sep=",") %>% dplyr::select(GrLivArea, SalePrice)
-
-# plot
-data %>% 
-  ggplot( aes(x=GrLivArea, y=SalePrice/1000)) +
-    geom_point(color="#69b3a2", alpha=0.8) +
-    ggtitle("Ground living area partially explains sale price of apartments") +
-    theme_ipsum() +
-    theme(
-      plot.title = element_text(size=12)
-    ) +
-    ylab('Sale price (k$)') +
-    xlab('Ground living area')
-```
-
-]
-
-.pull-right[
-
-```{r, echo = F}
-data %>% 
-  ggplot( aes(x=GrLivArea, y=SalePrice/1000)) +
-    geom_point(color="#69b3a2", alpha=0.8, size = .7) +
-    geom_smooth(se = F, linetype = "dashed", color = "black") +
-    geom_smooth(method = "lm", color = "red") +
-    ggtitle("Ground living area partially explains sale price of apartments") +
-    theme_ipsum() +
-    theme(
-      plot.title = element_text(size=12)
-    ) +
-    ylab('Sale price (k$)') +
-    xlab('Ground living area')
-```
-
-]
-
----
-
-# Time series: Line plot
-
-```{r, echo = F, fig.height = 4, fig.width = 10}
-# Load dataset from github
-data <- read.table("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/3_TwoNumOrdered.csv", header=T)
-data$date <- as.Date(data$date)
-
-# plot
-data %>%
-  ggplot( aes(x=date, y=value)) +
-    geom_line(color="#69b3a2") +
-    ggtitle("Evolution of Bitcoin price") +
-    ylab("bitcoin price ($)") +
-    theme_ipsum()
-```
-
----
-
-# Coefficient plots
-
-![](img/masur_2016.png)
-_Masur & Scharkow, 2016_
-
----
-
-class: inverse, center, middle
-
 # Creating visualization in R
 
 ggplot2: The grammar of Graphics
@@ -1062,7 +1340,7 @@ ggplot2: The grammar of Graphics
 
 - It uses a layered grammar of graphics, i.e., each part of a figure (coordinate system, plot annotations, geometrical objects, aesthetics...) are an individual layer that can be added and removed.
 
-- Understanding this grammar is a powerful for creating great visualizations
+- Understanding this grammar is powerful for creating great visualizations
 
 
 ]
@@ -1141,17 +1419,6 @@ p +
 ```
 
 ]
----
-
-# Layers and components
-
-.pull-right2[
-
-![](https://miro.medium.com/max/2000/1*mcLnnVdHNg-ikDbHJfHDNA.png)
-_Sarkar, 2018_
-
-]
-
 
 ---
 
@@ -1161,11 +1428,11 @@ _Sarkar, 2018_
 
 - A lot of times, we can convey insights better in charts or figures
 
-- However, there are many caveats and sometimes a classic table does the job
+- However, there are many caveats and sometimes a classic results table does the job
 
 - The appropriate graph is always determined by the *type of data* and the *context*/*research question*
 
-- In the next practical session, we will learn how to produce nice figures in R!
+- In the next practical session(s), we will learn how to produce nice figures in R!
 
 
 
@@ -1186,6 +1453,8 @@ class: my-one-page-font
 
 - Anscombe, F. J. (1973). Graphs in statistical analysis. The American Statistician, 27(1), 17–21.
 
+- Casas, A., & Williams, N. W. (2019). Images that matter: Online protests and the mobilizing role of pictures. Political Research Quarterly 72 (2), 360-375. 
+
 - Cleveland, W. S., & McGill, R. (1984). Graphical perception: Theory, experimentation, and application to the development of graphical methods. Journal of the American Statistical Association, 79, 531–534.
 
 - Cleveland, W. S., & McGill, R. (1987). Graphical perception: The visual decoding of quantitative information on graphical displays of data. Journal of the Royal Statistical Society Series A, 150, 192–229.
@@ -1194,7 +1463,17 @@ class: my-one-page-font
 
 - Hehman, E., & Xie, S. Y. (2021). Doing Better Data Visualization. Advances in Methods and Practices in Psychological Science. https://doi.org/10.1177/25152459211045334
 
+- Kabakoff, R. (2020). Data Visualization with R. https://rkabacoff.github.io/datavis/
+
 - Masur, P. K & Scharkow, M. (2016). Disclosure management on social network sites: Individual privacy perceptions and user-directed privacy strategies. Social Media + Society, 2(1), 1-13. https://doi.org/10.1177/2056305116634368
+
+
+
+---
+
+class: my-one-page-font
+
+# References
 
 - Sakar, D. (2018). A Comprehensive Guide to the Grammar of Graphics for Effective Visualization of Multi-dimensional Data. https://towardsdatascience.com/a-comprehensive-guide-to-the-grammar-of-graphics-for-effective-visualization-of-multi-dimensional-1f92b4ed4149
 
