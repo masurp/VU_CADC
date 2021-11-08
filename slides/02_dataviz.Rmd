@@ -315,126 +315,9 @@ ggplot(subset_covid) +
 
 ---
 
-
 class: inverse, center, middle
 
-# Data visualization
-
-Understanding representations of data.
-
-
----
-
-
-# Which figure is more informative?
-
-.pull-left[
-```{r, echo = F}
-library(tidyverse)
-d <- tibble(group = LETTERS[1:5],
-       perc = c(25, 20, 15, 21, 19))
-
-ggplot(d, aes(x = "", y=perc, fill=group)) +
-  geom_bar(stat="identity", width=1) +
-  coord_polar("y", start=0) +
-  scale_fill_brewer(palette = "Set2") +
-  theme_void()
-```
-]
-
-
-.pull-right[
-```{r, echo = F}
-ggplot(d, aes(x = fct_reorder(group, perc), y=perc, fill = group)) +
-  geom_bar(stat="identity") +
-  theme_minimal() +
-  theme(legend.position = "none") +
-  scale_fill_brewer(palette = "Set2") +
-  labs(x = "", y = "")
-```
-
-]
----
-
-# Which figure works better?
-
-```{r, echo = F, fig.height=3, fig.width = 9}
-d <- tibble(group = rep(LETTERS[1:4], each = 50),
-            y = c(rnorm(50, 3, 7), rnorm(50, 2, 2), rnorm(50, 5, 4), rnorm(50, 5, 6)))
-
-p1 <- ggplot(d, aes(x = group, y = y)) +
-  geom_point(alpha = .6) +
-  theme_ipsum()
-
-p2 <- ggplot(d, aes(x = group, y = y, color = group)) +
-  geom_boxplot() +
-  scale_color_brewer(palette = "Set2") +
-  theme_ipsum() +
-  theme(legend.position = "none")
-
-p3 <- ggplot(d, aes(x = group, y = y, fill = group)) +
-  geom_boxplot() +
-  geom_jitter(color="black", size=0.7, alpha=0.5,width = .2) +
-  scale_fill_brewer(palette = "Set2") +
-  theme_ipsum() +
-  theme(legend.position = "none")
-
-cowplot::plot_grid(p1, p2, p3, nrow = 1)
-```
-
-
----
-
-# Which figure tells a better story?
-
-.pull-left[
-```{r, echo = F}
-library(babynames)
-library(viridis)
-data <- babynames %>% 
-  filter(name %in% c("Mary","Emma", "Ida", "Ashley", "Amanda", "Jessica",    "Patricia", "Linda", "Deborah",   "Dorothy", "Betty", "Helen")) %>%
-  filter(sex=="F")
-
-# Plot
-data %>%
-  ggplot(aes(x=year, y=n, group=name, color=name)) +
-    geom_line() +
-    scale_color_viridis(discrete = TRUE) +
-    theme(
-      legend.position="none",
-      plot.title = element_text(size=14)) +
-    ggtitle("Popularity of names") +
-  labs(color = "") +
-    theme_ipsum()
-
-```
-]
-
-.pull-right[
-
-```{r, echo = F}
-data %>%
-  mutate(highlight=ifelse(name=="Amanda", "Amanda", "Other")) %>%
-  ggplot(aes(x=year, y=n, group=name, color=highlight, size=highlight)) +
-    geom_line() +
-    scale_color_manual(values = c("#69b3a2", "lightgrey")) +
-    scale_size_manual(values=c(1.5,0.6)) +
-    theme(legend.position="none") +
-    theme_ipsum() +
-    geom_label(x=1990, y=55000, label="3550 babies were called\n'Amanda' in 1970", size=3, color="#69b3a2") +
-    theme(
-      legend.position="none",
-      plot.title = element_text(size=14)
-)
-```
-
-]
-
----
-
-class: inverse, center, middle
-
-# Why we should look at data.
+# Why we should look at data!
 
 When data visualization is useful (and when it is not). 
 
@@ -477,6 +360,52 @@ anscombe %>%
 
 ![](img/correlations.png)
 _(Adapted from Jan Vanhove: "http://janhove.github.io/RCode/plot_r.R")_
+
+---
+
+# Spotting outliers and non-normal distributions
+
+.pull-left[
+```{r, echo = F}
+x <- rnorm(75, 2, 1)
+ggplot(NULL, aes(x = x)) +
+  geom_histogram(bins = 10, color = "white", fill = "#69b3a2") +
+  theme_ipsum()
+```
+
+]
+
+.pull-right[
+```{r, echo = F}
+x <- rnorm(75, 2, 1)
+x[10:12] <- 7
+x[13] <- 8
+ggplot(NULL, aes(x = x)) +
+  geom_histogram(bins = 10, color = "white", fill = "#69b3a2") +
+  theme_ipsum()
+```
+
+]
+
+---
+
+# Type of distributions in data
+
+
+```{r, echo = F, fig.width = 12, fig.height=5.5}
+set.seed(42)
+tibble(normal = rnorm(1000, 5, 2),
+       bimodal = rnorm(1000, c(-5, 5), 2),
+       uniform = runif(1000, 5, 7),
+       skewed = rbeta(1000,5,2)) %>%
+  gather(key, value) %>%
+  ggplot(aes(x = value)) +
+  geom_histogram(bins = 35, color = "white", fill = "#69b3a2") +
+  facet_wrap(~key, nrow = 2, scales = "free") +
+  theme_ipsum()
+
+```
+
 
 ---
 
@@ -890,6 +819,124 @@ p + geom_line(color="gray70", aes(group = country)) +
 ### When to use?
 
 - To highlight differences between higher-level groups (e.g., countries in continents, pupils in schools, articles in newspapers,...)
+
+---
+
+
+class: inverse, center, middle
+
+# Data visualization
+
+Understanding representations of data.
+
+
+---
+
+
+# Which figure is more informative?
+
+.pull-left[
+```{r, echo = F}
+library(tidyverse)
+d <- tibble(group = LETTERS[1:5],
+       perc = c(25, 20, 15, 21, 19))
+
+ggplot(d, aes(x = "", y=perc, fill=group)) +
+  geom_bar(stat="identity", width=1) +
+  coord_polar("y", start=0) +
+  scale_fill_brewer(palette = "Set2") +
+  theme_void()
+```
+]
+
+
+.pull-right[
+```{r, echo = F}
+ggplot(d, aes(x = fct_reorder(group, perc), y=perc, fill = group)) +
+  geom_bar(stat="identity") +
+  theme_minimal() +
+  theme(legend.position = "none") +
+  scale_fill_brewer(palette = "Set2") +
+  labs(x = "", y = "")
+```
+
+]
+---
+
+# Which figure works better?
+
+```{r, echo = F, fig.height=3, fig.width = 9}
+d <- tibble(group = rep(LETTERS[1:4], each = 50),
+            y = c(rnorm(50, 3, 7), rnorm(50, 2, 2), rnorm(50, 5, 4), rnorm(50, 5, 6)))
+
+p1 <- ggplot(d, aes(x = group, y = y)) +
+  geom_point(alpha = .6) +
+  theme_ipsum()
+
+p2 <- ggplot(d, aes(x = group, y = y, color = group)) +
+  geom_boxplot() +
+  scale_color_brewer(palette = "Set2") +
+  theme_ipsum() +
+  theme(legend.position = "none")
+
+p3 <- ggplot(d, aes(x = group, y = y, fill = group)) +
+  geom_boxplot() +
+  geom_jitter(color="black", size=0.7, alpha=0.5,width = .2) +
+  scale_fill_brewer(palette = "Set2") +
+  theme_ipsum() +
+  theme(legend.position = "none")
+
+cowplot::plot_grid(p1, p2, p3, nrow = 1)
+```
+
+
+---
+
+# Which figure tells a better story?
+
+.pull-left[
+```{r, echo = F}
+library(babynames)
+library(viridis)
+data <- babynames %>% 
+  filter(name %in% c("Mary","Emma", "Ida", "Ashley", "Amanda", "Jessica",    "Patricia", "Linda", "Deborah",   "Dorothy", "Betty", "Helen")) %>%
+  filter(sex=="F")
+
+# Plot
+data %>%
+  ggplot(aes(x=year, y=n, group=name, color=name)) +
+    geom_line() +
+    scale_color_viridis(discrete = TRUE) +
+    theme(
+      legend.position="none",
+      plot.title = element_text(size=14)) +
+    ggtitle("Popularity of names") +
+  labs(color = "") +
+    theme_ipsum()
+
+```
+]
+
+.pull-right[
+
+```{r, echo = F}
+data %>%
+  mutate(highlight=ifelse(name=="Amanda", "Amanda", "Other")) %>%
+  ggplot(aes(x=year, y=n, group=name, color=highlight, size=highlight)) +
+    geom_line() +
+    scale_color_manual(values = c("#69b3a2", "lightgrey")) +
+    scale_size_manual(values=c(1.5,0.6)) +
+    theme(legend.position="none") +
+    theme_ipsum() +
+    geom_label(x=1990, y=55000, label="3550 babies were called\n'Amanda' in 1970", size=3, color="#69b3a2") +
+    theme(
+      legend.position="none",
+      plot.title = element_text(size=14)
+)
+```
+
+]
+
 
 ---
 
