@@ -83,7 +83,7 @@ In the third cycle, students will work on their own research projects. Resources
 #### Practical Session 1: Data visualization
 
 - Handouts:
-    - [Basics of Data Visualization](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_basics_data-visualization.md)
+    - [Basics of Data Visualization](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_basics_data-visualization.md) ([Version with solutions](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_basics_data-visualization_complete.md))
 
 #### Practical Session 2: Tidyverse II
 
@@ -132,6 +132,7 @@ In the third cycle, students will work on their own research projects. Resources
 #### Additional resources
 
 - Chapter 9 & 10 in "Computational Analysis of Communication" by Van Atteveldt et al. (see Canvas)
+- ["The Validity of Sentiment Analysis"](https://doi.org/10.1080/19312458.2020.1869198) - Article by Van Atteveldt et al., 2021
 
 <br>
 <hr>
