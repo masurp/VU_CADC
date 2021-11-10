@@ -1,6 +1,6 @@
 ---
 title: "Computational Analysis of Digital Communication"
-subtitle: "Week 3: Text as Data - Basics of Automatic Text Analysis"
+subtitle: "Week 3: Basics of Automatic Text Analysis and Dictionary Approaches"
 author: ""
 institute: ""
 date: "Dr. Philipp K. Masur | p.k.masur@vu.nl"
@@ -69,12 +69,12 @@ output:
 
 ---
 
-# But a lot of communication content looks like this...
+# But a lot of (mass) communication looks like this...
 
 ![](img/nyt_page.png)
 ---
 
-# ...or is based on user-generated content...
+# ...or is based on user-generated content.
 
 ![](img/socialmedia.jpg)
 ---
@@ -89,7 +89,7 @@ _Hilbert & Lopez, 2011_
 
 # Problem or opportunity?
 
-- A lot of communication (except for fleeting face-to-face communication) is encoded in texts
+- A lot of communication is encoded in texts
 
 - But text does not look like data we can easily analyze...
 
@@ -98,6 +98,9 @@ _Hilbert & Lopez, 2011_
 **Experimental data**
 
 ```{r, echo = F,  R.options = list(width = 40)}
+library(tidyverse)
+library(hrbrthemes)
+library(ggthemes)
 tibble(id = c(1:100),
        condition = rep(c("A", "B"), 50),
        sns_use = runif(100, min = 1, max = 5),
@@ -133,7 +136,7 @@ A company owned by Thiel had lodged a consent application for a sprawling lodge 
 
 # Traditional content/text analysis
 
-Typical steps in a classic *content/text* analysis:
+Typical steps in a *content/text* analysis:
 
 **1.** Selecting the content one wants to analyze
 
@@ -148,6 +151,7 @@ Typical steps in a classic *content/text* analysis:
 **6.** Analyze frequencies, relationships, differences, similarities between units/codes
 
 --
+<br><br>
 
 **Problem:** Requires a lot of work and there are always more texts than humans can possibly code manually!
 
@@ -169,7 +173,7 @@ Typical steps in a classic *content/text* analysis:
 
 **2.** Automated Text Analysis
 
-**3.** Dictionary Approaches
+**3.** Deductive Approaches: Dictionary-based Text Analysis
 
 **4.** Examples from the literature
 
@@ -186,7 +190,7 @@ How can we analyze texts with computers?
 # Definition
 
 .pull-left[
-> Text analysis is “a research technique for making replicable and valid inferences from texts (or other meaningful matter) to the contexts of their use” 
+> Text analysis is "a research technique for making replicable and valid inferences from texts (or other meaningful matter) to the contexts of their use" 
 >
 >Krippendorff, 2004
 
@@ -219,7 +223,7 @@ How can we analyze texts with computers?
 
 # Symbols and Meaning
 
-- Text or more generally language consists of *symbols*
+- Text consists of *symbols*
 
 - Symbols by themselves do not have meaning
 
@@ -260,9 +264,9 @@ How can we analyze texts with computers?
 
 - Each field studies a *different level* at which language exhibits organization
 
-- When we engage in text analysis, we use these levels of organization to create language features
+- When we engage in text analysis, we use these levels of organization to create language features (e.g., tokens, n-grams,...)
 
-- They often depend on the morphological characteristics of language, such as when text is broken into sequences of characters
+- They often depend on the morphological characteristics of language, such as when text is broken into sequences of characters, words, sentences
 
 _Hvitfeldt & Silge, 2021, chap. 1_
 
@@ -305,16 +309,16 @@ _van Atteveldt, Welbers, & Van der Velden, 2019_
 # (1) Obtaining texts
 
 - Publicly available data sets
-  - E.g.: Political texts, news from publisher / library
+  - e.g.: Political texts, news from publisher / library
   - Great if you can find it, often not available
 
 - Scraping primary sources
-  - E.g.: Press releases from party website, existing archives
+  - e.g.: Press releases from party website, existing archives
   - Writing scrapers can be trivial or very complex depending on web site
   - Make sure to check legal issues
 
 - Proprietary texts from third parties:
-  - E.g.: digital archives (LexisNexis, factiva etc.), social media APIs)
+  - e.g.: digital archives (LexisNexis, factiva etc.), social media APIs
   - Often custom format, API restrictions, API changes
   - Terms of use not conducive to research, sharing
 
@@ -322,7 +326,7 @@ _van Atteveldt, Welbers, & Van der Velden, 2019_
 
 # (2) From text to data
 
-- Algorithms process numbers, they don’t read text
+- Algorithms (or generally R) process numbers, they do not read text
 
 - First step in any analysis is to convert text to series of numbers
 
@@ -333,10 +337,10 @@ _van Atteveldt, Welbers, & Van der Velden, 2019_
     - Normalization 
     - Frequency trimming
 
-- The resulting structured text is then used to create a document-feature matrix (DTM)
+- The resulting structured text is then often used to create a document-feature matrix (DTM)
 
     - Table containing frequency of each word in each document
-    - Called “bag of words” -> ignores word order
+    - Called “bag of words” approach -> ignores word order
 
 ---
 
@@ -358,8 +362,9 @@ _van Atteveldt, Welbers, & Van der Velden, 2019_
     
 ---
 
-
 # Tokenization
+
+- In a first step, we need to break text down into the features that we want to analyze (so-called tokens)
 
 - We take an input (a string) and a token type (a meaningful unit of text, such as a word) and we split the input (string) into pieces (tokens) that correspond to the type (e.g., word) 
 
@@ -382,16 +387,16 @@ _Manning, Raghavan, and Schütze 2008_
 
 # Types of Tokens
 
-- Thinking of a token as a **word** is a useful start (and mostly used approach -> bag-of-words approach)
+- Thinking of a token as a **word** is a useful start (and most used approach -> bag-of-words)
 
 - However, we can generalize the idea of a token beyond only a single word to other units of text:
 
-    - characters
-    - words
-    - sentences
-    - lines
+    - characters ("I", "l", "o", "v", "e", "y", "o", "u")
+    - words  ("I", "love", "you")
+    - sentences ("I love you")
+    - lines ("He went to her. I love")
     - paragraphs, and
-    - n-grams
+    - n-grams (e.g., "I love")
 
 <br><br>
 
@@ -469,16 +474,17 @@ tokens_replace(toks, pattern = lexicon::hash_lemmas$token, replacement = lexicon
 ```
 
 
-
 ---
 
 # Document-term matrix or document-feature matrix
 
-- Finally, we create a representation 
+- Finally, we create a representation of these "tokens" (or terms or features) 
 
-- Refers to a mathematical matrix that describes the frequency of terms that occur in a collection of documents
+- A document-feature matrix refers to a mathematical matrix that describes the frequency of terms that occur in a collection of documents
 
-- In a document-term matrix, rows correspond to documents in the collection and columns correspond to terms.
+- In this matrix, each row corresponds to a document in the collection and columns correspond to terms.
+
+- Each cell contains the number of times a term is in that particular document
 
 ```{r, R.options = list(width = 80)}
 dtm <- dfm(final_toks)
@@ -487,147 +493,616 @@ dtm
 
 ---
 
-# Word frequencies
+# Word frequencies and summaries
 
-```{r, echo = F}
-library(quanteda.textplots)
-textplot_wordcloud(dfm(toks), min_count = 1)
+
+```{r, R.options = list(width = 80)}
+library(quanteda.textstats)
+textstat_frequency(dfm(toks), n = 10)  
+textstat_summary(dfm(toks))
 ```
 
+
+---
+# Word frequencies
+
+![](img/wordcloud1.png)
 
 ---
 
 # (3) Analyzing the structured data
 
 .pull-left[
-- Rule-based analyses 
+- Rule-based analyses (deductive approaches)
     - Assigns meaning by researcher
     - “if word X occurs, the text means Y”
     
-- Supervised machine learning (will be discussed in the next lecture)
+- Supervised machine learning (inductive approaches)
     - Train a model on coded training examples
     - Generalizes meaning in human coding of training material
     - “Text X is like other texts that were negative, so X is probably negative”
 ]
 
---
 .pull-right[
-- Unsupervised machine learning (will be an optional method in cycle 3)
+- Unsupervised machine learning (inductive approaches)
     - Find clusters of words that co-occur
     - Meaning is assigned afterwards by researcher interpretation
     - “These words form a pattern, which I think means X”
-]
+    
+    
+<br><br><br>
 
 _Boumans & Trilling, 2016_
+]
+
+
 
 ---
 
 # (4) Evaluating the validity of the analysis
 
 - Many text analysis processes are 'black boxes'
-    - even manual coding, dictionaries are ultimately opaque
+    - even manual coding
+    - dictionaries are ultimately opaque
 
 - Computer does not 'understand' natural language 
 
 - Need to prove to reader that analysis is valid
-    - Validate by comparing to known good (often manual annotation of 'gold standard')
+    - Validate by comparing to known good 
+    - Comparison: often manual annotation of 'gold standard'
 
 --
 
-- We will talk about different validation approaches when we discuss rule-based and supervised learning methods
+<br><br>
+
+**Note:** We will talk about different validation approaches when we discuss rule-based and supervised learning methods
 
 ---
 
 
 class: inverse, center, middle
 
-# Dictionary Approaches
+# Deductive Approaches: Dictionary/Lexical Analysis
 
 Using fixed set of terms per concept to automatically code texts.
 
 ---
 
-# Basic idea
+# What are deductive approaches?
+
+- Code rules are set *a priori* based on a predefined "text theory"
+
+- Computer uses these rules to decode text in a deterministic way
+
+- Rules can differ substantially:
+    - based on individual words or group of words (e.g., articles that contain "government" are coded as "politics")
+    - based on patterns (e.g., the sender of a mail can be identified by looking for "FROM:")
+    - combinations of both 
+
+
+---
+# Basic idea of dictionary approaches
 
 .pull-left[
 
+- Quite old technique of content analysis (since 60s)
+
 - Dictionaries or lexicons contain a lot of information about links between words and meanings
 
-- This approach makes use if this by counting the number of words that appear in each document that have been assigned a particular meaning or value by the researcher 
+- We define a word list for every category that we want to code
 
-- Key idea: if a term from the dictionary occurs, assign it that code
+- Computer searches for the existence of these words in text
+      - if the word exist, assign the 'code' to that document (or sentence)
+      - e.g. positive = {good, happy, nice}, negative = {bad, stupid, expensive}
 
-    - E.g. positive = {good, happy, nice}, negative = {bad, stupid, expensive}
 
 ]
 
 .pull-right[
 ![](img/lexicon.jpg)
 ]
-  
-
----
-
-```{r, eval = F}
-library(tidyverse)
-load("slides/data/supercorpus.RData")
-
-dtm <- supercorpus %>%
-  tokens() %>%
-  tokens_remove(stopwords("en")) %>%
-  dfm()
-
-populism.liberalism <- dictionary(
-  list(
-    populism = c("elit*", "consensus*", "undemocratic*", "referend*", "corrupt*", "propagand", "politici*", "*deceit*", "*deceiv*", "*betray*", "shame*", "scandal*", "truth*", "dishonest*", "establishm*", "ruling*"),
-    liberalism = c("liber*", "free*", "indiv*", "open*", "law*", "rules", "order", "rights", "trade", "global", "inter*", "trans*", "minori*", "exchange", "market*")))
-populism.liberalism
-
-result = dtm %>% dfm_lookup(populism.liberalism) %>% convert(to = "data.frame") %>% as_tibble
-result = result %>% mutate(length=ntoken(dtm))
-result %>%
-  mutate()
-```
-
-
----
-
-```{r, eval = F}
-populism.liberalism <- dictionary(
-  list(
-    populism = c("elit*", "consensus*", "undemocratic*", "referend*", "corrupt*", "propagand", "politici*", "*deceit*", "*deceiv*", "*betray*", "shame*", "scandal*", "truth*", "dishonest*", "establishm*", "ruling*"),
-    liberalism = c("liber*", "free*", "indiv*", "open*", "law*", "rules", "order", "rights", "trade", "global", "inter*", "trans*", "minori*", "exchange", "market*")))
-populism.liberalism
-```
-
-
-```{r, eval = F}
-dfm.eu <- dfm(supercorpus, groups = "country", dictionary = populism.liberalism)
-meine.dfm.eu.prop <- dfm_weight(meine.dfm.eu, scheme = "prop")
-convert(meine.dfm.eu.prop, "data.frame")
-```
 
 
 ---
 # Advantages and disadvantages
 
-- Fixed set of terms per concept (wildcards, synonyms, conditions, proximity)
-
 - Advantages: 
-    - Technically easy
-    - Transparent
-    - Few resources needed
+    - Technically easy, many dictionaries exists
+    - Transparent and replicable, if dictionary is shared
+    - Few resources needed, efficient
 
 - Disadvantages:
     - Low validity for non-trivial concepts (sentiment, frames, specific topics)
+        - categories needs be identifiable by simple word lists!
+    - May require considerable preprocessing to reduce ambiguity
     - Difficult to create/maintain large dictionaries
     - Can encode biases 
+
+---
+
+# How can we develop a dictionary?
+
+- Define categories
+
+- Inspecting keywords-in-context lists
+
+- Manually coding and comparing word frequencies per category
+
+- Inclusion of different spellings
+
+- Deletion of words the lead to false-positives
+
+- Testing, testing, testing...
+
+
+---
+
+# Special case: Sentiment analysis
+
+
+- Coding and counting of evaluative statements per document
+
+- Analysis of sentiment: Positive vs. negative?
+
+- Subjectivity analysis: Is there any sentiment at all?
+
+- Emotional analysis: Are there any emotions?
+
+- In most cases, a score will be computed (e.g. sentiment = positive - negative words)
+
+- Problems: Negation, irony, descriptive rather than evaluative statements
+
+
+---
+
+# Example: The State of the Union Speech Corpus
+
+```{r, R.options = list(width = 90)}
+library(quanteda.corpora)
+library(quanteda.dictionaries)
+library(quanteda.textplots)
+
+data_df <- convert(data_corpus_sotu, "data.frame") %>%
+  as_tibble
+data_df
+```
+
+---
+
+# Understanding the data: Speeches per President
+
+.pull-left[
+```{r plot_speech, eval = F}
+data_df %>%
+  group_by(President) %>%
+  summarize(n = n()) %>%
+  ggplot(aes(x = reorder(President, n), y = n)) +
+  geom_bar(stat = "identity", fill = "lightblue") +
+  coord_flip() +
+  theme_wsj()
+
+```
+]
+
+.pull-right[
+
+```{r plot-label-out1, ref.label="plot_speech", echo=FALSE}
+
+```
+
+]
+
+
+---
+
+# Text preprocessing: Creating a corpus
+
+```{r, R.options = list(width = 90)}
+corp <- corpus(data_df, docid_field = "doc_id", text_field = "text")
+corp 
+```
+
+---
+
+# What are the most used words in these speeches?
+
+```{r, echo = F}
+dtm1 <- corp %>%
+  tokens(remove_punct = T, remove_symbols = T) %>%
+  tokens_remove(stopwords("en")) %>%
+  dfm 
+# textplot_wordcloud(dtm1, max_words = 50)
+```
+
+![](img/wordcloud2.png)
+
+
+---
+
+# How do Trump and Obama compare?
+
+.pull-left[
+
+```{r, echo = F}
+is_trump = docvars(dtm1)$President == 'Trump' 
+trump_dtm = dtm1[is_trump,]
+textplot_wordcloud(trump_dtm, max_words = 35, color = "red")
+```
+
+]
+
+
+.pull-right[
+```{r, echo = F}
+is_obama = docvars(dtm1)$President == 'Obama' 
+obama_dtm = dtm1[is_obama,]
+textplot_wordcloud(obama_dtm, max_words = 35, color = "blue")
+```
+
+]
+
+---
+
+# Keyword-in-context
+
+- We can also search for specific text passages that contain a specific word (e.g., "terror")
+
+```{r R.options = list(width = 140)}
+k = kwic(corp, 'terror', window = 4)
+head(k, 10)
+```
+
+
+---
+
+```{r echo = F}
+library(SentimentAnalysis)
+```
+
+
+# Using an exisiting dictionary: The General Sentiment Dictionary
+
+- Dictionary with a list of positive and negative words according to the psychological Harvard-IV dictionary as used in the General Inquirer software
+
+- This is a general-purpose dictionary developed by the Harvard University
+
+.pull-left[
+
+**Negative words**
+
+```{r, echo = F}
+head(DictionaryGI$negative, 14)
+```
+]
+
+.pull-right[
+
+**Positive words**
+
+```{r, echo = F}
+head(DictionaryGI$positive, 14)
+```
+
+]
+
+---
+
+# Running the actual sentiment analysis
+
+.pull-left[
+
+- We use the text corpus containing all speeches
+
+- We tokenize the speeches (separating them into words)
+
+- We do not stem or lemmatize the text as dictionaries contain full words!
+
+- We create a document-feature matrix
+
+- We look up how often certain words are in the different text documents
+
+- Number of 'negative' and 'positive' words per speech is the outcome of this analysis
+
+]
+
+--
+
+.pull-right[
+```{r, R.options = list(width = 90)}
+dtm <- corp %>%    
+  tokens() %>%
+  dfm
+res <- dtm %>%
+  dfm_lookup(dictionary(DictionaryGI))
+res
+```
+
+]
+
+---
+
+# Combining all information to a final data set
+
+```{r, R.options = list(width = 90)}
+dict_results <- convert(res, 'data.frame') %>%
+  mutate(length=ntoken(dtm))
+variables <- cbind(doc_id = docnames(res), docvars(res))
+d <- left_join(variables, dict_results) %>%
+  as_tibble
+head(d)
+```
+
+---
+
+# Amount of negative and positive words per president
+
+.pull-left[
+
+- We can know do several frequency analyses
+
+- For example, how many positive and negative words have president used on average?
+
+]
+
+.pull-right[
+```{r, echo = F}
+d %>%
+  group_by(President) %>%
+  summarise(negative = mean(negative/length),
+            positive = mean(positive/length)) %>%
+  pivot_longer(-President) %>%
+  ggplot(aes(x = reorder(President, value), y = value, group = name, fill = name)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  coord_flip() +
+  theme_clean() +
+  labs(fill = "")
+```
+]
+
+---
+
+# Investigating Sentiment: Computing a Score
+
+- In most sentiment analyses, researchers compute some sort of overall sentiment score
+
+- A common score is to subtract the negative count from the positive count and divide by either by the number of sentiment words or the total number of words (length):
+
+$sentiment1 = (positive - negative) / (positive + negative)$
+
+$sentiment2 = (positive - negative) / length$
+
+- We can also compute a measure of subjectivity to get an idea of how much sentiment is expressed in total:
+
+$subjectivy = (positive + negative) / length)$
+
+
+
+---
+
+# Sentiment scores over time
+
+.pull-left[
+
+```{r, echo = F}
+d <- d %>%
+  mutate(sentiment1 = (positive - negative) / (positive + negative),
+         sentiment2 = (positive - negative) / length,
+         subjectivity=(positive + negative) / length)
+
+# Line plot
+d %>%
+  ggplot(aes(x = Date, y = sentiment1)) +
+  geom_line(color = "darkred") +
+  theme_economist() +
+  ggtitle("Sentiment (V1) in SOTU-speeches over time")
+```
+
+
+]
+
+.pull-right[
+
+```{r, echo = F}
+# Line plot
+d %>%
+  ggplot(aes(x = Date, y = sentiment2)) +
+  geom_line(color = "darkblue") +
+  theme_economist() +
+  ggtitle("Sentiment (V2) in SOTU-speeches over time")
+```
+
+
+]
+
+---
+
+# Subjectivity in SOTU-speeches over time
+
+```{r, echo = F, fig.width=14, fig.height=5.5}
+# Line plot
+d %>%
+  ggplot(aes(x = Date, y = subjectivity)) +
+  geom_line(color = "darkblue") +
+  theme_economist() +
+  ggtitle("Subjectivity in SOTU-speeches over time")
+```
+
+
+]
+
+---
+
+# Sentiment of different presidents
+
+```{r, echo = F, fig.width=10, fig.height=4.5}
+d %>%
+  filter(President %in% c("Obama", "Trump", "Clinton")) %>%
+  pivot_longer(sentiment1:subjectivity) %>%
+  ggplot(aes(x = Date, y = value, color = name)) +
+  geom_line(size = 1.5) +
+  geom_point(size = 3) +
+  scale_color_brewer(palette = "Set1") +
+  facet_grid(name~President, scales = "free") +
+  theme_bw() +
+  ggtitle("Sentiment development of selected presidents") +
+  labs(color = "") +
+  guides(color = F)
+```
+
+---
+
+# Validation
+
+- To get an overall quantitative measure of the validity of a dictionary, one should always manually code a random sample of documents and compare the coding with the dictionary results
+
+- This can (and should) be reported in the methods section of a paper using a sentiment dictionary
+
+- General procedure
+
+    - Draw a random subsample of the documents
+    - Code actual sentiment with human coders (the 'gold standard')
+    - Combine the manual coding results with the results from the automated sentiment analysis
+    - Produce validation scores, e.g., correlation between manual and automated coding, validation scores
+
+---
+
+# Typical validation scores
+
+- Accuracy: Percentage of agreement between automated algorithm and gold standard
+
+- Precision: Probability of a positively coded document is relevant
+
+- Recall: Probability that a relevant document is coded positively
+
+- F-Score: Mean between precision and recall
+
+---
+
+# Validation-Scores
+
+.pull-left[
+![](https://glassboxmedicine.files.wordpress.com/2019/02/confusion-matrix.png)
+
+]
+
+.pull-right[
+
+- From the confusion matrix, we can compute all relevant scores:
+
+  - **Precision** = TP / (TP + FP)
+
+  - **Recall** = TP / (TP + FN)
+
+  - **F-Score** = 2 * (Precision * Recall) / (Precision + Recall)
+
+]
+---
+
+class: inverse, center, middle
+
+# Examples in the literature
+
+How is this used in research?
+
+---
+
+# Political migration discourses on social media
+
+
+- Analyzed migration discourses in the Facebook accounts of political actors (n=1702) across six European countries (Spain, UK, Germany, Austria, Sweden and Poland)
+
+- present new insights into the visibility of migration as a topic
+
+- investigated sentiment about migration, revealing country- and party-specific patterns
+
+<br><br>
+
+_Heidenreich et al., 2019_
+    
+---
+
+# Methods
+
+.pull-left[
+- Downloaded textual data for all migration-related posts (n = 24,578) of members of parliaments (n = 1702) in six countries
+
+![](img/heidenreich_table1.png)
+]
+
+.pull-right[
+
+- Used automated contend analysis to estimate sentiment towards migration in each post
+
+- Machine translated the whole corpus into English
+
+- Used a dictionary-approach (Lexicoder; Young and Soroka, 2012) to cound positive and negative words
+
+- Computed sentiment for each document by calculating as the sum of the scores
+for all words bearing positive sentiment (Pi) minus the sum of all scores from negative
+words (Ni), divided by the number of words (Wi). 
+
+]
+
+---
+
+# Results: Visibility
+
+.pull-left[
+
+- In Germany and Austria there is indeed descriptive evidence that parties of the right discuss migration more frequently in their Facebook status posts than other parties
+
+- Conversely, in Spain, the UK and Poland the topic tended to be more prominent in the posts of left-wing parties
+
+- At first glance, Sweden seems to be an outlier.
+
+- In sum there is no consistent overall pattern supporting the hypothesis that right wing parties pay more attention to the topic of migration on Facebook than left leaning parties 
+
+
+
+]
+
+
+.pull-right[
+![](img/heidenreich_table2.png)
+]
+
+---
+# Results: Sentiment
+
+![](img/heidenreich_table3.png)
+
+---
+
+# Conclusion of the study
+
+- Migration is a more prominent in countries with positive net migration than in countries where net migration is neutral or negative
+
+- They did not find support for the assumption that right-leaning parties talk more, and more negatively, about migration
+
+- However, political actors from parties of the extreme left and the extreme right of the political spectrum address migration more frequently and more negatively than more moderate political players
+
+- Potential limitations
+
+    - How valid is the automated translation of text into English?
+    - How valid is the sentiment approximation based on dictionaries?
 
 ---
 
 class: inverse, center, middle
 
 # Thank you for your attention!
+
+---
+
+# Required Reading
+
+<br><br>
+
+Heidenreich, T., Eberl, J.-M., Lind, F. & Boomgaarden, H. (2020). Political migration discourses on social media: a comparative perspective on visibility and sentiment across political Facebook accounts in Europe. Journal of Ethnic and Migration Studies, (46)7, 1261-1280,  https://doi.org/10.1080/1369183X.2019.1665990
+
+<br>
+
+_(available on Canvas)_
 
 
 ---
@@ -636,6 +1111,8 @@ class: my-one-page-font
 # References
 
 - Boumans, J. W., & Trilling, D. (2016). Taking stock of the toolkit: An overview of relevant automated content analysis approaches and techniques for digital journalism scholars. Digital journalism, 4(1), 8-23.
+
+- Heidenreich, T., Eberl, J.-M., Lind, F. & Boomgaarden, H. (2020). Political migration discourses on social media: a comparative perspective on visibility and sentiment across political Facebook accounts in Europe. Journal of Ethnic and Migration Studies, (46)7, 1261-1280, DOI: 10.1080/1369183X.2019.1665990
 
 - Hilbert, M., & López, P. (2011). The World’s Technological Capacity to Store, Communicate, and Compute Information. Science, 332(6025), 60 –65. https://doi.org/10.1126/science.1200970
 
