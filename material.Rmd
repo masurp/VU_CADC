@@ -88,7 +88,7 @@ In the third cycle, students will work on their own research projects. Resources
 #### Practical Session 2: Tidyverse II
 
 - Handouts:
-    - [Tidyverse: Reshaping](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_tidy_reshaping-and-joining.md)
+    - [Tidyverse: Reshaping](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_tidy_reshaping-and-joining.md) ([Version with solutions](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_tidy_reshaping-and-joining_complete.md))
     - [Tidyverse: Joining](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R-tidy-13a-joining.md)
 
 #### Homework
