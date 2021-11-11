@@ -22,7 +22,7 @@ Before the first practical session (2nd of November), please make sure that you 
 
 #### Familiarize yourself with the course
 
-Lectures are every *Monday*(on campus, see overview for exact dates and times). In these lectures, a particular research problem will be introduced and we will discuss methodological solutions. We will get to know respective computational methods and contextualize them within the broader research process. We expect you to:
+Lectures are every *Monday* (on campus, see overview for exact dates and times). In these lectures, a particular research problem will be introduced and we will discuss methodological solutions. We will get to know respective computational methods and contextualize them within the broader research process. We expect you to:
 
 - Think, participate, discuss
 - Ask questions!
@@ -33,7 +33,7 @@ Practical sessions are every *Tuesday* and *Thursday* (on campus, see overview f
 - Run the scripts and work through the code 
 - Ask questions!
 
-In the third cycle, students will work on their own research projects. Resources and material for additional methods and statistical approachers will be provided to all students. 
+In the third cycle, students will work on their own research projects. Resources and material for additional methods and statistical approaches will be provided to all students. 
 
 
 <br>
@@ -111,12 +111,12 @@ In the third cycle, students will work on their own research projects. Resources
 #### Lecture: Text as Data - Basics of Automatic Text Analysis
 
 - Slides:
-    - Download Slides (to be uploaded soon)
+    - [Download Slides](slides/03_textanalysis.html)
 
 #### Practical Session 1
 
 - Handouts: 
-    - Basic text analysis (to be uploaded soon)
+    - [Basic text analysis](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_basics-of-text-analysis.md)
 
 #### Practical Session 2 
 
