@@ -92,6 +92,9 @@ _Hilbert &amp; Lopez, 2011_
 
 # Problem or opportunity?
 
+
+
+
 - A lot of communication is encoded in texts
 
 - But text does not look like data we can easily analyze...
@@ -105,12 +108,12 @@ _Hilbert &amp; Lopez, 2011_
 # A tibble: 6 x 5
      id condition sns_use well_being
   &lt;int&gt; &lt;chr&gt;       &lt;dbl&gt;      &lt;dbl&gt;
-1     1 A            2.82     -5.59 
-2     2 B            3.02      1.05 
-3     3 A            1.59     -6.76 
-4     4 B            1.28     -0.808
-5     5 A            4.58      3.12 
-6     6 B            4.35      0.376
+1     1 A            3.31    -3.50  
+2     2 B            3.57     8.41  
+3     3 A            1.53     4.54  
+4     4 B            2.40     0.0963
+5     5 A            1.95    -0.983 
+6     6 B            4.06    -2.18  
 # … with 1 more variable: pers1 &lt;dbl&gt;
 ```
 ]
@@ -517,8 +520,8 @@ toks # original tokens
 ```
 Tokens consisting of 1 document.
 text1 :
-[1] "example"       "preprocessing" "techniques"    "shows"        
-[5] "happens"       "preprocessing" "procedure"    
+[1] "example"       "preprocessing" "techniques"    "happens"      
+[5] "preprocessing" "procedure"    
 ```
 
 --
@@ -532,8 +535,8 @@ tokens_replace(toks, pattern = lexicon::hash_lemmas$token, replacement = lexicon
 ```
 Tokens consisting of 1 document.
 text1 :
-[1] "example"    "preprocess" "technique"  "show"       "happen"    
-[6] "preprocess" "procedure" 
+[1] "example"    "preprocess" "technique"  "happen"     "preprocess"
+[6] "procedure" 
 ```
 
 
@@ -556,10 +559,10 @@ dtm
 ```
 
 ```
-Document-feature matrix of: 1 document, 6 features (0.00% sparse) and 0 docvars.
+Document-feature matrix of: 1 document, 5 features (0.00% sparse) and 0 docvars.
        features
-docs    exampl preprocess techniqu show happen procedur
-  text1      1          2        1    1      1        1
+docs    exampl preprocess techniqu happen procedur
+  text1      1          2        1      1        1
 ```
 
 ---
@@ -578,9 +581,8 @@ textstat_frequency(dfm(toks), n = 10)
 1 preprocessing         2    1       1   all
 2       example         1    2       1   all
 3    techniques         1    2       1   all
-4         shows         1    2       1   all
-5       happens         1    2       1   all
-6     procedure         1    2       1   all
+4       happens         1    2       1   all
+5     procedure         1    2       1   all
 ```
 
 ```r
@@ -589,7 +591,7 @@ textstat_summary(dfm(toks))
 
 ```
   document chars sents tokens types puncts numbers symbols urls tags emojis
-1    text1    NA    NA      7     6      0       0       0    0    0      0
+1    text1    NA    NA      6     5      0       0       0    0    0      0
 ```
 
 
@@ -847,13 +849,13 @@ Washington-1794 :
 
 .pull-left[
 
-&lt;img src="03_textanalysis_files/figure-html/unnamed-chunk-18-1.png" width="100%" /&gt;
+&lt;img src="03_textanalysis_files/figure-html/unnamed-chunk-19-1.png" width="100%" /&gt;
 
 ]
 
 
 .pull-right[
-&lt;img src="03_textanalysis_files/figure-html/unnamed-chunk-19-1.png" width="100%" /&gt;
+&lt;img src="03_textanalysis_files/figure-html/unnamed-chunk-20-1.png" width="100%" /&gt;
 
 ]
 
@@ -1015,7 +1017,7 @@ head(d)
 ]
 
 .pull-right[
-&lt;img src="03_textanalysis_files/figure-html/unnamed-chunk-26-1.png" width="100%" /&gt;
+&lt;img src="03_textanalysis_files/figure-html/unnamed-chunk-27-1.png" width="100%" /&gt;
 ]
 
 ---
@@ -1042,21 +1044,12 @@ head(d)
 
 .pull-left[
 
-&lt;img src="03_textanalysis_files/figure-html/unnamed-chunk-27-1.png" width="100%" /&gt;
-
-
-]
-
-.pull-right[
-
 &lt;img src="03_textanalysis_files/figure-html/unnamed-chunk-28-1.png" width="100%" /&gt;
 
 
 ]
 
----
-
-# Subjectivity in SOTU-speeches over time
+.pull-right[
 
 &lt;img src="03_textanalysis_files/figure-html/unnamed-chunk-29-1.png" width="100%" /&gt;
 
@@ -1065,30 +1058,74 @@ head(d)
 
 ---
 
-# Sentiment of different presidents
+# Subjectivity in SOTU-speeches over time
 
 &lt;img src="03_textanalysis_files/figure-html/unnamed-chunk-30-1.png" width="100%" /&gt;
 
+
+]
+
 ---
 
-# Validation
+# Sentiment of different presidents
 
-- To get an overall quantitative measure of the validity of a dictionary, one should always manually code a random sample of documents and compare the coding with the dictionary results
+&lt;img src="03_textanalysis_files/figure-html/unnamed-chunk-31-1.png" width="100%" /&gt;
 
-- This can (and should) be reported in the methods section of a paper using a sentiment dictionary
+---
+
+class: inverse, center, middle
+
+# Reliability and Validity
+
+Making sure the automated coding is correct!
+
+
+---
+
+# Reliability and Validity
+
+- **Reliability** means accuracy, but also reproducibility and stability of the results
+
+- **Validity** means that codings/classifications represent the actual theoretical concepts
+
+- To estimate both, we manually code a random sample of the documents and compare the coding with the dictionary results
 
 - General procedure
 
     - Draw a random subsample of the documents
     - Code actual sentiment with human coders (the 'gold standard')
     - Combine the manual coding results with the results from the automated sentiment analysis
-    - Produce validation scores, e.g., correlation between manual and automated coding, validation scores
+    - Produce validation scores, e.g., correlation between manual and automated coding, precision, recall...
+    
+- Agreement with manual coding, which is often regarded as the 'gold-standard', is often seen as validity (but this holds only if human beings are inerrant!)
 
 ---
 
-# Typical validation scores
+# Reliability
 
-- Accuracy: Percentage of agreement between automated algorithm and gold standard
+.pull-left[
+- Basis is always the confusion matrix between algorithm and manual coder that assessed the same content
+
+- Accuracy (Holsti-Coefficient) = sum of the diagonale / sum of the entire matrix
+
+- Disadvantages
+      - No correction of random chance agreements
+      - easy computable for 2 coders
+      - only nominal scales
+      - no accounting for missings
+      
+- Alternative: Cronbach's Alpha (but often seen as too strict)
+]
+
+.pull-right[
+![](https://glassboxmedicine.files.wordpress.com/2019/02/confusion-matrix.png)
+
+]
+---
+
+# Validity
+
+- Again Accuracy: procentual agreement between algorithm and coder
 
 - Precision: Probability of a positively coded document is relevant
 
@@ -1114,6 +1151,8 @@ head(d)
   - **Recall** = TP / (TP + FN)
 
   - **F-Score** = 2 * (Precision * Recall) / (Precision + Recall)
+
+- No clear thresholds: need to be assessed in the research context, but values closer to 1 are desirable
 
 ]
 ---
@@ -1191,6 +1230,12 @@ words (Ni), divided by the number of words (Wi).
 
 ![](img/heidenreich_table3.png)
 
+---
+
+# Results: Predicting sentiment
+
+![](img/heidenreich_table4.png)
+- Best predictor was whether the politicians were either far-left or far-right!
 ---
 
 # Conclusion of the study

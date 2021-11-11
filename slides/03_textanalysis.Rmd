@@ -89,6 +89,13 @@ _Hilbert & Lopez, 2011_
 
 # Problem or opportunity?
 
+```{r, echo = F}
+library(tidyverse)
+library(hrbrthemes)
+library(ggthemes)
+```
+
+
 - A lot of communication is encoded in texts
 
 - But text does not look like data we can easily analyze...
@@ -98,9 +105,6 @@ _Hilbert & Lopez, 2011_
 **Experimental data**
 
 ```{r, echo = F,  R.options = list(width = 40)}
-library(tidyverse)
-library(hrbrthemes)
-library(ggthemes)
 tibble(id = c(1:100),
        condition = rep(c("A", "B"), 50),
        sns_use = runif(100, min = 1, max = 5),
@@ -951,24 +955,59 @@ d %>%
 
 ---
 
-# Validation
+class: inverse, center, middle
 
-- To get an overall quantitative measure of the validity of a dictionary, one should always manually code a random sample of documents and compare the coding with the dictionary results
+# Reliability and Validity
 
-- This can (and should) be reported in the methods section of a paper using a sentiment dictionary
+Making sure the automated coding is correct!
+
+
+---
+
+# Reliability and Validity
+
+- **Reliability** means accuracy, but also reproducibility and stability of the results
+
+- **Validity** means that codings/classifications represent the actual theoretical concepts
+
+- To estimate both, we manually code a random sample of the documents and compare the coding with the dictionary results
 
 - General procedure
 
     - Draw a random subsample of the documents
     - Code actual sentiment with human coders (the 'gold standard')
     - Combine the manual coding results with the results from the automated sentiment analysis
-    - Produce validation scores, e.g., correlation between manual and automated coding, validation scores
+    - Produce validation scores, e.g., correlation between manual and automated coding, precision, recall...
+    
+- Agreement with manual coding, which is often regarded as the 'gold-standard', is often seen as validity (but this holds only if human beings are inerrant!)
 
 ---
 
-# Typical validation scores
+# Reliability
 
-- Accuracy: Percentage of agreement between automated algorithm and gold standard
+.pull-left[
+- Basis is always the confusion matrix between algorithm and manual coder that assessed the same content
+
+- Accuracy (Holsti-Coefficient) = sum of the diagonale / sum of the entire matrix
+
+- Disadvantages
+      - No correction of random chance agreements
+      - easy computable for 2 coders
+      - only nominal scales
+      - no accounting for missings
+      
+- Alternative: Cronbach's Alpha (but often seen as too strict)
+]
+
+.pull-right[
+![](https://glassboxmedicine.files.wordpress.com/2019/02/confusion-matrix.png)
+
+]
+---
+
+# Validity
+
+- Again Accuracy: procentual agreement between algorithm and coder
 
 - Precision: Probability of a positively coded document is relevant
 
@@ -994,6 +1033,8 @@ d %>%
   - **Recall** = TP / (TP + FN)
 
   - **F-Score** = 2 * (Precision * Recall) / (Precision + Recall)
+
+- No clear thresholds: need to be assessed in the research context, but values closer to 1 are desirable
 
 ]
 ---
@@ -1071,6 +1112,12 @@ words (Ni), divided by the number of words (Wi).
 
 ![](img/heidenreich_table3.png)
 
+---
+
+# Results: Predicting sentiment
+
+![](img/heidenreich_table4.png)
+- Best predictor was whether the politicians were either far-left or far-right!
 ---
 
 # Conclusion of the study
