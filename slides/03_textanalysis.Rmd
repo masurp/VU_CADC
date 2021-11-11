@@ -975,9 +975,9 @@ Making sure the automated coding is correct!
 - General procedure
 
     - Draw a random subsample of the documents
-    - Code actual sentiment with human coders (the 'gold standard')
+    - Code actual documents with human coders (the 'gold standard')
     - Combine the manual coding results with the results from the automated sentiment analysis
-    - Produce validation scores, e.g., correlation between manual and automated coding, precision, recall...
+    - Produce reliability and validation scores, e.g., correlation between manual and automated coding, precision, recall...
     
 - Agreement with manual coding, which is often regarded as the 'gold-standard', is often seen as validity (but this holds only if human beings are inerrant!)
 
@@ -1007,7 +1007,7 @@ Making sure the automated coding is correct!
 
 # Validity
 
-- Again Accuracy: procentual agreement between algorithm and coder
+- Again Accuracy: agreement between algorithm and coder
 
 - Precision: Probability of a positively coded document is relevant
 
@@ -1035,6 +1035,8 @@ Making sure the automated coding is correct!
   - **F-Score** = 2 * (Precision * Recall) / (Precision + Recall)
 
 - No clear thresholds: need to be assessed in the research context, but values closer to 1 are desirable
+
+- Can be used to compare models!
 
 ]
 ---
