@@ -7,6 +7,7 @@
 /slides/libs
 /slides/*cache
 /slides/data/
+/literature/
 /homework/*.csv
 /homework/*.sav
 /tutorials/data/*.csv
