@@ -1028,7 +1028,7 @@ Making sure the automated coding is correct!
 
 - Recall: Probability that a relevant document is coded positively
 
-- F-Score: Mean between precision and recall
+- F1-Score: Mean between precision and recall
 
 ---
 
@@ -1047,7 +1047,7 @@ Making sure the automated coding is correct!
 
   - **Recall** = TP / (TP + FN)
 
-  - **F-Score** = 2 * (Precision * Recall) / (Precision + Recall)
+  - **F1-Score** = 2 * (Precision * Recall) / (Precision + Recall)
 
 - No clear thresholds: need to be assessed in the research context, but values closer to 1 are desirable
 
