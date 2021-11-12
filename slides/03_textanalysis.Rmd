@@ -361,7 +361,7 @@ _van Atteveldt, Welbers, & Van der Velden, 2019_
 - Cleaning steps needed to reduce noise:
     - Removing unnecessary symbols (e.g., punctuations, numbers...)
     - Removing stopwords (e.g., 'a', 'the'...)
-    - Normalization: Stemming (wants -> want) OR lemmatizing (ran -> run)
+    - Normalization: Stemming (wants -> want) *OR* lemmatizing (ran -> run)
     - Frequency trimming (removing rare words)
     
 ---
@@ -463,12 +463,13 @@ final_toks # after stemming
 
 - Instead of using set rules to cut words down to their stems, lemmatization uses knowledge about a language's structure to reduce words down to their lemmas, the canonical or dictionary forms of words
 
-- Lemmatizers often use a rich lexical database like 'WordNet' as a way to look up word meanings for a given part-of-speech use (Miller 1995)
+- Lemmatizers use a rich lexical database like 'WordNet' to look up word meanings for a given part-of-speech use (Miller 1995)
 
 
 ```{r, R.options = list(width = 80)}
 toks # original tokens
 ```
+
 
 --
 
@@ -502,7 +503,7 @@ dtm
 
 ```{r, R.options = list(width = 80)}
 library(quanteda.textstats)
-textstat_frequency(dfm(toks), n = 10)  
+textstat_frequency(dfm(toks))  
 textstat_summary(dfm(toks))
 ```
 
@@ -673,6 +674,18 @@ data_df
 
 ---
 
+# A speech by Obama in 2009
+
+```{r, R.options = list(width = 120)}
+data_df %>%
+  filter(doc_id == "Obama-2009") %>%
+  select(text) %>% 
+  as.character %>%
+  writeLines
+```
+
+---
+
 # Understanding the data: Speeches per President
 
 .pull-left[
@@ -814,7 +827,8 @@ head(DictionaryGI$positive, 14)
 .pull-right[
 ```{r, R.options = list(width = 90)}
 dtm <- corp %>%    
-  tokens() %>%
+  tokens %>%
+  tokens_tolower %>%
   dfm
 res <- dtm %>%
   dfm_lookup(dictionary(DictionaryGI))
@@ -940,13 +954,14 @@ d %>%
 
 ```{r, echo = F, fig.width=10, fig.height=4.5}
 d %>%
-  filter(President %in% c("Obama", "Trump", "Clinton")) %>%
+  filter(President %in% c("Obama", "Trump", "Clinton", "Bush")) %>%
+  filter(FirstName != "George") %>%
   pivot_longer(sentiment1:subjectivity) %>%
   ggplot(aes(x = Date, y = value, color = name)) +
   geom_line(size = 1.5) +
   geom_point(size = 3) +
   scale_color_brewer(palette = "Set1") +
-  facet_grid(name~President, scales = "free") +
+  facet_grid(name~reorder(President, Date), scales = "free") +
   theme_bw() +
   ggtitle("Sentiment development of selected presidents") +
   labs(color = "") +
@@ -1036,7 +1051,7 @@ Making sure the automated coding is correct!
 
 - No clear thresholds: need to be assessed in the research context, but values closer to 1 are desirable
 
-- Can be used to compare models!
+- Can be used to compare model performance!
 
 ]
 ---
