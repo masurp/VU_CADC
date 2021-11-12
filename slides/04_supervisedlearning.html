@@ -62,66 +62,1102 @@ class: left, middle, title-slide
 
 # Machine Learning?
 
-![](img/thematrix.jpeg)
+![](img/thematrix.jpg)
 ---
 
-# What are we actually talking about?
+# So what are we actually talking about?
 
-- Machine learning is the study of computer algorithms that can improve automatically through experience and by the use of data.
+- Machine learning is the study of computer algorithms that can improve automatically through experience and by the use of data
 
-- Due to the "black box" nature of the algorithm's operations, it is often seen as a form of artificial intelligence. 
+- Due to the "black box" nature of the algorithm's operations, it is often seen as a form of **artificial intelligence** 
 
-- Key idea: machine learning algorithms build a model based on sample data, known as "training data", in order to make predictions or decisions without being explicitly programmed to do so.
+- Machine learning is used in a wide variety of applications, such as in medicine (e.g., pattern detection), email filtering (e.g., spam detection), speech recognition, and computer vision (e.g., face recognition)
 
-- Machine learning is used in a wide variety of applications, such as in medicine (e.g., pattern detection), email filtering (e.g., spam detection), speech recognition, and computer vision.
-
----
-
-# The problem: What has this to do with text analysis?
-
-- A common task in communication science involves hand-labeling sets of documents for specific variables (e.g. manual coding)
-
-- In the past, this required hiring research assistants and training them to read and evaluate text by hand
-
-- Disadvantages: It was expensive, prone to error, required extensive data quality checks, and was unfeasible if you had an extremely large corpus of texts
-
----
-
-# Enter machine learning!
-
-We can now use machine learning models to classify text into specific sets of categories. This is known as **supervised learning**. The basic process is:
-
-&lt;br&gt;
-
-**1.** Hand-code a small set of documents (say N = 1,000) for whatever variable(s) you care about
-
-**2.** Train a machine learning model on the hand-coded data, using the variable as the outcome of interest and the text features of the documents as the predictors
-
-**3.** Evaluate the effectiveness of the machine learning model via cross-validation
-
-**4.** Once you have trained a model with sufficient predictive accuracy, apply the model to the remaining set of documents that have never been hand-coded (say N = 100,000)
+- In communication science, we can use these techniques to automate text analysis!
 
 ---
 
 # Content of this lecture
 
-&lt;br&gt;
-
 **1.** What is machine learning?
 
-**2.** Principles
+**2.** Supervised text classification
 
-**3.** Validation
+- Overview
+- Principles
+- Validation
+- Example: Predicting genre from song lyrics
 
-**4.** Examples from the literature
+**3.** Examples from the literature
+
+**4.** Outlook and conclusion
+
+---
+
+class: inverse, center, middle
+
+# What is machine learning?
+
+Differences between supervised and unsupervised approaches.
+
+---
+
+# Deductive vs. inductive approaches
+
+- In the previous lecture, we talked about deductive approaches (e.g., dictionary approaches)
+
+- These are **deterministic** and are based on text theory (e.g., happy -&gt; positive, hate -&gt; negative)
+
+- Yet, natural language is often ambiguous and **probabilistic** coding may be better
+
+- Dictionary-based or generally rule-based approaches are not very similar to manual coding; a human being assesses much more than just a list of words!
+
+- Inductive approaches promise to combine the scalability of automatic coding with the validity of manual coding (supervised learning) or can even code things or relations that we as human beings cannot identify (unsupervised learning)
+
+---
+
+![](img/machinelearning.png)
+
+---
+
+.pull-left[
+
+### Supervised learning
+
+- Algorithms build a model based on sample data, known as "training data", in order to make predictions or decisions without being explicitly programmed to do so
+
+- Combines the scalability of automatic coding with the validity of manual coding (requires pre-labeled data to train algorithm)
+
+- Examples:
+
+    - Supervised text classification: extending manual coding to large text corpora, sentiment analysis...
+    - Pattern recognition: e.g., face recognition, spam filter,...
+
+]
+
+.pull-right[
+
+### Unsupervised learning
+
+- Algorithm detects clusters, patterns, or associations in data that has not been labeled previously, but researcher needs to interpret results
+
+- Very helpful to make sense of new data (similar to cluster analysis or exploratory factor analysis)
+
+- Examples: 
+
+    - Topic modeling: Extracting topics from unlabeled (text) data
+    - Customer segmentation: Better understanding different customer groups around which to build marketing or other business strategies
+
+]
+
+---
+
+class: inverse, center, middle
+
+# Supervised text classification
+
+Training algorithms to make good predictions!
+
+---
+
+# Supervised text classification
+
+We can now use machine learning models to classify text into specific sets of categories. This is known as **supervised learning**. The basic process is:
+
+&lt;br&gt;
+
+--
+
+**1.** Hand-code a small set of documents (say N = 1,000) for whatever variable(s) you care about
+
+--
+
+**2.** Train a machine learning model on the hand-coded data, using the variable as the outcome of interest and the text features of the documents as the predictors
+
+--
+
+**3.** Evaluate the effectiveness of the machine learning model via cross-validation (test it on new data/gold standard)
+
+--
+
+**4.** Once you have trained a model with sufficient predictive accuracy, apply the model to the remaining set of documents that have never been hand-coded (e.g., N = 100,000) or use it in the planned application (e.g., a spam filter detection software)
+
+
+---
+
+# Procedure
+
+![](img/machinelearning_process.png)
+---
+
+# Example: Spam detection
+
+
+.pull-left2b[
+
+- Say you have two boxes of emails: spam and not spam
+      - You want to develop a tool to automatically filter spam messages
+
+- How would you do this if you could only use a dictionary?
+      - Compare spam and not spam emails to see which words and word combinations occur a lot in spam  and not in not spam.
+      - Downsides: Extremely time consuming and difficult!
+
+- Machine learning solution
+      - Transform the emails into data (e.g., DTM) 
+      - Let the computer figure out how to compute a probability for whether an email is spam
+      - Different ML algorithms figure this out in different ways
+      
+- The resulting "classifier" can then be integrated in a software tool that can be used to detect spam mails automatically
+
+]
+
+.pull-right2b[
+
+![](https://www.gannett-cdn.com/-mm-/a6718defc8f73669cf5fa602af2b5816e6650aa5/c=0-97-2120-1295/local/-/media/2015/07/15/Phoenix/Phoenix/635725905226180308-ThinkstockPhotos-466311057.jpg)
+]
+
+---
+
+# General idea
+
+.pull-left[
+- Model relation between...
+    - Input features 
+        - Similar to independent variables in statistics
+        - Can be MANY features (e.g., all words in a DTM)
+    - Output class
+        - Similar to dependent variables
+        - Can be categories (e.g., sentiment, topic classification) or continuous (e.g., stock market value)
+        
+]
+
+.pull-right[
+
+- Similar to ‘normal’ statistical modeling, but...
+    - Statistics serves to make inferences about a population (Does X relate to Y?)
+        - Doesn't use too many variables to avoid the difficult of interpreting too many parameters
+        - Fit model using full data (a sample from the population)
+    - Machine learning serves to make generalizable predictions (How to best predict Y?)
+        - Use as many variables as you need, and don’t worry about interpretability of parameters
+        - Always train (fit) and test (validate) on distinct data
+]
+
+---
+
+# Statistical modeling vs. Machine Learning
+
+- Machine learning is thus *similar* to ‘normal’ statistical modeling
+      - Learn `f` so you can predict `y` from `x`: `y ~ f(x)`
+
+- Goal of ‘normal’ modeling: explaining/understanding
+      - Requires interpretable parameters
+
+- Goal of machine learning: best possible prediction
+      - Requires best possible fit
+
+- Machine learning models have often 1000’s of collinear independent variables and can have many latent variables
+
+---
+
+# Advantages and disadvantages of supervised approaches
+
+### Advantages
+
+- independent of language and topic; we only need consistently coded training material
+
+- can be connected to traditional content analysis (same operationalisation, similar criteria in terms of validity and reliability)
+
+- efficient (analysis of very large samples and text corpora possible)
+
+- comparatively simple to integrate
+
+
+### Disadvantages
+
+- Requires large amounts of (manually) coded training data
+
+- Requires in-depth validation
+
+---
+
+class: inverse, center, middle
+
+# Principles of Supervised Text Classification
+
+How do these algorithms work?
+
+---
+
+# Overview of different algorithms
+
+- There are many different "algorithms" or classifiers that we can use:
+
+  - Naive Bayes
+  - Support Vector Machines
+  - Logistic regression
+  - k-Nearest neighbors
+  - ... and many more
+
+- Most of these algorithms have certain hyperparameters that need to be set
+
+  - e.g., learning rate, regularization, structure...
+
+- Unfortunately, there is no good theoretical basis for selecting an algorithm
+
+  - Solution: choose algorithm that performs best
+
+---
+
+# Naive Bayes
+
+
+.pull-left[
+- Computes the prior probability (P) for every category (c = outcome variable) based on the training data set
+
+- Computes the probability of every feature (x) to be a characteristic of the class (c); i.e., the relative frequency of the feature in category
+
+- For every category (c), all feature probabilites (x) are multiplied
+
+- Chooses the class that has highest weighted sum of inputs
+
+- "Naively" assumes that parameters are independent (essentially a linear model, a weighted dictionary)
+
+]
+
+.pull-right[
+
+![](https://s3.ap-south-1.amazonaws.com/techleer/204.png)
+
+
+]
+
+---
+
+# Support vector machines
+
+.pull-left[
+
+![](https://upload.wikimedia.org/wikipedia/commons/7/72/SVM_margin.png)
+]
+
+
+.pull-right[
+
+- Very often used machine learning method
+
+- Tries to find decision boundary between points
+
+- Maximize margin between classes while minimizing errors
+
+- More formally, a support-vector machine constructs a hyperplane or set of hyperplanes in a high- or infinite-dimensional space, which can be used for classification, regression, or other tasks like outliers detection
+
+]
+
+---
+
+# Logistic regression
+
+.pull-left[
+
+- A simple logistic regression model (as you have learned about in P1) can also be a good way to estimate classes
+
+- In simple words, the dependent variable is binary in nature and coded as either 1 (= class A) or 0 (= is not class A).
+
+- Mathematically, a logistic regression model predicts P(Y=1) as a function of X:
+
+`\(P(Y) = \frac {1}{1+e^{-(\beta_0 + \beta_1 x)}}\)`
+
+]
+
+.pull-right[
+
+![](https://user.oc-static.com/upload/2019/05/22/15585409579438_ch09_001_logistic_function.png)
+
+]
+
+---
+
+# Neural networks
+
+.pull-left2b[
+
+- Inspired by human brain (but abstracted to mathematical model)
+
+
+- Each ‘neuron’ is a linear model with activation function: 
+
+`\(y = f(w_1x_1 + … + w_nx_n)\)`
+
+
+- Normal activation functions: logistic, linear, block, tanh, …
+
+
+- Each neuron is practically a generalized linear model
+
+]
+
+.pull-right2b[
+
+![](img/neuralnetwork.png)
+]
+
+
+---
+
+# How to know which performs best?
+
+
+- Sufficiently complex algorithms can "predict" all training data perfectly
+
+- But such an algorithm does not generalize to new data
+
+- Essentially, we want the model to have a good fit to the data, but we also want it to optimize on things that are specific to the training data set
+
+- Problem of under- vs- overfit
 
 ---
 
 
+&lt;img src="04_supervisedlearning_files/figure-html/unnamed-chunk-3-1.png" width="100%" /&gt;
+
+
+---
+
+&lt;img src="04_supervisedlearning_files/figure-html/unnamed-chunk-4-1.png" width="100%" /&gt;
+
+---
+
+&lt;img src="04_supervisedlearning_files/figure-html/unnamed-chunk-5-1.png" width="100%" /&gt;
+
+---
+
+&lt;img src="04_supervisedlearning_files/figure-html/unnamed-chunk-6-1.png" width="100%" /&gt;
+
+---
+
+# Preventing overfitting in machine learning
+
+- Regularization
+
+    - When fitting a model, ‘punish’ complexity / flexibility
+    
+ - Out-of-sample validation detects overfitting
+ 
+    - To see whether a model generalizes to new data, simply test it on new data!
+    
+- In sum, we need to validate our new classifier
+
+---
+
+
+class: inverse, center, middle
+
+# Validation
+
+Best practices and processes.
+
+---
+
+# Typical Machine Learning Process: Training vs. Testing
+
+- Always validate on held-out data
+
+- Models (almost) always overfit
+    - Performance on training data not a good indicator of real quality
+    
+- Solution
+
+    - Split data into train and test sets (There are different ways of doing this, like split-half, leave-1-out, or k-fold)
+    - Train model on training data
+    - Test model on unseen test data
+    - We can again estimate accuracy, precision, recall, and F-Score (see last lecture)
+
+--
+
+- So...why don’t we do this with statistics?
+
+    - Less complex models, so less risk of overfitting (but it’s still a risk!)
+    - Less focus on prediction 
+
+
+---
+
+# Example: Predicting music genre from lyrics
+
+
+- This data is scraped from the "Vagalume" website, so it depends on their storing and sharing millions of song lyrics
+
+- Many different songs, but not all types of music are represented in this data set
+
+
+```
+# A tibble: 161,289 x 10
+# Groups:   SLink [161,289]
+   ALink   SName     SLink         Lyric                       Idiom Artist  Songs Popularity Genre Genres              
+   &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;         &lt;chr&gt;                       &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;               
+ 1 /10000… More Tha… /10000-mania… "I could feel at the time.… ENGL… 10000 …   110        0.3 Rock  Rock; Pop; Electron…
+ 2 /10000… Because … /10000-mania… "Take me now, baby, here a… ENGL… 10000 …   110        0.3 Rock  Rock; Pop; Electron…
+ 3 /10000… These Ar… /10000-mania… "These are. These are days… ENGL… 10000 …   110        0.3 Rock  Rock; Pop; Electron…
+ 4 /10000… A Campfi… /10000-mania… "A lie to say, \"O my moun… ENGL… 10000 …   110        0.3 Rock  Rock; Pop; Electron…
+ 5 /10000… Everyday… /10000-mania… "Trudging slowly over wet … ENGL… 10000 …   110        0.3 Rock  Rock; Pop; Electron…
+ 6 /10000… Don't Ta… /10000-mania… "Don't talk, I will listen… ENGL… 10000 …   110        0.3 Rock  Rock; Pop; Electron…
+ 7 /10000… Across T… /10000-mania… "Well they left then in th… ENGL… 10000 …   110        0.3 Rock  Rock; Pop; Electron…
+ 8 /10000… Planned … /10000-mania… "[ music: Dennis Drew/lyri… ENGL… 10000 …   110        0.3 Rock  Rock; Pop; Electron…
+ 9 /10000… Rainy Day /10000-mania… "On bended kneeI've looked… ENGL… 10000 …   110        0.3 Rock  Rock; Pop; Electron…
+10 /10000… Anthem F… /10000-mania… "For whom do the bells tol… ENGL… 10000 …   110        0.3 Rock  Rock; Pop; Electron…
+# … with 161,279 more rows
+```
+
+---
+
+# Understanding the data set
+
+
+.pull-left[
+
+- Contains o. a. artist name, song name, lyrics, and genre of the artist (not the song)
+
+- The following genres are in the data set:
+
+    - Rock
+    - Hip Hop
+    - Pop music
+    - Sertanejo (Basically the Brazilian version of Country Music)
+    - Funk Carioca (Originated 60s US Funk, a completely different genre in Brazil nowadays)
+    - Samba (Typical Brazilian music)
+    
+]
+
+.pull-right[
+&lt;img src="04_supervisedlearning_files/figure-html/unnamed-chunk-8-1.png" width="100%" /&gt;
+]
+
+---
+
+# How is the data stored and encoded?
+
+
+```r
+d %&gt;%
+  ungroup %&gt;%
+  filter(Artist == "Britney Spears" &amp; SName == "...Baby One More Time") %&gt;%
+  select(Artist, SName, Lyric, Genre)
+```
+
+```
+# A tibble: 1 x 4
+  Artist       SName             Lyric                                                                                                 Genre
+  &lt;chr&gt;        &lt;chr&gt;             &lt;chr&gt;                                                                                                 &lt;chr&gt;
+1 Britney Spe… ...Baby One More… Oh baby baby. Oh baby baby (wow). Oh baby baby. How was I supposed to know?. That something wasn't r… Pop  
+```
+
+```r
+d %&gt;%
+  ungroup %&gt;%
+  filter(Artist == "Drake" &amp; SName == "God's Plan") %&gt;%
+  select(Artist, SName, Lyric, Genre)
+```
+
+```
+# A tibble: 1 x 4
+  Artist SName      Lyric                                                                                                             Genre 
+  &lt;chr&gt;  &lt;chr&gt;      &lt;chr&gt;                                                                                                             &lt;chr&gt; 
+1 Drake  God's Plan "Yeah they wishin' and wishin' and wishin' and wishin'. They wishin' on me, yuh. I been movin' calm, don't start… Hip H…
+```
+
+---
+
+# Note: Dealing with non-determinism
+
+- Many machine learning algorithms are non-deterministic
+
+- Random initial state and/or random parameter improvements
+      - Even deterministic algorithm uses random data split
+
+- Problem: research is not replicable, outcome may be affected
+
+- For replicability: set random seed in R: `set.seed(123)`
+
+- For valid outcome: repeat X times and report average performance
+
+---
+
+# Creating a corpus
+
+
+```r
+library(quanteda)
+library(quanteda.textmodels)
+d &lt;- d %&gt;%
+  filter(Genre == "Rock" | Genre == "Pop" | Genre == "Hip Hop")
+
+music &lt;- corpus(d, docid_field = "SLink", text_field = "Lyric")
+music
+```
+
+```
+Corpus consisting of 116,190 documents and 8 docvars.
+/10000-maniacs/more-than-this.html :
+"I could feel at the time. There was no way of knowing. Falle..."
+
+/10000-maniacs/because-the-night.html :
+"Take me now, baby, here as I am. Hold me close, and try and ..."
+
+/10000-maniacs/these-are-days.html :
+"These are. These are days you'll remember. Never before and ..."
+
+/10000-maniacs/a-campfire-song.html :
+"A lie to say, "O my mountain has coal veins and beds to dig...."
+
+/10000-maniacs/everyday-is-like-sunday.html :
+"Trudging slowly over wet sand. Back to the bench where your ..."
+
+/10000-maniacs/dont-talk.html :
+"Don't talk, I will listen. Don't talk, you keep your distanc..."
+
+[ reached max_ndoc ... 116,184 more documents ]
+```
+
+---
+
+# Splitting the data into a train and a test set
+
+
+.pull-left2b[
+
+
+```r
+# Set seed to insure replicability
+set.seed(42)
+
+# Sample rows for testset and create subsets
+testset &lt;- sample(docnames(music), nrow(d)/2)
+music_test &lt;-  music %&gt;% corpus_subset(docnames(music) %in% testset)
+music_train &lt;- music %&gt;% corpus_subset(!docnames(music) %in% testset)
+
+# Define outcome variable for each set
+genre_train &lt;- as.factor(docvars(music_train, "Genre"))
+genre_test &lt;- as.factor(docvars(music_test, "Genre"))
+```
+
+]
+
+
+.pull-right2b[
+
+- The procedure is always the same 
+
+- Split data into train and test set
+    - split-half (what we do here)
+    - leave-1-out
+    - k-fold
+
+- We store the outcome variable (`Genre`) for each subset
+
+]
+---
+
+# Text preprocessing (remember lecture 3?)
+
+.pull-left[
+
+- Step 1: Tokenization (including removing 'noise') and normalization
+
+- Step 2: Removing stop words
+
+- Step 3: Stemming
+
+- Step 4: Create document-feature matrix (DFM)
+
+- Step 5: Remove to short (&lt; 2 characters) and rare words
+
+- (Step 6: Transforms the `dtm` so that words with a high document frequency weight less)
+
+]
+
+.pull-right[
+
+
+```r
+dfm_train &lt;- music_train %&gt;% 
+  tokens(remove_punct = T, 
+         remove_numbers = T, 
+         remove_symbols = T) %&gt;%
+  tokens_tolower %&gt;%
+  tokens_remove(stopwords('en')) %&gt;%
+  tokens_wordstem %&gt;%
+  dfm %&gt;%
+  dfm_select(min_nchar = 2) %&gt;% 
+  dfm_trim(min_docfreq=20) %&gt;%
+  dfm_tfidf()   # weighting process
+```
+
+]
+---
+
+# Choose algorithm and train model
+
+
+```r
+library(quanteda.textmodels)
+m_nb &lt;- textmodel_nb(x = dfm_train, y = genre_train)
+summary(m_nb)
+```
+
+```
+
+Call:
+textmodel_nb.dfm(x = dfm_train, y = genre_train)
+
+Class Priors:
+(showing first 3 elements)
+Hip Hop     Pop    Rock 
+ 0.3333  0.3333  0.3333 
+
+Estimated Feature Scores:
+            take      now     babi      hold     close       tri understand      desir     hunger      fire    breath
+Hip Hop 0.001212 0.001709 0.001888 0.0006368 0.0003482 0.0008651  0.0003373 0.00004339 0.00002898 0.0003382 0.0002871
+Pop     0.001912 0.002209 0.003575 0.0012459 0.0007566 0.0013738  0.0005118 0.00017103 0.00006059 0.0007605 0.0006797
+Rock    0.002145 0.002460 0.002282 0.0013524 0.0007455 0.0015209  0.0006004 0.00028225 0.00010402 0.0010468 0.0008306
+            love     banquet       feed     come      way     feel    command      hand       sun     descend      hurt
+Hip Hop 0.001688 0.000010103 0.00013287 0.001310 0.001060 0.001011 0.00003257 0.0007522 0.0001953 0.000008027 0.0003476
+Pop     0.004675 0.000007163 0.00009344 0.002088 0.001887 0.002379 0.00003420 0.0011299 0.0007235 0.000022522 0.0007979
+Rock    0.003456 0.000018215 0.00028555 0.002653 0.002062 0.002207 0.00008816 0.0012946 0.0011366 0.000053122 0.0007014
+            night    belong     lover        us     caus     doubt      alon      ring
+Hip Hop 0.0007309 0.0000717 0.0001143 0.0009473 0.001716 0.0001802 0.0003117 0.0003029
+Pop     0.0016766 0.0002989 0.0005302 0.0012290 0.002201 0.0002322 0.0008661 0.0003434
+Rock    0.0018035 0.0004535 0.0005678 0.0014138 0.001477 0.0002986 0.0012920 0.0004085
+```
+
+
+---
+
+# Predict genre in test set using the algorithm
+
+.pull-left[
+
+- To see how well the model does, we test it on the test data
+
+- For this, it is important that the test data uses the same features (vocabulary) as the training data
+
+- The model contains parameters for these features, not for words that only occur in the test data
+
+- In other words, we have to "match" or "align" the train and test data
+
+    - Same textprocessing
+    - Matching of the features
+
+]
+
+
+.pull-right[
+
+```r
+# Matching
+dfm_test &lt;- music_test %&gt;% 
+  tokens(remove_punct = T, 
+         remove_numbers = T, 
+         remove_symbols = T) %&gt;%
+  tokens_remove(stopwords('en')) %&gt;%
+  tokens_wordstem %&gt;%
+  dfm %&gt;% 
+  dfm_match(featnames(dfm_train)) %&gt;% 
+  dfm_tfidf()
+
+# Actual prediction
+nb_pred &lt;- predict(m_nb, newdata = dfm_test)
+head(nb_pred, 2)
+```
+
+```
+/10000-maniacs/more-than-this.html 
+                              Rock 
+/10000-maniacs/these-are-days.html 
+                              Rock 
+Levels: Hip Hop Pop Rock
+```
+]
+
+---
+
+# Evaluating the Prediction: Validation of Naive Bayes model
+
+.pull-left[
+
+- As we can see in the confusion matrix, there are a lot of false positives and false negatives!
+
+- **Overall Accuracy**: 64.71%
+
+- Precision, Recall and F1-Score are not too good for each genre
+    
+    - Precision is slightly better for Rock and Pop,
+    - Recall is better for Hip Hop
+
+]
+
+.pull-right[
+
+
+```
+--- Confusion Matrix ---
+```
+
+```
+          Reference
+Prediction Hip Hop   Pop  Rock
+   Hip Hop    7106  2501  3315
+   Pop        1012  7073  2849
+   Rock       1166  9659 23414
+```
+
+```
+--- Validation Scores ---
+```
+
+```
+           Genre Precision Recall   F1
+1 Class: Hip Hop      0.55   0.77 0.64
+2     Class: Pop      0.65   0.37 0.47
+3    Class: Rock      0.68   0.79 0.73
+```
+
+]
+
+---
+
+# Different algorithm (SVM) = better results?
+
+
+
+.pull-left[
+
+- When we refit the model with support vector machines, there are still a lot of false positives and false negatives
+
+- **Overall Accuracy**: 69.66%
+
+- However, Precision, Recall and F1-Score all became better!
+
+]
+
+.pull-right[
+
+
+```
+--- Confusion Matrix ---
+```
+
+```
+          Reference
+Prediction Hip Hop   Pop  Rock
+   Hip Hop    6509  1228   796
+   Pop        1682 10297  5117
+   Rock       1093  7708 23665
+```
+
+```
+--- Validation Scores ---
+```
+
+```
+           Genre Precision Recall   F1
+1 Class: Hip Hop      0.76   0.70 0.73
+2     Class: Pop      0.60   0.54 0.57
+3    Class: Rock      0.73   0.80 0.76
+```
+
+]
+
+---
+# Comparison between Naive Bayes and Support Vector Machines
+
+.pull-left[
+
+
+```
+        model   Genre Precision Recall   F1
+1 Naive Bayes Hip Hop      0.55   0.77 0.64
+2 Naive Bayes     Pop      0.65   0.37 0.47
+3 Naive Bayes    Rock      0.68   0.79 0.73
+4         SVM Hip Hop      0.76   0.70 0.73
+5         SVM     Pop      0.60   0.54 0.57
+6         SVM    Rock      0.73   0.80 0.76
+```
+
+]
+
+.pull-right[
+
+- Support vector machines perfom slightly better overall
+
+- Precision, Recall and F1-Score are all better
+
+- Particularly the prediction of "Hip Hop" and "Rock" have improved considerably
+
+]
+
+---
+
+# Visualizing performance
+
+&lt;img src="04_supervisedlearning_files/figure-html/unnamed-chunk-19-1.png" width="100%" /&gt;
+
+---
+
+# Drivers of model performance
+
+1. Task difficulty
+
+2. Amount of training data
+
+3. Choice of features (n-grams, lemmata, etc)
+
+4. Text preprocessing (e.g., exclude or include stopwords?)
+
+5. Tuning of algorithm (if required)
+
+---
+
+# What is the effect of text preprocessing on model performance?
+
+![](img/scharkow_table3.png)
+
+
+---
+class: inverse, center, middle
+
+# Examples from the literature
+
+How is this used in research?
+
+---
+
+# Example 1: Validating different approaches
+
+-  Van Atteveldt et al (2021) re-analysised data reported in Boukes et al. (2020) to understanding the validity of different text classification approaches 
+
+- The data incldued news from a total of ten newspapers and five websites published between February 1 and July 7, 2015:
+
+    - three quality newspapers (NRC Handelsblad, Trouw, de Volkskrant)
+    - a financial newspaper (Financieel Dagblad)
+    - three popular newspapers (Algemeen Dagblad, Metro, De Telegraaf)
+    - three regional outlets (Dagblad van het Noorden, de Gelderlander, Noordhollands Dagblad)
+    
+---
+
+# Methods
+    
+- They analyzed the paper using different methods and compared the results
+
+    - Gold standard (manual coding by the three authors)
+    - Manual coding (1 or 3 coders)
+    - Crowd-Coding (1, 3 or 5 coders on a online platform)
+    - Sentiment dictionaries (various versions)
+    - Different supervised machine learning algorithms (NB, SVM, convolutional neural networks)
+    
+- Investigating performance results of all models
+---
+
+# Main results
+
+![](img/vanatteveldt_table2.png)
+
+---
+
+# So which method is valid?
+
+- Manual coding still outperforms all other approaches
+
+- Supervised text classification (particularly deep learning) is better than dictionary approaches (not too surprising)
+
+- Particularly supervised learning gets better with more training data (more is more!)
+
+- Nonetheless strongly depends on quality of training data
+
+- Recommendation for dictionary: Apply any applicable off-the-shelf dictionaries and if any of these is sufficiently valid as
+determined by comparison with the gold standard, use this for the textanalysis
+
+    - dictionaries give very good transparency
+    - replicability for a low cost
+
+---
+
+# Example 2: Incivility in Facebook comments
+
+- Study examined the extent and patterns of incivility in the comment sections of 42 US news outlets’ Facebook pages in 2015–2016
+
+- News source outlets included
+    
+    - National-news outlets (e.g., ABC, CBS, CNN...)
+    - Local-new outlets (e.g., The Denver Post, San Francisco Chronicle...)
+    - Conservative and liberal partisan news outlets (e.g., Breitbart, The Daily Show...)
+    
+- Implemented a combination of manual coding and supervised machine learning to code comments with regard to:
+
+    - Civil
+    - Interpersonal rudeness
+    - Personal rudeness
+    - Impersonal extreme incivility
+    - Personal extreme civility
+    
+---
+
+# Results: Incivility over time
+
+.pull-left[
+- Despite several discernible spikes, the percentage of extremely uncivil personal comments on national-news outlets’ pages shifted only modestly 
+
+- On conservative outlets’ Facebook pages, the proportions of both extremely uncivil and rude comments fluctuated dramatically across the sampling window
+
+_Su et al., 2018_
+
+]
+
+.pull-left[
+
+![](img/su_fig1.png)
+]
+---
+
+# Overall differences
+
+![](img/sug_fig2.png)
+
+
+---
+class: inverse, center, middle
+
+# Outlook and Conclusion
+
+---
+
+# Unsupervised machine learning
+
+- A type of machine learning in which the algorithm is not provided with any pre-assigned labels or scores for the training data
+
+- As a result, unsupervised learning algorithms must first self-discover any naturally occurring patterns in that training data set
+
+- The resulting "classes", "patterns", or "groups need to be interpreted by the researcher
+
+- Approach is similar to two statistical approaches:
+
+    - Exploratory factor analysis: Finding similar items to create latent factors
+    - Cluster analysis: Finding similar observations to create clusters of similar observations
+
+---
+
+# Example: Topic modelling of 80 years of communication science
+
+
+- Günther and Domahidi (2017) used unsupervised topic modelling to extract **topics** from 80 years of published communication research (i.e., based on abstracts)
+
+- The data includeed n = 15,172 articles from journals such as Journal of Communication, Communication Research, etc. 
+
+![](img/günther_table1.png)
+
+---
+
+# Results: More and more research is published
+
+
+![](img/günther_fig1.png)
+
+---
+
+# Deep learning
+
+- Deep learning is part of a broader family of machine learning methods based on artificial neural networks with representation learning
+
+- Learning can again be supervised, semi-supervised or unsupervised.
+
+- Large neural network with many hidden layers
+    - Possible because of modern computing power, large training sets
+    - Powers e.g. automatic translation, self-driving cars, chess computers, etc
+
+- Originally developed to deal with image recognition, now also adapted for text analysis
+
+- Use words in order, rather than document-level frequencies (allows for word combinations/relations)
+
+---
+
+# Example: TV gender representation
+
+
+.pull-left[
+
+![](img/juergen_face.png)
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+_Jürgens, Meltzer, &amp; Scharkow, 2021_
+
+]
+
+
+.pull-left[
+
+![](img/juergen_face2.png)
+
+]
+
+
+
+---
+
+# Is machine learning really useful?
+
+
+.pull-left2b[
+- Is it OK to use a model we can’t possibly understand?
+
+- Machine learning in the social sciences generally used to solve an engineering problem
+
+- Output of ML is input for “actual” model (e.g., we classify text, but run classic statistics with the output)]
+
+.pull-right2b[
+
+![](https://upload.wikimedia.org/wikipedia/commons/8/81/Artificial_Intelligence_%26_AI_%26_Machine_Learning_-_30212411048.jpg)
+
+]
+---
+
+# Summary
+
+
+
+.pull-left2[
+
+![](img/thematrix.jpeg)
+]
+
+.pull-right2[
+- Machine learning is a useful tool for generalizing from sample
+
+- It is very useful to reduce the amount of manual coding needed
+
+- Many different models exist (each with many parameters/options)
+
+- We always need to validate model on unseen and representative test data!
+
+]
+---
 
 class: inverse, center, middle
 
 # Thank you for your attention!
+
+---
+
+# Required Reading
+
+&lt;br&gt;&lt;br&gt;
+
+van Atteveldt, W., van der Velden, M. A. C. G., &amp; Boukes, M.. (2021). The Validity of Sentiment Analysis: Comparing Manual Annotation, Crowd-Coding, Dictionary Approaches, and Machine Learning Algorithms. Communication Methods and Measures, (15)2, 121-140, https://doi.org/10.1080/19312458.2020.1869198
+
+Su, L. Y.-F., Xenos, M. A., Rose, K. M., Wirz, C., Scheufele, D. A., &amp; Brossard, D. (2018). Uncivil and personal? Comparing patterns of incivility in comments on the Facebook pages of news outlets. New Media &amp; Society, 20(10), 3678–3699. https://doi.org/10.1177/1461444818757205
+
+&lt;br&gt;
+
+_(available on Canvas)_
+
 
 
 ---
@@ -129,6 +1165,21 @@ class: inverse, center, middle
 class: my-one-page-font
 
 # References
+
+- Boumans, J. W., &amp; Trilling, D. (2016). Taking stock of the toolkit: An overview of relevant automated content analysis approaches and techniques for digital journalism scholars. Digital journalism, 4(1), 8-23.
+
+- Günther, E. , &amp; Domahidi, E. (2017). What Communication Scholars Write About:
+An Analysis of 80 Years of Research in High-Impact Journals. International Journal of Communication 11(2017), 3051–3071
+
+- Hvitfeld, E. &amp; Silge, J. (2021). Supervised Machine Learning for Text Analysis in R. CRC Press. https://smltar.com/
+
+- Jürgens, P., Meltzer, C., &amp; Scharkow, M. (2021, in press). Age and Gender Representation on German TV: A Longitudinal Computational Analysis. Computational Communication Research. 
+
+- Scharkow, M. (2013). Thematic content analysis using supervised machine learning: An empirical evaluation using german online news. Quality &amp; Quantity, 47(2), 761–773. https://doi.org/10.1007/s11135-011-9545-7
+
+- Su, L. Y.-F., Xenos, M. A., Rose, K. M., Wirz, C., Scheufele, D. A., &amp; Brossard, D. (2018). Uncivil and personal? Comparing patterns of incivility in comments on the Facebook pages of news outlets. New Media &amp; Society, 20(10), 3678–3699. https://doi.org/10.1177/1461444818757205
+
+- van Atteveldt, W., van der Velden, M. A. C. G., &amp; Boukes, M.. (2021). The Validity of Sentiment Analysis: Comparing Manual Annotation, Crowd-Coding, Dictionary Approaches, and Machine Learning Algorithms. Communication Methods and Measures, (15)2, 121-140, https://doi.org/10.1080/19312458.2020.1869198
 
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
