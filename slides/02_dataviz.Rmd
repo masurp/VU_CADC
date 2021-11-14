@@ -224,7 +224,7 @@ head(tidy_covid)
 
 ```{r, warning = F, message = F, R.options = list(width = 80)}
 subset_covid <- tidy_covid %>% 
-  mutate(Deaths_million = as.numeric(gsub(",","",`Deaths/million`)),  # transform character into numeric values
+  mutate(Deaths_million = as.numeric(gsub(",","",`Deathsper million`)),  # transform character into numeric values
          Deaths = as.numeric(gsub(",","", Deaths)),
          Cases = as.numeric(gsub(",","", Cases)),
          Mortality = (Deaths/Cases)*100) %>%                          # estimate mortality
@@ -1530,5 +1530,75 @@ class: my-one-page-font
 
 
 
+---
+
+# Example Exam Question (Multiple Choice)
+
+Imagine you have collected data on how much time people spent on Instagram (e.g., in minutes per day) and on their self-esteem (e.g., a personality type questionnaire). You want to estimate the relationship between the two variables and want to make sure that a linear model is the correct choice. What data visualization could help you here?
+
+A. First, one can plot histograms to investigate the variables' distribution. Second, one can test differences in self-esteem with a boxplot. 
+
+B. First, one can plot histograms to investigate the variables' distribution. Second, one can use a scatter plot to assess the linearity of the relationship. 
+
+C. Both of the statements above are correct. 
+
+D. None of the statements above are correct. 
+
+---
+
+# Example Exam Question (Multiple Choice)
+
+Imagine you have collected data on how much time people spent on Instagram (e.g., in minutes per day) and on their self-esteem (e.g., a personality type questionnaire). You want to estimate the relationship between the two variables and want to make sure that a linear model is the correct choice. What data visualization could help you here?
+
+A. First, one can plot histograms to investigate the variables' distribution. Second, one can test differences in self-esteem with a boxplot. 
+
+**B. First, one can plot histograms to investigate the variables' distribution. Second, one can use a scatter plot to assess the linearity of the relationship.**
+
+C. Both of the statements above are correct. 
+
+D. None of the statements above are correct. 
+
+---
+
+# Example Exam Question (Open Format)
+
+.pull-left[
+```{r, echo = F, fig.height=4, fig.width = 5}
+d <- tibble(group = rep(c("Level 1", "Level 2", "Level 3"), 100),
+       outcome = rnorm(300, c(2, 3, 4), c(2, 3, 4)))
+
+d %>%
+  group_by(group) %>%
+  summarize(m = mean(outcome),
+            se = psych::describe(outcome)$se,
+            ll = m - 1.96*se,
+            ul = m + 1.96*se) %>%
+  ggplot(aes(x = group, y = m, ymin = ll, ymax = ul, fill = group, group = 1)) +
+  geom_line() +
+  geom_errorbar(width=.1, position=position_dodge(.9)) +
+  geom_point(shape=21, size=3, fill="white") +
+  ylim(0.5, 6) +
+  theme_classic() +
+  labs(x = "", y = "")
+```
+
+]
+
+.pull-right[
+
+The figure on the left shows result from an experiment, in which researchers investigated the impact of increasingly negative articles about a politician on people's attitude towards this politician. What is good and what is bad about the figure? <br>
+_(2 points each for explaining weaknesses and strengths of the figure)_
+
+
+]
+
+---
+
+# Answer
+
+
+Strengths: Overall, the figure is not too complicated and conveys the results in a clear manner. Most importantly, by including 95% confidence intervals, the authors have conveyed uncertainty around the results and allow readers to assess the significance of the difference between groups (e.g., it seems that Level 3 was significantly different from Level 1, but not from Level 2).
+
+Weaknesses/Issues: The authors did not provide a title for the figure, but more importantly, they did not label the axes. This way, the figure can not be understood without additional information. Further, it is unclear whether the y-axis represents the full attitudinal scale or whether it was truncated. This is problematic because it could potentially over-accentuate the differences between the experimental conditions. A minor suggestion for improvement: The authors could add some grey grid lines which could help to assess the true value of the estimated point differences. 
 
 
