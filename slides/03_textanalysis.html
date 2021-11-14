@@ -607,7 +607,7 @@ textstat_summary(dfm(toks))
 
 .pull-left[
 - Rule-based analyses (deductive approaches)
-    - Assigns meaning by researcher
+    - Meaning is assigned by researcher
     - “if word X occurs, the text means Y”
     
 - Supervised machine learning (inductive approaches)
@@ -1495,6 +1495,54 @@ class: my-one-page-font
 - Hvitfeld, E. &amp; Silge, J. (2021). Supervised Machine Learning for Text Analysis in R. CRC Press. https://smltar.com/
 
 - Krippendorff, K. (2004). Content Analysis. Sage. 
+
+---
+
+# Example Exam Question (Multiple Choice)
+
+A very important step in any automated text analysis refers to "transforming the text to structured data". What are typical preprocessing steps?
+
+A. Tokenization, translation, combination, and frequency trimming.
+
+B. Tokenization, stopword removal, normalization, and frequency trimming.
+
+C. Tokenization, inclusion of annotations, interpretation, and frequency trimming.
+
+D. Tokenization, stopword removal, combination, and inclusion of annotations. 
+
+---
+
+# Example Exam Question (Multiple Choice)
+
+A very important step in any automated text analysis refers to "transforming the text to structured data". What are typical preprocessing steps?
+
+A. Tokenization, translation, combination, and frequency trimming.
+
+**B. Tokenization, stopword removal, normalization, and frequency trimming.**
+
+C. Tokenization, inclusion of annotations, interpretation, and frequency trimming.
+
+D. Tokenization, stopword removal, combination, and inclusion of annotations. 
+
+
+---
+
+# Example Exam Question (Open Format)
+
+Name and explain two disadvantages of dictionary approaches. &lt;br&gt;
+_(4 points, 2 points for correctly naming two disadvantages and 2 points for correctly explaining them)_
+
+--
+
+1. Low validity: Dictionary approaches measure the concepts of interest based on simple word lists. Particularly with non-trivial and complex concepts (e.g., sentiment, frames, topics,...), the assumption that this word in a reliable and valid way may be problematic. For example, true sentiment is more than just counting positive and negative words. 
+
+2. Requires considerable text preprocessing: To reduce ambiguity, dictionary approaches require a lot of text preprocessing (e.g., removing stopwords, punctuation, numbers, stemming, lemmatization). For example, the word "like" would be coded as a positive word in most sentiment dictionaries, but in most sentences, it only refers to something being "like" something else. 
+
+
+
+
+
+
 
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
