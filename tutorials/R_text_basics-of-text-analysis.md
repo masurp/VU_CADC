@@ -54,10 +54,11 @@ library(quanteda.textstats)
 
 # Step 1: Importing text and creating a quanteda corpus
 
-The first step is getting text into R in a proper format. stored in a
-variety of formats, from plain text and CSV files to HTML and PDF, and
-with different ‘encodings’. There are various packages for reading these
-file formats, and there is also the convenient
+The first step is getting text into R in a proper format. Text is often
+stored in a variety of formats, from plain text and CSV files to HTML
+and PDF, and more often than not with different ‘encodings’. There are
+various packages for reading these file formats, and there is also the
+convenient
 [readtext](https://cran.r-project.org/web/packages/readtext/vignettes/readtext_vignette.html)
 that is specialized for reading texts from a variety of formats.
 
@@ -122,8 +123,8 @@ I read them from an online source here, but you can also read them from
 your hard drive by specifying the path:
 
 ``` r
-texts <- reattext("c:/path/to/files")
-texts <- reattext("/Users/me/Documents/files")
+texts <- readtext("c:/path/to/files")
+texts <- readtext("/Users/me/Documents/files")
 ```
 
 You can convert the texts directly into a corpus object as above:
@@ -173,13 +174,13 @@ sentences.
 ## Preprocessing/cleaning DTMs
 
 However, directly converting a text to a DTM is a bit crude. Note, for
-instance, that the words `Cats`, `cats`, and `cat` are given different
-columns. In this DTM, “Cats” and “awesome” are as different as “Cats”
-and “cats”, but for many types of analysis we would be more interested
-in the fact that both texts are about felines, and not about the
-specific word that is used. Also, for performance it can be useful (or
-even necessary) to use fewer columns, and to ignore less interesting
-words such as `is` or very rare words such as `soliloquy`.
+instance, that the words `cats`, and `cat` are given different columns.
+In this DTM, “cats” and “awesome” are as different as “cats” and “cat”,
+but for many types of analysis we would be more interested in the fact
+that both texts are about felines, and not about the specific word that
+is used. Also, for performance it can be useful (or even necessary) to
+use fewer columns, and to ignore less interesting words such as `is` or
+very rare words such as `soliloquy`.
 
 This can be achieved by using additional `preprocessing` steps. In the
 next example, we’ll again create the DTM, but this time we make all text
@@ -242,14 +243,14 @@ dtm <- corp %>%
 dtm
 ```
 
-This dtm has 23,469 documents and 20,429 features (i.e. terms), and no
+This dtm has 23,469 documents and 16,032 features (i.e. terms), and no
 longer shows the actual matrix because it simply wouldn’t fit. Depending
 on the type of analysis that you want to conduct, we might not need this
 many words, or might actually run into computational limitations.
 
-Luckily, many of these 20K features are not that informative. The
+Luckily, many of these 16K features are not that informative. The
 distribution of term frequencies tends to have a very long tail, with
-many words occuring only once or a few times in our corpus. For many
+many words occurring only once or a few times in our corpus. For many
 types of bag-of-words analysis it would not harm to remove these words,
 and it might actually improve results.
 
@@ -323,10 +324,11 @@ textplot_keyness(ts)
 ```
 
 **Exercise 1:** Create two subset of the dtm. The first one should only
-contain speeches of “Abraham Lincoln” and the second of “George Bush”.
-In a first step, create two wordclouds. How did these president differ
-with regard to the words they used? Second, create a keyness plot to
-visualize the difference.
+contain speeches of “Abraham Lincoln” and the second of “George W.
+Bush”. In a first step, create two wordclouds. How did these president
+differ with regard to the words they used? Second, create a keyness plot
+to visualize the difference between Bush and the rest of the entire
+corpus
 
 ``` r
 # Solution here
@@ -374,10 +376,11 @@ textplot_wordcloud(terror_dtm, max_words = 50)     ## top 50 (most frequent) wor
 ## Dictionary search
 
 You can perform a basic dictionary search. In terms of query options
-this is less advanced than AmCAT, but quanteda offers more ways to
-analyse the dictionary results. Also, it supports the use of existing
-dictionaries, for instance for sentiment analysis (but mostly for
-english dictionaries, we will do this next week).
+this is less advanced than other packages, but quanteda offers more ways
+to analyse the dictionary results. Also, it supports the use of existing
+dictionaries, for instance for sentiment or topic analyses (but mostly
+for english dictionaries, we will do this in the next practical
+session).
 
 An convenient way of using dictionaries is to make a DTM with the
 columns representing dictionary terms.
