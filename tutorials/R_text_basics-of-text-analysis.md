@@ -417,13 +417,21 @@ head(df)
 **Exercise 2:** Create a barplot that compares how much each president
 has talked about the four topics (freedom, military, economy,
 terrorism). In how far does George Bush (Jr) differ from the others?
-Tip: You first need to convert the original corpus into a data.frame and
-then merge it with the data frame we just created. Then you have to
-group by presidents and summarize the topics in one way or the other.
-Finally, you may have to engage in some reshaping before you can plot
-the data.
+Tip: The following code already converts the original corpus into a
+data.frame, merges it with the data frame we just created, and
+summarized the topics per president. You now may have to engage in some
+reshaping before you can plot the data in a meaningful way. Also:
+coord\_flip() may be good to use…
 
 ``` r
+new_data <- convert(corp, "data.frame") %>%
+  left_join(df) %>%
+  group_by(President) %>%
+  summarise(terrorism = sum(terrorism)/n(),
+            economy = sum(economy)/n(),
+            military = sum(military)/n(),
+            freedom = sum(freedom)/n())
+
 # Solution here
 ```
 
