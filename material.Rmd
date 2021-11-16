@@ -117,13 +117,13 @@ In the third cycle, students will work on their own research projects. Resources
 #### Practical Session 1
 
 - Handouts: 
-    - [Basic text analysis](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_basics-of-text-analysis.md) ([Version with solutions](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_basics-of-text-analysis_complete.md))
+    - [Basic Text Analysis](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_basics-of-text-analysis.md) ([Version with solutions](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_basics-of-text-analysis_complete.md))
 
 #### Practical Session 2 
 
 - Handouts: 
 
-  - [Dictionary approaches](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_dictionary-approaches.md)
+  - [Dictionary Approaches](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_dictionary-approaches.md)
 
 #### Homework
 
@@ -133,7 +133,7 @@ In the third cycle, students will work on their own research projects. Resources
 #### Additional resources
 
 - Chapter 9 & 10 in "Computational Analysis of Communication" by Van Atteveldt et al. (see Canvas)
-- A nice [Tutorial for Sentiment Analysis](https://content-analysis-with-r.com/3-sentiment.html) by Cornelius Puschmann and Mario Haim (including R code examples)
+- A Nice [Tutorial for Sentiment Analysis](https://content-analysis-with-r.com/3-sentiment.html) by Cornelius Puschmann and Mario Haim (including R code examples)
 
 <br>
 <hr>
