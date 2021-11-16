@@ -10,11 +10,11 @@ The course consists of one lecture (starting from the 1st of November 2021) and 
 
 | Class | Teacher | Room & Time |
 | :---- | :---- |:--------- |
-| Lectures            | Dr. Philipp Masur | **HG-14A00** (Monday, 9:00am) |
-| Practical session 1 | Dr. Philipp Masur | **HG-01A32** (Tuesday, 9:00), **HG-11A22** (Thursday, 13:30) |
+| Lectures            | Dr. Philipp Masur | **online via Zoom** (Monday, 9:00am) |
+| Practical session 1 | Dr. Philipp Masur | **online via Zoom** (Tuesday, 9:00 & Thursday, 13:30) |
 | Practical session 2 | Dr. Philipp Masur | **HG-01A32** (Tuesday, 11:00), **HG-11A22** (Thursday, 15:30) |
 | Practical session 3 | Dr. Paulina Pankowska | **HG-11A36** (Tuesday, 9:00 & Thursday, 13:30) |
-| Practical session 4 | Dr. Paulina Pankowska | **HG-11A36** (Tuesday, 11:00 & Thursday, 15:30) |
+| Practical session 4 | Dr. Paulina Pankowska | **online via Zoom** (Tuesday, 11:00 & Thursday, 15:30) |
 | Practical session 5 | Dr. Kasper Welbers |**HG-02A37** (Tuesday, 9:00 & Thursday, 13:30) |
 
 
