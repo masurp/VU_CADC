@@ -117,7 +117,7 @@ In the third cycle, students will work on their own research projects. Resources
 #### Practical Session 1
 
 - Handouts: 
-    - [Basic text analysis](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_basics-of-text-analysis.md)
+    - [Basic text analysis](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_basics-of-text-analysis.md) ([Version with solutions](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_basics-of-text-analysis_complete.md))
 
 #### Practical Session 2 
 
