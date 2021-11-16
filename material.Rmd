@@ -133,6 +133,7 @@ In the third cycle, students will work on their own research projects. Resources
 #### Additional resources
 
 - Chapter 9 & 10 in "Computational Analysis of Communication" by Van Atteveldt et al. (see Canvas)
+- A nice [Tutorial for Sentiment Analysis](https://content-analysis-with-r.com/3-sentiment.html) by Cornelius Puschmann and Mario Haim (including R code examples)
 
 <br>
 <hr>
