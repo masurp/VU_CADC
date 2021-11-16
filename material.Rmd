@@ -123,7 +123,7 @@ In the third cycle, students will work on their own research projects. Resources
 
 - Handouts: 
 
-  - Dictionary approaches (to be uploaded soon)
+  - [Dictionary approaches](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_dictionary-approaches.md)
 
 #### Homework
 
