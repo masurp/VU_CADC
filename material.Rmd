@@ -128,7 +128,8 @@ In the third cycle, students will work on their own research projects. Resources
 #### Homework
 
 - Complete this assignment (copy the entire code into a RMarkdown file)
-    - [Homework: Dictionary Approaches](https://github.com/masurp/VU_CADC/blob/main/homework/03_homework_assignment.Rmd)
+    - Homework: Dictionary Approaches (to be uploaded soon)
+    
 
 #### Additional resources
 
@@ -143,7 +144,7 @@ In the third cycle, students will work on their own research projects. Resources
 #### Lecture: Machine Learning - Supervised Text Classification
 
 - Slides:
-    - Download Slides (to be uploaded soon)
+    - [Download Slides](slides/04_supervisedlearning.html)
 
 #### Practical Session 1
 
