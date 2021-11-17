@@ -15,7 +15,9 @@ Wouter van Atteveldt, Kasper Welbers & Philipp Masur
 -   [Sentiment analysis](#sentiment-analysis)
     -   [Creating a quanteda dictionary from a word
         list](#creating-a-quanteda-dictionary-from-a-word-list)
-    -   [Improving a dictionary](#improving-a-dictionary)
+    -   [Running the sentiment
+        analysis](#running-the-sentiment-analysis)
+    -   [Creating sentiment scores](#creating-sentiment-scores)
 
 # Introduction
 
@@ -40,8 +42,6 @@ these approaches. Particularly, the validity of such dictionaries is -
 despite them being used in actual research - often questionable. So
 overall, the main lessons of today’s tutorial is that you should always
 validate to make sure your results are valid for your task and domain.
-For example, it is always a good idea to adapt a lexicon (dictionary) to
-your domain/task by inspecting (the context of) the most common words.
 Depending on resources, using crowd coding and/or machine learning can
 also be a better option than a purely lexical (dictionary-based)
 approach.
@@ -110,15 +110,9 @@ about whether it was liked (favorite\_count) or retweeted
 (retweet\_count).
 
 Because the format is still a simple data set (or tibble), we can
-quickly check how many tweets we have per company and check how much
-each company tweeted over time:
+quickly check how much each company tweeted over time:
 
 ``` r
-# Number of tweets per company
-tweets %>%
-  group_by(screen_name) %>%
-  count
-
 # Tweets over time
 tweets %>%
   mutate(date = as.Date(created_at)) %>%
@@ -169,29 +163,6 @@ dtm <- corp %>%
   tokens %>%
   dfm
 dtm
-```
-
-And when we have a dtm, we might as well make a word cloud to make sure
-that the results make some sense:
-
-``` r
-textplot_wordcloud(dtm, max_words=200, color = c("lightblue", "orange", "red", "black"))
-```
-
-There are a lot of unncessary words in the dfm (e.g., search terms, stop
-words, symbols…). Although this is not necessarily problematic for a
-dictionary analysis, we can nonetheless - for the moment - remove them
-to get a better word cloud.
-
-``` r
-dtm2 <- corp %>% 
-  tokens(remove_punct = T, remove_numbers = T, remove_symbols = T) %>% 
-  tokens_remove(stopwords("en")) %>%
-  tokens_remove("https*") %>%     ## Removing any links
-  dfm %>%
-  dfm_select(min_nchar = 2) %>%   ## at least two characters
-  dfm_trim(min_docfreq=10)        ## word should be in the data set at least 10 times
-textplot_wordcloud(dtm2, max_words=100, color = c("lightblue", "orange", "red", "black"))
 ```
 
 # Dictionary-based analysis
@@ -278,26 +249,21 @@ of times each brand personality dimension was mentioned by the different
 companies.
 
 ``` r
-tweets2 %>%
-  select(company = screen_name,
-         COMPETENCE:SOPHISTICATION) %>%
-  pivot_longer(-company, names_to = "brand_pers") %>%
-  group_by(company, brand_pers) %>%
-  summarize(number_of_mentions = sum(value)) %>%
-  pivot_wider(names_from = "brand_pers", values_from = "number_of_mentions")
+plot_data <- tweets2 %>%
+  group_by(screen_name) %>%
+  summarize(competence = sum(COMPETENCE)/n(),
+            excitement = sum(EXCITEMENT)/n(),
+            ruggedness = sum(RUGGEDNESS)/n(),
+            sincerity = sum(SINCERITY)/n(),
+            sophistication = sum(SOPHISTICATION)/n())
+plot_data
 ```
 
 Of course, instead of a table, we could also plot the differences using
 a barplot:
 
 ``` r
-tweets2 %>%
-  group_by(screen_name) %>%
-  summarize(competence = sum(COMPETENCE)/n(),
-            excitement = sum(EXCITEMENT)/n(),
-            ruggedness = sum(RUGGEDNESS)/n(),
-            sincerity = sum(SINCERITY)/n(),
-            sophistication = sum(SOPHISTICATION)/n()) %>%
+plot_data %>%
   pivot_longer(-screen_name) %>%
   ggplot(aes(x = screen_name, y = value, fill = name)) +
   geom_bar(stat = "identity", position = "dodge") +
@@ -323,7 +289,6 @@ tab
 
 # Pairwise comparisons using Tukey's HSD
 pairs(tab, adjust = "tukey")
-plot(tab, comparisons = T)
 ```
 
 ## Validating a dictionary
@@ -358,7 +323,7 @@ docs %>%
 ```
 
 Then, you can open the result in excel, code the documents by filling in
-the sentiment column, and read the result back in and combine with your
+the empty columns, and read the result back in and combine with your
 results above.
 
 Note that I rename the columns and turn the document identifier into a
@@ -366,7 +331,8 @@ character column to facilitate matching it:
 
 ``` r
 validation <- read_csv("to_code.csv") %>% 
-  mutate(doc_id=as.character(doc_id)) %>% inner_join(result)
+  mutate(doc_id = as.character(doc_id)) %>% 
+  inner_join(result)
 ```
 
 In the following code, I simply create a “random” manual coding to
@@ -380,7 +346,8 @@ validation <- tibble(doc_id=sample_ids, manual_competence = rep(c(1,1, 1, 0, 0),
 ```
 
 Now let’s see if my (admittedly completely random) manual coding matches
-the sentiment score. We can do a correlation:
+the competence score created by the dictionary analysis. In a first
+step, we can simply do a correlation:
 
 ``` r
 cor.test(validation$manual_competence, validation$COMPETENCE)
@@ -489,38 +456,20 @@ quanteda dictionary:
 GI_dict <- dictionary(DictionaryGI)
 ```
 
-For the word lists, you can compose a dictionary e.g. of positive and
-negative terms: (and similarly e.g. for weak words and strong words, or
-any list of words you find online)
-
-``` r
-HL_dict <- dictionary(list(positive=positive.words, negative=negation.words))
-```
+## Running the sentiment analysis
 
 To run the actual sentiment analysis, we can use the same dtm that we
 created earlier and again use the `dfm_lookup()` function. Note that we
-are adding a variable “dict” that tells us which dictionary we have used
-and already produce a length variable (i.e., a variable that contains
-the length of each tweet) that we will use later to compute a sentiment
+also produce a length variable (i.e., a variable that contains the
+length of each tweet) that we will use later to compute a sentiment
 score.
 
 ``` r
-sentiment1 <- dtm %>%
+sentiment <- dtm %>%
   dfm_lookup(GI_dict) %>%
   convert("data.frame") %>%
   as_tibble %>%
-  mutate(dict = "GI_dict") %>%
   mutate(length = ntoken(dtm))
-
-sentiment2 <- dtm %>%
-  dfm_lookup(HL_dict) %>%
-  convert("data.frame") %>%
-  as_tibble %>%
-  mutate(dict = "HL_dict") %>%
-  mutate(length = ntoken(dtm))
-
-sentiment <- bind_rows(sentiment1, sentiment2)
-sentiment
 ```
 
 Now, we probably want to compute some sort of overall sentiment score.
@@ -529,6 +478,8 @@ negative count from the positive count and divide by either the total
 number of words or by the number of sentiment words. We can also compute
 a measure of subjectivity to get an idea of how much sentiment is
 expressed in total:
+
+## Creating sentiment scores
 
 ``` r
 sentiment <- sentiment %>% 
@@ -553,80 +504,10 @@ the four companies.
 
 ``` r
 tweets3 %>%
-  select(screen_name, subjectivity, dict) %>%
-  group_by(dict, screen_name) %>%
+  select(screen_name, subjectivity) %>%
+  group_by(screen_name) %>%
   summarize(sub = mean(subjectivity)) %>%
-  ggplot(aes(x = dict, y = sub, fill = screen_name)) +
+  ggplot(aes(x = screen_name, y = sub)) +
   geom_bar(stat = "identity", position = "dodge") +
-  labs(x = "Type of Dictionary", y = "Subjectivity Score", fill = "Company")
+  labs(x = "Company", y = "Subjectivity Score")
 ```
-
-## Improving a dictionary
-
-To improve a sentiment dictionary, it is important to see which words in
-the dictionary are driving the results. The easiest way to do this is to
-use `textstat_frequency` function and then using the tidyverse filter
-function together with the `%in%` operator to select only rows where the
-feature is in the dictionary:
-
-``` r
-freqs <- textstat_frequency(dtm)
-freqs %>% 
-  as_tibble %>% 
-  filter(feature %in% HL_dict$positive)
-```
-
-As you can see, the most frequent ‘positive’ words found are ‘better’
-and ‘thank’. Now, it’s possible that these are actually used in a
-positive sense (“We have become better at…”, “We are thankful…”), but it
-is equally possible that they are used negative, especially the word
-“better” (e.g., “We should do better…”).
-
-To find out, the easiest method is to get a keyword-in-context list for
-the term:
-
-``` r
-head(kwic(tokens(corp), "better"))
-```
-
-From this, it seems that the word `better` here is not used as a
-positive verb, but rather as a way to indicate the the providers can
-make the app or phone even better. To remove it from the list of
-positive words, we can use the `setdiff` (difference between two sets)
-function:
-
-``` r
-positive.cleaned <- setdiff(positive.words, c("better"))
-HL_dict2 <- dictionary(list(positive = positive.cleaned, negative = negation.words))
-```
-
-To check, look at the top positive words that are now found:
-
-``` r
-freqs %>% 
-  filter(feature %in% HL_dict2$positive) %>%
-  as_tibble
-```
-
-This seems like a lot of work for each word, but even just checking the
-top 25 words can have a very strong effect on validity since these words
-often drive a large part of the outcomes.
-
-Similarly, you can check for missing words by inspecting the top words
-not matched by any of the terms (using `!` to negate the condition)
-
-``` r
-sent.words <- c(HL_dict$positive, HL_dict$negative)
-freqs %>% 
-  filter(!feature %in% sent.words) %>% 
-  View
-```
-
-By piping the result to View, it is easy to scroll through the results
-in rstudio. Note that this does not work in a Rmd file since View cannot
-be used in a static document!
-
-Scroll through the most frequent words, and if you find a word that
-might be positive or negative check using `kwic` whether it is indeed
-(generally) used that way, and then add it to the dictionary similar to
-above, but using the combination function `c` rather than `setdiff`.
