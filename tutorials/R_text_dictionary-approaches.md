@@ -91,7 +91,7 @@ In a first step, we engage in some simple data wrangling. We first
 create a unique post id and then select specific variables from the
 comparatively large data set. As a final, but very important step when
 we use Twitter data, we remove the `#` from the tweets as R will
-otherwise not recognize e.g., “\#awesome” as the same word as “awespome”
+otherwise not recognize e.g., “\#awesome” as the same word as “awesome”
 
 ``` r
 tweets <- tweets %>%
@@ -142,11 +142,11 @@ As we learn in the last practical session, the main primitive for any
 dictionary analysis is the document-term matrix (DTM). For more
 information on creating a DTM from a vector (column) of text, see again
 the [tutorial on basic text analysis with
-quanteda](R_text_basics-of-text-analysis.md). For this tutorial, it is
-important to make sure that the preprocessing options (especially
-stemming) match those in the dictionary: if the dictionary entries are
-not stemmed, but the text is, they will not match. In case of doubt,
-it’s probably best to skip stemming altogether.
+quanteda](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_basics-of-text-analysis.md).
+For this tutorial, it is important to make sure that the preprocessing
+options (especially stemming) match those in the dictionary: if the
+dictionary entries are not stemmed, but the text is, they will not
+match. In case of doubt, it’s probably best to skip stemming altogether.
 
 For our text analysis, we first need to transform this data set into a
 corpus format. We can do so with the function `corpus()` which only asks
@@ -273,8 +273,8 @@ tweets2
 
 Usually, coding our tweets manually is not really the end goal of our
 analysis. Instead, we now can use this information to further analyze
-our text. A first very simple analysis could be to summary the amount of
-times each brand personality dimension was mentioned by the different
+our text. A first very simple analysis could be to summarize the amount
+of times each brand personality dimension was mentioned by the different
 companies.
 
 ``` r
@@ -311,7 +311,7 @@ R, here is an analysis of variance (ANOVA) testing the differences in
 “COMPETENCE” across the four companies.
 
 ``` r
-library(emmeans)
+library(emmeans) # don't forget to install the package first!
 m_comp <- aov(COMPETENCE ~ screen_name, tweets2)
 
 # Model summary
@@ -373,6 +373,12 @@ In the following code, I simply create a “random” manual coding to
 demonstrate some of the typical validation steps (we will engage in more
 meaningful validation practices in later practical sessions).
 
+``` r
+# Just creates just a column with "random" manual codings
+validation <- tibble(doc_id=sample_ids, manual_competence = rep(c(1,1, 1, 0, 0), 10)) %>% 
+  inner_join(result)
+```
+
 Now let’s see if my (admittedly completely random) manual coding matches
 the sentiment score. We can do a correlation:
 
@@ -401,12 +407,13 @@ sum(diag(cm)) / sum(cm)
 
 # Sentiment analysis
 
-In this second part of this tutorial, we will engage in an actual
-sentiment analysis. Some of the most important questions about text have
-to do with *sentiment* (or *tone*): Is a text in general positive or
-negate? Are actors described as likable and successful? Is the economy
-doing well or poorly? Is an issue framed as good or bad? Is an actor in
-favor of or against a certain policy proposal?
+In this second part of this tutorial, we will engage in a special case
+of a dictionary analysis: a so-called sentiment analysis. Some of the
+most important questions about text have to do with *sentiment* (or
+*tone*): Is a text in general positive or negate? Are actors described
+as likable and successful? Is the economy doing well or poorly? Is an
+issue framed as good or bad? Is an actor in favor of or against a
+certain policy proposal?
 
 *Caveat*: This method is very successful for some tasks such as deciding
 whether a review is positive or negative. In other cases, however, one
@@ -462,7 +469,6 @@ standard dictionaries:
 
 ``` r
 url <- "https://raw.githubusercontent.com/cjhutto/vaderSentiment/master/vaderSentiment/vader_lexicon.txt"
-# note: the command below gives warning messages due to the details column, these can be safely ignored
 vader <- read_delim(url, col_names=c("word","sentiment", "details"),  col_types="cdc",  delim="\t")
 vader
 ```
@@ -475,7 +481,7 @@ the VADER dictionary, you should not strip them from your data.
 
 ## Creating a quanteda dictionary from a word list
 
-You can apply the dictionaries listed above using dfm\_lookup. The
+You can apply the dictionaries listed above again using dfm\_lookup. The
 dictionaries from `SentimentAnalysis` can be directly turned into a
 quanteda dictionary:
 
@@ -493,9 +499,10 @@ HL_dict <- dictionary(list(positive=positive.words, negative=negation.words))
 
 To run the actual sentiment analysis, we can use the same dtm that we
 created earlier and again use the `dfm_lookup()` function. Note that we
-are add in “dict” variable that tells us which dictionary we have used
+are adding a variable “dict” that tells us which dictionary we have used
 and already produce a length variable (i.e., a variable that contains
-the length of each tweet).
+the length of each tweet) that we will use later to compute a sentiment
+score.
 
 ``` r
 sentiment1 <- dtm %>%
@@ -541,8 +548,8 @@ tweets3 <- tweets %>%
 tweets3
 ```
 
-For now, let us simply look at how the subjectivity of each company
-changed over time.
+For now, let us simply investigate differences in subjectivity across
+the four companies.
 
 ``` r
 tweets3 %>%
@@ -550,7 +557,8 @@ tweets3 %>%
   group_by(dict, screen_name) %>%
   summarize(sub = mean(subjectivity)) %>%
   ggplot(aes(x = dict, y = sub, fill = screen_name)) +
-  geom_bar(stat = "identity", position = "dodge")
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(x = "Type of Dictionary", y = "Subjectivity Score", fill = "Company")
 ```
 
 ## Improving a dictionary
