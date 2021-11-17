@@ -128,7 +128,7 @@ In the third cycle, students will work on their own research projects. Resources
 #### Homework
 
 - Complete this assignment (copy the entire code into a RMarkdown file)
-    - Homework: Dictionary Approaches
+    - [Homework: Dictionary Approaches](https://github.com/masurp/VU_CADC/blob/main/homework/03_homework_assignment.Rmd)
 
 #### Additional resources
 
