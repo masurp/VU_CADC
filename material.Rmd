@@ -61,7 +61,7 @@ In the third cycle, students will work on their own research projects. Resources
 - Work through this tutorial: 
     - [R Markdown: Basics](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_basics_r-markdown.md)
 - Complete this assignment (copy the entire code into a RMarkdown file)
-    - [Homework: Basic Data Wrangling](https://github.com/masurp/VU_CADC/blob/main/homework/01_homework_assignment.Rmd)
+    - [Homework: Basic Data Wrangling](https://github.com/masurp/VU_CADC/blob/main/homework/01_homework_assignment.Rmd) ([Version with solutions](https://github.com/masurp/VU_CADC/blob/main/homework/01_homework_assignment_complete.md))
 
 #### Additional resources: 
 
