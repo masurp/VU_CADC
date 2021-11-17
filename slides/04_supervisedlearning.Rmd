@@ -57,20 +57,105 @@ output:
 }
 ```
 
+# If science fiction stories...
+
+- are to be believed, the invention of artificial intelligence inevitably leads to apocalyptic wars between machines and their makers
+
+- It begins with today's reality: computers learning how to play simple games and automate routines
+
+- They later are given control over traffic lights and communications, followed by military drones and missiles
+
+- This evolution takes a bad turn once computers become "sentient" and learn how to teach themselves....
+
+
+
+---
+
 # Machine Learning?
 
 ![](img/thematrix.jpg)
+---
+
+# And then?
+
+.pull-left2b[
+
+Having no more need for human programmers, humankind is simply "deleted"...
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+_(Stills from the movies "Ex Machina" and "Her")_
+ 
+]
+
+
+.pull-right2b[
+
+![](https://filmkrant.nl/wp-content/uploads/2015/03/ex_machina-1000x563.jpg)
+
+
+![](https://m.media-amazon.com/images/M/MV5BMTc1MDY0MjI4NV5BMl5BanBnXkFtZTgwMzAxNjM3MDE@._V1_.jpg)
+
+]
+
 ---
 
 # So what are we actually talking about?
 
 - Machine learning is the study of computer algorithms that can improve automatically through experience and by the use of data
 
+- The field originated in an environment where the available data, statistical methods, and computing power rapidly and simultaneously evolved
+
 - Due to the "black box" nature of the algorithm's operations, it is often seen as a form of **artificial intelligence** 
 
-- Machine learning is used in a wide variety of applications, such as in medicine (e.g., pattern detection), email filtering (e.g., spam detection), speech recognition, and computer vision (e.g., face recognition)
+- But in simple term: Machines are not good at asking questions or even knowing what questions are
+
+- They are much better in answering them, provided the question is stated in a way that a computer can comprehend (remember the challenge of text analysis?)
+
+
+---
+
+# Applications of Machine Learning
+
+
+.pull-left[
+
+- Machine learning is most successful when it augments, rather than replaces, the specialized knowledge of a subject-matter expert. 
+
+
+- Machine learning is thereby used in a wide variety of applications and contexts, such as in businesses, hospitals, scientific laboratories, or governmental organizations
 
 - In communication science, we can use these techniques to automate text analysis!
+
+]
+
+.pull-right[
+
+Some success stories of applying machine learning in practical context:
+
+- Identification of spam messages in mails
+- Segmentation of customers for targeted advertising
+- Weather forcasts and long-term climate changes
+- Reduction of fraudulent credit card transactions
+- Prediction of election outcomes
+- Auto-piloting and self-driving cars
+- Face recognition
+- Optimization of energy use in homes and buildings
+- Discovery of genetic sequences linked to diseases
+-....
+    
+]
+
+
+
+_Lantz, 2013_
+
 
 ---
 
@@ -127,7 +212,7 @@ Differences between supervised and unsupervised approaches.
 
 - Examples:
 
-    - Supervised text classification: extending manual coding to large text corpora, sentiment analysis...
+    - Supervised text classification, such as extending manual coding to large text corpora, sentiment analysis...
     - Pattern recognition: e.g., face recognition, spam filter,...
 
 ]
@@ -165,7 +250,7 @@ We can now use machine learning models to classify text into specific sets of ca
 
 --
 
-**1.** Hand-code a small set of documents (say N = 1,000) for whatever variable(s) you care about
+**1.** Manually code a small set of documents (say N = 1,000) for whatever variable(s) you care about
 
 --
 
@@ -187,7 +272,7 @@ We can now use machine learning models to classify text into specific sets of ca
 ![](img/machinelearning_process.png)
 ---
 
-# Example: Spam detection
+# Example: Spam Detection
 
 
 .pull-left2b[
@@ -262,7 +347,7 @@ We can now use machine learning models to classify text into specific sets of ca
 
 - independent of language and topic; we only need consistently coded training material
 
-- can be connected to traditional content analysis (same operationalisation, similar criteria in terms of validity and reliability)
+- can be connected to traditional content analysis (same operationalization, similar criteria in terms of validity and reliability)
 
 - efficient (analysis of very large samples and text corpora possible)
 
@@ -271,7 +356,7 @@ We can now use machine learning models to classify text into specific sets of ca
 
 ### Disadvantages
 
-- Requires large amounts of (manually) coded training data
+- Requires large amounts of (manually) coded training data 
 
 - Requires in-depth validation
 
@@ -309,13 +394,14 @@ How do these algorithms work?
 
 
 .pull-left[
+
 - Computes the prior probability (P) for every category (c = outcome variable) based on the training data set
 
 - Computes the probability of every feature (x) to be a characteristic of the class (c); i.e., the relative frequency of the feature in category
 
-- For every category (c), all feature probabilites (x) are multiplied
+- For every category (c), all feature probabilities (x) are multiplied
 
-- Chooses the class that has highest weighted sum of inputs
+- The algorithm hence chooses the class that has highest weighted sum of inputs
 
 - "Naively" assumes that parameters are independent (essentially a linear model, a weighted dictionary)
 
@@ -342,11 +428,11 @@ How do these algorithms work?
 
 - Very often used machine learning method
 
-- Tries to find decision boundary between points
+- Can be imagined as a surface that creates a boundary between points of data plotted in a multidimensional space representing examples and their feature values
 
-- Maximize margin between classes while minimizing errors
+- Tries to find decision boundary between points that maximizes margin between classes while minimizing errors
 
-- More formally, a support-vector machine constructs a hyperplane or set of hyperplanes in a high- or infinite-dimensional space, which can be used for classification, regression, or other tasks like outliers detection
+- More formally, a support-vector machine constructs a hyperplane or set of hyperplanes in a high- or infinite-dimensional space, which can be used for classification, regression, or other tasks like outlier detection
 
 ]
 
@@ -360,9 +446,11 @@ How do these algorithms work?
 
 - In simple words, the dependent variable is binary in nature and coded as either 1 (= class A) or 0 (= is not class A).
 
-- Mathematically, a logistic regression model predicts P(Y=1) as a function of X:
+- Mathematically, a logistic regression model predicts the probability of the outcome P(Y=1) as a function of X:
 
 $P(Y) = \frac {1}{1+e^{-(\beta_0 + \beta_1 x)}}$
+
+- 
 
 ]
 
@@ -484,7 +572,7 @@ ggplot(NULL, aes(x = x, y = y)) +
  
     - To see whether a model generalizes to new data, simply test it on new data!
     
-- In sum, we need to validate our new classifier
+- In sum, we need to validate our new classifier on unseen data
 
 ---
 
@@ -506,17 +594,18 @@ Best practices and processes.
     
 - Solution
 
-    - Split data into train and test sets (There are different ways of doing this, like split-half, leave-1-out, or k-fold)
+    - Split data into train and test sets (there are different ways of doing this, like split-half, leave-1-out, or k-fold)
     - Train model on training data
     - Test model on unseen test data
     - We can again estimate accuracy, precision, recall, and F-Score (see last lecture)
 
 --
 
-- So...why don’t we do this with statistics?
+- So... why don’t we do this with statistics?
 
     - Less complex models, so less risk of overfitting (but it’s still a risk!)
     - Less focus on prediction 
+    - But we sometimes could, and should use this approach!
 
 
 ---
@@ -524,7 +613,7 @@ Best practices and processes.
 # Example: Predicting music genre from lyrics
 
 
-- This data is scraped from the "Vagalume" website, so it depends on their storing and sharing millions of song lyrics
+- This data is scraped from the "Vagalume" website, so it depends on their storing and sharing millions of song lyrics (not really representative or complete)
 
 - Many different songs, but not all types of music are represented in this data set
 
@@ -675,7 +764,7 @@ genre_test <- as.factor(docvars(music_test, "Genre"))
 
 - Step 4: Create document-feature matrix (DFM)
 
-- Step 5: Remove to short (< 2 characters) and rare words
+- Step 5: Remove too short (< 2 characters) and rare words
 
 - (Step 6: Transforms the `dtm` so that words with a high document frequency weight less)
 
@@ -694,7 +783,7 @@ dfm_train <- music_train %>%
   dfm %>%
   dfm_select(min_nchar = 2) %>% 
   dfm_trim(min_docfreq=20) %>%
-  dfm_tfidf()   # weighting process
+  dfm_tfidf()  ## weighting process
 ```
 
 ]
@@ -704,7 +793,7 @@ dfm_train <- music_train %>%
 
 ```{r, R.options = list(width = 120)}
 library(quanteda.textmodels)
-m_nb <- textmodel_nb(x = dfm_train, y = genre_train)
+m_nb <- textmodel_nb(x = dfm_train, y = genre_train) ## Naive Bayes
 summary(m_nb)
 ```
 
@@ -715,7 +804,7 @@ summary(m_nb)
 
 .pull-left[
 
-- To see how well the model does, we test it on the test data
+- To see how well the model does, we test it on the test (held-out) data
 
 - For this, it is important that the test data uses the same features (vocabulary) as the training data
 
@@ -750,7 +839,7 @@ head(nb_pred, 2)
 
 ---
 
-# Evaluating the Prediction: Validation of Naive Bayes model
+# Evaluating the Prediction: Validation of Naive Bayes Model
 
 .pull-left[
 
@@ -800,7 +889,7 @@ cm_svm <- confusionMatrix(svm_pred, genre_test)
 
 - **Overall Accuracy**: `r papaja::printnum(mean(svm_pred == genre_test)*100)`%
 
-- However, Precision, Recall and F1-Score all became better!
+- However, Precision, Recall and F1-Score all have improved!
 
 ]
 
@@ -855,7 +944,7 @@ val %>%
 
 .pull-right[
 
-- Support vector machines perfom slightly better overall
+- Support vector machines perform slightly better overall
 
 - Precision, Recall and F1-Score are all better
 
@@ -898,6 +987,7 @@ val %>%
 
 ![](img/scharkow_table3.png)
 
+_Scharkow, 2013_
 
 ---
 class: inverse, center, middle
@@ -910,7 +1000,7 @@ How is this used in research?
 
 # Example 1: Validating different approaches
 
--  Van Atteveldt et al (2021) re-analysised data reported in Boukes et al. (2020) to understanding the validity of different text classification approaches 
+-  Van Atteveldt et al. (2021) re-analysised data reported in Boukes et al. (2020) to understanding the validity of different text classification approaches 
 
 - The data incldued news from a total of ten newspapers and five websites published between February 1 and July 7, 2015:
 
@@ -931,7 +1021,8 @@ How is this used in research?
     - Sentiment dictionaries (various versions)
     - Different supervised machine learning algorithms (NB, SVM, convolutional neural networks)
     
-- Investigating performance results of all models
+- Investigated performance results of all models
+
 ---
 
 # Main results
@@ -951,10 +1042,10 @@ How is this used in research?
 - Nonetheless strongly depends on quality of training data
 
 - Recommendation for dictionary: Apply any applicable off-the-shelf dictionaries and if any of these is sufficiently valid as
-determined by comparison with the gold standard, use this for the textanalysis
+determined by comparison with the gold standard, use this for the text analysis
 
-    - dictionaries give very good transparency
-    - replicability for a low cost
+    - Dictionaries give very good transparency
+    - Replicability for a low cost
 
 ---
 
@@ -970,17 +1061,18 @@ determined by comparison with the gold standard, use this for the textanalysis
     
 - Implemented a combination of manual coding and supervised machine learning to code comments with regard to:
 
-    - Civil
+    - Civility
     - Interpersonal rudeness
     - Personal rudeness
     - Impersonal extreme incivility
-    - Personal extreme civility
+    - Personal extreme incivility
     
 ---
 
 # Results: Incivility over time
 
 .pull-left[
+
 - Despite several discernible spikes, the percentage of extremely uncivil personal comments on national-news outlets’ pages shifted only modestly 
 
 - On conservative outlets’ Facebook pages, the proportions of both extremely uncivil and rude comments fluctuated dramatically across the sampling window
@@ -1013,9 +1105,9 @@ class: inverse, center, middle
 
 - As a result, unsupervised learning algorithms must first self-discover any naturally occurring patterns in that training data set
 
-- The resulting "classes", "patterns", or "groups need to be interpreted by the researcher
+- The resulting "classes", "patterns", or "groups" need to be interpreted by the researcher
 
-- Approach is similar to two statistical approaches:
+- Approach is similar (partly even equivalent) to some statistical approaches:
 
     - Exploratory factor analysis: Finding similar items to create latent factors
     - Cluster analysis: Finding similar observations to create clusters of similar observations
@@ -1025,7 +1117,7 @@ class: inverse, center, middle
 # Example: Topic modelling of 80 years of communication science
 
 
-- Günther and Domahidi (2017) used unsupervised topic modelling to extract **topics** from 80 years of published communication research (i.e., based on abstracts)
+- Günther and Domahidi (2017) used unsupervised topic modeling to extract **topics** from 80 years of published communication research (i.e., based on abstracts)
 
 - The data includeed n = 15,172 articles from journals such as Journal of Communication, Communication Research, etc. 
 
@@ -1044,15 +1136,16 @@ class: inverse, center, middle
 
 - Deep learning is part of a broader family of machine learning methods based on artificial neural networks with representation learning
 
-- Learning can again be supervised, semi-supervised or unsupervised.
+- Learning can again be supervised, semi-supervised or unsupervised
 
-- Large neural network with many hidden layers
+- Generally refers to large neural networks with many hidden layers
+
     - Possible because of modern computing power, large training sets
-    - Powers e.g. automatic translation, self-driving cars, chess computers, etc
+    - Powers e.g. automatic translation, self-driving cars, chess computers, etc.
 
 - Originally developed to deal with image recognition, now also adapted for text analysis
 
-- Use words in order, rather than document-level frequencies (allows for word combinations/relations)
+- Use the combination of words, bi-grams, word-embeddings, rather than feature frequencies 
 
 ---
 
@@ -1083,7 +1176,8 @@ _Jürgens, Meltzer, & Scharkow, 2021_
 
 
 .pull-left2b[
-- Is it OK to use a model we can’t possibly understand?
+
+- Is it okay to use a model we can’t possibly understand?
 
 - Machine learning in the social sciences generally used to solve an engineering problem
 
@@ -1094,6 +1188,8 @@ _Jürgens, Meltzer, & Scharkow, 2021_
 ![](https://upload.wikimedia.org/wikipedia/commons/8/81/Artificial_Intelligence_%26_AI_%26_Machine_Learning_-_30212411048.jpg)
 
 ]
+
+
 ---
 
 # Conclusion
@@ -1106,6 +1202,7 @@ _Jürgens, Meltzer, & Scharkow, 2021_
 ]
 
 .pull-right2[
+
 - Machine learning is a useful tool for generalizing from sample
 
 - It is very useful to reduce the amount of manual coding needed
@@ -1152,9 +1249,66 @@ An Analysis of 80 Years of Research in High-Impact Journals. International Journ
 
 - Jürgens, P., Meltzer, C., & Scharkow, M. (2021, in press). Age and Gender Representation on German TV: A Longitudinal Computational Analysis. Computational Communication Research. 
 
+- Lantz, B. (2013). Machine learning in R. Packt Publishing Ltd.
+
 - Scharkow, M. (2013). Thematic content analysis using supervised machine learning: An empirical evaluation using german online news. Quality & Quantity, 47(2), 761–773. https://doi.org/10.1007/s11135-011-9545-7
 
 - Su, L. Y.-F., Xenos, M. A., Rose, K. M., Wirz, C., Scheufele, D. A., & Brossard, D. (2018). Uncivil and personal? Comparing patterns of incivility in comments on the Facebook pages of news outlets. New Media & Society, 20(10), 3678–3699. https://doi.org/10.1177/1461444818757205
 
 - van Atteveldt, W., van der Velden, M. A. C. G., & Boukes, M.. (2021). The Validity of Sentiment Analysis: Comparing Manual Annotation, Crowd-Coding, Dictionary Approaches, and Machine Learning Algorithms. Communication Methods and Measures, (15)2, 121-140, https://doi.org/10.1080/19312458.2020.1869198
+
+
+
+---
+
+# Example Exam Question (Multiple Choice)
+
+Van Atteveldt and colleagues (2020) tested the validity of various automated text analysis approaches. What was their main result?
+
+A. English dictionaries performed better than Dutch dictionaries in classifying the sentiment of Dutch news paper headlines. 
+
+B. Dictionary approaches were as good as machine learning approaches in classifying the sentiment of Dutch news paper headlines. 
+
+C. Of all automated approaches, supervised machine learning approaches perfomed the best in classifying the sentiment of Dutch news paper headlines.  
+
+D. Manual coding and supervised machine learning approaches performed similarly well in classifying the sentiment of Dutch news paper headlines. 
+
+---
+
+# Example Exam Question (Multiple Choice)
+
+Van Atteveldt and colleagues (2020) tested the validity of various automated text analysis approaches. What was their main result?
+
+A. English dictionaries performed better than Dutch dictionaries in classifying the sentiment of Dutch news paper headlines. 
+
+B. Dictionary approaches were as good as machine learning approaches in classifying the sentiment of Dutch news paper headlines. 
+
+**C. Of all automated approaches, supervised machine learning approaches perfomed the best in classifying the sentiment of Dutch news paper headlines.**  
+
+D. Manual coding and supervised machine learning approaches performed similarly well in classifying the sentiment of Dutch news paper headlines. 
+
+
+---
+
+# Example Exam Question (Open Format)
+
+Describe the typical process used in supervised text classification.
+
+--
+
+Any supervised machine learning procedure to analyze text usually contains at least 4 steps: 
+
+1. One has to manually code a small set of documents for whatever variable(s) you care about (e.g., topics, sentiment, source,...). 
+
+2. One has to train a machine learning model on the hand-coded /gold-standard data, using the variable as the outcome of interest and the text features of the documents as the predictors. 
+
+3. One has to evaluate the effectiveness of the machine learning model via cross-validation. This means one has to test the model test on new (held-out) data.  
+
+4. Once one has trained a model with sufficient predictive accuracy, precision and recall, one can apply the model to more documents that have never been hand-coded or use it for the purpose it was designed for (e.g., a spam filter detection software)
+
+
+
+
+
+
 
