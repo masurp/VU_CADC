@@ -94,7 +94,7 @@ In the third cycle, students will work on their own research projects. Resources
 #### Homework
 
 - Complete this assignment (copy the entire code into a RMarkdown file)
-    - [Homework: Tidyverse and Data Visualization](https://github.com/masurp/VU_CADC/blob/main/homework/02_homework_assignment.Rmd)
+    - [Homework: Tidyverse and Data Visualization](https://github.com/masurp/VU_CADC/blob/main/homework/02_homework_assignment.Rmd) ([Version with solutions](https://github.com/masurp/VU_CADC/blob/main/homework/02_homework_assignment_complete.md))
 
 #### Additional resources: 
 
