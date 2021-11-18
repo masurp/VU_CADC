@@ -112,7 +112,7 @@ Next, try to apply to the dictionary to the dtm we created earlier. The resultin
 
 Now try to convert the results into a data.frame (or better a tibble) and compute a sentiment score by substracting the sum of "negative" and "fear" related words from the the sum of "positive" and "trust" related words (i.e., `score = (positive + trust) - (negative + fear)`). This is a slightly different score than we produced in the practical session. 
 
-Furthermore, recode the resulting score so that positive values (> 0) are coded as 1, neutral (= 0) are coded as 0 and negative values (< 0) as -1. This can be done with in various ways, but the easiest way is to use another mutate command and simply wrap the computed score with the function `sign()`. 
+Furthermore, recode the resulting score so that positive values (> 0) are coded as 1, neutral (= 0) are coded as 0 and negative values (< 0) as -1. This can be done in various ways, but the easiest way is to use another mutate command and simply wrap the computed score with the function `sign()`. 
 
 ```{r}
 # Solution here
