@@ -127,7 +127,7 @@ In the third cycle, students will work on their own research projects. Resources
 
 #### Homework
 
-- Add two music reviews to the following google sheet
+- Add two music reviews to the following google sheet (before Monday 17:00)
     - In the coming week, we would like to work with some (text) data that we have produced ourselves. So as a small homework, I would like to ask you to add (at least) two reviews to this data set. Please fill in the columns for one music album that you really like (e.g., your favorite album by your favorite music artist) and one for an album that you were slightly disappointed by or even did not like at all (I already provided some examples). If you don't mind disclosing, please also add your name (if not use a nickname). We will explore this data visually as well. 
     - [Google Sheet Including Music Reviews](https://docs.google.com/spreadsheets/d/1LUb88gBopeCJvK15MFBn-DTt7oe4-SeP2SePfqZuPek/edit?usp=sharing)
 
