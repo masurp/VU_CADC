@@ -50,7 +50,7 @@ library(quanteda.textstats)
 # Load data
 url <- "https://raw.githubusercontent.com/vanatteveldt/ecosent/master/data/intermediate/sentences_ml.csv"
 d <- read_csv(url) %>% 
-  select(doc_id = id, text = headline, sentiment=value) %>%
+  select(doc_id = id, text = headline, lemmata, sentiment=value) %>%
   mutate(doc_id = as.character(doc_id))
 head(d)
 ```
@@ -65,62 +65,13 @@ table(d$sentiment)
 
 In total, there are 6,322 headlines, roughly half of them are neutral, ~2000 are rather negative and ~1500 are rather positive.  
 
-## Preprocessing
-
-Let's use the package updpipe to lemmatize the headlines. 
-This package can parse various languages, and will automatically download the needed language models.
-Acutally, the original data already contained lemmatized text, but that was done with a different parser,
-and it is nice to see how to do it within R. 
-
-Note that I call `udpipe` on the data frame, which expects it to have a `doc_id` and `text` column,
-similar to e.g. quanteda. 
-You can also call it on a character column or vector directly (e.g. `udpipe(d$text)`),
-but then the document id will not be preserved. 
-Also note that I set `parser="none"`, which disables the syntactic parsing,  making it a bit quicker to compute. 
-
-```{r}
-library(udpipe)  # you need to install the package first!
-tokens <- udpipe(d, "dutch", parser="none")
-```
-
-The result is a data frame with one row per word. Let us quickly do some selecting and check the results for one headline (id == "10007")
-
-```{r}
-tokens <- as_tibble(tokens) %>% 
-  select(doc_id, token, start, lemma, upos)
-
-# Check
-tokens %>%
-  filter(doc_id == 10007)
-```
-
-This shows the output for one headline (*Rabobank voorspelt flinke stijging hypotheekrente*, Rabobank predicts steep increase [of] mortgage-interest),
-correctly tagging e.g. predict as a verb and lemmatizing it to its infinitive form. 
-
-Now, let's recombine the lemmata per sentence (so that each row is one headline) and join it with our original dataframe:
-
-```{r}
-lemmatized <- tokens %>% 
-  arrange(doc_id, start)  %>% 
-  group_by(doc_id) %>% 
-  summarize(lemmatized=str_c(lemma, collapse=" "))
-head(lemmatized)
-```
-
-Now we add this back to our original data frame:
-
-```{r}
-d <- inner_join(d, lemmatized)
-head(d)
-```
-
-So now we have both the original "text" and the "lemmatized" version of the text. We can run analyses on both, but you should from now on work with the lemmatized text!
+It is important to note that we have both the original "text" and the "lemmatized" version of the text. We can run analyses on both, but you should from now on work with the lemmatized text!
 
 # Analysis
 
 ## Creating the document-feature matrix
 
-In a first step, make a document-term-matrix from the lemmatized texts. This means first creating a "corpus" (bear in mind to correctly set the "text-field"), engage in reasonable preprocessing (e.g., removing punctuation, frequency trimming, but don't engage in anything more elaborate such as stopword removal or stemming as we already lemmatized!)
+In a first step, make a document-term-matrix from the lemmatized texts. This means first creating a "corpus" (bear in mind to set `text-field = "lemmata"`), engage in reasonable preprocessing (e.g., removing punctuation, frequency trimming, but don't engage in anything more elaborate such as stopword removal or stemming as we already lemmatized!)
 
 ```{r}
 # Solution here
@@ -144,13 +95,14 @@ First, we download the dictionary and turn it into a quanteda dictionary:
 url <- "https://raw.githubusercontent.com/vanatteveldt/ecosent/master/data/raw/dictionaries/NRC-Emotion-Lexicon-v0.92-In105Languages-Nov2017Translations.csv"
 nrc <- read_csv(url) %>% select(term = `Dutch (nl)`, Positive, Negative, Fear, Trust) %>% filter(term != 'NO TRANSLATION')
 dict <- dictionary(list(positive = nrc$term[nrc$Positive==1],
-                       negative = nrc$term[nrc$Negative==1],
-                       fear = nrc$term[nrc$Fear==1],
-                       trust = nrc$term[nrc$Trust==1]))
+                        negative = nrc$term[nrc$Negative==1],
+                        fear = nrc$term[nrc$Fear==1],
+                        trust = nrc$term[nrc$Trust==1]))
+dict
 ```
 
 
-Next, try to apply to the dictionary to the dtm we created earlier. The resulting dtm contains information about which headlines contains positive, negaive, fear-related, and trust-related words. Can you create table that shows the absolute frequency of each word? Which words occur most often?
+Next, try to apply to the dictionary to the dtm we created earlier. The resulting dtm contains information about which headlines contains positive, negative, fear-related, and trust-related words. Can you create table that shows the absolute frequency of each word? Which words occur most often?
 
 ```{r}
 # Solution here
@@ -158,7 +110,9 @@ Next, try to apply to the dictionary to the dtm we created earlier. The resultin
 
 **Answer:** [Add your answer/interpretation here]
 
-Now try to convert the results into a data.frame (or better a tibble) and compute a sentiment score by substracting the sum of "negative" and "fear" related words from the the sum of "positive" and "trust" related words (i.e., `score = (positive + trust) - (negative + fear)`; this is a slightly differnet score than we produced in the practical session). Recode the resulting score so that positive values (> 0) are coded as 1, neutral (= 0) are coded as 0 and negative values (< 0) as -1. To do this, you can use another mutate command here and simply wrap the computed score with the function `sign()`. 
+Now try to convert the results into a data.frame (or better a tibble) and compute a sentiment score by substracting the sum of "negative" and "fear" related words from the the sum of "positive" and "trust" related words (i.e., `score = (positive + trust) - (negative + fear)`). This is a slightly different score than we produced in the practical session. 
+
+Furthermore, recode the resulting score so that positive values (> 0) are coded as 1, neutral (= 0) are coded as 0 and negative values (< 0) as -1. This can be done with in various ways, but the easiest way is to use another mutate command and simply wrap the computed score with the function `sign()`. 
 
 ```{r}
 # Solution here
