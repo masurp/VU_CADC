@@ -14,3 +14,4 @@
 /homework/*.sav
 /tutorials/data/*.csv
 /tutorials/data/*.sav
+/tutorials/*cache
