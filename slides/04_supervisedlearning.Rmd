@@ -325,6 +325,8 @@ _Image Source: https://quantdare.com/machine-learning-a-brief-breakdown/_
 
 # Statistical Modeling vs. Machine Learning?
 
+.pull-left[
+
 - Machine learning is thus *similar* to normal statistical modeling
 
 - Learn $f$ so you can predict $y$ from $x$: 
@@ -334,6 +336,27 @@ _Image Source: https://quantdare.com/machine-learning-a-brief-breakdown/_
 $y = f(x)$
 
 </center>
+
+]
+
+.pull-right[
+
+```{r, echo = F}
+data <- tibble(x = rnorm(50, 3, 2),
+               y = 2*x + rnorm(50, 0, 4))
+ggplot(data, aes(x, y)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = F, color = "red") +
+  theme_classic() +
+  geom_point(aes(x = 2.5, y = 4.75), shape = 1, size = 4, color = "blue") +
+  geom_hline(yintercept = 4.75, linetype = "dashed", color = "grey") +
+  geom_vline(xintercept = 2.5, linetype = "dashed", color = "grey")
+
+```
+
+
+
+]
 
 ---
 
