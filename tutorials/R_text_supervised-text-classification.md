@@ -45,7 +45,7 @@ the ‘small’ data sets which are freely available). These reviews are
 stored in gzipped json-lines format, meaning it is a compressed file in
 which each line is a json document. This sounds complicated, but you can
 directly read this into an R data frame using the `jsonlite::stream_in`
-function on thenurl using the `gzcon` function to decompress.
+function on the url using the `gzcon` function to decompress.
 
 For this example, we pick the digital music category, mostly because it
 is relatively small and still interesting. If you select a category with
@@ -95,7 +95,7 @@ combining the summary and review text:
 ``` r
 reviews <- reviews %>% 
   mutate(fivestar = overall == 5,
-         text = str_c(str_replace_na(summary),  str_replace_na(reviewText), sep=" "))
+         text = str_c(summary, reviewText, sep = " "))
 
 # Check
 reviews %>%
@@ -114,6 +114,9 @@ appropriate rows (using the negative selection for the test set to
 select everything except for the training set):
 
 ``` r
+# To ensure replicability
+set.seed(42)
+
 # Sample 
 trainset <- sample(nrow(reviews), size=round(nrow(reviews) * 0.8))
 reviews_train <- reviews %>% slice(trainset)
@@ -122,7 +125,7 @@ reviews_test <- reviews %>% slice(-trainset)
 
 ## Creating the DFM
 
-First, we create a document feature model of the training data:
+First, we create a document feature matrix (dtm) of the training data:
 
 ``` r
 dfm_train <- reviews_train %>% 
@@ -147,9 +150,9 @@ summary(nbmodel)
 ```
 
 The summary of the model already provides us with some idea about the
-probabilistic prediction: e.g., the word “great” is more likely to be in
-a five-star review than in a review with less stars. Pretty intuitive,
-right?
+probabilistic prediction: So for example, the word “great” is more
+likely to be in a five star review than in a less good review. Pretty
+intuitive, right?
 
 ## Testing the model
 
@@ -194,7 +197,7 @@ package:
 
 ``` r
 library(caret)
-confusionMatrix(table(predictions, actual = dfm_test$fivestar), mode = "prec_recall", positive="TRUE")
+confusionMatrix(table(predictions, actual = dfm_test$fivestar), mode = "prec_recall", positive = "TRUE")
 ```
 
 This results shows us the confusion matrix and a number of performance
@@ -207,10 +210,10 @@ and F1 (harmonic mean of precision and recall)
 Just for fun, let’s have a look at how well the algorithm can predict
 our music taste (or at least how well it predicts our rating based on
 our review!). All of our reviews are stored in the following file that
-we can simply load from the github page of this course.
+we can simply load from the CANVAS page of this course.
 
 ``` r
-our_data <- read_csv("data/music_reviews.csv")
+our_data <- read_csv("music_reviews.csv")
 head(our_data)
 ```
 
@@ -299,7 +302,9 @@ confusionMatrix(table(predictions, dfm_test2$fivestar), mode = "prec_recall", po
 **Exercise 1:** If we would train another algorithm (e.g., support
 vector machines), would the results differ? Try out the function
 `textmodel_svm()` (Note: this may take some time depending on your
-computing power…)
+computing power…). If this does not work, try out some extra text
+preprocessing steps (e.g., removing stopwords, frequency trimming) and
+whether these improve or reduce the performance.
 
 ``` r
 # solution here
