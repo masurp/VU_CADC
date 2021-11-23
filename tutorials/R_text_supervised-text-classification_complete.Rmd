@@ -1,0 +1,353 @@
+---
+title: 'Supervised Text Classification'
+author: "Philipp Masur, Wouter van Atteveldt & Kasper Welbers"
+date: "2021-11"
+output: 
+  github_document:
+    toc: yes
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, echo=F, message=F}
+knitr::opts_chunk$set(echo = TRUE, results = TRUE, message = FALSE, warning = FALSE)
+library(printr)
+```
+
+
+# Introduction
+
+In supervised text classification, 
+we train a statistical model on the *features* of our data (e.g. the word frequencies)
+to predict the *class* of our texts (e.g. the sentiment).
+
+For this example, we will use functions from the `quanteda.textmodels` package. 
+Normally, the go-to package for machine learning is `caret`, but unfortunately that package does not deal with sparse matrices well, making it less attractive for text analysis purposes. 
+The good thing is that if you are used to `quanteda` you will find it very easy to use their textmodels as well.
+
+# Getting Amazon Review Data
+
+For this example, we will use Amazon reviews. 
+These reviews have the benefit of being relatively straightforward and explicit in their expressed sentiment (e.g. compared to parliamentary speeches),
+and there is a large amount of existing reviews that can be downloaded. 
+
+We use the reviews from [Amazon Review Dataset](https://nijianmo.github.io/amazon/index.html) (scroll down to the 'small' data sets which are freely available). 
+These reviews are stored in gzipped json-lines format, meaning it is a compressed file in which each line is a json document.
+This sounds complicated, but you can directly read this into an R data frame using the `jsonlite::stream_in` function on the url using the `gzcon` function to decompress.
+
+For this example, we pick the digital music category, mostly because it is relatively small and still interesting. 
+If you select a category with more data, it will take longer to download and run the models, but results might well be better.
+
+```{r}
+library(tidyverse)
+library(quanteda)
+library(quanteda.textplots)
+```
+
+```{r, cache=T}
+reviews <- jsonlite::stream_in(gzcon(url("http://deepyeti.ucsd.edu/jianmo/amazon/categoryFilesSmall/Digital_Music_5.json.gz"))) 
+
+reviews <- reviews %>% 
+   as_tibble %>% 
+  select(reviewerID, asin, overall, summary, reviewText)
+head(reviews)
+```
+
+In this file, `reviewID` identifies the user that placed the reivew, `asin` identifies the reviewed product, `overall` is the amount of stars, 
+and `summary` and `reviewText` are the review text as entered by the user. Taken together, `reviewID` and `asin` uniquely identify a row. 
+
+Let us quickly check, how often 5 stars are given.
+
+```{r}
+reviews %>%
+  ggplot(aes(x = overall)) +
+  geom_histogram(bins = 5, fill = "lightblue", color = "white") +
+  theme_minimal()
+
+table(reviews$overall < 5) %>% 
+  prop.table
+```
+
+We can see that most reviews are really positive (5 stars!). The training data may hence not provide much information to differentiate e.g., reviews with a scor of 3 from a score of 2. 
+
+Before proceeding to the text classification, we will thus compute a binary target class (five-star or not) and create a text variable combining the summary and review text:
+
+```{r}
+reviews <- reviews %>% 
+  mutate(fivestar = overall == 5,
+         text = str_c(summary, reviewText, sep = " "))
+
+# Check
+reviews %>%
+  select(fivestar, text) %>%
+  head
+```
+
+# Data Preprocessing
+
+## Splitting into training and test data
+
+Before we can train a model, we need to split the model into training and text data.
+We do this with regular R and tidyverse functions, in this case we sample from the row indices and use `slice` to select the appropriate rows
+(using the negative selection for the test set to select everything except for the training set):
+
+```{r}
+# To ensure replicability
+set.seed(42)
+
+# Sample 
+trainset <- sample(nrow(reviews), size=round(nrow(reviews) * 0.8))
+reviews_train <- reviews %>% slice(trainset)
+reviews_test <- reviews %>% slice(-trainset)
+```
+
+## Creating the DFM
+
+First, we create a document feature matrix (dtm) of the training data:
+
+```{r}
+dfm_train <- reviews_train %>% 
+  corpus %>% 
+  tokens %>%
+  tokens_wordstem %>%
+  dfm %>% 
+  dfm_trim(min_docfreq = 10)
+dfm_train
+```
+
+
+# Machine Learning
+
+## Training the algorithm
+
+Now, we can train a text model with e.g., the naive bayes algorithm:
+
+```{r}
+library(quanteda.textmodels) ## install first!
+nbmodel <- textmodel_nb(dfm_train, dfm_train$fivestar)
+summary(nbmodel)
+```
+
+The summary of the model already provides us with some idea about the probabilistic prediction: So for example, the word "great" is more likely to be in a five star review than in a less good review. Pretty intuitive, right?
+
+
+## Testing the model
+
+Let's test it on the training data set (note, this should always yield good results unless something went wrong)
+
+```{r}
+predictions <- predict(nbmodel, dfm_train)
+mean(predictions == dfm_train$fivestar)
+```
+
+## Validating on the test data
+
+To use the model on new data, we need to make sure that the columns of the train and test dataset agree.
+For this, we can use the `dfm_match` function, which makes sure that the test dfm uses the columns from the train dfm:
+
+```{r}
+dfm_test <- reviews_test %>% 
+  corpus %>% 
+  tokens %>%
+  tokens_wordstem %>%
+  dfm %>% 
+  dfm_trim(min_docfreq = 10) %>% 
+  dfm_match(features = featnames(dfm_train))
+
+colnames(dfm_test) %>% head()
+colnames(dfm_train) %>% head()
+```
+
+Now, we can use the predict function as above:
+
+```{r}
+predictions <- predict(nbmodel, dfm_test)
+mean(predictions == dfm_test$fivestar)
+```
+
+So, the result is lower, but not that much lower, which is good. Next, let's have a look at some more statistics,
+for which we use the `caret` package:
+
+```{r}
+library(caret)
+confusionMatrix(table(predictions, actual = dfm_test$fivestar), mode = "prec_recall", positive = "TRUE")
+```
+
+This results shows us the confusion matrix and a number of performance statistics, 
+including precision (if it predicted 5 stars, was it correct), recall (out of all 5-star reviews, how many did it predict), and F1 (harmonic mean of precision and recall)
+
+
+## Music we like and hate: Validation on our own data 
+
+Just for fun, let's have a look at how well the algorithm can predict our music taste (or at least how well it predicts our rating based on our review!). All of our reviews are stored in the following file that we can simply load from the CANVAS page of this course. 
+
+```{r}
+our_data <- read_csv("music_reviews.csv")
+head(our_data)
+```
+
+First, just for fun, let us explore our data a bit. 
+
+```{r}
+our_data %>%
+  corpus(text_field = "genre") %>%
+  tokens(remove_punct = T) %>%
+  dfm %>%
+  textplot_wordcloud(max_words = 20, min_count = 1, color = c("orange", "red", "blue"))
+```
+
+What are the most named artists?
+
+```{r}
+# Overall most named artists
+our_data %>%
+  corpus(text_field = "artist") %>%
+  tokens(what = "sentence") %>%   ## change tokenization to "sentence"
+  dfm %>%
+  textplot_wordcloud(max_words = 50, min_count = 1, color = c("orange", "red", "blue"))
+
+# Overall most liked artists
+our_data %>%
+  filter(overall == 5) %>%    ## only include 5 star reviews
+  corpus(text_field = "artist") %>%
+  tokens(what = "sentence") %>%
+  dfm %>%
+  textplot_wordcloud(max_words = 50, min_count = 1, color = c("orange", "red", "blue"))
+```
+
+How did we rate the albums on on average? Per genre?
+
+```{r}
+# Average across all reviews
+our_data %>%
+  summarize(m = mean(overall, na.rm = T),
+            sd = sd(overall, na.rm = T))
+
+# Average per genre
+our_data %>%
+  group_by(genre) %>%
+  summarize(m = mean(overall, na.rm = T),
+            sd = sd(overall, na.rm = T)) %>%
+  arrange(-m)
+
+```
+
+And which artists did we like the most?
+
+```{r, fig.height = 15, fig.width = 12}
+our_data %>%
+  filter(!is.na(artist)) %>%
+  group_by(artist) %>%
+  summarize(score = mean(overall, na.rm = T),
+            se = psych::describe(overall)$se,
+            ll = score - 1.96*se,
+            ul = score + 1.96*se,
+            n = n()) %>%
+  ggplot(aes(x = reorder(artist, score), 
+             y = score, ymin = ll, ymax = ul, 
+             color = factor(n))) +
+  geom_pointrange() +
+  ylim(1,5) +
+  coord_flip() +
+  theme_minimal() +
+  labs(y = "Average score", x = "", color = "Number of\nreviews",
+       title = "Our average music taste")
+```
+
+Most importantly, we can now of course also test whether the trained model also does well in predicting our rating of our favoriate and not so favorite music. We first again have to build a "fivestar" variable that distinguishes between top reviews (overall = 5) and less good ones (overall < 5). Then, we again have to build the a document-feature matrix (including all relevant preprocessing steps) and match it to the train set. 
+
+```{r}
+our_data <- our_data %>%
+   mutate(fivestar = overall == 5,
+   text = str_c(str_replace_na(summary),  str_replace_na(text), sep=" "))
+
+dfm_test2 <- our_data %>%
+  corpus %>% 
+  tokens %>%
+  tokens_wordstem %>%
+  dfm %>% 
+  #dfm_trim(min_docfreq = 10) %>%   ## don't remove any words here
+  dfm_match(features = featnames(dfm_train))
+dfm_test2
+```
+
+Finally, we can predict rating in this new data set with the trained algorithm by again using the `predict()` function. And to check how well the model did, we again produce accuracy and validation scores.  
+
+```{r}
+# Prediction
+predictions <- predict(nbmodel, dfm_test2)
+
+# Accuracy
+mean(predictions == dfm_test2$fivestar, na.rm = T)
+
+# Confusion matrix and validation scores
+confusionMatrix(table(predictions, dfm_test2$fivestar), mode = "prec_recall", positive="TRUE")
+```
+
+
+**Exercise 1:** If we would train another algorithm (e.g., support vector machines), would the results differ? Try out the function `textmodel_svm()` (Note: this may take some time depending on your computing power...). If this does not work, try out some extra text preprocessing steps (e.g., removing stopwords, frequency trimming) and whether these improve or reduce the performance.
+
+```{r}
+# Different preprocessing for our data set (no stemming, no word removal)
+dfm_train2 <- reviews_train %>% 
+  corpus %>% 
+  tokens %>%
+  dfm 
+
+# Train algorithm again
+nbmodel2 <- textmodel_nb(dfm_train2, dfm_train2$fivestar)
+summary(nbmodel2)
+
+# Match test data set
+dfm_test3 <- reviews_test %>%
+  corpus %>% 
+  tokens %>%
+  dfm %>%
+  dfm_match(features = featnames(dfm_train2))
+
+# Prediction
+predictions2 <- predict(nbmodel2, dfm_test3)
+
+# Accuracy
+mean(predictions2 == dfm_test3$fivestar, na.rm = T) ## slightly better than before
+
+# Confusion matrix and validation scores
+confusionMatrix(table(predictions2, dfm_test3$fivestar), mode = "prec_recall", positive="TRUE")
+```
+
+We can see that by a) removing "stemming" and b) not removing infrequent words, the naive bayes classifier became slightly better .85 < .86.
+
+
+## Bonus: Creating a little prediction software....
+
+```{r}
+score_predictor <- function(review = "Five stars!"){
+ x <- review %>%
+  tokens %>%
+  tokens_wordstem %>%
+  dfm %>%
+  dfm_match(features = featnames(dfm_train)) %>%
+  predict(nbmodel, .) %>%
+  as.logical
+ ifelse(isTRUE(x), "5", "4 or less")
+}
+
+# Does it predict 5 stars?
+score_predictor("Bon Jovi's Greatest Hits are one of the best albums in the entire world!")
+
+# Does it predict less than 5 stars?
+score_predictor("Bon Jovi's Greatest Hits is the worst you can possibly listen too. Damn.")
+```
+
+
+# Where to go next?
+
+The code above gives a good template to get started with supervised text analysis. 
+First, you can try using different data sets and different models, e.g. the support vector machine `textmodel_svm`
+Next, you can experiment with different features, e.g. by trying n-grams, lemmatization, etc.
+Then, you can use cross-validation rather than a single train-test split, especially to find the best parameter settings for models that have hyperparameters (such as the C and epsilon parameters of the SVM). 
+Finally, you can experiment with how much training data is required to produce a good model by running the model with random subsamples of the training data, producing a graph called a *learning curve*.
+
+
+
+
