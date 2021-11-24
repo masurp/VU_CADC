@@ -6,6 +6,7 @@
 *.Rproj
 /slides/libs
 /slides/*cache
+/slides/*.pdf
 /slides/data/
 /literature/
 /admin/
