@@ -59,7 +59,7 @@ data.
 
 ``` r
 # Importing the json data base
-tweets <- jsonlite::stream_in(file("data/trolls_data.json"))
+tweets <- jsonlite::stream_in(file("trolls_data.json"))
 
 # Some preprocessing to get a tidy data set
 tweets <- tweets %>%

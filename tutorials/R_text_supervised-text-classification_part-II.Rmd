@@ -38,7 +38,7 @@ In this tutorial, our goal is to use an existing, annotated data sets of Twitter
 
 ```{r}
 # Importing the json data base
-tweets <- jsonlite::stream_in(file("data/trolls_data.json"))
+tweets <- jsonlite::stream_in(file("trolls_data.json"))
 
 # Some preprocessing to get a tidy data set
 tweets <- tweets %>%
