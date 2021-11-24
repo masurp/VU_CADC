@@ -158,7 +158,7 @@ In the third cycle, students will work on their own research projects. Resources
 #### Practical Session 2
 
 - Handouts:
-    - Supervised text classification II (to be uploaded soon)
+    - [Supervised text classification II](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_supervised-text-classification_part-II.md)
     
 
 #### Homework
