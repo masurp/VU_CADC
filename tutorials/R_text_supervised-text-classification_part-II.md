@@ -210,7 +210,7 @@ both algorithms next to each other.
 
 ``` r
 # Extracting accuracy scores
-accuracy <- bind_rows(nb_cm$overa, svm_cm$overall) %>%
+accuracy <- bind_rows(nb_cm$overall, svm_cm$overall) %>%
   mutate(algorithm = c("Naive Bayes", "Support Vector Machines")) %>%
   select(algorithm, Accuracy, Kappa)
 
