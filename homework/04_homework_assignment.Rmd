@@ -1,0 +1,99 @@
+---
+title: 'Homework 4: Supervised Text Classification'
+author: "Wouter van Atteveldt, Mariken van der Velden, & Philipp Masur"
+date: ""
+output:
+  html_document:
+    toc: yes
+editor_options:
+  chunk_output_type: console
+---
+
+```{r opts, echo = FALSE}
+library(knitr)
+knitr::opts_chunk$set(echo = TRUE, results = TRUE, message = FALSE, warning = FALSE)
+```
+
+# Formalities
+
+- Name:         [ENTER YOUR NAME HERE]
+- Student ID:   [ENTER YOUR STUDENT ID HERE]   
+
+In the end, klick on "knit" and upload the respective html-output file to Canvas. Please add your name and lastname to the output file name:
+e.g., 02_homework_assignment_NAME-LASTNAME.html
+
+
+
+# Introduction 
+
+In the last homework, we replicated parts of the article [The Validity of Sentiment Analysis](https://raw.githubusercontent.com/vanatteveldt/ecosent/master/report/atteveldt_sentiment.pdf) by Wouter van Atteveldt, Mariken van der Velden and Mark Boukes in which they tested different methods' validity in assessing the sentiment in Dutch newspaper headlines. Again, special thanks to Wouter and Mariken for sharing their data and code for this exercise!
+
+In this homework, we will replicate a different part of their paper. As you already realized in the last homework, the sentiment analysis based on a dictionary did not work very well. The accuracy (in comparison to the gold standard) was below .50, so close to chance!
+
+In this homework, you will use supervised machine learning algorithms and check whether they perform better at classifying the sentiment of the Dutch newspaper headlines. 
+
+
+# Data 
+
+We again load the data from the respective github repository with the following code. 
+
+```{r}
+# Needed packages
+library(tidyverse)
+library(quanteda)
+library(quanteda.textplots)
+library(quanteda.textstats)
+
+# Load data
+url <- "https://raw.githubusercontent.com/vanatteveldt/ecosent/master/data/intermediate/sentences_ml.csv"
+d <- read_csv(url) %>% 
+  select(doc_id = id, text = headline, lemmata, sentiment=value) %>%
+  mutate(doc_id = as.character(doc_id))
+head(d)
+```
+
+Just as in the last homework, this dataset contains Dutch newspaper headlines of articles mentioning the economy. 
+The `sentiment` column is a manual coding of the state of the economy, 
+i.e. whether according to the headline one would conclude the economy is doing well or not. 
+
+# Analysis
+
+## Splitting the data into a training and test data set
+
+First, you need to split the data set into a training and a test data set. The original data set contains more than 6,000 headlines, so think about a reasonable percentage split. Please justify your decision for a certain percentage below. 
+
+```{r}
+# Solution here
+```
+
+**Answer:** [Your response here.]
+
+## Creating the document-feature matrix
+
+Once you have created the training data set, make a document-term-matrix that can be passed to the machine learning algorithm. This means first creating a "corpus" (bear in mind to set `text-field = "lemmata"`), engage in reasonable preprocessing (if necessary) and transform into a dtm!
+
+```{r}
+# Solution here
+```
+
+## Training the algorithm
+
+Now use the Naive Bayes Classifier to train a model based on the training data. Bear in mind, the outcome varibale is the column `sentiment`.
+
+```{r}
+library(quanteda.textmodels)
+# Solution here
+```
+
+
+## Testing agains the gold standard
+
+In a final step, test the resulting predictions using the test data. How well did the algorithm perform? (Provide an elaborate interpretation of the results that takes different valdiation scores into account.)
+
+
+```{r}
+library(caret)
+# Solution here
+```
+
+**Answer:** [Your interpretation here]
