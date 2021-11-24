@@ -1,0 +1,354 @@
+Supervised Text Classification II
+================
+Philipp Masur
+2021-11
+
+-   [Introduction](#introduction)
+-   [Preprocessing](#preprocessing)
+    -   [Getting some Twitter data](#getting-some-twitter-data)
+    -   [Creating train and test data
+        sets](#creating-train-and-test-data-sets)
+    -   [Text preprocessing and creating the
+        DTM](#text-preprocessing-and-creating-the-dtm)
+-   [Machine Learning Process](#machine-learning-process)
+    -   [Training different algorithm](#training-different-algorithm)
+    -   [Testing the algorithms on the held-out
+        data](#testing-the-algorithms-on-the-held-out-data)
+-   [Using the classifier on a new data
+    set](#using-the-classifier-on-a-new-data-set)
+    -   [Getting some new twitter data](#getting-some-new-twitter-data)
+    -   [Using the trained algorithm to predict whether these tweets
+        contain “aggressive”
+        language](#using-the-trained-algorithm-to-predict-whether-these-tweets-contain-aggressive-language)
+    -   [Some simple analyses](#some-simple-analyses)
+
+# Introduction
+
+In this tutorial, we are going to further practice using different
+supervised learning approaches to classify/code text.
+
+A small reminder: In supervised text classification, we train a
+statistical model on the *features* of our data (e.g. the word
+frequencies) to predict the *class* of our texts (e.g. the sentiment,
+topic,…).
+
+We will again use functions from the `quanteda.textmodels` package as
+well as some functions from the `caret` package.
+
+``` r
+library(tidyverse)
+library(quanteda)
+library(quanteda.textplots)
+library(quanteda.textmodels)
+library(caret)
+```
+
+# Preprocessing
+
+## Getting some Twitter data
+
+In this tutorial, our goal is to use an existing, annotated data sets of
+Twitter tweets to train an algorithm to detect “aggressive” or “uncivil”
+language in tweets. This [data
+set](https://www.kaggle.com/dataturks/dataset-for-detection-of-cybertrolls)
+includes about 20,000 tweets that are further labeled as being
+aggressive (1) or not aggressive (0). The data set comes as a json-file,
+which I uploaded to our CANVAS page. Let’s download the data, use the
+function `stream_in()` from the `jsonlite` package and check out the
+data.
+
+``` r
+# Importing the json data base
+tweets <- jsonlite::stream_in(file("data/trolls_data.json"))
+
+# Some preprocessing to get a tidy data set
+tweets <- tweets %>%
+  as_tibble %>%
+  mutate(label = unlist(annotation$label)) %>%
+  select(label, text = content) %>%
+  mutate(text = trimws(text))
+head(tweets)
+```
+
+Let’s try to better understand our data and check how many tweets are
+labelled as aggresive vs. not aggresive.
+
+``` r
+tweets %>%
+  group_by(label) %>%
+  count %>%
+  mutate(prop = n/nrow(tweets))
+```
+
+To better understand how the data was labeled, let’s look at the most
+used words in the tweets that were coded as “aggressive”. We can do so
+by first filtering our data set to contain only aggressive tweets. We
+then go through some text preprocessing and create a document-term
+matrix. We can then create a simply wordcloud.
+
+``` r
+tweets %>%
+  filter(label == 1) %>%
+  corpus %>%
+  tokens(what = "word1", remove_punct = T, remove_symbols = T) %>%
+  tokens_remove(stopwords("en")) %>%
+  dfm %>%
+  textplot_wordcloud(max_words = 75, color = c("orange", "red"))
+```
+
+Not very nice, but it seems that the tweets have been labeled correctly.
+
+## Creating train and test data sets
+
+Similar to our last practical session, we need to split the model into
+training and text data. We again do this with regular R and tidyverse
+function. We sample from the row indices and use `slice` to select the
+appropriate rows:
+
+``` r
+# To ensure replicability
+set.seed(42)
+
+# Sample 
+trainset <- sample(nrow(tweets), size=round(nrow(tweets) * 0.8))
+tweets_train <- tweets %>% slice(trainset)
+tweets_test <- tweets %>% slice(-trainset)
+```
+
+## Text preprocessing and creating the DTM
+
+The next step again consists of engaging in various text preprocessing
+steps. Because supervised machine learning algorithm do well even if we
+do not remove any noise, we only tokenize, but with the added argument
+`what = "word1"`, which automatically removes the `#` from the tweets.
+
+``` r
+dfm_train <- tweets_train %>% 
+  corpus %>% 
+  tokens(what = "word1") %>%
+  dfm
+dfm_train
+```
+
+# Machine Learning Process
+
+## Training different algorithm
+
+Based on this document-term matrix, we can now start to train
+algorithms. This time, we are actually going to use two different
+algorithms (both Naive Bayes and Support Vector Machines) and check
+which one performs better.
+
+``` r
+# Naive Bayes
+nb_model <- textmodel_nb(dfm_train, dfm_train$label)
+
+# Support Vector Machines
+svm_model <- textmodel_svm(dfm_train, dfm_train$label)
+```
+
+## Testing the algorithms on the held-out data
+
+To validate our algorithms, we again need to preprocess our test data in
+the exact same way as we did our training data. Bear in mind that we
+need to “match” both document-feature matrices for the prediction to
+work.
+
+``` r
+# Preprocessing test data
+dfm_test <- tweets_test %>% 
+  corpus %>% 
+  tokens(what = "word1") %>%
+  dfm %>%
+  dfm_match(features = featnames(dfm_train))
+
+# Predicting 
+nb_predictions <- predict(nb_model, dfm_test)
+svm_predictions <- predict(svm_model, dfm_test)
+
+# Accuracy
+mean(nb_predictions == dfm_test$label)
+mean(svm_predictions == dfm_test$label) #
+```
+
+As we can see, support vector machines have a much higher accuracy!
+Let’s explor the difference in a bit more detail.
+
+``` r
+# Naive Bayes
+nb_cm <- confusionMatrix(table(predictions = nb_predictions, actual = dfm_test$label))
+svm_cm <- confusionMatrix(table(predictions = svm_predictions, actual = dfm_test$label))
+
+# Creating a comparison table
+validation <- bind_cols(nb_cm$byClass %>% as.data.frame,
+                        svm_cm$byClass %>% as.data.frame) %>%
+  rownames_to_column("scores") %>%
+  as_tibble
+names(validation) <- c("scores", "naive bayes", "support vector machines")
+validation
+```
+
+Perhaps it would be nice, if we could assess this visually:
+
+``` r
+validation %>%
+  pivot_longer(-scores) %>%
+  ggplot(aes(x = name, y = value, fill = name)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  ylim(0, 1) +
+  guides(fill = F) +
+  facet_wrap(~scores) +
+  coord_flip() +
+  theme_bw() +
+  labs(x = "", y = "score",
+       title = "Naive Bayes vs. Support Vector Machines")
+```
+
+# Using the classifier on a new data set
+
+## Getting some new twitter data
+
+Now, we have learned that particularly the SVM algorithm performs well
+based on our test data set. So perhaps we can use it to classify a new
+set of tweets? Let’s get some new twitter data, i.e., \~30,000
+english-speaking tweets using the search term “lockdown”. If you have a
+Twitter account, you can run the following code to scrape some 18,000
+tweets yourself.
+
+``` r
+library(rtweet)
+tweets_new <- search_tweets("lockdown", n = 18000, lang = "en")
+```
+
+Alternatively, simply download the data set from Canvas and load it into
+R using the standard procedure. We directly select only those variables
+that are of interest to us:
+
+``` r
+tweets_new <- read_csv("tweets_new.csv") %>%
+  select(user_id, status_id, created_at, user = screen_name, text, 
+         is_retweet, favorite_count, retweet_count, quote_count, reply_count)
+head(tweets_new)
+```
+
+## Using the trained algorithm to predict whether these tweets contain “aggressive” language
+
+To classify our new tweets automatically, we need to preprocess our new
+data in the exact same way as our train data set and also match (i.e.,
+align) the document-feature matrix using `dfm_match()`
+
+``` r
+dfm_tweets <- tweets_new %>%
+  mutate(text = str_remove_all(text, "#")) %>%
+  corpus %>% 
+  tokens(what = "word1") %>%
+  dfm %>%
+  dfm_match(features = featnames(dfm_train))
+dfm_tweets
+```
+
+Now, we use our algorithm to predict the classes and we add them
+directly to our data set.
+
+``` r
+# Predict aggressiveness in tweets
+pred_nb <- predict(nb_model, dfm_tweets)
+pred_nb_prop <- predict(nb_model, dfm_tweets, type = "probability")  ## We can even get the probability based on the Naive Bayes classifier
+pred_svm <- predict(svm_model, dfm_tweets)
+
+# Add prediction to data set
+tweets_new$pred_nb = pred_nb
+tweets_new$pred_nb_prop = pred_nb_prop[,2]
+tweets_new$pred_svm = pred_svm
+
+# Check
+tweets_new %>%
+  select(contains("pred"))
+```
+
+Of course, we cannot really tell whether any of the algorithms did
+“well”. We would need to manually annotate a subsample of our new data
+and compare against this gold standard. For the time being, let’s have a
+look at some of the tweets that have been classified as containing
+“aggressive” language.
+
+``` r
+tweets_new %>%
+  filter(!is_retweet) %>%
+  filter(pred_svm == 1) %>%
+  select(user, text) %>%
+  print(n = 25)
+
+# Filtering based on probability
+tweets_new %>%
+  filter(!is_retweet) %>%
+  filter(pred_nb_prop > .95) %>%
+  select(user, text) %>%
+  print(n = 25)
+```
+
+What words do they use?
+
+``` r
+tweets_new %>%
+  filter(!is_retweet) %>%
+  filter(pred_svm == 1) %>%
+  corpus %>%
+  tokens(what = "word1", remove_punct = T, remove_symbols = T) %>%
+  tokens_remove(c("lockdown", "https", "t.co")) %>%
+  tokens_remove(stopwords("en")) %>%
+  dfm %>%
+  textplot_wordcloud(max_words = 75, color = c("orange", "red"))
+```
+
+## Some simple analyses
+
+With these results, we can now do some analyses, e.g., how many tweets
+overall were classified as aggressive?
+
+``` r
+# Naive Bayes
+tweets_new %>%
+  group_by(pred_nb) %>%
+  count %>%
+  mutate(prop = n/nrow(tweets_new))
+
+# Support Vector Machines
+tweets_new %>%
+  group_by(pred_svm) %>%
+  count %>%
+  mutate(prop = n/nrow(tweets_new))
+```
+
+We can also investigate, whether aggressiveness leads to more or less
+liking or retweeting:
+
+``` r
+# Favorite
+tweets_new %>%
+  filter(!is_retweet) %>%
+  glm(favorite_count > 0 ~ pred_nb_prop, data = ., family = binomial()) %>%
+  summary
+
+# Retweet
+tweets_new %>%
+  filter(!is_retweet) %>%
+  glm(retweet_count > 0 ~ pred_nb_prop, data = ., family = binomial()) %>%
+  summary
+```
+
+Or let’s plot how aggressiveness changes over the course of the day in
+tweets on the lockdown…
+
+``` r
+library(lubridate)
+tweets_new %>%
+  mutate(date = round_date(created_at, "hours")) %>%
+  group_by(date) %>%
+  summarize(aggro = mean(pred_nb_prop, na.rm = T)) %>%
+  ggplot(aes(x = date, y = aggro)) +
+  geom_line(color = "red") +
+  theme_classic() +
+  labs(x = "Hours", y = "Amount of aggressiveness in tweets",
+       title = "Agressiveness on Twitter across 2 days")
+```
