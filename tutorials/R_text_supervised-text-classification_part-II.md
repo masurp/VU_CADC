@@ -195,8 +195,8 @@ information (or validation score) we are interested in.
 
 ``` r
 # Create confusion matrices
-nb_cm <- confusionMatrix(table(predictions = nb_predictions, actual = dfm_test$label))
-svm_cm <- confusionMatrix(table(predictions = svm_predictions, actual = dfm_test$label))
+nb_cm <- confusionMatrix(table(predictions = nb_predictions, actual = dfm_test$label), mode = 'prec_recall')
+svm_cm <- confusionMatrix(table(predictions = svm_predictions, actual = dfm_test$label), mode = 'prec_recall')
 
 # Check results
 nb_cm
