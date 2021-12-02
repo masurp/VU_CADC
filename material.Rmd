@@ -185,7 +185,7 @@ Exam week.
     - Make sure to be there on time
     
 - Format
-    - The exam in a paper-pencil format
+    - The exam will be on **TestVision**
     - 30-35 Multiple Choice Questions
     - 6-10 Open Questions
     - Example questions are provided at the end of all lecture slides
