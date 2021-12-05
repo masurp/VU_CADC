@@ -43,7 +43,7 @@ In the third cycle, students will work on their own research projects. Resources
 
 #### Lecture: Introduction to Computational Methods
 
-- Slides:
+- Slides Lecture 1:
     - [Download Slides](slides/01_introduction.html)
 
 #### Practical Session 1: Introduction to R and RStudio
@@ -77,7 +77,7 @@ In the third cycle, students will work on their own research projects. Resources
 
 #### Lecture: Data Wrangling and Data Visualization
 
-- Slides:
+- Slides Lecture 2:
     - [Download Slides](slides/02_dataviz.html)
 
 #### Practical Session 1: Data visualization
@@ -111,7 +111,7 @@ In the third cycle, students will work on their own research projects. Resources
 
 #### Lecture: Text as Data - Basics of Automatic Text Analysis
 
-- Slides:
+- Slides Lecture 3:
     - [Download Slides](slides/03_textanalysis.html)
 
 #### Practical Session 1
@@ -147,7 +147,7 @@ In the third cycle, students will work on their own research projects. Resources
 
 #### Lecture: Machine Learning - Supervised Text Classification
 
-- Slides:
+- Slides Lecture 4:
     - [Download Slides](slides/04_supervisedlearning.html)
 
 #### Practical Session 1
@@ -200,7 +200,40 @@ Exam week.
 
 ## Week 6 & 7
 
-Group projects.
+#### Introduction to Group Research Projects
+
+- Slides Lecture 5:
+    - [Download Slides](slides/05_groupprojects.html)
+    
+#### Additional methods and resources (handouts and video tutorials)
+
+- A general collection of diverse R tutorials
+    - [The CCS Amsterdam R course material](https://github.com/ccs-amsterdam/r-course-material) 
+    
+- Basic Statistics in R
+    - [Basic Statistics (ANOVA, regression, t-test, etc.)](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/simple_modeling.md) ([Video tutorial](https://www.youtube.com/watch?v=1K3SKsEj9eI)) 
+    - Moderation Analysis (to be uploaded soon)
+
+- Test theory and factor analyses
+    - [Test theory and confirmatory factor analyses](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R_test-theory_1_cfa.md) ([Video tutorial](https://www.youtube.com/watch?v=uKlagNgC-GY))
+    - [Exploratory factor analysis](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R_test-theory_2_efa.md)
+    
+- Advanced Statistics
+    - [Advanced Statistics Overview](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/advanced_modeling.md)
+    - [Generalized linear model](https://htmlpreview.github.io/?https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/generalized_linear_models.html) ([Video tutorial](https://www.youtube.com/watch?v=WnmwuD8OwMw&list=PL-i7GM-A1wBarcTV3wN2f-AAuEK3j76M0&index=3))
+    - [Multilevel Modeling](https://htmlpreview.github.io/?https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/multilevel_models.html) ([Video tutorial](https://www.youtube.com/watch?v=1Tw1eIfSyEQ&list=PL-i7GM-A1wBarcTV3wN2f-AAuEK3j76M0&index=4))
+    
+- Additional text analysis
+    - [Unsupervised topic modeling](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/r_text_lda.md) ([Video tutorial](https://youtu.be/4YyoMGv1nkc))
+    
+#### Final presentation at the "mini-conference"
+
+- Time and Date: 20th December from 9:00 to 11:30
+
+    - There will be three parallel sessions
+    - More information soon (including exact schedule)
+
+- You will give a 10-minute talk (including appropriate slides)
 
 <br>
 <hr>
