@@ -216,7 +216,7 @@ Exam week.
 
 - Test theory and factor analyses
     - [Test theory and confirmatory factor analyses](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R_test-theory_1_cfa.md) ([Video tutorial](https://www.youtube.com/watch?v=uKlagNgC-GY))
-    - [Exploratory factor analysis](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R_test-theory_2_efa.md)
+    - [Exploratory factor analysis](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R_test-theory_2_efa.md) ([Video tutorial](https://youtu.be/AXaBMDA34YM))
     
 - Advanced Statistics
     - [Advanced Statistics Overview](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/advanced_modeling.md)
