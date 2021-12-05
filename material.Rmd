@@ -226,14 +226,6 @@ Exam week.
 - Additional text analysis
     - [Unsupervised topic modeling](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/r_text_lda.md) ([Video tutorial](https://youtu.be/4YyoMGv1nkc))
     
-#### Final presentation at the "mini-conference"
-
-- Time and Date: 20th December from 9:00 to 11:30
-
-    - There will be three parallel sessions
-    - More information soon (including exact schedule)
-
-- You will give a 10-minute talk (including appropriate slides)
 
 <br>
 <hr>
@@ -242,7 +234,19 @@ Exam week.
 
 ## Week 8
 
-There will be a mini-conference this week where all research groups present their findings. 
+#### Final presentation at the "mini-conference"
+
+- At a final "mini-conference", you will present the findings of your research projects!
+
+- Time and Date: 20th December from 9:00 to 11:30
+
+    - There will be three parallel sessions
+    - More information soon (including exact schedule)
+
+- You will give a 10-minute talk (including appropriate slides)
+
+- You will create a summary "poster"
+
 
 
 <hr>
