@@ -226,6 +226,9 @@ Exam week.
 - Additional text analysis
     - [Unsupervised topic modeling](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/r_text_lda.md) ([Video tutorial](https://youtu.be/4YyoMGv1nkc))
     
+- Web Scraping
+    - [Web scraping using Rvest](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/rvest.md)
+    
 
 <br>
 <hr>
