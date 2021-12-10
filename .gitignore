@@ -11,6 +11,7 @@
 /literature/
 /admin/
 /exam/
+/scraping/
 /homework/*.csv
 /homework/*.sav
 /tutorials/data/*.csv
