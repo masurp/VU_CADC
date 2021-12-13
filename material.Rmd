@@ -158,7 +158,7 @@ In the third cycle, students will work on their own research projects. Resources
 #### Practical Session 2
 
 - Handouts:
-    - [Supervised text classification II](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_supervised-text-classification_part-II.md)
+    - [Supervised text classification II](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_supervised-text-classification_part-II.md) ([Version with solutions](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_supervised-text-classification-II_complete.md))
     
 
 #### Homework
@@ -212,7 +212,6 @@ Exam week.
     
 - Basic Statistics in R
     - [Basic Statistics (ANOVA, regression, t-test, etc.)](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/simple_modeling.md) ([Video tutorial](https://www.youtube.com/watch?v=1K3SKsEj9eI)) 
-    - Moderation Analysis (to be uploaded soon)
 
 - Test theory and factor analyses
     - [Test theory and confirmatory factor analyses](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R_test-theory_1_cfa.md) ([Video tutorial](https://www.youtube.com/watch?v=uKlagNgC-GY))
@@ -250,6 +249,7 @@ Exam week.
 
 - You will create a summary "poster"
 
+- Deadline for slides, poster, rmarkdown and html output: **19th December at 23.59** (sharp deadline!)
 
 
 <hr>
