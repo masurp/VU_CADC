@@ -12,6 +12,7 @@
 /admin/
 /exam/
 /scraping/
+/group_projects/
 /homework/*.csv
 /homework/*.sav
 /tutorials/data/*.csv
