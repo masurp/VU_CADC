@@ -8,7 +8,12 @@ output:
     df_print: paged
 ---
 
+<br><br>
 
+As part of the course "Computational Analysis of Digital Communication", students conducted individual research projects. The following posters summarize their projects and main results. 
+
+<br><br>
+<hr>
 ### Research Group 1 
 
 <a href="poster/rg1.png"><img src= "poster/rg1.png" /></a>
