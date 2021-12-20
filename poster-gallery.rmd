@@ -1,0 +1,281 @@
+---
+title: "Poster Gallery"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 5
+    df_print: paged
+---
+
+
+### Research Group 1 
+
+<a href="poster/rg1.png"><img src= "poster/rg1.png" /></a>
+
+<br><br>
+<hr>
+
+### Research Group 2 
+
+<a href="poster/rg2.png"><img src= "poster/rg2.png" /></a>
+
+
+<br><br>
+<hr>
+
+### Research Group 3 
+
+<a href="poster/rg3.png"><img src= "poster/rg3.png" /></a>
+
+
+<br><br>
+<hr>
+
+### Research Group 4 
+
+<a href="poster/rg4.png"><img src= "poster/rg4.png" /></a>
+
+
+<br><br>
+<hr>
+
+### Research Group 5 
+
+<a href="poster/rg5.png"><img src= "poster/rg5.png" /></a>
+
+
+<br><br>
+<hr>
+
+### Research Group 6 
+
+<a href="poster/rg6.png"><img src= "poster/rg6.png" /></a>
+
+
+<br><br>
+<hr>
+
+### Research Group 7
+
+<a href="poster/rg7.png"><img src= "poster/rg7.png" /></a>
+
+<br><br>
+<hr>
+
+### Research Group 8 
+
+<a href="poster/rg8.png"><img src= "poster/rg8.png" /></a>
+
+<br><br>
+<hr>
+
+### Research Group 9 
+
+<a href="poster/rg9.png"><img src= "poster/rg9.png" /></a>
+
+<br><br>
+<hr>
+
+### Research Group 10 
+
+<a href="poster/rg10.png"><img src= "poster/rg10.png" /></a>
+
+
+<br><br>
+<hr>
+
+### Research Group 11 
+
+<a href="poster/rg11.png"><img src= "poster/rg11.png" /></a>
+
+
+<br><br>
+<hr>
+
+### Research Group 12 
+
+<a href="poster/rg12.png"><img src= "poster/rg12.png" /></a>
+
+
+<br><br>
+<hr>
+
+### Research Group 13 
+
+<a href="poster/rg11.png"><img src= "poster/rg11.png" /></a>
+
+
+<br><br>
+<hr>
+
+### Research Group 14 
+
+<a href="poster/rg14.png"><img src= "poster/rg14.png" /></a>
+
+<br><br>
+<hr>
+
+### Research Group 15 
+
+<a href="poster/rg15.png"><img src= "poster/rg15.png" /></a>
+
+
+<br><br>
+<hr>
+
+### Research Group 17 
+
+<a href="poster/rg17.png"><img src= "poster/rg17.png" /></a>
+
+<br><br>
+<hr>
+
+### Research Group 18 
+
+<a href="poster/rg18.png"><img src= "poster/rg18.png" /></a>
+
+
+<br><br>
+<hr>
+
+### Research Group 20 
+
+<a href="poster/rg20.png"><img src= "poster/rg20.png" /></a>
+
+<br><br>
+<hr>
+
+### Research Group 21 
+
+<a href="poster/rg21.png"><img src= "poster/rg21.png" /></a>
+
+<br><br>
+<hr>
+
+### Research Group 22 
+
+<a href="poster/rg22.png"><img src= "poster/rg22.png" /></a>
+
+<br><br>
+<hr>
+
+### Research Group 23 
+
+<a href="poster/rg23.png"><img src= "poster/rg23.png" /></a>
+
+<br><br>
+<hr>
+
+### Research Group 24 
+
+<a href="poster/rg24.png"><img src= "poster/rg24.png" /></a>
+
+
+<br><br>
+<hr>
+
+### Research Group 25 
+
+<a href="poster/rg25.png"><img src= "poster/rg25.png" /></a>
+
+
+<br><br>
+<hr>
+
+### Research Group 26 
+
+<a href="poster/rg26.png"><img src= "poster/rg26.png" /></a>
+
+
+<br><br>
+<hr>
+
+### Research Group 27 
+
+<a href="poster/rg27.png"><img src= "poster/rg27.png" /></a>
+
+<br><br>
+<hr>
+
+### Research Group 28 
+
+<a href="poster/rg28.png"><img src= "poster/rg28.png" /></a>
+
+<br><br>
+<hr>
+
+### Research Group 29 
+
+<a href="poster/rg29.png"><img src= "poster/rg29.png" /></a>
+
+<br><br>
+<hr>
+
+### Research Group 30 
+
+<a href="poster/rg30.png"><img src= "poster/rg30.png" /></a>
+
+
+
+<br><br>
+<hr>
+
+### Research Group 31 
+
+<a href="poster/rg31.png"><img src= "poster/rg31.png" /></a>
+
+<br><br>
+<hr>
+
+### Research Group 32 
+
+<a href="poster/rg32.png"><img src= "poster/rg32.png" /></a>
+
+<br><br>
+<hr>
+
+### Research Group 33 
+
+<a href="poster/rg33.png"><img src= "poster/rg33.png" /></a>
+
+<br><br>
+<hr>
+
+### Research Group 34 
+
+<a href="poster/rg34.png"><img src= "poster/rg34.png" /></a>
+
+<br><br>
+<hr>
+
+### Research Group 35 
+
+<a href="poster/rg35.png"><img src= "poster/rg35.png" /></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<hr>
+
+<p style = "margin-left: auto; margin-right: 0;">
+This course is published under the following [license](https://github.com/masurp/VU_CADC/blob/main/LICENSE.md). 
+</p>
