@@ -245,11 +245,9 @@ Exam week.
     - There will be three parallel sessions
     - More information soon (including exact schedule)
 
-- You will give a 10-minute talk (including appropriate slides)
+- Poster Gallery:
 
-- You will create a summary "poster"
-
-- Deadline for slides, poster, rmarkdown and html output: **19th December at 23.59** (sharp deadline!)
+    - [Visual summaries of the findings from the group projects](https://masurp.github.io/VU_CADC/poster-gallery.html)
 
 
 <hr>
