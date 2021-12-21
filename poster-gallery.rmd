@@ -10,7 +10,9 @@ output:
 
 <br><br>
 
-As part of the course "Computational Analysis of Digital Communication" at the Vrije Universiteit Amsterdam, small groups of students conducted individual research projects. The following posters summarize their projects and main results. Project cover a wide range of topics and methods ranging from e.g., emotionas in tweets about covid-19 vaccines (RG4; dictionary analysis), predicting sentiment in financial news headlines (RG9; supervised machine learning), or conspiracies theories over time on Reddit (RG32; unsupervised topic modeling), to negativity in song lyrics over time (RG34; supervised machine learning) or correlations between twitter sentiment and stock market value of large companies (RG35; sentiment analysis). Feel free to browse through the different project:
+As part of the course "Computational Analysis of Digital Communication" at the Vrije Universiteit Amsterdam, small groups of students conducted individual research projects. The following posters summarize their projects and main results. 
+
+The projects cover a wide range of topics and methods ranging from e.g., emotions in tweets about COVID-19 vaccines (RG4; dictionary analysis), predicting sentiment in financial news headlines (RG9; supervised machine learning), or conspiracies theories over time on Reddit (RG32; unsupervised topic modeling), to negativity in song lyrics (RG34; supervised machine learning) or correlations between twitter sentiment and stock market value of large companies (RG35; sentiment analysis). We invite you to browse through the different projects:
 
 <br><br>
 <hr>
