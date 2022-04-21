@@ -482,6 +482,8 @@ save(d, file = "test_data.RData")   ## file = file and/or connection to write to
 load(file = "test_data.RData")
 
 # Save and load a csv file
+# install.packages("readr")  ## only once on each computer
+library(readr)
 write_csv(d, file = "test_data.csv")
 d2 <- read_csv(file = "test_data.csv", )
 d2
