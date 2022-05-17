@@ -16,20 +16,20 @@ Kasper Welbers, Wouter van Atteveldt & Philipp Masur
 -   [Data Summarization](#data-summarization)
     -   [Grouping rows](#grouping-rows)
     -   [Summarizing](#summarizing)
-    -   [Using mutate with group\_by](#using-mutate-with-group_by)
+    -   [Using mutate with group_by](#using-mutate-with-group_by)
     -   [Ungrouping](#ungrouping)
 -   [Multiple grouping variables](#multiple-grouping-variables)
 
 # Introduction
 
 The goal of this practical session is to get you acquainted with the
-[Tidyverse](https://www.tidyverse.org/). Tidyverse is a collection of
-packages that have been designed around a singular and clearly defined
-set of principles about what data should look like and how we should
-work with it. It comes with a nice introduction in the [R for Data
-Science](http://r4ds.had.co.nz/) book, for which the digital version is
-available for free. This tutorial deals with most of the material in
-chapter 5 of that book.
+[Tidyverse](https://www.tidyverse.org/) and to learn how to transform
+and summarize data. Tidyverse is a collection of packages that have been
+designed around a singular and clearly defined set of principles about
+what data should look like and how we should work with it. It comes with
+a nice introduction in the [R for Data Science](http://r4ds.had.co.nz/)
+book, for which the digital version is available for free. This tutorial
+deals with most of the material in chapter 5 of that book.
 
 In this part of the tutorial, we’ll focus on working with data using the
 `tidyverse` package. This package includes the `dplyr` (data-pliers)
@@ -109,7 +109,7 @@ directly from the Internet!
 
 The example below downloads an overview of gun polls from the [data
 analytics site 538](https://fivethirtyeight.com/), and reads it into a
-tibble using the read\_csv function:
+tibble using the read_csv function:
 
 ``` r
 url <- "https://raw.githubusercontent.com/fivethirtyeight/data/master/poll-quiz-guns/guns-polls.csv"
@@ -133,7 +133,7 @@ click on the name of the data.frame (d) in the top-right window
 The `filter` function can be used to select a subset of rows. In the
 guns data, the `Question` column specifies which question was asked. We
 can select only those rows (polls) that asked whether the minimum
-purchage age for guns should be raised to 21:
+purchase age for guns should be raised to 21:
 
 ``` r
 age21 <- filter(d, Question == 'age-21')
@@ -350,7 +350,7 @@ d
 
 ## Grouping rows
 
-Now, we can use the group\_by function to group by, for example,
+Now, we can use the group_by function to group by, for example,
 pollster:
 
 ``` r
@@ -364,7 +364,7 @@ there are 8 groups (different questions) in total.
 
 ## Summarizing
 
-To summarize, you follow the group\_by with a call to `summarize`.
+To summarize, you follow the group_by with a call to `summarize`.
 Summarize has a syntax that is similar to mutate:
 `summarize(column = calculation, ...)`. The crucial difference, however,
 is that you always need to use a function in the calculation, and that
@@ -417,15 +417,15 @@ d %>%
 Note: As you can see, one of the values has a missing value (NA) for
 standard deviation. Why?
 
-## Using mutate with group\_by
+## Using mutate with group_by
 
 The examples above all reduce the number of cases to the number of
-groups. Another option is to use mutate after a group\_by, which allows
+groups. Another option is to use mutate after a group_by, which allows
 you to add summary values to the rows themselves.
 
 For example, suppose we wish to see whether a certain poll has a
 different prediction from the average polling of that question. We can
-group\_by question and then use mutate to calculate the average support:
+group_by question and then use mutate to calculate the average support:
 
 ``` r
 d2 <- d %>% 
@@ -495,7 +495,7 @@ following variables:
 -   **profile**: The second manipulated factor, i.e., the number of
     profile pictures that contained faces
 -   **age**: Age of the participants -**gender**: Gender of the
-    participants -**norm\_perc**: A scale measuring how strongly
+    participants -**norm_perc**: A scale measuring how strongly
     participants perceived the social norm to disclose oneself on the
     platform. -**disclosure**: Their intention to disclose themselves on
     the platform
