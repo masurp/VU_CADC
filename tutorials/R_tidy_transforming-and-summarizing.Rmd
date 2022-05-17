@@ -13,7 +13,7 @@ editor_options:
 ```{r setup, include=FALSE}
 ## include this at top of your RMarkdown file for pretty output
 ## make sure to have the printr package installed: install.packages('printr')
-knitr::opts_chunk$set(echo = TRUE, results = FALSE, message = FALSE, warning = FALSE)
+knitr::opts_chunk$set(echo = TRUE, results = FALSE, message = FALSE, warning = FALSE, fig.keep='none')
 library(printr)
 ```
 
@@ -23,7 +23,7 @@ The goal of this practical session is to get you acquainted with the [Tidyverse]
 
 In this part of the tutorial, we'll focus on working with data using the `tidyverse` package. 
 This package includes the `dplyr` (data-pliers) packages, which contains most of the tools we're using below,
-but it also contains functions for reading, analysing and visualising data that will be explained later. 
+but it also contains functions for reading, analyzing and visualizing data that will be explained later. 
 
 ## Installing tidyverse
 
@@ -60,12 +60,6 @@ data <- tibble(resp = c(1,2,3),
                gender = c("M","F","F"), 
                height = c(176, 165, 172))
 data
-```
-
-**Exercise 1:** How would you create a subset that contains only female participants?
-
-```{r}
-# Code here
 ```
 
 
@@ -174,6 +168,23 @@ For sorting, this should generally be fine as the sorted data should contain the
 For subsetting, this means that the rows or columns are actually deleted from the dataset (in memory),
 so you will have to read the file again (or start from an earlier object) if you need those rows or columns later. 
 
+Let us quickly make a bar plot from this subset (more on data visualization next week!).
+
+```{r}
+# Create plot
+plot <- ggplot(age21, aes(x = reorder(Pollster, Support), y = Support)) + 
+  geom_col(fill = "lightblue")
+plot
+
+# Change layout
+plot + 
+  ylim(0, 100) +
+  theme_minimal() +
+  coord_flip() +
+  labs(x = "Pollster", title = "Support for raising the age for gun purchases to 21")
+```
+
+
 
 ## Adding or transforming variables with mutate()
 
@@ -187,7 +198,6 @@ Here we'll first create some variables and then look at the variables (using the
 age21 <- mutate(age21, party_diff = abs(`Republican Support` - `Democratic Support`))
 select(age21, Question, Pollster, party_diff)
 age21 <- arrange(age21, Population, -Support)
-
 ```
 
 To transform (recode) a variable in the same column, you can simply use an existing name in `mutate()` to overwrite it.
@@ -233,10 +243,10 @@ For example, you might want to download, clean, and subset a data set before doi
 In that case, you probably want to store the result of downloading, cleaning, and subsetting as a variable, and use that in your analyses.
 
 
-**Exercise 2:** Create a subset of the tibble `d` in which only polls with the question "arm-teacher" are included. Select only the variables *Pollster*, *Population*, and *Support* (feel free to rename them to more shorter abbreviations at the same time). Recode the variable Support so that it ranges from 0 to 1. Recode the variable *Population* so that the values reader *reg* and *adu* (tip: use the function `recode()` within a `mutate()` command. If you don't know how the `recode` function works, use the help function `?`!)
+**Exercise 2:** Create a subset of the tibble `d` in which only polls with the question "arm-teachers" are included. Select only the variables *Pollster*, *Population*, and *Support* (feel free to rename them to more shorter abbreviations at the same time). Recode the variable Support so that it ranges from 0 to 1. Recode the variable *Population* so that the values reader *reg* and *adu* (tip: use the function `recode()` within a `mutate()` command. If you don't know how the `recode` function works, use the help function `?`!)
 
 ```{r}
-# Code here
+d
 ```
 
 

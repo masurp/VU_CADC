@@ -34,7 +34,7 @@ deals with most of the material in chapter 5 of that book.
 In this part of the tutorial, we’ll focus on working with data using the
 `tidyverse` package. This package includes the `dplyr` (data-pliers)
 packages, which contains most of the tools we’re using below, but it
-also contains functions for reading, analysing and visualising data that
+also contains functions for reading, analyzing and visualizing data that
 will be explained later.
 
 ## Installing tidyverse
@@ -86,13 +86,6 @@ data <- tibble(resp = c(1,2,3),
                gender = c("M","F","F"), 
                height = c(176, 165, 172))
 data
-```
-
-**Exercise 1:** How would you create a subset that contains only female
-participants?
-
-``` r
-# Code here
 ```
 
 ## Reading data
@@ -227,6 +220,23 @@ actually deleted from the dataset (in memory), so you will have to read
 the file again (or start from an earlier object) if you need those rows
 or columns later.
 
+Let us quickly make a bar plot from this subset (more on data
+visualization next week!).
+
+``` r
+# Create plot
+plot <- ggplot(age21, aes(x = reorder(Pollster, Support), y = Support)) + 
+  geom_col(fill = "lightblue")
+plot
+
+# Change layout
+plot + 
+  ylim(0, 100) +
+  theme_minimal() +
+  coord_flip() +
+  labs(x = "Pollster", title = "Support for raising the age for gun purchases to 21")
+```
+
 ## Adding or transforming variables with mutate()
 
 The `mutate` function makes it easy to create new variables or to modify
@@ -318,7 +328,7 @@ store the result of downloading, cleaning, and subsetting as a variable,
 and use that in your analyses.
 
 **Exercise 2:** Create a subset of the tibble `d` in which only polls
-with the question “arm-teacher” are included. Select only the variables
+with the question “arm-teachers” are included. Select only the variables
 *Pollster*, *Population*, and *Support* (feel free to rename them to
 more shorter abbreviations at the same time). Recode the variable
 Support so that it ranges from 0 to 1. Recode the variable *Population*
@@ -327,7 +337,7 @@ so that the values reader *reg* and *adu* (tip: use the function
 `recode` function works, use the help function `?`!)
 
 ``` r
-# Code here
+d
 ```
 
 # Data Summarization
