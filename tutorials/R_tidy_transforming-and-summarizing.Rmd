@@ -19,7 +19,7 @@ library(printr)
 
 # Introduction
 
-The goal of this practical session is to get you acquainted with the [Tidyverse](https://www.tidyverse.org/). Tidyverse is a collection of packages that have been designed around a singular and clearly defined set of principles about what data should look like and how we should work with it. It comes with a nice introduction in the [R for Data Science](http://r4ds.had.co.nz/) book, for which the digital version is available for free. This tutorial deals with most of the material in chapter 5 of that book. 
+The goal of this practical session is to get you acquainted with the [Tidyverse](https://www.tidyverse.org/) and to learn how to transform and summarize data. Tidyverse is a collection of packages that have been designed around a singular and clearly defined set of principles about what data should look like and how we should work with it. It comes with a nice introduction in the [R for Data Science](http://r4ds.had.co.nz/) book, for which the digital version is available for free. This tutorial deals with most of the material in chapter 5 of that book. 
 
 In this part of the tutorial, we'll focus on working with data using the `tidyverse` package. 
 This package includes the `dplyr` (data-pliers) packages, which contains most of the tools we're using below,
@@ -96,7 +96,7 @@ or call `View(d)`.
 
 The `filter` function can be used to select a subset of rows. 
 In the guns data, the `Question` column specifies which question was asked.
-We can select only those rows (polls) that asked whether the minimum purchage age for guns should be raised to 21:
+We can select only those rows (polls) that asked whether the minimum purchase age for guns should be raised to 21:
 
 ```{r}
 age21 <- filter(d, Question == 'age-21')
