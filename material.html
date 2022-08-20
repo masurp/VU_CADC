@@ -13,8 +13,8 @@
 
 <title>Materials</title>
 
-<script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
@@ -65,6 +65,7 @@ if (window.hljs) {
 
 
 
+
 <style type = "text/css">
 .main-container {
   max-width: 940px;
@@ -85,6 +86,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -297,12 +301,12 @@ div.tocify {
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
 <div class="row">
-<div class="col-sm-12 col-md-4 col-lg-3">
+<div class="col-xs-12 col-sm-4 col-md-3">
 <div id="TOC" class="tocify">
 </div>
 </div>
 
-<div class="toc-content col-sm-12 col-md-8 col-lg-9">
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -310,7 +314,7 @@ div.tocify {
 <div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -351,38 +355,57 @@ div.tocify {
 </div>
 
 
-<p>On this page, you’ll find all materials (e.g., slides, handouts, R-syntax, etc.) for this course.</p>
+<p>On this page, you’ll find all materials (e.g., slides, handouts,
+R-syntax, etc.) for this course.</p>
 <p><br></p>
 <div id="preparation" class="section level2">
 <h2>Preparation</h2>
 <div id="install-r-and-rstudio" class="section level4">
 <h4>Install R and RStudio</h4>
-<p>Before the first practical session (2nd of November), please make sure that you have R and Rstudio installed on your computer and have played around a little with it (it is open source and free to use!). Please work through the initial steps outlined in this worksheet:</p>
+<p>Before the first practical session (2nd of November), please make
+sure that you have R and Rstudio installed on your computer and have
+played around a little with it (it is open source and free to use!).
+Please work through the initial steps outlined in this worksheet:</p>
 <ul>
-<li><a href="https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R_basics_1_getting_started_short.md">Installing R and RStudio</a>.</li>
+<li><a
+href="https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R_basics_1_getting_started_short.md">Installing
+R and RStudio</a>.</li>
 </ul>
 </div>
 <div id="familiarize-yourself-with-the-course" class="section level4">
 <h4>Familiarize yourself with the course</h4>
-<p>Lectures are every <em>Monday</em> (online; see overview for exact dates and times). In these lectures, a particular research problem will be introduced and we will discuss methodological solutions. We will get to know respective computational methods and contextualize them within the broader research process. We expect you to:</p>
+<p>Lectures are every <em>Monday</em> (online; see overview for exact
+dates and times). In these lectures, a particular research problem will
+be introduced and we will discuss methodological solutions. We will get
+to know respective computational methods and contextualize them within
+the broader research process. We expect you to:</p>
 <ul>
 <li>Think, participate, discuss</li>
 <li>Ask questions!</li>
 </ul>
-<p>Practical sessions are every <em>Tuesday</em> and <em>Thursday</em> (partly online, partly on campus; see overview for exact dates and times). For the practical sessions, the class will be split into 5 groups of equal size (this will happen in the first lecture). In these practical sessions, we will work with RStudio and ran analyses on real-world data sets. We therefore engage in various data analytic exercises. We expect you to:</p>
+<p>Practical sessions are every <em>Tuesday</em> and <em>Thursday</em>
+(partly online, partly on campus; see overview for exact dates and
+times). For the practical sessions, the class will be split into 5
+groups of equal size (this will happen in the first lecture). In these
+practical sessions, we will work with RStudio and ran analyses on
+real-world data sets. We therefore engage in various data analytic
+exercises. We expect you to:</p>
 <ul>
 <li>Bring your computer</li>
 <li>Run the scripts and work through the code</li>
 <li>Ask questions!</li>
 </ul>
-<p>In the third cycle, students will work on their own research projects. Resources and material for additional methods and statistical approaches will be provided to all students.</p>
+<p>In the third cycle, students will work on their own research
+projects. Resources and material for additional methods and statistical
+approaches will be provided to all students.</p>
 <br>
 <hr>
 </div>
 </div>
 <div id="week-1" class="section level2">
 <h2>Week 1</h2>
-<div id="lecture-introduction-to-computational-methods" class="section level4">
+<div id="lecture-introduction-to-computational-methods"
+class="section level4">
 <h4>Lecture: Introduction to Computational Methods</h4>
 <ul>
 <li>Slides Lecture 1:
@@ -391,12 +414,15 @@ div.tocify {
 </ul></li>
 </ul>
 </div>
-<div id="practical-session-1-introduction-to-r-and-rstudio" class="section level4">
+<div id="practical-session-1-introduction-to-r-and-rstudio"
+class="section level4">
 <h4>Practical Session 1: Introduction to R and RStudio</h4>
 <ul>
 <li>Handouts:
 <ul>
-<li><a href="https://github.com/masurp/VU_CADC/blob/main/tutorials/R_basics_introduction.md">R Basics: Getting Started</a> (<a href="https://github.com/masurp/VU_CADC/blob/main/tutorials/R_basics_introduction_complete.md">Version with solutions</a>)</li>
+<li><a
+href="https://github.com/masurp/VU_CADC/blob/main/tutorials/R_basics_introduction.md">R
+Basics: Getting Started</a></li>
 </ul></li>
 </ul>
 </div>
@@ -405,7 +431,9 @@ div.tocify {
 <ul>
 <li>Handout:
 <ul>
-<li><a href="https://github.com/masurp/VU_CADC/blob/main/tutorials/R_tidy_transforming-and-summarizing.md">Tidyverse: Transforming and Summarizing</a> (<a href="https://github.com/masurp/VU_CADC/blob/main/tutorials/R_tidy_transforming-and-summarizing_complete.md">Version with solutions</a>)</li>
+<li><a
+href="https://github.com/masurp/VU_CADC/blob/main/tutorials/R_tidy_transforming-and-summarizing.md">Tidyverse:
+Transforming and Summarizing</a></li>
 </ul></li>
 </ul>
 </div>
@@ -414,20 +442,28 @@ div.tocify {
 <ul>
 <li>Work through this tutorial:
 <ul>
-<li><a href="https://github.com/masurp/VU_CADC/blob/main/tutorials/R_basics_r-markdown.md">R Markdown: Basics</a></li>
+<li><a
+href="https://github.com/masurp/VU_CADC/blob/main/tutorials/R_basics_r-markdown.md">R
+Markdown: Basics</a></li>
 </ul></li>
-<li>Complete this assignment (copy the entire code into a RMarkdown file)
+<li>Complete this assignment (copy the entire code into a RMarkdown
+file)
 <ul>
-<li><a href="https://github.com/masurp/VU_CADC/blob/main/homework/01_homework_assignment.Rmd">Homework: Basic Data Wrangling</a> (<a href="https://github.com/masurp/VU_CADC/blob/main/homework/01_homework_assignment_complete.md">Version with solutions</a>)</li>
+<li><a
+href="https://github.com/masurp/VU_CADC/blob/main/homework/01_homework_assignment.Rmd">Homework:
+Basic Data Wrangling</a></li>
 </ul></li>
 </ul>
 </div>
 <div id="additional-resources" class="section level4">
 <h4>Additional resources:</h4>
 <ul>
-<li>Chapter 5 &amp; 6 in “Computational Analysis of Communication” by Van Atteveldt et al. (see Canvas)</li>
-<li><a href="https://r4ds.had.co.nz/">Online book “R for Data Science”</a></li>
-<li><a href="https://bookdown.org/yihui/rmarkdown/">Online book “R Markdown: The Definitive Guide”</a></li>
+<li>Chapter 5 &amp; 6 in “Computational Analysis of Communication” by
+Van Atteveldt et al. (see Canvas)</li>
+<li><a href="https://r4ds.had.co.nz/">Online book “R for Data
+Science”</a></li>
+<li><a href="https://bookdown.org/yihui/rmarkdown/">Online book “R
+Markdown: The Definitive Guide”</a></li>
 </ul>
 <br>
 <hr>
@@ -435,7 +471,8 @@ div.tocify {
 </div>
 <div id="week-2" class="section level2">
 <h2>Week 2</h2>
-<div id="lecture-data-wrangling-and-data-visualization" class="section level4">
+<div id="lecture-data-wrangling-and-data-visualization"
+class="section level4">
 <h4>Lecture: Data Wrangling and Data Visualization</h4>
 <ul>
 <li>Slides Lecture 2:
@@ -449,7 +486,9 @@ div.tocify {
 <ul>
 <li>Handouts:
 <ul>
-<li><a href="https://github.com/masurp/VU_CADC/blob/main/tutorials/R_basics_data-visualization.md">Basics of Data Visualization</a> (<a href="https://github.com/masurp/VU_CADC/blob/main/tutorials/R_basics_data-visualization_complete.md">Version with solutions</a>)</li>
+<li><a
+href="https://github.com/masurp/VU_CADC/blob/main/tutorials/R_basics_data-visualization.md">Basics
+of Data Visualization</a></li>
 </ul></li>
 </ul>
 </div>
@@ -458,28 +497,40 @@ div.tocify {
 <ul>
 <li>Handouts:
 <ul>
-<li><a href="https://github.com/masurp/VU_CADC/blob/main/tutorials/R_tidy_reshaping-and-joining.md">Tidyverse: Reshaping</a> (<a href="https://github.com/masurp/VU_CADC/blob/main/tutorials/R_tidy_reshaping-and-joining_complete.md">Version with solutions</a>)</li>
-<li><a href="https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R-tidy-13a-joining.md">Tidyverse: Joining</a></li>
+<li><a
+href="https://github.com/masurp/VU_CADC/blob/main/tutorials/R_tidy_reshaping-and-joining.md">Tidyverse:
+Reshaping</a></li>
+<li><a
+href="https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R-tidy-13a-joining.md">Tidyverse:
+Joining</a></li>
 </ul></li>
 </ul>
 </div>
 <div id="homework-1" class="section level4">
 <h4>Homework</h4>
 <ul>
-<li>Complete this assignment (copy the entire code into a RMarkdown file)
+<li>Complete this assignment (copy the entire code into a RMarkdown
+file)
 <ul>
-<li><a href="https://github.com/masurp/VU_CADC/blob/main/homework/02_homework_assignment.Rmd">Homework: Tidyverse and Data Visualization</a> (<a href="https://github.com/masurp/VU_CADC/blob/main/homework/02_homework_assignment_complete.md">Version with solutions</a>)</li>
+<li><a
+href="https://github.com/masurp/VU_CADC/blob/main/homework/02_homework_assignment.Rmd">Homework:
+Tidyverse and Data Visualization</a></li>
 </ul></li>
 </ul>
 </div>
 <div id="additional-resources-1" class="section level4">
 <h4>Additional resources:</h4>
 <ul>
-<li>Chapter 6 in “Computational Analysis of Communication” by Van Atteveldt et al. (see Canvas)</li>
-<li><a href="https://r4ds.had.co.nz/">Online book “R for Data Science”</a></li>
-<li><a href="https://socviz.co/">Online book “Data Visualization” by Kieran Healy</a></li>
-<li><a href="https://www.data-to-viz.com/">Website “Data-To-Viz” (great overview on visualizations with code examples)</a></li>
-<li><a href="https://www.r-graph-gallery.com/">The R Graph Gallery (examples of visualizations)</a></li>
+<li>Chapter 6 in “Computational Analysis of Communication” by Van
+Atteveldt et al. (see Canvas)</li>
+<li><a href="https://r4ds.had.co.nz/">Online book “R for Data
+Science”</a></li>
+<li><a href="https://socviz.co/">Online book “Data Visualization” by
+Kieran Healy</a></li>
+<li><a href="https://www.data-to-viz.com/">Website “Data-To-Viz” (great
+overview on visualizations with code examples)</a></li>
+<li><a href="https://www.r-graph-gallery.com/">The R Graph Gallery
+(examples of visualizations)</a></li>
 </ul>
 <br>
 <hr>
@@ -487,7 +538,8 @@ div.tocify {
 </div>
 <div id="week-3" class="section level2">
 <h2>Week 3</h2>
-<div id="lecture-text-as-data---basics-of-automatic-text-analysis" class="section level4">
+<div id="lecture-text-as-data---basics-of-automatic-text-analysis"
+class="section level4">
 <h4>Lecture: Text as Data - Basics of Automatic Text Analysis</h4>
 <ul>
 <li>Slides Lecture 3:
@@ -501,7 +553,9 @@ div.tocify {
 <ul>
 <li>Handouts:
 <ul>
-<li><a href="https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_basics-of-text-analysis.md">Basic Text Analysis</a> (<a href="https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_basics-of-text-analysis_complete.md">Version with solutions</a>)</li>
+<li><a
+href="https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_basics-of-text-analysis.md">Basic
+Text Analysis</a></li>
 </ul></li>
 </ul>
 </div>
@@ -510,29 +564,49 @@ div.tocify {
 <ul>
 <li><p>Handouts:</p>
 <ul>
-<li><a href="https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_dictionary-approaches.md">Dictionary Approaches</a> (<a href="https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_dictionary-approaches_complete.md">Version with solutions</a>)</li>
+<li><a
+href="https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_dictionary-approaches.md">Dictionary
+Approaches</a></li>
 </ul></li>
 </ul>
 </div>
 <div id="homework-2" class="section level4">
 <h4>Homework</h4>
 <ul>
-<li>Add two music reviews to the following google sheet (before Monday 17:00)
+<li>Add two music reviews to the following google sheet (before Monday
+17:00)
 <ul>
-<li>In the coming week, we would like to work with some (text) data that we have produced ourselves. So as a small homework, I would like to ask you to add (at least) two reviews to this data set. Please fill in the columns for one music album that you really like (e.g., your favorite album by your favorite music artist) and one for an album that you were slightly disappointed by or even did not like at all (I already provided some examples). If you don’t mind disclosing, please also add your name (if not use a nickname). We will explore this data visually as well.</li>
-<li><a href="https://docs.google.com/spreadsheets/d/1LUb88gBopeCJvK15MFBn-DTt7oe4-SeP2SePfqZuPek/edit?usp=sharing">Google Sheet Including Music Reviews</a></li>
+<li>In the coming week, we would like to work with some (text) data that
+we have produced ourselves. So as a small homework, I would like to ask
+you to add (at least) two reviews to this data set. Please fill in the
+columns for one music album that you really like (e.g., your favorite
+album by your favorite music artist) and one for an album that you were
+slightly disappointed by or even did not like at all (I already provided
+some examples). If you don’t mind disclosing, please also add your name
+(if not use a nickname). We will explore this data visually as
+well.</li>
+<li><a
+href="https://docs.google.com/spreadsheets/d/1LUb88gBopeCJvK15MFBn-DTt7oe4-SeP2SePfqZuPek/edit?usp=sharing">Google
+Sheet Including Music Reviews</a></li>
 </ul></li>
-<li>Complete this assignment (copy the entire code into a RMarkdown file)
+<li>Complete this assignment (copy the entire code into a RMarkdown
+file)
 <ul>
-<li><a href="https://github.com/masurp/VU_CADC/blob/main/homework/03_homework_assignment.Rmd">Homework: Dictionary Approaches</a> (<a href="https://github.com/masurp/VU_CADC/blob/main/homework/03_homework_assignment_complete.md">Version with solutions</a>)</li>
+<li><a
+href="https://github.com/masurp/VU_CADC/blob/main/homework/03_homework_assignment.Rmd">Homework:
+Dictionary Approaches</a></li>
 </ul></li>
 </ul>
 </div>
 <div id="additional-resources-2" class="section level4">
 <h4>Additional resources</h4>
 <ul>
-<li>Chapter 9 &amp; 10 in “Computational Analysis of Communication” by Van Atteveldt et al. (see Canvas)</li>
-<li>A Nice <a href="https://content-analysis-with-r.com/3-sentiment.html">Tutorial for Sentiment Analysis</a> by Cornelius Puschmann and Mario Haim (including R code examples)</li>
+<li>Chapter 9 &amp; 10 in “Computational Analysis of Communication” by
+Van Atteveldt et al. (see Canvas)</li>
+<li>A Nice <a
+href="https://content-analysis-with-r.com/3-sentiment.html">Tutorial for
+Sentiment Analysis</a> by Cornelius Puschmann and Mario Haim (including
+R code examples)</li>
 </ul>
 <br>
 <hr>
@@ -540,7 +614,8 @@ div.tocify {
 </div>
 <div id="week-4" class="section level2">
 <h2>Week 4</h2>
-<div id="lecture-machine-learning---supervised-text-classification" class="section level4">
+<div id="lecture-machine-learning---supervised-text-classification"
+class="section level4">
 <h4>Lecture: Machine Learning - Supervised Text Classification</h4>
 <ul>
 <li>Slides Lecture 4:
@@ -554,7 +629,9 @@ div.tocify {
 <ul>
 <li>Handouts:
 <ul>
-<li><a href="https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_supervised-text-classification.md">Supervised text classification I</a> (<a href="https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_supervised-text-classification_complete.md">Version with solutions</a>)</li>
+<li><a
+href="https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_supervised-text-classification.md">Supervised
+text classification I</a></li>
 </ul></li>
 </ul>
 </div>
@@ -563,24 +640,31 @@ div.tocify {
 <ul>
 <li>Handouts:
 <ul>
-<li><a href="https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_supervised-text-classification_part-II.md">Supervised text classification II</a> (<a href="https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_supervised-text-classification_part-II_complete.md">Version with solutions</a>)</li>
+<li><a
+href="https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_supervised-text-classification_part-II.md">Supervised
+text classification II</a></li>
 </ul></li>
 </ul>
 </div>
 <div id="homework-3" class="section level4">
 <h4>Homework</h4>
 <ul>
-<li>Complete this assignment (copy the entire code into a RMarkdown file)
+<li>Complete this assignment (copy the entire code into a RMarkdown
+file)
 <ul>
-<li><a href="https://github.com/masurp/VU_CADC/blob/main/homework/04_homework_assignment.Rmd">Homework: Supervised text classification</a> (<a href="https://github.com/masurp/VU_CADC/blob/main/homework/04_homework_assignment_complete.md">Version with solutions</a>)</li>
+<li><a
+href="https://github.com/masurp/VU_CADC/blob/main/homework/04_homework_assignment.Rmd">Homework:
+Supervised text classification</a></li>
 </ul></li>
 </ul>
 </div>
 <div id="additional-resources-3" class="section level4">
 <h4>Additional resources:</h4>
 <ul>
-<li>Chapter 8 in “Computational Analysis of Communication” by Van Atteveldt et al. (see Canvas)</li>
-<li><a href="https://smltar.com/">Supervised Machine Learning for Text Analysis in R</a></li>
+<li>Chapter 8 in “Computational Analysis of Communication” by Van
+Atteveldt et al. (see Canvas)</li>
+<li><a href="https://smltar.com/">Supervised Machine Learning for Text
+Analysis in R</a></li>
 </ul>
 <br>
 <hr>
@@ -592,9 +676,9 @@ div.tocify {
 <ul>
 <li>Date and Time of the Exam
 <ul>
-<li><strong>Date:</strong> 3. December 2021</li>
-<li><strong>Time:</strong> 08:30 - 11:15</li>
-<li><strong>Location:</strong> Tent (<a href="https://vu.nl/en/about-vu/more-about/digitent">More information</a>)</li>
+<li><strong>Date:</strong> tba</li>
+<li><strong>Time:</strong> tba</li>
+<li><strong>Location:</strong> tba</li>
 <li>Make sure to be there on time</li>
 </ul></li>
 <li>Format
@@ -608,7 +692,9 @@ div.tocify {
 <ul>
 <li>Content of the lectures</li>
 <li>The required readings (see lecture slides and Canvas)</li>
-<li>The practical sessions will further help to deepen your understanding of the concepts and approaches, but you will not be required to write R code in the exam.</li>
+<li>The practical sessions will further help to deepen your
+understanding of the concepts and approaches, but you will not be
+required to write R code in the exam.</li>
 </ul></li>
 </ul>
 <br>
@@ -616,7 +702,8 @@ div.tocify {
 </div>
 <div id="week-6-7" class="section level2">
 <h2>Week 6 &amp; 7</h2>
-<div id="introduction-to-group-research-projects" class="section level4">
+<div id="introduction-to-group-research-projects"
+class="section level4">
 <h4>Introduction to Group Research Projects</h4>
 <ul>
 <li>Slides Lecture 5:
@@ -625,35 +712,65 @@ div.tocify {
 </ul></li>
 </ul>
 </div>
-<div id="additional-methods-and-resources-handouts-and-video-tutorials" class="section level4">
+<div id="additional-methods-and-resources-handouts-and-video-tutorials"
+class="section level4">
 <h4>Additional methods and resources (handouts and video tutorials)</h4>
 <ul>
 <li>A general collection of diverse R tutorials
 <ul>
-<li><a href="https://github.com/ccs-amsterdam/r-course-material">The CCS Amsterdam R course material</a></li>
+<li><a href="https://github.com/ccs-amsterdam/r-course-material">The CCS
+Amsterdam R course material</a></li>
 </ul></li>
 <li>Basic Statistics in R
 <ul>
-<li><a href="https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/simple_modeling.md">Basic Statistics (ANOVA, regression, t-test, etc.)</a> (<a href="https://www.youtube.com/watch?v=1K3SKsEj9eI">Video tutorial</a>)</li>
+<li><a
+href="https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/simple_modeling.md">Basic
+Statistics (ANOVA, regression, t-test, etc.)</a> (<a
+href="https://www.youtube.com/watch?v=1K3SKsEj9eI">Video
+tutorial</a>)</li>
 </ul></li>
 <li>Test theory and factor analyses
 <ul>
-<li><a href="https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R_test-theory_1_cfa.md">Test theory and confirmatory factor analyses</a> (<a href="https://www.youtube.com/watch?v=uKlagNgC-GY">Video tutorial</a>)</li>
-<li><a href="https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R_test-theory_2_efa.md">Exploratory factor analysis</a> (<a href="https://youtu.be/AXaBMDA34YM">Video tutorial</a>)</li>
+<li><a
+href="https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R_test-theory_1_cfa.md">Test
+theory and confirmatory factor analyses</a> (<a
+href="https://www.youtube.com/watch?v=uKlagNgC-GY">Video
+tutorial</a>)</li>
+<li><a
+href="https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R_test-theory_2_efa.md">Exploratory
+factor analysis</a> (<a href="https://youtu.be/AXaBMDA34YM">Video
+tutorial</a>)</li>
 </ul></li>
 <li>Advanced Statistics
 <ul>
-<li><a href="https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/advanced_modeling.md">Advanced Statistics Overview</a></li>
-<li><a href="https://htmlpreview.github.io/?https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/generalized_linear_models.html">Generalized linear model</a> (<a href="https://www.youtube.com/watch?v=WnmwuD8OwMw&amp;list=PL-i7GM-A1wBarcTV3wN2f-AAuEK3j76M0&amp;index=3">Video tutorial</a>)</li>
-<li><a href="https://htmlpreview.github.io/?https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/multilevel_models.html">Multilevel Modeling</a> (<a href="https://www.youtube.com/watch?v=1Tw1eIfSyEQ&amp;list=PL-i7GM-A1wBarcTV3wN2f-AAuEK3j76M0&amp;index=4">Video tutorial</a>)</li>
+<li><a
+href="https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/advanced_modeling.md">Advanced
+Statistics Overview</a></li>
+<li><a
+href="https://htmlpreview.github.io/?https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/generalized_linear_models.html">Generalized
+linear model</a> (<a
+href="https://www.youtube.com/watch?v=WnmwuD8OwMw&amp;list=PL-i7GM-A1wBarcTV3wN2f-AAuEK3j76M0&amp;index=3">Video
+tutorial</a>)</li>
+<li><a
+href="https://htmlpreview.github.io/?https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/multilevel_models.html">Multilevel
+Modeling</a> (<a
+href="https://www.youtube.com/watch?v=1Tw1eIfSyEQ&amp;list=PL-i7GM-A1wBarcTV3wN2f-AAuEK3j76M0&amp;index=4">Video
+tutorial</a>)</li>
 </ul></li>
 <li>Additional text analysis
 <ul>
-<li><a href="https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/r_text_lda.md">Unsupervised topic modeling</a> (<a href="https://youtu.be/4YyoMGv1nkc">Video tutorial</a>)</li>
+<li><a
+href="https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/r_text_lda.md">Unsupervised
+topic modeling</a> (<a href="https://youtu.be/4YyoMGv1nkc">Video
+tutorial</a>)</li>
 </ul></li>
 <li>Web Scraping
 <ul>
-<li><a href="https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/rvest.md">Web scraping using Rvest</a> (<a href="https://www.youtube.com/watch?v=9GR26Y4z_v4">Video tutorial</a>)</li>
+<li><a
+href="https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/rvest.md">Web
+scraping using Rvest</a> (<a
+href="https://www.youtube.com/watch?v=9GR26Y4z_v4">Video
+tutorial</a>)</li>
 </ul></li>
 </ul>
 <br>
@@ -662,23 +779,22 @@ div.tocify {
 </div>
 <div id="week-8" class="section level2">
 <h2>Week 8</h2>
-<div id="final-presentation-at-the-mini-conference" class="section level4">
+<div id="final-presentation-at-the-mini-conference"
+class="section level4">
 <h4>Final presentation at the “mini-conference”</h4>
 <ul>
-<li><p>At a final “mini-conference”, you will present the findings of your research projects!</p></li>
+<li><p>At a final “mini-conference”, you will present the findings of
+your research projects!</p></li>
 <li><p>Time and Date: 20th December from 9:00 to 11:30</p>
 <ul>
 <li>There will be three parallel sessions</li>
 <li>More information soon (including exact schedule)</li>
 </ul></li>
-<li><p>Poster Gallery:</p>
-<ul>
-<li><a href="https://masurp.github.io/VU_CADC/poster-gallery.html">Visual summaries of the findings from the group projects</a></li>
-</ul></li>
 </ul>
 <hr>
 <p style="margin-left: auto; margin-right: 0;">
-This course is published under the following <a href="https://github.com/masurp/VU_CADC/blob/main/LICENSE.md">license</a>.
+This course is published under the following <a
+href="https://github.com/masurp/VU_CADC/blob/main/LICENSE.md">license</a>.
 </p>
 </div>
 </div>
@@ -721,6 +837,9 @@ $(document).ready(function () {
 
 <script>
 $(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
 
     // move toc-ignore selectors from section div to header
     $('div.section.toc-ignore')

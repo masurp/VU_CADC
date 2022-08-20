@@ -49,19 +49,19 @@ In the third cycle, students will work on their own research projects. Resources
 #### Practical Session 1: Introduction to R and RStudio
 
 - Handouts: 
-    - [R Basics: Getting Started](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_basics_introduction.md) ([Version with solutions](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_basics_introduction_complete.md))
+    - [R Basics: Getting Started](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_basics_introduction.md)
     
 #### Practical Session 2: Tidyverse I 
 
 - Handout: 
-    - [Tidyverse: Transforming and Summarizing](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_tidy_transforming-and-summarizing.md) ([Version with solutions](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_tidy_transforming-and-summarizing_complete.md))
+    - [Tidyverse: Transforming and Summarizing](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_tidy_transforming-and-summarizing.md)
     
 #### Homework
 
 - Work through this tutorial: 
     - [R Markdown: Basics](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_basics_r-markdown.md)
 - Complete this assignment (copy the entire code into a RMarkdown file)
-    - [Homework: Basic Data Wrangling](https://github.com/masurp/VU_CADC/blob/main/homework/01_homework_assignment.Rmd) ([Version with solutions](https://github.com/masurp/VU_CADC/blob/main/homework/01_homework_assignment_complete.md))
+    - [Homework: Basic Data Wrangling](https://github.com/masurp/VU_CADC/blob/main/homework/01_homework_assignment.Rmd)
 
 #### Additional resources: 
 
@@ -83,18 +83,18 @@ In the third cycle, students will work on their own research projects. Resources
 #### Practical Session 1: Data visualization
 
 - Handouts:
-    - [Basics of Data Visualization](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_basics_data-visualization.md) ([Version with solutions](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_basics_data-visualization_complete.md))
+    - [Basics of Data Visualization](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_basics_data-visualization.md)
 
 #### Practical Session 2: Tidyverse II
 
 - Handouts:
-    - [Tidyverse: Reshaping](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_tidy_reshaping-and-joining.md) ([Version with solutions](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_tidy_reshaping-and-joining_complete.md))
+    - [Tidyverse: Reshaping](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_tidy_reshaping-and-joining.md) 
     - [Tidyverse: Joining](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R-tidy-13a-joining.md)
 
 #### Homework
 
 - Complete this assignment (copy the entire code into a RMarkdown file)
-    - [Homework: Tidyverse and Data Visualization](https://github.com/masurp/VU_CADC/blob/main/homework/02_homework_assignment.Rmd) ([Version with solutions](https://github.com/masurp/VU_CADC/blob/main/homework/02_homework_assignment_complete.md))
+    - [Homework: Tidyverse and Data Visualization](https://github.com/masurp/VU_CADC/blob/main/homework/02_homework_assignment.Rmd)
 
 #### Additional resources: 
 
@@ -117,13 +117,13 @@ In the third cycle, students will work on their own research projects. Resources
 #### Practical Session 1
 
 - Handouts: 
-    - [Basic Text Analysis](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_basics-of-text-analysis.md) ([Version with solutions](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_basics-of-text-analysis_complete.md))
+    - [Basic Text Analysis](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_basics-of-text-analysis.md) 
 
 #### Practical Session 2 
 
 - Handouts: 
 
-  - [Dictionary Approaches](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_dictionary-approaches.md) ([Version with solutions](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_dictionary-approaches_complete.md))
+  - [Dictionary Approaches](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_dictionary-approaches.md)
 
 #### Homework
 
@@ -132,7 +132,7 @@ In the third cycle, students will work on their own research projects. Resources
     - [Google Sheet Including Music Reviews](https://docs.google.com/spreadsheets/d/1LUb88gBopeCJvK15MFBn-DTt7oe4-SeP2SePfqZuPek/edit?usp=sharing)
 
 - Complete this assignment (copy the entire code into a RMarkdown file)
-    - [Homework: Dictionary Approaches](https://github.com/masurp/VU_CADC/blob/main/homework/03_homework_assignment.Rmd) ([Version with solutions](https://github.com/masurp/VU_CADC/blob/main/homework/03_homework_assignment_complete.md))
+    - [Homework: Dictionary Approaches](https://github.com/masurp/VU_CADC/blob/main/homework/03_homework_assignment.Rmd)
     
 
 #### Additional resources
@@ -153,18 +153,18 @@ In the third cycle, students will work on their own research projects. Resources
 #### Practical Session 1
 
 - Handouts: 
-    - [Supervised text classification I](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_supervised-text-classification.md) ([Version with solutions](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_supervised-text-classification_complete.md))
+    - [Supervised text classification I](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_supervised-text-classification.md) 
 
 #### Practical Session 2
 
 - Handouts:
-    - [Supervised text classification II](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_supervised-text-classification_part-II.md) ([Version with solutions](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_supervised-text-classification_part-II_complete.md))
+    - [Supervised text classification II](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_supervised-text-classification_part-II.md) 
     
 
 #### Homework
 
 - Complete this assignment (copy the entire code into a RMarkdown file)
-    - [Homework: Supervised text classification](https://github.com/masurp/VU_CADC/blob/main/homework/04_homework_assignment.Rmd) ([Version with solutions](https://github.com/masurp/VU_CADC/blob/main/homework/04_homework_assignment_complete.md))
+    - [Homework: Supervised text classification](https://github.com/masurp/VU_CADC/blob/main/homework/04_homework_assignment.Rmd) 
     
 #### Additional resources: 
 
@@ -179,9 +179,9 @@ In the third cycle, students will work on their own research projects. Resources
 Exam week. 
 
 - Date and Time of the Exam
-    - **Date:** 3. December 2021
-    - **Time:** 08:30 - 11:15
-    - **Location:** Tent ([More information](https://vu.nl/en/about-vu/more-about/digitent))
+    - **Date:** tba
+    - **Time:** tba
+    - **Location:** tba
     - Make sure to be there on time
     
 - Format
@@ -244,11 +244,6 @@ Exam week.
 
     - There will be three parallel sessions
     - More information soon (including exact schedule)
-
-- Poster Gallery:
-
-    - [Visual summaries of the findings from the group projects](https://masurp.github.io/VU_CADC/poster-gallery.html)
-
 
 <hr>
 
