@@ -2,7 +2,7 @@
 title: "Course Overview"
 ---
 
-The course consists of one lecture (starting from the 1st of November 2021) and two practical sessions per week. For the practical sessions, the group will be split into five groups of equal size. 
+The course consists of one lecture and two practical sessions per week. For the practical sessions, the group will be split into 5-6 groups of equal size. 
 
 <br>
 
@@ -10,12 +10,13 @@ The course consists of one lecture (starting from the 1st of November 2021) and 
 
 | Class | Teacher | Room & Time |
 | :---- | :---- |:--------- |
-| Lectures            | Dr. Philipp Masur | **online via Zoom** (Monday, 9:00am) |
-| Practical session 1 | Dr. Philipp Masur | **online via Zoom** (Tuesday, 9:00 & Thursday, 13:30) |
-| Practical session 2 | Dr. Philipp Masur | **HG-01A32** (Tuesday, 11:00), **HG-11A22** (Thursday, 15:30) |
-| Practical session 3 | Dr. Paulina Pankowska | **HG-11A36** (Tuesday, 9:00 & Thursday, 13:30) |
-| Practical session 4 | Dr. Paulina Pankowska | **online via Zoom** (Tuesday, 11:00 & Thursday, 15:30) |
-| Practical session 5 | Dr. Kasper Welbers |**HG-02A37** (Tuesday, 9:00 & Thursday, 13:30) |
+| Lectures            | Dr. Philipp Masur | **HG-14A00** - Monday, 9:00am |
+| Practical session 1 | tba | Wednesday, 9:00 & Thursday, 13:30 |
+| Practical session 2 | tba | Wednesday, 11:00 & Thursday, 15:30 |
+| Practical session 3 | tba | Wednesday, 9:00 & Friday, 09:00) |
+| Practical session 4 | tba | Wednesday, 11:00 & Friday, 11:00 |
+| Practical session 5 | tba | Wednesday, 9:00 & Friday, 09:00) |
+| Practical session 6 | tba | Wednesday, 11:00 & Friday, 11:00) |
 
 
 
@@ -26,30 +27,30 @@ The course consists of one lecture (starting from the 1st of November 2021) and 
 | Date | Week | Type | Content | Assignments |
 |:-:|:-:|:---| :---------- |:------ | 
 |  |  | | **Cycle 1: Introduction and Data Wrangling** |  |
-| 01/11/21 | 1 | Lecture | Introduction to Computational Methods |  | 
-| 02/11/21 | 1 | Practical session | Introduction to R and RStudio |  | 
-| 04/11/21 | 1 | Practical session | Tidyverse I |  Homework Assignment 1 |
-| 08/11/21 | 2 | Lecture | Data Wrangling and Data Visualization |  | 
-| 09/11/21 | 2 | Practical session | Tidyverse II |  |
+| 31/10/21 | 1 | Lecture | Introduction to Computational Methods |  | 
+| 02-03/11/21 | 1 | Practical session | Introduction to R and RStudio |  | 
+| 07/11/21 | 1 | Practical session | Tidyverse I |  Homework Assignment 1 |
+| 09-10/11/21 | 2 | Lecture | Data Wrangling and Data Visualization |  | 
+| 11/11/21 | 2 | Practical session | Tidyverse II |  |
 | 11/11/21 | 2 | Practical session | Data visualization |  Homework Assignment 2 |
 |  |  | | **Cycle 2: Text Analysis and Machine Learning** |  |
-| 15/11/21 | 3 | Lecture | Text as Data: Basics of Automatic Text Analysis | |
-| 16/11/21 | 3 | Practical session | Text preprocessing and descriptive analyses |  |
+| 14/11/21 | 3 | Lecture | Text as Data: Basics of Automatic Text Analysis | |
+| 16-17/11/21 | 3 | Practical session | Text preprocessing and descriptive analyses |  |
 | 18/11/21 | 3 | Practical session | Dictionary approaches |  Homework Assignment 3 |
-| 22/11/21 | 4 | Lecture | Machine Learning - Supervised Text Classification |  | 
-| 23/11/21 | 4 | Practical session | Supervised learning I |   |
+| 21/11/21 | 4 | Lecture | Machine Learning - Supervised Text Classification |  | 
+| 23-24/11/21 | 4 | Practical session | Supervised learning I |   |
 | 25/11/21 | 4 | Practical session | Supervised learning II |  Homework Assignment 4 |
 |  |  | | **Exam** |  |
-| 03/12/21 | 5 | Written Exam (Multiple-Choice) | Content of Cycle 1 & 2 | |
+| 02/12/21 | 5 | Written Exam (Multiple-Choice) | Content of Cycle 1 & 2 | |
 |  |  | | **Cycle 3: Specialization** |  |
-| 06/12/21 | 6 | Lecture | Introduction to the group projects and advanced methods | |
-| 07/12/21 | 6 | Practical session | Meeting with teacher |  |
+| 05/12/21 | 6 | Lecture | Introduction to the group projects and advanced methods | |
+| 07-08/12/21 | 6 | Practical session | Meeting with teacher |  |
 | 09/12/21 | 6 | Practical session | Meeting with teacher |  |
-| 13/12/21 | 7 |   | *No lecture* | | 
-| 14/12/21 | 7 | Practical session | Meeting with teacher |   |
+| 12/12/21 | 7 |   | *No lecture* | | 
+| 14-15/12/21 | 7 | Practical session | Meeting with teacher |   |
 | 16/12/21 | 7 | Practical session | Meeting with teacher |   |
 |  |  | | **Mini-Conference** |  |
-| 20/12/21 | 8 | Different sessions | Presentations of group projects  | 10-min talk |
+| 19/12/21 | 8 | Different sessions | Presentations of group projects  | 10-min talk |
 
 
 

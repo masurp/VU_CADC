@@ -13,10 +13,10 @@
 
 <title>Content</title>
 
-<script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
@@ -60,6 +60,7 @@ if (window.hljs) {
 
 
 
+
 <style type = "text/css">
 .main-container {
   max-width: 940px;
@@ -80,6 +81,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -232,7 +236,7 @@ $(document).ready(function () {
 <div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -274,31 +278,79 @@ $(document).ready(function () {
 
 
 <p><img src="https://images.pexels.com/photos/4769486/pexels-photo-4769486.jpeg" width="270" align= "right" style = "padding-left: 10px; padding-bottm: 10px;"/></p>
-<p>This course introduces <strong>data science</strong> technologies and techniques to study communication processes and effects in novel and innovative ways. Learning data science and computational methods is useful because it provides new skills and much thought-after qualifications in the job market, but also allows us to tap into new areas of research and to gain a better understanding of today’s society.</p>
-<p>On the one hand, this both enables and incentivizes us to expand our <strong>methodological toolkit</strong>. To study political communication, we can now turn our gaze to countless communication artifacts from political parties and organizations. In media psychological research, we can make use of log data and advanced analytical procedures to measure effects at new and fine-grained levels. In the field of corporate communication, the rise of social media as central communication platforms not only requires our attention, but also enables new ways to study marketing and public relations in a natural setting and on a massive scale.</p>
-<p>On the other hand, the digital era has also given way to new <strong>key phenomena in communication</strong> that are difficult to understand without a general understanding of data science technologies. Indeed, scientists are not the only ones using these technologies. More and more facets of digital life are becoming at least partially managed by algorithms. Decisions of journalists, politicians, and organizations are increasingly based on metrics of collective human behavior. In the best cases, these developments can enhance lives. In the worst cases, they can foster fake news and undermine democracy. In all cases, it is becoming increasingly difficult to understand the impact of these developments without knowing the possibilities and limits of computers.</p>
-<p>In the course, students will learn about common <strong>computational methods in Communication Science</strong>. They will learn how to use the statistical programming environment R to a) import various data formats as well as gather data from online sources, b) transform and wrangle data to get it ready for analysis, c) perform text analysis (including machine learning approaches), d) perform advanced statistical methods in independent research projects (e.g., time series analysis, multilevel analysis, factor analyses and structural equation modeling, analysis of variance based on experimental data).</p>
-<p>Based on a problem-based learning approach, each lecture introduces a new empirical problem and discusses methods and statistical approaches that can solve the problem. Students then learn how to conduct these methodological solutions in the practical sessions and are given the opportunity to further practice these approaches in further homework assignments.</p>
+<p>This course introduces <strong>data science</strong> technologies and
+techniques to study communication processes and effects in novel and
+innovative ways. Learning data science and computational methods is
+useful because it provides new skills and much thought-after
+qualifications in the job market, but also allows us to tap into new
+areas of research and to gain a better understanding of today’s
+society.</p>
+<p>On the one hand, this both enables and incentivizes us to expand our
+<strong>methodological toolkit</strong>. To study political
+communication, we can now turn our gaze to countless communication
+artifacts from political parties and organizations. In media
+psychological research, we can make use of log data and advanced
+analytical procedures to measure effects at new and fine-grained levels.
+In the field of corporate communication, the rise of social media as
+central communication platforms not only requires our attention, but
+also enables new ways to study marketing and public relations in a
+natural setting and on a massive scale.</p>
+<p>On the other hand, the digital era has also given way to new
+<strong>key phenomena in communication</strong> that are difficult to
+understand without a general understanding of data science technologies.
+Indeed, scientists are not the only ones using these technologies. More
+and more facets of digital life are becoming at least partially managed
+by algorithms. Decisions of journalists, politicians, and organizations
+are increasingly based on metrics of collective human behavior. In the
+best cases, these developments can enhance lives. In the worst cases,
+they can foster fake news and undermine democracy. In all cases, it is
+becoming increasingly difficult to understand the impact of these
+developments without knowing the possibilities and limits of
+computers.</p>
+<p>In the course, students will learn about common <strong>computational
+methods in Communication Science</strong>. They will learn how to use
+the statistical programming environment R to a) import various data
+formats as well as gather data from online sources, b) transform and
+wrangle data to get it ready for analysis, c) perform text analysis
+(including machine learning approaches), d) perform advanced statistical
+methods in independent research projects (e.g., time series analysis,
+multilevel analysis, factor analyses and structural equation modeling,
+analysis of variance based on experimental data).</p>
+<p>Based on a problem-based learning approach, each lecture introduces a
+new empirical problem and discusses methods and statistical approaches
+that can solve the problem. Students then learn how to conduct these
+methodological solutions in the practical sessions and are given the
+opportunity to further practice these approaches in further homework
+assignments.</p>
 <p><br></p>
 <div id="learning-goals" class="section level2">
 <h2>Learning goals</h2>
 <p>After completion of the course, students will…</p>
 <ul>
-<li>know the most important (computational) methods to analyze digital communication</li>
-<li>be able to identify data analytical problems and challenges, analyze them critically, and find appropriate solutions</li>
-<li>be able to read, understand, and criticize recent communication research</li>
+<li>know the most important (computational) methods to analyze digital
+communication</li>
+<li>be able to identify data analytical problems and challenges, analyze
+them critically, and find appropriate solutions</li>
+<li>be able to read, understand, and criticize recent communication
+research</li>
 </ul>
-<p>With regard to the specific methods being taught, students will be able to…</p>
+<p>With regard to the specific methods being taught, students will be
+able to…</p>
 <ul>
-<li>gather, scrape, and import data from different file types, APIs, and websites</li>
+<li>gather, scrape, and import data from different file types, APIs, and
+websites</li>
 <li>link data from different sources to create new insights</li>
-<li>clean and transform messy data into a tidy data format ready for analysis</li>
-<li>conduct computational text analysis and use machine learning techniques to extract useful information from textual data</li>
-<li>perform advanced statistical analyses (e.g., time series analysis, structural equation modeling, linkage analysis…)</li>
+<li>clean and transform messy data into a tidy data format ready for
+analysis</li>
+<li>conduct computational text analysis and use machine learning
+techniques to extract useful information from textual data</li>
+<li>perform advanced statistical analyses (e.g., time series analysis,
+structural equation modeling, linkage analysis…)</li>
 </ul>
 <hr>
 <p style="margin-left: auto; margin-right: 0;">
-This course is published under the following <a href="https://github.com/masurp/VU_CADC/blob/main/LICENSE.md">license</a>.
+This course is published under the following <a
+href="https://github.com/masurp/VU_CADC/blob/main/LICENSE.md">license</a>.
 </p>
 </div>
 

@@ -13,10 +13,10 @@
 
 <title>Course Overview</title>
 
-<script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
@@ -60,6 +60,7 @@ if (window.hljs) {
 
 
 
+
 <style type = "text/css">
 .main-container {
   max-width: 940px;
@@ -80,6 +81,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -232,7 +236,7 @@ $(document).ready(function () {
 <div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -273,7 +277,9 @@ $(document).ready(function () {
 </div>
 
 
-<p>The course consists of one lecture (starting from the 1st of November 2021) and two practical sessions per week. For the practical sessions, the group will be split into five groups of equal size.</p>
+<p>The course consists of one lecture and two practical sessions per
+week. For the practical sessions, the group will be split into 5-6
+groups of equal size.</p>
 <p><br></p>
 <div id="rooms-and-times" class="section level2">
 <h2>Rooms and Times</h2>
@@ -294,32 +300,37 @@ $(document).ready(function () {
 <tr class="odd">
 <td align="left">Lectures</td>
 <td align="left">Dr. Philipp Masur</td>
-<td align="left"><strong>online via Zoom</strong> (Monday, 9:00am)</td>
+<td align="left"><strong>HG-14A00</strong> - Monday, 9:00am</td>
 </tr>
 <tr class="even">
 <td align="left">Practical session 1</td>
-<td align="left">Dr. Philipp Masur</td>
-<td align="left"><strong>online via Zoom</strong> (Tuesday, 9:00 &amp; Thursday, 13:30)</td>
+<td align="left">tba</td>
+<td align="left">Wednesday, 9:00 &amp; Thursday, 13:30</td>
 </tr>
 <tr class="odd">
 <td align="left">Practical session 2</td>
-<td align="left">Dr. Philipp Masur</td>
-<td align="left"><strong>HG-01A32</strong> (Tuesday, 11:00), <strong>HG-11A22</strong> (Thursday, 15:30)</td>
+<td align="left">tba</td>
+<td align="left">Wednesday, 11:00 &amp; Thursday, 15:30</td>
 </tr>
 <tr class="even">
 <td align="left">Practical session 3</td>
-<td align="left">Dr. Paulina Pankowska</td>
-<td align="left"><strong>HG-11A36</strong> (Tuesday, 9:00 &amp; Thursday, 13:30)</td>
+<td align="left">tba</td>
+<td align="left">Wednesday, 9:00 &amp; Friday, 09:00)</td>
 </tr>
 <tr class="odd">
 <td align="left">Practical session 4</td>
-<td align="left">Dr. Paulina Pankowska</td>
-<td align="left"><strong>online via Zoom</strong> (Tuesday, 11:00 &amp; Thursday, 15:30)</td>
+<td align="left">tba</td>
+<td align="left">Wednesday, 11:00 &amp; Friday, 11:00</td>
 </tr>
 <tr class="even">
 <td align="left">Practical session 5</td>
-<td align="left">Dr. Kasper Welbers</td>
-<td align="left"><strong>HG-02A37</strong> (Tuesday, 9:00 &amp; Thursday, 13:30)</td>
+<td align="left">tba</td>
+<td align="left">Wednesday, 9:00 &amp; Friday, 09:00)</td>
+</tr>
+<tr class="odd">
+<td align="left">Practical session 6</td>
+<td align="left">tba</td>
+<td align="left">Wednesday, 11:00 &amp; Friday, 11:00)</td>
 </tr>
 </tbody>
 </table>
@@ -328,6 +339,13 @@ $(document).ready(function () {
 <div id="overview" class="section level2">
 <h2>Overview</h2>
 <table>
+<colgroup>
+<col width="10%" />
+<col width="10%" />
+<col width="14%" />
+<col width="39%" />
+<col width="25%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th align="center">Date</th>
@@ -342,39 +360,40 @@ $(document).ready(function () {
 <td align="center"></td>
 <td align="center"></td>
 <td align="left"></td>
-<td align="left"><strong>Cycle 1: Introduction and Data Wrangling</strong></td>
+<td align="left"><strong>Cycle 1: Introduction and Data
+Wrangling</strong></td>
 <td align="left"></td>
 </tr>
 <tr class="even">
-<td align="center">01/11/21</td>
+<td align="center">31/10/21</td>
 <td align="center">1</td>
 <td align="left">Lecture</td>
 <td align="left">Introduction to Computational Methods</td>
 <td align="left"></td>
 </tr>
 <tr class="odd">
-<td align="center">02/11/21</td>
+<td align="center">02-03/11/21</td>
 <td align="center">1</td>
 <td align="left">Practical session</td>
 <td align="left">Introduction to R and RStudio</td>
 <td align="left"></td>
 </tr>
 <tr class="even">
-<td align="center">04/11/21</td>
+<td align="center">07/11/21</td>
 <td align="center">1</td>
 <td align="left">Practical session</td>
 <td align="left">Tidyverse I</td>
 <td align="left">Homework Assignment 1</td>
 </tr>
 <tr class="odd">
-<td align="center">08/11/21</td>
+<td align="center">09-10/11/21</td>
 <td align="center">2</td>
 <td align="left">Lecture</td>
 <td align="left">Data Wrangling and Data Visualization</td>
 <td align="left"></td>
 </tr>
 <tr class="even">
-<td align="center">09/11/21</td>
+<td align="center">11/11/21</td>
 <td align="center">2</td>
 <td align="left">Practical session</td>
 <td align="left">Tidyverse II</td>
@@ -391,18 +410,19 @@ $(document).ready(function () {
 <td align="center"></td>
 <td align="center"></td>
 <td align="left"></td>
-<td align="left"><strong>Cycle 2: Text Analysis and Machine Learning</strong></td>
+<td align="left"><strong>Cycle 2: Text Analysis and Machine
+Learning</strong></td>
 <td align="left"></td>
 </tr>
 <tr class="odd">
-<td align="center">15/11/21</td>
+<td align="center">14/11/21</td>
 <td align="center">3</td>
 <td align="left">Lecture</td>
 <td align="left">Text as Data: Basics of Automatic Text Analysis</td>
 <td align="left"></td>
 </tr>
 <tr class="even">
-<td align="center">16/11/21</td>
+<td align="center">16-17/11/21</td>
 <td align="center">3</td>
 <td align="left">Practical session</td>
 <td align="left">Text preprocessing and descriptive analyses</td>
@@ -416,14 +436,14 @@ $(document).ready(function () {
 <td align="left">Homework Assignment 3</td>
 </tr>
 <tr class="even">
-<td align="center">22/11/21</td>
+<td align="center">21/11/21</td>
 <td align="center">4</td>
 <td align="left">Lecture</td>
 <td align="left">Machine Learning - Supervised Text Classification</td>
 <td align="left"></td>
 </tr>
 <tr class="odd">
-<td align="center">23/11/21</td>
+<td align="center">23-24/11/21</td>
 <td align="center">4</td>
 <td align="left">Practical session</td>
 <td align="left">Supervised learning I</td>
@@ -444,7 +464,7 @@ $(document).ready(function () {
 <td align="left"></td>
 </tr>
 <tr class="even">
-<td align="center">03/12/21</td>
+<td align="center">02/12/21</td>
 <td align="center">5</td>
 <td align="left">Written Exam (Multiple-Choice)</td>
 <td align="left">Content of Cycle 1 &amp; 2</td>
@@ -458,14 +478,15 @@ $(document).ready(function () {
 <td align="left"></td>
 </tr>
 <tr class="even">
-<td align="center">06/12/21</td>
+<td align="center">05/12/21</td>
 <td align="center">6</td>
 <td align="left">Lecture</td>
-<td align="left">Introduction to the group projects and advanced methods</td>
+<td align="left">Introduction to the group projects and advanced
+methods</td>
 <td align="left"></td>
 </tr>
 <tr class="odd">
-<td align="center">07/12/21</td>
+<td align="center">07-08/12/21</td>
 <td align="center">6</td>
 <td align="left">Practical session</td>
 <td align="left">Meeting with teacher</td>
@@ -479,14 +500,14 @@ $(document).ready(function () {
 <td align="left"></td>
 </tr>
 <tr class="odd">
-<td align="center">13/12/21</td>
+<td align="center">12/12/21</td>
 <td align="center">7</td>
 <td align="left"></td>
 <td align="left"><em>No lecture</em></td>
 <td align="left"></td>
 </tr>
 <tr class="even">
-<td align="center">14/12/21</td>
+<td align="center">14-15/12/21</td>
 <td align="center">7</td>
 <td align="left">Practical session</td>
 <td align="left">Meeting with teacher</td>
@@ -507,7 +528,7 @@ $(document).ready(function () {
 <td align="left"></td>
 </tr>
 <tr class="odd">
-<td align="center">20/12/21</td>
+<td align="center">19/12/21</td>
 <td align="center">8</td>
 <td align="left">Different sessions</td>
 <td align="left">Presentations of group projects</td>
@@ -517,7 +538,8 @@ $(document).ready(function () {
 </table>
 <hr>
 <p style="margin-left: auto; margin-right: 0;">
-This course is published under the following <a href="https://github.com/masurp/VU_CADC/blob/main/LICENSE.md">license</a>.
+This course is published under the following <a
+href="https://github.com/masurp/VU_CADC/blob/main/LICENSE.md">license</a>.
 </p>
 </div>
 
