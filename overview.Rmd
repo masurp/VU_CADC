@@ -25,7 +25,7 @@ The course consists of one lecture and two practical sessions per week. For the 
 ## Overview
 
 | Date | Week | Type | Content | Assignments |
-|:-:|:-:|:---| :---------- |:------ | 
+|:----:|:-:|:---| :---------- |:------ | 
 |  |  | | **Cycle 1: Introduction and Data Wrangling** |  |
 | 31/10/21 | 1 | Lecture | Introduction to Computational Methods |  | 
 | 02-03/11/21 | 1 | Practical session | Introduction to R and RStudio |  | 
