@@ -31,7 +31,7 @@ With regard to the specific methods being taught, students will be able to...
 - link data from different sources to create new insights
 - clean and transform messy data into a tidy data format ready for analysis
 - conduct computational text analysis and use machine learning techniques to extract useful information from textual data
-- perform advanced statistical analyses (e.g., time series analysis, structural equation modeling, linkage analysis…)
+- perform statistical analyses.
 
 <hr>
 

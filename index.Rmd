@@ -6,8 +6,8 @@ This page contains all information and materials for the course "Computational A
 
 - import various data formats as well as gather data from online sources, 
 - transform and wrangle data to get it ready for analysis, 
-- perform text analysis (including dictionary, supervised and unsupervised machine learning approaches), 
-- perform statistical analysis. 
+- perform text analysis (including dictionary, supervised and unsupervised machine learning approaches) to create data sets, and
+- perform statistical analysis on relevant aspects of it.  
 
 <br>
 
