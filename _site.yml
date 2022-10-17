@@ -12,8 +12,6 @@ navbar:
       href: material.html
     - text: "Contact"
       href: contact.html
-    - text: "Source code"
-      href: "https://github.com/masurp/VU_CADC"
 output:
   html_document:
       theme: flatly
