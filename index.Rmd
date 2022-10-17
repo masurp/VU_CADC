@@ -6,8 +6,8 @@ This page contains all information and materials for the course "Computational A
 
 - import various data formats as well as gather data from online sources, 
 - transform and wrangle data to get it ready for analysis, 
-- perform text analysis (including machine learning approaches), 
-- perform advanced statistical methods (e.g., time series analysis, multilevel analysis, factor analyses and structural equation modeling, analysis of variance based on experimental data). 
+- perform text analysis (including dictionary, supervised and unsupervised machine learning approaches), 
+- perform statistical analysis. 
 
 <br>
 
