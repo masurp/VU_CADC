@@ -16,24 +16,20 @@ On this page, you'll find all materials (e.g., slides, handouts, R-syntax, etc.)
 
 #### Install R and RStudio
 
-Before the first practical session, please make sure that you have R and Rstudio installed on your computer and have played around a little with it (it is open source and free to use!). Please work through the initial steps outlined in this worksheet:
+Before the first practical session, please make sure that you have R and Rstudio installed on your computer and have played around a little with it (it is open source and free to use). Please work through the initial steps outlined in these two worksheets:
 
 - [Installing R and RStudio](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R_basics_1_getting_started_short.md). 
+- [R Basics](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_basics_introduction.md)
 
 #### Familiarize yourself with the course
 
-Lectures are every *Monday* (see overview for exact dates and times). In these lectures, a particular research problem will be introduced and we will discuss methodological solutions. We will get to know respective computational methods and contextualize them within the broader research process. We expect you to:
+Lectures are every *Monday* (see [overview](overview.html) for exact dates and times). In these lectures, a particular research problem will be introduced and we will discuss methodological solutions. We will get to know respective computational methods and contextualize them within the broader research process. Practical sessions are every **Wednesday*, *Thursday*, and *Friday* (see [overview](overview.html) for exact dates and times). For the practical sessions, the class will be split into 5-6 groups of equal size. In these practical sessions, we will work with RStudio and ran analyses on real-world data sets. We therefore engage in various data analytic exercises. We expect you to: 
 
-- Think, participate, discuss
-- Ask questions!
-
-Practical sessions are every **Wednesday*, *Thursday*, and *Friday* (see overview for exact dates and times). For the practical sessions, the class will be split into 5-6 groups of equal size (this will happen in the first lecture). In these practical sessions, we will work with RStudio and ran analyses on real-world data sets. We therefore engage in various data analytic exercises. We expect you to: 
-
-- Bring your computer
+- Bring your own computer
 - Run the scripts and work through the code 
-- Ask questions!
+- Ask questions and participate!
 
-In the third cycle, students will work on their own research projects. Resources and material for additional methods and statistical approaches will be provided to all students. 
+In the third part of the course, students will work on their own research projects. Resources and material for additional methods and statistical approaches will be provided to all students. 
 
 
 <br>
@@ -46,68 +42,39 @@ In the third cycle, students will work on their own research projects. Resources
 - Slides Lecture 1:
     - [Download Slides](slides/01_introduction.html)
 
-#### Practical Session 1: Introduction to R and RStudio
+#### Practical Session 1: Tidyverse I: Data Wrangling
 
 - Handouts: 
-    - [R Basics: Getting Started](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_basics_introduction.md)
-    
-#### Practical Session 2: Tidyverse I 
-
-- Handout: 
     - [Tidyverse: Transforming and Summarizing](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_tidy_transforming-and-summarizing.md)
     
+    
+#### Practical Session 2: Tidyverse II: Data visualization
+
+- Handouts:
+    - [Basics of Data Visualization](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_basics_data-visualization.md)
+
+   
 #### Homework
 
 - Work through this tutorial: 
     - [R Markdown: Basics](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_basics_r-markdown.md)
+    
 - Complete this assignment (copy the entire code into a RMarkdown file)
     - [Homework: Basic Data Wrangling](https://github.com/masurp/VU_CADC/blob/main/homework/01_homework_assignment.Rmd)
+    - [Homework: Tidyverse and Data Visualization](https://github.com/masurp/VU_CADC/blob/main/homework/02_homework_assignment.Rmd)
 
 #### Additional resources: 
 
 
-- Chapter 5 & 6 in "Computational Analysis of Communication" by Van Atteveldt et al. (see Canvas)
-- [Online book "R for Data Science"](https://r4ds.had.co.nz/)
-- [Online book "R Markdown: The Definitive Guide"](https://bookdown.org/yihui/rmarkdown/)
+- Chapter 5 & 6 in [Computational Analysis of Communication](https://cssbook.net/) by Van Atteveldt et al. 
+- [Online book "R for Data Science"](https://r4ds.had.co.nz/) 
+- [Online book "Data Visualization" by Kieran Healy](https://socviz.co/)
+- [Website "Data-To-Viz" (great overview on visualizations with code examples)](https://www.data-to-viz.com/)
 
 <br>
 <hr>
 
 ## Week 2
-
-#### Lecture: Data Wrangling and Data Visualization
-
-- Slides Lecture 2:
-    - [Download Slides](slides/02_dataviz.html)
-
-#### Practical Session 1: Data visualization
-
-- Handouts:
-    - [Basics of Data Visualization](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_basics_data-visualization.md)
-
-#### Practical Session 2: Tidyverse II
-
-- Handouts:
-    - [Tidyverse: Reshaping](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_tidy_reshaping-and-joining.md) 
-    - [Tidyverse: Joining](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R-tidy-13a-joining.md)
-
-#### Homework
-
-- Complete this assignment (copy the entire code into a RMarkdown file)
-    - [Homework: Tidyverse and Data Visualization](https://github.com/masurp/VU_CADC/blob/main/homework/02_homework_assignment.Rmd)
-
-#### Additional resources: 
-
-- Chapter 6 in "Computational Analysis of Communication" by Van Atteveldt et al. (see Canvas)
-- [Online book "R for Data Science"](https://r4ds.had.co.nz/) 
-- [Online book "Data Visualization" by Kieran Healy](https://socviz.co/)
-- [Website "Data-To-Viz" (great overview on visualizations with code examples)](https://www.data-to-viz.com/)
-- [The R Graph Gallery (examples of visualizations)](https://www.r-graph-gallery.com/)
-
-<br>
-<hr>
-
-## Week 3
 
 #### Lecture: Text as Data - Basics of Automatic Text Analysis
 
@@ -133,13 +100,13 @@ In the third cycle, students will work on their own research projects. Resources
 
 #### Additional resources
 
-- Chapter 9 & 10 in "Computational Analysis of Communication" by Van Atteveldt et al. (see Canvas)
+- Chapter 9 & 10 in [Computational Analysis of Communication](https://cssbook.net/) by Van Atteveldt et al. (see Canvas)
 - A Nice [Tutorial for Sentiment Analysis](https://content-analysis-with-r.com/3-sentiment.html) by Cornelius Puschmann and Mario Haim (including R code examples)
 
 <br>
 <hr>
 
-## Week 4
+## Week 3
 
 #### Lecture: Machine Learning - Supervised Text Classification
 
@@ -164,7 +131,38 @@ In the third cycle, students will work on their own research projects. Resources
     
 #### Additional resources: 
 
-- Chapter 8 in "Computational Analysis of Communication" by Van Atteveldt et al. (see Canvas)
+- Chapter 8 & 11 in [Computational Analysis of Communication](https://cssbook.net/) by Van Atteveldt et al. (see Canvas)
+- [Supervised Machine Learning for Text Analysis in R](https://smltar.com/)
+
+<br>
+<hr>
+
+## Week 4
+
+#### Lecture: Machine Learning - Unsupervised Topic Modeling
+
+- Slides Lecture 4:
+    - [Download Slides] (available soon)
+
+#### Practical Session 1
+
+- Handouts: 
+    - [Unsupervised text classification I] (available soon) 
+
+#### Practical Session 2
+
+- Handouts:
+    - [Unsupervised text classification II] (available soon) 
+    
+
+#### Homework
+
+- Complete this assignment (copy the entire code into a RMarkdown file)
+    - [Homework: Unsupervised text classification] (available soon) 
+    
+#### Additional resources: 
+
+- Chapter 11 in [Computational Analysis of Communication](https://cssbook.net/) by Van Atteveldt et al. (see Canvas)
 - [Supervised Machine Learning for Text Analysis in R](https://smltar.com/)
 
 <br>
