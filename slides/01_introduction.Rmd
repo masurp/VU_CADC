@@ -16,14 +16,14 @@ output:
       titleSlideClass: [left, middle]
 ---
 
-```{r child = 'theme.rmd'}
+```{r child = 'theme2.rmd'}
 ```
 
 class: inverse, center, middle
 
 # Welcome!
 
-My name is Philipp Masur, I am an Assistant Professor for Persuasive Communication.
+My name is Philipp Masur, I am an Assistant Professor at the Department of Communication Science. 
 
 
 
@@ -39,7 +39,7 @@ My name is Philipp Masur, I am an Assistant Professor for Persuasive Communicati
 
 **3.** Formalities of the course
 
-**4.** Learning 'R'
+**4.** Learning 'R' for automated text analysis
 
 
 ---
@@ -94,6 +94,7 @@ class: inverse, center, middle
 --
 
 .pull-right[
+
 - The authors also had access to complete call records from 1.5 million people
 
 - Combining both data sources, they used the survey data to "train" a machine learning model to predict a person's wealth based on their call records.
@@ -146,14 +147,14 @@ _Thompson, 2010_
 ]
 
 
-
 ---
-# Computational Social Science:
+
+# Computational Social Science
 
 
-- Field of Social Science that uses algorithmic tools and large/unstructured data tounderstand human/social behaviour 
+- Field of Social Science that uses algorithmic tools and large/unstructured data to understand human/social behavior 
 
-- Computational methods as “microscope”: methods are not the goal, but contribute to theoretical development 
+- Computational methods as “microscope”: methods are not the goal, but contribute to theoretical development and/or data generation
 
 - Complements rather than replaces traditional methodologies
 
@@ -187,7 +188,7 @@ td {
 | 1 | Big | The scale or volume of some current datasets is often impressive. However, big datasets are not an end in themselves, but they can enable certain kinds of research including the study of rare events, the estimation of heterogeneity, and the detection of small differences |
 | 2 | Always-on | Many big data systems are constantly collecting data and thus enable to study unexpected events and allow for real-time measurement  |
 | 3 | Nonreactive | Participants are generally not aware that their data are being captured or they have become so accustomed to this data collection that it no longer changes their behavior. |
-| 4 | Incomplete | Most big data sources are incomplete, in the sense that they don’t have the information that you will want for your research. This is a common feature of data that were created for purposes other than research. |
+| 4 | Incomplete | Most big data sources are incomplete, in the sense that they don't have the information that you will want for your research. This is a common feature of data that were created for purposes other than research. |
 | 5 | Inaccessible | Data held by companies and governments are difficult for researchers to access. 
 
 _Salganik, 2017, chap. 2.3_
@@ -210,24 +211,53 @@ _Salganik, 2017, chap. 2.3_
 
 ---
 
+# Example data
+
+.pull-left[
+
+- Smartphone log data (Masur, 2018)
+
+- Incredible detailed log of each person's use
+
+- Big data?
+    
+    - BIG: Thousands of rows per person, but not many columns
+    - ALWAYS-ON: Recorded smartphone use at all times
+    - INCOMPLETE: Did not record app use with higher privacy standards (e.g., signal)
+    - DIRTY: Depending on what you want to study, lots of noise (e.g., phone on/off)
+
+]
+
+
+.pull-right[
+
+![](img/logs.png)
+
+]
+
+
+---
+
 # Typical computational research strategies
 
 
 .pull-left[
+
 ### 1. Counting things
 
-In the age of big data, researcher can "count" more than ever.
+In the age of big data, researcher can "count" more than ever (e.g., how often do people use their smartphone per day)
 
 ### 2. Forecasting and nowcasting
 
-Big data allow for more accurate predictions both in the present and in the future.
+Big data allow for more accurate predictions both in the present and in the future (e.g., )
+
 ]
 
 .pull-right[
 
 ### 3. Approximating experiments
 
-Computational methods provide opportunities to conduct "natural experiments".
+Computational methods provide opportunities to conduct "natural experiments" (e.g., check smartphone log data of people who use their smartphone naturally and those who abstain from certain apps, e.g., social media)
 
 ]
 
@@ -240,7 +270,7 @@ _Salganik, 2017, chap. 2.4_
 # Advantages and Disadvantages
 
 - Advantages of Computational Methods
-    - Actual behaviour vs. self-report
+    - Actual behavior vs. self-report
     - Social context vs. lab setting
     - Small N to large N
 
@@ -278,19 +308,18 @@ Why computational methods are important for (future) communication research.
 
 The recent acceleration in the use of computational methods for communication science is primarily fueled by the confluence of at least three developments:
 
-- vast **amounts of digitally available data**, ranging from social media messages and other "digital" traces to web archives and newly digitized newspaper and other historical archives
+- vast **amounts of digitally available data**, ranging from social media messages and other digital traces to web archives and newly digitized newspaper and other historical archives
 
-- improved tools to analyze this data, including **network analysis methods** and **automatic text analysis methods** such as supervised **text classification**, **topic modelling**, **word embeddings**, and **syntactic methods**
+- improved tools to analyze this data, including **network analysis methods** and **automatic text analysis methods** such as supervised **text classification**, **topic modeling**, **word embeddings**, and **syntactic methods**
 
-- powerful and cheap **processing power**, and easy to use **computing infrastructure** for processing these data, including scientific and commercial cloud computing, sharing platforms such as Github and Dataverse, and crowd coding platforms such as
-Amazon MTurk and Crowdflower
+- powerful and cheap **processing power**, and easy to use **computing infrastructure** for processing these data, including scientific and commercial cloud computing, sharing platforms such as Github and Dataverse, and crowd coding platforms such as Amazon MTurk and Crowdflower
 
 _Van Atteveldt & Peng, 2017_
 
 
 ---
 
-# Example: Simulating search queries
+# Example 1: Simulating search queries
 
 - Numbers of drug-overdose deaths have been increasing in the United States
 
@@ -316,7 +345,7 @@ _Haim, Scherr, & Arendt, 2021_
 
 - Counseling services were displayed at high rates after suicide-related potentially harmful search queries (e.g., “how to commit suicide”)
 
-- Display rates were substantially lower when drug-related terms, indicative of users’ suicidal overdosing tendencies, were added (e.g., “how to commit suicide fentanyl”)
+- Display rates were substantially lower when drug-related terms, indicative of users’ suicidal overdosing tendencies, were added (e.g., "how to commit suicide fentanyl")
 ]
 
 .pull-right[
@@ -326,14 +355,14 @@ _Haim, Scherr, & Arendt, 2021_
 _Haim, Scherr, & Arendt, 2021_
 ---
 
-# Example: Analyzing and aggregating news coverage
+# Example 2: Analyzing and aggregating news coverage
 
 .pull-left[
 - Jacobi and colleagues (2016) analyzed the coverage of nuclear technology from 1945 to the present in the New York Times
 
 - Analysis of 51,528 news stories (headline and lead): Way too much for human coding!
 
-- Used "topic modelling" to extract latent topics and analyzed their occurence over time
+- Used "topic modeling" to extract latent topics and analyzed their occurrence over time
 ]
 
 .pull-right[
@@ -344,7 +373,7 @@ _Jacobi, Welbers, & Van Atteveldt, 2016_
 
 ---
 
-# Example: Analyzing gender representation in TV
+# Example 3: Analyzing gender representation in TV
 
 - Jürgens and colleagues (2021) investigated gender representations in over ten years of daytime TV programming
 
@@ -373,6 +402,30 @@ _Jürgens, Meltzer, & Scharkow, 2021_
 
 
 ---
+
+# Example 4: Information flow in the Dutch Telegramsphere
+
+.pull-left[
+
+- Simon et al., (2022) collected the full messaging history (N = 2,033,661) of 174 Dutch-language public Telegram chats/channels
+
+- Among other things, used advanced topic modeling and network analyses
+
+- Authors found that over time, conspiracy-themed, far-right activist, and COVID-19-sceptical communities dominated the Dutch Telegramsphere of current affairs
+
+- Their findings raise concerns with respect to Telegram’s polarization and radicalization capacity 
+
+]
+
+
+.pull-right[
+
+![](img/simon_figure3.png)
+
+]
+
+---
+
 
 # Ethics of 'Big Data' and Computational Research
 
@@ -404,7 +457,7 @@ Researcher scraped students' data from Facebook, merged it with university recor
 
 ---
 
-# The “Facebook mood manipulation” study
+# The "Facebook mood manipulation" study
 
 - Massive online experiment (N ~ 700k)
 
@@ -414,7 +467,7 @@ Researcher scraped students' data from Facebook, merged it with university recor
 
 - Stimulus: Hide (negative / positive / random) messages from FB timeline 
 
-- Measurement / DV: sentiment of posts by user 
+- Measurement / dependent variables: sentiment of posts by user 
 
 <br><br>
 
@@ -445,11 +498,11 @@ _Kramer et al., 2014_
 
 # Is this good science? Why not?
 
-- What’s cool?
+- What's cool?
     - Potentially interesting research question
-    - actual behaviour measured as well as self-report measures
+    - actual behavior measured as well as self-report measures
 
-- What’s not so cool? A lot...
+- What's not so cool? A lot...
     - No informed consent
     - Not replicable
     - Low internal validity
@@ -464,6 +517,10 @@ _Kramer et al., 2014_
 # Ethical problems with computational methods
 
 - More power over participants than in the past
+
+    - Data collection without awareness/consent
+    - Manipulation without awareness/consent
+    - Data potentially sensitive, individual users identifiable
 
 - Guiding principles
 
@@ -481,7 +538,7 @@ _Salganik, 2018, chap. 6_
 
 # Challenges of computational communication science
 
-- Data-driven research questions might not be theoretically interesting
+- Simply data-driven research questions might not be theoretically interesting
 
 - Proprietary data threatens accessibility and reproducibility
 
@@ -530,10 +587,10 @@ How this course is going to work?
 
 # Teachers
 
-| Dr. Philipp K. Masur | | Dr. Paulina Pankowska | | Dr. Kaspar Welbers |
-|:---------------------:| -- |:---------------------:|-- |:---------------------:|
-|![](img/Masur.jpg) | | ![](img/Pankowska.png)  | |  ![](img/Welbers.png) |
-| Lecture & Course Coordinator | | Lecturer | | Lecturer |
+| Dr. Philipp K. Masur |  | Dr. Kaspar Welbers | | Dr. Alberto López Ortega      | | Santiago Gómez-Echeverry | | Emma Diel |
+|:---------------------:| -- |:---------------------:|-- |:---------------------:| -- |:---------------------:|-- |:---------------------:|
+|![](img/philipp.jpg) | |   ![](img/kasper.jpg) | | ![](img/alberto.jpg) || ![](img/santiago.jpg) || ![](img/emma.jpg)
+| Lecturer & Course Coordinator | | Teacher | | Teacher | | Teacher | | Teacher |
 
 
 ---
@@ -543,13 +600,9 @@ How this course is going to work?
 .pull-left[
 ### Teaching assistants
 
-Not everything will work at the first time. Because we work with code, tiny mistakes can produce errors. During the practical sessions, these three assistants are there to help you:
+Not everything will work at the first time. Because we work with code, tiny mistakes can produce errors. The following teaching assistants will be available during the practical sessions: 
 
-- Meryam Boufouchk
-
-- Daniel Huisman
-
-- Gianni Quaedvlieg
+- t.b.a.
 
 ]
 
@@ -559,11 +612,7 @@ Not everything will work at the first time. Because we work with code, tiny mist
 
 If you have any further problems related to installing software, running packages or code, or simply an error message you do not understand, you can address the R Help Desk:
 
-- Henry Lachman
-
-- Sarah Sramota
-
-**Office Hours:** Tuesdays (3-5pm) and Thursdays (10-12am)
+**Office Hours:** t.b.a.
 
 
 ]
@@ -601,6 +650,7 @@ With regard to the specific methods being taught in R, you will be able to…
 # Information and Materials
 
 .pull-left[
+
 The major hub for this course is the following website:
 
 - https://masurp.github.io/VU_CADC/
@@ -619,7 +669,6 @@ The major hub for this course is the following website:
 
 - Every Monday from 9:00 to 11.15
 - Introduction of research problems and computational solutions
-- Hybrid format (you can follow via Zoom)
 
 ]
 
@@ -628,8 +677,6 @@ The major hub for this course is the following website:
 
 - Course will be split in 5 groups
 - Practical sessions take place twice a week
-- Every Tuesday (either 9:00 to 10:30 or 11:00 to 12:30)
-- Every Thursday (with 13.30 to 15:00 or 15:30 to 17:00)
 - Here, you will learn to run code in RStudio!
 
 
@@ -647,15 +694,15 @@ The major hub for this course is the following website:
 
 .pull-left[
 
-- **Cycle 1:** Data Wrangling And Data Visualization
+- **Cycle 1:** Data Wrangling, Data Visualization, and Introduction to Text Analysis
 
     - Introduction to computational methods
-    - Data wrangling and data visualizations
+    - Text as data: Introduction to text analysis and dictionary approaches
 
 - **Cycle 2:** Text Analysis and Machine Learning
 
-    - Text as data: Introduction to text analysis and dictionary approaches
     - Automated text analysis: Supervised machine learning approaches
+    - Automated text analysis: Unsupervised machine learning approaches
     
 ]
 
@@ -677,16 +724,15 @@ The major hub for this course is the following website:
 - **Cycle 1:** Data Wrangling And Data Visualization
 
     - Introduction to R
-    - Tidyverse I
-    - Tidyverse II
+    - Tidyverse 
     - Data visualization
+    - Basics of text analysis
+    - Dictionary approaches
 
 - **Cycle 2:** Text Analysis and Machine Learning
 
-    - Basics of text analysis
-    - Dictionary approaches
-    - Supervised text analysis I
-    - Supervised text analysis II
+    - Supervised text analysis
+    - Unsupervised text analysis
     
 ]
 
@@ -713,9 +759,9 @@ The major hub for this course is the following website:
 
 # Exam
 
-After the first two cycles, there will be a written exam (**70% of the final grade**):
+After the first two cycles, there will be a written exam (**40% of the final grade**):
 
-- The exam will consist of ~60 multiple choice questions and ~6 open-ended questions
+- The exam will consist of ~35 multiple choice questions and ~6 open-ended questions
 
 - Exam questions will be based on all material discussed in the first two cycles, including lecture content, class materials, and required readings
 
@@ -728,7 +774,7 @@ After the first two cycles, there will be a written exam (**70% of the final gra
 
 # Homework
 
-After each week, students are required to hand in a “homework”, which represents a practical application of some of the taught analysis methods (e.g. with a new data set, specific research question) pass (**10% of the final grade**):
+After each week, students are required to hand in a “homework”, which represents a practical application of some of the taught analysis methods (e.g. with a new data set, specific research question) pass (**30% of the final grade**):
 
 - Each week’s assignment requires students to apply the methods they have learned to a new data set
 
@@ -740,23 +786,23 @@ After each week, students are required to hand in a “homework”, which repres
 
 # Group presentation
 
-In the third cycle, students will be assigned to small working groups in which they independently conduct a research project. A final presentation will be graded per group (**20% of the final grade**).
+In the third cycle, students will be assigned to small working groups in which they independently conduct a research project. A final presentation will be graded per group (**30% of the final grade**).
 
-- A 12-minute talk (including appropriate slides) in which you:
+- A 10-minute talk (including appropriate slides) in which you:
     - introduce the research project (1-2 slides)
     - describe theory and hypotheses (1 slide)
     - explain the methods (1 slide)
     - present the results (2 slides)
     - discuss the findings (1-2 slides)
 
-Students are required to hand in the slides and analyses beforehand (Deadline: 19th of December 2021 at 12:00). 
+Students are required to hand in the slides and analyses beforehand (Deadline: 18th of December 2021 at 12:00). 
 
 ---
 class: inverse, center, middle
 
 # The trouble with 'R'
 
-We have to learn a programming language???
+"This is was already difficult in P1!"
 
 ---
 
@@ -879,7 +925,7 @@ data %>%
 
 - flexible and comprehensive programming
 - complex data management
-- advanced analyses with large or messy data
+- advanced analyses with large or messy data (text analysis!)
 - to produce publication-ready figures and documents
 
 ### R encourages...
@@ -904,7 +950,10 @@ class: inverse, center, middle
 
 <br><br>
 
+Kramer, A. D. I., Guillory, J. E, & Hancock, J. (2014). Experimental Evidence of Massive-Scale Emotional Contagion Through Social Networks. Proceedings of the National Academy of Sciences, 111(24), 8788-8790.
+
 Van Atteveldt, W., & Peng, T.-Q. (2018). When communication meets computation: Opportunities, challenges, and pitfalls in computational communication science. Communication Methods and Measures, 12(2-3), 81–92. https://doi.org/10.1080/19312458.2018.1458084
+
 
 _(available on Canvas)_
 
@@ -924,7 +973,9 @@ class: my-one-page-font
 
 - Kramer, A. D. I., Guillory, J. E, & Hancock, J. (2014). Experimental Evidence of Massive-Scale Emotional Contagion Through Social Networks. Proceedings of the National Academy of Sciences, 111(24), 8788-8790.
 
-- Salganik, M. J. (2018). Bit by Bit: Social Research in the Digital Age. Princeton University Press. 
+- Salganik, M. J. (2018). Bit by Bit: Social Research in the Digital Age. Princeton University Press.
+
+- Simon, M., Welbers, K., Kroon, A. C. & Trilling, D. (2022). Linked in the dark: A network approach to understanding information flows within the Dutch Telegramsphere. Information, Communication & Society, https://doi.org/10.1080/1369118X.2022.2133549
 
 - Thompson, T. (2010). Crime software may help police predict violent offences. The Observer. Retrieved from https://www.theguardian.com/uk/2010/jul/25/police-software-crime-prediction
 
@@ -944,7 +995,7 @@ B. It overtly manipulated people's emotion.
 
 C. Both A and B are true.
 
-D. The problem was not problematic ethically.  
+D. The study was not ethically problematic.  
 
 ---
 
@@ -958,7 +1009,7 @@ B. It overtly manipulated people's emotion.
 
 **C. Both A and B are true.** 
 
-D. The problem was not problematic ethically.  
+D. The study was not ethically problematic.    
 
 ---
 
