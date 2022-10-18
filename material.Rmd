@@ -42,13 +42,13 @@ In the third part of the course, students will work on their own research projec
 - Slides Lecture 1:
     - [Download Slides](slides/01_introduction.html)
 
-#### Practical Session 1: Tidyverse I: Data Wrangling
+#### Practical Session 1: Data Wrangling
 
 - Handouts: 
     - [Tidyverse: Transforming and Summarizing](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_tidy_transforming-and-summarizing.md)
     
     
-#### Practical Session 2: Tidyverse II: Data visualization
+#### Practical Session 2: Data visualization
 
 - Handouts:
     - [Basics of Data Visualization](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_basics_data-visualization.md)
@@ -63,7 +63,7 @@ In the third part of the course, students will work on their own research projec
     - [Homework: Basic Data Wrangling](https://github.com/masurp/VU_CADC/blob/main/homework/01_homework_assignment.Rmd)
     - [Homework: Tidyverse and Data Visualization](https://github.com/masurp/VU_CADC/blob/main/homework/02_homework_assignment.Rmd)
 
-#### Additional resources: 
+#### Additional resources
 
 
 - Chapter 5 & 6 in [Computational Analysis of Communication](https://cssbook.net/) by Van Atteveldt et al. 
@@ -170,7 +170,7 @@ In the third part of the course, students will work on their own research projec
 
 ## Week 5
 
-Exam week. 
+#### Exam week 
 
 - Date and Time of the Exam
     - **Date:** tba
