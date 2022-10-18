@@ -45,13 +45,13 @@ In the third part of the course, students will work on their own research projec
 #### Practical Session 1: Data Wrangling
 
 - Handouts: 
-    - [Tidyverse: Transforming and Summarizing](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_tidy_transforming-and-summarizing.md)
+    - [Transforming and Summarizing](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_tidy_transforming-and-summarizing.md)
     
     
 #### Practical Session 2: Data visualization
 
 - Handouts:
-    - [Basics of Data Visualization](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_basics_data-visualization.md)
+    - [Data Visualization](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_basics_data-visualization.md)
 
    
 #### Homework
