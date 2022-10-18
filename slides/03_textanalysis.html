@@ -10,10 +10,18 @@
     <textarea id="source">
 class: left, middle, title-slide
 
+.title[
 # Computational Analysis of Digital Communication
-## Week 3: Basics of Automatic Text Analysis and Dictionary Approaches
+]
+.subtitle[
+## Week 2: Basics of Automatic Text Analysis and Dictionary Approaches
+]
+.author[
 ### 
+]
+.date[
 ### Dr. Philipp K. Masur | <a href="mailto:p.k.masur@vu.nl" class="email">p.k.masur@vu.nl</a>
+]
 
 ---
 
@@ -105,15 +113,15 @@ _Hilbert &amp; Lopez, 2011_
 
 
 ```
-# A tibble: 6 x 5
+# A tibble: 6 × 5
      id condition sns_use well_being
   &lt;int&gt; &lt;chr&gt;       &lt;dbl&gt;      &lt;dbl&gt;
-1     1 A            3.31    -3.50  
-2     2 B            3.57     8.41  
-3     3 A            1.53     4.54  
-4     4 B            2.40     0.0963
-5     5 A            1.95    -0.983 
-6     6 B            4.06    -2.18  
+1     1 A            1.77     -0.104
+2     2 B            3.51      3.29 
+3     3 A            1.76      2.11 
+4     4 B            1.20     -1.52 
+5     5 A            4.28      3.98 
+6     6 B            2.78      5.12 
 # … with 1 more variable: pers1 &lt;dbl&gt;
 ```
 ]
@@ -124,7 +132,7 @@ _Hilbert &amp; Lopez, 2011_
 
 
 ```
-# A tibble: 6 x 1
+# A tibble: 6 × 1
   text                                  
   &lt;chr&gt;                                 
 1 "North Korea launched a ballistic mis…
@@ -194,6 +202,7 @@ How can we analyze texts with computers?
 # Definition
 
 .pull-left[
+
 &gt; Text analysis is "a research technique for making replicable and valid inferences from texts (or other meaningful matter) to the contexts of their use" 
 &gt;
 &gt;Krippendorff, 2004
@@ -568,31 +577,63 @@ docs    exampl preprocess techniqu happen procedur
 
 ---
 
+# Larger example of a document-feature matrix
+
+
+```
+# A tibble: 4 × 2
+  label text                                                                    
+  &lt;chr&gt; &lt;chr&gt;                                                                   
+1 doc1  This is an Example of Preprocessing Techniques. This is what happens du…
+2 doc2  This is another Example of Preprocessing Text. This is what when you ha…
+3 doc3  This is a third Example of Preprocessing Techniques.                    
+4 doc3  This is an Example of Preprocessing Approaches. Nothing to complicated  
+```
+
+```
+Document-feature matrix of: 4 documents, 29 features (59.48% sparse) and 1 docvar.
+       features
+docs    this is an example of preprocessing techniques what happens during
+  text1    2  2  1       1  1             2          1    1       1      1
+  text2    2  2  0       1  1             1          0    1       0      0
+  text3    1  1  0       1  1             1          1    0       0      0
+  text4    1  1  1       1  1             1          0    0       0      0
+[ reached max_nfeat ... 19 more features ]
+```
+
+
+
+---
+
 # Word frequencies and summaries
 
 
 
 ```r
 library(quanteda.textstats)
-textstat_frequency(dfm(toks))  
+head(textstat_frequency(dfm2))
 ```
 
 ```
         feature frequency rank docfreq group
-1 preprocessing         2    1       1   all
-2       example         1    2       1   all
-3    techniques         1    2       1   all
-4       happens         1    2       1   all
-5     procedure         1    2       1   all
+1          this         6    1       4   all
+2            is         6    1       4   all
+3 preprocessing         5    3       4   all
+4       example         4    4       4   all
+5            of         4    4       4   all
+6            an         2    6       2   all
 ```
 
 ```r
-textstat_summary(dfm(toks))
+textstat_summary(dfm2)
 ```
 
 ```
   document chars sents tokens types puncts numbers symbols urls tags emojis
-1    text1    NA    NA      6     5      0       0       0    0    0      0
+1    text1    NA    NA     15    12      0       0       0    0    0      0
+2    text2    NA    NA     19    17      0       0       0    0    0      0
+3    text3    NA    NA      8     8      0       0       0    0    0      0
+4    text4    NA    NA     10    10      0       0       0    0    0      0
 ```
 
 
@@ -762,19 +803,19 @@ data_df
 ```
 
 ```
-# A tibble: 241 x 8
-   doc_id    text                     FirstName President Date       delivery type  party 
-   &lt;chr&gt;     &lt;chr&gt;                    &lt;chr&gt;     &lt;chr&gt;     &lt;date&gt;     &lt;fct&gt;    &lt;fct&gt; &lt;fct&gt; 
- 1 Washingt… "Fellow-Citizens of the… George    Washingt… 1790-01-08 spoken   SOTU  Indep…
- 2 Washingt… "Fellow-Citizens of the… George    Washingt… 1790-12-08 spoken   SOTU  Indep…
- 3 Washingt… "Fellow-Citizens of the… George    Washingt… 1791-10-25 spoken   SOTU  Indep…
- 4 Washingt… "Fellow-Citizens of the… George    Washingt… 1792-11-06 spoken   SOTU  Indep…
- 5 Washingt… "Fellow-Citizens of the… George    Washingt… 1793-12-03 spoken   SOTU  Indep…
- 6 Washingt… "Fellow-Citizens of the… George    Washingt… 1794-11-19 spoken   SOTU  Indep…
- 7 Washingt… "Fellow-Citizens of the… George    Washingt… 1795-12-08 spoken   SOTU  Indep…
- 8 Washingt… "Fellow-Citizens of the… George    Washingt… 1796-12-07 spoken   SOTU  Indep…
- 9 Adams-17… "Gentlemen of the Senat… John      Adams     1797-11-22 spoken   SOTU  Feder…
-10 Adams-17… "Gentlemen of the Senat… John      Adams     1798-12-08 spoken   SOTU  Feder…
+# A tibble: 241 × 8
+   doc_id           text               FirstName President Date       delivery type  party
+   &lt;chr&gt;            &lt;chr&gt;              &lt;chr&gt;     &lt;chr&gt;     &lt;date&gt;     &lt;fct&gt;    &lt;fct&gt; &lt;fct&gt;
+ 1 Washington-1790  "Fellow-Citizens … George    Washingt… 1790-01-08 spoken   SOTU  Inde…
+ 2 Washington-1790b "Fellow-Citizens … George    Washingt… 1790-12-08 spoken   SOTU  Inde…
+ 3 Washington-1791  "Fellow-Citizens … George    Washingt… 1791-10-25 spoken   SOTU  Inde…
+ 4 Washington-1792  "Fellow-Citizens … George    Washingt… 1792-11-06 spoken   SOTU  Inde…
+ 5 Washington-1793  "Fellow-Citizens … George    Washingt… 1793-12-03 spoken   SOTU  Inde…
+ 6 Washington-1794  "Fellow-Citizens … George    Washingt… 1794-11-19 spoken   SOTU  Inde…
+ 7 Washington-1795  "Fellow-Citizens … George    Washingt… 1795-12-08 spoken   SOTU  Inde…
+ 8 Washington-1796  "Fellow-Citizens … George    Washingt… 1796-12-07 spoken   SOTU  Inde…
+ 9 Adams-1797       "Gentlemen of the… John      Adams     1797-11-22 spoken   SOTU  Fede…
+10 Adams-1798       "Gentlemen of the… John      Adams     1798-12-08 spoken   SOTU  Fede…
 # … with 231 more rows
 ```
 
@@ -957,8 +998,7 @@ data_df %&gt;%
   summarize(n = n()) %&gt;%
   ggplot(aes(x = reorder(President, n), y = n)) +
   geom_bar(stat = "identity", fill = "lightblue") +
-  coord_flip() +
-  theme_wsj()
+  coord_flip()
 ```
 ]
 
@@ -1017,13 +1057,13 @@ Washington-1794 :
 
 .pull-left[
 
-&lt;img src="03_textanalysis_files/figure-html/unnamed-chunk-20-1.png" width="100%" /&gt;
+&lt;img src="03_textanalysis_files/figure-html/unnamed-chunk-21-1.png" width="100%" /&gt;
 
 ]
 
 
 .pull-right[
-&lt;img src="03_textanalysis_files/figure-html/unnamed-chunk-21-1.png" width="100%" /&gt;
+&lt;img src="03_textanalysis_files/figure-html/unnamed-chunk-22-1.png" width="100%" /&gt;
 
 ]
 
@@ -1162,15 +1202,15 @@ head(d)
 ```
 
 ```
-# A tibble: 6 x 10
-  doc_id    FirstName President  Date       delivery type  party  negative positive length
-  &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;      &lt;date&gt;     &lt;fct&gt;    &lt;fct&gt; &lt;fct&gt;     &lt;dbl&gt;    &lt;dbl&gt;  &lt;int&gt;
-1 Washingt… George    Washington 1790-01-08 spoken   SOTU  Indep…       26      126   1167
-2 Washingt… George    Washington 1790-12-08 spoken   SOTU  Indep…       34      108   1501
-3 Washingt… George    Washington 1791-10-25 spoken   SOTU  Indep…       49      185   2471
-4 Washingt… George    Washington 1792-11-06 spoken   SOTU  Indep…       65      147   2282
-5 Washingt… George    Washington 1793-12-03 spoken   SOTU  Indep…       70      125   2116
-6 Washingt… George    Washington 1794-11-19 spoken   SOTU  Indep…      130      194   3192
+# A tibble: 6 × 10
+  doc_id      FirstName President Date       delivery type  party negative positive length
+  &lt;chr&gt;       &lt;chr&gt;     &lt;chr&gt;     &lt;date&gt;     &lt;fct&gt;    &lt;fct&gt; &lt;fct&gt;    &lt;dbl&gt;    &lt;dbl&gt;  &lt;int&gt;
+1 Washington… George    Washingt… 1790-01-08 spoken   SOTU  Inde…       26      126   1167
+2 Washington… George    Washingt… 1790-12-08 spoken   SOTU  Inde…       34      108   1501
+3 Washington… George    Washingt… 1791-10-25 spoken   SOTU  Inde…       49      185   2471
+4 Washington… George    Washingt… 1792-11-06 spoken   SOTU  Inde…       65      147   2282
+5 Washington… George    Washingt… 1793-12-03 spoken   SOTU  Inde…       70      125   2116
+6 Washington… George    Washingt… 1794-11-19 spoken   SOTU  Inde…      130      194   3192
 ```
 
 ---
@@ -1186,7 +1226,7 @@ head(d)
 ]
 
 .pull-right[
-&lt;img src="03_textanalysis_files/figure-html/unnamed-chunk-28-1.png" width="100%" /&gt;
+&lt;img src="03_textanalysis_files/figure-html/unnamed-chunk-29-1.png" width="100%" /&gt;
 ]
 
 ---
@@ -1213,21 +1253,12 @@ head(d)
 
 .pull-left[
 
-&lt;img src="03_textanalysis_files/figure-html/unnamed-chunk-29-1.png" width="100%" /&gt;
-
-
-]
-
-.pull-right[
-
 &lt;img src="03_textanalysis_files/figure-html/unnamed-chunk-30-1.png" width="100%" /&gt;
 
 
 ]
 
----
-
-# Subjectivity in SOTU-speeches over time
+.pull-right[
 
 &lt;img src="03_textanalysis_files/figure-html/unnamed-chunk-31-1.png" width="100%" /&gt;
 
@@ -1236,9 +1267,18 @@ head(d)
 
 ---
 
-# Sentiment of different presidents
+# Subjectivity in SOTU-speeches over time
 
 &lt;img src="03_textanalysis_files/figure-html/unnamed-chunk-32-1.png" width="100%" /&gt;
+
+
+]
+
+---
+
+# Sentiment of different presidents
+
+&lt;img src="03_textanalysis_files/figure-html/unnamed-chunk-33-1.png" width="100%" /&gt;
 
 ---
 
@@ -1470,6 +1510,8 @@ class: inverse, center, middle
 
 &lt;br&gt;&lt;br&gt;
 
+Welbers, K., Van Atteveldt, W., &amp; Benoit, K. (2017). Text analysis in R. Communication Methods and Measures, 11(4), 245-265.
+
 Heidenreich, T., Eberl, J.-M., Lind, F. &amp; Boomgaarden, H. (2020). Political migration discourses on social media: a comparative perspective on visibility and sentiment across political Facebook accounts in Europe. Journal of Ethnic and Migration Studies, (46)7, 1261-1280,  https://doi.org/10.1080/1369183X.2019.1665990
 
 Mellado, C., Hallin, D., Cárcamo, L. Alfaro, R. ... &amp; Ramos, A. (2021) Sourcing Pandemic News: A Cross-National Computational Analysis of Mainstream Media Coverage of COVID-19 on Facebook, Twitter, and Instagram. Digital Journalism, 9(9), 1271-1295, https://doi.org/10.1080/21670811.2021.1942114
@@ -1590,6 +1632,19 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable

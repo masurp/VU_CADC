@@ -1,6 +1,6 @@
 ---
 title: "Computational Analysis of Digital Communication"
-subtitle: "Week 3: Basics of Automatic Text Analysis and Dictionary Approaches"
+subtitle: "Week 2: Basics of Automatic Text Analysis and Dictionary Approaches"
 author: ""
 institute: ""
 date: "Dr. Philipp K. Masur | p.k.masur@vu.nl"
@@ -17,7 +17,7 @@ output:
 ---
 
 
-```{r child = 'theme.rmd'}
+```{r child = 'theme2.rmd'}
 
 ```
 
@@ -194,6 +194,7 @@ How can we analyze texts with computers?
 # Definition
 
 .pull-left[
+
 > Text analysis is "a research technique for making replicable and valid inferences from texts (or other meaningful matter) to the contexts of their use" 
 >
 >Krippendorff, 2004
@@ -498,13 +499,34 @@ dtm
 
 ---
 
+# Larger example of a document-feature matrix
+
+```{r, echo = F, R.options = list(width = 80)}
+text <- tibble(label = c("doc1", "doc2", "doc3", "doc3"),
+               text = c("This is an Example of Preprocessing Techniques. This is what happens during the preprocessing procedure!1!", 
+                        "This is another Example of Preprocessing Text. This is what when you have several documents in your data set.",
+                        "This is a third Example of Preprocessing Techniques.",
+                        "This is an Example of Preprocessing Approaches. Nothing to complicated"))
+text
+
+dfm2 <- text %>%
+  corpus %>%
+  tokens(remove_punct = T, remove_numbers = T) %>%
+  dfm
+dfm2
+```
+
+
+
+---
+
 # Word frequencies and summaries
 
 
 ```{r, R.options = list(width = 80)}
 library(quanteda.textstats)
-textstat_frequency(dfm(toks))  
-textstat_summary(dfm(toks))
+head(textstat_frequency(dfm2))
+textstat_summary(dfm2)
 ```
 
 
@@ -695,8 +717,7 @@ data_df %>%
   summarize(n = n()) %>%
   ggplot(aes(x = reorder(President, n), y = n)) +
   geom_bar(stat = "identity", fill = "lightblue") +
-  coord_flip() +
-  theme_wsj()
+  coord_flip()
 
 ```
 ]
@@ -872,7 +893,7 @@ d %>%
   ggplot(aes(x = reorder(President, value), y = value, group = name, fill = name)) +
   geom_bar(stat = "identity", position = "dodge") +
   coord_flip() +
-  theme_clean() +
+  theme_update() +
   labs(fill = "")
 ```
 ]
@@ -911,7 +932,7 @@ d <- d %>%
 d %>%
   ggplot(aes(x = Date, y = sentiment1)) +
   geom_line(color = "darkred") +
-  theme_economist() +
+  theme_update() +
   ggtitle("Sentiment (V1) in SOTU-speeches over time")
 ```
 
@@ -925,7 +946,7 @@ d %>%
 d %>%
   ggplot(aes(x = Date, y = sentiment2)) +
   geom_line(color = "darkblue") +
-  theme_economist() +
+  theme_update() +
   ggtitle("Sentiment (V2) in SOTU-speeches over time")
 ```
 
@@ -941,7 +962,7 @@ d %>%
 d %>%
   ggplot(aes(x = Date, y = subjectivity)) +
   geom_line(color = "darkblue") +
-  theme_economist() +
+  theme_update() +
   ggtitle("Subjectivity in SOTU-speeches over time")
 ```
 
@@ -958,8 +979,8 @@ d %>%
   filter(FirstName != "George") %>%
   pivot_longer(sentiment1:subjectivity) %>%
   ggplot(aes(x = Date, y = value, color = name)) +
-  geom_line(size = 1.5) +
-  geom_point(size = 3) +
+  geom_line() +
+  geom_point() +
   scale_color_brewer(palette = "Set1") +
   facet_grid(name~reorder(President, Date), scales = "free") +
   theme_bw() +
@@ -1197,6 +1218,8 @@ class: inverse, center, middle
 # Required Reading
 
 <br><br>
+
+Welbers, K., Van Atteveldt, W., & Benoit, K. (2017). Text analysis in R. Communication Methods and Measures, 11(4), 245-265.
 
 Heidenreich, T., Eberl, J.-M., Lind, F. & Boomgaarden, H. (2020). Political migration discourses on social media: a comparative perspective on visibility and sentiment across political Facebook accounts in Europe. Journal of Ethnic and Migration Studies, (46)7, 1261-1280,  https://doi.org/10.1080/1369183X.2019.1665990
 
