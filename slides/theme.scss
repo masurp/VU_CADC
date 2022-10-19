@@ -4,7 +4,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700');
 
 $font-family-sans-serif: "Roboto Condensed", serif !default;
-$presentation-font-size-root: 29px;
+$presentation-font-size-root: 27px;
 
 // headings
 $presentation-heading-font: "Roboto Condensed", sans-serif !default;
@@ -15,7 +15,7 @@ $presentation-h2-font-size: 1.5em !default;
 $presentation-h3-font-size: 1.1em !default;
 
 // code
-$code-block-font-size: .60em;
+$code-block-font-size: .55em;
 
 .reveal div.sourceCode, .reveal pre code {
 //  background-color: $main-color !important;
