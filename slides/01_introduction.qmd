@@ -14,7 +14,7 @@ format:
 editor: visual
 ---
 
-# WELCOME
+# WELCOME {background-color="steelblue"}
 
 My name is Philipp Masur, I am an Assistant Professor at the Department of Communication Science.
 
@@ -30,7 +30,7 @@ My name is Philipp Masur, I am an Assistant Professor at the Department of Commu
 
 **4.** Learning 'R' for automated text analysis
 
-# What is computational social science?
+# What is computational social science? {background-color="steelblue"}
 
 ...and why should we care?
 
@@ -200,7 +200,7 @@ Computational methods provide opportunities to conduct "natural experiments" (e.
     -   Samples often biased
     -   Insufficient metadata
 
-# Computational Communication Science
+# Computational Communication Science{background-color="steelblue"}
 
 Why computational methods are important for (future) communication research...
 
@@ -435,7 +435,7 @@ Researcher scraped students' data from Facebook, merged it with university recor
 
 -   However, computational communication research comes with **ethical challenges** related to consent, privacy, and autonomy of the participants
 
-# Formalities
+# Formalities{background-color="steelblue"}
 
 How this course is going to work?
 
@@ -639,7 +639,7 @@ In the third cycle, students will be assigned to small working groups in which t
 
 Students are required to hand in the slides and analyses beforehand (Deadline: 18th of December 2021 at 12:00)
 
-# The trouble with 'R'
+# The trouble with 'R'{background-color="steelblue"}
 
 "This is was already difficult in P1!"
 
@@ -792,7 +792,7 @@ data %>%
 
 *So let's have fun with it!*
 
-# Thank you for your attention!
+# Thank you for your attention!{background-color="steelblue"}
 
 ## Required Reading
 

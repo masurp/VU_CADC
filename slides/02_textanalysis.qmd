@@ -146,7 +146,7 @@ Typical steps in a *content/text* analysis:
 
 **4.** Examples from the literature
 
-# Text as Data
+# Text as Data {background-color="steelblue"}
 
 How can we analyze texts with computers?
 
@@ -226,7 +226,7 @@ _Hvitfeldt & Silge, 2021, chap. 1_
 :::
 ::::
 
-# Automatic Text Analysis
+# Automatic Text Analysis {background-color="steelblue"}
 
 How we can study large quantities of documents and texts?
 
@@ -520,7 +520,7 @@ _Boumans & Trilling, 2016_
 **Note:** We will talk about different validation approaches when we discuss rule-based and supervised learning methods
 
 
-# Deductive Approaches: Dictionary/Lexical Analysis
+# Deductive Approaches: Dictionary/Lexical Analysis {background-color="steelblue"}
 
 Using fixed set of terms per concept to automatically code texts.
 
@@ -887,7 +887,7 @@ d %>%
   guides(color = F)
 ```
 
-# Reliability and Validity
+# Reliability and Validity {background-color="steelblue"}
 
 Making sure the automated coding is correct!
 
@@ -961,7 +961,7 @@ Making sure the automated coding is correct!
 :::
 
 
-# Examples in the literature
+# Examples in the literature {background-color="steelblue"}
 
 How is this used in research?
 
@@ -1083,6 +1083,8 @@ _Heidenreich et al., 2019_
   - How valid is the automated translation of text into English?
   - How valid is the sentiment approximation based on dictionaries?
 
+
+# Thank you for your attention!{background-color="steelblue"}
 
 ## Required Reading
 
