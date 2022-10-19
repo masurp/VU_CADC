@@ -79,7 +79,7 @@ In the third part of the course, students will work on their own research projec
 #### Lecture: Text as Data - Basics of Automatic Text Analysis
 
 - Slides Lecture 3:
-    - [Download Slides](slides/03_textanalysis.html)
+    - [Download Slides](slides/02_textanalysis.html)
 
 #### Practical Session 1
 
