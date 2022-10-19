@@ -1,1137 +1,1649 @@
 <!DOCTYPE html>
-<html lang="" xml:lang="">
-  <head>
-    <title>Computational Analysis of Digital Communication</title>
-    <meta charset="utf-8" />
-    <script src="libs/header-attrs/header-attrs.js"></script>
-    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
-  </head>
-  <body>
-    <textarea id="source">
-class: left, middle, title-slide
-
-.title[
-# Computational Analysis of Digital Communication
-]
-.subtitle[
-## Week 1: Introduction
-]
-.author[
-### 
-]
-.date[
-### Dr. Philipp K. Masur | <a href="mailto:p.k.masur@vu.nl" class="email">p.k.masur@vu.nl</a>
-]
-
----
-
-
-
-
-
-
-
-class: inverse, center, middle
-
-# Welcome!
-
-My name is Philipp Masur, I am an Assistant Professor at the Department of Communication Science. 
-
-
-
----
-
-# Content of this lecture
-
-&lt;br&gt;
-
-**1.** What is computational social science?
-
-**2.** Computational communication science
-
-**3.** Formalities of the course
-
-**4.** Learning 'R' for automated text analysis
-
-
----
-
-class: inverse, center, middle
-
-# What is computational social science?
-
-...and why should we care?
-
----
-
-&lt;style type="text/css"&gt;
-.pull-left2 {
-  float: left;
-  width: 30%;
-}
-.pull-right2 {
-  float: right;
-  width: 60%;
-}
-
-.pull-left3 {
-  float: left;
-  width: 45%;
-  padding-right: 5% 
-}
-.pull-right3 {
-  float: right;
-  width: 45%;
-  padding-left: 5% 
-}
-
-.my-one-page-font {
-  font-size: 17px;
-}
-&lt;/style&gt;
-
-# Example: Harnessing surprising sources of information
-
-.pull-left[
-
-- In 2009, Blumenstock and colleagues (2015, Science) wanted to study wealth and poverty in Rwanda. 
-
-- They conducted a survey with a random sample of 1,000 customers of the largest mobile phone provider
-
-- They collected demographics, social, and economic characteristics 
-
-- Traditional social science survey, right?
-]
-
---
-
-.pull-right[
-
-- The authors also had access to complete call records from 1.5 million people
-
-- Combining both data sources, they used the survey data to "train" a machine learning model to predict a person's wealth based on their call records.
-
-- They also estimated the places of residence based on the geographic information embedded in call records. 
-]
-
-&lt;br&gt;
-
-_Blumenstock, Cadamura, &amp; On, 2015_
-
----
-
-# Example: Wealth in Rwanda
-
-.pull-left[
-![](img/Blumenstock_et_al_Rwanda.png)
-]
-
-.pull-right[
-
-- All together, they were able to produce a high-resolution map of the geographic distribution of wealth (and poverty) in Rwanda.
-
-- Interesting side effect: Results were hard to validate - there were simply no comparable estimates for all geographic areas in Rwanda
-]
-
-_Blumenstock, Cadamura, &amp; On, 2015_
-
----
-
-# Example: Crime prediction
-
-.pull-left2[
-![](https://www.pluggedin.com/wp-content/uploads/2019/12/minority-report-1024x677.jpg)
-&lt;br&gt;&lt;br&gt;
-
-_Thompson, 2010_
-
-]
-
-.pull-right2[
-
-- Already years ago, police departments have started to use a system called CRUSH (Criminal Reduction Utilizing Statistical History) 
-
-- It evaluates patterns of past crime incidents and combines it with a range of data including crime reports, offender behavior profiles, or weather forecasts
-
-- This combination of data is then used to predict potential hot spots and allocate resources to areas where particular crimes are most likely to occur.
-
-
-]
-
-
----
-
-# Computational Social Science
-
-
-- Field of Social Science that uses algorithmic tools and large/unstructured data to understand human/social behavior 
-
-- Computational methods as “microscope”: methods are not the goal, but contribute to theoretical development and/or data generation
-
-- Complements rather than replaces traditional methodologies
-
-
----
-
-# Why is this important now?
-
-- In the past, collecting data was **expensive** (surveys, observations...)
-
-- In the digital age, the behaviors of billions of people are **recorded**, **stored**, and therefore **analyzable**
-
-- Every time you click on a website, make a call on your mobile phone, or pay for something with your credit card, a **digital record of your behavior** is created and stored
-
-- Because (meta-)data are a byproduct of people’s everyday actions, they are often called **digital traces**
-
-- Large-scale records of persons or business are often called **big data**.
-
----
-
-# 10 Characteristics of Big Data
-
-&lt;style&gt;
+<html lang="en"><head>
+<script src="01_introduction_files/libs/clipboard/clipboard.min.js"></script>
+<script src="01_introduction_files/libs/quarto-html/tabby.min.js"></script>
+<script src="01_introduction_files/libs/quarto-html/popper.min.js"></script>
+<script src="01_introduction_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="01_introduction_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="01_introduction_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="01_introduction_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.0.36">
+
+  <meta name="author" content="Dr.&nbsp;Philipp K. Masur">
+  <title>Computational Analysis of Digital Communication</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="01_introduction_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="01_introduction_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="01_introduction_files/libs/revealjs/dist/theme/quarto.css" id="theme">
+  <link href="01_introduction_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="01_introduction_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="01_introduction_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="01_introduction_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+
+  .callout {
+    margin-top: 1em;
+    margin-bottom: 1em;  
+    border-radius: .25rem;
+  }
+
+  .callout.callout-style-simple { 
+    padding: 0em 0.5em;
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+    display: flex;
+  }
+
+  .callout.callout-style-default {
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+  }
+
+  .callout .callout-body-container {
+    flex-grow: 1;
+  }
+
+  .callout.callout-style-simple .callout-body {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-style-default .callout-body {
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-captioned.callout-style-simple .callout-body {
+    margin-top: 0.2em;
+  }
+
+  .callout:not(.callout-captioned) .callout-body {
+      display: flex;
+  }
+
+  .callout:not(.no-icon).callout-captioned.callout-style-simple .callout-content {
+    padding-left: 1.6em;
+  }
+
+  .callout.callout-captioned .callout-header {
+    padding-top: 0.2em;
+    margin-bottom: -0.2em;
+  }
+
+  .callout.callout-captioned .callout-caption  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+    
+  .callout.callout-captioned.callout-style-simple .callout-content  p {
+    margin-top: 0;
+  }
+
+  .callout.callout-captioned.callout-style-default .callout-content  p {
+    margin-top: 0.7em;
+  }
+
+  .callout.callout-style-simple div.callout-caption {
+    border-bottom: none;
+    font-size: .9rem;
+    font-weight: 600;
+    opacity: 75%;
+  }
+
+  .callout.callout-style-default  div.callout-caption {
+    border-bottom: none;
+    font-weight: 600;
+    opacity: 85%;
+    font-size: 0.9rem;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-default div.callout-content {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-simple .callout-icon::before {
+    height: 1rem;
+    width: 1rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+  }
+
+  .callout.callout-style-default .callout-icon::before {
+    height: 0.9rem;
+    width: 0.9rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 0.9rem 0.9rem;
+  }
+
+  .callout-caption {
+    display: flex
+  }
+    
+  .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  .callout.no-icon::before {
+    display: none !important;
+  }
+
+  .callout.callout-captioned .callout-body > .callout-content > :last-child {
+    margin-bottom: 0.5rem;
+  }
+
+  .callout.callout-captioned .callout-icon::before {
+    margin-top: .5rem;
+    padding-right: .5rem;
+  }
+
+  .callout:not(.callout-captioned) .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  /* Callout Types */
+
+  div.callout-note {
+    border-left-color: #4582ec !important;
+  }
+
+  div.callout-note .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
+  }
+
+  div.callout-note.callout-style-default .callout-caption {
+    background-color: #dae6fb
+  }
+
+  div.callout-important {
+    border-left-color: #d9534f !important;
+  }
+
+  div.callout-important .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-important.callout-style-default .callout-caption {
+    background-color: #f7dddc
+  }
+
+  div.callout-warning {
+    border-left-color: #f0ad4e !important;
+  }
+
+  div.callout-warning .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-warning.callout-style-default .callout-caption {
+    background-color: #fcefdc
+  }
+
+  div.callout-tip {
+    border-left-color: #02b875 !important;
+  }
+
+  div.callout-tip .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-tip.callout-style-default .callout-caption {
+    background-color: #ccf1e3
+  }
+
+  div.callout-caution {
+    border-left-color: #fd7e14 !important;
+  }
+
+  div.callout-caution .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
+  }
+
+  div.callout-caution.callout-style-default .callout-caption {
+    background-color: #ffe5d0
+  }
+
+  </style>
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" data-background-image="https://storage.googleapis.com/exenzo-jobboard/bb/public/thumb/logo-jpg-57.jpg" data-background-position="top right" data-background-size="auto" class="center">
+  <h1 class="title">Computational Analysis of Digital Communication</h1>
+  <p class="subtitle">Week 1: Introduction</p>
+  <p class="author">Dr.&nbsp;Philipp K. Masur</p>
+</section>
+
+<section>
+<section id="welcome" class="title-slide slide level1 center">
+<h1>WELCOME</h1>
+<p>My name is Philipp Masur, I am an Assistant Professor at the Department of Communication Science.</p>
+</section>
+<section id="content-of-this-lecture" class="slide level2">
+<h2>Content of this lecture</h2>
+<p><br></p>
+<p><strong>1.</strong> What is computational social science?</p>
+<p><strong>2.</strong> Computational communication science</p>
+<p><strong>3.</strong> Formalities of the course</p>
+<p><strong>4.</strong> Learning ‘R’ for automated text analysis</p>
+</section></section>
+<section>
+<section id="what-is-computational-social-science" class="title-slide slide level1 center">
+<h1>What is computational social science?</h1>
+<p>…and why should we care?</p>
+</section>
+<section id="example-surprising-sources-of-information" class="slide level2">
+<h2>Example: Surprising sources of information</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<ul>
+<li><p>In 2009, Blumenstock and colleagues (2015, Science) wanted to study wealth and poverty in Rwanda.</p></li>
+<li><p>They conducted a survey with a random sample of 1,000 customers of the largest mobile phone provider</p></li>
+<li><p>They collected demographics, social, and economic characteristics</p></li>
+<li><p>Traditional social science survey, right?</p></li>
+</ul>
+</div><div class="column" style="width:5%;">
+
+</div><div class="column" style="width:45%;">
+<ul>
+<li><p>The authors also had access to complete call records from 1.5 million people</p></li>
+<li><p>Combining both data sources, they used the survey data to “train” a machine learning model to predict a person’s wealth based on their call records.</p></li>
+<li><p>They also estimated the places of residence based on the geographic information embedded in call records.</p></li>
+</ul>
+</div>
+</div>
+<p><em>Blumenstock, Cadamura, &amp; On, 2015</em></p>
+</section>
+<section id="example-wealth-in-rwanda" class="slide level2">
+<h2>Example: Wealth in Rwanda</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p><img data-src="img/Blumenstock_et_al_Rwanda.png"></p>
+</div><div class="column" style="width:40%;">
+<ul>
+<li><p>All together, they were able to produce a high-resolution map of the geographic distribution of wealth (and poverty) in Rwanda.</p></li>
+<li><p>Interesting side effect: Results were hard to validate - there were simply no comparable estimates for all geographic areas in Rwanda</p></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="example-crime-prediction" class="slide level2">
+<h2>Example: Crime prediction</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="https://www.pluggedin.com/wp-content/uploads/2019/12/minority-report-1024x677.jpg"></p>
+</div><div class="column" style="width:50%;">
+<ul>
+<li><p>Already years ago, police departments have started to use a system called CRUSH (Criminal Reduction Utilizing Statistical History)</p></li>
+<li><p>It evaluates patterns of past crime incidents and combines it with a range of data including crime reports, offender behavior profiles, or weather forecasts</p></li>
+<li><p>This combination of data is then used to predict potential hot spots and allocate resources to areas where particular crimes are most likely to occur.</p></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="computational-social-science" class="slide level2">
+<h2>Computational Social Science</h2>
+<ul>
+<li><p>Field of Social Science that uses algorithmic tools and large/unstructured data to understand human/social behavior</p></li>
+<li><p>Computational methods as “microscope”: methods are not the goal, but contribute to theoretical development and/or data generation</p></li>
+<li><p>Complements rather than replaces traditional methodologies</p></li>
+</ul>
+</section>
+<section id="why-is-this-important-now" class="slide level2">
+<h2>Why is this important now?</h2>
+<ul>
+<li><p>In the past, collecting data was <strong>expensive</strong> (surveys, observations…)</p></li>
+<li><p>In the digital age, the behaviors of billions of people are <strong>recorded</strong>, <strong>stored</strong>, and therefore <strong>analyzable</strong></p></li>
+<li><p>Every time you click on a website, make a call on your mobile phone, or pay for something with your credit card, a <strong>digital record of your behavior</strong> is created and stored</p></li>
+<li><p>Because (meta-)data are a byproduct of people’s everyday actions, they are often called <strong>digital traces</strong></p></li>
+<li><p>Large-scale records of persons or business are often called <strong>big data</strong>.</p></li>
+</ul>
+</section>
+<section id="characteristics-of-big-data" class="slide level2">
+<h2>10 Characteristics of Big Data</h2>
+<style>
 td {
   font-size: 22px
 }
-&lt;/style&gt;
+</style>
+<table>
+<colgroup>
+<col style="width: 23%">
+<col style="width: 23%">
+<col style="width: 52%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: left;">Characteristic</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td style="text-align: left;">Big</td>
+<td style="text-align: left;">The scale or volume of some current datasets is often impressive. However, big datasets are not an end in themselves, but they can enable certain kinds of research including the study of rare events, the estimation of heterogeneity, and the detection of small differences</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td style="text-align: left;">Always-on</td>
+<td style="text-align: left;">Many big data systems are constantly collecting data and thus enable to study unexpected events and allow for real-time measurement</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td style="text-align: left;">Nonreactive</td>
+<td style="text-align: left;">Participants are generally not aware that their data are being captured or they have become so accustomed to this data collection that it no longer changes their behavior.</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td style="text-align: left;">Incomplete</td>
+<td style="text-align: left;">Most big data sources are incomplete, in the sense that they don’t have the information that you will want for your research. This is a common feature of data that were created for purposes other than research.</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td style="text-align: left;">Inaccessible</td>
+<td style="text-align: left;">Data held by companies and governments are difficult for researchers to access.</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p><em>Salganik, 2017, chap.&nbsp;2.3</em></p>
+</section>
+<section id="characteristics-of-big-data-1" class="slide level2">
+<h2>10 Characteristics of Big Data</h2>
+<table>
+<colgroup>
+<col style="width: 24%">
+<col style="width: 24%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: left;">Characteristic</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>6</td>
+<td style="text-align: left;">Nonrepresentative</td>
+<td style="text-align: left;">Most big datasets are nonetheless not representative of certain populations. Out-of-sample generalizations are hence difficult or impossible.</td>
+</tr>
+<tr class="even">
+<td>7</td>
+<td style="text-align: left;">Drifting</td>
+<td style="text-align: left;">Many big data systems are changing constantly, thus making it difficult to study long-term trends</td>
+</tr>
+<tr class="odd">
+<td>8</td>
+<td style="text-align: left;">Algorithmically <br>confounded</td>
+<td style="text-align: left;">Behavior in big data systems is not natural; it is driven by the engineering goals of the systems.</td>
+</tr>
+<tr class="even">
+<td>9</td>
+<td style="text-align: left;">Dirty</td>
+<td style="text-align: left;">Big data often includes a lot of noise (e.g., junk, spam, spurious data points…)</td>
+</tr>
+<tr class="odd">
+<td>10</td>
+<td style="text-align: left;">Sensitive</td>
+<td style="text-align: left;">Some of the information that companies and governments have is sensitive.</td>
+</tr>
+</tbody>
+</table>
+<p><br><br></p>
+<p><em>Salganik, 2017, chap.&nbsp;2.3</em></p>
+</section>
+<section id="example-data" class="slide level2">
+<h2>Example data</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li><p>Smartphone log data (Masur, 2018)</p></li>
+<li><p>Incredible detailed log of each person’s use</p></li>
+<li><p>Big data?</p>
+<ul>
+<li>BIG: Thousands of rows per person, but not many columns</li>
+<li>ALWAYS-ON: Recorded smartphone use at all times</li>
+<li>INCOMPLETE: Did not record app use with higher privacy standards (e.g., signal)</li>
+<li>DIRTY: Depending on what you want to study, lots of noise (e.g., phone on/off)</li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:5%;">
 
-|  |  Characteristic | Description |
-| - | :----------- | :------------------------ | 
-| 1 | Big | The scale or volume of some current datasets is often impressive. However, big datasets are not an end in themselves, but they can enable certain kinds of research including the study of rare events, the estimation of heterogeneity, and the detection of small differences |
-| 2 | Always-on | Many big data systems are constantly collecting data and thus enable to study unexpected events and allow for real-time measurement  |
-| 3 | Nonreactive | Participants are generally not aware that their data are being captured or they have become so accustomed to this data collection that it no longer changes their behavior. |
-| 4 | Incomplete | Most big data sources are incomplete, in the sense that they don't have the information that you will want for your research. This is a common feature of data that were created for purposes other than research. |
-| 5 | Inaccessible | Data held by companies and governments are difficult for researchers to access. 
+</div><div class="column" style="width:45%;">
+<p><img data-src="img/logs.png"></p>
+</div>
+</div>
+</section>
+<section id="typical-computational-research-strategies" class="slide level2">
+<h2>Typical computational research strategies</h2>
+<h3 id="counting-things">1. Counting things</h3>
+<p>In the age of big data, researcher can “count” more than ever (e.g., how often do people use their smartphone per day)</p>
+<p><br></p>
+<h3 id="forecasting-and-nowcasting">2. Forecasting and nowcasting</h3>
+<p>Big data allow for more accurate predictions both in the present and in the future (e.g., )</p>
+<p><br></p>
+<h3 id="approximating-experiments">3. Approximating experiments</h3>
+<p>Computational methods provide opportunities to conduct “natural experiments” (e.g., check smartphone log data of people who use their smartphone naturally and those who abstain from certain apps, e.g., social media)</p>
+</section>
+<section id="advantages-and-disadvantages" class="slide level2">
+<h2>Advantages and Disadvantages</h2>
+<ul>
+<li>Advantages of Computational Methods
+<ul>
+<li>Actual behavior vs.&nbsp;self-report</li>
+<li>Social context vs.&nbsp;lab setting</li>
+<li>Small N to large N</li>
+</ul></li>
+<li>Disadvantages of Computational Methods
+<ul>
+<li>Techniques often complicated</li>
+<li>Data often proprietary</li>
+<li>Samples often biased</li>
+<li>Insufficient metadata</li>
+</ul></li>
+</ul>
+</section></section>
+<section>
+<section id="computational-communication-science" class="title-slide slide level1 center">
+<h1>Computational Communication Science</h1>
+<p>Why computational methods are important for (future) communication research…</p>
+</section>
+<section id="definition" class="slide level2">
+<h2>Definition</h2>
+<p><br></p>
+<blockquote>
+<p>“Computational Communication Science (CCS) is the label applied to the emerging subfield that investigates the use of computational algorithms to gather and analyze big and often semi- or unstructured data sets to develop and test communication science theories”</p>
+<p><em>Van Atteveldt &amp; Peng, 2018</em></p>
+</blockquote>
+</section>
+<section id="promises" class="slide level2">
+<h2>Promises</h2>
+<p>The recent acceleration in the use of computational methods for communication science is primarily fueled by the confluence of at least three developments:</p>
+<ul>
+<li><p>vast <strong>amounts of digitally available data</strong>, ranging from social media messages and other digital traces to web archives and newly digitized newspaper and other historical archives</p></li>
+<li><p>improved tools to analyze this data, including <strong>network analysis methods</strong> and <strong>automatic text analysis methods</strong> such as supervised <strong>text classification</strong>, <strong>topic modeling</strong>, <strong>word embeddings</strong>, and <strong>syntactic methods</strong></p></li>
+<li><p>powerful and cheap <strong>processing power</strong>, and easy to use <strong>computing infrastructure</strong> for processing these data, including scientific and commercial cloud computing, sharing platforms such as Github and Dataverse, and crowd coding platforms such as Amazon MTurk and Crowdflower</p></li>
+</ul>
+</section>
+<section id="example-1-simulating-search-queries" class="slide level2">
+<h2>Example 1: Simulating search queries</h2>
+<ul>
+<li><p>Numbers of drug-overdose deaths have been increasing in the United States</p></li>
+<li><p>Google spotlights counselling services as helpful resources when users query for suicide-related search terms</p></li>
+<li><p>However, the search engine does so at varying display rates, depending on terms used</p></li>
+<li><p>Display rates in the drug-overdose deaths domain are unknown</p></li>
+<li><p>Haim and colleagues (2021) emulated suicide-related potentially harmful searches at large scale across the U.S. to explore Google’s response to search queries including or excluding additional drug-related terms</p></li>
+</ul>
+<p><br></p>
+<p><em>Haim, Scherr, &amp; Arendt, 2021</em></p>
+</section>
+<section id="example-1-simulating-search-queries-1" class="slide level2">
+<h2>Example 1: Simulating search queries</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li><p>They conducted 215,999 search requests with varying combinations of search terms</p></li>
+<li><p>Counseling services were displayed at high rates after suicide-related potentially harmful search queries (e.g., “how to commit suicide”)</p></li>
+<li><p>Display rates were substantially lower when drug-related terms, indicative of users’ suicidal overdosing tendencies, were added (e.g., “how to commit suicide fentanyl”)</p></li>
+</ul>
+</div><div class="column" style="width:5%;">
 
-_Salganik, 2017, chap. 2.3_
+</div><div class="column" style="width:45%;">
+<p><img data-src="img/haim_searchqueries.jpg"></p>
+</div>
+</div>
+</section>
+<section id="example-2-analyzing-news-coverage" class="slide level2">
+<h2>Example 2: Analyzing news coverage</h2>
+<div class="columns">
+<div class="column" style="width:35%;">
+<ul>
+<li><p>Jacobi and colleagues (2016) analyzed the coverage of nuclear technology from 1945 to the present in the New York Times</p></li>
+<li><p>Analysis of 51,528 news stories (headline and lead): Way too much for human coding!</p></li>
+<li><p>Used “topic modeling” to extract latent topics and analyzed their occurrence over time</p></li>
+</ul>
+</div><div class="column" style="width:65%;">
+<p><img data-src="img/Jacobi_topicmodelling.png"></p>
+</div>
+</div>
+</section>
+<section id="example-3-gender-representation-in-tv" class="slide level2">
+<h2>Example 3: Gender representation in TV</h2>
+<ul>
+<li><p>Jürgens and colleagues (2021) investigated gender representations in over ten years of daytime TV programming</p></li>
+<li><p>Usually, this would have required hours and hours (!) of manual coding (i.e., watching a hell lot of TV), but they used neural networks to automatically detect gender in shown faces</p></li>
+</ul>
 
----
+<img data-src="img/juergen_face.png" class="r-stretch"></section>
+<section id="underrepresentation-of-women-in-german-tv" class="slide level2">
+<h2>Underrepresentation of women in German TV</h2>
+<div class="columns">
+<div class="column" style="width:35%;">
+<ul>
+<li><p>Women on average remained underrepresented on TV, with 6.3 million female faces out of 16 million total (estimated proportion .39, 95% CI: .37-.42)</p></li>
+<li><p>This strong overall bias was mirrored across specific subsamples (news, sports, advertising…)</p></li>
+</ul>
+</div><div class="column" style="width:65%;">
+<p><img data-src="img/juergen_face2.png"></p>
+</div>
+</div>
+</section>
+<section id="example-4-dutch-telegramsphere" class="slide level2">
+<h2>Example 4: Dutch Telegramsphere</h2>
+<div class="columns">
+<div class="column" style="width:55%;">
+<ul>
+<li><p>Simon et al., (2022) collected the full messaging history (N = 2,033,661) of 174 Dutch-language public Telegram chats/channels</p></li>
+<li><p>Among other things, used advanced topic modeling and network analyses</p></li>
+<li><p>Authors found that over time, conspiracy-themed, far-right activist, and COVID-19-sceptical communities dominated</p></li>
+<li><p>Their findings raise concerns with respect to Telegram’s polarization and radicalization capacity</p></li>
+</ul>
+</div><div class="column" style="width:45%;">
+<p><img data-src="img/simon_figure3.png"></p>
+</div>
+</div>
+</section>
+<section id="ethics-of-big-data-and-computational-research" class="slide level2">
+<h2>Ethics of ‘Big Data’ and Computational Research</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<div style="background: #c3dbe6; padding: 15px; height: 10em; ">
+<p>700,000 Facebook users were put into an experiment that may have altered their emotions. The participants did not give consent and the study was not subject to third party ethical oversight (Kramer et al., 2014)</p>
+</div>
+</div><div class="column" style="width:5%;">
 
-# 10 Characteristics of Big Data
+</div><div class="column" style="width:45%;">
+<div style="background: #c3dbe6; padding: 15px; height: 10em;">
+<p>Researcher scraped students’ data from Facebook, merged it with university records, used these data for research and then shared them with other researchers (Wimmer &amp; Lewis, 2010).</p>
+</div>
+</div>
+</div>
+<div class="fragment">
+<p><br></p>
+<p><strong>Question:</strong> Do you think these studies are problematic? If yes, why?</p>
+</div>
+</section>
+<section id="the-facebook-mood-manipulation-study" class="slide level2">
+<h2>The “Facebook mood manipulation” study</h2>
+<ul>
+<li><p>Massive online experiment (N ~ 700k)</p></li>
+<li><p>Main Research Question: Is emotion contagious?</p></li>
+<li><p>Experimental groups: positive / negative / control</p></li>
+<li><p>Stimulus: Hide (negative / positive / random) messages from FB timeline</p></li>
+<li><p>Measurement / dependent variables: sentiment of posts by user</p></li>
+</ul>
+<p><br><br></p>
+<p><em>Kramer et al., 2014</em></p>
+</section>
+<section id="computational-technique-sentiment-analysis" class="slide level2">
+<h2>Computational technique: Sentiment Analysis</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<ul>
+<li><p>LIWC word list (Linguistic Inquiry and Word Count; Pennebaker et al)</p>
+<ul>
+<li><p>406 positive words: e.g., love, nice, sweet, etc.</p></li>
+<li><p>399 negative words (and subcategories): e.g.&nbsp;hurt, ugly, nasty</p></li>
+</ul></li>
+<li><p>Count occurrences of words in both categories, subtract negative from positive</p></li>
+</ul>
+</div><div class="column" style="width:5%;">
 
-|  |  Characteristic | Description |
-| - | :----------- | :------------------------ | 
-| 6 | Nonrepresentative | Most big datasets are nonetheless not representative of certain populations. Out-of-sample generalizations are hence difficult or impossible. |
-| 7 | Drifting | Many big data systems are changing constantly, thus making it difficult to study long-term trends |
-| 8 | Algorithmically confounded | Behavior in big data systems is not natural; it is driven by the engineering goals of the systems. |
-| 9 | Dirty | Big data often includes a lot of noise (e.g., junk, spam, spurious data points...) |
-| 10 | Sensitive | Some of the information that companies and governments have is sensitive. |
+</div><div class="column" style="width:45%;">
+<p><img data-src="img/facebook_pnas.jpg"></p>
+</div>
+</div>
+</section>
+<section id="is-this-good-science-why-not" class="slide level2">
+<h2>Is this good science? Why not?</h2>
+<ul>
+<li>What’s cool?
+<ul>
+<li>Potentially interesting research question</li>
+<li>actual behavior measured as well as self-report measures</li>
+</ul></li>
+<li>What’s not so cool? A lot…
+<ul>
+<li>No informed consent</li>
+<li>Not replicable</li>
+<li>Low internal validity
+<ul>
+<li>Is sentiment of posts indicative of mood?</li>
+<li>Does change in sentiment originate in contagion of mood?</li>
+</ul></li>
+<li>Low measurement accuracy
+<ul>
+<li>Are word counts indicative of sentiment?</li>
+</ul></li>
+<li>Overt manipulation of people’s life</li>
+</ul></li>
+</ul>
+</section>
+<section id="ethical-problems-with-computational-methods" class="slide level2">
+<h2>Ethical problems with computational methods</h2>
+<ul>
+<li><p>More power over participants than in the past</p>
+<ul>
+<li>Data collection without awareness/consent</li>
+<li>Manipulation without awareness/consent</li>
+<li>Data potentially sensitive, individual users identifiable</li>
+</ul></li>
+</ul>
+<div class="fragment">
+<ul>
+<li><p>Guiding principles</p>
+<ul>
+<li><strong>Respect for persons:</strong> Treating people as autonomous and honoring their wishes</li>
+<li><strong>Beneficence:</strong> Understanding and improving the risk/benefit profile of a study</li>
+<li><strong>Justice:</strong> Risks and benefits should be evenly distributed</li>
+<li><strong>Respect for law and public interest</strong></li>
+</ul></li>
+</ul>
+<p><em>Salganik, 2018, chap.&nbsp;6</em></p>
+</div>
+</section>
+<section id="challenges-of-comp.-communication-science" class="slide level2">
+<h2>Challenges of comp. communication science</h2>
+<ul>
+<li><p>Simply data-driven research questions might not be theoretically interesting</p></li>
+<li><p>Proprietary data threatens accessibility and reproducibility</p></li>
+<li><p>‘Found’ data not always representative, threatening external validity</p></li>
+<li><p>Computational method bias and noise threaten accuracy and internal validity</p></li>
+<li><p>Inadequate ethical standards/procedures</p></li>
+</ul>
+<p><br></p>
+<p><em>Van Atteveldt &amp; Peng, 2017</em></p>
+</section>
+<section id="preliminary-summary" class="slide level2">
+<h2>Preliminary summary</h2>
+<ul>
+<li><p><img data-src="img/pexels-omkar-patyane-238480.jpg" style="float: right; padding-left: 40px;" width="400">Computational communication research holds <strong>manifold promises</strong></p></li>
+<li><p>We can harness unusual sources of information and <strong>large amounts of data</strong>, particularly because people constantly leave <strong>digital traces</strong></p></li>
+<li><p>New methods allow to <strong>structure</strong>, <strong>aggregate</strong> and <strong>make sense</strong> of these data and extract meaningful information to study communication behavior and phenomena</p></li>
+<li><p>However, computational communication research comes with <strong>ethical challenges</strong> related to consent, privacy, and autonomy of the participants</p></li>
+</ul>
+</section></section>
+<section>
+<section id="formalities" class="title-slide slide level1 center">
+<h1>Formalities</h1>
+<p>How this course is going to work?</p>
+</section>
+<section id="teachers" class="slide level2">
+<h2>Teachers</h2>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Dr.&nbsp;Philipp K. Masur</th>
+<th></th>
+<th style="text-align: center;">Dr.&nbsp;Kaspar Welbers</th>
+<th></th>
+<th style="text-align: center;">Dr.&nbsp;Alberto López Ortega</th>
+<th></th>
+<th style="text-align: center;">Santiago Gómez-Echeverry</th>
+<th></th>
+<th style="text-align: center;">Emma Diel</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><img data-src="img/philipp.jpg"></td>
+<td></td>
+<td style="text-align: center;"><img data-src="img/kasper.jpg"></td>
+<td></td>
+<td style="text-align: center;"><img data-src="img/alberto.jpg"></td>
+<td></td>
+<td style="text-align: center;"><img data-src="img/santiago.jpg"></td>
+<td></td>
+<td style="text-align: center;"><img data-src="img/emma.jpg"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Lecturer &amp; Course Coordinator</td>
+<td></td>
+<td style="text-align: center;">Teacher</td>
+<td></td>
+<td style="text-align: center;">Teacher</td>
+<td></td>
+<td style="text-align: center;">Teacher</td>
+<td></td>
+<td style="text-align: center;">Teacher</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="teaching-assistants-r-help-desk" class="slide level2">
+<h2>Teaching assistants &amp; R help desk</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<h3 id="teaching-assistants">Teaching assistants</h3>
+<p>Not everything will work at the first time. Because we work with code, tiny mistakes can produce errors. The following teaching assistants will be available during the practical sessions:</p>
+<ul>
+<li>Denise Roth</li>
+<li>Sarah Sramota</li>
+<li>Helena Weibel</li>
+</ul>
+</div><div class="column" style="width:5%;">
 
-&lt;br&gt;
+</div><div class="column" style="width:45%;">
+<h3 id="r-help-desk">R Help Desk</h3>
+<p>If you have any further problems related to installing software, running packages or code, or simply an error message you do not understand, you can address the R Help Desk:</p>
+<p><strong>Office Hours:</strong> t.b.a.</p>
+</div>
+</div>
+</section>
+<section id="learning-goals" class="slide level2">
+<h2>Learning goals</h2>
+<p>After completion of the course, you will…</p>
+<ul>
+<li><p>know some of the most important (computational) methods to analyze digital communication</p></li>
+<li><p>be able to identify data analytical problems, analyze them critically, and find appropriate solutions</p></li>
+<li><p>be able to read, understand, and criticize recent communication research</p></li>
+</ul>
+</section>
+<section id="skills-and-methods" class="slide level2">
+<h2>Skills and methods</h2>
+<p>With regard to the specific methods being taught in R, you will be able to…</p>
+<ul>
+<li><p>gather, scrape, and import data from different file types, APIs, and websites</p></li>
+<li><p>link data from different sources to create new insights</p></li>
+<li><p>clean and transform messy data into a tidy data format ready for analysis</p></li>
+<li><p>conduct computational text analysis and use machine learning to extract information from textual data</p></li>
+<li><p>perform advanced statistical analyses</p></li>
+</ul>
+</section>
+<section id="information-and-materials" class="slide level2">
+<h2>Information and Materials</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<p>The major hub for this course is the following website:</p>
+<ul>
+<li><a href="https://masurp.github.io/VU_CADC/" class="uri">https://masurp.github.io/VU_CADC/</a></li>
+</ul>
+<p>Communication and assignment submission via Canvas</p>
+<ul>
+<li>S_CADC: Computationele analyse van digitale communicatie</li>
+</ul>
+</div><div class="column" style="width:5%;">
 
-_Salganik, 2017, chap. 2.3_
+</div><div class="column" style="width:45%;">
+<p><img data-src="img/course_screenshot.png"></p>
+</div>
+</div>
+</section>
+<section id="course-structure" class="slide level2">
+<h2>Course structure</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<h3 id="lectures">Lectures</h3>
+<ul>
+<li>Every Monday from 9:00 to 11.15</li>
+<li>Introduction of research problems and computational solutions</li>
+</ul>
+</div><div class="column" style="width:5%;">
 
----
+</div><div class="column" style="width:45%;">
+<h3 id="practical-sessions">Practical sessions</h3>
+<ul>
+<li>Course will be split in 5 groups</li>
+<li>Practical sessions take place twice a week</li>
+<li>Here, you will learn to run code in RStudio!</li>
+</ul>
+</div>
+</div>
+<p><br><br></p>
+<p><em>Note:</em> For the time being, all practical sessions are taught <strong>on campus</strong>. Please only join if you don’t show any potential Covid-19 symptoms!</p>
+</section>
+<section id="overview-of-lectures" class="slide level2">
+<h2>Overview of Lectures</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<ul>
+<li><p><strong>Cycle 1:</strong> Data Wrangling, Visualization and Text Analysis</p>
+<ul>
+<li>Introduction to computational methods</li>
+<li>Text as data: Introduction to text analysis and dictionary approaches</li>
+</ul></li>
+<li><p><strong>Cycle 2:</strong> Machine Learning</p>
+<ul>
+<li>Automated text analysis: Supervised machine learning approaches</li>
+<li>Automated text analysis: Unsupervised machine learning approaches</li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:5%;">
 
-# Example data
+</div><div class="column" style="width:45%;">
+<ul>
+<li><p><strong>Cycle 3:</strong>Group Projects</p>
+<ul>
+<li>In this circle, we offer online resources for a range of additional methods and approaches</li>
+<li>Your task is to develop an independent research project and apply these methods</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="overview-of-practical-sessions" class="slide level2">
+<h2>Overview of practical sessions</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<ul>
+<li><p><strong>Cycle 1:</strong> Data Wrangling, Visualization, and Text Analysis</p>
+<ul>
+<li>Introduction to R</li>
+<li>Tidyverse</li>
+<li>Data visualization</li>
+<li>Basics of text analysis</li>
+<li>Dictionary approaches</li>
+</ul></li>
+<li><p><strong>Cycle 2:</strong> Machine Learning</p>
+<ul>
+<li>Supervised text analysis</li>
+<li>Unsupervised text analysis</li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:5%;">
 
-.pull-left[
+</div><div class="column" style="width:45%;">
+<ul>
+<li><p><strong>Cycle 3:</strong> Group Projects</p>
+<ul>
+<li>In this cycle, the practical sessions will be used to discuss your project with one of the teachers</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="attendance" class="slide level2">
+<h2>Attendance</h2>
+<ul>
+<li><p>Attendance during the regular lectures is not compulsory but highly recommended.</p></li>
+<li><p>Attendance of the practical sessions is mandatory.</p></li>
+<li><p>One absence from one of the workgroup sessions, for serious health, family, or work reasons, can be excused if the instructor is advised in advance.</p></li>
+</ul>
+</section>
+<section id="exam" class="slide level2">
+<h2>Exam</h2>
+<p>After the first two cycles, there will be a written exam (<strong>40% of the final grade</strong>):</p>
+<ul>
+<li><p>The exam will consist of ~35 multiple choice questions and ~6 open-ended questions</p></li>
+<li><p>Exam questions will be based on all material discussed in the first two cycles, including lecture content, class materials, and required readings</p></li>
+<li><p>Example questions will be provided throughout the course</p></li>
+<li><p>Please register for the exam via VUweb</p></li>
+</ul>
+</section>
+<section id="homework" class="slide level2">
+<h2>Homework</h2>
+<p>After each week, students are required to hand in a “homework”, which represents a practical application of some of the taught analysis methods (e.g.&nbsp;with a new data set, specific research question) pass (<strong>30% of the final grade</strong>):</p>
+<ul>
+<li><p>Each week’s assignment requires students to apply the methods they have learned to a new data set</p></li>
+<li><p>Students will receive an RMarkdown template for their code and the respective data set(s)</p></li>
+<li><p>Students are required to hand in the RMarkdown file and a compiled html on Thursday (24:00) the week after. All homework assignments must be submitted to pass.</p></li>
+</ul>
+</section>
+<section id="group-presentation" class="slide level2">
+<h2>Group presentation</h2>
+<p>In the third cycle, students will be assigned to small working groups in which they independently conduct a research project. A final presentation will be graded per group (<strong>30% of the final grade</strong>).</p>
+<ul>
+<li>A 10-minute talk (including appropriate slides) in which you:
+<ul>
+<li>introduce the research project (1-2 slides)</li>
+<li>describe theory and hypotheses (1 slide)</li>
+<li>explain the methods (1 slide)</li>
+<li>present the results (2 slides)</li>
+<li>discuss the findings (1-2 slides)</li>
+</ul></li>
+</ul>
+<p>Students are required to hand in the slides and analyses beforehand (Deadline: 18th of December 2021 at 12:00)</p>
+</section></section>
+<section>
+<section id="the-trouble-with-r" class="title-slide slide level1 center">
+<h1>The trouble with ‘R’</h1>
+<p>“This is was already difficult in P1!”</p>
+</section>
+<section id="what-is-r" class="slide level2">
+<h2>What is ‘R’?</h2>
+<div class="cell">
 
-- Smartphone log data (Masur, 2018)
+</div>
+<div class="cell columns column-output-location">
+<div class="column">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Load package</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="co"># Create vector</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>variable <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">2</span>, <span class="dv">4</span>)</span>
+<span id="cb1-6"><a href="#cb1-6"></a></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="co"># Plot Histogram</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="fu">ggplot</span>(<span class="cn">NULL</span>, </span>
+<span id="cb1-9"><a href="#cb1-9"></a>       <span class="fu">aes</span>(variable)) <span class="sc">+</span> </span>
+<span id="cb1-10"><a href="#cb1-10"></a>  <span class="fu">geom_histogram</span>(<span class="at">color =</span> <span class="st">"white"</span>, </span>
+<span id="cb1-11"><a href="#cb1-11"></a>                 <span class="at">fill =</span> <span class="st">"lightblue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output-display">
+<p><img data-src="01_introduction_files/figure-revealjs/unnamed-chunk-2-1.png" width="480"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="what-is-r-1" class="slide level2">
+<h2>What is ‘R’?</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Simulating data</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">100</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb2-3"><a href="#cb2-3"></a>y <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">*</span>x <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb2-4"><a href="#cb2-4"></a></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="co"># Bind as data frame</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a>d <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(x, y)</span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="fu">head</span>(d, <span class="at">n =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            x          y
+1  -0.3329234 -0.6376749
+2   1.3631137  2.3695240
+3  -0.4691473 -0.0856683
+4   0.8428756  2.1991165
+5  -1.4579937 -1.8977844
+6  -0.4003059 -1.8220909
+7  -0.7764173 -2.1145028
+8  -0.3692965 -1.7511491
+9   1.2401015 -0.5406114
+10 -0.1074338  0.1174827</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:10%;">
 
-- Incredible detailed log of each person's use
+</div><div class="column" style="width:45%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># Fitting model</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>model <span class="ot">&lt;-</span><span class="fu">lm</span>(<span class="at">formula =</span> y <span class="sc">~</span> x, </span>
+<span id="cb4-3"><a href="#cb4-3"></a>           <span class="at">data =</span> d)</span>
+<span id="cb4-4"><a href="#cb4-4"></a></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="co"># Create output</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a>texreg<span class="sc">::</span><span class="fu">screenreg</span>(model, </span>
+<span id="cb4-7"><a href="#cb4-7"></a>                  <span class="at">single.row =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+==============================
+             Model 1          
+------------------------------
+(Intercept)    0.02 (0.10)    
+x              1.65 (0.13) ***
+------------------------------
+R^2            0.63           
+Adj. R^2       0.63           
+Num. obs.    100              
+==============================
+*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05</code></pre>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="what-is-r-vs-rstudio" class="slide level2">
+<h2>What is ‘R’ vs ‘RStudio’?</h2>
+<h3 id="basics">Basics</h3>
+<ul>
+<li>R is a programming language, not just a software for statistical analyses</li>
+<li>Yet, primarily developed for conducting statistical analyses</li>
+<li>Open source (free of cost!)</li>
+</ul>
+<h3 id="infrastructure">Infrastructure</h3>
+<ul>
+<li>R is the programming language</li>
+<li>R shares some similarities with Python, S and Scheme</li>
+<li>RStudio is the software that is mostly used</li>
+</ul>
+</section>
+<section id="advantages-of-r" class="slide level2">
+<h2>Advantages of R</h2>
+<h3 id="the-future-of-scientific-data-analysis">The future of scientific data analysis</h3>
+<ul>
+<li>R is international and interdisciplinary</li>
+<li>Constant development and improvement by a huge online community</li>
+<li>Allows to work with complex and messy data structures</li>
+</ul>
+<h3 id="flexibility">Flexibility</h3>
+<ul>
+<li>There are thousand additional packages for almost any statistical procedure</li>
+<li>Allows for flexible programming and is adaptive to own needs</li>
+<li>Encourages replicable analyses</li>
+</ul>
+</section>
+<section id="advantages-of-r-visualization" class="slide level2">
+<h2>Advantages of R: Visualization</h2>
+<div class="columns">
+<div class="column" style="width:30%;">
+<ul>
+<li>Allows to produce publication-ready figures and visualizations</li>
+<li>Allows to combine analyses and writing to produces diverse output formats (e.g., these slides)</li>
+</ul>
+</div><div class="column" style="width:5%;">
 
-- Big data?
+</div><div class="column" style="width:65%;">
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="01_introduction_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="conclusion" class="slide level2">
+<h2>Conclusion</h2>
+<h3 id="r-allows">R allows…</h3>
+<ul>
+<li>flexible and comprehensive programming</li>
+<li>complex data management</li>
+<li>advanced analyses with large or messy data (text analysis!)</li>
+<li>to produce publication-ready figures and documents</li>
+</ul>
+<h3 id="r-encourages">R encourages…</h3>
+<ul>
+<li>reproducable and comprehensible analyses</li>
+<li>us to have fun with programming and coding!</li>
+</ul>
+<div class="fragment">
+<p><em>So let’s have fun with it!</em></p>
+</div>
+</section></section>
+<section>
+<section id="thank-you-for-your-attention" class="title-slide slide level1 center">
+<h1>Thank you for your attention!</h1>
+
+</section>
+<section id="required-reading" class="slide level2">
+<h2>Required Reading</h2>
+<p><br><br></p>
+<p>Kramer, A. D. I., Guillory, J. E, &amp; Hancock, J. (2014). Experimental Evidence of Massive-Scale Emotional Contagion Through Social Networks. Proceedings of the National Academy of Sciences, 111(24), 8788-8790.</p>
+<p>Van Atteveldt, W., &amp; Peng, T.-Q. (2018). When communication meets computation: Opportunities, challenges, and pitfalls in computational communication science. Communication Methods and Measures, 12(2-3), 81–92. https://doi.org/10.1080/19312458.2018.1458084</p>
+<p><em>(available on Canvas)</em></p>
+</section>
+<section id="references" class="slide level2 smaller">
+<h2>References</h2>
+<ul>
+<li><p>Blumenstock, J. E., Cadamuro, G. , and On, R. (2015). Predicting Poverty and Wealth from Mobile Phone Metadata. Science, 350(6264), 1073–6. https://doi.org/10.1126/science.aac4420.</p></li>
+<li><p>Haim, M., Scherr, S., &amp; Arendt, F. (2021). How search engines may help reduce drug-related suicides. Drug and Alcohol Dependence, 226(108874). https://dx.doi.org/10.1016/j.drugalcdep.2021.108874</p></li>
+<li><p>Jacobi,C., van Atteveldt, W. &amp; Welbers, K. (2016) Quantitative analysis of large amounts of journalistic texts using topic modelling. Digital Journalism, 4(1), 89-106, DOI: 10.1080/21670811.2015.1093271</p></li>
+<li><p>Jürgens, P., Meltzer, C., &amp; Scharkow, M. (2021, in press). Age and Gender Representation on German TV: A Longitudinal Computational Analysis. Computational Communication Research.</p></li>
+<li><p>Kramer, A. D. I., Guillory, J. E, &amp; Hancock, J. (2014). Experimental Evidence of Massive-Scale Emotional Contagion Through Social Networks. Proceedings of the National Academy of Sciences, 111(24), 8788-8790.</p></li>
+<li><p>Salganik, M. J. (2018). Bit by Bit: Social Research in the Digital Age. Princeton University Press.</p></li>
+<li><p>Simon, M., Welbers, K., Kroon, A. C. &amp; Trilling, D. (2022). Linked in the dark: A network approach to understanding information flows within the Dutch Telegramsphere. Information, Communication &amp; Society, https://doi.org/10.1080/1369118X.2022.2133549</p></li>
+<li><p>Thompson, T. (2010). Crime software may help police predict violent offences. The Observer. Retrieved from https://www.theguardian.com/uk/2010/jul/25/police-software-crime-prediction</p></li>
+<li><p>Van Atteveldt, W., &amp; Peng, T.-Q. (2018). When communication meets computation: Opportunities, challenges, and pitfalls in computational communication science. Communication Methods and Measures, 12(2-3), 81–92. https://doi.org/10.1080/19312458.2018.1458084</p></li>
+<li><p>Wimmer, A. &amp; Lewis, K., (2010). Beyond and Below Racial Homophily: ERG Models of a Friendship Network Documented on Facebook. American Journal of Sociology, 116(2), 583-642.</p></li>
+</ul>
+</section>
+<section id="example-exam-question-multiple-choice" class="slide level2">
+<h2>Example Exam Question (Multiple Choice)</h2>
+<p>Why is the “Facebook Manipulation Study” by Kramer et al.&nbsp;ethically problematic?</p>
+<p><br></p>
+<p>A. People did not now that they took part in a study (no informed consent).</p>
+<p>B. It overtly manipulated people’s emotion.</p>
+<p>C. Both A and B are true.</p>
+<p>D. The study was not ethically problematic.</p>
+</section>
+<section id="example-exam-question-multiple-choice-1" class="slide level2">
+<h2>Example Exam Question (Multiple Choice)</h2>
+<p>Why is the “Facebook Manipulation Study” by Kramer et al.&nbsp;ethically problematic?</p>
+<p><br></p>
+<p>A. People did not now that they took part in a study (no informed consent).</p>
+<p>B. It overtly manipulated people’s emotion.</p>
+<p><strong>C. Both A and B are true.</strong></p>
+<p>D. The study was not ethically problematic.</p>
+</section>
+<section id="example-exam-question-open-format" class="slide level2">
+<h2>Example Exam Question (Open Format)</h2>
+<p>Name and explain two characteristics of big data.</p>
+<p><em>(4 points, 2 points for correctly naming them and 2 points for correctly explaining them)</em></p>
+<div class="fragment">
+<ol type="1">
+<li><p>Big data are often “incomplete”: This means they do not have the information that you will want for your research. This is a common feature of data that were created for purposes other than research. For example, log data (e.g., browser history) includes all links a person has visited over time, but does not provide any additional information. More over, it may contain gaps where the software failed or the person purposefully hid his surfing behavior.</p></li>
+<li><p>Big data are often “algorithmically confounded”: Behavior in big data systems is not natural; it is driven by the engineering goals of the systems. For example, what you see on a facebook news feed depends on algorithm that Facebook has built into their platform. Behavior of individuals is thus also driven by these system-immanent features.</p></li>
+</ol>
+<p><img src="img/logo.png" class="slide-logo"></p>
+<div class="footer footer-default">
+
+</div>
+</div>
+</section></section>
+    </div>
+  </div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="01_introduction_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="01_introduction_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="01_introduction_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="01_introduction_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="01_introduction_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="01_introduction_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="01_introduction_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="01_introduction_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="01_introduction_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="01_introduction_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'smaller': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'fade',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
     
-    - BIG: Thousands of rows per person, but not many columns
-    - ALWAYS-ON: Recorded smartphone use at all times
-    - INCOMPLETE: Did not record app use with higher privacy standards (e.g., signal)
-    - DIRTY: Depending on what you want to study, lots of noise (e.g., phone on/off)
-
-]
-
-
-.pull-right[
-
-![](img/logs.png)
-
-]
-
-
----
-
-# Typical computational research strategies
-
-
-.pull-left[
-
-### 1. Counting things
-
-In the age of big data, researcher can "count" more than ever (e.g., how often do people use their smartphone per day)
-
-### 2. Forecasting and nowcasting
-
-Big data allow for more accurate predictions both in the present and in the future (e.g., )
-
-]
-
-.pull-right[
-
-### 3. Approximating experiments
-
-Computational methods provide opportunities to conduct "natural experiments" (e.g., check smartphone log data of people who use their smartphone naturally and those who abstain from certain apps, e.g., social media)
-
-]
-
-&lt;br&gt;&lt;br&gt;
-
-_Salganik, 2017, chap. 2.4_
-
----
-
-# Advantages and Disadvantages
-
-- Advantages of Computational Methods
-    - Actual behavior vs. self-report
-    - Social context vs. lab setting
-    - Small N to large N
-
-- Disadvantages of Computational Methods
-    - Techniques often complicated
-    - Data often proprietary
-    - Samples often biased
-    - Insufficient metadata 
-
-
----
-
-class: inverse, center, middle
-
-# Computational Communication Science
-
-Why computational methods are important for (future) communication research. 
-
----
-
-# Definition
-
-&lt;br&gt;
-
-&gt; "Computational Communication Science (CCS) is the label applied to the 
-&gt; emerging subfield that investigates the use of computational algorithms 
-&gt; to gather and analyze big and often semi- or unstructured data sets 
-&gt; to develop and test communication science theories" 
-&gt;
-&gt;_Van Atteveldt &amp; Peng, 2018_
-
----
-
-# Promises of computational communication research
-
-The recent acceleration in the use of computational methods for communication science is primarily fueled by the confluence of at least three developments:
-
-- vast **amounts of digitally available data**, ranging from social media messages and other digital traces to web archives and newly digitized newspaper and other historical archives
-
-- improved tools to analyze this data, including **network analysis methods** and **automatic text analysis methods** such as supervised **text classification**, **topic modeling**, **word embeddings**, and **syntactic methods**
-
-- powerful and cheap **processing power**, and easy to use **computing infrastructure** for processing these data, including scientific and commercial cloud computing, sharing platforms such as Github and Dataverse, and crowd coding platforms such as Amazon MTurk and Crowdflower
-
-_Van Atteveldt &amp; Peng, 2017_
-
-
----
-
-# Example 1: Simulating search queries
-
-- Numbers of drug-overdose deaths have been increasing in the United States
-
-- Google spotlights counselling services as helpful resources when users query for suicide-related search terms
-
-- However, the search engine does so at varying display rates, depending on terms used
-
-- Display rates in the drug-overdose deaths domain are unknown
-
-- Haim and colleagues (2021) emulated suicide-related potentially harmful searches at large scale across the U.S. to explore Google’s response to search queries including or excluding additional drug-related terms
-
-&lt;br&gt;
-
-_Haim, Scherr, &amp; Arendt, 2021_
-
----
-
-# Simulating behavior and analyzing responses
-
-.pull-left[
-
-- They conducted 215,999 search requests with varying combinations of search terms
-
-- Counseling services were displayed at high rates after suicide-related potentially harmful search queries (e.g., “how to commit suicide”)
-
-- Display rates were substantially lower when drug-related terms, indicative of users’ suicidal overdosing tendencies, were added (e.g., "how to commit suicide fentanyl")
-]
-
-.pull-right[
-![](img/haim_searchqueries.jpg)
-]
-
-_Haim, Scherr, &amp; Arendt, 2021_
----
-
-# Example 2: Analyzing and aggregating news coverage
-
-.pull-left[
-- Jacobi and colleagues (2016) analyzed the coverage of nuclear technology from 1945 to the present in the New York Times
-
-- Analysis of 51,528 news stories (headline and lead): Way too much for human coding!
-
-- Used "topic modeling" to extract latent topics and analyzed their occurrence over time
-]
-
-.pull-right[
-![](img/Jacobi_topicmodelling.png)
-]
-
-_Jacobi, Welbers, &amp; Van Atteveldt, 2016_
-
----
-
-# Example 3: Analyzing gender representation in TV
-
-- Jürgens and colleagues (2021) investigated gender representations in over ten years of daytime TV programming
-
-- Usually, this would have required hours and hours (!) of manual coding (i.e., watching a hell lot of TV), but they used neural networks to automatically detect gender in shown faces
-
-![](img/juergen_face.png)
-
-
----
-
-# Underrepresentation of women in German TV
-
-.pull-left[
-- Women on average remained underrepresented on TV, with 6.3 million female faces out of 16 million total (estimated proportion .39, 95% CI: .37-.42)
-
-- This strong overall bias was mirrored across specific subsamples (news, sports, advertising...)
-
-&lt;br&gt;&lt;br&gt;
-
-_Jürgens, Meltzer, &amp; Scharkow, 2021_
-]
-
-.pull-right[
-![](img/juergen_face2.png)
-]
-
-
----
-
-# Example 4: Information flow in the Dutch Telegramsphere
-
-.pull-left[
-
-- Simon et al., (2022) collected the full messaging history (N = 2,033,661) of 174 Dutch-language public Telegram chats/channels
-
-- Among other things, used advanced topic modeling and network analyses
-
-- Authors found that over time, conspiracy-themed, far-right activist, and COVID-19-sceptical communities dominated the Dutch Telegramsphere of current affairs
-
-- Their findings raise concerns with respect to Telegram’s polarization and radicalization capacity 
-
-]
-
-
-.pull-right[
-
-![](img/simon_figure3.png)
-
-]
-
----
-
-
-# Ethics of 'Big Data' and Computational Research
-
-.pull-left3[
-
-&lt;p style = "background: #c3dbe6; padding: 10px; height: 8em; "&gt;
-
-700,000 Facebook users were put into an experiment that may have altered their emotions. The participants did not give consent and the study was not subject to third party ethical oversight (Kramer et al., 2014)
-
-&lt;/p&gt;
-
-]
-
-.pull-left3[
-
-&lt;p style = "background: #c3dbe6; padding: 10px; height: 8em;"&gt;
-
-Researcher scraped students' data from Facebook, merged it with university records, used these data for research and then shared them with other researchers (Wimmer &amp; Lewis, 2010).
-
-&lt;/p&gt;
-
-]
-
---
-
-&lt;br&gt;&lt;br&gt;&lt;br&gt;
-
-**Question:** Do you think these studies are problematic? If yes, why?
-
----
-
-# The "Facebook mood manipulation" study
-
-- Massive online experiment (N ~ 700k)
-
-- Main Research Question: Is emotion contagious?
-
-- Experimental groups: positive / negative / control
-
-- Stimulus: Hide (negative / positive / random) messages from FB timeline 
-
-- Measurement / dependent variables: sentiment of posts by user 
-
-&lt;br&gt;&lt;br&gt;
-
-_Kramer et al., 2014_
-
----
-
-# Computational technique: Measuring sentiment
-
-.pull-left[
-
-- LIWC word list (Linguistic Inquiry and Word Count; Pennebaker et al)
-
-    - 406 positive words: e.g., love, nice, sweet, etc.
-    
-    - 399 negative words (and subcategories): e.g. hurt, ugly, nasty
-
-- Count occurrences of words in both categories, subtract negative from positive
-
-]
-
-.pull-right[
-
-![](img/facebook_pnas.jpg)
-]
-
----
-
-# Is this good science? Why not?
-
-- What's cool?
-    - Potentially interesting research question
-    - actual behavior measured as well as self-report measures
-
-- What's not so cool? A lot...
-    - No informed consent
-    - Not replicable
-    - Low internal validity
-        - Is sentiment of posts indicative of mood?
-        - Does change in sentiment originate in contagion of mood?
-    - Low measurement accuracy
-        - Are word counts indicative of sentiment?
-    - Overt manipulation of people’s life
-
-
----
-# Ethical problems with computational methods
-
-- More power over participants than in the past
-
-    - Data collection without awareness/consent
-    - Manipulation without awareness/consent
-    - Data potentially sensitive, individual users identifiable
-
-- Guiding principles
-
-    - **Respect for persons:** Treating people as autonomous and honoring their wishes
-    - **Beneficence:** Understanding and improving the risk/benefit profile of a study
-    - **Justice:** Risks and benefits should be evenly distributed
-    - **Respect for law and public interest**
-
-
-&lt;br&gt;
-
-_Salganik, 2018, chap. 6_
-
----
-
-# Challenges of computational communication science
-
-- Simply data-driven research questions might not be theoretically interesting
-
-- Proprietary data threatens accessibility and reproducibility
-
-- ‘Found’ data not always representative, threatening external validity
-
-- Computational method bias and noise threaten accuracy and internal validity 
-
-- Inadequate ethical standards/procedures 
-
-
-_Van Atteveldt &amp; Peng, 2017_
-
-
-
----
-
-# Preliminary summary
-
-.pull-left2[
-
-![](img/pexels-omkar-patyane-238480.jpg)
-]
-
-.pull-right2[
-
-- Computational communication research holds **manifold promises**
-
-- We can harness unusual sources of information and **large amounts of data**, particularly because people constantly leave **digital traces**
-
-- New methods allow to **structure**, **aggregate** and **make sense** of these data and extract meaningful information to study communication behavior and phenomena
-
-- However, computational communication research comes with **ethical challenges** related to consent, privacy, and autonomy of the participants
-
-]
-
----
-
-class: inverse, center, middle
-
-# Formalities
-
-How this course is going to work?
-
-
----
-
-# Teachers
-
-| Dr. Philipp K. Masur |  | Dr. Kaspar Welbers | | Dr. Alberto López Ortega      | | Santiago Gómez-Echeverry | | Emma Diel |
-|:---------------------:| -- |:---------------------:|-- |:---------------------:| -- |:---------------------:|-- |:---------------------:|
-|![](img/philipp.jpg) | |   ![](img/kasper.jpg) | | ![](img/alberto.jpg) || ![](img/santiago.jpg) || ![](img/emma.jpg)
-| Lecturer &amp; Course Coordinator | | Teacher | | Teacher | | Teacher | | Teacher |
-
-
----
-
-# Teaching assistants &amp; R help desk
-
-.pull-left[
-### Teaching assistants
-
-Not everything will work at the first time. Because we work with code, tiny mistakes can produce errors. The following teaching assistants will be available during the practical sessions: 
-
-- t.b.a.
-
-]
-
-.pull-right[
-
-### R Help Desk
-
-If you have any further problems related to installing software, running packages or code, or simply an error message you do not understand, you can address the R Help Desk:
-
-**Office Hours:** t.b.a.
-
-
-]
-
----
-
-# Learning goals 
-
-After completion of the course, you will…
-
-- know some of the most important (computational) methods to analyze digital communication
-
-- be able to identify data analytical problems, analyze them critically, and find appropriate solutions
-
-- be able to read, understand, and criticize recent communication research
-
----
-
-# Skills and methods
-
-With regard to the specific methods being taught in R, you will be able to…
-
-- gather, scrape, and import data from different file types, APIs, and websites
-
-- link data from different sources to create new insights
-
-- clean and transform messy data into a tidy data format ready for analysis
-
-- conduct computational text analysis and use machine learning to extract information from textual data
-
-- perform advanced statistical analyses 
-
----
-
-# Information and Materials
-
-.pull-left[
-
-The major hub for this course is the following website:
-
-- https://masurp.github.io/VU_CADC/
-
-]
-
-.pull-left[
-![](img/course_screenshot.png)
-]
----
-
-# Course structure
-
-.pull-left[
-### Lectures
-
-- Every Monday from 9:00 to 11.15
-- Introduction of research problems and computational solutions
-
-]
-
-.pull-right[
-### Practical sessions
-
-- Course will be split in 5 groups
-- Practical sessions take place twice a week
-- Here, you will learn to run code in RStudio!
-
-
-]
-
-&lt;br&gt;&lt;br&gt;
-
-*Note:* For the time being, all practical sessions are taught **on campus**. Please only join if you don't show any potential Covid-19 symptoms!
-
----
-
-# Overview of Lectures
-
-&lt;br&gt;
-
-.pull-left[
-
-- **Cycle 1:** Data Wrangling, Data Visualization, and Introduction to Text Analysis
-
-    - Introduction to computational methods
-    - Text as data: Introduction to text analysis and dictionary approaches
-
-- **Cycle 2:** Text Analysis and Machine Learning
-
-    - Automated text analysis: Supervised machine learning approaches
-    - Automated text analysis: Unsupervised machine learning approaches
-    
-]
-
-.pull-right[
-
-- **Cycle 3:** Specialization and Group Projects
-
-    - In this circle, we offer online resources for a range of additional methods and approaches
-    - Your task is to develop an independent research project and apply these methods
-
-]
-
----
-
-# Overview of practical sessions
-
-.pull-left[
-
-- **Cycle 1:** Data Wrangling And Data Visualization
-
-    - Introduction to R
-    - Tidyverse 
-    - Data visualization
-    - Basics of text analysis
-    - Dictionary approaches
-
-- **Cycle 2:** Text Analysis and Machine Learning
-
-    - Supervised text analysis
-    - Unsupervised text analysis
-    
-]
-
-.pull-right[
-
-- **Cycle 3:** Specialization and Group Projects
-
-    - In this cycle, the practical sessions will be used to discuss your project with one of the teachers
-
-]
-
----
-
-# Attendance
-
-- Attendance during the regular lectures is not compulsory but highly recommended. 
-
-- Attendance of the practical sessions is mandatory. 
-
-- One absence from one of the workgroup sessions, for serious health, family, or work reasons, can be excused if the instructor is advised in advance.  
-
-
----
-
-# Exam
-
-After the first two cycles, there will be a written exam (**40% of the final grade**):
-
-- The exam will consist of ~35 multiple choice questions and ~6 open-ended questions
-
-- Exam questions will be based on all material discussed in the first two cycles, including lecture content, class materials, and required readings
-
-- Example questions will be provided throughout the course
-
-- Please register for the exam via VUweb
-
-
----
-
-# Homework
-
-After each week, students are required to hand in a “homework”, which represents a practical application of some of the taught analysis methods (e.g. with a new data set, specific research question) pass (**30% of the final grade**):
-
-- Each week’s assignment requires students to apply the methods they have learned to a new data set
-
-- Students will receive an RMarkdown template for their code and the respective data set(s)
-
-- Students are required to hand in the RMarkdown file and a compiled html on Tuesday (24:00) the week after. All homework assignments must be submitted to pass. 
-
----
-
-# Group presentation
-
-In the third cycle, students will be assigned to small working groups in which they independently conduct a research project. A final presentation will be graded per group (**30% of the final grade**).
-
-- A 10-minute talk (including appropriate slides) in which you:
-    - introduce the research project (1-2 slides)
-    - describe theory and hypotheses (1 slide)
-    - explain the methods (1 slide)
-    - present the results (2 slides)
-    - discuss the findings (1-2 slides)
-
-Students are required to hand in the slides and analyses beforehand (Deadline: 18th of December 2021 at 12:00). 
-
----
-class: inverse, center, middle
-
-# The trouble with 'R'
-
-"This is was already difficult in P1!"
-
----
-
-# What is 'R'?
-
-.pull-left[
-
-
-
-
-
-```r
-# Load package
-library(ggplot2)
-
-# Create vector
-variable &lt;- rnorm(100, 2, 4)
-
-# Plot Histogram
-ggplot(NULL, 
-       aes(variable)) + 
-  geom_histogram(color = "white", 
-                 fill = "lightblue")
-```
-
-]
-
-.pull-right[
-
-&lt;img src="01_introduction_files/figure-html/plot-label-out1-1.png" width="100%" /&gt;
-
-]
-
----
-
-
-# What is 'R' vs 'RStudio'?
-
-### Basics
-
-- R is a programming language, not just a software for statistical analyses
-- Yet, primarily developed for conducting statistical analyses
-- Open source (free of cost!)
-
-
-### Infrastructure
-
-- R is the programming language
-- R shares some similarities with Python, S and Scheme
-- RStudio is the software that is mostly used
-
----
-
-# Advantages of R
-
-### The future of scientific data analysis
-
-- R is international and interdisciplinary
-- Constant development and improvement by a huge online community
-- Allows to work with complex and messy data structures
-
-### Flexibility
-
-- There are thousand additional packages for almost any statistical procedure
-- Allows for flexible programming and is adaptive to own needs
-- Encourages replicible analyses
-
----
-
-# Advantages of R
-
-.pull-left2[
-### Visualization
-
-- Allows to produce publication-ready figures and visualizations
-- Allows to combine analyses and writing to produces diverse output formats (e.g., these slides)
-
-]
-
---
-
-.pull-right2[
-
-&lt;img src="01_introduction_files/figure-html/unnamed-chunk-4-1.png" width="100%" /&gt;
-
-]
----
-
-# Conclusion
-
-### R allows...
-
-- flexible and comprehensive programming
-- complex data management
-- advanced analyses with large or messy data (text analysis!)
-- to produce publication-ready figures and documents
-
-### R encourages...
-
-- reproducable and comprehensible analyses
-- us to have fun with programming and coding!
-
---
-
-### So let's have fun with it!
-
----
-
-class: inverse, center, middle
-
-# Thank you for your attention!
-
-
----
-
-# Required Reading
-
-&lt;br&gt;&lt;br&gt;
-
-Kramer, A. D. I., Guillory, J. E, &amp; Hancock, J. (2014). Experimental Evidence of Massive-Scale Emotional Contagion Through Social Networks. Proceedings of the National Academy of Sciences, 111(24), 8788-8790.
-
-Van Atteveldt, W., &amp; Peng, T.-Q. (2018). When communication meets computation: Opportunities, challenges, and pitfalls in computational communication science. Communication Methods and Measures, 12(2-3), 81–92. https://doi.org/10.1080/19312458.2018.1458084
-
-
-_(available on Canvas)_
-
----
-
-class: my-one-page-font
-
-# References
-
-- Blumenstock, J. E., Cadamuro, G. , and On, R. (2015). Predicting Poverty and Wealth from Mobile Phone Metadata. Science, 350(6264), 1073–6. https://doi.org/10.1126/science.aac4420.
-
-- Haim, M., Scherr, S., &amp; Arendt, F. (2021). How search engines may help reduce drug-related suicides. Drug and Alcohol Dependence, 226(108874). https://dx.doi.org/10.1016/j.drugalcdep.2021.108874 
-
-- Jacobi,C., van Atteveldt, W. &amp; Welbers, K. (2016) Quantitative analysis of large amounts of journalistic texts using topic modelling. Digital Journalism, 4(1), 89-106, DOI: 10.1080/21670811.2015.1093271
-
-- Jürgens, P., Meltzer, C., &amp; Scharkow, M. (2021, in press). Age and Gender Representation on German TV: A Longitudinal Computational Analysis. Computational Communication Research. 
-
-- Kramer, A. D. I., Guillory, J. E, &amp; Hancock, J. (2014). Experimental Evidence of Massive-Scale Emotional Contagion Through Social Networks. Proceedings of the National Academy of Sciences, 111(24), 8788-8790.
-
-- Salganik, M. J. (2018). Bit by Bit: Social Research in the Digital Age. Princeton University Press.
-
-- Simon, M., Welbers, K., Kroon, A. C. &amp; Trilling, D. (2022). Linked in the dark: A network approach to understanding information flows within the Dutch Telegramsphere. Information, Communication &amp; Society, https://doi.org/10.1080/1369118X.2022.2133549
-
-- Thompson, T. (2010). Crime software may help police predict violent offences. The Observer. Retrieved from https://www.theguardian.com/uk/2010/jul/25/police-software-crime-prediction
-
-- Van Atteveldt, W., &amp; Peng, T.-Q. (2018). When communication meets computation: Opportunities, challenges, and pitfalls in computational communication science. Communication Methods and Measures, 12(2-3), 81–92. https://doi.org/10.1080/19312458.2018.1458084
-
-- Wimmer, A. &amp; Lewis, K., (2010). Beyond and Below Racial Homophily: ERG Models of a Friendship Network Documented on Facebook. American Journal of Sociology, 116(2), 583-642. 
-
----
-
-# Example Exam Question (Multiple Choice)
-
-Why is the "Facebook Manipulation Study" by Kramer et al. ethically problematic?
-
-A. People did not now that they took part in a study (no informed consent).
-
-B. It overtly manipulated people's emotion.
-
-C. Both A and B are true.
-
-D. The study was not ethically problematic.  
-
----
-
-# Example Exam Question (Multiple Choice)
-
-Why is the "Facebook Manipulation Study" by Kramer et al. ethically problematic?
-
-A. People did not now that they took part in a study (no informed consent).
-
-B. It overtly manipulated people's emotion.
-
-**C. Both A and B are true.** 
-
-D. The study was not ethically problematic.    
-
----
-
-# Example Exam Question (Open Format)
-
-Name and explain two characteristics of big data.
-&lt;br&gt;
-_(4 points, 2 points for correctly naming them and 2 points for correctly explaining them)_
-
---
-
-1. Big data are often "incomplete": This means they do not have the information that you will want for your research. This is a common feature of data that were created for purposes other than research. For example, log data (e.g., browser history) includes all links a person has visited over time, but does not provide any additional information. More over, it may contain gaps where the software failed or the person purposefully hid his surfing behavior.
-
-2. Big data are often "algorithmically confounded": Behavior in big data systems is not natural; it is driven by the engineering goals of the systems. For example, what you see on a facebook news feed depends on algorithm that Facebook has built into their platform. Behavior of individuals is thus also driven by these system-immanent features. 
-
-
-
-
-
-
-
-    </textarea>
-<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
-<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
-<script>var slideshow = remark.create({
-"highlightStyle": "github",
-"highlightLines": false,
-"countIncrementalSlides": false,
-"ratio": "16:9"
-});
-if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
-  window.dispatchEvent(new Event('resize'));
-});
-(function(d) {
-  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
-  if (!r) return;
-  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
-  d.head.appendChild(s);
-})(document);
-
-(function(d) {
-  var el = d.getElementsByClassName("remark-slides-area");
-  if (!el) return;
-  var slide, slides = slideshow.getSlides(), els = el[0].children;
-  for (var i = 1; i < slides.length; i++) {
-    slide = slides[i];
-    if (slide.properties.continued === "true" || slide.properties.count === "false") {
-      els[i - 1].className += ' has-continuation';
-    }
-  }
-  var s = d.createElement("style");
-  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
-  d.head.appendChild(s);
-})(document);
-// delete the temporary CSS (for displaying all slides initially) when the user
-// starts to view slides
-(function() {
-  var deleted = false;
-  slideshow.on('beforeShowSlide', function(slide) {
-    if (deleted) return;
-    var sheets = document.styleSheets, node;
-    for (var i = 0; i < sheets.length; i++) {
-      node = sheets[i].ownerNode;
-      if (node.dataset["target"] !== "print-only") continue;
-      node.parentNode.removeChild(node);
-    }
-    deleted = true;
-  });
-})();
-// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
-// screen reader (see PR #262)
-(function(d) {
-  let res = {};
-  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
-    const t = tr.querySelector('td:nth-child(2)').innerText;
-    tr.querySelectorAll('td:first-child .key').forEach(key => {
-      const k = key.innerText;
-      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
-    });
-  });
-  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
-})(document);
-(function() {
-  "use strict"
-  // Replace <script> tags in slides area to make them executable
-  var scripts = document.querySelectorAll(
-    '.remark-slides-area .remark-slide-container script'
-  );
-  if (!scripts.length) return;
-  for (var i = 0; i < scripts.length; i++) {
-    var s = document.createElement('script');
-    var code = document.createTextNode(scripts[i].textContent);
-    s.appendChild(code);
-    var scriptAttrs = scripts[i].attributes;
-    for (var j = 0; j < scriptAttrs.length; j++) {
-      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
-    }
-    scripts[i].parentElement.replaceChild(s, scripts[i]);
-  }
-})();
-(function() {
-  var links = document.getElementsByTagName('a');
-  for (var i = 0; i < links.length; i++) {
-    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
-      links[i].target = '_blank';
-    }
-  }
-})();</script>
-
-<script>
-slideshow._releaseMath = function(el) {
-  var i, text, code, codes = el.getElementsByTagName('code');
-  for (i = 0; i < codes.length;) {
-    code = codes[i];
-    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
-      text = code.textContent;
-      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
-          /^\$\$(.|\s)+\$\$$/.test(text) ||
-          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
-        code.outerHTML = code.innerHTML;  // remove <code></code>
-        continue;
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          // dispatch for htmlwidgets
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for reveal
+        if (window.Reveal) {
+          window.Reveal.addEventListener("slidechanged", function(event) {
+            fireSlideChanged(event.previousSlide, event.currentSlide);
+          });
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
       }
-    }
-    i++;
-  }
-};
-slideshow._releaseMath(document);
-</script>
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-(function () {
-  var script = document.createElement('script');
-  script.type = 'text/javascript';
-  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
-  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
-    script.src  = script.src.replace(/^https?:/, '');
-  document.getElementsByTagName('head')[0].appendChild(script);
-})();
-</script>
-  </body>
-</html>
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const clipboard = new window.ClipboardJS('.code-copy-button', {
+        target: function(trigger) {
+          return trigger.previousElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        setTimeout(function() {
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      });
+      function tippyHover(el, contentFn) {
+        const config = {
+          allowHTML: true,
+          content: contentFn,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'quarto-reveal',
+          placement: 'bottom-start'
+        };
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          let href = ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          return note.innerHTML;
+        });
+      }
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+        tippyHover(ref, function() {
+          var popup = window.document.createElement('div');
+          cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    });
+    </script>
+    
+
+</body></html>

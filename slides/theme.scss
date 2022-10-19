@@ -1,0 +1,67 @@
+/*-- scss:defaults --*/
+
+// fonts
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700');
+
+$font-family-sans-serif: "Roboto Condensed", serif !default;
+$presentation-font-size-root: 29px;
+
+// headings
+$presentation-heading-font: "Roboto Condensed", sans-serif !default;
+$presentation-heading-font-weight: 400 !default;
+
+$presentation-h1-font-size: 1.85em !default;
+$presentation-h2-font-size: 1.5em !default;
+$presentation-h3-font-size: 1.1em !default;
+
+// code
+$code-block-font-size: .60em;
+
+.reveal div.sourceCode, .reveal pre code {
+//  background-color: $main-color !important;
+}
+
+.reveal div.sourceCode {
+  margin-bottom: 10px !important;
+}
+
+/*-- scss:rules --*/
+
+.reveal h1.title {
+  margin-bottom:1em;
+  margin-top:1em;
+  color: var(--r-main-color);
+  text-align:left;
+  padding:0;
+  margin-left:0;
+}
+
+.reveal h2 {
+  margin-bottom:1em;
+  text-transform: uppercase;
+}
+
+p.subtitle {
+  font-size: var(--r-heading3-size);
+}
+
+p.author, p.date, p.subtitle {
+  margin-bottom:.75em;
+  text-align: left; }
+
+.reveal table {
+  margin:0;
+}
+
+.reveal .slide-number {
+  font-family: var(--r-heading-font);
+}
+
+
+// colors
+
+:root {
+  --r--main-color: #0089CF
+  --r-link-color: #0089CF;
+  --r-heading-color: #0089CF;
+}
