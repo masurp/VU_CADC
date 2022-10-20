@@ -109,7 +109,7 @@ In the third part of the course, students will work on their own research projec
 #### Lecture: Machine Learning - Supervised Text Classification
 
 - Slides Lecture 4:
-    - [Download Slides](slides/04_supervisedlearning.html)
+    - [Download Slides](slides/03_supervisedlearning.html)
 
 #### Practical Session 1
 
