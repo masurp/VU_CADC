@@ -14,12 +14,11 @@ library(knitr)
 library(kableExtra)
 tribble(~Class, ~Teacher, ~Time, ~Room,
         "Lectures", "Dr. Philipp Masur", "Monday  9:00am", "HG-14A00",
-        "Practical Session 1", "tba", "Wednesday, 9:00 & Thursday, 13:30", "",
-        "Practical Session 2", "tba", "Wednesday, 11:00 & Thursday, 15:30", "",
-        "Practical Session 3", "tba", "Wednesday, 9:00 & Friday, 09:00", "",
-        "Practical Session 4", "tba", "Wednesday, 11:00 & Friday, 11:30", "",
-        "Practical Session 5", "tba", "Wednesday, 9:00 & Friday, 09:00", "",
-        "Practical Session 6", "tba", "Wednesday, 11:00 & Friday, 11:00", "") %>%
+        "Practical Session 1", "tba", "Wednesday, 9:00 & Thursday, 13:30", "Dr. Alberto López Ortega",
+        "Practical Session 2", "tba", "Wednesday, 11:00 & Thursday, 15:30", "Dr. Alberto López Ortega",
+        "Practical Session 3", "tba", "Wednesday, 9:00 & Friday, 09:00", "Santiago Gómez-Echeverry",
+        "Practical Session 4", "tba", "Wednesday, 11:00 & Friday, 11:00", "Santiago Gómez-Echeverry",
+        "Practical Session 5", "tba", "Wednesday, 9:00 & Friday, 09:00", "Dr. Kasper Welbers") %>%
   kable(format = "html") %>%
   kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive")) %>%
   kable_styling(fixed_thead = T) %>%
