@@ -59,9 +59,9 @@ In the third part of the course, students will work on their own research projec
 - Work through this tutorial: 
     - [R Markdown: Basics](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_basics_r-markdown.md)
     
-- Complete this assignment (copy the entire code into a RMarkdown file)
-    - [Homework: Basic Data Wrangling](https://github.com/masurp/VU_CADC/blob/main/homework/01_homework_assignment.Rmd)
-    - [Homework: Tidyverse and Data Visualization](https://github.com/masurp/VU_CADC/blob/main/homework/02_homework_assignment.Rmd)
+- Complete this assignment (available on canvas in the module "Homework Templates & Datasets)
+    - 01_homework_assignment.rmd
+ 
 
 #### Additional resources
 
@@ -94,14 +94,12 @@ In the third part of the course, students will work on their own research projec
 
 #### Homework
 
-- Complete this assignment (copy the entire code into a RMarkdown file)
-    - [Homework: Dictionary Approaches](https://github.com/masurp/VU_CADC/blob/main/homework/03_homework_assignment.Rmd)
-    
+- Complete this assignment (available on canvas in the module "Homework Templates & Datasets)
+    - 02_homework_assignment.rmd
 
 #### Additional resources
 
-- Chapter 9 & 10 in [Computational Analysis of Communication](https://cssbook.net/) by Van Atteveldt et al. (see Canvas)
-- A Nice [Tutorial for Sentiment Analysis](https://content-analysis-with-r.com/3-sentiment.html) by Cornelius Puschmann and Mario Haim (including R code examples)
+- Chapter 9 & 10 in [Computational Analysis of Communication](https://cssbook.net/) by Van Atteveldt et al. 
 
 <br>
 <hr>
@@ -126,12 +124,12 @@ In the third part of the course, students will work on their own research projec
 
 #### Homework
 
-- Complete this assignment (copy the entire code into a RMarkdown file)
-    - [Homework: Supervised text classification](https://github.com/masurp/VU_CADC/blob/main/homework/04_homework_assignment.Rmd) 
+- Complete this assignment (available on canvas in the module "Homework Templates & Datasets)
+    - 03_homework_assignment.rmd
     
 #### Additional resources: 
 
-- Chapter 8 & 11 in [Computational Analysis of Communication](https://cssbook.net/) by Van Atteveldt et al. (see Canvas)
+- Chapter 8 & 11 in [Computational Analysis of Communication](https://cssbook.net/) by Van Atteveldt et al. 
 - [Supervised Machine Learning for Text Analysis in R](https://smltar.com/)
 
 <br>
@@ -157,13 +155,12 @@ In the third part of the course, students will work on their own research projec
 
 #### Homework
 
-- Complete this assignment (copy the entire code into a RMarkdown file)
-    - [Homework: Unsupervised text classification] (available soon) 
+- Complete this assignment (available on canvas in the module "Homework Templates & Datasets)
+    - 04_homework_assignment.rmd
     
 #### Additional resources: 
 
-- Chapter 11 in [Computational Analysis of Communication](https://cssbook.net/) by Van Atteveldt et al. (see Canvas)
-- [Supervised Machine Learning for Text Analysis in R](https://smltar.com/)
+- Chapter 11 in [Computational Analysis of Communication](https://cssbook.net/) by Van Atteveldt et al. 
 
 <br>
 <hr>
