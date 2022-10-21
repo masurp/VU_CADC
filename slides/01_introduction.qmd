@@ -59,7 +59,7 @@ My name is Philipp Masur, I am an Assistant Professor at the Department of Commu
 :::
 :::
 
-*Blumenstock, Cadamura, & On, 2015*
+<p style="font-size:0.75em;">*Blumenstock, Cadamura, & On, 2015*</p>
 
 ## Example: Wealth in Rwanda
 
@@ -130,7 +130,7 @@ td {
 
 <br>
 
-*Salganik, 2017, chap. 2.3*
+<p style="font-size:0.75em;">*Salganik, 2017, chap. 2.3*</p>
 
 ## 10 Characteristics of Big Data
 
@@ -144,7 +144,7 @@ td {
 
 <br><br>
 
-*Salganik, 2017, chap. 2.3*
+<p style="font-size:0.75em;">*Salganik, 2017, chap. 2.3*</p>
 
 ## Example data
 
@@ -210,7 +210,7 @@ Why computational methods are important for (future) communication research...
 
 > "Computational Communication Science (CCS) is the label applied to the emerging subfield that investigates the use of computational algorithms to gather and analyze big and often semi- or unstructured data sets to develop and test communication science theories"
 >
-> *Van Atteveldt & Peng, 2018*
+> <p style="font-size:0.75em;">*Van Atteveldt & Peng, 2018*</p>
 
 ## Promises
 
@@ -236,7 +236,7 @@ The recent acceleration in the use of computational methods for communication sc
 
 <br>
 
-*Haim, Scherr, & Arendt, 2021*
+<p style="font-size:0.75em;">*Haim, Scherr, & Arendt, 2021*</p>
 
 ## Example 1: Simulating search queries
 
@@ -299,7 +299,7 @@ The recent acceleration in the use of computational methods for communication sc
 
 ::: columns
 ::: {.column width="55%"}
--   Simon et al., (2022) collected the full messaging history (N = 2,033,661) of 174 Dutch-language public Telegram chats/channels
+-   Simon et al. (2022) collected the full messaging history (N = 2,033,661) of 174 Dutch-language public Telegram chats/channels
 
 -   Among other things, used advanced topic modeling and network analyses
 
@@ -312,6 +312,7 @@ The recent acceleration in the use of computational methods for communication sc
 ![](img/simon_figure3.png)
 :::
 :::
+
 
 ## Ethics of 'Big Data' and Computational Research
 
@@ -352,7 +353,7 @@ Researcher scraped students' data from Facebook, merged it with university recor
 
 <br><br>
 
-*Kramer et al., 2014*
+<p style="font-size:0.75em;">*Kramer et al., 2014*</p>
 
 ## Computational technique: Sentiment Analysis
 
@@ -407,7 +408,7 @@ Researcher scraped students' data from Facebook, merged it with university recor
     -   **Justice:** Risks and benefits should be evenly distributed
     -   **Respect for law and public interest**
 
-*Salganik, 2018, chap. 6*
+<p style="font-size:0.75em;">*Salganik, 2018, chap. 6*</p>
 
 ## Challenges of comp. communication science
 
@@ -423,7 +424,7 @@ Researcher scraped students' data from Facebook, merged it with university recor
 
 <br>
 
-*Van Atteveldt & Peng, 2017*
+<p style="font-size:0.75em;">*Van Atteveldt & Peng, 2017*</p>
 
 ## Preliminary summary
 
@@ -697,7 +698,6 @@ model <-lm(formula = y ~ x,
 # Create output
 texreg::screenreg(model, 
                   single.row = T)
-
 ```
 
 :::
@@ -798,9 +798,9 @@ data %>%
 
 <br><br>
 
-Kramer, A. D. I., Guillory, J. E, & Hancock, J. (2014). Experimental Evidence of Massive-Scale Emotional Contagion Through Social Networks. Proceedings of the National Academy of Sciences, 111(24), 8788-8790.
+- Kramer, A. D. I., Guillory, J. E, & Hancock, J. (2014). Experimental Evidence of Massive-Scale Emotional Contagion Through Social Networks. Proceedings of the National Academy of Sciences, 111(24), 8788-8790.
 
-Van Atteveldt, W., & Peng, T.-Q. (2018). When communication meets computation: Opportunities, challenges, and pitfalls in computational communication science. Communication Methods and Measures, 12(2-3), 81--92. https://doi.org/10.1080/19312458.2018.1458084
+- Van Atteveldt, W., & Peng, T.-Q. (2018). When communication meets computation: Opportunities, challenges, and pitfalls in computational communication science. Communication Methods and Measures, 12(2-3), 81--92. https://doi.org/10.1080/19312458.2018.1458084
 
 *(available on Canvas)*
 

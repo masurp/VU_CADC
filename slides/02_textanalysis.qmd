@@ -43,7 +43,7 @@ editor: visual
 
 ![](img/hilbert_lopez.png)
 
-_Hilbert & Lopez, 2011_
+<p style="font-size:0.75em;">_Hilbert & Lopez, 2011_</p>
 
 
 ## Problem or opportunity?
@@ -52,6 +52,8 @@ _Hilbert & Lopez, 2011_
 library(tidyverse)
 library(hrbrthemes)
 library(ggthemes)
+library(paletteer)
+library(ggwordcloud)
 ```
 
 
@@ -207,7 +209,7 @@ How can we analyze texts with computers?
 
 - They often depend on the morphological characteristics of language, such as when text is broken into sequences of characters, words, sentences
 
-_Hvitfeldt & Silge, 2021, chap. 1_
+<p style="font-size:0.75em;">_Hvitfeldt & Silge, 2021, chap. 1_</p>
 
 :::
 ::: {.column width="5%"}
@@ -237,7 +239,7 @@ How we can study large quantities of documents and texts?
 ![](img/textanalysis.png)
 
 
-_van Atteveldt, Welbers, & Van der Velden, 2019_
+<p style="font-size:0.75em;">_van Atteveldt, Welbers, & Van der Velden, 2019_</p>
 
 ## (1) Obtaining texts
 
@@ -259,21 +261,41 @@ _van Atteveldt, Welbers, & Van der Velden, 2019_
 
 ## (2) From text to data
 
+::: {.column width="35%"}
+
 - Algorithms (or generally R) process numbers, they do not read text
 
 - First step in any analysis is to convert text to series of numbers
 
-- This is done through a number of steps (also know as preprocessing) which include: 
+- This is done through a number of optional steps (also know as preprocessing) which include: 
 
-    - Tokenization 
-    - Removing stopwords 
-    - Normalization 
+    - Tokenization
+    - Removing Stopwords
+    - Stemming or Lemmatization
+    - Normalization
     - Frequency trimming
 
 - The resulting structured text is then often used to create a document-feature matrix (DTM)
 
     - Table containing frequency of each word in each document
     - Called “bag of words” approach -> ignores word order
+    
+## Text Preprocessing Process
+    
+```{mermaid}
+flowchart LR
+    A[Texts/Documents] --> B(Tokenization)
+    B -->|One| D[Removing Stopwords]
+    B -->|Two| E[Stemming]
+    B -->|Three| F[Normalization]
+    B -->|Four| G[Frequency trimming]
+    D --> H(Document-Term-Feature-Matrix)
+    E --> H
+    F --> H
+    G --> H
+```
+
+
 
 
 
@@ -294,7 +316,6 @@ _van Atteveldt, Welbers, & Van der Velden, 2019_
     - Frequency trimming (removing rare words)
     
 
-
 ## Tokenization
 
 - In a first step, we need to break text down into the features that we want to analyze (so-called tokens)
@@ -304,7 +325,7 @@ _van Atteveldt, Welbers, & Van der Velden, 2019_
 ```{r}
 #| R.options: list(width = 120)
 #| echo: true
-library(quanteda)
+#| output-location: fragment
 text <- "This is an Example of not very elaborate Preprocessing Techniques!1!"
 text
 ```
@@ -313,12 +334,13 @@ text
 ```{r}
 #| R.options: list(width = 120)
 #| echo: true
-#| output-location: fragment
+
+library(quanteda)
 toks <- tokens(text, remove_punct = TRUE, remove_numbers = TRUE) 
 toks
 ```
 <br>
-_Manning, Raghavan, and Schütze 2008_
+<p style="font-size:0.75em;">_Manning, Raghavan, and Schütze 2008_</p>
 
 
 ## Types of Tokens
@@ -336,7 +358,7 @@ _Manning, Raghavan, and Schütze 2008_
 
 <br><br>
 
-_Hvitfeldt & Silge, 2021, chap. 2.2_
+<p style="font-size:0.75em;">_Hvitfeldt & Silge, 2021, chap. 2.2_</p>
 
 
 ## Removing stopwords
@@ -466,7 +488,20 @@ textstat_summary(dfm2)
 
 ## Word frequencies
 
-![](img/wordcloud1.png)
+
+```{r}
+#| echo: true
+#| output-location: fragment
+#| fig-height: 4
+#| fig-width: 7
+textstat_frequency(dfm2) %>%
+  ggplot(aes(label = feature, size = frequency, color = factor(frequency))) +
+  geom_text_wordcloud(show.legend = T) +
+  scale_size_area(max_size = 11) +
+  scale_color_paletteer_d("MetBrewer::Demuth") +
+  theme_minimal() +
+  labs(color = "frequency")
+```
 
 
 
@@ -494,9 +529,9 @@ textstat_summary(dfm2)
     - “These words form a pattern, which I think means X”
     
     
-<br><br>
+<br><br><br><br>
 
-_Boumans & Trilling, 2016_
+<p style="font-size:0.75em;">_Boumans & Trilling, 2016_</p>
 :::
 ::::
 
@@ -580,6 +615,7 @@ Using fixed set of terms per concept to automatically code texts.
 
 - Testing, testing, testing...
 
+
 ## Special case: Sentiment analysis
 
 
@@ -632,7 +668,7 @@ data_df %>%
   ggplot(aes(x = reorder(President, n), 
              y = n)) +
   geom_bar(stat = "identity", 
-           fill = "lightblue") +
+           fill = "steelblue2") +
   coord_flip() +
   labs(y = "Number of speeches",
        x = "")
@@ -975,7 +1011,7 @@ How is this used in research?
 
 - Health sources were also prominent, while significant diversity of sources, including citizen sources, emerged as the pandemic went on
 
-_Mellado et al., 2021_
+<p style="font-size:0.75em;">_Mellado et al., 2021_</p>
 
 
 ## Method: Dictionary approach
@@ -1012,7 +1048,7 @@ _Mellado et al., 2021_
 
 <br><br>
 
-_Heidenreich et al., 2019_
+<p style="font-size:0.75em;">_Heidenreich et al., 2019_</p>
     
 ---
 
@@ -1090,11 +1126,11 @@ _Heidenreich et al., 2019_
 
 <br><br>
 
-Welbers, K., Van Atteveldt, W., & Benoit, K. (2017). Text analysis in R. Communication Methods and Measures, 11(4), 245-265.
+- Welbers, K., Van Atteveldt, W., & Benoit, K. (2017). Text analysis in R. Communication Methods and Measures, 11(4), 245-265.
 
-Heidenreich, T., Eberl, J.-M., Lind, F. & Boomgaarden, H. (2020). Political migration discourses on social media: a comparative perspective on visibility and sentiment across political Facebook accounts in Europe. Journal of Ethnic and Migration Studies, (46)7, 1261-1280,  https://doi.org/10.1080/1369183X.2019.1665990
+- Heidenreich, T., Eberl, J.-M., Lind, F. & Boomgaarden, H. (2020). Political migration discourses on social media: a comparative perspective on visibility and sentiment across political Facebook accounts in Europe. Journal of Ethnic and Migration Studies, (46)7, 1261-1280,  https://doi.org/10.1080/1369183X.2019.1665990
 
-Mellado, C., Hallin, D., Cárcamo, L. Alfaro, R. ... & Ramos, A. (2021) Sourcing Pandemic News: A Cross-National Computational Analysis of Mainstream Media Coverage of COVID-19 on Facebook, Twitter, and Instagram. Digital Journalism, 9(9), 1271-1295, https://doi.org/10.1080/21670811.2021.1942114
+- <p style="font-size:0.75em;">Mellado, C., Hallin, D., Cárcamo, L. Alfaro, R. ... & Ramos, A. (2021) Sourcing Pandemic News: A Cross-National Computational Analysis of Mainstream Media Coverage of COVID-19 on Facebook, Twitter, and Instagram. Digital Journalism, 9(9), 1271-1295, https://doi.org/10.1080/21670811.2021.1942114
 
 <br>
 

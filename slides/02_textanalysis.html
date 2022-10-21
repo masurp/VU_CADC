@@ -7,7 +7,7 @@
 <link href="02_textanalysis_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="02_textanalysis_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="02_textanalysis_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.0.36">
+  <meta name="generator" content="quarto-1.1.251">
 
   <meta name="author" content="Dr.&nbsp;Philipp K. Masur">
   <title>Computational Analysis of Digital Communication</title>
@@ -19,10 +19,15 @@
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    span.underline{text-decoration: underline;}
-    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
     pre > code.sourceCode { white-space: pre; position: relative; }
     pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -377,6 +382,9 @@
       margin-right: 0; 
     }
   </style>
+  <script src="02_textanalysis_files/libs/quarto-diagram/mermaid.min.js"></script>
+  <script src="02_textanalysis_files/libs/quarto-diagram/mermaid-init.js"></script>
+  <link href="02_textanalysis_files/libs/quarto-diagram/mermaid.css" rel="stylesheet">
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -417,7 +425,9 @@
 <section id="increasing-amount-of-text-data-available-online" class="slide level2">
 <h2>Increasing amount of (text) data available online</h2>
 
-<img data-src="img/hilbert_lopez.png" class="r-stretch"><p><em>Hilbert &amp; Lopez, 2011</em></p>
+<img data-src="img/hilbert_lopez.png" class="r-stretch"><p style="font-size:0.75em;">
+<em>Hilbert &amp; Lopez, 2011</em>
+</p>
 </section>
 <section id="problem-or-opportunity" class="slide level2">
 <h2>Problem or opportunity?</h2>
@@ -437,12 +447,12 @@
 <pre><code># A tibble: 6 × 5
      id condition sns_use well_being pers1
   &lt;int&gt; &lt;chr&gt;       &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt;
-1     1 A            3.36      3.80   5.15
-2     2 B            1.38      4.06   4.65
-3     3 A            3.64      3.33   3.88
-4     4 B            1.40     -0.229  5.68
-5     5 A            4.12     -1.24   3.27
-6     6 B            2.16      2.01   4.30</code></pre>
+1     1 A            3.83     11.6    3.78
+2     2 B            2.68      0.268  6.52
+3     3 A            3.96      4.61   3.25
+4     4 B            2.24      8.61   5.29
+5     5 A            3.59      0.555  5.71
+6     6 B            4.61      2.62   4.53</code></pre>
 </div>
 </div>
 </div><div class="column" style="width:10%;">
@@ -550,7 +560,9 @@
 <li><p>When we engage in text analysis, we use these levels of organization to create language features (e.g., tokens, n-grams,…)</p></li>
 <li><p>They often depend on the morphological characteristics of language, such as when text is broken into sequences of characters, words, sentences</p></li>
 </ul>
-<p><em>Hvitfeldt &amp; Silge, 2021, chap.&nbsp;1</em></p>
+<p style="font-size:0.75em;">
+<em>Hvitfeldt &amp; Silge, 2021, chap.&nbsp;1</em>
+</p>
 </div><div class="column" style="width:5%;">
 
 </div><div class="column" style="width:45%;">
@@ -600,7 +612,9 @@
 <h2>Steps in Automatic Text Analysis</h2>
 <p><br><br></p>
 
-<img data-src="img/textanalysis.png" class="r-stretch"><p><em>van Atteveldt, Welbers, &amp; Van der Velden, 2019</em></p>
+<img data-src="img/textanalysis.png" class="r-stretch"><p style="font-size:0.75em;">
+<em>van Atteveldt, Welbers, &amp; Van der Velden, 2019</em>
+</p>
 </section>
 <section id="obtaining-texts" class="slide level2">
 <h2>(1) Obtaining texts</h2>
@@ -626,13 +640,15 @@
 </section>
 <section id="from-text-to-data" class="slide level2">
 <h2>(2) From text to data</h2>
+<p>::: {.column width=“35%”}</p>
 <ul>
 <li><p>Algorithms (or generally R) process numbers, they do not read text</p></li>
 <li><p>First step in any analysis is to convert text to series of numbers</p></li>
-<li><p>This is done through a number of steps (also know as preprocessing) which include:</p>
+<li><p>This is done through a number of optional steps (also know as preprocessing) which include:</p>
 <ul>
 <li>Tokenization</li>
-<li>Removing stopwords</li>
+<li>Removing Stopwords</li>
+<li>Stemming or Lemmatization</li>
 <li>Normalization</li>
 <li>Frequency trimming</li>
 </ul></li>
@@ -642,6 +658,31 @@
 <li>Called “bag of words” approach -&gt; ignores word order</li>
 </ul></li>
 </ul>
+</section>
+<section id="text-preprocessing-process" class="slide level2">
+<h2>Text Preprocessing Process</h2>
+<div class="cell" data-reveal="true">
+<div class="cell-output-display">
+<div>
+<p>
+</p><pre class="mermaid" data-tooltip-selector="#mermaid-tooltip-1">flowchart LR
+    A[Texts/Documents] --&gt; B(Tokenization)
+    B --&gt;|One| D[Removing Stopwords]
+    B --&gt;|Two| E[Stemming]
+    B --&gt;|Three| F[Normalization]
+    B --&gt;|Four| G[Frequency trimming]
+    D --&gt; H(Document-Term-Feature-Matrix)
+    E --&gt; H
+    F --&gt; H
+    G --&gt; H
+</pre>
+<div id="mermaid-tooltip-1" class="mermaidTooltip">
+
+</div>
+<p></p>
+</div>
+</div>
+</div>
 </section>
 <section id="text-cleaning-stemming-lemmatizing" class="slide level2">
 <h2>Text cleaning, stemming, lemmatizing</h2>
@@ -671,19 +712,19 @@
 <li><p>We take an input (a string) and a token type (a meaningful unit of text, such as a word) and we split the input (string) into pieces (tokens) that correspond to the type (e.g., word)</p></li>
 </ul>
 <div class="cell" data-r.options="list(width = 120)">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">library</span>(quanteda)</span>
-<span id="cb3-2"><a href="#cb3-2"></a>text <span class="ot">&lt;-</span> <span class="st">"This is an Example of not very elaborate Preprocessing Techniques!1!"</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a>text</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>text <span class="ot">&lt;-</span> <span class="st">"This is an Example of not very elaborate Preprocessing Techniques!1!"</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>text</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment" data-r.options="list(width = 120)">
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "This is an Example of not very elaborate Preprocessing Techniques!1!"</code></pre>
 </div>
 </div>
 <p><br></p>
 <div class="cell" data-r.options="list(width = 120)">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>toks <span class="ot">&lt;-</span> <span class="fu">tokens</span>(text, <span class="at">remove_punct =</span> <span class="cn">TRUE</span>, <span class="at">remove_numbers =</span> <span class="cn">TRUE</span>) </span>
-<span id="cb5-2"><a href="#cb5-2"></a>toks</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell fragment" data-r.options="list(width = 120)">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">library</span>(quanteda)</span>
+<span id="cb5-2"><a href="#cb5-2"></a>toks <span class="ot">&lt;-</span> <span class="fu">tokens</span>(text, <span class="at">remove_punct =</span> <span class="cn">TRUE</span>, <span class="at">remove_numbers =</span> <span class="cn">TRUE</span>) </span>
+<span id="cb5-3"><a href="#cb5-3"></a>toks</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Tokens consisting of 1 document.
 text1 :
@@ -692,7 +733,10 @@ text1 :
  [9] "Preprocessing" "Techniques"   </code></pre>
 </div>
 </div>
-<p><br> <em>Manning, Raghavan, and Schütze 2008</em></p>
+<br>
+<p style="font-size:0.75em;">
+<em>Manning, Raghavan, and Schütze 2008</em>
+</p>
 </section>
 <section id="types-of-tokens" class="slide level2">
 <h2>Types of Tokens</h2>
@@ -709,7 +753,9 @@ text1 :
 </ul></li>
 </ul>
 <p><br><br></p>
-<p><em>Hvitfeldt &amp; Silge, 2021, chap.&nbsp;2.2</em></p>
+<p style="font-size:0.75em;">
+<em>Hvitfeldt &amp; Silge, 2021, chap.&nbsp;2.2</em>
+</p>
 </section>
 <section id="removing-stopwords" class="slide level2">
 <h2>Removing stopwords</h2>
@@ -889,8 +935,21 @@ docs    this is an example of preprocessing techniques what happens during
 </section>
 <section id="word-frequencies" class="slide level2">
 <h2>Word frequencies</h2>
-
-<img data-src="img/wordcloud1.png" class="r-stretch"></section>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">textstat_frequency</span>(dfm2) <span class="sc">%&gt;%</span></span>
+<span id="cb27-2"><a href="#cb27-2"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">label =</span> feature, <span class="at">size =</span> frequency, <span class="at">color =</span> <span class="fu">factor</span>(frequency))) <span class="sc">+</span></span>
+<span id="cb27-3"><a href="#cb27-3"></a>  <span class="fu">geom_text_wordcloud</span>(<span class="at">show.legend =</span> T) <span class="sc">+</span></span>
+<span id="cb27-4"><a href="#cb27-4"></a>  <span class="fu">scale_size_area</span>(<span class="at">max_size =</span> <span class="dv">11</span>) <span class="sc">+</span></span>
+<span id="cb27-5"><a href="#cb27-5"></a>  <span class="fu">scale_color_paletteer_d</span>(<span class="st">"MetBrewer::Demuth"</span>) <span class="sc">+</span></span>
+<span id="cb27-6"><a href="#cb27-6"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb27-7"><a href="#cb27-7"></a>  <span class="fu">labs</span>(<span class="at">color =</span> <span class="st">"frequency"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<p><img data-src="02_textanalysis_files/figure-revealjs/unnamed-chunk-18-1.png" width="672"></p>
+</div>
+</div>
+</section>
 <section id="analyzing-the-structured-data" class="slide level2">
 <h2>(3) Analyzing the structured data</h2>
 <div class="columns">
@@ -919,8 +978,10 @@ docs    this is an example of preprocessing techniques what happens during
 <li>“These words form a pattern, which I think means X”</li>
 </ul></li>
 </ul>
-<p><br><br></p>
-<p><em>Boumans &amp; Trilling, 2016</em></p>
+<p><br><br><br><br></p>
+<p style="font-size:0.75em;">
+<em>Boumans &amp; Trilling, 2016</em>
+</p>
 </div>
 </div>
 </section>
@@ -1026,13 +1087,13 @@ docs    this is an example of preprocessing techniques what happens during
 <section id="example-the-state-of-the-union-speech-corpus" class="slide level2">
 <h2>Example: The State of the Union Speech Corpus</h2>
 <div class="cell" data-r.options="{&quot;width&quot;:90}">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">library</span>(quanteda.corpora)</span>
-<span id="cb27-2"><a href="#cb27-2"></a><span class="fu">library</span>(quanteda.dictionaries)</span>
-<span id="cb27-3"><a href="#cb27-3"></a><span class="fu">library</span>(quanteda.textplots)</span>
-<span id="cb27-4"><a href="#cb27-4"></a></span>
-<span id="cb27-5"><a href="#cb27-5"></a>data_df <span class="ot">&lt;-</span> <span class="fu">convert</span>(data_corpus_sotu, <span class="st">"data.frame"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb27-6"><a href="#cb27-6"></a>  as_tibble</span>
-<span id="cb27-7"><a href="#cb27-7"></a>data_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">library</span>(quanteda.corpora)</span>
+<span id="cb28-2"><a href="#cb28-2"></a><span class="fu">library</span>(quanteda.dictionaries)</span>
+<span id="cb28-3"><a href="#cb28-3"></a><span class="fu">library</span>(quanteda.textplots)</span>
+<span id="cb28-4"><a href="#cb28-4"></a></span>
+<span id="cb28-5"><a href="#cb28-5"></a>data_df <span class="ot">&lt;-</span> <span class="fu">convert</span>(data_corpus_sotu, <span class="st">"data.frame"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb28-6"><a href="#cb28-6"></a>  as_tibble</span>
+<span id="cb28-7"><a href="#cb28-7"></a>data_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 241 × 8
    doc_id           text               FirstName President Date       delivery type  party
@@ -1213,16 +1274,16 @@ Thank you. God bless you, and may God bless the United States of America. Thank 
 <h2>Understanding the data: Speeches per President</h2>
 <div class="cell columns column-output-location">
 <div class="column">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>data_df <span class="sc">%&gt;%</span></span>
-<span id="cb30-2"><a href="#cb30-2"></a>  <span class="fu">group_by</span>(President) <span class="sc">%&gt;%</span></span>
-<span id="cb30-3"><a href="#cb30-3"></a>  <span class="fu">summarize</span>(<span class="at">n =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
-<span id="cb30-4"><a href="#cb30-4"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(President, n), </span>
-<span id="cb30-5"><a href="#cb30-5"></a>             <span class="at">y =</span> n)) <span class="sc">+</span></span>
-<span id="cb30-6"><a href="#cb30-6"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, </span>
-<span id="cb30-7"><a href="#cb30-7"></a>           <span class="at">fill =</span> <span class="st">"lightblue"</span>) <span class="sc">+</span></span>
-<span id="cb30-8"><a href="#cb30-8"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb30-9"><a href="#cb30-9"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Number of speeches"</span>,</span>
-<span id="cb30-10"><a href="#cb30-10"></a>       <span class="at">x =</span> <span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a>data_df <span class="sc">%&gt;%</span></span>
+<span id="cb31-2"><a href="#cb31-2"></a>  <span class="fu">group_by</span>(President) <span class="sc">%&gt;%</span></span>
+<span id="cb31-3"><a href="#cb31-3"></a>  <span class="fu">summarize</span>(<span class="at">n =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb31-4"><a href="#cb31-4"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(President, n), </span>
+<span id="cb31-5"><a href="#cb31-5"></a>             <span class="at">y =</span> n)) <span class="sc">+</span></span>
+<span id="cb31-6"><a href="#cb31-6"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, </span>
+<span id="cb31-7"><a href="#cb31-7"></a>           <span class="at">fill =</span> <span class="st">"steelblue2"</span>) <span class="sc">+</span></span>
+<span id="cb31-8"><a href="#cb31-8"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb31-9"><a href="#cb31-9"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Number of speeches"</span>,</span>
+<span id="cb31-10"><a href="#cb31-10"></a>       <span class="at">x =</span> <span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column fragment">
 <div class="cell-output-display">
 <p><img data-src="02_textanalysis_files/figure-revealjs/plot_speech-1.png" width="480"></p>
@@ -1233,8 +1294,8 @@ Thank you. God bless you, and may God bless the United States of America. Thank 
 <section id="text-preprocessing-creating-a-corpus" class="slide level2">
 <h2>Text preprocessing: Creating a corpus</h2>
 <div class="cell" data-r.options="{&quot;width&quot;:90}">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a>corp <span class="ot">&lt;-</span> <span class="fu">corpus</span>(data_df, <span class="at">docid_field =</span> <span class="st">"doc_id"</span>, <span class="at">text_field =</span> <span class="st">"text"</span>)</span>
-<span id="cb31-2"><a href="#cb31-2"></a>corp </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a>corp <span class="ot">&lt;-</span> <span class="fu">corpus</span>(data_df, <span class="at">docid_field =</span> <span class="st">"doc_id"</span>, <span class="at">text_field =</span> <span class="st">"text"</span>)</span>
+<span id="cb32-2"><a href="#cb32-2"></a>corp </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment" data-r.options="{&quot;width&quot;:90}">
 <div class="cell-output cell-output-stdout">
@@ -1265,15 +1326,15 @@ Washington-1794 :
 <h2>What are the most used words in these speeches?</h2>
 <div class="column" style="width:46%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a>dtm1 <span class="ot">&lt;-</span> corp <span class="sc">%&gt;%</span></span>
-<span id="cb33-2"><a href="#cb33-2"></a> <span class="fu">tokens</span>(<span class="at">remove_punct =</span> T, </span>
-<span id="cb33-3"><a href="#cb33-3"></a>        <span class="at">remove_symbols =</span> T) <span class="sc">%&gt;%</span></span>
-<span id="cb33-4"><a href="#cb33-4"></a> <span class="fu">tokens_remove</span>(<span class="fu">stopwords</span>(<span class="st">"en"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb33-5"><a href="#cb33-5"></a> dfm </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a>dtm1 <span class="ot">&lt;-</span> corp <span class="sc">%&gt;%</span></span>
+<span id="cb34-2"><a href="#cb34-2"></a> <span class="fu">tokens</span>(<span class="at">remove_punct =</span> T, </span>
+<span id="cb34-3"><a href="#cb34-3"></a>        <span class="at">remove_symbols =</span> T) <span class="sc">%&gt;%</span></span>
+<span id="cb34-4"><a href="#cb34-4"></a> <span class="fu">tokens_remove</span>(<span class="fu">stopwords</span>(<span class="st">"en"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb34-5"><a href="#cb34-5"></a> dfm </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="fu">textplot_wordcloud</span>(dtm1, </span>
-<span id="cb34-2"><a href="#cb34-2"></a>  <span class="at">max_words =</span> <span class="dv">50</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="fu">textplot_wordcloud</span>(dtm1, </span>
+<span id="cb35-2"><a href="#cb35-2"></a>  <span class="at">max_words =</span> <span class="dv">50</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div class="column" style="width:53%;">
@@ -1288,11 +1349,11 @@ Washington-1794 :
 </ul>
 <div class="column" style="width:46%;">
 <div class="cell" data-r.options="{&quot;width&quot;:90}">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a>is_trump <span class="ot">&lt;-</span> <span class="fu">docvars</span>(dtm1)<span class="sc">$</span>President <span class="sc">==</span> <span class="st">'Trump'</span> </span>
-<span id="cb35-2"><a href="#cb35-2"></a>trump_dtm <span class="ot">&lt;-</span> dtm1[is_trump,]</span>
-<span id="cb35-3"><a href="#cb35-3"></a><span class="fu">textplot_wordcloud</span>(trump_dtm, <span class="at">max_words =</span> <span class="dv">35</span>, <span class="at">color =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a>is_trump <span class="ot">&lt;-</span> <span class="fu">docvars</span>(dtm1)<span class="sc">$</span>President <span class="sc">==</span> <span class="st">'Trump'</span> </span>
+<span id="cb36-2"><a href="#cb36-2"></a>trump_dtm <span class="ot">&lt;-</span> dtm1[is_trump,]</span>
+<span id="cb36-3"><a href="#cb36-3"></a><span class="fu">textplot_wordcloud</span>(trump_dtm, <span class="at">max_words =</span> <span class="dv">35</span>, <span class="at">color =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img data-src="02_textanalysis_files/figure-revealjs/unnamed-chunk-22-1.png" width="960"></p>
+<p><img data-src="02_textanalysis_files/figure-revealjs/unnamed-chunk-24-1.png" width="960"></p>
 </div>
 </div>
 </div>
@@ -1301,11 +1362,11 @@ Washington-1794 :
 </div>
 <div class="column" style="width:46%;">
 <div class="cell" data-r.options="{&quot;width&quot;:90}">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a>is_obama <span class="ot">&lt;-</span> <span class="fu">docvars</span>(dtm1)<span class="sc">$</span>President <span class="sc">==</span> <span class="st">'Obama'</span> </span>
-<span id="cb36-2"><a href="#cb36-2"></a>obama_dtm <span class="ot">&lt;-</span> dtm1[is_obama,]</span>
-<span id="cb36-3"><a href="#cb36-3"></a><span class="fu">textplot_wordcloud</span>(obama_dtm, <span class="at">max_words =</span> <span class="dv">35</span>, <span class="at">color =</span> <span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a>is_obama <span class="ot">&lt;-</span> <span class="fu">docvars</span>(dtm1)<span class="sc">$</span>President <span class="sc">==</span> <span class="st">'Obama'</span> </span>
+<span id="cb37-2"><a href="#cb37-2"></a>obama_dtm <span class="ot">&lt;-</span> dtm1[is_obama,]</span>
+<span id="cb37-3"><a href="#cb37-3"></a><span class="fu">textplot_wordcloud</span>(obama_dtm, <span class="at">max_words =</span> <span class="dv">35</span>, <span class="at">color =</span> <span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img data-src="02_textanalysis_files/figure-revealjs/unnamed-chunk-23-1.png" width="960"></p>
+<p><img data-src="02_textanalysis_files/figure-revealjs/unnamed-chunk-25-1.png" width="960"></p>
 </div>
 </div>
 </div>
@@ -1317,8 +1378,8 @@ Washington-1794 :
 <li><p>This can be very helpful to understand how these words have been used in different documents (here: speeches)</p></li>
 </ul>
 <div class="cell" data-r.options="{&quot;width&quot;:140}">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a>k <span class="ot">&lt;-</span> <span class="fu">kwic</span>(corp, <span class="st">'terror'</span>, <span class="at">window =</span> <span class="dv">4</span>)</span>
-<span id="cb37-2"><a href="#cb37-2"></a><span class="fu">head</span>(k, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a>k <span class="ot">&lt;-</span> <span class="fu">kwic</span>(corp, <span class="st">'terror'</span>, <span class="at">window =</span> <span class="dv">4</span>)</span>
+<span id="cb38-2"><a href="#cb38-2"></a><span class="fu">head</span>(k, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Keyword-in-context with 10 matches.                                                                                                 
      [Monroe-1817, 2948]        will henceforth lose their | terror | . Fortifications in those  
@@ -1346,7 +1407,7 @@ Washington-1794 :
 <div class="column" style="width:45%;">
 <p><strong>Negative words</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a><span class="fu">head</span>(DictionaryGI<span class="sc">$</span>negative, <span class="dv">14</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="fu">head</span>(DictionaryGI<span class="sc">$</span>negative, <span class="dv">14</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "abandon"     "abandonment" "abate"       "abdicate"    "abhor"      
  [6] "abject"      "abnormal"    "abolish"     "abominable"  "abrasive"   
@@ -1360,7 +1421,7 @@ Washington-1794 :
 <div class="column" style="width:45%;">
 <p><strong>Positive words</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a><span class="fu">head</span>(DictionaryGI<span class="sc">$</span>positive, <span class="dv">14</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a><span class="fu">head</span>(DictionaryGI<span class="sc">$</span>positive, <span class="dv">14</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "abide"      "ability"    "able"       "abound"     "absolve"   
  [6] "absorbent"  "absorption" "abundance"  "abundant"   "accede"    
@@ -1383,13 +1444,13 @@ Washington-1794 :
 </div>
 <div class="column" style="width:45%;">
 <div class="cell" data-r.options="{&quot;width&quot;:90}" data-output-location="fragment">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a>dtm <span class="ot">&lt;-</span> corp <span class="sc">%&gt;%</span>    </span>
-<span id="cb43-2"><a href="#cb43-2"></a>  tokens <span class="sc">%&gt;%</span></span>
-<span id="cb43-3"><a href="#cb43-3"></a>  tokens_tolower <span class="sc">%&gt;%</span></span>
-<span id="cb43-4"><a href="#cb43-4"></a>  dfm</span>
-<span id="cb43-5"><a href="#cb43-5"></a>res <span class="ot">&lt;-</span> dtm <span class="sc">%&gt;%</span></span>
-<span id="cb43-6"><a href="#cb43-6"></a>  <span class="fu">dfm_lookup</span>(<span class="fu">dictionary</span>(DictionaryGI))</span>
-<span id="cb43-7"><a href="#cb43-7"></a>res</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a>dtm <span class="ot">&lt;-</span> corp <span class="sc">%&gt;%</span>    </span>
+<span id="cb44-2"><a href="#cb44-2"></a>  tokens <span class="sc">%&gt;%</span></span>
+<span id="cb44-3"><a href="#cb44-3"></a>  tokens_tolower <span class="sc">%&gt;%</span></span>
+<span id="cb44-4"><a href="#cb44-4"></a>  dfm</span>
+<span id="cb44-5"><a href="#cb44-5"></a>res <span class="ot">&lt;-</span> dtm <span class="sc">%&gt;%</span></span>
+<span id="cb44-6"><a href="#cb44-6"></a>  <span class="fu">dfm_lookup</span>(<span class="fu">dictionary</span>(DictionaryGI))</span>
+<span id="cb44-7"><a href="#cb44-7"></a>res</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Document-feature matrix of: 241 documents, 2 features (0.00% sparse) and 6 docvars.
                   features
@@ -1408,12 +1469,12 @@ docs               negative positive
 <section id="combining-all-information-to-a-final-data-set" class="slide level2">
 <h2>Combining all information to a final data set</h2>
 <div class="cell" data-r.options="{&quot;width&quot;:90}">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a>dict_results <span class="ot">&lt;-</span> <span class="fu">convert</span>(res, <span class="st">'data.frame'</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb45-2"><a href="#cb45-2"></a>  <span class="fu">mutate</span>(<span class="at">length=</span><span class="fu">ntoken</span>(dtm))</span>
-<span id="cb45-3"><a href="#cb45-3"></a>variables <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="at">doc_id =</span> <span class="fu">docnames</span>(res), <span class="fu">docvars</span>(res))</span>
-<span id="cb45-4"><a href="#cb45-4"></a>d <span class="ot">&lt;-</span> <span class="fu">left_join</span>(variables, dict_results) <span class="sc">%&gt;%</span></span>
-<span id="cb45-5"><a href="#cb45-5"></a>  as_tibble</span>
-<span id="cb45-6"><a href="#cb45-6"></a><span class="fu">head</span>(d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a>dict_results <span class="ot">&lt;-</span> <span class="fu">convert</span>(res, <span class="st">'data.frame'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb46-2"><a href="#cb46-2"></a>  <span class="fu">mutate</span>(<span class="at">length=</span><span class="fu">ntoken</span>(dtm))</span>
+<span id="cb46-3"><a href="#cb46-3"></a>variables <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="at">doc_id =</span> <span class="fu">docnames</span>(res), <span class="fu">docvars</span>(res))</span>
+<span id="cb46-4"><a href="#cb46-4"></a>d <span class="ot">&lt;-</span> <span class="fu">left_join</span>(variables, dict_results) <span class="sc">%&gt;%</span></span>
+<span id="cb46-5"><a href="#cb46-5"></a>  as_tibble</span>
+<span id="cb46-6"><a href="#cb46-6"></a><span class="fu">head</span>(d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment" data-r.options="{&quot;width&quot;:90}">
 <div class="cell-output cell-output-stdout">
@@ -1443,7 +1504,7 @@ docs               negative positive
 <div class="column" style="width:45%;">
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="02_textanalysis_files/figure-revealjs/unnamed-chunk-30-1.png" width="480"></p>
+<p><img data-src="02_textanalysis_files/figure-revealjs/unnamed-chunk-32-1.png" width="480"></p>
 </div>
 </div>
 </div>
@@ -1464,32 +1525,32 @@ docs               negative positive
 <section id="sentiment-scores-over-time" class="slide level2">
 <h2>Sentiment scores over time</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a>d <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span></span>
-<span id="cb47-2"><a href="#cb47-2"></a>  <span class="fu">mutate</span>(<span class="at">sentiment1 =</span> (positive <span class="sc">-</span> negative) <span class="sc">/</span> (positive <span class="sc">+</span> negative),</span>
-<span id="cb47-3"><a href="#cb47-3"></a>         <span class="at">sentiment2 =</span> (positive <span class="sc">-</span> negative) <span class="sc">/</span> length,</span>
-<span id="cb47-4"><a href="#cb47-4"></a>         <span class="at">subjectivity=</span>(positive <span class="sc">+</span> negative) <span class="sc">/</span> length)</span>
-<span id="cb47-5"><a href="#cb47-5"></a></span>
-<span id="cb47-6"><a href="#cb47-6"></a><span class="co"># Line plot</span></span>
-<span id="cb47-7"><a href="#cb47-7"></a>d <span class="sc">%&gt;%</span></span>
-<span id="cb47-8"><a href="#cb47-8"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Date, <span class="at">y =</span> sentiment1)) <span class="sc">+</span></span>
-<span id="cb47-9"><a href="#cb47-9"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"darkred"</span>) <span class="sc">+</span></span>
-<span id="cb47-10"><a href="#cb47-10"></a>  <span class="fu">theme_update</span>() <span class="sc">+</span></span>
-<span id="cb47-11"><a href="#cb47-11"></a>  <span class="fu">ggtitle</span>(<span class="st">"Sentiment (V1) in SOTU-speeches over time"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a>d <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span></span>
+<span id="cb48-2"><a href="#cb48-2"></a>  <span class="fu">mutate</span>(<span class="at">sentiment1 =</span> (positive <span class="sc">-</span> negative) <span class="sc">/</span> (positive <span class="sc">+</span> negative),</span>
+<span id="cb48-3"><a href="#cb48-3"></a>         <span class="at">sentiment2 =</span> (positive <span class="sc">-</span> negative) <span class="sc">/</span> length,</span>
+<span id="cb48-4"><a href="#cb48-4"></a>         <span class="at">subjectivity=</span>(positive <span class="sc">+</span> negative) <span class="sc">/</span> length)</span>
+<span id="cb48-5"><a href="#cb48-5"></a></span>
+<span id="cb48-6"><a href="#cb48-6"></a><span class="co"># Line plot</span></span>
+<span id="cb48-7"><a href="#cb48-7"></a>d <span class="sc">%&gt;%</span></span>
+<span id="cb48-8"><a href="#cb48-8"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Date, <span class="at">y =</span> sentiment1)) <span class="sc">+</span></span>
+<span id="cb48-9"><a href="#cb48-9"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"darkred"</span>) <span class="sc">+</span></span>
+<span id="cb48-10"><a href="#cb48-10"></a>  <span class="fu">theme_update</span>() <span class="sc">+</span></span>
+<span id="cb48-11"><a href="#cb48-11"></a>  <span class="fu">ggtitle</span>(<span class="st">"Sentiment (V1) in SOTU-speeches over time"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
-<p><img data-src="02_textanalysis_files/figure-revealjs/unnamed-chunk-31-1.png" width="1440"></p>
+<p><img data-src="02_textanalysis_files/figure-revealjs/unnamed-chunk-33-1.png" width="1440"></p>
 </div>
 </div>
 </section>
 <section id="subjectivity-in-sotu-speeches-over-time" class="slide level2">
 <h2>Subjectivity in SOTU-speeches over time</h2>
 
-<img data-src="02_textanalysis_files/figure-revealjs/unnamed-chunk-32-1.png" width="1152" class="r-stretch"></section>
+<img data-src="02_textanalysis_files/figure-revealjs/unnamed-chunk-34-1.png" width="1152" class="r-stretch"></section>
 <section id="sentiment-of-different-presidents" class="slide level2">
 <h2>Sentiment of different presidents</h2>
 
-<img data-src="02_textanalysis_files/figure-revealjs/unnamed-chunk-33-1.png" width="960" class="r-stretch"></section></section>
+<img data-src="02_textanalysis_files/figure-revealjs/unnamed-chunk-35-1.png" width="960" class="r-stretch"></section></section>
 <section>
 <section id="reliability-and-validity" class="title-slide slide level1 center" data-background-color="steelblue">
 <h1>Reliability and Validity</h1>
@@ -1571,7 +1632,9 @@ docs               negative positive
 <li><p>It demonstrates the strong role of the state in constructing pandemic news and suggesting that mainstream news organizations’ social media posts maintain a strong elite orientation</p></li>
 <li><p>Health sources were also prominent, while significant diversity of sources, including citizen sources, emerged as the pandemic went on</p></li>
 </ul>
-<p><em>Mellado et al., 2021</em></p>
+<p style="font-size:0.75em;">
+<em>Mellado et al., 2021</em>
+</p>
 </section>
 <section id="method-dictionary-approach" class="slide level2">
 <h2>Method: Dictionary approach</h2>
@@ -1599,7 +1662,9 @@ docs               negative positive
 <li><p>investigated sentiment about migration, revealing country- and party-specific patterns</p></li>
 </ul>
 <p><br><br></p>
-<p><em>Heidenreich et al., 2019</em></p>
+<p style="font-size:0.75em;">
+<em>Heidenreich et al., 2019</em>
+</p>
 </section>
 <section id="methods" class="slide level2">
 <h2>Methods</h2>
@@ -1667,9 +1732,12 @@ docs               negative positive
 <section id="required-reading" class="slide level2">
 <h2>Required Reading</h2>
 <p><br><br></p>
-<p>Welbers, K., Van Atteveldt, W., &amp; Benoit, K. (2017). Text analysis in R. Communication Methods and Measures, 11(4), 245-265.</p>
-<p>Heidenreich, T., Eberl, J.-M., Lind, F. &amp; Boomgaarden, H. (2020). Political migration discourses on social media: a comparative perspective on visibility and sentiment across political Facebook accounts in Europe. Journal of Ethnic and Migration Studies, (46)7, 1261-1280, https://doi.org/10.1080/1369183X.2019.1665990</p>
-<p>Mellado, C., Hallin, D., Cárcamo, L. Alfaro, R. … &amp; Ramos, A. (2021) Sourcing Pandemic News: A Cross-National Computational Analysis of Mainstream Media Coverage of COVID-19 on Facebook, Twitter, and Instagram. Digital Journalism, 9(9), 1271-1295, https://doi.org/10.1080/21670811.2021.1942114</p>
+<ul>
+<li><p>Welbers, K., Van Atteveldt, W., &amp; Benoit, K. (2017). Text analysis in R. Communication Methods and Measures, 11(4), 245-265.</p></li>
+<li><p>Heidenreich, T., Eberl, J.-M., Lind, F. &amp; Boomgaarden, H. (2020). Political migration discourses on social media: a comparative perspective on visibility and sentiment across political Facebook accounts in Europe. Journal of Ethnic and Migration Studies, (46)7, 1261-1280, https://doi.org/10.1080/1369183X.2019.1665990</p></li>
+<li><p style="font-size:0.75em;">
+</p><p>Mellado, C., Hallin, D., Cárcamo, L. Alfaro, R. … &amp; Ramos, A. (2021) Sourcing Pandemic News: A Cross-National Computational Analysis of Mainstream Media Coverage of COVID-19 on Facebook, Twitter, and Instagram. Digital Journalism, 9(9), 1271-1295, https://doi.org/10.1080/21670811.2021.1942114</p></li>
+</ul>
 <p><br></p>
 <p><em>(available on Canvas)</em></p>
 </section>
@@ -2036,7 +2104,8 @@ docs               negative positive
       for (var i=0; i<noterefs.length; i++) {
         const ref = noterefs[i];
         tippyHover(ref, function() {
-          let href = ref.getAttribute('href');
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);
