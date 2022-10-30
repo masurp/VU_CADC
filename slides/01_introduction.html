@@ -7,7 +7,7 @@
 <link href="01_introduction_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="01_introduction_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="01_introduction_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.0.36">
+  <meta name="generator" content="quarto-1.1.251">
 
   <meta name="author" content="Dr.&nbsp;Philipp K. Masur">
   <title>Computational Analysis of Digital Communication</title>
@@ -19,10 +19,15 @@
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    span.underline{text-decoration: underline;}
-    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
     pre > code.sourceCode { white-space: pre; position: relative; }
     pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -377,6 +382,9 @@
       margin-right: 0; 
     }
   </style>
+  <script src="01_introduction_files/libs/quarto-diagram/mermaid.min.js"></script>
+  <script src="01_introduction_files/libs/quarto-diagram/mermaid-init.js"></script>
+  <link href="01_introduction_files/libs/quarto-diagram/mermaid.css" rel="stylesheet">
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -448,6 +456,9 @@
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><img data-src="https://www.pluggedin.com/wp-content/uploads/2019/12/minority-report-1024x677.jpg"></p>
+<p style="font-size:0.75em;">
+<em>Movie “Minority Report”, 2002</em>
+</p>
 </div><div class="column" style="width:50%;">
 <ul>
 <li><p>Already years ago, police departments have started to use a system called CRUSH (Criminal Reduction Utilizing Statistical History)</p></li>
@@ -460,10 +471,40 @@
 <section id="computational-social-science" class="slide level2">
 <h2>Computational Social Science</h2>
 <ul>
-<li><p>Field of Social Science that uses algorithmic tools and large/unstructured data to understand human/social behavior</p></li>
-<li><p>Computational methods as “microscope”: methods are not the goal, but contribute to theoretical development and/or data generation</p></li>
+<li><p>Field of Social Science that uses algorithmic tools and large/unstructured data to understand human and social behavior</p></li>
+<li><p>Computational methods as “microscope”: Methods are not the goal, but contribute to theoretical development and/or data generation</p></li>
 <li><p>Complements rather than replaces traditional methodologies</p></li>
+<li><p>Includes methods such as, e.g.,:</p>
+<ul>
+<li>Advanced data wrangling/data science</li>
+<li>Combining of different data sets</li>
+<li>Automated Text Analysis</li>
+<li>Machine Learning (supervised and unsupervised)</li>
+<li>Actor-based modelling</li>
+<li>Simulations</li>
+<li>…</li>
+</ul></li>
 </ul>
+</section>
+<section id="typical-workflow" class="slide level2">
+<h2>Typical workflow</h2>
+<div class="cell" data-reveal="true">
+<div class="cell-output-display">
+<div>
+<p>
+</p><pre class="mermaid" data-tooltip-selector="#mermaid-tooltip-1">flowchart TB
+    A[Problem/Purpose] --&gt; B[Data Acquistion]
+    B --&gt; D[Data Wrangling/Cleaning]
+    D --&gt; E[Modeling/Analysis]
+    E --&gt; F[Visualization/Reporting]
+</pre>
+<div id="mermaid-tooltip-1" class="mermaidTooltip">
+
+</div>
+<p></p>
+</div>
+</div>
+</div>
 </section>
 <section id="why-is-this-important-now" class="slide level2">
 <h2>Why is this important now?</h2>
@@ -523,10 +564,6 @@ td {
 </tr>
 </tbody>
 </table>
-<p><br></p>
-<p style="font-size:0.75em;">
-<em>Salganik, 2017, chap.&nbsp;2.3</em>
-</p>
 </section>
 <section id="characteristics-of-big-data-1" class="slide level2">
 <h2>10 Characteristics of Big Data</h2>
@@ -582,7 +619,7 @@ td {
 <div class="column" style="width:50%;">
 <ul>
 <li><p>Smartphone log data (Masur, 2018)</p></li>
-<li><p>Incredible detailed log of each person’s use</p></li>
+<li><p>Incredible detailed log of each person’s smartphone use</p></li>
 <li><p>Big data?</p>
 <ul>
 <li>BIG: Thousands of rows per person, but not many columns</li>
@@ -600,14 +637,32 @@ td {
 </section>
 <section id="typical-computational-research-strategies" class="slide level2">
 <h2>Typical computational research strategies</h2>
+<div class="column" style="width:52%;">
 <h3 id="counting-things">1. Counting things</h3>
-<p>In the age of big data, researcher can “count” more than ever (e.g., how often do people use their smartphone per day)</p>
+<p>In the age of big data, researcher can “count” more than ever</p>
+<ul>
+<li>How often do people use their smartphone per day?</li>
+<li>About which topics do news websites write most often?</li>
+</ul>
 <p><br></p>
 <h3 id="forecasting-and-nowcasting">2. Forecasting and nowcasting</h3>
-<p>Big data allow for more accurate predictions both in the present and in the future (e.g., )</p>
-<p><br></p>
+<p>Big data allow for more accurate predictions both in the present and in the future</p>
+<ul>
+<li>Investigate when people disclose themselves in computer-mediated communication</li>
+<li>Crime prediction</li>
+</ul>
+</div>
+<div class="column" style="width:4%;">
+
+</div>
+<div class="column" style="width:40%;">
 <h3 id="approximating-experiments">3. Approximating experiments</h3>
-<p>Computational methods provide opportunities to conduct “natural experiments” (e.g., check smartphone log data of people who use their smartphone naturally and those who abstain from certain apps, e.g., social media)</p>
+<p>Computational methods provide opportunities to conduct “natural experiments”</p>
+<ul>
+<li>Compare smartphone log data of people who use their smartphone naturally vs.&nbsp;those who abstain from certain apps (e.g., social media apps)</li>
+<li>Investigate the potential of nudges to make users select certain news</li>
+</ul>
+</div>
 </section>
 <section id="advantages-and-disadvantages" class="slide level2">
 <h2>Advantages and Disadvantages</h2>
@@ -618,6 +673,9 @@ td {
 <li>Social context vs.&nbsp;lab setting</li>
 <li>Small N to large N</li>
 </ul></li>
+</ul>
+<p><br></p>
+<ul>
 <li>Disadvantages of Computational Methods
 <ul>
 <li>Techniques often complicated</li>
@@ -668,15 +726,15 @@ td {
 <section id="example-1-simulating-search-queries-1" class="slide level2">
 <h2>Example 1: Simulating search queries</h2>
 <div class="columns">
-<div class="column" style="width:50%;">
+<div class="column" style="width:40%;">
 <ul>
 <li><p>They conducted 215,999 search requests with varying combinations of search terms</p></li>
 <li><p>Counseling services were displayed at high rates after suicide-related potentially harmful search queries (e.g., “how to commit suicide”)</p></li>
 <li><p>Display rates were substantially lower when drug-related terms, indicative of users’ suicidal overdosing tendencies, were added (e.g., “how to commit suicide fentanyl”)</p></li>
 </ul>
-</div><div class="column" style="width:5%;">
+</div><div class="column" style="width:2%;">
 
-</div><div class="column" style="width:45%;">
+</div><div class="column" style="width:55%;">
 <p><img data-src="img/haim_searchqueries.jpg"></p>
 </div>
 </div>
@@ -931,7 +989,7 @@ td {
 </div><div class="column" style="width:45%;">
 <h3 id="r-help-desk">R Help Desk</h3>
 <p>If you have any further problems related to installing software, running packages or code, or simply an error message you do not understand, you can address the R Help Desk:</p>
-<p><strong>Office Hours:</strong> t.b.a.</p>
+<p><strong>Office Hours:</strong> Wednesday: 13.00 - 15.00 on Zoom (see canvas)</p>
 </div>
 </div>
 </section>
@@ -1007,6 +1065,9 @@ td {
 <li>Introduction to computational methods</li>
 <li>Text as data: Introduction to text analysis and dictionary approaches</li>
 </ul></li>
+</ul>
+<p><br></p>
+<ul>
 <li><p><strong>Cycle 2:</strong> Machine Learning</p>
 <ul>
 <li>Automated text analysis: Supervised machine learning approaches</li>
@@ -1039,6 +1100,9 @@ td {
 <li>Basics of text analysis</li>
 <li>Dictionary approaches</li>
 </ul></li>
+</ul>
+<p><br></p>
+<ul>
 <li><p><strong>Cycle 2:</strong> Machine Learning</p>
 <ul>
 <li>Supervised text analysis</li>
@@ -1059,15 +1123,18 @@ td {
 </section>
 <section id="attendance" class="slide level2">
 <h2>Attendance</h2>
+<p>You will realize that this course has a comparatively steep learning curve. We will learn about complex research papers and recreate their analyses in R. It is thus generally recommended to follow all lectures and practical sessions! Despite some initial challenges, you will also experience a lot of self-efficacy: Learning R and computational methods is very rewarding and at the end, you can be proud of what you have achieved!</p>
+<p><br></p>
 <ul>
-<li><p>Attendance during the regular lectures is not compulsory but highly recommended.</p></li>
+<li><p>Attendance during the regular lectures is not compulsory but highly recommended (this is the content for the exam!).</p></li>
 <li><p>Attendance of the practical sessions is mandatory.</p></li>
-<li><p>One absence from one of the workgroup sessions, for serious health, family, or work reasons, can be excused if the instructor is advised in advance.</p></li>
+<li><p>One absence from one of the workgroup sessions, for serious health, family, or work reasons, can be excused if the instructor is advised <strong>in advance</strong>.</p></li>
 </ul>
 </section>
 <section id="exam" class="slide level2">
 <h2>Exam</h2>
 <p>After the first two cycles, there will be a written exam (<strong>40% of the final grade</strong>):</p>
+<p><br></p>
 <ul>
 <li><p>The exam will consist of ~35 multiple choice questions and ~6 open-ended questions</p></li>
 <li><p>Exam questions will be based on all material discussed in the first two cycles, including lecture content, class materials, and required readings</p></li>
@@ -1077,16 +1144,24 @@ td {
 </section>
 <section id="homework" class="slide level2">
 <h2>Homework</h2>
-<p>After each week, students are required to hand in a “homework”, which represents a practical application of some of the taught analysis methods (e.g.&nbsp;with a new data set, specific research question) pass (<strong>30% of the final grade</strong>):</p>
+<p>After each week, students are required to hand in a “homework”, which represents a practical application of some of the taught analysis methods (e.g.&nbsp;with a new data set, specific research question) (<strong>30% of the final grade</strong>):</p>
+<p><br></p>
 <ul>
 <li><p>Each week’s assignment requires students to apply the methods they have learned to a new data set</p></li>
 <li><p>Students will receive an RMarkdown template for their code and the respective data set(s)</p></li>
 <li><p>Students are required to hand in the RMarkdown file and a compiled html on Thursday (24:00) the week after. All homework assignments must be submitted to pass.</p></li>
+<li><p>Homework assignment will be graded as follows:</p>
+<ul>
+<li>Fail: <strong>-1</strong></li>
+<li>Pass: <strong>0</strong></li>
+<li>Good: <strong>1</strong></li>
+</ul></li>
 </ul>
 </section>
 <section id="group-presentation" class="slide level2">
 <h2>Group presentation</h2>
 <p>In the third cycle, students will be assigned to small working groups in which they independently conduct a research project. A final presentation will be graded per group (<strong>30% of the final grade</strong>).</p>
+<p><br></p>
 <ul>
 <li>A 10-minute talk (including appropriate slides) in which you:
 <ul>
@@ -1124,7 +1199,7 @@ td {
 <span id="cb1-11"><a href="#cb1-11"></a>                 <span class="at">fill =</span> <span class="st">"lightblue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
 <div class="cell-output-display">
-<p><img data-src="01_introduction_files/figure-revealjs/unnamed-chunk-2-1.png" width="480"></p>
+<p><img data-src="01_introduction_files/figure-revealjs/unnamed-chunk-3-1.png" width="480"></p>
 </div>
 </div>
 </div>
@@ -1227,7 +1302,7 @@ Num. obs.    100
 </div><div class="column" style="width:65%;">
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="01_introduction_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></p>
+<p><img data-src="01_introduction_files/figure-revealjs/unnamed-chunk-6-1.png" width="960"></p>
 </div>
 </div>
 </div>
@@ -1634,7 +1709,8 @@ Num. obs.    100
       for (var i=0; i<noterefs.length; i++) {
         const ref = noterefs[i];
         tippyHover(ref, function() {
-          let href = ref.getAttribute('href');
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);

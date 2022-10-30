@@ -80,6 +80,8 @@ My name is Philipp Masur, I am an Assistant Professor at the Department of Commu
 ::: columns
 ::: {.column width="50%"}
 ![](https://www.pluggedin.com/wp-content/uploads/2019/12/minority-report-1024x677.jpg)
+
+<p style="font-size:0.75em;">*Movie "Minority Report", 2002*</p>
 :::
 
 ::: {.column width="50%"}
@@ -93,11 +95,32 @@ My name is Philipp Masur, I am an Assistant Professor at the Department of Commu
 
 ## Computational Social Science
 
--   Field of Social Science that uses algorithmic tools and large/unstructured data to understand human/social behavior
+-   Field of Social Science that uses algorithmic tools and large/unstructured data to understand human and social behavior
 
--   Computational methods as "microscope": methods are not the goal, but contribute to theoretical development and/or data generation
+-   Computational methods as "microscope": Methods are not the goal, but contribute to theoretical development and/or data generation
 
 -   Complements rather than replaces traditional methodologies
+
+-   Includes methods such as, e.g.,:
+    
+    - Advanced data wrangling/data science
+    - Combining of different data sets 
+    - Automated Text Analysis
+    - Machine Learning (supervised and unsupervised)
+    - Actor-based modelling
+    - Simulations
+    - ...
+    
+
+## Typical workflow
+
+```{mermaid}
+flowchart TB
+    A[Problem/Purpose] --> B[Data Acquistion]
+    B --> D[Data Wrangling/Cleaning]
+    D --> E[Modeling/Analysis]
+    E --> F[Visualization/Reporting]
+```
 
 ## Why is this important now?
 
@@ -128,10 +151,6 @@ td {
 | 4   | Incomplete     | Most big data sources are incomplete, in the sense that they don't have the information that you will want for your research. This is a common feature of data that were created for purposes other than research.                                                              |
 | 5   | Inaccessible   | Data held by companies and governments are difficult for researchers to access.                                                                                                                                                                                                 |
 
-<br>
-
-<p style="font-size:0.75em;">*Salganik, 2017, chap. 2.3*</p>
-
 ## 10 Characteristics of Big Data
 
 |     | Characteristic                 | Description                                                                                                                                   |
@@ -152,7 +171,7 @@ td {
 ::: {.column width="50%"}
 -   Smartphone log data (Masur, 2018)
 
--   Incredible detailed log of each person's use
+-   Incredible detailed log of each person's smartphone use
 
 -   Big data?
 
@@ -172,21 +191,38 @@ td {
 
 ## Typical computational research strategies
 
+
+::: {.column width="52%"}
 ### 1. Counting things
 
-In the age of big data, researcher can "count" more than ever (e.g., how often do people use their smartphone per day)
+In the age of big data, researcher can "count" more than ever
+
+- How often do people use their smartphone per day?
+- About which topics do news websites write most often?
 
 <br>
 
 ### 2. Forecasting and nowcasting
 
-Big data allow for more accurate predictions both in the present and in the future (e.g., )
+Big data allow for more accurate predictions both in the present and in the future 
 
-<br>
+- Investigate when people disclose themselves in computer-mediated communication
+- Crime prediction
 
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="40%"}
 ### 3. Approximating experiments
 
-Computational methods provide opportunities to conduct "natural experiments" (e.g., check smartphone log data of people who use their smartphone naturally and those who abstain from certain apps, e.g., social media)
+Computational methods provide opportunities to conduct "natural experiments"
+
+- Compare smartphone log data of people who use their smartphone naturally vs. those who abstain from certain apps (e.g., social media apps)
+- Investigate the potential of nudges to make users select certain news
+
+:::
 
 ## Advantages and Disadvantages
 
@@ -194,6 +230,9 @@ Computational methods provide opportunities to conduct "natural experiments" (e.
     -   Actual behavior vs. self-report
     -   Social context vs. lab setting
     -   Small N to large N
+    
+<br>
+    
 -   Disadvantages of Computational Methods
     -   Techniques often complicated
     -   Data often proprietary
@@ -241,7 +280,7 @@ The recent acceleration in the use of computational methods for communication sc
 ## Example 1: Simulating search queries
 
 ::: columns
-::: {.column width="50%"}
+::: {.column width="40%"}
 -   They conducted 215,999 search requests with varying combinations of search terms
 
 -   Counseling services were displayed at high rates after suicide-related potentially harmful search queries (e.g., "how to commit suicide")
@@ -249,10 +288,10 @@ The recent acceleration in the use of computational methods for communication sc
 -   Display rates were substantially lower when drug-related terms, indicative of users' suicidal overdosing tendencies, were added (e.g., "how to commit suicide fentanyl")
 :::
 
-::: {.column width="5%"}
+::: {.column width="2%"}
 :::
 
-::: {.column width="45%"}
+::: {.column width="55%"}
 ![](img/haim_searchqueries.jpg)
 :::
 :::
@@ -468,7 +507,8 @@ Not everything will work at the first time. Because we work with code, tiny mist
 
 If you have any further problems related to installing software, running packages or code, or simply an error message you do not understand, you can address the R Help Desk:
 
-**Office Hours:** t.b.a.
+**Office Hours:** 
+Wednesday: 13.00 - 15.00 on Zoom (see canvas)
 :::
 :::
 
@@ -552,6 +592,8 @@ Communication and assignment submission via Canvas
     -   Introduction to computational methods
     -   Text as data: Introduction to text analysis and dictionary approaches
 
+<br>
+
 -   **Cycle 2:** Machine Learning
 
     -   Automated text analysis: Supervised machine learning approaches
@@ -581,6 +623,8 @@ Communication and assignment submission via Canvas
     -   Basics of text analysis
     -   Dictionary approaches
 
+<br>
+
 -   **Cycle 2:** Machine Learning
 
     -   Supervised text analysis
@@ -599,15 +643,21 @@ Communication and assignment submission via Canvas
 
 ## Attendance
 
--   Attendance during the regular lectures is not compulsory but highly recommended.
+You will realize that this course has a comparatively steep learning curve. We will learn about complex research papers and recreate their analyses in R. It is thus generally recommended to follow all lectures and practical sessions! Despite some initial challenges, you will also experience a lot of self-efficacy: Learning R and computational methods is very rewarding and at the end, you can be proud of what you have achieved!
+
+<br>
+
+-   Attendance during the regular lectures is not compulsory but highly recommended (this is the content for the exam!).
 
 -   Attendance of the practical sessions is mandatory.
 
--   One absence from one of the workgroup sessions, for serious health, family, or work reasons, can be excused if the instructor is advised in advance.
+-   One absence from one of the workgroup sessions, for serious health, family, or work reasons, can be excused if the instructor is advised **in advance**.
 
 ## Exam
 
 After the first two cycles, there will be a written exam (**40% of the final grade**):
+
+<br>
 
 -   The exam will consist of \~35 multiple choice questions and \~6 open-ended questions
 
@@ -619,7 +669,9 @@ After the first two cycles, there will be a written exam (**40% of the final gra
 
 ## Homework
 
-After each week, students are required to hand in a "homework", which represents a practical application of some of the taught analysis methods (e.g. with a new data set, specific research question) pass (**30% of the final grade**):
+After each week, students are required to hand in a "homework", which represents a practical application of some of the taught analysis methods (e.g. with a new data set, specific research question) (**30% of the final grade**):
+
+<br>
 
 -   Each week's assignment requires students to apply the methods they have learned to a new data set
 
@@ -627,9 +679,17 @@ After each week, students are required to hand in a "homework", which represents
 
 -   Students are required to hand in the RMarkdown file and a compiled html on Thursday (24:00) the week after. All homework assignments must be submitted to pass.
 
+-   Homework assignment will be graded as follows:
+    
+    - Fail: **-1**
+    - Pass: **0**
+    - Good: **1**
+
 ## Group presentation
 
 In the third cycle, students will be assigned to small working groups in which they independently conduct a research project. A final presentation will be graded per group (**30% of the final grade**).
+
+<br>
 
 -   A 10-minute talk (including appropriate slides) in which you:
     -   introduce the research project (1-2 slides)
