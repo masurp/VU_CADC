@@ -261,8 +261,6 @@ How we can study large quantities of documents and texts?
 
 ## (2) From text to data
 
-::: {.column width="35%"}
-
 - Algorithms (or generally R) process numbers, they do not read text
 
 - First step in any analysis is to convert text to series of numbers
@@ -945,7 +943,7 @@ Making sure the automated coding is correct!
 - Agreement with manual coding, which is often regarded as the 'gold-standard', is often seen as validity (but this holds only if human beings are inerrant!)
 
 
-## Reliability / Confustion Matrix
+## Reliability / Confusion Matrix
 
 ::: {.column width="45%"}
 ![](https://glassboxmedicine.files.wordpress.com/2019/02/confusion-matrix.png)
