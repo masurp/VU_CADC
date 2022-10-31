@@ -3,22 +3,32 @@ R Tidyverse: Data Transformation & Summarization
 Kasper Welbers, Wouter van Atteveldt & Philipp Masur
 2021-10
 
--   [Introduction](#introduction)
-    -   [Installing tidyverse](#installing-tidyverse)
--   [Tidyverse basics](#tidyverse-basics)
-    -   [Reading data](#reading-data)
-    -   [Subsetting with filter()](#subsetting-with-filter)
-    -   [Selecting certain columns](#selecting-certain-columns)
-    -   [Sorting with arrange()](#sorting-with-arrange)
-    -   [Adding or transforming variables with
-        mutate()](#adding-or-transforming-variables-with-mutate)
--   [Working with Pipes](#working-with-pipes)
--   [Data Summarization](#data-summarization)
-    -   [Grouping rows](#grouping-rows)
-    -   [Summarizing](#summarizing)
-    -   [Using mutate with group_by](#using-mutate-with-group_by)
-    -   [Ungrouping](#ungrouping)
--   [Multiple grouping variables](#multiple-grouping-variables)
+- <a href="#introduction" id="toc-introduction">Introduction</a>
+  - <a href="#installing-tidyverse" id="toc-installing-tidyverse">Installing
+    tidyverse</a>
+- <a href="#tidyverse-basics" id="toc-tidyverse-basics">Tidyverse
+  basics</a>
+  - <a href="#reading-data" id="toc-reading-data">Reading data</a>
+  - <a href="#subsetting-with-filter"
+    id="toc-subsetting-with-filter">Subsetting with filter()</a>
+  - <a href="#selecting-certain-columns"
+    id="toc-selecting-certain-columns">Selecting certain columns</a>
+  - <a href="#sorting-with-arrange" id="toc-sorting-with-arrange">Sorting
+    with arrange()</a>
+  - <a href="#adding-or-transforming-variables-with-mutate"
+    id="toc-adding-or-transforming-variables-with-mutate">Adding or
+    transforming variables with mutate()</a>
+- <a href="#working-with-pipes" id="toc-working-with-pipes">Working with
+  Pipes</a>
+- <a href="#data-summarization" id="toc-data-summarization">Data
+  Summarization</a>
+  - <a href="#grouping-rows" id="toc-grouping-rows">Grouping rows</a>
+  - <a href="#summarizing" id="toc-summarizing">Summarizing</a>
+  - <a href="#using-mutate-with-group_by"
+    id="toc-using-mutate-with-group_by">Using mutate with group_by</a>
+  - <a href="#ungrouping" id="toc-ungrouping">Ungrouping</a>
+- <a href="#multiple-grouping-variables"
+  id="toc-multiple-grouping-variables">Multiple grouping variables</a>
 
 # Introduction
 
@@ -327,7 +337,7 @@ doing multiple analyses with it. In that case, you probably want to
 store the result of downloading, cleaning, and subsetting as a variable,
 and use that in your analyses.
 
-**Exercise 2:** Create a subset of the tibble `d` in which only polls
+**Exercise 1:** Create a subset of the tibble `d` in which only polls
 with the question “arm-teachers” are included. Select only the variables
 *Pollster*, *Population*, and *Support* (feel free to rename them to
 more shorter abbreviations at the same time). Recode the variable
@@ -498,17 +508,17 @@ and different intentions to disclose onself. The full data set can be
 downloaded here: <https://osf.io/kfm6x/>. This subset contains the
 following variables:
 
--   **id**: participants’ unique identifiers
--   **condition**: the condition they were randomly assigned.
--   **norm**: The first manipulated factor, i.e., number of posts that
-    contained faces.
--   **profile**: The second manipulated factor, i.e., the number of
-    profile pictures that contained faces
--   **age**: Age of the participants -**gender**: Gender of the
-    participants -**norm_perc**: A scale measuring how strongly
-    participants perceived the social norm to disclose oneself on the
-    platform. -**disclosure**: Their intention to disclose themselves on
-    the platform
+- **id**: participants’ unique identifiers
+- **condition**: the condition they were randomly assigned.
+- **norm**: The first manipulated factor, i.e., number of posts that
+  contained faces.
+- **profile**: The second manipulated factor, i.e., the number of
+  profile pictures that contained faces
+- **age**: Age of the participants -**gender**: Gender of the
+  participants -**norm_perc**: A scale measuring how strongly
+  participants perceived the social norm to disclose oneself on the
+  platform. -**disclosure**: Their intention to disclose themselves on
+  the platform
 
 Using the functions of the tidyverse, try to answer the following
 questions:

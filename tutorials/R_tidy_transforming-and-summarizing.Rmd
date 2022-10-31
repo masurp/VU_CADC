@@ -243,7 +243,7 @@ For example, you might want to download, clean, and subset a data set before doi
 In that case, you probably want to store the result of downloading, cleaning, and subsetting as a variable, and use that in your analyses.
 
 
-**Exercise 2:** Create a subset of the tibble `d` in which only polls with the question "arm-teachers" are included. Select only the variables *Pollster*, *Population*, and *Support* (feel free to rename them to more shorter abbreviations at the same time). Recode the variable Support so that it ranges from 0 to 1. Recode the variable *Population* so that the values reader *reg* and *adu* (tip: use the function `recode()` within a `mutate()` command. If you don't know how the `recode` function works, use the help function `?`!)
+**Exercise 1:** Create a subset of the tibble `d` in which only polls with the question "arm-teachers" are included. Select only the variables *Pollster*, *Population*, and *Support* (feel free to rename them to more shorter abbreviations at the same time). Recode the variable Support so that it ranges from 0 to 1. Recode the variable *Population* so that the values reader *reg* and *adu* (tip: use the function `recode()` within a `mutate()` command. If you don't know how the `recode` function works, use the help function `?`!)
 
 ```{r}
 d
