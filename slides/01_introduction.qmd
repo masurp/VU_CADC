@@ -119,13 +119,7 @@ My name is Philipp Masur, I am an Assistant Professor at the Department of Commu
 
 ## Typical workflow
 
-```{mermaid}
-flowchart TB
-    A[Problem/Purpose] --> B[Data Acquistion]
-    B --> D[Data Wrangling/Cleaning]
-    D --> E[Modeling/Analysis]
-    E --> F[Visualization/Reporting]
-```
+![](https://images.squarespace-cdn.com/content/v1/55fdfa38e4b07a55be8680a4/1615903072761-9H9XREOMPJFBGI8QAW1U/Data+Science+Workflow+Image.jpg)
 
 ## Why is this important now?
 
