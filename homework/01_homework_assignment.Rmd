@@ -1,5 +1,5 @@
 ---
-title: 'Homework 1: Basic Data Wrangling '
+title: 'Homework 1: Basic Data Wrangling & Visualization '
 author: "Philipp Masur"
 date: ""
 output:
@@ -39,9 +39,9 @@ head(d)
 
 ## Task 1: Provide a description of the sample
 
-Let's explore the data set. The data set contains some variables that assess socio-demographic characteristics of the participants (age, gender, edu, race...). Use the tidyverse functions that we discussed on the last practical session, 
+Let's explore the data set. The data set contains some variables that assess socio-demographic characteristics of the participants (age, gender, edu, race...). Use the tidyverse functions that we discussed on the last practical session to:
 
-- Create a subset that only contains socio-demographic variables.
+- create a subset that only contains socio-demographic variables.
 - How old are participants on average?
 - How many female and male participants are in the data set (0 = male, 1 = female, 2 = other)?
 - How old are participants from different educational levels?
@@ -50,13 +50,17 @@ Let's explore the data set. The data set contains some variables that assess soc
 # Solution here
 ```
 
+
+Answer: [Describe your results in a few sentences here]
+
+
 ## Task 2: Explore social media use 
 
-The following code adds a mean indices that represent the latent dimension *critical media literacy* (ranging from 1 to 7). 
+The following code adds a mean indice that represent the latent dimension *critical media literacy* (ranging from 1 to 7). 
 
 - Create a subset that contains the variables *age*, *edu*, and *MLI_CRI*.
-- Remove all missing values using the function `na.omit()`.
-- Does critical media literacy differ depending on the educational level?
+- Remove all missing values using the function `na.omit()` (Don't forget to save the new data set in order to be able to use it for subsequent analyses!)
+- Does critical media literacy differ depending on the educational level? Create a respective table and plot the differences (Bonus: How could we test this with a statistical test?)
 - Filter out people below 40 and again assess whether critical media literacy differs across educational levels.
 
 ```{r}
@@ -66,16 +70,36 @@ d <- d %>%
 # Solution here
 ```
 
+Answer: [Describe your results in a few sentences here]
 
 ## Task 3: Norm perceptions on Instagram
 
 The data set contains some variables that measure norm perceptions in relation to visual self-disclosure on Instagram (12 items starting with "INV_NOR_"). 
 
 - Create the mean across all these item per person and add it as a new column to the data set.
-- Do norm perceptions differ depending on gender?
+- Do norm perceptions differ depending on gender? (Create a respective plot and test whether the difference is significant)
 
 
 ```{r}
 # Solution here
+
 ```
 
+Answer: [Describe your results in a few sentences here]
+
+## Task 4: Relationship between norm perceptions and self-disclosure  on Instagram
+
+The code below creates another mean indice that represent the latent dimension "Self-disclosure on Instagram" (ranging from 1 to 7). Let's explore the relationship between norm perceptions and self-disclosure. 
+
+- Create a scatterplot that shows the relationship (add both points and a regression line). Bonus: Change the axis-labels to be more meaningful and adjust the layout/aesthetics to create a publication-ready figure
+- Does the relationship differ depending on education and gender? (There are different ways how one can explore this visually... Tip: It has to do with adding a group aesthetic or using facet_grid().)
+- 
+
+```{r}
+d <- d %>%
+  mutate(behavior = rowMeans(d %>% select(contains("IND_BEH")), na.rm = T))
+
+# Solution here
+```
+
+Answer: [Describe your results in a few sentences here]
