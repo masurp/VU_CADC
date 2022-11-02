@@ -3,19 +3,27 @@ Basics of Data Visualization
 Kasper Welbers, Wouter van Atteveldt & Philipp Masur
 2021-10
 
--   [A basic ggplot plot](#a-basic-ggplot-plot)
-    -   [Loading packages and data](#loading-packages-and-data)
-    -   [Building a layered
-        visualization](#building-a-layered-visualization)
-    -   [Important note on ggplot command
-        syntax](#important-note-on-ggplot-command-syntax)
-    -   [Other aesthetics](#other-aesthetics)
--   [Bar plots](#bar-plots)
-    -   [Setting graph options](#setting-graph-options)
-    -   [Grouped bar plots](#grouped-bar-plots)
--   [Line plots](#line-plots)
--   [Multiple ‘faceted’ plots](#multiple-faceted-plots)
--   [Themes](#themes)
+-   <a href="#a-basic-ggplot-plot" id="toc-a-basic-ggplot-plot">A basic
+    ggplot plot</a>
+    -   <a href="#loading-packages-and-data"
+        id="toc-loading-packages-and-data">Loading packages and data</a>
+    -   <a href="#building-a-layered-visualization"
+        id="toc-building-a-layered-visualization">Building a layered
+        visualization</a>
+    -   <a href="#important-note-on-ggplot-command-syntax"
+        id="toc-important-note-on-ggplot-command-syntax">Important note on
+        ggplot command syntax</a>
+    -   <a href="#other-aesthetics" id="toc-other-aesthetics">Other
+        aesthetics</a>
+-   <a href="#bar-plots" id="toc-bar-plots">Bar plots</a>
+    -   <a href="#setting-graph-options" id="toc-setting-graph-options">Setting
+        graph options</a>
+    -   <a href="#grouped-bar-plots" id="toc-grouped-bar-plots">Grouped bar
+        plots</a>
+-   <a href="#line-plots" id="toc-line-plots">Line plots</a>
+-   <a href="#multiple-faceted-plots"
+    id="toc-multiple-faceted-plots">Multiple ‘faceted’ plots</a>
+-   <a href="#themes" id="toc-themes">Themes</a>
 
 This tutorial teaches the basics of data visualization using the
 `ggplot2` package (included in the `tidyverse`). For more information,
@@ -289,8 +297,8 @@ plot1
 
 Some options, like labels, legends, and the coordinate system are
 graph-wide rather than per layer. You add these options to the graph by
-adding extra functions to the call. For example, we can use
-coord\_flip() to swap the x and y axes:
+adding extra functions to the call. For example, we can use coord_flip()
+to swap the x and y axes:
 
 ``` r
 plot1 + 
@@ -320,8 +328,8 @@ ggplot(nh_gop) +
            stat = 'identity') + 
   coord_flip() +
   xlab("Candidate") + 
-  guides(fill=F) + 
-  theme_minimal()
+  theme_minimal() +
+  theme(legend.position = "none")
 ```
 
 ## Grouped bar plots
@@ -410,8 +418,8 @@ ggplot(super) +
   coord_flip()
 ```
 
-Note <sub>facet\_wrap</sub> wraps around a single facet. You can also
-use \~facet\_grid() to specify separate variables for rows and columns.
+Note <sub>facet_wrap</sub> wraps around a single facet. You can also use
+\~facet_grid() to specify separate variables for rows and columns.
 
 **Exercise 2:** How could we change the plot to color the bars according
 to the candidates?

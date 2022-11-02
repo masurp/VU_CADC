@@ -257,8 +257,8 @@ ggplot(nh_gop) +
            stat = 'identity') + 
   coord_flip() +
   xlab("Candidate") + 
-  guides(fill=F) + 
-  theme_minimal()
+  theme_minimal() +
+  theme(legend.position = "none")
 ```
 
 ## Grouped bar plots
