@@ -150,8 +150,8 @@ on what should be done to the data.
 Note the use of `==` for comparison: In R, `=` means assingment and `==`
 means equals. Other comparisons are e.g. `>` (greather than), `<=` (less
 than or equal) and `!=` (not equal). You can also combine multiple
-conditions with logical (boolean) operators: `&` (and), `|` or, and `!`
-(not), and you can use parentheses like in mathematics.
+conditions with logical (boolean) operators: `&` (and), `|` (or), and
+`!` (not), and you can use parentheses like in mathematics.
 
 So, we can find all surveys where support for raising the gun age was at
 least 80%:
