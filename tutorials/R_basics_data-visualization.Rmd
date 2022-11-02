@@ -20,7 +20,7 @@ library(printr)
 This tutorial teaches the basics of data visualization using the `ggplot2` package (included in the `tidyverse`). 
 For more information, see [R4DS Chapter 3: Data Visualization](http://r4ds.had.co.nz/data-visualisation.html) and  [R4DS Chapter 7: Exploratory Data Analysis](http://r4ds.had.co.nz/exploratory-data-analysis.html).
 
-For *many* cool visualization examples using `gplot2` (with R code included!) see the [R Graph Gallery](https://www.r-graph-gallery.com/portfolio/ggplot2-package/).
+For *many* cool visualization examples using `ggplot2` (with R code included!) see the [R Graph Gallery](https://www.r-graph-gallery.com/portfolio/ggplot2-package/).
 For inspiration (but unfortunately no R code), there is also a [538 blog post on data visualization from 2016](https://fivethirtyeight.com/features/the-52-best-and-weirdest-charts-we-made-in-2016/).
 Finally, see the article on '[the grammar of graphics](http://vita.had.co.nz/papers/layered-grammar.html)' published by Hadley Wickham for more insight into the ideas behind ggplot.
 

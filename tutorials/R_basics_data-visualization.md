@@ -32,7 +32,7 @@ Visualization](http://r4ds.had.co.nz/data-visualisation.html) and [R4DS
 Chapter 7: Exploratory Data
 Analysis](http://r4ds.had.co.nz/exploratory-data-analysis.html).
 
-For *many* cool visualization examples using `gplot2` (with R code
+For *many* cool visualization examples using `ggplot2` (with R code
 included!) see the [R Graph
 Gallery](https://www.r-graph-gallery.com/portfolio/ggplot2-package/).
 For inspiration (but unfortunately no R code), there is also a [538 blog
