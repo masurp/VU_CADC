@@ -17,8 +17,8 @@ tribble(~Class, ~Teacher, ~Time, ~Room,
         "Practical Session 1", "Dr. Alberto López Ortega", "Wednesday, 9:00 & Thursday, 13:30", "HG-05A37",
         "Practical Session 2", "Dr. Alberto López Ortega", "Wednesday, 11:00 & Thursday, 15:30", "HG-05A37",
         "Practical Session 3", "Santiago Gómez-Echeverry", "Wednesday, 9:00 & Friday, 09:00", "HG-05A36 & HG-05A37",
-        "Practical Session 4", "Santiago Gómez-Echeverry", "Wednesday, 11:00 & Friday, 11:00", "HG-05A37 & HG-05A36",
-        "Practical Session 5", "Dr. Kasper Welbers", "Wednesday, 9:00 & Friday, 09:00", "HG-05A37 & BV-0H53") %>%
+        "Practical Session 4", "Santiago Gómez-Echeverry", "Wednesday, 11:00 & Friday, 11:00", "HG-05A36",
+        "Practical Session 5", "Dr. Kasper Welbers", "Wednesday, 9:00 & Friday, 09:00", "HG-06A37 & BV-0H53") %>%
   kable(format = "html") %>%
   kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive")) %>%
   kable_styling(fixed_thead = T) %>%
