@@ -81,7 +81,7 @@ In the third part of the course, students will work on their own research projec
 
 #### Lecture: Text as Data - Basics of Automatic Text Analysis
 
-- Slides Lecture 3:
+- Slides Lecture 2:
     - [Download Slides](slides/02_textanalysis.html)
 
 #### Practical Session 1
@@ -111,7 +111,7 @@ In the third part of the course, students will work on their own research projec
 
 #### Lecture: Machine Learning - Supervised Text Classification
 
-- Slides Lecture 4:
+- Slides Lecture 3:
     - [Download Slides](slides/03_supervisedlearning.html)
 
 #### Practical Session 1
