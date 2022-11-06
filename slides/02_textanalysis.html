@@ -426,8 +426,8 @@
 <h2>Increasing amount of (text) data available online</h2>
 
 <img data-src="img/hilbert_lopez.png" class="r-stretch"><p style="font-size:0.75em;">
-<em>Hilbert &amp; Lopez, 2011</em>
-</p>
+</p><p><em>Hilbert &amp; Lopez, 2011</em></p>
+<p></p>
 </section>
 <section id="problem-or-opportunity" class="slide level2">
 <h2>Problem or opportunity?</h2>
@@ -447,12 +447,12 @@
 <pre><code># A tibble: 6 × 5
      id condition sns_use well_being pers1
   &lt;int&gt; &lt;chr&gt;       &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt;
-1     1 A            3.41      0.717  3.15
-2     2 B            1.28     -1.96   5.65
-3     3 A            1.85     -0.411  4.16
-4     4 B            2.80      3.06   4.81
-5     5 A            2.26      0.961  4.47
-6     6 B            4.66      9.62   4.25</code></pre>
+1     1 A            4.12      5.24   2.94
+2     2 B            3.56      0.825  3.58
+3     3 A            2.95      2.88   1.51
+4     4 B            3.12      3.88   4.67
+5     5 A            3.60      0.311  2.38
+6     6 B            3.71     -1.47   3.06</code></pre>
 </div>
 </div>
 </div><div class="column" style="width:10%;">
@@ -561,8 +561,8 @@
 <li><p>They often depend on the morphological characteristics of language, such as when text is broken into sequences of characters, words, sentences</p></li>
 </ul>
 <p style="font-size:0.75em;">
-<em>Hvitfeldt &amp; Silge, 2021, chap.&nbsp;1</em>
-</p>
+</p><p><em>Hvitfeldt &amp; Silge, 2021, chap.&nbsp;1</em></p>
+<p></p>
 </div><div class="column" style="width:5%;">
 
 </div><div class="column" style="width:45%;">
@@ -613,8 +613,8 @@
 <p><br><br></p>
 
 <img data-src="img/textanalysis.png" class="r-stretch"><p style="font-size:0.75em;">
-<em>van Atteveldt, Welbers, &amp; Van der Velden, 2019</em>
-</p>
+</p><p><em>van Atteveldt, Welbers, &amp; Van der Velden, 2019</em></p>
+<p></p>
 </section>
 <section id="obtaining-texts" class="slide level2">
 <h2>(1) Obtaining texts</h2>
@@ -670,7 +670,7 @@
     B --&gt;|Two| E[Stemming]
     B --&gt;|Three| F[Normalization]
     B --&gt;|Four| G[Frequency trimming]
-    D --&gt; H(Document-Term-Feature-Matrix)
+    D --&gt; H(Document-Feature-Matrix)
     E --&gt; H
     F --&gt; H
     G --&gt; H
@@ -724,6 +724,8 @@
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">library</span>(quanteda)</span>
 <span id="cb5-2"><a href="#cb5-2"></a>toks <span class="ot">&lt;-</span> <span class="fu">tokens</span>(text, <span class="at">remove_punct =</span> <span class="cn">TRUE</span>, <span class="at">remove_numbers =</span> <span class="cn">TRUE</span>) </span>
 <span id="cb5-3"><a href="#cb5-3"></a>toks</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment" data-r.options="list(width = 120)">
 <div class="cell-output cell-output-stdout">
 <pre><code>Tokens consisting of 1 document.
 text1 :
@@ -732,10 +734,10 @@ text1 :
  [9] "Preprocessing" "Techniques"   </code></pre>
 </div>
 </div>
-<br>
+<p><br></p>
 <p style="font-size:0.75em;">
-<em>Manning, Raghavan, and Schütze 2008</em>
-</p>
+</p><p><em>Manning, Raghavan, and Schütze 2008</em></p>
+<p></p>
 </section>
 <section id="types-of-tokens" class="slide level2">
 <h2>Types of Tokens</h2>
@@ -753,8 +755,8 @@ text1 :
 </ul>
 <p><br><br></p>
 <p style="font-size:0.75em;">
-<em>Hvitfeldt &amp; Silge, 2021, chap.&nbsp;2.2</em>
-</p>
+</p><p><em>Hvitfeldt &amp; Silge, 2021, chap.&nbsp;2.2</em></p>
+<p></p>
 </section>
 <section id="removing-stopwords" class="slide level2">
 <h2>Removing stopwords</h2>
@@ -979,8 +981,8 @@ docs    this is an example of preprocessing techniques what happens during
 </ul>
 <p><br><br><br><br></p>
 <p style="font-size:0.75em;">
-<em>Boumans &amp; Trilling, 2016</em>
-</p>
+</p><p><em>Boumans &amp; Trilling, 2016</em></p>
+<p></p>
 </div>
 </div>
 </section>
@@ -1090,9 +1092,8 @@ docs    this is an example of preprocessing techniques what happens during
 <span id="cb28-2"><a href="#cb28-2"></a><span class="fu">library</span>(quanteda.dictionaries)</span>
 <span id="cb28-3"><a href="#cb28-3"></a><span class="fu">library</span>(quanteda.textplots)</span>
 <span id="cb28-4"><a href="#cb28-4"></a></span>
-<span id="cb28-5"><a href="#cb28-5"></a>data_df <span class="ot">&lt;-</span> <span class="fu">convert</span>(data_corpus_sotu, <span class="st">"data.frame"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb28-6"><a href="#cb28-6"></a>  as_tibble</span>
-<span id="cb28-7"><a href="#cb28-7"></a>data_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb28-5"><a href="#cb28-5"></a>data_df <span class="ot">&lt;-</span> <span class="fu">convert</span>(data_corpus_sotu, <span class="st">"data.frame"</span>) <span class="sc">%&gt;%</span> as_tibble</span>
+<span id="cb28-6"><a href="#cb28-6"></a>data_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 241 × 8
    doc_id           text               FirstName President Date       delivery type  party
@@ -1348,9 +1349,11 @@ Washington-1794 :
 </ul>
 <div class="column" style="width:46%;">
 <div class="cell" data-r.options="{&quot;width&quot;:90}">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a>is_trump <span class="ot">&lt;-</span> <span class="fu">docvars</span>(dtm1)<span class="sc">$</span>President <span class="sc">==</span> <span class="st">'Trump'</span> </span>
-<span id="cb36-2"><a href="#cb36-2"></a>trump_dtm <span class="ot">&lt;-</span> dtm1[is_trump,]</span>
-<span id="cb36-3"><a href="#cb36-3"></a><span class="fu">textplot_wordcloud</span>(trump_dtm, <span class="at">max_words =</span> <span class="dv">35</span>, <span class="at">color =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a>is_trump<span class="ot">&lt;-</span><span class="fu">docvars</span>(dtm1)<span class="sc">$</span>President <span class="sc">==</span> <span class="st">'Trump'</span> </span>
+<span id="cb36-2"><a href="#cb36-2"></a>trump_dtm<span class="ot">&lt;-</span>dtm1[is_trump,]</span>
+<span id="cb36-3"><a href="#cb36-3"></a><span class="fu">textplot_wordcloud</span>(trump_dtm, </span>
+<span id="cb36-4"><a href="#cb36-4"></a>                   <span class="at">max_words =</span> <span class="dv">35</span>, </span>
+<span id="cb36-5"><a href="#cb36-5"></a>                   <span class="at">color =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img data-src="02_textanalysis_files/figure-revealjs/unnamed-chunk-24-1.png" width="960"></p>
 </div>
@@ -1361,9 +1364,11 @@ Washington-1794 :
 </div>
 <div class="column" style="width:46%;">
 <div class="cell" data-r.options="{&quot;width&quot;:90}">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a>is_obama <span class="ot">&lt;-</span> <span class="fu">docvars</span>(dtm1)<span class="sc">$</span>President <span class="sc">==</span> <span class="st">'Obama'</span> </span>
-<span id="cb37-2"><a href="#cb37-2"></a>obama_dtm <span class="ot">&lt;-</span> dtm1[is_obama,]</span>
-<span id="cb37-3"><a href="#cb37-3"></a><span class="fu">textplot_wordcloud</span>(obama_dtm, <span class="at">max_words =</span> <span class="dv">35</span>, <span class="at">color =</span> <span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a>is_obama<span class="ot">&lt;-</span><span class="fu">docvars</span>(dtm1)<span class="sc">$</span>President <span class="sc">==</span> <span class="st">'Obama'</span> </span>
+<span id="cb37-2"><a href="#cb37-2"></a>obama_dtm<span class="ot">&lt;-</span>dtm1[is_obama,]</span>
+<span id="cb37-3"><a href="#cb37-3"></a><span class="fu">textplot_wordcloud</span>(obama_dtm, </span>
+<span id="cb37-4"><a href="#cb37-4"></a>                   <span class="at">max_words =</span> <span class="dv">35</span>, </span>
+<span id="cb37-5"><a href="#cb37-5"></a>                   <span class="at">color =</span> <span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img data-src="02_textanalysis_files/figure-revealjs/unnamed-chunk-25-1.png" width="960"></p>
 </div>
@@ -1406,11 +1411,10 @@ Washington-1794 :
 <div class="column" style="width:45%;">
 <p><strong>Negative words</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="fu">head</span>(DictionaryGI<span class="sc">$</span>negative, <span class="dv">14</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="fu">head</span>(DictionaryGI<span class="sc">$</span>negative, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "abandon"     "abandonment" "abate"       "abdicate"    "abhor"      
- [6] "abject"      "abnormal"    "abolish"     "abominable"  "abrasive"   
-[11] "abrupt"      "abscond"     "absence"     "absent"     </code></pre>
+ [6] "abject"      "abnormal"    "abolish"     "abominable"  "abrasive"   </code></pre>
 </div>
 </div>
 </div>
@@ -1420,11 +1424,10 @@ Washington-1794 :
 <div class="column" style="width:45%;">
 <p><strong>Positive words</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a><span class="fu">head</span>(DictionaryGI<span class="sc">$</span>positive, <span class="dv">14</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a><span class="fu">head</span>(DictionaryGI<span class="sc">$</span>positive, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "abide"      "ability"    "able"       "abound"     "absolve"   
- [6] "absorbent"  "absorption" "abundance"  "abundant"   "accede"    
-[11] "accentuate" "accept"     "acceptable" "acceptance"</code></pre>
+ [6] "absorbent"  "absorption" "abundance"  "abundant"   "accede"    </code></pre>
 </div>
 </div>
 </div>
@@ -1571,8 +1574,8 @@ docs               negative positive
 <li><p>Agreement with manual coding, which is often regarded as the ‘gold-standard’, is often seen as validity (but this holds only if human beings are inerrant!)</p></li>
 </ul>
 </section>
-<section id="reliability-confustion-matrix" class="slide level2">
-<h2>Reliability / Confustion Matrix</h2>
+<section id="reliability-confusion-matrix" class="slide level2">
+<h2>Reliability / Confusion Matrix</h2>
 <div class="column" style="width:45%;">
 <p><img data-src="https://glassboxmedicine.files.wordpress.com/2019/02/confusion-matrix.png"></p>
 </div>
@@ -1632,8 +1635,8 @@ docs               negative positive
 <li><p>Health sources were also prominent, while significant diversity of sources, including citizen sources, emerged as the pandemic went on</p></li>
 </ul>
 <p style="font-size:0.75em;">
-<em>Mellado et al., 2021</em>
-</p>
+</p><p><em>Mellado et al., 2021</em></p>
+<p></p>
 </section>
 <section id="method-dictionary-approach" class="slide level2">
 <h2>Method: Dictionary approach</h2>
@@ -1662,8 +1665,8 @@ docs               negative positive
 </ul>
 <p><br><br></p>
 <p style="font-size:0.75em;">
-<em>Heidenreich et al., 2019</em>
-</p>
+</p><p><em>Heidenreich et al., 2019</em></p>
+<p></p>
 </section>
 <section id="methods" class="slide level2">
 <h2>Methods</h2>
@@ -1680,6 +1683,7 @@ docs               negative positive
 <li><p>Used a dictionary-approach (Lexicoder; Young and Soroka, 2012) to cound positive and negative words</p></li>
 <li><p>Computed sentiment for each document by calculating as the sum of the scores for all words bearing positive sentiment (Pi) minus the sum of all scores from negative words (Ni), divided by the number of words (Wi).</p></li>
 </ul>
+<p><span class="math inline">\(Sentiment = \frac{Pi-Ni}{Wi}\)</span></p>
 </div>
 </section>
 <section id="results-visibility" class="slide level2">
@@ -1721,6 +1725,15 @@ docs               negative positive
 <li>How valid is the automated translation of text into English?</li>
 <li>How valid is the sentiment approximation based on dictionaries?</li>
 </ul></li>
+</ul>
+</section>
+<section id="conclusion" class="slide level2">
+<h2>Conclusion</h2>
+<ul>
+<li><p>Automated text analysis is a useful for working with large-scale text corpora</p></li>
+<li><p>Dictionaries can be extremely helpful in detecting certain specific terms (e.g., authors, certain words, labels, names…)</p></li>
+<li><p>Yet, they are not very good at coding more complex concepts, after all, their validity depends on how well a concept can be represented by a simple word list</p></li>
+<li><p>We always need to validate model our analyis using manually coded material</p></li>
 </ul>
 </section></section>
 <section>

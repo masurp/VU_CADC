@@ -18,18 +18,15 @@ editor: visual
 
 ...is based on what people are telling us:
 
-- via self-reports in surveys
+-   via self-reports in surveys
 
-- via responses in experimental research
+-   via responses in experimental research
 
-- in qualitative interviews
-
-
+-   in qualitative interviews
 
 ## But a lot of (mass) communication looks like this...
 
 ![](img/nyt_page.png)
-
 
 ## ...or is based on user-generated content.
 
@@ -43,8 +40,11 @@ editor: visual
 
 ![](img/hilbert_lopez.png)
 
-<p style="font-size:0.75em;">_Hilbert & Lopez, 2011_</p>
+<p style="font-size:0.75em;">
 
+*Hilbert & Lopez, 2011*
+
+</p>
 
 ## Problem or opportunity?
 
@@ -56,17 +56,14 @@ library(paletteer)
 library(ggwordcloud)
 ```
 
+-   A lot of communication is encoded in texts
 
-- A lot of communication is encoded in texts
-
-- But text does not look like data we can easily analyze...
+-   But text does not look like data we can easily analyze...
 
 <br><br>
 
-:::: {.columns}
-
+::: columns
 ::: {.column width="45%"}
-
 **Experimental data**
 
 ```{r}
@@ -80,11 +77,11 @@ tibble(id = c(1:100),
   head()
 ```
 :::
+
 ::: {.column width="10%"}
 :::
 
 ::: {.column width="45%"}
-
 **Text data**
 
 ```{r, echo = F,  R.options = list(width = 40)}
@@ -103,10 +100,8 @@ Footage shared across social media showed the newlyweds squeezed inside the alum
 A company owned by Thiel had lodged a consent application for a sprawling lodge on his property, which would include a “pod” for the owner himself, water features and meditation space. The consent describes “a series of stand-alone buildings, including a lodge for visitor accommodation for up to 24 guests, accommodation pod for the owner, together with associated lodge management buildings, infrastructure, landscape treatment, water features and meditation space”. The earthworks required to build it would cover over 73,700m² of land.", "In some ways, accounts of “human origins” play a similar role for us today as myth did for ancient Greeks or Polynesians. This is not to cast aspersions on the scientific rigour or value of these accounts. It is simply to observe that the two fulfil somewhat similar functions. If we think on a scale of, say, the last 3m years, there actually was a time when someone, after all, did have to light a fire, cook a meal or perform a marriage ceremony for the first time. We know these things happened. Still, we really don’t know how. It is very difficult to resist the temptation to make up stories about what might have happened: stories which necessarily reflect our own fears, desires, obsessions and concerns. As a result, such distant times can become a vast canvas for the working out of our collective fantasies.")) %>%
   head()
 ```
-
 :::
-::::
-
+:::
 
 ## Traditional content/text analysis
 
@@ -126,15 +121,13 @@ Typical steps in a *content/text* analysis:
 
 **6.** Analyze frequencies, relationships, differences, similarities between units/codes
 
-. . . 
+. . .
 
 <br><br>
 
 **Problem:** Requires a lot of work and there are always more texts than humans can possibly code manually!
 
-
 # Solution: Automating the process!
-
 
 ## Content of this lecture
 
@@ -152,17 +145,13 @@ Typical steps in a *content/text* analysis:
 
 How can we analyze texts with computers?
 
-
 ## Definition
-
-
 
 ![](https://www.asc.upenn.edu/sites/default/files/styles/360x360/public/2020-09/Klaus_Krippendorff_360_0.jpg?h=5273c5c2&itok=d-IFcUP8){style="float: right; padding-left: 40px;" width="400"}
 
-> Text analysis is "a research technique for making replicable and valid inferences from texts (or other meaningful matter) to the contexts of their use" 
+> Text analysis is "a research technique for making replicable and valid inferences from texts (or other meaningful matter) to the contexts of their use"
 >
->Krippendorff, 2004
-
+> Krippendorff, 2004
 
 ## What is text?
 
@@ -176,57 +165,57 @@ How can we analyze texts with computers?
 
 ## Symbols and Meaning
 
-- Text consists of *symbols*
+-   Text consists of *symbols*
 
-- Symbols by themselves do not have meaning
+-   Symbols by themselves do not have meaning
 
-- A symbol itself is a mark, sign, or word that indicates, signifies, or is understood as representing an idea, object, or relationship
+-   A symbol itself is a mark, sign, or word that indicates, signifies, or is understood as representing an idea, object, or relationship
 
-- Symbols thereby allow people to go beyond what is known or seen by creating linkages between otherwise very different concepts and experiences 
+-   Symbols thereby allow people to go beyond what is known or seen by creating linkages between otherwise very different concepts and experiences
 
-- Text (a collection of symbols) only attains meaning when interpreted (in its context)
+-   Text (a collection of symbols) only attains meaning when interpreted (in its context)
 
-- Main challenge in Automatic Text Analysis: Bridge the gap from symbols to meaningful interpretation
-
+-   Main challenge in Automatic Text Analysis: Bridge the gap from symbols to meaningful interpretation
 
 ## Understanding language
 
 ![](img/hvitfeld_book.png){style="float: right; padding-left: 40px;" width="300"}
 
->"As natural language processing (NLP) practitioners, we bring our assumptions about what language is and how language works into the task of creating modeling features from natural language and using those features as inputs to statistical models. This is true even when we don't think about how language works very deeply or when our understanding is unsophisticated or inaccurate; speaking a language is not the same as having an explicit knowledge of how that language works. We can improve our machine learning models for text by heightening that knowledge."
+> "As natural language processing (NLP) practitioners, we bring our assumptions about what language is and how language works into the task of creating modeling features from natural language and using those features as inputs to statistical models. This is true even when we don't think about how language works very deeply or when our understanding is unsophisticated or inaccurate; speaking a language is not the same as having an explicit knowledge of how that language works. We can improve our machine learning models for text by heightening that knowledge."
 >
->_Hvitfeldt & Silge, 2021_
+> *Hvitfeldt & Silge, 2021*
 
 ## A short overview of linguistics
 
-:::: {.columns}
-
+::: columns
 ::: {.column width="45%"}
+-   Each field studies a *different level* at which language exhibits organization
 
-- Each field studies a *different level* at which language exhibits organization
+-   When we engage in text analysis, we use these levels of organization to create language features (e.g., tokens, n-grams,...)
 
-- When we engage in text analysis, we use these levels of organization to create language features (e.g., tokens, n-grams,...)
+-   They often depend on the morphological characteristics of language, such as when text is broken into sequences of characters, words, sentences
 
-- They often depend on the morphological characteristics of language, such as when text is broken into sequences of characters, words, sentences
+<p style="font-size:0.75em;">
 
-<p style="font-size:0.75em;">_Hvitfeldt & Silge, 2021, chap. 1_</p>
+*Hvitfeldt & Silge, 2021, chap. 1*
 
+</p>
 :::
+
 ::: {.column width="5%"}
 :::
+
 ::: {.column width="45%"}
-
-| Subfield |	What does it focus on? |
-|:--------- |:---------|
-| Phonetics	      |  Sounds that people use in language |
-| Phonology	      |  Systems of sounds in particular languages |
-| Morphology	    |  How words are formed |
-| Syntax	        |  How sentences are formed from words |
-| Semantics	      |  What sentences mean |
-| Pragmatics	    |  How language is used in context |
-
+| Subfield   | What does it focus on?                    |
+|:-----------|:------------------------------------------|
+| Phonetics  | Sounds that people use in language        |
+| Phonology  | Systems of sounds in particular languages |
+| Morphology | How words are formed                      |
+| Syntax     | How sentences are formed from words       |
+| Semantics  | What sentences mean                       |
+| Pragmatics | How language is used in context           |
 :::
-::::
+:::
 
 # Automatic Text Analysis {background-color="steelblue"}
 
@@ -238,48 +227,47 @@ How we can study large quantities of documents and texts?
 
 ![](img/textanalysis.png)
 
+<p style="font-size:0.75em;">
 
-<p style="font-size:0.75em;">_van Atteveldt, Welbers, & Van der Velden, 2019_</p>
+*van Atteveldt, Welbers, & Van der Velden, 2019*
+
+</p>
 
 ## (1) Obtaining texts
 
-- Publicly available data sets
-  - e.g.: Political texts, news from publisher / library
-  - Great if you can find it, often not available
-
-- Scraping primary sources
-  - e.g.: Press releases from party website, existing archives
-  - Writing scrapers can be trivial or very complex depending on web site
-  - Make sure to check legal issues
-
-- Proprietary texts from third parties:
-  - e.g.: digital archives (LexisNexis, factiva etc.), social media APIs
-  - Often custom format, API restrictions, API changes
-  - Terms of use not conducive to research, sharing
-
-
+-   Publicly available data sets
+    -   e.g.: Political texts, news from publisher / library
+    -   Great if you can find it, often not available
+-   Scraping primary sources
+    -   e.g.: Press releases from party website, existing archives
+    -   Writing scrapers can be trivial or very complex depending on web site
+    -   Make sure to check legal issues
+-   Proprietary texts from third parties:
+    -   e.g.: digital archives (LexisNexis, factiva etc.), social media APIs
+    -   Often custom format, API restrictions, API changes
+    -   Terms of use not conducive to research, sharing
 
 ## (2) From text to data
 
-- Algorithms (or generally R) process numbers, they do not read text
+-   Algorithms (or generally R) process numbers, they do not read text
 
-- First step in any analysis is to convert text to series of numbers
+-   First step in any analysis is to convert text to series of numbers
 
-- This is done through a number of optional steps (also know as preprocessing) which include: 
+-   This is done through a number of optional steps (also know as preprocessing) which include:
 
-    - Tokenization
-    - Removing Stopwords
-    - Stemming or Lemmatization
-    - Normalization
-    - Frequency trimming
+    -   Tokenization
+    -   Removing Stopwords
+    -   Stemming or Lemmatization
+    -   Normalization
+    -   Frequency trimming
 
-- The resulting structured text is then often used to create a document-feature matrix (DTM)
+-   The resulting structured text is then often used to create a document-feature matrix (DTM)
 
-    - Table containing frequency of each word in each document
-    - Called “bag of words” approach -> ignores word order
-    
+    -   Table containing frequency of each word in each document
+    -   Called "bag of words" approach -\> ignores word order
+
 ## Text Preprocessing Process
-    
+
 ```{mermaid}
 flowchart LR
     A[Texts/Documents] --> B(Tokenization)
@@ -287,38 +275,32 @@ flowchart LR
     B -->|Two| E[Stemming]
     B -->|Three| F[Normalization]
     B -->|Four| G[Frequency trimming]
-    D --> H(Document-Term-Feature-Matrix)
+    D --> H(Document-Feature-Matrix)
     E --> H
     F --> H
     G --> H
 ```
 
-
-
-
-
 ## Text cleaning, stemming, lemmatizing
 
-- Text contains a lot of noise
-    - Very uncommon words
-    - Spelling, scraping mistakes (HTML code, boilerplate, etc)
-    - Stop words (e.g., a, the, I, will)
-    - Conjugations of the same word (want, wants)
-    - Near synonyms (wants, loves)
-    - Of course, what is noise depends on your RQ!
-
-- Cleaning steps needed to reduce noise:
-    - Removing unnecessary symbols (e.g., punctuations, numbers...)
-    - Removing stopwords (e.g., 'a', 'the'...)
-    - Normalization: Stemming (wants -> want) *OR* lemmatizing (ran -> run)
-    - Frequency trimming (removing rare words)
-    
+-   Text contains a lot of noise
+    -   Very uncommon words
+    -   Spelling, scraping mistakes (HTML code, boilerplate, etc)
+    -   Stop words (e.g., a, the, I, will)
+    -   Conjugations of the same word (want, wants)
+    -   Near synonyms (wants, loves)
+    -   Of course, what is noise depends on your RQ!
+-   Cleaning steps needed to reduce noise:
+    -   Removing unnecessary symbols (e.g., punctuations, numbers...)
+    -   Removing stopwords (e.g., 'a', 'the'...)
+    -   Normalization: Stemming (wants -\> want) *OR* lemmatizing (ran -\> run)
+    -   Frequency trimming (removing rare words)
 
 ## Tokenization
 
-- In a first step, we need to break text down into the features that we want to analyze (so-called tokens)
+-   In a first step, we need to break text down into the features that we want to analyze (so-called tokens)
 
-- We take an input (a string) and a token type (a meaningful unit of text, such as a word) and we split the input (string) into pieces (tokens) that correspond to the type (e.g., word) 
+-   We take an input (a string) and a token type (a meaningful unit of text, such as a word) and we split the input (string) into pieces (tokens) that correspond to the type (e.g., word)
 
 ```{r}
 #| R.options: list(width = 120)
@@ -329,43 +311,53 @@ text
 ```
 
 <br>
+
 ```{r}
 #| R.options: list(width = 120)
 #| echo: true
+#| output-location: fragment
 
 library(quanteda)
 toks <- tokens(text, remove_punct = TRUE, remove_numbers = TRUE) 
 toks
 ```
-<br>
-<p style="font-size:0.75em;">_Manning, Raghavan, and Schütze 2008_</p>
 
+<br>
+
+<p style="font-size:0.75em;">
+
+*Manning, Raghavan, and Schütze 2008*
+
+</p>
 
 ## Types of Tokens
 
-- Thinking of a token as a **word** is a useful start (and most used approach -> bag-of-words)
+-   Thinking of a token as a **word** is a useful start (and most used approach -\> bag-of-words)
 
-- However, we can generalize the idea of a token beyond only a single word to other units of text:
+-   However, we can generalize the idea of a token beyond only a single word to other units of text:
 
-    - characters ("I", "l", "o", "v", "e", "y", "o", "u")
-    - words  ("I", "love", "you")
-    - sentences ("I love you")
-    - lines ("He went to her. I love")
-    - paragraphs, and
-    - n-grams (e.g., "I love")
+    -   characters ("I", "l", "o", "v", "e", "y", "o", "u")
+    -   words ("I", "love", "you")
+    -   sentences ("I love you")
+    -   lines ("He went to her. I love")
+    -   paragraphs, and
+    -   n-grams (e.g., "I love")
 
 <br><br>
 
-<p style="font-size:0.75em;">_Hvitfeldt & Silge, 2021, chap. 2.2_</p>
+<p style="font-size:0.75em;">
 
+*Hvitfeldt & Silge, 2021, chap. 2.2*
+
+</p>
 
 ## Removing stopwords
 
-- Once we have split text into tokens, it often becomes clear that not all words carry the same amount of information
+-   Once we have split text into tokens, it often becomes clear that not all words carry the same amount of information
 
-- Common words that carry little (or perhaps no) meaningful information are called **stop words** (e.g., 'a', 'the', 'didn't', 'of'...)
+-   Common words that carry little (or perhaps no) meaningful information are called **stop words** (e.g., 'a', 'the', 'didn't', 'of'...)
 
-- It is common advice and practice to remove stop words for various text analysis tasks, but stop word removal is more nuanced than many resources may lead you to believe
+-   It is common advice and practice to remove stop words for various text analysis tasks, but stop word removal is more nuanced than many resources may lead you to believe
 
 <br>
 
@@ -377,9 +369,9 @@ toks
 
 ## Normalization
 
-- Before we move to the more sophisticated normalization, including stemming or lemmatizing, we need to align similar words. 
+-   Before we move to the more sophisticated normalization, including stemming or lemmatizing, we need to align similar words.
 
-- R does differ between lower and upper case letters. We hence need to transfrom to lower case to make words comparable. 
+-   R does differ between lower and upper case letters. We hence need to transfrom to lower case to make words comparable.
 
 <br>
 
@@ -391,9 +383,9 @@ toks
 
 ## Stemming
 
-- What if we aren’t interested in the difference between e.g., "trees" and "tree" and we want to treat both together? 
+-   What if we aren't interested in the difference between e.g., "trees" and "tree" and we want to treat both together?
 
-- Stemming refers to the process of identifying the base word (or stem) for a data set of words and is thus concerned with the linguistics subfield of morphology (i.e., how words are formed). 
+-   Stemming refers to the process of identifying the base word (or stem) for a data set of words and is thus concerned with the linguistics subfield of morphology (i.e., how words are formed).
 
 ```{r, R.options = list(width = 80), echo = T}
 #| output-location: fragment
@@ -401,25 +393,23 @@ toks # original tokens
 ```
 
 <br>
+
 ```{r, R.options = list(width = 80), echo = T}
 #| output-location: fragment
 final_toks <- tokens_wordstem(toks) 
 final_toks # after stemming
 ```
 
-
 ## Lemmatization
 
-- Instead of using set rules to cut words down to their stems, lemmatization uses knowledge about a language's structure to reduce words down to their lemmas, the canonical or dictionary forms of words
+-   Instead of using set rules to cut words down to their stems, lemmatization uses knowledge about a language's structure to reduce words down to their lemmas, the canonical or dictionary forms of words
 
-- Lemmatizers use a rich lexical database like 'WordNet' to look up word meanings for a given part-of-speech use (Miller 1995)
-
+-   Lemmatizers use a rich lexical database like 'WordNet' to look up word meanings for a given part-of-speech use (Miller 1995)
 
 ```{r, R.options = list(width = 80), echo = T}
 #| output-location: fragment
 toks # original tokens
 ```
-
 
 . . .
 
@@ -430,23 +420,21 @@ toks # original tokens
 tokens_replace(toks, pattern = lexicon::hash_lemmas$token, replacement = lexicon::hash_lemmas$lemma)
 ```
 
-
 ## Document-term matrix or document-feature matrix
 
-- Finally, we create a representation of these "tokens" (or terms or features) 
+-   Finally, we create a representation of these "tokens" (or terms or features)
 
-- A document-feature matrix refers to a mathematical matrix that describes the frequency of terms that occur in a collection of documents
+-   A document-feature matrix refers to a mathematical matrix that describes the frequency of terms that occur in a collection of documents
 
-- In this matrix, each row corresponds to a document in the collection and columns correspond to terms.
+-   In this matrix, each row corresponds to a document in the collection and columns correspond to terms.
 
-- Each cell contains the number of times a term is in that particular document
+-   Each cell contains the number of times a term is in that particular document
 
 ```{r, R.options = list(width = 80), echo = T}
 #| output-location: fragment
 dtm <- dfm(final_toks)
 dtm
 ```
-
 
 ## Larger example of a document-feature matrix
 
@@ -471,13 +459,11 @@ dfm2
 
 ## Word frequencies and summaries
 
-
 ```{r, R.options = list(width = 80), echo = T}
 #| output-location: fragment
 library(quanteda.textstats)
 head(textstat_frequency(dfm2))
 ```
-
 
 ```{r, R.options = list(width = 80), echo = T}
 #| output-location: fragment
@@ -485,7 +471,6 @@ textstat_summary(dfm2)
 ```
 
 ## Word frequencies
-
 
 ```{r}
 #| echo: true
@@ -501,134 +486,129 @@ textstat_frequency(dfm2) %>%
   labs(color = "frequency")
 ```
 
-
-
 ## (3) Analyzing the structured data
 
-:::: {.columns}
-
+::: columns
 ::: {.column width="45%"}
-- Rule-based analyses (deductive approaches)
-    - Meaning is assigned by researcher
-    - “if word X occurs, the text means Y”
-    
-- Supervised machine learning (inductive approaches)
-    - Train a model on coded training examples
-    - Generalizes meaning in human coding of training material
-    - “Text X is like other texts that were negative, so X is probably negative”
+-   Rule-based analyses (deductive approaches)
+    -   Meaning is assigned by researcher
+    -   "if word X occurs, the text means Y"
+-   Supervised machine learning (inductive approaches)
+    -   Train a model on coded training examples
+    -   Generalizes meaning in human coding of training material
+    -   "Text X is like other texts that were negative, so X is probably negative"
 :::
+
 ::: {.column width="5%"}
 :::
-::: {.column width="45%"}
 
-- Unsupervised machine learning (inductive approaches)
-    - Find clusters of words that co-occur
-    - Meaning is assigned afterwards by researcher interpretation
-    - “These words form a pattern, which I think means X”
-    
-    
+::: {.column width="45%"}
+-   Unsupervised machine learning (inductive approaches)
+    -   Find clusters of words that co-occur
+    -   Meaning is assigned afterwards by researcher interpretation
+    -   "These words form a pattern, which I think means X"
+
 <br><br><br><br>
 
-<p style="font-size:0.75em;">_Boumans & Trilling, 2016_</p>
-:::
-::::
+<p style="font-size:0.75em;">
 
+*Boumans & Trilling, 2016*
+
+</p>
+:::
+:::
 
 ## (4) Evaluating the validity of the analysis
 
-- Many text analysis processes are 'black boxes'
-    - even manual coding
-    - dictionaries are ultimately opaque
+-   Many text analysis processes are 'black boxes'
 
-- Computer does not 'understand' natural language 
+    -   even manual coding
+    -   dictionaries are ultimately opaque
 
-- Need to prove to reader that analysis is valid
-    - Validate by comparing to known good 
-    - Comparison: often manual annotation of 'gold standard'
+-   Computer does not 'understand' natural language
 
-. . . 
+-   Need to prove to reader that analysis is valid
+
+    -   Validate by comparing to known good
+    -   Comparison: often manual annotation of 'gold standard'
+
+. . .
 
 <br><br>
 
 **Note:** We will talk about different validation approaches when we discuss rule-based and supervised learning methods
 
-
 # Deductive Approaches: Dictionary/Lexical Analysis {background-color="steelblue"}
 
 Using fixed set of terms per concept to automatically code texts.
 
-
 ## What are deductive approaches?
 
-- Code rules are set *a priori* based on a predefined "text theory"
+-   Code rules are set *a priori* based on a predefined "text theory"
 
-- Computer uses these rules to decode text in a deterministic way
+-   Computer uses these rules to decode text in a deterministic way
 
-- Rules can differ substantially:
-    - based on individual words or group of words (e.g., articles that contain "government" are coded as "politics")
-    - based on patterns (e.g., the sender of a mail can be identified by looking for "FROM:")
-    - combinations of both 
-    
+-   Rules can differ substantially:
+
+    -   based on individual words or group of words (e.g., articles that contain "government" are coded as "politics")
+    -   based on patterns (e.g., the sender of a mail can be identified by looking for "FROM:")
+    -   combinations of both
 
 ## Basic idea of dictionary approaches
 
 ::: {.column width="45%"}
-
-- Quite old technique of content analysis (since 60s)
-- Dictionaries or lexicons contain a lot of information about links between words and meanings
-- We define a word list for every category that we want to code
-- Computer searches for the existence of these words in text
-  - if the word exist, assign the 'code' to that document (or sentence)
-  - e.g. positive = {good, happy, nice}, negative = {bad, stupid, expensive}
+-   Quite old technique of content analysis (since 60s)
+-   Dictionaries or lexicons contain a lot of information about links between words and meanings
+-   We define a word list for every category that we want to code
+-   Computer searches for the existence of these words in text
+    -   if the word exist, assign the 'code' to that document (or sentence)
+    -   e.g. positive = {good, happy, nice}, negative = {bad, stupid, expensive}
 :::
+
 ::: {.column width="45%"}
 ![](img/lexicon.jpg)
 :::
 
 ## Advantages and disadvantages
 
-- Advantages: 
-    - Technically easy, many dictionaries exists
-    - Transparent and replicable, if dictionary is shared
-    - Few resources needed, efficient
-
-- Disadvantages:
-    - Low validity for non-trivial concepts (sentiment, frames, specific topics)
-        - categories needs be identifiable by simple word lists!
-    - May require considerable preprocessing to reduce ambiguity
-    - Difficult to create/maintain large dictionaries
-    - Can encode biases 
+-   Advantages:
+    -   Technically easy, many dictionaries exists
+    -   Transparent and replicable, if dictionary is shared
+    -   Few resources needed, efficient
+-   Disadvantages:
+    -   Low validity for non-trivial concepts (sentiment, frames, specific topics)
+        -   categories needs be identifiable by simple word lists!
+    -   May require considerable preprocessing to reduce ambiguity
+    -   Difficult to create/maintain large dictionaries
+    -   Can encode biases
 
 ## How can we develop a dictionary?
 
-- Define categories
+-   Define categories
 
-- Inspecting keywords-in-context lists
+-   Inspecting keywords-in-context lists
 
-- Manually coding and comparing word frequencies per category
+-   Manually coding and comparing word frequencies per category
 
-- Inclusion of different spellings
+-   Inclusion of different spellings
 
-- Deletion of words the lead to false-positives
+-   Deletion of words the lead to false-positives
 
-- Testing, testing, testing...
-
+-   Testing, testing, testing...
 
 ## Special case: Sentiment analysis
 
+-   Coding and counting of evaluative statements per document
 
-- Coding and counting of evaluative statements per document
+-   Analysis of sentiment: Positive vs. negative?
 
-- Analysis of sentiment: Positive vs. negative?
+-   Subjectivity analysis: Is there any sentiment at all?
 
-- Subjectivity analysis: Is there any sentiment at all?
+-   Emotional analysis: Are there any emotions?
 
-- Emotional analysis: Are there any emotions?
+-   In most cases, a score will be computed (e.g. sentiment = positive - negative words)
 
-- In most cases, a score will be computed (e.g. sentiment = positive - negative words)
-
-- Problems: Negation, irony, descriptive rather than evaluative statements
-
+-   Problems: Negation, irony, descriptive rather than evaluative statements
 
 ## Example: The State of the Union Speech Corpus
 
@@ -637,11 +617,9 @@ library(quanteda.corpora)
 library(quanteda.dictionaries)
 library(quanteda.textplots)
 
-data_df <- convert(data_corpus_sotu, "data.frame") %>%
-  as_tibble
+data_df <- convert(data_corpus_sotu, "data.frame") %>% as_tibble
 data_df
 ```
-
 
 ## A speech by Obama in 2009
 
@@ -654,7 +632,6 @@ data_df %>%
 ```
 
 ## Understanding the data: Speeches per President
-
 
 ```{r plot_speech, echo = T}
 #| output-location: column-fragment
@@ -672,7 +649,6 @@ data_df %>%
        x = "")
 ```
 
-
 ## Text preprocessing: Creating a corpus
 
 ```{r, R.options = list(width = 90), echo = T}
@@ -681,7 +657,7 @@ corp <- corpus(data_df, docid_field = "doc_id", text_field = "text")
 corp 
 ```
 
-##  What are the most used words in these speeches?
+## What are the most used words in these speeches?
 
 ::: {.column width="46%"}
 ```{r, echo = T}
@@ -692,113 +668,102 @@ dtm1 <- corp %>%
  dfm 
 ```
 
-
 ```{r, echo = T, eval = F}
 textplot_wordcloud(dtm1, 
   max_words = 50)
 ```
-
 :::
 
 ::: {.column width="53%"}
 ![](img/wordcloud2.png)
 :::
 
-
 ## How do Trump and Obama compare?
 
-- Wordclouds can be used to "eyeball" differences in text corpora
+-   Wordclouds can be used to "eyeball" differences in text corpora
 
-- Of course, this can not be compared to a statistical analysis of similarity, but it gives us a first impression of major difference in word use
+-   Of course, this can not be compared to a statistical analysis of similarity, but it gives us a first impression of major difference in word use
 
 ::: {.column width="46%"}
-
 ```{r, echo = T, R.options = list(width = 90)}
-is_trump <- docvars(dtm1)$President == 'Trump' 
-trump_dtm <- dtm1[is_trump,]
-textplot_wordcloud(trump_dtm, max_words = 35, color = "red")
+is_trump<-docvars(dtm1)$President == 'Trump' 
+trump_dtm<-dtm1[is_trump,]
+textplot_wordcloud(trump_dtm, 
+                   max_words = 35, 
+                   color = "red")
 ```
 :::
+
 ::: {.column width="5%"}
 :::
+
 ::: {.column width="46%"}
 ```{r, echo = T, R.options = list(width = 90)}
-is_obama <- docvars(dtm1)$President == 'Obama' 
-obama_dtm <- dtm1[is_obama,]
-textplot_wordcloud(obama_dtm, max_words = 35, color = "blue")
+is_obama<-docvars(dtm1)$President == 'Obama' 
+obama_dtm<-dtm1[is_obama,]
+textplot_wordcloud(obama_dtm, 
+                   max_words = 35, 
+                   color = "blue")
 ```
-
 :::
-
-
 
 ## Keyword-in-context
 
-- We can also search for specific text passages that contain a specific word (e.g., "terror")
+-   We can also search for specific text passages that contain a specific word (e.g., "terror")
 
-- This can be very helpful to understand how these words have been used in different documents (here: speeches)
+-   This can be very helpful to understand how these words have been used in different documents (here: speeches)
 
 ```{r R.options = list(width = 140), echo = T}
 k <- kwic(corp, 'terror', window = 4)
 head(k, 10)
 ```
 
-
 ```{r echo = F}
 library(SentimentAnalysis)
 ```
 
-
 ## Using an exisiting dictionary: The General Sentiment Dictionary
 
-- Dictionary with a list of positive and negative words according to the psychological Harvard-IV dictionary as used in the General Inquirer software
+-   Dictionary with a list of positive and negative words according to the psychological Harvard-IV dictionary as used in the General Inquirer software
 
-- This is a general-purpose dictionary developed by the Harvard University
+-   This is a general-purpose dictionary developed by the Harvard University
 
 ::: {.column width="45%"}
-
 **Negative words**
 
 ```{r, echo = T}
-head(DictionaryGI$negative, 14)
+head(DictionaryGI$negative, 10)
 ```
 :::
 
 ::: {.column width="5%"}
 :::
+
 ::: {.column width="45%"}
-
-
 **Positive words**
 
 ```{r, echo = T}
-head(DictionaryGI$positive, 14)
+head(DictionaryGI$positive, 10)
 ```
-
 :::
-
-
 
 ## Running the actual sentiment analysis
 
-
 ::: {.column width="45%"}
-- We use the text corpus containing all speeches
+-   We use the text corpus containing all speeches
 
-- We tokenize the speeches (separating them into words)
+-   We tokenize the speeches (separating them into words)
 
-- We do not stem or lemmatize the text as dictionaries contain full words!
+-   We do not stem or lemmatize the text as dictionaries contain full words!
 
-- We create a document-feature matrix
+-   We create a document-feature matrix
 
-- We look up how often certain words are in the different text documents
+-   We look up how often certain words are in the different text documents
 
-- Number of 'negative' and 'positive' words per speech is the outcome of this analysis
-
+-   Number of 'negative' and 'positive' words per speech is the outcome of this analysis
 :::
+
 ::: {.column width="45%"}
-
-
 ```{r, R.options = list(width = 90), echo = T}
 #| output-location: fragment
 dtm <- corp %>%    
@@ -809,9 +774,7 @@ res <- dtm %>%
   dfm_lookup(dictionary(DictionaryGI))
 res
 ```
-
 :::
-
 
 ## Combining all information to a final data set
 
@@ -827,18 +790,16 @@ head(d)
 
 ## Amount of negative and positive words per president
 
-
 ::: {.column width="45%"}
+-   We can know do several frequency analyses
 
-- We can know do several frequency analyses
-
-- For example, how many positive and negative words have president used on average?
-
+-   For example, how many positive and negative words have president used on average?
 :::
+
 ::: {.column width="5%"}
 :::
-::: {.column width="45%"}
 
+::: {.column width="45%"}
 ```{r, echo = F}
 #| fig-width: 5
 #| fig-height: 5.5
@@ -853,26 +814,23 @@ d %>%
   theme_update() +
   labs(fill = "")
 ```
-
 :::
 
 ## Investigating Sentiment: Computing a Score
 
-- In most sentiment analyses, researchers compute some sort of overall sentiment score
+-   In most sentiment analyses, researchers compute some sort of overall sentiment score
 
-- A common score is to subtract the negative count from the positive count and divide by either by the number of sentiment words or the total number of words (length):
+-   A common score is to subtract the negative count from the positive count and divide by either by the number of sentiment words or the total number of words (length):
 
 $sentiment1 = (positive - negative) / (positive + negative)$
 
 $sentiment2 = (positive - negative) / length$
 
-- We can also compute a measure of subjectivity to get an idea of how much sentiment is expressed in total:
+-   We can also compute a measure of subjectivity to get an idea of how much sentiment is expressed in total:
 
 $subjectivy = (positive + negative) / length)$
 
-
 ## Sentiment scores over time
-
 
 ```{r, echo = T}
 #| output-location: fragment
@@ -902,7 +860,6 @@ d %>%
   ggtitle("Subjectivity in SOTU-speeches over time")
 ```
 
-
 ## Sentiment of different presidents
 
 ```{r, echo = F, fig.width=10, fig.height=4.5}
@@ -927,73 +884,67 @@ Making sure the automated coding is correct!
 
 ## Reliability and Validity
 
-- **Reliability** means accuracy, but also reproducibility and stability of the results
+-   **Reliability** means accuracy, but also reproducibility and stability of the results
 
-- **Validity** means that codings/classifications represent the actual theoretical concepts
+-   **Validity** means that codings/classifications represent the actual theoretical concepts
 
-- To estimate both, we manually code a random sample of the documents and compare the coding with the dictionary results
+-   To estimate both, we manually code a random sample of the documents and compare the coding with the dictionary results
 
-- General procedure
+-   General procedure
 
-    - Draw a random subsample of the documents
-    - Code actual documents with human coders (the 'gold standard')
-    - Combine the manual coding results with the results from the automated sentiment analysis
-    - Produce reliability and validation scores, e.g., correlation between manual and automated coding, precision, recall...
-    
-- Agreement with manual coding, which is often regarded as the 'gold-standard', is often seen as validity (but this holds only if human beings are inerrant!)
+    -   Draw a random subsample of the documents
+    -   Code actual documents with human coders (the 'gold standard')
+    -   Combine the manual coding results with the results from the automated sentiment analysis
+    -   Produce reliability and validation scores, e.g., correlation between manual and automated coding, precision, recall...
 
+-   Agreement with manual coding, which is often regarded as the 'gold-standard', is often seen as validity (but this holds only if human beings are inerrant!)
 
 ## Reliability / Confusion Matrix
 
 ::: {.column width="45%"}
 ![](https://glassboxmedicine.files.wordpress.com/2019/02/confusion-matrix.png)
 :::
-::: {.column width="45%"}
 
-- Basis is always the confusion matrix between algorithm and manual coder that assessed the same content
-- Accuracy (Holsti-Coefficient) = sum of the diagonale / sum of the entire matrix
-- Disadvantages
-  - No correction of random chance agreements
-  - easy computable for 2 coders
-  - only nominal scales
-  - no accounting for missings
-      
-- Alternative: Cronbach's Alpha (but often seen as too strict)
+::: {.column width="45%"}
+-   Basis is always the confusion matrix between algorithm and manual coder that assessed the same content
+-   Accuracy (Holsti-Coefficient) = sum of the diagonale / sum of the entire matrix
+-   Disadvantages
+    -   No correction of random chance agreements
+    -   easy computable for 2 coders
+    -   only nominal scales
+    -   no accounting for missings
+-   Alternative: Cronbach's Alpha (but often seen as too strict)
 :::
 
 ## Validity
 
-- Again Accuracy: agreement between algorithm and coder
+-   Again Accuracy: agreement between algorithm and coder
 
-- Precision: Probability of a positively coded document is relevant
+-   Precision: Probability of a positively coded document is relevant
 
-- Recall: Probability that a relevant document is coded positively
+-   Recall: Probability that a relevant document is coded positively
 
-- F1-Score: Mean between precision and recall
-
+-   F1-Score: Mean between precision and recall
 
 ## Validation scores
 
 ::: {.column width="45%"}
 ![](https://glassboxmedicine.files.wordpress.com/2019/02/confusion-matrix.png)
-
 :::
+
 ::: {.column width="45%"}
+-   From the confusion matrix, we can compute all relevant scores:
 
-- From the confusion matrix, we can compute all relevant scores:
+    -   **Precision** = TP / (TP + FP)
 
-  - **Precision** = TP / (TP + FP)
+    -   **Recall** = TP / (TP + FN)
 
-  - **Recall** = TP / (TP + FN)
+    -   **F1-Score** = 2 x (Precision x Recall) / (Precision + Recall)
 
-  - **F1-Score** = 2 x (Precision x Recall) / (Precision + Recall)
+-   No clear thresholds: need to be assessed in the research context, but values closer to 1 are desirable
 
-- No clear thresholds: need to be assessed in the research context, but values closer to 1 are desirable
-
-- Can be used to compare model performance!
-
+-   Can be used to compare model performance!
 :::
-
 
 # Examples in the literature {background-color="steelblue"}
 
@@ -1001,30 +952,31 @@ How is this used in research?
 
 ## Example 1: Sourcing Pandemic News
 
-- The study analyzes the sources and actors present in more than 940,000 posts on COVID-19 published in the 227 Facebook, Instagram, and Twitter accounts of 78 sampled news outlets between January 1 and December 31 of 2020
+-   The study analyzes the sources and actors present in more than 940,000 posts on COVID-19 published in the 227 Facebook, Instagram, and Twitter accounts of 78 sampled news outlets between January 1 and December 31 of 2020
 
-- The analysis shows the dominance of political sources across countries and platforms, particularly in Latin America
+-   The analysis shows the dominance of political sources across countries and platforms, particularly in Latin America
 
-- It demonstrates the strong role of the state in constructing pandemic news and suggesting that mainstream news organizations' social media posts maintain a strong elite orientation 
+-   It demonstrates the strong role of the state in constructing pandemic news and suggesting that mainstream news organizations' social media posts maintain a strong elite orientation
 
-- Health sources were also prominent, while significant diversity of sources, including citizen sources, emerged as the pandemic went on
+-   Health sources were also prominent, while significant diversity of sources, including citizen sources, emerged as the pandemic went on
 
-<p style="font-size:0.75em;">_Mellado et al., 2021_</p>
+<p style="font-size:0.75em;">
 
+*Mellado et al., 2021*
+
+</p>
 
 ## Method: Dictionary approach
 
-- The authors identified eleven categories (political, business, health, scientific and academic sources, police/security, legal, civil society, citizen, media, sports, and celebrity sources)
+-   The authors identified eleven categories (political, business, health, scientific and academic sources, police/security, legal, civil society, citizen, media, sports, and celebrity sources)
 
-- The broke these down into sub-categories that represent formal positions, names of individuals, institutions, organizations and groups, as well as each of their nicknames and acronyms (if any). 
+-   The broke these down into sub-categories that represent formal positions, names of individuals, institutions, organizations and groups, as well as each of their nicknames and acronyms (if any).
 
-- Each national team was responsible for translating the sub-categories into their own language 
+-   Each national team was responsible for translating the sub-categories into their own language
 
-- Based on this, a manual dictionary was created for the seven countries included in the study, which contains over (10,102) entities that belonged to each sub-category at the time of data collection
+-   Based on this, a manual dictionary was created for the seven countries included in the study, which contains over (10,102) entities that belonged to each sub-category at the time of data collection
 
-- This dictionary was used to categorize all posts automatically
-
-
+-   This dictionary was used to categorize all posts automatically
 
 ## Results: Source distribution per country
 
@@ -1034,121 +986,128 @@ How is this used in research?
 
 ![](img/Mellado_fig1.png)
 
-
 ## Example 2: Political migration discourses on social media
 
+-   Heidenreich and colleagues (2019), analyzed migration discourses in the Facebook accounts of political actors (n=1702) across six European countries (Spain, UK, Germany, Austria, Sweden and Poland)
 
-- Heidenreich and colleagues (2019), analyzed migration discourses in the Facebook accounts of political actors (n=1702) across six European countries (Spain, UK, Germany, Austria, Sweden and Poland)
+-   present new insights into the visibility of migration as a topic
 
-- present new insights into the visibility of migration as a topic
-
-- investigated sentiment about migration, revealing country- and party-specific patterns
+-   investigated sentiment about migration, revealing country- and party-specific patterns
 
 <br><br>
 
-<p style="font-size:0.75em;">_Heidenreich et al., 2019_</p>
-    
----
+<p style="font-size:0.75em;">
+
+*Heidenreich et al., 2019*
+
+</p>
+
+------------------------------------------------------------------------
 
 ## Methods
 
 ::: {.column width="55%"}
-
-- Downloaded textual data for all migration-related posts (n = 24,578) of members of parliaments (n = 1702) in six countries
+-   Downloaded textual data for all migration-related posts (n = 24,578) of members of parliaments (n = 1702) in six countries
 
 ![](img/heidenreich_table1.png)
-
 :::
 
 ::: {.column width="40%"}
+-   Used automated contend analysis to estimate sentiment towards migration in each post
 
-- Used automated contend analysis to estimate sentiment towards migration in each post
+-   Machine translated the whole corpus into English
 
-- Machine translated the whole corpus into English
+-   Used a dictionary-approach (Lexicoder; Young and Soroka, 2012) to cound positive and negative words
 
-- Used a dictionary-approach (Lexicoder; Young and Soroka, 2012) to cound positive and negative words
+-   Computed sentiment for each document by calculating as the sum of the scores for all words bearing positive sentiment (Pi) minus the sum of all scores from negative words (Ni), divided by the number of words (Wi).
 
-- Computed sentiment for each document by calculating as the sum of the scores for all words bearing positive sentiment (Pi) minus the sum of all scores from negative words (Ni), divided by the number of words (Wi). 
-
+$Sentiment = \frac{Pi-Ni}{Wi}$
 :::
 
 ## Results: Visibility
 
-
 ::: {.column width="45%"}
-- In Germany and Austria there is indeed descriptive evidence that parties of the right discuss migration more frequently in their Facebook status posts than other parties
+-   In Germany and Austria there is indeed descriptive evidence that parties of the right discuss migration more frequently in their Facebook status posts than other parties
 
-- Conversely, in Spain, the UK and Poland the topic tended to be more prominent in the posts of left-wing parties
+-   Conversely, in Spain, the UK and Poland the topic tended to be more prominent in the posts of left-wing parties
 
-- At first glance, Sweden seems to be an outlier.
+-   At first glance, Sweden seems to be an outlier.
 
-- In sum there is no consistent overall pattern supporting the hypothesis that right wing parties pay more attention to the topic of migration on Facebook than left leaning parties 
-
+-   In sum there is no consistent overall pattern supporting the hypothesis that right wing parties pay more attention to the topic of migration on Facebook than left leaning parties
 :::
+
 ::: {.column width="5%"}
 :::
 
 ::: {.column width="45%"}
 ![](img/heidenreich_table2.png)
-
 :::
 
 ## Results: Sentiment
 
 ![](img/heidenreich_table3.png)
 
-
 ## Results: Predicting sentiment
 
 ![](img/heidenreich_table4.png)
 
-- Best predictor was whether the politicians were either far-left or far-right
+-   Best predictor was whether the politicians were either far-left or far-right
 
 ## Conclusion of the study
 
-- Migration is a more prominent in countries with positive net migration than in countries where net migration is neutral or negative
+-   Migration is a more prominent in countries with positive net migration than in countries where net migration is neutral or negative
 
-- They did not find support for the assumption that right-leaning parties talk more, and more negatively, about migration
+-   They did not find support for the assumption that right-leaning parties talk more, and more negatively, about migration
 
-- However, political actors from parties of the extreme left and the extreme right of the political spectrum address migration more frequently and more negatively than more moderate political players
+-   However, political actors from parties of the extreme left and the extreme right of the political spectrum address migration more frequently and more negatively than more moderate political players
 
-- Potential limitations
+-   Potential limitations
 
-  - How valid is the automated translation of text into English?
-  - How valid is the sentiment approximation based on dictionaries?
+    -   How valid is the automated translation of text into English?
+    -   How valid is the sentiment approximation based on dictionaries?
+
+## Conclusion
+
+-   Automated text analysis is a useful for working with large-scale text corpora
+
+-   Dictionaries can be extremely helpful in detecting certain specific terms (e.g., authors, certain words, labels, names...)
+
+-   Yet, they are not very good at coding more complex concepts, after all, their validity depends on how well a concept can be represented by a simple word list
+
+-   We always need to validate model our analyis using manually coded material
 
 
-# Thank you for your attention!{background-color="steelblue"}
+# Thank you for your attention! {background-color="steelblue"}
 
 ## Required Reading
 
 <br><br>
 
-- Welbers, K., Van Atteveldt, W., & Benoit, K. (2017). Text analysis in R. Communication Methods and Measures, 11(4), 245-265.
+-   Welbers, K., Van Atteveldt, W., & Benoit, K. (2017). Text analysis in R. Communication Methods and Measures, 11(4), 245-265.
 
-- Heidenreich, T., Eberl, J.-M., Lind, F. & Boomgaarden, H. (2020). Political migration discourses on social media: a comparative perspective on visibility and sentiment across political Facebook accounts in Europe. Journal of Ethnic and Migration Studies, (46)7, 1261-1280,  https://doi.org/10.1080/1369183X.2019.1665990
+-   Heidenreich, T., Eberl, J.-M., Lind, F. & Boomgaarden, H. (2020). Political migration discourses on social media: a comparative perspective on visibility and sentiment across political Facebook accounts in Europe. Journal of Ethnic and Migration Studies, (46)7, 1261-1280, https://doi.org/10.1080/1369183X.2019.1665990
 
-- <p style="font-size:0.75em;">Mellado, C., Hallin, D., Cárcamo, L. Alfaro, R. ... & Ramos, A. (2021) Sourcing Pandemic News: A Cross-National Computational Analysis of Mainstream Media Coverage of COVID-19 on Facebook, Twitter, and Instagram. Digital Journalism, 9(9), 1271-1295, https://doi.org/10.1080/21670811.2021.1942114
+-   <p style="font-size:0.75em;">
+
+    Mellado, C., Hallin, D., Cárcamo, L. Alfaro, R. ... & Ramos, A. (2021) Sourcing Pandemic News: A Cross-National Computational Analysis of Mainstream Media Coverage of COVID-19 on Facebook, Twitter, and Instagram. Digital Journalism, 9(9), 1271-1295, https://doi.org/10.1080/21670811.2021.1942114
 
 <br>
 
-_(available on Canvas)_
-
-
+*(available on Canvas)*
 
 ## References {.smaller}
 
-- Boumans, J. W., & Trilling, D. (2016). Taking stock of the toolkit: An overview of relevant automated content analysis approaches and techniques for digital journalism scholars. Digital journalism, 4(1), 8-23.
+-   Boumans, J. W., & Trilling, D. (2016). Taking stock of the toolkit: An overview of relevant automated content analysis approaches and techniques for digital journalism scholars. Digital journalism, 4(1), 8-23.
 
-- Heidenreich, T., Eberl, J.-M., Lind, F. & Boomgaarden, H. (2020). Political migration discourses on social media: a comparative perspective on visibility and sentiment across political Facebook accounts in Europe. Journal of Ethnic and Migration Studies, (46)7, 1261-1280, DOI: 10.1080/1369183X.2019.1665990
+-   Heidenreich, T., Eberl, J.-M., Lind, F. & Boomgaarden, H. (2020). Political migration discourses on social media: a comparative perspective on visibility and sentiment across political Facebook accounts in Europe. Journal of Ethnic and Migration Studies, (46)7, 1261-1280, DOI: 10.1080/1369183X.2019.1665990
 
-- Hilbert, M., & López, P. (2011). The World’s Technological Capacity to Store, Communicate, and Compute Information. Science, 332(6025), 60 –65. https://doi.org/10.1126/science.1200970
+-   Hilbert, M., & López, P. (2011). The World's Technological Capacity to Store, Communicate, and Compute Information. Science, 332(6025), 60 --65. https://doi.org/10.1126/science.1200970
 
-- Hvitfeld, E. & Silge, J. (2021). Supervised Machine Learning for Text Analysis in R. CRC Press. https://smltar.com/
+-   Hvitfeld, E. & Silge, J. (2021). Supervised Machine Learning for Text Analysis in R. CRC Press. https://smltar.com/
 
-- Krippendorff, K. (2004). Content Analysis. Sage. 
+-   Krippendorff, K. (2004). Content Analysis. Sage.
 
----
+------------------------------------------------------------------------
 
 ## Example Exam Question (Multiple Choice)
 
@@ -1162,9 +1121,9 @@ B. Tokenization, stopword removal, normalization, and frequency trimming.
 
 C. Tokenization, inclusion of annotations, interpretation, and frequency trimming.
 
-D. Tokenization, stopword removal, combination, and inclusion of annotations. 
+D. Tokenization, stopword removal, combination, and inclusion of annotations.
 
----
+------------------------------------------------------------------------
 
 ## Example Exam Question (Multiple Choice)
 
@@ -1178,25 +1137,16 @@ A. Tokenization, translation, combination, and frequency trimming.
 
 C. Tokenization, inclusion of annotations, interpretation, and frequency trimming.
 
-D. Tokenization, stopword removal, combination, and inclusion of annotations. 
+D. Tokenization, stopword removal, combination, and inclusion of annotations.
 
-
----
+------------------------------------------------------------------------
 
 ## Example Exam Question (Open Format)
 
-Name and explain two disadvantages of dictionary approaches. <br>
-_(4 points, 2 points for correctly naming two disadvantages and 2 points for correctly explaining them)_
+Name and explain two disadvantages of dictionary approaches. <br> *(4 points, 2 points for correctly naming two disadvantages and 2 points for correctly explaining them)*
 
 . . .
 
-1. Low validity: Dictionary approaches measure the concepts of interest based on simple word lists. Particularly with non-trivial and complex concepts (e.g., sentiment, frames, topics,...), the assumption that this word in a reliable and valid way may be problematic. For example, true sentiment is more than just counting positive and negative words. 
+1.  Low validity: Dictionary approaches measure the concepts of interest based on simple word lists. Particularly with non-trivial and complex concepts (e.g., sentiment, frames, topics,...), the assumption that this word in a reliable and valid way may be problematic. For example, true sentiment is more than just counting positive and negative words.
 
-2. Requires considerable text preprocessing: To reduce ambiguity, dictionary approaches require a lot of text preprocessing (e.g., removing stopwords, punctuation, numbers, stemming, lemmatization). For example, the word "like" would be coded as a positive word in most sentiment dictionaries, but in most sentences, it only refers to something being "like" something else. 
-
-
-
-
-
-
-
+2.  Requires considerable text preprocessing: To reduce ambiguity, dictionary approaches require a lot of text preprocessing (e.g., removing stopwords, punctuation, numbers, stemming, lemmatization). For example, the word "like" would be coded as a positive word in most sentiment dictionaries, but in most sentences, it only refers to something being "like" something else.
