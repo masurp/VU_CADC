@@ -1019,9 +1019,7 @@ How is this used in research?
 
 -   Used a dictionary-approach (Lexicoder; Young and Soroka, 2012) to cound positive and negative words
 
--   Computed sentiment for each document by calculating as the sum of the scores for all words bearing positive sentiment (Pi) minus the sum of all scores from negative words (Ni), divided by the number of words (Wi).
-
-$Sentiment = \frac{Pi-Ni}{Wi}$
+-   Computed sentiment for each document by calculating as the sum of the scores for all words bearing positive sentiment minus the sum of all scores from negative words, divided by the number of words.
 :::
 
 ## Results: Visibility

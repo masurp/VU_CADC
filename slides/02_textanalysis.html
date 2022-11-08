@@ -447,12 +447,12 @@
 <pre><code># A tibble: 6 × 5
      id condition sns_use well_being pers1
   &lt;int&gt; &lt;chr&gt;       &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt;
-1     1 A            4.12      5.24   2.94
-2     2 B            3.56      0.825  3.58
-3     3 A            2.95      2.88   1.51
-4     4 B            3.12      3.88   4.67
-5     5 A            3.60      0.311  2.38
-6     6 B            3.71     -1.47   3.06</code></pre>
+1     1 A            4.83     -2.59   2.90
+2     2 B            3.80      4.03   2.44
+3     3 A            3.44      1.92   6.36
+4     4 B            4.34      1.15   6.67
+5     5 A            2.21      0.322  1.15
+6     6 B            3.36     -2.82   4.67</code></pre>
 </div>
 </div>
 </div><div class="column" style="width:10%;">
@@ -1681,9 +1681,8 @@ docs               negative positive
 <li><p>Used automated contend analysis to estimate sentiment towards migration in each post</p></li>
 <li><p>Machine translated the whole corpus into English</p></li>
 <li><p>Used a dictionary-approach (Lexicoder; Young and Soroka, 2012) to cound positive and negative words</p></li>
-<li><p>Computed sentiment for each document by calculating as the sum of the scores for all words bearing positive sentiment (Pi) minus the sum of all scores from negative words (Ni), divided by the number of words (Wi).</p></li>
+<li><p>Computed sentiment for each document by calculating as the sum of the scores for all words bearing positive sentiment minus the sum of all scores from negative words, divided by the number of words.</p></li>
 </ul>
-<p><span class="math inline">\(Sentiment = \frac{Pi-Ni}{Wi}\)</span></p>
 </div>
 </section>
 <section id="results-visibility" class="slide level2">
