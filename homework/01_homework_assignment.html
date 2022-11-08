@@ -498,7 +498,6 @@ publication-ready figure</li>
 <li>Does the relationship differ depending on education and gender?
 (There are different ways how one can explore this visually… Tip: It has
 to do with adding a group aesthetic or using facet_grid().)</li>
-<li></li>
 </ul>
 <pre class="r"><code>d &lt;- d %&gt;%
   mutate(behavior = rowMeans(d %&gt;% select(contains(&quot;IND_BEH&quot;)), na.rm = T))

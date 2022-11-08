@@ -16,17 +16,16 @@ knitr::opts_chunk$set(echo = TRUE, results = TRUE, message = FALSE, warning = FA
 
 # Formalities
 
-- Name:         [ENTER YOUR NAME HERE]
-- Student ID:   [ENTER YOUR STUDENT ID HERE]   
+-   Name: [ENTER YOUR NAME HERE]
+-   Student ID: [ENTER YOUR STUDENT ID HERE]
 
-In the end, klick on "knit" and upload the respective html-output file to Canvas. Please add your name and lastname to the output file name:
-e.g., 01_homework_assignment_NAME-LASTNAME.html
+In the end, klick on "knit" and upload the respective html-output file to Canvas. Please add your name and lastname to the output file name: e.g., 01_homework_assignment_NAME-LASTNAME.html
 
 # Instructions
 
-In this homework assignment, you are going to practice what you have learned in the past two practical sessions. To do so, we need to get some data into R. On Canvas, you will find a module called "Data Sets". Within this module, there are several data sets that we will use throughout the course. For this assignment, download the data set **norm_data.csv**. This data set stems from an online survey on social media use and norm perceptions. 
+In this homework assignment, you are going to practice what you have learned in the past two practical sessions. To do so, we need to get some data into R. On Canvas, you will find a module called "Data Sets". Within this module, there are several data sets that we will use throughout the course. For this assignment, download the data set **norm_data.csv**. This data set stems from an online survey on social media use and norm perceptions.
 
-If you have set the working directory to the location of this RMarkdown Script and you put the csv-file in the same folder, you can load that data set without specifying a specific path. 
+If you have set the working directory to the location of this RMarkdown Script and you put the csv-file in the same folder, you can load that data set without specifying a specific path.
 
 ```{r}
 library(tidyverse)
@@ -34,34 +33,31 @@ d <- read_csv("norm_data.csv")
 head(d)
 ```
 
-
 # Exercises
 
 ## Task 1: Provide a description of the sample
 
 Let's explore the data set. The data set contains some variables that assess socio-demographic characteristics of the participants (age, gender, edu, race...). Use the tidyverse functions that we discussed on the last practical session to:
 
-- create a subset that only contains socio-demographic variables.
-- How old are participants on average?
-- How many female and male participants are in the data set (0 = male, 1 = female, 2 = other)?
-- How old are participants from different educational levels?
+-   create a subset that only contains socio-demographic variables.
+-   How old are participants on average?
+-   How many female and male participants are in the data set (0 = male, 1 = female, 2 = other)?
+-   How old are participants from different educational levels?
 
 ```{r}
 # Solution here
 ```
 
-
 Answer: [Describe your results in a few sentences here]
 
+## Task 2: Explore social media use
 
-## Task 2: Explore social media use 
+The following code adds a mean indice that represent the latent dimension *critical media literacy* (ranging from 1 to 7).
 
-The following code adds a mean indice that represent the latent dimension *critical media literacy* (ranging from 1 to 7). 
-
-- Create a subset that contains the variables *age*, *edu*, and *MLI_CRI*.
-- Remove all missing values using the function `na.omit()` (Don't forget to save the new data set in order to be able to use it for subsequent analyses!)
-- Does critical media literacy differ depending on the educational level? Create a respective table and plot the differences (Bonus: How could we test this with a statistical test?)
-- Filter out people below 40 and again assess whether critical media literacy differs across educational levels.
+-   Create a subset that contains the variables *age*, *edu*, and *MLI_CRI*.
+-   Remove all missing values using the function `na.omit()` (Don't forget to save the new data set in order to be able to use it for subsequent analyses!)
+-   Does critical media literacy differ depending on the educational level? Create a respective table and plot the differences (Bonus: How could we test this with a statistical test?)
+-   Filter out people below 40 and again assess whether critical media literacy differs across educational levels.
 
 ```{r}
 d <- d %>%
@@ -74,11 +70,10 @@ Answer: [Describe your results in a few sentences here]
 
 ## Task 3: Norm perceptions on Instagram
 
-The data set contains some variables that measure norm perceptions in relation to visual self-disclosure on Instagram (12 items starting with "INV_NOR_"). 
+The data set contains some variables that measure norm perceptions in relation to visual self-disclosure on Instagram (12 items starting with "INV_NOR\_").
 
-- Create the mean across all these item per person and add it as a new column to the data set.
-- Do norm perceptions differ depending on gender? (Create a respective plot and test whether the difference is significant)
-
+-   Create the mean across all these item per person and add it as a new column to the data set.
+-   Do norm perceptions differ depending on gender? (Create a respective plot and test whether the difference is significant)
 
 ```{r}
 # Solution here
@@ -87,13 +82,12 @@ The data set contains some variables that measure norm perceptions in relation t
 
 Answer: [Describe your results in a few sentences here]
 
-## Task 4: Relationship between norm perceptions and self-disclosure  on Instagram
+## Task 4: Relationship between norm perceptions and self-disclosure on Instagram
 
-The code below creates another mean indice that represent the latent dimension "Self-disclosure on Instagram" (ranging from 1 to 7). Let's explore the relationship between norm perceptions and self-disclosure. 
+The code below creates another mean indice that represent the latent dimension "Self-disclosure on Instagram" (ranging from 1 to 7). Let's explore the relationship between norm perceptions and self-disclosure.
 
-- Create a scatterplot that shows the relationship (add both points and a regression line). Bonus: Change the axis-labels to be more meaningful and adjust the layout/aesthetics to create a publication-ready figure
-- Does the relationship differ depending on education and gender? (There are different ways how one can explore this visually... Tip: It has to do with adding a group aesthetic or using facet_grid().)
-- 
+-   Create a scatterplot that shows the relationship (add both points and a regression line). Bonus: Change the axis-labels to be more meaningful and adjust the layout/aesthetics to create a publication-ready figure
+-   Does the relationship differ depending on education and gender? (There are different ways how one can explore this visually... Tip: It has to do with adding a group aesthetic or using facet_grid().)
 
 ```{r}
 d <- d %>%

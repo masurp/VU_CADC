@@ -86,7 +86,7 @@ library(quanteda.textmodels)
 ```
 
 
-## Testing agains the gold standard
+## Testing against the gold standard
 
 In a final step, test the resulting predictions using the test data. How well did the algorithm perform? (Provide an elaborate interpretation of the results that takes different valdiation scores into account.)
 

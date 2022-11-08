@@ -1,6 +1,6 @@
 ---
-title: 'Homework 2: Data Wrangling and Data Visualization'
-author: "Philipp Masur"
+title: 'Homework 3: Text Analysis and Dictionary Approaches'
+author: "Wouter van Atteveldt, Mariken van der Velden, & Philipp Masur"
 date: ""
 output:
   html_document:
@@ -22,115 +22,108 @@ knitr::opts_chunk$set(echo = TRUE, results = TRUE, message = FALSE, warning = FA
 In the end, klick on "knit" and upload the respective html-output file to Canvas. Please add your name and lastname to the output file name:
 e.g., 02_homework_assignment_NAME-LASTNAME.html
 
-# Instructions
+# Introduction 
 
-In this homework assignment, you are again going to practice what you have learned in the past two practical sessions. To do so, we again need to get some data into R. In the Canvas Module "Homework Templates & Data Sets" you will find the data set **ESS9_2018.csv**. This data set is the most recent European Social Survey (Wave 9). It can be downloaded from this website: http://www.europeansocialsurvey.org/data/, where you can find also more information about the data set. 
+Wouter van Atteveldt, Mariken van der Velden and Mark Boukes have published an article titled [The Validity of Sentiment Analysis](https://raw.githubusercontent.com/vanatteveldt/ecosent/master/report/atteveldt_sentiment.pdf) (one of the required readings for week 4) in which they tested different methods' validity in assessing the sentiment in Dutch newspaper headlines. Special thanks to Wouter and Mariken for sharing their data and code for this exercise!
 
-If you have set the working directory to the location of this RMarkdown Script and you put the csv-file in the same folder, you can load that data set without specifying a specific path. 
+Although all used scripts and data are available on the [github page](https://github.com/vanatteveldt/ecosent),
+it uses both Python and R.
+Note that you don't need to be able to read Dutch to be do this homework,
+although of course it can help for inspecting the data and doing error analysis.
+
+In this homework, you will reproduce some of the analyses from that paper,
+namely the quanteda-based Dutch dictionaries approach. Note that the outcome will not be identical as both preprocessing and ML implementation will be different,
+but the outcomes are comparable. 
+
+
+# Data 
+
+We can simply load the data from the respective github repository with the following code. 
 
 ```{r}
-# Code here
+# Needed packages
+library(tidyverse)
+library(quanteda)
+library(quanteda.textplots)
+library(quanteda.textstats)
+
+# Load data
+url <- "https://raw.githubusercontent.com/vanatteveldt/ecosent/master/data/intermediate/sentences_ml.csv"
+d <- read_csv(url) %>% 
+  select(doc_id = id, text = headline, lemmata, sentiment=value) %>%
+  mutate(doc_id = as.character(doc_id))
+head(d)
+```
+
+This dataset contains Dutch newspaper headlines of articles mentioning the economy. 
+The `sentiment` column is a manual coding of the state of the economy, 
+i.e. whether according to the headline one would conclude the economy is doing well or not. 
+
+```{r}
+table(d$sentiment)
+```
+
+In total, there are 6,322 headlines, roughly half of them are neutral, ~2000 are rather negative and ~1500 are rather positive.  
+
+It is important to note that we have both the original "text" and the "lemmatized" version of the text. We can run analyses on both, but you should from now on work with the lemmatized text!
+
+# Analysis
+
+## Creating the document-feature matrix
+
+In a first step, make a document-term-matrix from the lemmatized texts. This means first creating a "corpus" (bear in mind to set `text-field = "lemmata"`), engage in reasonable preprocessing (e.g., removing punctuation, frequency trimming, but don't engage in anything more elaborate such as stopword removal or stemming as we already lemmatized!)
+
+```{r}
+# Solution here
+```
+
+Let's quickly make a word cloud to get an idea what these headlines are about (set max_words = 25). What is the most often used word (even if it is probably a stop word)?
+
+```{r}
+# Solution here
+```
+
+**Answer:** [Add your answer here]
+
+
+## Applying a dictionary
+
+Next, you need to download and apply the NRC dictionary for Dutch: ([original code](https://github.com/vanatteveldt/ecosent/blob/master/src/data-processing/11_apply_dictionaries_quanteda.R)).
+First, we download the dictionary and turn it into a quanteda dictionary:
+
+```{r}
+url <- "https://raw.githubusercontent.com/vanatteveldt/ecosent/master/data/raw/dictionaries/NRC-Emotion-Lexicon-v0.92-In105Languages-Nov2017Translations.csv"
+nrc <- read_csv(url) %>% 
+  select(term = `Dutch (nl)`, Positive, Negative, Fear, Trust) %>% 
+  filter(term != 'NO TRANSLATION')
+dict <- dictionary(list(positive = nrc$term[nrc$Positive==1],
+                        negative = nrc$term[nrc$Negative==1],
+                        fear = nrc$term[nrc$Fear==1],
+                        trust = nrc$term[nrc$Trust==1]))
+dict
 ```
 
 
-# Exercises
-
-## Task 1: Selecting the right variables and understanding the data
-
-1.1. The data set is comparatively big and we only want to work with some variables. So in a first step, select and potentially rename the following variables:
-
-- **idno**:     respondents' id
-- **cntry**:    country
-- **nwspol**:   News consumptions (in minutes per day) about politics and current affairs (watching, reading, listening)
-- **netustm**:  Internet use (in minutes per day)
-- **polintr**:  Political interest (1 = very interested, 2 = quite interested, 3 = hardly interested, 4 = not at all interested)
-- **stflife**:  Life satisfaction 
-- **gndr**:     Gender
-- **agea**:     Age (in years)
-
+Next, try to apply to the dictionary to the dtm we created earlier. The resulting dtm contains information about which headlines contains positive, negative, fear-related, and trust-related words. Can you create table that shows the absolute frequency of each word? Which words occur most often?
 
 ```{r}
-# Code here
+# Solution here
 ```
 
-2.2. How many people are in the data set (Tip: use the function `nrow()`) and what is their average age? How many people are there in each country?
+**Answer:** [Answer here]
+
+Now try to convert the results into a data.frame (or better a tibble) and compute a sentiment score by substracting the sum of "negative" and "fear" related words from the the sum of "positive" and "trust" related words (i.e., `score = (positive + trust) - (negative + fear)`). This is a slightly different score than we produced in the practical session. 
+
+Furthermore, recode the resulting score so that positive values (> 0) are coded as 1, neutral (= 0) are coded as 0 and negative values (< 0) as -1. This can be done in various ways, but the easiest way is to use another mutate command and simply wrap the computed score with the function `sign()`. 
 
 ```{r}
-# Code here
+# Solution
 ```
 
-**Answer:** [add an interpretion here]
-
-## Task 2: Summarizing across countries
-
-2.1. Try to figure out on what scale political interest was measured. What is the mean and standard deviation of the variables "political interest", "political news consumption"? Tip: Install the package `psych` and use the function `describe()` to assess the variables psychometric properties. 
+Now, you should be able to join these results with the original data set. Try to compute the confusion matrix (using the `table()` function) and then produce the accuracy score. What do we learn?
 
 ```{r}
-# Code here
+# Solution
 ```
 
-**Answer:** [add an interpretion here]
-
-2.2. Check the assumption that both variables are normally distributed. Do so by plotting histograms for both variables.
-
-```{r}
-# Code here
-```
-
-**Answer:** [add an interpretion here]
-
-2.2. Second, try to use the `group_by` and `summarise` commands to produce the average news consumptions across countries. If you can, also estimate the standard deviation per country.
-
-```{r}
-# Code here
-```
-
-
-2.3. If you have summarized the data, assign them to a new object and try to plot difference in news consumption between countries as a barplot. Reorder the countries to show which is consumes most political news in which the least. Which countries consume the most political news?
-
-```{r}
-# Code here
-```
-
-**Answer:** [add an interpretion here]
-
-
-## Task 3: Does internet use affect well-being?
-
-The subsequent code runs a linear model in which life satisfaction is predicted by internet use. Some further variables are entered as control variables. Based on the results of this model, Internet use is a positive, significant predictor of life satisfaction. 
-
-3.1. How could you supplement this analysis with an appropriate graph? Is the relationship really practically relevant?
-
-```{r}
-# Linear model
-model <- lm(formula = life_sat ~ age + gender-1 + internet_use, data = d) # change data object if you didnt use "d"
-summary(model)
-
-# Plot here
-
-```
-
-**Answer:** [add an interpretion here]
-
-3.2. Does the relationship differ for different age groups? The following code creates a new age variable. Add this variable age_group to the aesthetics of the plot you created above (e.g., by adding `color = age_group?`) What do you see? 
-
-```{r}
-# Creating a age variable, filtering out people who did not provide age
-age_data <- d %>%
-  mutate(age_group = cut(age, 3)) %>% # cuts variable in three equal groups
-  filter(!is.na(age_group))
-
-# Plot here
-```
-
-**Answer:** [add an interpretion here]
-
-
-3.3. Bonus questions: Can you add a simple command to the plot that creates the same type of visualization for all countries? What do you see?
-
-```{r}
-# Code here
-```
-
-**Answer:** [add an interpretion here]
-
+**Answer:** [Add answer here]
