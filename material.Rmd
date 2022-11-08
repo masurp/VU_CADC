@@ -51,7 +51,7 @@ In the third part of the course, students will work on their own research projec
 #### Practical Session 2: Data visualization
 
 - Handouts:
-    - [Data Visualization](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_basics_data-visualization.md)
+    - [Data Visualization](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_basics_data-visualization.md) ([Version with solutions](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_basics_data-visualization_complete.md))
 
    
 #### Homework
