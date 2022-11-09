@@ -1,5 +1,5 @@
 ---
-title: 'Homework 1: Basic Data Wrangling (Solutions) '
+title: 'Homework 1: Basic Data Wrangling & Visualization (with Solutions) '
 author: "Philipp Masur"
 date: ""
 output:
@@ -16,17 +16,16 @@ knitr::opts_chunk$set(echo = TRUE, results = TRUE, message = FALSE, warning = FA
 
 # Formalities
 
-- Name:         [ENTER YOUR NAME HERE]
-- Student ID:   [ENTER YOUR STUDENT ID HERE]   
+-   Name: [ENTER YOUR NAME HERE]
+-   Student ID: [ENTER YOUR STUDENT ID HERE]
 
-In the end, klick on "knit" and upload the respective html-output file to Canvas. Please add your name and lastname to the output file name:
-e.g., 01_homework_assignment_NAME-LASTNAME.html
+In the end, klick on "knit" and upload the respective html-output file to Canvas. Please add your name and lastname to the output file name: e.g., 01_homework_assignment_NAME-LASTNAME.html
 
 # Instructions
 
-In this homework assignment, you are going to practice what you have learned in the past two practical sessions. To do soe, we need to get some data into R. On Canvas, you will find a module called "Data Sets". Within this module, there are several data sets that we will use throughout the course. For this assignment, download the data set **norm_data.csv**. This data set stems from an online survey on social media use and norm perceptions. 
+In this homework assignment, you are going to practice what you have learned in the past two practical sessions. To do so, we need to get some data into R. On Canvas, you will find a module called "Data Sets". Within this module, there are several data sets that we will use throughout the course. For this assignment, download the data set **norm_data.csv**. This data set stems from an online survey on social media use and norm perceptions.
 
-If you have set the working directory to the location of this RMarkdown Script and you put the csv-file in the same folder, you can load that data set without specifying a specific path. 
+If you have set the working directory to the location of this RMarkdown Script and you put the csv-file in the same folder, you can load that data set without specifying a specific path.
 
 ```{r}
 library(tidyverse)
@@ -34,145 +33,233 @@ d <- read_csv("norm_data.csv")
 head(d)
 ```
 
-
 # Exercises
 
 ## Task 1: Provide a description of the sample
 
-Let's explore the data set. The data set contains some variables that assess socio-demographic characteristics of the participants (age, gender, edu, race...). Use the tidyverse functions that we discussed on the last practical session, 
+Let's explore the data set. The data set contains some variables that assess socio-demographic characteristics of the participants (age, gender, edu, race...). Use the tidyverse functions that we discussed on the last practical session to:
 
-- Create a subset that only contains socio-demographic variables.
-- How old are participants on average?
-- How many female and male participants are in the data set (0 = male, 1 = female, 2 = other)?
-- How old are participants from different educational levels?
-
-```{r}
-# Create subset
-d_soc <- d %>%   ## don't forget to save the subset to be able to work with it afterwards!
-  select(age, gender, edu, race, employment, relationship)
-
-# Recode one person who provided birth year instead of age (This is a good reminder to always check your data!)
-d_soc <- d_soc %>%
-  mutate(age = ifelse(age > 100, 2021-age, age))
-
-# Alternative 1: Using base functions
-mean(d_soc$age, na.rm = T)
-sd(d_soc$age, na.rm = T)
-
-# Alternative 2: Using the summarize function in the tidyvere
-d_soc %>%
-  summarize(m = mean(age, na.rm = T),
-            sd = sd(age, na.rm = T))
-
-# Alternative 3: Using the psych package and its function describe
-library(psych)  # you have to install this first!
-describe(d_soc$age) 
-```
-
-**Answer:** Participants are on average M = 36.5 years old (SD = 11.3). 
+-   create a subset that only contains socio-demographic variables.
+-   How old are participants on average?
+-   How many female and male participants are in the data set (0 = male, 1 = female, 2 = other)?
+-   How old are participants from different educational levels?
 
 ```{r}
-# Alternative 1: Frequency table of gender using summarize
-d_soc %>%
+## Creating a subset with socio-demographic variables
+d_sub <- d %>%
+  select(age, gender, education = edu, race, relationship, employment) %>%
+  mutate(age = ifelse(age > 1900, 2022-age, age))  # Recoding necessary as some people provided birthyear!
+
+#-------------------------------------------------------------------------------
+## Average age 
+
+# Solution 1 with tidyverse functions
+d_sub %>%
+  summarize(M = mean(age, na.rm = T),
+            SD = sd(age, na.rm = T),
+            Min = min(age, na.rm = T),
+            Max = max(age, na.rm = T))
+
+# Solution 2 with the package 'psych'
+library(psych)
+describe(d_sub$age)
+
+# Solution 3 with base R
+mean(d_sub$age)
+sd(d_sub$age)
+
+#-------------------------------------------------------------------------------
+## Gender distribution
+
+# Solution 1 with tidyverse
+d_sub %>%
   group_by(gender) %>%
-  summarize(n = n()) %>%
-  mutate(prop = prop.table(n))  ## adding percentages to the table
+  tally %>%
+  mutate(prop = n/nrow(d_sub))
 
-# Alternative 2: Using the count function
-d_soc %>%
-  group_by(gender) %>%
-  count %>%                     ## Does the same as the summarizing command above
-  mutate(prop = prop.table(n))  
+# Solution with base R
+prop.table(table(d_sub$gender, useNA = "always"))
+
+
+
+#-------------------------------------------------------------------------------
+## Age differences across educational levels
+d_sub %>%
+  select(education, age) %>%     # select relevant variables
+  na.omit %>%                    # omit NAs
+  group_by(education) %>%        # group by educational level
+  summarize(M = mean(age, na.rm = T),
+            SD = sd(age, na.rm = T),
+            Min = min(age, na.rm = T),
+            Max = max(age, na.rm = T))
+
+# Significance test (Bonus)
+summary(aov(lm(age ~ education, d_sub)))
 ```
 
-**Answer:** There are 411 males (35.9%) and 638 females (55.7%) in the sample. Five participants did not indicate their gender and 92 did not indicate their gender at all.
+Answer: In this sample with n = 1,146 participant, the average age is *M* = 36.51 years (SD = 11.26). Gender was not very equally distributed: 35.9% were male and 55.7% were female. Another 0.4% chose "other" as answer options and 8.0% did not provide an answer. People with different educational levels did not differ in their average age, although lower educational levels were slightly younger overall. An analysis of variance did not found statistical differences in age across educational levels: *F*(299) = 2.37, *p* = .124.
 
-```{r}
-# Age per educational level
-d_soc %>%
-  group_by(edu) %>%
-  summarize(m = mean(age, na.rm = T))
-```
+## Task 2: Explore social media use
 
-**Answer:** Age hardly differs between educational levels (range = 34.2 - 37.9). 
+The following code adds a mean indice that represent the latent dimension *critical media literacy* (ranging from 1 to 7).
 
-## Task 2: Explore social media use 
-
-The following code adds a mean indices that represent the latent dimension *critical media literacy* (ranging from 1 to 7). 
-
-- Create a subset that contains the variables *age*, *edu*, and *MLI_CRI*.
-- Remove all missing values using the function `na.omit()`.
-- Does critical media literacy differ depending on the educational level?
-- Filter out people below 40 and again assess whether critical media literacy differs across educational levels.
+-   Create a subset that contains the variables *age*, *edu*, and *MLI_CRI*.
+-   Remove all missing values using the function `na.omit()` (Don't forget to save the new data set in order to be able to use it for subsequent analyses!)
+-   Does critical media literacy differ depending on the educational level? Create a respective table and plot the differences (Bonus: How could we test this with a statistical test?)
+-   Filter out people below 40 and again assess whether critical media literacy differs across educational levels.
 
 ```{r}
 d <- d %>%
   mutate(MLI_CRI = rowMeans(d %>% select(contains("MLI_CRI")), na.rm = T))
 
-# Select variabke, remove all missings and create the subset
-d2 <- d %>%                        ## again, don't forget to save your steps in a new object!
+#-------------------------------------------------------------------------------
+## Creating the subset
+d_sub2 <- d %>%
   select(age, edu, MLI_CRI) %>%
   na.omit
 
-# Summarize critical media literacy by educational level
-d2 %>%
+#-------------------------------------------------------------------------------
+## Difference in media literacy across educational levels
+# Create table (Bonus: With confidence intervals)
+table <- d_sub2 %>%
   group_by(edu) %>%
-  summarise(mean = mean(MLI_CRI, na.rm = T),
-            sd = sd(MLI_CRI, na.rm = T))
+  summarize(M = mean(MLI_CRI),
+            SE = sd(MLI_CRI)/sqrt(length(MLI_CRI)),  # compute standard error
+            LL = M - 1.96*SE,                        # Lower CI
+            UL = M + 1.96*SE)                        # Upper CI
+table
 
-# Bonus: Significant test using an analysis of variance (ANOVA)
-m <- aov(MLI_CRI ~ edu, d2)
-summary(m)
+# Plot differences
+plot <- table %>%
+  ggplot(aes(x = edu, y = M, ymin = LL, ymax = UL)) +
+  geom_col(fill = "steelblue") +
+  ylim(0, 7) +
+  theme_classic() +
+  labs(x = "Educational level", y = "Media Literacy",
+       title = "Relationship between education and media literacy")
+plot
 
-```
+# Bonus: add confidence intervals
+plot + 
+  geom_errorbar(width = .2)
 
-**Answer:** Based on a simple mean comparison, critical media literacy does differ between educational level: The higher the educational level, the more literate are the participants. This difference is significant, F(1, 1051) = 13.96, p < .001. 
+# Statistical test
+library(effectsize)   # can produce standarized effect sizes for anovas
+model <- aov(MLI_CRI ~ factor(edu), d_sub2)
+summary(model)
+effectsize(model)
 
-```{r}
-# Create subset
-d2_old <- d2 %>%
+#-------------------------------------------------------------------------------
+## Difference in media literacy across educational levels for people above 40 years
+# Filtering out people
+d_sub3 <- d_sub2 %>%
   filter(age >= 40)
 
-# Summarize data in subset
-d2_old %>%
+d_sub3 %>%
   group_by(edu) %>%
-  summarize(mean = mean(MLI_CRI, na.rm = T),
-            sd = sd(MLI_CRI, na.rm = T))
+  summarize(M = mean(MLI_CRI),
+            SE = sd(MLI_CRI)/sqrt(length(MLI_CRI)),  
+            LL = M - 1.96*SE,                       
+            UL = M + 1.96*SE)     
 
-# Bonus: Significant test using an analysis of variance (ANOVA)
-m <- aov(MLI_CRI ~ edu, d2_old)
-summary(m)
+model2 <- aov(MLI_CRI ~ factor(edu), d_sub3)
+summary(model2)
+effectsize(model2)
 ```
 
-**Answer:** If we only inspect older participants (>= 40 years), this results changes slightly: the differences are seemingly smaller. Yet, the difference is still statistically significant: F(1,334) = 4.65, p = .032. 
+Answer: Based on the bar plot, we an see that a higher education is positively related to media literacy: The higher the level of education, the higher the level of media literacy. The relationship is significant: *F*(30.3) = 4.05, *p* = .001. However, the effect is rather small: $\eta^2$ = 0.02. This effect further disappears if we exclude people below 40 years of age. 
 
 ## Task 3: Norm perceptions on Instagram
 
-The data set contains some variables that measure norm perceptions in relation to visual self-disclosure on Instagram (12 items starting with "INV_NOR_"). 
+The data set contains some variables that measure norm perceptions in relation to visual self-disclosure on Instagram (12 items starting with "INV_NOR\_").
 
-- Create the mean across all these item per person and add it as a new column to the data set.
-- Do norm perceptions differ depending on gender (only looking at 0 = males and 1 = females)?
-- How could you test whether this difference is statistically significant (tip: ?t.test)? 
-
+-   Create the mean across all these item per person and add it as a new column to the data set.
+-   Do norm perceptions differ depending on gender? (Create a respective plot and test whether the difference is significant)
 
 ```{r}
+# Adding the mean for norm perceptions
 d <- d %>%
-  mutate(NORM = rowMeans(d %>% select(contains("INV_NOR")), na.rm = T))
+  mutate(norms = rowMeans(d %>% select(contains("INV_NOR_")), na.rm = T))
 
-# Filter 
-d_gen <- d %>%
-  filter(gender == 0 | gender == 1)
-
-# Means
-d_gen %>%
+#-------------------------------------------------------------------------------
+# Create table
+table2 <- d %>%
+  mutate(gender = factor(gender, labels = c("male", "female", "other"))) %>%
+  select(gender, norms) %>%
+  na.omit %>%
   group_by(gender) %>%
-  summarize(average_norm = mean(NORM))
+  summarize(M = mean(norms),
+            SE = sd(norms)/sqrt(length(norms)),  
+            LL = M - 1.96*SE,                       
+            UL = M + 1.96*SE,
+            n = n())
+table2
 
-# Significant test
-t.test(NORM ~ gender, d_gen)
+# Plot differences
+table2 %>%
+  ggplot(aes(x = gender, y = M, ymin = LL, ymax = UL, fill = gender)) +
+  geom_col() +
+  geom_errorbar(width = .2) +
+  scale_fill_brewer(palette = "Blues") +
+  theme_classic() +
+  labs(x = "Gender", y = "Norm Perceptions",
+       title = "Gender differences in self-disclosure norm perceptions on Instagram")
+
+#-------------------------------------------------------------------------------
+## Test for significance
+d %>%
+  filter(gender != 2) %>%
+  t.test(norms ~ gender, data = .)  # point is the placeholder here
 
 ```
 
-**Answer:** Males perceive norms related to visual self-disclosure to be slightly less strong (M = 4.90) compared to females (M = 5.1). This difference is statistically significant, t(846.76) = -4.00, p < .001. 
+Answer: Female participants generally perceived a stronger norm to disclose on Instagram (*M* = 5.13) than males (*M* = 4.90). This differences was statistically significant: *t*(846.76) = -4.00, *p* < .001.
 
 
+## Task 4: Relationship between norm perceptions and self-disclosure on Instagram
+
+The code below creates another mean indice that represent the latent dimension "Self-disclosure on Instagram" (ranging from 1 to 7). Let's explore the relationship between norm perceptions and self-disclosure.
+
+-   Create a scatterplot that shows the relationship (add both points and a regression line). Bonus: Change the axis-labels to be more meaningful and adjust the layout/aesthetics to create a publication-ready figure
+-   Does the relationship differ depending on education and gender? (There are different ways how one can explore this visually... Tip: It has to do with adding a group aesthetic or using facet_grid().)
+
+```{r}
+d <- d %>%
+  mutate(behavior = rowMeans(d %>% select(contains("IND_BEH")), na.rm = T))
+
+#-------------------------------------------------------------------------------
+## Plot standard scatter plot
+d %>%
+  ggplot(aes(x = norms, y = behavior)) +
+  geom_point(alpha = .5, size = 1.5) +
+  geom_smooth(method = "lm") +
+  labs(x = "Norm perceptions", y = "Self-Disclosure",
+       title = "Scatterplot for the relationship between norm perceptions and self-disclosure") +
+  theme_classic()
+
+#-------------------------------------------------------------------------------
+## Plot scatterplot per education and gender
+# Solution 1: Adding group aesthetics and a facet_wrap
+d %>%
+  filter(gender != 2) %>%
+  mutate(gender = factor(gender, labels = c("male", "female"))) %>%
+  ggplot(aes(x = norms, y = behavior, group = gender, color = gender)) +
+  geom_point(alpha = .5) +
+  geom_smooth(method = "lm", se = F) +
+  facet_wrap(~edu) +
+  theme_bw()
+
+# Solution 2: Adding  a facet_grid
+d %>%
+  filter(gender != 2) %>%
+  mutate(gender = factor(gender, labels = c("male", "female"))) %>%
+  ggplot(aes(x = norms, y = behavior)) +
+  geom_point(alpha = .5) +
+  geom_smooth(method = "lm", se = F) +
+  facet_grid(gender~edu) +
+  theme_bw()
+  
+
+```
+
+Answer: As it can be seen in the figure(s), the relationship between norm perceptions and actual behavior is strong and positive. Furthermore, this relationship hardly differs across gender or educational levels. 
