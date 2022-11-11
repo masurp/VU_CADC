@@ -1,5 +1,5 @@
 ---
-title: 'Homework 3: Text Analysis and Dictionary Approaches'
+title: 'Homework 2: Text Analysis and Dictionary Approaches'
 author: "Wouter van Atteveldt, Mariken van der Velden, & Philipp Masur"
 date: ""
 output:
@@ -24,10 +24,8 @@ e.g., 02_homework_assignment_NAME-LASTNAME.html
 
 # Introduction 
 
-Wouter van Atteveldt, Mariken van der Velden and Mark Boukes have published an article titled [The Validity of Sentiment Analysis](https://raw.githubusercontent.com/vanatteveldt/ecosent/master/report/atteveldt_sentiment.pdf) (one of the required readings for week 4) in which they tested different methods' validity in assessing the sentiment in Dutch newspaper headlines. Special thanks to Wouter and Mariken for sharing their data and code for this exercise!
+Wouter van Atteveldt, Mariken van der Velden and Mark Boukes have published an article titled [The Validity of Sentiment Analysis](https://raw.githubusercontent.com/vanatteveldt/ecosent/master/report/atteveldt_sentiment.pdf) (one of the required readings for week 3) in which they tested different methods' validity in assessing the sentiment in Dutch newspaper headlines. Special thanks to Wouter and Mariken for sharing their data and code for this exercise!
 
-Although all used scripts and data are available on the [github page](https://github.com/vanatteveldt/ecosent),
-it uses both Python and R.
 Note that you don't need to be able to read Dutch to be do this homework,
 although of course it can help for inspecting the data and doing error analysis.
 
