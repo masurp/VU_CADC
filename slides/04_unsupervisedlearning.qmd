@@ -1,0 +1,38 @@
+---
+title: "Computational Analysis of Digital Communication"
+subtitle: "Week 3: Unsupervised Topic Modeling"
+author: "Dr. Philipp K. Masur"
+format:
+  revealjs: 
+    theme: [default, theme.scss]
+    logo: img/logo.png
+    background-transition: fade
+    title-slide-attributes:
+        data-background-image: https://storage.googleapis.com/exenzo-jobboard/bb/public/thumb/logo-jpg-57.jpg
+        data-background-position: "top right"
+        data-background-size: auto
+editor: visual
+---
+
+## Intuitions behind LDA topic modelling
+
+![](img/blei_lda.png)
+
+
+
+# Thank you for your attention! {background-color="steelblue"}
+
+## Required Reading
+
+<br><br>
+
+Günther, E. , & Domahidi, E. (2017). What Communication Scholars Write About: An Analysis of 80 Years of Research in High-Impact Journals. International Journal of Communication 11(2017), 3051--3071
+
+Jacobi,C., van Atteveldt, W. & Welbers, K. (2016) Quantitative analysis of large amounts of journalistic texts using topic modelling. Digital Journalism, 4(1), 89-106, DOI: 10.1080/21670811.2015.1093271
+
+
+<br>
+
+*(available on Canvas)*
+
+## References {.smaller}

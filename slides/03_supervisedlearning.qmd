@@ -240,23 +240,23 @@ ggplot(data, aes(x, y)) +
 
 ## Differences
 
--   Goal of 'normal' modeling: explaining/understanding
+- Goal of 'normal' modeling: explaining/understanding
+    
+    - Serves to make inferences about a population ("Does X relate to Y?")
+    - Doesn't use too many variables to avoid the difficult of interpreting too many parameters
+    - Requires interpretable parameters
 
-        - Serves to make inferences about a population ("Does X relate to Y?")
-        - Doesn't use too many variables to avoid the difficult of interpreting too many parameters
-        - Requires interpretable parameters
-
--   Goal of machine learning: best possible prediction
-
-        - make generalizable predictions ("How to best predict Y?")
-        - Use as many variables as you need, and don’t worry about interpretability of parameters
-        - Always train (fit) and test (validate) on distinct data
+- Goal of machine learning: best possible prediction
+    
+    - make generalizable predictions ("How to best predict Y?")
+    - Use as many variables as you need, and don’t worry about interpretability of parameters
+    - Always train (fit) and test (validate) on distinct data
 
 . . .
 
 **Note:** Machine learning models often have 1000's of collinear independent variables and can have many latent variables!
 
-## Advantages and disadvantages of supervised approaches
+## Supervised Approaches
 
 ### Advantages
 
@@ -320,7 +320,7 @@ How do these algorithms work?
 
 <center>$P(spam|viagra) = \frac{P(viagra|spam) * P(spam)}{P(viagra)} = \frac{.20 * .20}{.05} = .80$</center>
 
-## Strengths and Weaknesses of the Naive Bayes algorithm
+## Overview: Naive Bayes
 
 ### Strengths
 
@@ -349,7 +349,7 @@ How do these algorithms work?
 
 -   More formally, a support-vector machine constructs a hyperplane or set of hyperplanes in a high- or infinite-dimensional space
 
-## Strengths and Weaknesses of the Support Vector Machines
+## Overview: Support Vector Machines
 
 ### Strengths
 
@@ -394,7 +394,7 @@ How do these algorithms work?
 
 **Universal approximator:** Neural Networks with single hidden layer can represent every continuous function
 
-## Strengths and Weaknesses of Neural Networks
+## Overview: Neural Networks
 
 ### Strengths
 
@@ -740,23 +740,21 @@ head(nb_pred, 2)
 
 ## Evaluating the Prediction
 
-
 ::: {.column width="45%"}
+-   As we can see in the confusion matrix, there are a lot of false positives and false negatives!
 
-- As we can see in the confusion matrix, there are a lot of false positives and false negatives!
+-   **Overall Accuracy**: `r papaja::printnum(mean(nb_pred == genre_test)*100)`%
 
-- **Overall Accuracy**: `r papaja::printnum(mean(nb_pred == genre_test)*100)`%
+-   Precision, Recall and F1-Score are not too good for each genre
 
-- Precision, Recall and F1-Score are not too good for each genre
-    
-    - Precision is slightly better for Rock and Pop,
-    - Recall is better for Hip Hop
+    -   Precision is slightly better for Rock and Pop,
+    -   Recall is better for Hip Hop
 :::
+
 ::: {.column width="5%"}
 :::
 
 ::: {.column width="45%"}
-
 ```{r, echo = T, R.options = list(width = 120)}
 #| output-location: fragment
 library(caret)
@@ -776,41 +774,33 @@ cm_nb$table
   mutate_if(is.numeric, round, 2))
 
 ```
-
 :::
-
 
 ## Different algorithm = better results?
 
-
-
 ::: {.column width="45%"}
-
 ```{r, echo = T}
 m_svm <- textmodel_svm(x = dfm_train, y = genre_train, type = 2) 
 svm_pred <- predict(m_svm, newdata = dfm_test)
 cm_svm <- confusionMatrix(svm_pred, genre_test)
 ```
 
+-   When we refit the model with support vector machines, there are still a lot of false positives and false negatives
 
-- When we refit the model with support vector machines, there are still a lot of false positives and false negatives
+-   **Overall Accuracy**: `r papaja::printnum(mean(svm_pred == genre_test)*100)`%
 
-- **Overall Accuracy**: `r papaja::printnum(mean(svm_pred == genre_test)*100)`%
-
-- However, Precision, Recall and F1-Score all have improved!
-
+-   However, Precision, Recall and F1-Score all have improved!
 :::
+
 ::: {.column width="5%"}
 :::
 
 ::: {.column width="45%"}
-
 ```{r, echo = T, R.options = list(width = 120)}
 #| output-location: fragment
 cm_svm <- confusionMatrix(svm_pred, genre_test)
 cm_svm$table
 ```
-
 
 ```{r, echo = T, R.options = list(width = 120)}
 #| output-location: fragment
@@ -821,11 +811,9 @@ cm_svm$table
   as.data.frame %>%
   mutate_if(is.numeric, round, 2))
 ```
-
 :::
 
 ## Comparison between Algorithms
-
 
 ```{r, echo = T, R.options = list(width = 120)}
 #| output-location: column-fragment
@@ -850,189 +838,157 @@ bind_rows(cm_nb2, cm_svm2) %>%
 
 ```
 
-
-
 ## Drivers of model performance
 
-1. Task difficulty
+1.  Task difficulty
 
-2. Amount of training data
+2.  Amount of training data
 
-3. Choice of features (n-grams, lemmata, etc)
+3.  Choice of features (n-grams, lemmata, etc)
 
-4. Text preprocessing (e.g., exclude or include stopwords?)
+4.  Text preprocessing (e.g., exclude or include stopwords?)
 
-5. Tuning of algorithm (if required)
-
-
+5.  Tuning of algorithm (if required)
 
 ## What is the effect of text preprocessing on model performance?
 
 ![](img/scharkow_table3.png)
 
+*Scharkow, 2013*
 
-_Scharkow, 2013_
-
-
-# Examples from the literature{background-color="steelblue"}
+# Examples from the literature {background-color="steelblue"}
 
 How is this used in research?
 
-
 ## Example 1: Validating different approaches
 
--  Van Atteveldt et al. (2021) re-analysised data reported in Boukes et al. (2020) to understanding the validity of different text classification approaches 
+-   Van Atteveldt et al. (2021) re-analysised data reported in Boukes et al. (2020) to understanding the validity of different text classification approaches
 
-- The data incldued news from a total of ten newspapers and five websites published between February 1 and July 7, 2015:
+-   The data incldued news from a total of ten newspapers and five websites published between February 1 and July 7, 2015:
 
-    - three quality newspapers (NRC Handelsblad, Trouw, de Volkskrant)
-    - a financial newspaper (Financieel Dagblad)
-    - three popular newspapers (Algemeen Dagblad, Metro, De Telegraaf)
-    - three regional outlets (Dagblad van het Noorden, de Gelderlander, Noordhollands Dagblad)
-    
-
+    -   three quality newspapers (NRC Handelsblad, Trouw, de Volkskrant)
+    -   a financial newspaper (Financieel Dagblad)
+    -   three popular newspapers (Algemeen Dagblad, Metro, De Telegraaf)
+    -   three regional outlets (Dagblad van het Noorden, de Gelderlander, Noordhollands Dagblad)
 
 ## Methods
-    
-- They analyzed the paper using different methods and compared the results
 
-    - Gold standard (manual coding by the three authors)
-    - Manual coding (1 or 3 coders)
-    - Crowd-Coding (1, 3 or 5 coders on a online platform)
-    - Sentiment dictionaries (various versions)
-    - Different supervised machine learning algorithms (NB, SVM, convolutional neural networks)
-    
-- Investigated performance results of all models
+-   They analyzed the paper using different methods and compared the results
 
+    -   Gold standard (manual coding by the three authors)
+    -   Manual coding (1 or 3 coders)
+    -   Crowd-Coding (1, 3 or 5 coders on a online platform)
+    -   Sentiment dictionaries (various versions)
+    -   Different supervised machine learning algorithms (NB, SVM, convolutional neural networks)
 
+-   Investigated performance results of all models
 
 ## Main results
 
 ![](img/vanatteveldt_table2.png)
 
-
 ## So which method is valid?
 
-- Manual coding still outperforms all other approaches
+-   Manual coding still outperforms all other approaches
 
-- Supervised text classification (particularly deep learning) is better than dictionary approaches (not too surprising)
+-   Supervised text classification (particularly deep learning) is better than dictionary approaches (not too surprising)
 
-- Particularly supervised learning gets better with more training data (more is more!)
+-   Particularly supervised learning gets better with more training data (more is more!)
 
-- Nonetheless strongly depends on quality of training data
+-   Nonetheless strongly depends on quality of training data
 
-- Recommendation for dictionary: Apply any applicable off-the-shelf dictionaries and if any of these is sufficiently valid as
-determined by comparison with the gold standard, use this for the text analysis
+-   Recommendation for dictionary: Apply any applicable off-the-shelf dictionaries and if any of these is sufficiently valid as determined by comparison with the gold standard, use this for the text analysis
 
-    - Dictionaries give very good transparency
-    - Replicability for a low cost
-    
-    
+    -   Dictionaries give very good transparency
+    -   Replicability for a low cost
+
 ## Example 2: Incivility in Facebook comments
 
-- Study examined the extent and patterns of incivility in the comment sections of 42 US news outlets’ Facebook pages in 2015–2016
+-   Study examined the extent and patterns of incivility in the comment sections of 42 US news outlets' Facebook pages in 2015--2016
 
-- News source outlets included
-    
-    - National-news outlets (e.g., ABC, CBS, CNN...)
-    - Local-new outlets (e.g., The Denver Post, San Francisco Chronicle...)
-    - Conservative and liberal partisan news outlets (e.g., Breitbart, The Daily Show...)
-    
-- Implemented a combination of manual coding and supervised machine learning to code comments with regard to:
+-   News source outlets included
 
-    - Civility
-    - Interpersonal rudeness
-    - Personal rudeness
-    - Impersonal extreme incivility
-    - Personal extreme incivility
-    
+    -   National-news outlets (e.g., ABC, CBS, CNN...)
+    -   Local-new outlets (e.g., The Denver Post, San Francisco Chronicle...)
+    -   Conservative and liberal partisan news outlets (e.g., Breitbart, The Daily Show...)
 
+-   Implemented a combination of manual coding and supervised machine learning to code comments with regard to:
+
+    -   Civility
+    -   Interpersonal rudeness
+    -   Personal rudeness
+    -   Impersonal extreme incivility
+    -   Personal extreme incivility
 
 ## Results: Incivility over time
 
 ::: {.column width="30%"}
+-   Despite several discernible spikes, the percentage of extremely uncivil personal comments on national-news outlets' pages shifted only modestly
 
-- Despite several discernible spikes, the percentage of extremely uncivil personal comments on national-news outlets’ pages shifted only modestly 
+-   On conservative outlets' Facebook pages, the proportions of both extremely uncivil and rude comments fluctuated dramatically across the sampling window
 
-- On conservative outlets’ Facebook pages, the proportions of both extremely uncivil and rude comments fluctuated dramatically across the sampling window
-
-_Su et al., 2018_
-
+*Su et al., 2018*
 :::
+
 ::: {.column width="5%"}
 :::
 
 ::: {.column width="60%"}
-
 ![](img/su_fig1.png)
-
 :::
 
 ## Overall differences
 
 ![](img/sug_fig2.png)
 
-# Outlook and Conclusion{background-color="steelblue"}
-
+# Outlook and Conclusion {background-color="steelblue"}
 
 ## Deep learning
 
-- Deep learning is part of a broader family of machine learning methods based on artificial neural networks with representation learning
+-   Deep learning is part of a broader family of machine learning methods based on artificial neural networks with representation learning
 
-- Learning can again be supervised, semi-supervised or unsupervised
+-   Learning can again be supervised, semi-supervised or unsupervised
 
-- Generally refers to large neural networks with many hidden layers
+-   Generally refers to large neural networks with many hidden layers
 
-    - Possible because of modern computing power, large training sets
-    - Powers e.g. automatic translation, self-driving cars, chess computers, etc.
+    -   Possible because of modern computing power, large training sets
+    -   Powers e.g. automatic translation, self-driving cars, chess computers, etc.
 
-- Originally developed to deal with image recognition, now also adapted for text analysis
+-   Originally developed to deal with image recognition, now also adapted for text analysis
 
-- Use the combination of words, bi-grams, word-embeddings, rather than feature frequencies 
-
+-   Use the combination of words, bi-grams, word-embeddings, rather than feature frequencies
 
 ## Deep Learning Neural Networks
 
 ![](img/deep-learning.jpg)
 
-
-
 ## Example: TV gender representation
 
 ::: {layout="[60, 50]"}
-
 ![](img/juergen_face.png)
 
 ![](img/juergen_face2.png)
-
 :::
-
 
 ## Is machine learning really useful?
 
+-   Is it okay to use a model we can't possibly understand?
 
-- Is it okay to use a model we can’t possibly understand?
+-   Machine learning in the social sciences generally used to solve an engineering problem
 
-- Machine learning in the social sciences generally used to solve an engineering problem
-
-- Output of Machine Learning is input for “actual” statistical model (e.g., we classify text, but run an analysis of variance with the output)
-
+-   Output of Machine Learning is input for "actual" statistical model (e.g., we classify text, but run an analysis of variance with the output)
 
 ## Conclusion
 
-- Machine learning is a useful tool for generalizing from sample
+-   Machine learning is a useful tool for generalizing from sample
 
-- It is very useful to reduce the amount of manual coding needed
+-   It is very useful to reduce the amount of manual coding needed
 
-- Many different models exist (each with many parameters/options)
+-   Many different models exist (each with many parameters/options)
 
-- We always need to validate model on unseen and representative test data!
+-   We always need to validate model on unseen and representative test data!
 
-
-
-# Thank you for your attention!{background-color="steelblue"}
-
-
+# Thank you for your attention! {background-color="steelblue"}
 
 ## Required Reading
 
@@ -1040,38 +996,31 @@ _Su et al., 2018_
 
 van Atteveldt, W., van der Velden, M. A. C. G., & Boukes, M.. (2021). The Validity of Sentiment Analysis: Comparing Manual Annotation, Crowd-Coding, Dictionary Approaches, and Machine Learning Algorithms. Communication Methods and Measures, (15)2, 121-140, https://doi.org/10.1080/19312458.2020.1869198
 
-Su, L. Y.-F., Xenos, M. A., Rose, K. M., Wirz, C., Scheufele, D. A., & Brossard, D. (2018). Uncivil and personal? Comparing patterns of incivility in comments on the Facebook pages of news outlets. New Media & Society, 20(10), 3678–3699. https://doi.org/10.1177/1461444818757205
+Su, L. Y.-F., Xenos, M. A., Rose, K. M., Wirz, C., Scheufele, D. A., & Brossard, D. (2018). Uncivil and personal? Comparing patterns of incivility in comments on the Facebook pages of news outlets. New Media & Society, 20(10), 3678--3699. https://doi.org/10.1177/1461444818757205
 
 <br>
 
-_(available on Canvas)_
+*(available on Canvas)*
 
+------------------------------------------------------------------------
 
+## References {.smaller}
 
----
+-   Boumans, J. W., & Trilling, D. (2016). Taking stock of the toolkit: An overview of relevant automated content analysis approaches and techniques for digital journalism scholars. Digital journalism, 4(1), 8-23.
 
+-   Günther, E. , & Domahidi, E. (2017). What Communication Scholars Write About: An Analysis of 80 Years of Research in High-Impact Journals. International Journal of Communication 11(2017), 3051--3071
 
-## References{.smaller}
+-   Hvitfeld, E. & Silge, J. (2021). Supervised Machine Learning for Text Analysis in R. CRC Press. https://smltar.com/
 
-- Boumans, J. W., & Trilling, D. (2016). Taking stock of the toolkit: An overview of relevant automated content analysis approaches and techniques for digital journalism scholars. Digital journalism, 4(1), 8-23.
+-   Jürgens, P., Meltzer, C., & Scharkow, M. (2021, in press). Age and Gender Representation on German TV: A Longitudinal Computational Analysis. Computational Communication Research.
 
-- Günther, E. , & Domahidi, E. (2017). What Communication Scholars Write About:
-An Analysis of 80 Years of Research in High-Impact Journals. International Journal of Communication 11(2017), 3051–3071
+-   Lantz, B. (2013). Machine learning in R. Packt Publishing Ltd.
 
-- Hvitfeld, E. & Silge, J. (2021). Supervised Machine Learning for Text Analysis in R. CRC Press. https://smltar.com/
+-   Scharkow, M. (2013). Thematic content analysis using supervised machine learning: An empirical evaluation using german online news. Quality & Quantity, 47(2), 761--773. https://doi.org/10.1007/s11135-011-9545-7
 
-- Jürgens, P., Meltzer, C., & Scharkow, M. (2021, in press). Age and Gender Representation on German TV: A Longitudinal Computational Analysis. Computational Communication Research. 
+-   Su, L. Y.-F., Xenos, M. A., Rose, K. M., Wirz, C., Scheufele, D. A., & Brossard, D. (2018). Uncivil and personal? Comparing patterns of incivility in comments on the Facebook pages of news outlets. New Media & Society, 20(10), 3678--3699. https://doi.org/10.1177/1461444818757205
 
-- Lantz, B. (2013). Machine learning in R. Packt Publishing Ltd.
-
-- Scharkow, M. (2013). Thematic content analysis using supervised machine learning: An empirical evaluation using german online news. Quality & Quantity, 47(2), 761–773. https://doi.org/10.1007/s11135-011-9545-7
-
-- Su, L. Y.-F., Xenos, M. A., Rose, K. M., Wirz, C., Scheufele, D. A., & Brossard, D. (2018). Uncivil and personal? Comparing patterns of incivility in comments on the Facebook pages of news outlets. New Media & Society, 20(10), 3678–3699. https://doi.org/10.1177/1461444818757205
-
-- van Atteveldt, W., van der Velden, M. A. C. G., & Boukes, M.. (2021). The Validity of Sentiment Analysis: Comparing Manual Annotation, Crowd-Coding, Dictionary Approaches, and Machine Learning Algorithms. Communication Methods and Measures, (15)2, 121-140, https://doi.org/10.1080/19312458.2020.1869198
-
-
-
+-   van Atteveldt, W., van der Velden, M. A. C. G., & Boukes, M.. (2021). The Validity of Sentiment Analysis: Comparing Manual Annotation, Crowd-Coding, Dictionary Approaches, and Machine Learning Algorithms. Communication Methods and Measures, (15)2, 121-140, https://doi.org/10.1080/19312458.2020.1869198
 
 ## Example Exam Question (Multiple Choice)
 
@@ -1079,15 +1028,15 @@ Van Atteveldt and colleagues (2020) tested the validity of various automated tex
 
 <br>
 
-A. English dictionaries performed better than Dutch dictionaries in classifying the sentiment of Dutch news paper headlines. 
+A. English dictionaries performed better than Dutch dictionaries in classifying the sentiment of Dutch news paper headlines.
 
-B. Dictionary approaches were as good as machine learning approaches in classifying the sentiment of Dutch news paper headlines. 
+B. Dictionary approaches were as good as machine learning approaches in classifying the sentiment of Dutch news paper headlines.
 
 C. Of all automated approaches, supervised machine learning approaches performed the best in classifying the sentiment of Dutch news paper headlines.
 
-D. Manual coding and supervised machine learning approaches performed similarly well in classifying the sentiment of Dutch news paper headlines. 
+D. Manual coding and supervised machine learning approaches performed similarly well in classifying the sentiment of Dutch news paper headlines.
 
----
+------------------------------------------------------------------------
 
 ## Example Exam Question (Multiple Choice)
 
@@ -1095,14 +1044,13 @@ Van Atteveldt and colleagues (2020) tested the validity of various automated tex
 
 <br>
 
-A. English dictionaries performed better than Dutch dictionaries in classifying the sentiment of Dutch news paper headlines. 
+A. English dictionaries performed better than Dutch dictionaries in classifying the sentiment of Dutch news paper headlines.
 
-B. Dictionary approaches were as good as machine learning approaches in classifying the sentiment of Dutch news paper headlines. 
+B. Dictionary approaches were as good as machine learning approaches in classifying the sentiment of Dutch news paper headlines.
 
-**C. Of all automated approaches, supervised machine learning approaches performed the best in classifying the sentiment of Dutch news paper headlines.**  
+**C. Of all automated approaches, supervised machine learning approaches performed the best in classifying the sentiment of Dutch news paper headlines.**
 
-D. Manual coding and supervised machine learning approaches performed similarly well in classifying the sentiment of Dutch news paper headlines. 
-
+D. Manual coding and supervised machine learning approaches performed similarly well in classifying the sentiment of Dutch news paper headlines.
 
 ## Example Exam Question (Open Format)
 
@@ -1110,21 +1058,12 @@ Describe the typical process used in supervised text classification.
 
 . . .
 
-Any supervised machine learning procedure to analyze text usually contains at least 4 steps: 
+Any supervised machine learning procedure to analyze text usually contains at least 4 steps:
 
-1. One has to manually code a small set of documents for whatever variable(s) you care about (e.g., topics, sentiment, source,...). 
+1.  One has to manually code a small set of documents for whatever variable(s) you care about (e.g., topics, sentiment, source,...).
 
-2. One has to train a machine learning model on the hand-coded /gold-standard data, using the variable as the outcome of interest and the text features of the documents as the predictors. 
+2.  One has to train a machine learning model on the hand-coded /gold-standard data, using the variable as the outcome of interest and the text features of the documents as the predictors.
 
-3. One has to evaluate the effectiveness of the machine learning model via cross-validation. This means one has to test the model test on new (held-out) data.  
+3.  One has to evaluate the effectiveness of the machine learning model via cross-validation. This means one has to test the model test on new (held-out) data.
 
-4. Once one has trained a model with sufficient predictive accuracy, precision and recall, one can apply the model to more documents that have never been hand-coded or use it for the purpose it was designed for (e.g., a spam filter detection software)
-
-
-
-
-
-
-
-
-
+4.  Once one has trained a model with sufficient predictive accuracy, precision and recall, one can apply the model to more documents that have never been hand-coded or use it for the purpose it was designed for (e.g., a spam filter detection software)
