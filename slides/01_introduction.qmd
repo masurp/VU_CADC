@@ -18,10 +18,13 @@ editor: visual
 
 My name is Philipp Masur, I am an Assistant Professor at the Department of Communication Science.
 
----
+------------------------------------------------------------------------
 
-<div style='position: relative; padding-bottom: 56.25%; padding-top: 35px; height: 0; overflow: hidden;'><iframe sandbox='allow-scripts allow-same-origin allow-presentation' allowfullscreen='true' allowtransparency='true' frameborder='0' height='315' src='https://www.mentimeter.com/app/presentation/al8wshhp3wbj5cc45i5rjdokbn26wi5s/embed' style='position: absolute; top: 0; left: 0; width: 100%; height: 100%;' width='420'></iframe></div>
+::: {style="position: relative; padding-bottom: 56.25%; padding-top: 35px; height: 0; overflow: hidden;"}
+<iframe sandbox="allow-scripts allow-same-origin allow-presentation" allowfullscreen="true" allowtransparency="true" frameborder="0" height="315" src="https://www.mentimeter.com/app/presentation/al8wshhp3wbj5cc45i5rjdokbn26wi5s/embed" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" width="420">
 
+</iframe>
+:::
 
 ## Content of this lecture
 
@@ -64,7 +67,11 @@ My name is Philipp Masur, I am an Assistant Professor at the Department of Commu
 :::
 :::
 
-<p style="font-size:0.75em;">*Blumenstock, Cadamura, & On, 2015*</p>
+<p style="font-size:0.75em;">
+
+*Blumenstock, Cadamura, & On, 2015*
+
+</p>
 
 ## Example: Wealth in Rwanda
 
@@ -86,7 +93,11 @@ My name is Philipp Masur, I am an Assistant Professor at the Department of Commu
 ::: {.column width="50%"}
 ![](https://www.pluggedin.com/wp-content/uploads/2019/12/minority-report-1024x677.jpg)
 
-<p style="font-size:0.75em;">*Movie "Minority Report", 2002*</p>
+<p style="font-size:0.75em;">
+
+*Movie "Minority Report", 2002*
+
+</p>
 :::
 
 ::: {.column width="50%"}
@@ -107,15 +118,14 @@ My name is Philipp Masur, I am an Assistant Professor at the Department of Commu
 -   Complements rather than replaces traditional methodologies
 
 -   Includes methods such as, e.g.,:
-    
-    - Advanced data wrangling/data science
-    - Combining of different data sets 
-    - Automated Text Analysis
-    - Machine Learning (supervised and unsupervised)
-    - Actor-based modelling
-    - Simulations
-    - ...
-    
+
+    -   Advanced data wrangling/data science
+    -   Combining of different data sets
+    -   Automated Text Analysis
+    -   Machine Learning (supervised and unsupervised)
+    -   Actor-based modelling
+    -   Simulations
+    -   ...
 
 ## Typical workflow
 
@@ -143,7 +153,7 @@ td {
 </style>
 ```
 |     | Characteristic | Description                                                                                                                                                                                                                                                                     |
-|-----------------|:----------------|:-------------------------------------|
+|------------------|:-----------------|:------------------------------------|
 | 1   | Big            | The scale or volume of some current datasets is often impressive. However, big datasets are not an end in themselves, but they can enable certain kinds of research including the study of rare events, the estimation of heterogeneity, and the detection of small differences |
 | 2   | Always-on      | Many big data systems are constantly collecting data and thus enable to study unexpected events and allow for real-time measurement                                                                                                                                             |
 | 3   | Nonreactive    | Participants are generally not aware that their data are being captured or they have become so accustomed to this data collection that it no longer changes their behavior.                                                                                                     |
@@ -153,7 +163,7 @@ td {
 ## 10 Characteristics of Big Data
 
 |     | Characteristic                 | Description                                                                                                                                   |
-|------------------|:-----------------|:------------------------------------|
+|------------------|:-----------------|:-----------------------------------|
 | 6   | Nonrepresentative              | Most big datasets are nonetheless not representative of certain populations. Out-of-sample generalizations are hence difficult or impossible. |
 | 7   | Drifting                       | Many big data systems are changing constantly, thus making it difficult to study long-term trends                                             |
 | 8   | Algorithmically <br>confounded | Behavior in big data systems is not natural; it is driven by the engineering goals of the systems.                                            |
@@ -162,7 +172,11 @@ td {
 
 <br><br>
 
-<p style="font-size:0.75em;">*Salganik, 2017, chap. 2.3*</p>
+<p style="font-size:0.75em;">
+
+*Salganik, 2017, chap. 2.3*
+
+</p>
 
 ## Example data
 
@@ -190,24 +204,22 @@ td {
 
 ## Typical computational research strategies
 
-
 ::: {.column width="52%"}
 ### 1. Counting things
 
 In the age of big data, researcher can "count" more than ever
 
-- How often do people use their smartphone per day?
-- About which topics do news websites write most often?
+-   How often do people use their smartphone per day?
+-   About which topics do news websites write most often?
 
 <br>
 
 ### 2. Forecasting and nowcasting
 
-Big data allow for more accurate predictions both in the present and in the future 
+Big data allow for more accurate predictions both in the present and in the future
 
-- Investigate when people disclose themselves in computer-mediated communication
-- Crime prediction
-
+-   Investigate when people disclose themselves in computer-mediated communication
+-   Crime prediction
 :::
 
 ::: {.column width="4%"}
@@ -218,9 +230,8 @@ Big data allow for more accurate predictions both in the present and in the futu
 
 Computational methods provide opportunities to conduct "natural experiments"
 
-- Compare smartphone log data of people who use their smartphone naturally vs. those who abstain from certain apps (e.g., social media apps)
-- Investigate the potential of nudges to make users select certain news
-
+-   Compare smartphone log data of people who use their smartphone naturally vs. those who abstain from certain apps (e.g., social media apps)
+-   Investigate the potential of nudges to make users select certain news
 :::
 
 ## Advantages and Disadvantages
@@ -229,16 +240,16 @@ Computational methods provide opportunities to conduct "natural experiments"
     -   Actual behavior vs. self-report
     -   Social context vs. lab setting
     -   Small N to large N
-    
+
 <br>
-    
+
 -   Disadvantages of Computational Methods
     -   Techniques often complicated
     -   Data often proprietary
     -   Samples often biased
     -   Insufficient metadata
 
-# Computational Communication Science{background-color="steelblue"}
+# Computational Communication Science {background-color="steelblue"}
 
 Why computational methods are important for (future) communication research...
 
@@ -248,7 +259,11 @@ Why computational methods are important for (future) communication research...
 
 > "Computational Communication Science (CCS) is the label applied to the emerging subfield that investigates the use of computational algorithms to gather and analyze big and often semi- or unstructured data sets to develop and test communication science theories"
 >
-> <p style="font-size:0.75em;">*Van Atteveldt & Peng, 2018*</p>
+> <p style="font-size:0.75em;">
+>
+> *Van Atteveldt & Peng, 2018*
+>
+> </p>
 
 ## Promises
 
@@ -274,7 +289,11 @@ The recent acceleration in the use of computational methods for communication sc
 
 <br>
 
-<p style="font-size:0.75em;">*Haim, Scherr, & Arendt, 2021*</p>
+<p style="font-size:0.75em;">
+
+*Haim, Scherr, & Arendt, 2021*
+
+</p>
 
 ## Example 1: Simulating search queries
 
@@ -351,7 +370,6 @@ The recent acceleration in the use of computational methods for communication sc
 :::
 :::
 
-
 ## Ethics of 'Big Data' and Computational Research
 
 ::: columns
@@ -391,7 +409,11 @@ Researcher scraped students' data from Facebook, merged it with university recor
 
 <br><br>
 
-<p style="font-size:0.75em;">*Kramer et al., 2014*</p>
+<p style="font-size:0.75em;">
+
+*Kramer et al., 2014*
+
+</p>
 
 ## Computational technique: Sentiment Analysis
 
@@ -446,7 +468,11 @@ Researcher scraped students' data from Facebook, merged it with university recor
     -   **Justice:** Risks and benefits should be evenly distributed
     -   **Respect for law and public interest**
 
-<p style="font-size:0.75em;">*Salganik, 2018, chap. 6*</p>
+<p style="font-size:0.75em;">
+
+*Salganik, 2018, chap. 6*
+
+</p>
 
 ## Challenges of comp. communication science
 
@@ -462,7 +488,11 @@ Researcher scraped students' data from Facebook, merged it with university recor
 
 <br>
 
-<p style="font-size:0.75em;">*Van Atteveldt & Peng, 2017*</p>
+<p style="font-size:0.75em;">
+
+*Van Atteveldt & Peng, 2017*
+
+</p>
 
 ## Preliminary summary
 
@@ -474,7 +504,7 @@ Researcher scraped students' data from Facebook, merged it with university recor
 
 -   However, computational communication research comes with **ethical challenges** related to consent, privacy, and autonomy of the participants
 
-# Formalities{background-color="steelblue"}
+# Formalities {background-color="steelblue"}
 
 How this course is going to work?
 
@@ -506,8 +536,7 @@ Not everything will work at the first time. Because we work with code, tiny mist
 
 If you have any further problems related to installing software, running packages or code, or simply an error message you do not understand, you can address the R Help Desk:
 
-**Office Hours:** 
-Wednesday: 13.00 - 15.00 on Zoom (see canvas)
+**Office Hours:** Wednesday: 13.00 - 15.00 on Zoom (see canvas)
 :::
 :::
 
@@ -679,10 +708,10 @@ After each week, students are required to hand in a "homework", which represents
 -   Students are required to hand in the RMarkdown file and a compiled html on Thursday (24:00) the week after. All homework assignments must be submitted to pass.
 
 -   Homework assignment will be graded as follows:
-    
-    - Fail: **-1**
-    - Pass: **0**
-    - Good: **1**
+
+    -   Fail: **-1**
+    -   Pass: **0**
+    -   Good: **1**
 
 ## Group presentation
 
@@ -699,7 +728,7 @@ In the third cycle, students will be assigned to small working groups in which t
 
 Students are required to hand in the slides and analyses beforehand (Deadline: 18th of December 2021 at 12:00)
 
-# The trouble with 'R'{background-color="steelblue"}
+# The trouble with 'R' {background-color="steelblue"}
 
 "This is was already difficult in P1!"
 
@@ -729,8 +758,7 @@ ggplot(NULL,
 
 ## What is 'R'?
 
-:::: {.columns}
-
+::: columns
 ::: {.column width="45%"}
 ```{r}
 #| echo: true
@@ -744,10 +772,11 @@ d <- data.frame(x, y)
 head(d, n = 10)
 ```
 :::
+
 ::: {.column width="10%"}
 :::
-::: {.column width="45%"}
 
+::: {.column width="45%"}
 ```{r}
 #| echo: true
 # Fitting model
@@ -758,9 +787,8 @@ model <-lm(formula = y ~ x,
 texreg::screenreg(model, 
                   single.row = T)
 ```
-
 :::
-::::
+:::
 
 ## What is 'R' vs 'RStudio'?
 
@@ -851,15 +879,15 @@ data %>%
 
 *So let's have fun with it!*
 
-# Thank you for your attention!{background-color="steelblue"}
+# Thank you for your attention! {background-color="steelblue"}
 
 ## Required Reading
 
 <br><br>
 
-- Kramer, A. D. I., Guillory, J. E, & Hancock, J. (2014). Experimental Evidence of Massive-Scale Emotional Contagion Through Social Networks. Proceedings of the National Academy of Sciences, 111(24), 8788-8790.
+-   Kramer, A. D. I., Guillory, J. E, & Hancock, J. (2014). Experimental Evidence of Massive-Scale Emotional Contagion Through Social Networks. Proceedings of the National Academy of Sciences, 111(24), 8788-8790.
 
-- Van Atteveldt, W., & Peng, T.-Q. (2018). When communication meets computation: Opportunities, challenges, and pitfalls in computational communication science. Communication Methods and Measures, 12(2-3), 81--92. https://doi.org/10.1080/19312458.2018.1458084
+-   Van Atteveldt, W., & Peng, T.-Q. (2018). When communication meets computation: Opportunities, challenges, and pitfalls in computational communication science. Communication Methods and Measures, 12(2-3), 81--92. https://doi.org/10.1080/19312458.2018.1458084
 
 *(available on Canvas)*
 
