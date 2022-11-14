@@ -1020,6 +1020,8 @@ How is this used in research?
 
 ## Conclusion
 
+::: {.column width="45%"}
+
 -   Machine learning is a useful tool for generalizing from sample
 
 -   It is very useful to reduce the amount of manual coding needed
@@ -1027,6 +1029,17 @@ How is this used in research?
 -   Many different models exist (each with many parameters/options)
 
 -   We always need to validate model on unseen and representative test data!
+
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="45%"}
+
+![](img/machinelearning_process.png)
+
+:::
 
 # Thank you for your attention! {background-color="steelblue"}
 
