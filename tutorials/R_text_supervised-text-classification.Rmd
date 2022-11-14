@@ -45,7 +45,7 @@ library(quanteda.textplots)
 ```
 
 ```{r, cache=T}
-reviews <- jsonlite::stream_in(gzcon(url("http://deepyeti.ucsd.edu/jianmo/amazon/categoryFilesSmall/Digital_Music_5.json.gz"))) 
+reviews <- jsonlite::stream_in(gzcon(url("http://snap.stanford.edu/data/amazon/productGraph/categoryFiles/reviews_Digital_Music_5.json.gz"))) 
 
 reviews <- reviews %>% 
    as_tibble %>% 

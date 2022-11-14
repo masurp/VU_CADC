@@ -3,21 +3,32 @@ Supervised Text Classification
 Philipp Masur, Wouter van Atteveldt & Kasper Welbers
 2021-11
 
--   [Introduction](#introduction)
--   [Getting Amazon Review Data](#getting-amazon-review-data)
--   [Data Preprocessing](#data-preprocessing)
-    -   [Splitting into training and test
-        data](#splitting-into-training-and-test-data)
-    -   [Creating the DFM](#creating-the-dfm)
--   [Machine Learning](#machine-learning)
-    -   [Training the algorithm](#training-the-algorithm)
-    -   [Testing the model](#testing-the-model)
-    -   [Validating on the test data](#validating-on-the-test-data)
-    -   [Music we like and hate: Validation on our own
-        data](#music-we-like-and-hate-validation-on-our-own-data)
-    -   [Bonus: Creating a little prediction
-        software….](#bonus-creating-a-little-prediction-software)
--   [Where to go next?](#where-to-go-next)
+-   <a href="#introduction" id="toc-introduction">Introduction</a>
+-   <a href="#getting-amazon-review-data"
+    id="toc-getting-amazon-review-data">Getting Amazon Review Data</a>
+-   <a href="#data-preprocessing" id="toc-data-preprocessing">Data
+    Preprocessing</a>
+    -   <a href="#splitting-into-training-and-test-data"
+        id="toc-splitting-into-training-and-test-data">Splitting into training
+        and test data</a>
+    -   <a href="#creating-the-dfm" id="toc-creating-the-dfm">Creating the
+        DFM</a>
+-   <a href="#machine-learning" id="toc-machine-learning">Machine
+    Learning</a>
+    -   <a href="#training-the-algorithm"
+        id="toc-training-the-algorithm">Training the algorithm</a>
+    -   <a href="#testing-the-model" id="toc-testing-the-model">Testing the
+        model</a>
+    -   <a href="#validating-on-the-test-data"
+        id="toc-validating-on-the-test-data">Validating on the test data</a>
+    -   <a href="#music-we-like-and-hate-validation-on-our-own-data"
+        id="toc-music-we-like-and-hate-validation-on-our-own-data">Music we like
+        and hate: Validation on our own data</a>
+    -   <a href="#bonus-creating-a-little-prediction-software"
+        id="toc-bonus-creating-a-little-prediction-software">Bonus: Creating a
+        little prediction software….</a>
+-   <a href="#where-to-go-next" id="toc-where-to-go-next">Where to go
+    next?</a>
 
 # Introduction
 
@@ -59,7 +70,7 @@ library(quanteda.textplots)
 ```
 
 ``` r
-reviews <- jsonlite::stream_in(gzcon(url("http://deepyeti.ucsd.edu/jianmo/amazon/categoryFilesSmall/Digital_Music_5.json.gz"))) 
+reviews <- jsonlite::stream_in(gzcon(url("http://snap.stanford.edu/data/amazon/productGraph/categoryFiles/reviews_Digital_Music_5.json.gz"))) 
 
 reviews <- reviews %>% 
    as_tibble %>% 
@@ -265,7 +276,7 @@ Most importantly, we can now of course also test whether the trained
 model also does well in predicting our rating of our favoriate and not
 so favorite music. We first again have to build a “fivestar” variable
 that distinguishes between top reviews (overall = 5) and less good ones
-(overall &lt; 5). Then, we again have to build the a document-feature
+(overall \< 5). Then, we again have to build the a document-feature
 matrix (including all relevant preprocessing steps) and match it to the
 train set.
 
