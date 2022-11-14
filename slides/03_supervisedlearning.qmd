@@ -970,6 +970,46 @@ How is this used in research?
 ![](img/juergen_face2.png)
 :::
 
+
+## BERT language models
+
+- Bidirectional Encoder Representations from Transformers (BERT)
+
+- A machine learning technique for natural language processing, pre-training and developed by Google
+
+- A deep learning model in which every output element is connected to every input element, and the weightings between them are dynamically calculated based upon their connection
+
+- BERT is pre-trained on two different tasks: Masked Language Modeling and Next Sentence Prediction.
+
+    - Masked Language Model training is to hide a word in a sentence and then have the program predict what word has been hidden (masked) based on the hidden word's context
+    - Next Sentence Prediction training is to have the program predict whether two given sentences have a logical, sequential connection or whether their relationship is simply random
+
+## BERT language models - Schematic Overview
+
+![](https://miro.medium.com/max/1400/1*p4LFBwyHtCw_Qq9paDampA.png)
+
+
+## BERT in R?
+
+::: {.column width="50%"}
+
+- There is a new package (very recently released) that allows to use such pre-trained, large scale language models in R
+
+- If you are interested check the package "text": https://r-text.org/
+
+- But: Be mindful! Running a BERT model can take a long time and might even require a more powerful computer than yours!
+
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="45%"}
+
+
+![](https://r-text.org/reference/figures/text_logo_animation.gif)
+:::
+
 ## Is machine learning really useful?
 
 -   Is it okay to use a model we can't possibly understand?
