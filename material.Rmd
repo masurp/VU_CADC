@@ -87,13 +87,13 @@ In the third part of the course, students will work on their own research projec
 #### Practical Session 1
 
 - Handouts: 
-    - [Basic Text Analysis](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_basics-of-text-analysis.md) 
+    - [Basic Text Analysis](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_basics-of-text-analysis.md) ([Version with solutions](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_basics-of-text-analysis_complete.md))
 
 #### Practical Session 2 
 
 - Handouts: 
 
-  - [Dictionary Approaches](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_dictionary-approaches.md)
+  - [Dictionary Approaches](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_dictionary-approaches.md) ([Version with solutions](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_dictionary-approaches_complete.md))
 
 #### Homework
 
