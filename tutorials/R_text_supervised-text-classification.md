@@ -76,6 +76,10 @@ reviews <- reviews %>%
    as_tibble %>% 
   select(reviewerID, asin, overall, summary, reviewText)
 head(reviews)
+
+# In case the stream in of the json file doesn't work, go to canvas, download the 
+# review data set and load it directly into R by using the following line of code:
+# reviews <- read_csv("reviews.csv")
 ```
 
 In this file, `reviewID` identifies the user that placed the reivew,
