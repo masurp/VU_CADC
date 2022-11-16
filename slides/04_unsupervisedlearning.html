@@ -28,6 +28,70 @@
       margin: 0 0.8em 0.2em -1.6em;
       vertical-align: middle;
     }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="04_unsupervisedlearning_files/libs/revealjs/dist/theme/quarto.css" id="theme">
   <link href="04_unsupervisedlearning_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -325,14 +389,899 @@
 
 <section id="title-slide" data-background-image="https://storage.googleapis.com/exenzo-jobboard/bb/public/thumb/logo-jpg-57.jpg" data-background-position="top right" data-background-size="auto" class="center">
   <h1 class="title">Computational Analysis of Digital Communication</h1>
-  <p class="subtitle">Week 3: Unsupervised Topic Modeling</p>
+  <p class="subtitle">Week 4: Unsupervised Machine Learning - Topic Modeling</p>
   <p class="author">Dr.&nbsp;Philipp K. Masur</p>
 </section>
 
+<section class="slide level2">
+
+
+<img data-src="img/machinelearning.png" class="r-stretch"></section>
+<section class="slide level2">
+
+<div class="column" style="width:45%;">
+<h3 id="supervised-learning">Supervised learning</h3>
+<ul>
+<li><p>Algorithms build a model based on sample data, known as “training data”, in order to make predictions or decisions without being explicitly programmed to do so</p></li>
+<li><p>Combines the scalability of automatic coding with the validity of manual coding (requires pre-labeled data to train algorithm)</p></li>
+<li><p>Examples:</p>
+<ul>
+<li>Supervised text classification, such as extending manual coding to large text corpora, sentiment analysis…</li>
+<li>Pattern recognition: e.g., face recognition, spam filter,…</li>
+</ul></li>
+</ul>
+</div>
+<div class="column" style="width:4%;">
+
+</div>
+<div class="column" style="width:45%;">
+<h3 id="unsupervised-learning-next-lecture">Unsupervised learning (next lecture)</h3>
+<ul>
+<li><p>Algorithm detects clusters, patterns, or associations in data that has not been labeled previously, but researcher needs to interpret results</p></li>
+<li><p>Very helpful to make sense of new data (similar to cluster analysis or exploratory factor analysis)</p></li>
+<li><p>Examples:</p>
+<ul>
+<li>Topic modeling: Extracting topics from unlabeled (text) data</li>
+<li>Customer segmentation: Better understanding different customer groups around which to build marketing or other business strategies</li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section>
+<section id="computers-can-detect-topics" class="title-slide slide level1 center" data-background-color="steelblue">
+<h1>Computers can detect “topics”?</h1>
+
+</section>
+<section id="what-are-we-trying-to-achieve" class="slide level2">
+<h2>What are we trying to achieve?</h2>
+
+<img data-src="img/topic_slides/Slide1.png" class="r-stretch"></section>
+<section id="what-topics-can-be-extracted-from-the-documents" class="slide level2">
+<h2>What topics can be extracted from the documents?</h2>
+
+<img data-src="img/topic_slides/Slide2.png" class="r-stretch"></section>
+<section id="easy-for-humans" class="slide level2">
+<h2>Easy for humans…</h2>
+
+<img data-src="img/topic_slides/Slide3.png" class="r-stretch"></section>
+<section id="computer-can-only-rely-on-the-words" class="slide level2">
+<h2>Computer can only rely on the words</h2>
+
+<img data-src="img/topic_slides/Slide5.png" class="r-stretch"></section>
+<section id="but-each-word-may-belong-to-a-certain-topic" class="slide level2">
+<h2>But each word may belong to a certain topic!</h2>
+
+<img data-src="img/topic_slides/Slide4.png" class="r-stretch"></section>
+<section id="goals-of-topic-modeling" class="slide level2">
+<h2>Goals of topic modeling</h2>
+<div class="column" style="width:45%;">
+<ul>
+<li><p>Topic modeling is a method for unsupervised classification of documents</p></li>
+<li><p>It is somewhat similar to clustering on numeric data, which finds natural groups of items even when we’re not sure what we’re looking for</p></li>
+<li><p>The goal is to find a set of topics consisting of clusters of words that co-occur in these documents according to certain patterns</p></li>
+<li><p>However, the researchers must interpret the results of a topic model and there is usually more than one solution…</p></li>
+</ul>
+</div>
+<div class="column" style="width:4%;">
+
+</div>
+<div class="column" style="width:45%;">
+<p><img data-src="img/blei_lda.png"></p>
+<p style="font-size:0.75em;">
+<em>Blei, Ng, &amp; Jordan, 2003</em>
+</p>
+</div>
+</section>
+<section id="content-of-the-lecture" class="slide level2">
+<h2>Content of the lecture</h2>
+<ol type="1">
+<li><p>What is topic modeling?</p></li>
+<li><p>Topic Models as Dimensionality Reduction</p></li>
+<li><p>Latent Dirichlet Allocation - LDA topic modeling</p>
+<ul>
+<li>Basic Principles</li>
+<li>Dirichlet Distribution</li>
+<li>Gibbs Sampling</li>
+<li>How to determine the right number of topics</li>
+</ul></li>
+<li><p>(More) Examples from the literature</p></li>
+<li><p>Conclusion and outlook</p></li>
+</ol>
+</section></section>
+<section>
+<section id="what-is-topic-modeling" class="title-slide slide level1 center" data-background-color="steelblue">
+<h1>What is topic modeling?</h1>
+
+</section>
+<section id="lets-start-with-an-example" class="slide level2">
+<h2>Let’s start with an example</h2>
+<div class="column" style="width:45%;">
+<ul>
+<li><p>Jacobi, Welbers &amp; Van Atteveld (2016) analyzed the coverage of <em>nuclear technology</em> from 1945 to 2013 in the New York Times</p></li>
+<li><p>Overall, they analyzed 51,528 news stories (headline and lead): Way too much for human coding!</p></li>
+<li><p>Used Latent Dirichlet Allocation (LDA) topic modeling to extract topics</p></li>
+<li><p>They then analyzed their occurrence over time</p></li>
+<li><p>It is a nice example of what topic modelling can and can’t do</p></li>
+</ul>
+</div>
+<div class="column" style="width:4%;">
+
+</div>
+<div class="column" style="width:45%;">
+<p><img data-src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Nuclear_Power_Plant_Cattenom.jpg"></p>
+</div>
+</section>
+<section id="assumption-of-the-model" class="slide level2">
+<h2>Assumption of the model</h2>
+
+<img data-src="img/jacobi_fig1.png" class="r-stretch"></section>
+<section id="characteristics-of-a-topic-model" class="slide level2">
+<h2>Characteristics of a topic model</h2>
+<p>This example highlights a number of interesting points about LDA topic modelling</p>
+<ol type="1">
+<li><p>The document is split between two main topics, <em>Cold War</em> and <em>Nuclear Accidents</em>: In a coding scheme forced to have a single topic per document, it would be very difficult to choose the dominant topic for this article.</p></li>
+<li><p>Not all words are included in the analysis: Most are not used because they are non-substantive words such as determiners or prepositions (“the” or “it”), which the authors excluded, or because they are too rare (“Elbe”, “perish”) or too common (“have” but in this context also “nuclear”, since that was used to select the articles).</p></li>
+<li><p>No a priori coding scheme was used by the computer, so the topics in this document were found completely automatically.</p></li>
+</ol>
+</section>
+<section id="so-what-does-a-result-of-a-topic-model-look-like" class="slide level2">
+<h2>So what does a result of a Topic model look like?</h2>
+<div class="column" style="width:45%;">
+<ul>
+<li><p>Typical table resulting from a topic model</p></li>
+<li><p>Contains most representative words per topic (in this case 10 topics)</p></li>
+<li><p>The authors then interpreted the outcome and labeled each topic accordingly</p></li>
+</ul>
+</div>
+<div class="column" style="width:4%;">
+
+</div>
+<div class="column" style="width:45%;">
+<p><img data-src="img/jacobi_table1.png"></p>
+</div>
+</section>
+<section id="using-topics-for-substantive-analyses" class="slide level2">
+<h2>Using topics for substantive analyses</h2>
+
+<img data-src="img/Jacobi_topicmodelling.png" class="r-stretch"></section></section>
+<section>
+<section id="topic-models-as-dimensionality-reduction" class="title-slide slide level1 center" data-background-color="steelblue">
+<h1>Topic Models as Dimensionality Reduction</h1>
+
+</section>
+<section id="using-factor-analysis-to-extract-topics" class="slide level2">
+<h2>Using factor analysis to extract topics?</h2>
+<div class="column" style="width:45%;">
+<ul>
+<li><p>Problem: Texts are unstructured data and it is thus difficult to do standard statistical analysis with them</p></li>
+<li><p>Solution: Convert the texts into a document-term matrix, where documents represent cases and words are variables/characteristics of these cases</p></li>
+<li><p>Now we can use standard cluster/factor analysis techniques to reduce these dimensions?</p></li>
+</ul>
+</div>
+<div class="column" style="width:4%;">
+
+</div>
+<div class="column" style="width:45%;">
+<p><img data-src="https://www.researchgate.net/publication/338434397/figure/fig1/AS:844756024311809@1578416939705/The-results-obtained-from-Confirmatory-Factor-Analysis-CAF-for-the-APQ-P-First.png"></p>
+</div>
+</section>
+<section id="dimensionality-reduction-using-pca" class="slide level2">
+<h2>Dimensionality reduction using PCA</h2>
+<div class="cell" data-r.options="{&quot;width&quot;:80}">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Loadin packages</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(quanteda)</span>
+<span id="cb1-4"><a href="#cb1-4"></a></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="co"># Text examples</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>texts <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"LDA is a topic model algorithm"</span>,</span>
+<span id="cb1-7"><a href="#cb1-7"></a>           <span class="st">"Topic modeling is an interesting example of LDA"</span>,</span>
+<span id="cb1-8"><a href="#cb1-8"></a>           <span class="st">"News algorithms are important in journalism"</span>,</span>
+<span id="cb1-9"><a href="#cb1-9"></a>           <span class="st">"Journalism is important for society"</span>,</span>
+<span id="cb1-10"><a href="#cb1-10"></a>           <span class="st">"Journalists use algorithms in their work"</span>)</span>
+<span id="cb1-11"><a href="#cb1-11"></a></span>
+<span id="cb1-12"><a href="#cb1-12"></a><span class="co"># Text preprocessing</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a>(dtm_factor <span class="ot">&lt;-</span> texts <span class="sc">%&gt;%</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a>  <span class="fu">tokens</span>(<span class="at">remove_punct =</span> T) <span class="sc">%&gt;%</span></span>
+<span id="cb1-15"><a href="#cb1-15"></a>  <span class="fu">tokens_remove</span>(<span class="fu">stopwords</span>(<span class="st">"en"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb1-16"><a href="#cb1-16"></a>  dfm <span class="sc">%&gt;%</span></span>
+<span id="cb1-17"><a href="#cb1-17"></a>  as_tibble <span class="sc">%&gt;%</span></span>
+<span id="cb1-18"><a href="#cb1-18"></a>  <span class="fu">select</span>(<span class="sc">-</span>doc_id))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment" data-r.options="{&quot;width&quot;:80}">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 15
+    lda topic model algorithm modeling interesting example  news algorithms
+  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
+1     1     1     1         1        0           0       0     0          0
+2     1     1     0         0        1           1       1     0          0
+3     0     0     0         0        0           0       0     1          1
+4     0     0     0         0        0           0       0     0          0
+5     0     0     0         0        0           0       0     0          1
+# … with 6 more variables: important &lt;dbl&gt;, journalism &lt;dbl&gt;, society &lt;dbl&gt;,
+#   journalists &lt;dbl&gt;, use &lt;dbl&gt;, work &lt;dbl&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="dimensionality-reduction-using-pca-1" class="slide level2">
+<h2>Dimensionality reduction using PCA</h2>
+<div class="column" style="width:45%;">
+<div class="cell" data-output-location="fragment">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">prcomp</span>(dtm_factor, <span class="at">rank. =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Standard deviations (1, .., p=5):
+[1] 1.254104e+00 9.807140e-01 7.845689e-01 5.915016e-01 2.686400e-16
+
+Rotation (n x k) = (15 x 2):
+                   PC1         PC2
+lda         -0.4297844  0.05075217
+topic       -0.4297844  0.05075217
+model       -0.1865506  0.01595800
+algorithm   -0.1865506  0.01595800
+modeling    -0.2432338  0.03479417
+interesting -0.2432338  0.03479417
+example     -0.2432338  0.03479417
+news         0.1888600  0.13729363
+algorithms   0.2970694 -0.28984625
+important    0.3215750  0.37638771
+journalism   0.3215750  0.37638771
+society      0.1327150  0.23909408
+journalists  0.1082094 -0.42713988
+use          0.1082094 -0.42713988
+work         0.1082094 -0.42713988</code></pre>
+</div>
+</div>
+</div>
+<div class="column" style="width:4%;">
+
+</div>
+<div class="column" style="width:45%;">
+<ul>
+<li><p>Factor/Principal component analysis can reduce the number of columns (= reduce the dimensionality of the dataset)</p></li>
+<li><p>It assumes the manifest words are determined by (fewer) underlying latent factors</p></li>
+<li><p>In this simple example, it works to a certain degree, but we also see problems</p></li>
+</ul>
+</div>
+</section>
+<section id="latent-semantic-analysis" class="slide level2">
+<h2>Latent Semantic Analysis</h2>
+<ul>
+<li><p>Apply Singular Value Decomposition to the DTM</p>
+<ul>
+<li>Similar to factor analysis</li>
+</ul></li>
+<li><p>Found to mimic (some) human generalizations and even errors</p></li>
+<li><p>Also problematic to interpret:</p>
+<ul>
+<li>Negative values</li>
+<li>Not robust to ambiguous terms and antonyms</li>
+<li>No theoretical interpretation of mechanism</li>
+</ul></li>
+</ul>
+<p style="font-size:0.65em;">
+<em>e.g.&nbsp;Deerwester et al., 1990</em>
+</p>
+</section>
+<section id="preliminary-conclusion" class="slide level2">
+<h2>Preliminary conclusion</h2>
+<ul>
+<li><p>Clustering, factor analysis, principal component analyis and its extension “latent semantic analysis” can all be used to reduce the dimensionality of a document-term matrix</p></li>
+<li><p>The resulting dimension may be a basis for extracting topics (after all it is words with loadings onto different factors = topics)</p></li>
+<li><p>Yet, there are several problems</p>
+<ul>
+<li>Negative values difficult to interpret</li>
+<li>The underlying model is hard to intepret</li>
+</ul></li>
+</ul>
+</section></section>
+<section>
+<section id="latent-dirichlet-allocation---lda-topic-modeling" class="title-slide slide level1 center" data-background-color="steelblue">
+<h1>Latent Dirichlet Allocation - LDA Topic Modeling</h1>
+
+</section>
 <section id="intuitions-behind-lda-topic-modelling" class="slide level2">
 <h2>Intuitions behind LDA topic modelling</h2>
 
-<img data-src="img/blei_lda.png" class="r-stretch"></section>
+<img data-src="img/blei_lda.png" class="r-stretch"><p style="font-size:0.75em;">
+<em>Blei et al., 2003</em>
+</p>
+</section>
+<section id="latent-dirichlet-allocation---lda-topic-modeling-1" class="slide level2">
+<h2>Latent Dirichlet Allocation - LDA topic modeling</h2>
+<ul>
+<li><p>Evolution of Latent Semantic Analysis</p></li>
+<li><p>Is Based on generative statistical model that aligns with how articles or documents are written</p>
+<ul>
+<li>It ‘assumes’ an author who…</li>
+<li>chooses a mix of topics to write about.</li>
+<li>For each word, s/he select one of the topics…</li>
+<li>and then select a word from this topic.</li>
+</ul></li>
+<li><p>This basically results in a mixture model:</p>
+<ul>
+<li>Words can be in multiple topics (→ deals with ambiguity)</li>
+<li>Documents in multiple topics (→ deals with mixed content)</li>
+<li>But skewed towards a couple of topics, depending on <span class="math inline">\(\alpha\)</span> hyperparameter (more on this later)</li>
+</ul></li>
+</ul>
+</section>
+<section id="example-for-the-generative-model" class="slide level2">
+<h2>Example for the generative model</h2>
+<p>Let’s assume that you are a journalist writing a 500 word news item.</p>
+<ol type="1">
+<li><p>Xou would choose one or more topics to write about, for example 70% healthcare and 30% economy.</p></li>
+<li><p>For each word in the item, you randomly pick one of these topics based on their respective weight.</p></li>
+<li><p>Finally, you pick a random word from the words associated with that topic, where again each word has a certain probability for that topic. For example, “hospital” might have a high probability for healthcare while “effectiveness” might have a lower probability but could still occur</p></li>
+</ol>
+<p style="font-size:0.75em;">
+<em>Van Atteveldt, Trilling &amp; Calderon, 2021</em>
+</p>
+</section>
+<section id="dirichlet-distribution" class="slide level2">
+<h2>Dirichlet Distribution</h2>
+<ul>
+<li><p>Every topic and document is a probability distribution (over words / topics resp.)</p>
+<ul>
+<li>How likely is word w in topic z, or topic z in document d?</li>
+</ul></li>
+<li><p>These distributions are themselves randomly drawn</p>
+<ul>
+<li>From a “dirichlet distribution” which yields multinomial distributions</li>
+</ul></li>
+<li><p>So, what is a “Dirichlet distribution”?</p></li>
+</ul>
+</section>
+<section id="the-conference-dinner" class="slide level2">
+<h2>The conference dinner…</h2>
+<ul>
+<li><p>You walk into the room for the conference dinner and want to sit somehwere</p></li>
+<li><p>You are afraid to sit alone, so prefer a table with people</p>
+<ul>
+<li><span class="math inline">\(P(ti) = ni / sum(n)\)</span></li>
+<li>To avoid <span class="math inline">\(sum(n)=0\)</span> , every table starts at a baseline <span class="math inline">\(n=\alpha\)</span></li>
+</ul></li>
+<li><p>Everyone does the same as they enter</p>
+<ul>
+<li>Empty tables stay empty, full tables keep getting more people proportionally</li>
+<li>After many people enter, an equilibrium emerges</li>
+</ul></li>
+</ul>
+</section>
+<section id="effect-of-the-hyperparameter-alpha" class="slide level2">
+<h2>Effect of the hyperparameter <span class="math inline">\(\alpha\)</span></h2>
+<ul>
+<li><p>The restaurant converges to multinomial distribution</p>
+<ul>
+<li>E.g. the topics per document, of words per topic</li>
+</ul></li>
+<li><p>The initial number of people at the tables is the alpha hyperparameter</p>
+<ul>
+<li>Hyperparameter = ‘setting’/choice that affects how other parameters are estimated</li>
+</ul></li>
+<li><p>Intuitive effect of lower alpha:</p>
+<ul>
+<li>initial choices of ‘customers’ have larger effect</li>
+<li>likelier that a single table will get all participants</li>
+</ul></li>
+<li><p>Lower alpha = fewer topics per document</p>
+<ul>
+<li>but means topic have to include more words / have more overlap, as each word needs to be assigned</li>
+</ul></li>
+</ul>
+</section>
+<section id="plate-notation-of-lda" class="slide level2">
+<h2>Plate notation of LDA</h2>
+<div class="column" style="width:60%;">
+<img data-src="img/lda_process.png">
+<p style="font-size:0.75em;">
+<em>Blei et al., 2003</em>
+</p>
+</div>
+<div class="column" style="width:5%;">
+
+</div>
+<div class="column" style="width:30%;">
+<p>For each document <em>d</em>:</p>
+<ul>
+<li>Draw random topic proportions <span class="math inline">\(\theta\)</span></li>
+<li>For each word <em>n</em> in document <em>d</em>:
+<ul>
+<li>Draw a single topic <span class="math inline">\(Z\)</span> from <span class="math inline">\(\theta_d\)</span></li>
+<li>Draw a word <span class="math inline">\(W\)</span> from <span class="math inline">\(\beta_z\)</span></li>
+</ul></li>
+</ul>
+<p><span class="math inline">\(\beta_k\)</span> and <span class="math inline">\(\theta_d\)</span> are drawn from <span class="math inline">\(Dir(\alpha)\)</span> and thus not observed directly</p>
+<ul>
+<li>How do we determine such parameters?</li>
+</ul>
+</div>
+</section>
+<section id="reverse-engineering-the-generative-model" class="slide level2">
+<h2>Reverse-Engineering the generative model</h2>
+<ul>
+<li><p>The generative model assumes we know the parameters and want the words</p></li>
+<li><p>Our challenge is the opposite:</p>
+<ul>
+<li>We know the actual words in the corpus</li>
+<li>What are the parameters?</li>
+</ul></li>
+<li><p>Task: Find the parameters that maximize the likelihood of the corpus</p></li>
+<li><p>Unfortunately, there is no analytic solution</p>
+<ul>
+<li>Contrast with e.g.&nbsp;SVD and OLS that can be computed directly</li>
+<li>Similar to multilevel models, this is not the case for LDA</li>
+</ul></li>
+<li><p>Need to do iterative approximation of best solution</p></li>
+</ul>
+</section>
+<section id="gibbs-sampling-in-lda" class="slide level2">
+<h2>Gibbs Sampling in LDA</h2>
+<ul>
+<li><p>Suppose you know the topics of all words except for one word <span class="math inline">\(w\)</span></p></li>
+<li><p>This new word w is the new guest entering the restaurant</p>
+<ul>
+<li>Pick a topic within the document proportional to existing topics in the document (plus alpha)</li>
+<li>Pick a topic for the word proportional to existing topics for this word (plus eta)</li>
+</ul></li>
+<li><p>This gives a joint probability for all topics for this word</p></li>
+</ul>
+</section>
+<section id="iterative-gibbs" class="slide level2">
+<h2>Iterative Gibbs</h2>
+<ol type="1">
+<li><p>Start with random assignments of topics to words</p></li>
+<li><p>For each word w in document <span class="math inline">\(d\)</span></p>
+<ul>
+<li>Compute proportion of topics in word and document (disregarding w itself)</li>
+<li>Compute probability of each topic <span class="math inline">\(z\)</span> given those proportions</li>
+<li>Pick a new topic from that probability</li>
+<li>Update proportions for next iteration</li>
+</ul></li>
+<li><p>Repeat from 2 until converged</p></li>
+</ol>
+<p style="font-size:0.75em;">
+<em>Steyvers &amp; Griths, 2007</em>
+</p>
+</section>
+<section id="lets-look-at-an-example-in-r" class="slide level2">
+<h2>Let’s look at an Example in R</h2>
+<div class="cell" data-r.options="{&quot;width&quot;:80}">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">library</span>(quanteda)</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="fu">library</span>(quanteda.textplots)</span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="fu">library</span>(topicmodels)</span>
+<span id="cb5-5"><a href="#cb5-5"></a></span>
+<span id="cb5-6"><a href="#cb5-6"></a>s1 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/science articles/train.csv"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a>  <span class="fu">select</span>(<span class="at">id =</span> ID, <span class="at">title =</span> TITLE, <span class="at">abstract =</span> ABSTRACT) <span class="sc">%&gt;%</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5000</span>)</span>
+<span id="cb5-9"><a href="#cb5-9"></a></span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="fu">head</span>(s1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment" data-r.options="{&quot;width&quot;:80}">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+     id title                                                           abstract
+  &lt;dbl&gt; &lt;chr&gt;                                                           &lt;chr&gt;   
+1     1 Reconstructing Subject-Specific Effect Maps                     "Predic…
+2     2 Rotation Invariance Neural Network                              "Rotati…
+3     3 Spherical polyharmonics and Poisson kernels for polyharmonic f… "We int…
+4     4 A finite element approximation for the stochastic Maxwell--Lan… "The st…
+5     5 Comparative study of Discrete Wavelet Transforms and Wavelet T… "Fourie…
+6     6 On maximizing the fundamental frequency of the complement of a… "Let $\…</code></pre>
+</div>
+</div>
+</section>
+<section id="text-preprocessing-and-dtm" class="slide level2">
+<h2>Text Preprocessing and DTM</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>dtm <span class="ot">&lt;-</span> s1 <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">corpus</span>(<span class="at">text =</span> <span class="st">"abstract"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">tokens</span>(<span class="at">remove_punct =</span> T, <span class="at">remove_numbers =</span> T) <span class="sc">%&gt;%</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a>  <span class="fu">tokens_remove</span>(<span class="fu">stopwords</span>(<span class="st">"en"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a>  <span class="fu">tokens_select</span>(<span class="at">min_nchar =</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a>  dfm <span class="sc">%&gt;%</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a>  <span class="fu">dfm_trim</span>(<span class="at">min_termfreq =</span> <span class="dv">5</span>)</span>
+<span id="cb7-8"><a href="#cb7-8"></a>dtm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>Document-feature matrix of: 5,000 documents, 9,238 features (99.33% sparse) and 2 docvars.
+       features
+docs    predictive models allow subject-specific inference analyzing disease
+  text1          2      3     1                4         4         1       3
+  text2          0      0     0                0         0         0       0
+  text3          0      0     0                0         0         0       0
+  text4          0      0     0                0         0         0       0
+  text5          0      0     0                0         0         0       0
+  text6          0      0     0                0         0         0       0
+       features
+docs    related alterations neuroimaging
+  text1       1           1            2
+  text2       0           0            0
+  text3       0           0            0
+  text4       0           0            0
+  text5       0           0            0
+  text6       0           0            0
+[ reached max_ndoc ... 4,994 more documents, reached max_nfeat ... 9,228 more features ]</code></pre>
+</div>
+</div>
+</section>
+<section id="text-preprocessing" class="slide level2">
+<h2>Text preprocessing</h2>
+<ul>
+<li><p>Text preprocessing is more important for topic modelling than for other machine learning approaches</p></li>
+<li><p>For example keeping stopwords will lead to non-sensical “topics” because they co-occur so often</p></li>
+<li><p>We want to make sure that the model focuses on those words that really tell something about the topic</p></li>
+</ul>
+</section>
+<section id="estimating-a-topic-model-in-r" class="slide level2">
+<h2>Estimating a topic model in R</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">library</span>(topicmodels)</span>
+<span id="cb9-2"><a href="#cb9-2"></a></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="co"># Convert dtm to topicmodels' specific format</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a>dtm <span class="ot">&lt;-</span> <span class="fu">convert</span>(dtm, <span class="at">to =</span> <span class="st">"topicmodels"</span>) </span>
+<span id="cb9-5"><a href="#cb9-5"></a></span>
+<span id="cb9-6"><a href="#cb9-6"></a><span class="co"># Set seed to make it reproducible</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb9-8"><a href="#cb9-8"></a></span>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="co"># Fit topic model</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a>m <span class="ot">&lt;-</span> <span class="fu">LDA</span>(dtm, </span>
+<span id="cb9-11"><a href="#cb9-11"></a>         <span class="at">method =</span> <span class="st">"Gibbs"</span>, </span>
+<span id="cb9-12"><a href="#cb9-12"></a>         <span class="at">k =</span> <span class="dv">6</span>,  </span>
+<span id="cb9-13"><a href="#cb9-13"></a>         <span class="at">control =</span> <span class="fu">list</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>))</span>
+<span id="cb9-14"><a href="#cb9-14"></a>m</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>A LDA_Gibbs topic model with 6 topics.</code></pre>
+</div>
+</div>
+<p><br></p>
+<ul>
+<li><p>We need to chose the sampling method: usually Gibbs sampling</p></li>
+<li><p>We need to specify the number of topics (<span class="math inline">\(k\)</span>) a priori, but we can of course try out different solutions</p></li>
+<li><p>We can set the alpha parameter for the Dirichlet distribution</p></li>
+</ul>
+</section>
+<section id="inspecting-lda-results" class="slide level2">
+<h2>Inspecting LDA results</h2>
+<p>By using the function <code>terms()</code>, we can have a look at the most probable words in each of the six topics:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">terms</span>(m, <span class="dv">15</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>  as_tibble</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 15 × 6
+   `Topic 1`    `Topic 2`   `Topic 3`    `Topic 4`   `Topic 5` `Topic 6` 
+   &lt;chr&gt;        &lt;chr&gt;       &lt;chr&gt;        &lt;chr&gt;       &lt;chr&gt;     &lt;chr&gt;     
+ 1 algorithm    data        observations learning    show      can       
+ 2 problem      can         data         data        prove     magnetic  
+ 3 data         system      mass         network     also      phase     
+ 4 model        paper       galaxies     networks    graph     energy    
+ 5 method       systems     stars        neural      mathbb    model     
+ 6 can          network     find         model       paper     quantum   
+ 7 methods      using       star         can         group     state     
+ 8 paper        analysis    can          deep        space     field     
+ 9 show         based       using        training    study     states    
+10 results      time        emission     method      graphs    system    
+11 distribution different   stellar      models      given     dynamics  
+12 models       model       present      using       result    spin      
+13 approach     information galaxy       propose     results   two       
+14 optimization used        two          performance finite    systems   
+15 time         control     results      methods     set       properties</code></pre>
+</div>
+</div>
+<p><br></p>
+<ul>
+<li>What topics do these wordlists stand for?</li>
+</ul>
+</section>
+<section id="top-words-in-each-topic" class="slide level2">
+<h2>Top words in each topic</h2>
+<p>But because we gain a probability with which a word is in a topic, we can also look at these probabilities per word per topic:</p>
+<p><br></p>
+<div class="column" style="width:45%;">
+<div class="cell" data-output-location="fragment">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>topic <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>words <span class="ot">&lt;-</span> <span class="fu">posterior</span>(m)<span class="sc">$</span>terms[topic, ]</span>
+<span id="cb13-3"><a href="#cb13-3"></a>topwords <span class="ot">&lt;-</span> <span class="fu">sort</span>(words, </span>
+<span id="cb13-4"><a href="#cb13-4"></a>                 <span class="at">decreasing =</span> T) <span class="sc">%&gt;%</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a>  <span class="fu">head</span>(<span class="at">n =</span> <span class="dv">50</span>)</span>
+<span id="cb13-6"><a href="#cb13-6"></a><span class="fu">head</span>(topwords, <span class="dv">10</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-7"><a href="#cb13-7"></a>  as.data.frame</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                       .
+observations 0.005133322
+data         0.004952844
+mass         0.004927061
+galaxies     0.004359843
+stars        0.004256713
+find         0.003895756
+star         0.003844190
+can          0.003766843
+using        0.003766843
+emission     0.003689495</code></pre>
+</div>
+</div>
+</div>
+<div class="column" style="width:5%;">
+
+</div>
+<div class="column" style="width:45%;">
+<div class="cell" data-output-location="fragment">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">library</span>(wordcloud)</span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="fu">wordcloud</span>(<span class="fu">names</span>(topwords), topwords)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img data-src="04_unsupervisedlearning_files/figure-revealjs/unnamed-chunk-8-1.png" width="960"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="probabilites-of-topics-per-document" class="slide level2">
+<h2>Probabilites of topics per document</h2>
+<ul>
+<li><p>From the topic model, we can extract a table that shows us the probabilities of a topic being written about in the different texts (bear in mind, several topics can be in one text)</p></li>
+<li><p>We see for example, that there is a high probability of the text 7 being about topic 3 (astrophysics): if we look at the abstract of text 7, this seems to confirm the model!</p></li>
+</ul>
+<div class="column" style="width:62%;">
+<div class="cell" data-output-location="fragment">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">posterior</span>(m)<span class="sc">$</span>topics <span class="sc">%&gt;%</span> </span>
+<span id="cb16-2"><a href="#cb16-2"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a>  <span class="fu">rownames_to_column</span>(<span class="st">"doc"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb16-4"><a href="#cb16-4"></a>  as_tibble</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5,000 × 7
+   doc        `1`      `2`     `3`      `4`      `5`     `6`
+   &lt;chr&gt;    &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;
+ 1 text1  0.234   0.000569 0.0177  0.695    0.000569 0.0518 
+ 2 text2  0.00198 0.00198  0.00198 0.753    0.239    0.00198
+ 3 text3  0.00224 0.00224  0.00224 0.00224  0.989    0.00224
+ 4 text4  0.391   0.00162  0.00162 0.00162  0.375    0.229  
+ 5 text5  0.341   0.00136  0.00136 0.654    0.00136  0.00136
+ 6 text6  0.0105  0.000956 0.0583  0.000956 0.919    0.0105 
+ 7 text7  0.00198 0.0415   0.951   0.00198  0.00198  0.00198
+ 8 text8  0.00150 0.00150  0.00150 0.0465   0.00150  0.947  
+ 9 text9  0.0179  0.00162  0.229   0.00162  0.00162  0.748  
+10 text10 0.00124 0.373    0.00124 0.212    0.100    0.311  
+# … with 4,990 more rows</code></pre>
+</div>
+</div>
+</div>
+<div class="column" style="width:35%;">
+<div class="cell" data-output-location="fragment">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>s1 <span class="sc">%&gt;%</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a>  <span class="fu">filter</span>(id <span class="sc">==</span> <span class="dv">7</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb18-3"><a href="#cb18-3"></a>  <span class="fu">select</span>(abstract) <span class="sc">%&gt;%</span></span>
+<span id="cb18-4"><a href="#cb18-4"></a>  <span class="fu">as.character</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "We observed the newly discovered hyperbolic minor planet 1I/`Oumuamua (2017\nU1) on 2017 October 30 with Lowell Observatory's 4.3-m Discovery Channel\nTelescope. From these observations, we derived a partial lightcurve with\npeak-to-trough amplitude of at least 1.2 mag. This lightcurve segment rules out\nrotation periods less than 3 hr and suggests that the period is at least 5 hr.\nOn the assumption that the variability is due to a changing cross section, the\naxial ratio is at least 3:1. We saw no evidence for a coma or tail in either\nindividual images or in a stacked image having an equivalent exposure time of\n9000 s.\n"</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="probabilites-of-topics-per-document-1" class="slide level2">
+<h2>Probabilites of topics per document</h2>
+<p>Let’s check out another one: text 2 seems to be primarily about topic 4 (machine learning?):</p>
+<div class="column" style="width:62%;">
+<div class="cell" data-output-location="fragment">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>topic <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a>words <span class="ot">&lt;-</span> <span class="fu">posterior</span>(m)<span class="sc">$</span>terms[topic, ]</span>
+<span id="cb20-3"><a href="#cb20-3"></a>topwords <span class="ot">&lt;-</span> <span class="fu">head</span>(<span class="fu">sort</span>(words, <span class="at">decreasing =</span> T), <span class="at">n=</span><span class="dv">50</span>)</span>
+<span id="cb20-4"><a href="#cb20-4"></a><span class="fu">wordcloud</span>(<span class="fu">names</span>(topwords), topwords)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img data-src="04_unsupervisedlearning_files/figure-revealjs/unnamed-chunk-11-1.png" width="960"></p>
+</div>
+</div>
+</div>
+<div class="column" style="width:35%;">
+<div class="cell" data-output-location="fragment">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>s1 <span class="sc">%&gt;%</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a>  <span class="fu">filter</span>(id <span class="sc">==</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb21-3"><a href="#cb21-3"></a>  <span class="fu">select</span>(abstract) <span class="sc">%&gt;%</span></span>
+<span id="cb21-4"><a href="#cb21-4"></a>  <span class="fu">as.character</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Rotation invariance and translation invariance have great values in image\nrecognition tasks. In this paper, we bring a new architecture in convolutional\nneural network (CNN) named cyclic convolutional layer to achieve rotation\ninvariance in 2-D symbol recognition. We can also get the position and\norientation of the 2-D symbol by the network to achieve detection purpose for\nmultiple non-overlap target. Last but not least, this architecture can achieve\none-shot learning in some cases using those invariance.\n"</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="validation" class="slide level2">
+<h2>Validation</h2>
+<ul>
+<li><p>The first step after fitting a model is inspecting the results and establishing face validity</p></li>
+<li><p>Top words per topic are a good place to start, but one should also look at the top documents per topic to better understand how words are used in context.</p></li>
+<li><p>Also, it is good to inspect the relationships between topics and look at documents that load high on multiple topics to understand the relationship</p></li>
+<li><p>If one using topic models in a more confirmatory manner, e.g., the topics should match some sort of predefined categorization, you should use regular gold standard techniques for validation:</p>
+<ul>
+<li>code a sufficiently large random sample of documents with your predefined categories, and test whether the LDA topics match those categories (compute accuracy, precision, recall, F1-score)</li>
+<li>In general, however, in such cases it is a better idea to use a dictionary or supervised analysis technique as topic models often do not exactly capture our categories</li>
+</ul></li>
+</ul>
+</section>
+<section id="choosing-the-right-number-of-topics" class="slide level2">
+<h2>Choosing the right number of topics</h2>
+<ul>
+<li><p>Topic models such as LDA allow you to specify the number of topics in the model</p>
+<ul>
+<li>This is a nice thing because it allows you to adjust the granularity of what topics measure: between a few broad topics and many more specific topics.</li>
+<li>But it begets the question what the best number of topics is.</li>
+</ul></li>
+<li><p>The short and perhaps disappointing answer is: The best number of topics does not exist</p>
+<ul>
+<li>there is no singular idea of what a topic even is is</li>
+<li>it depends on what you are interested in: e.g., if you want know what a corpus is about, you want to have a limited number of topics that provide a good representation of overall themes</li>
+</ul></li>
+<li><p>But even if the best number of topics does not exist, some values for k (i.e.&nbsp;the number of topics) are better than others.</p>
+<ul>
+<li>If we use too few topics, there will be variance in the data that is not accounted for,</li>
+<li>If you use too many topics you will overfit and get topics that are not interesting</li>
+</ul></li>
+<li><p>So how can we at least determine what a good number of topics is?</p></li>
+</ul>
+</section>
+<section id="how-well-does-our-model-fit-the-data" class="slide level2">
+<h2>How well does our model fit the data?</h2>
+<ul>
+<li><p>One approach to the “best” number of topics is to check which model best predicts the data</p></li>
+<li><p>This is comparable to goodness-of-fit measures for statistical models (e.g., log likelihood, CFI, etc.)</p></li>
+<li><p>For LDA topic models, a commonly usd indicator is <strong>perplexity</strong> (Blei, Ng, &amp; Jordan, 2003), where lower perplexity indicate better predictin/fit</p></li>
+<li><p>To calculate perplexity, we follow an already known procedure (last lecture!):</p>
+<ul>
+<li>We first train an LDA model on a portion of the data</li>
+<li>Then, we model is evaluatd using the held-out portion of the data</li>
+<li>This procedure is repeated for models with different numbers of topics so that it becomes clear which one leads to the lowest perplexity</li>
+</ul></li>
+</ul>
+</section>
+<section id="calculating-perplexity-in-r" class="slide level2">
+<h2>Calculating perplexity in R</h2>
+<ul>
+<li><p>We first have to split up our data into data for training and testing the model</p></li>
+<li><p>This way we prevent overfitting the model</p></li>
+<li><p>Here we’ll use 75% for training, and held-out the remaining 25% for test data.</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="co"># Split sample</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a>train <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">rownames</span>(dtm), <span class="fu">nrow</span>(dtm) <span class="sc">*</span> .<span class="dv">75</span>)</span>
+<span id="cb23-3"><a href="#cb23-3"></a>dtm_train <span class="ot">&lt;-</span> dtm[<span class="fu">rownames</span>(dtm) <span class="sc">%in%</span> train, ]</span>
+<span id="cb23-4"><a href="#cb23-4"></a>dtm_test <span class="ot">&lt;-</span> dtm[<span class="sc">!</span><span class="fu">rownames</span>(dtm) <span class="sc">%in%</span> train, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Then, we train the model and then, we calculate the perplexity:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>m_train <span class="ot">&lt;-</span> <span class="fu">LDA</span>(dtm_train, <span class="at">method =</span> <span class="st">"Gibbs"</span>, <span class="at">k =</span> <span class="dv">6</span>,  <span class="at">control =</span> <span class="fu">list</span>(<span class="at">alpha =</span> <span class="fl">0.01</span>))</span>
+<span id="cb24-2"><a href="#cb24-2"></a><span class="fu">perplexity</span>(m, dtm_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1977.736</code></pre>
+</div>
+</div>
+</section>
+<section id="estimating-several-model-and-perplexity-scores" class="slide level2">
+<h2>Estimating several model and perplexity scores</h2>
+<ul>
+<li><p>A single perplexity score is not really useful as we have nothing to compare it against</p></li>
+<li><p>Instead, we calculate the perplexity score for models with different parameters, to see how this affects the perplexity</p></li>
+</ul>
+<div class="cell columns column-output-location">
+<div class="column">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="do">## create a dataframe to store the perplexity scores for different values of k</span></span>
+<span id="cb26-2"><a href="#cb26-2"></a>p <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">k =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">6</span>,<span class="dv">12</span>,<span class="dv">24</span>,<span class="dv">48</span>,<span class="dv">96</span>), <span class="at">perplexity =</span> <span class="cn">NA</span>)</span>
+<span id="cb26-3"><a href="#cb26-3"></a></span>
+<span id="cb26-4"><a href="#cb26-4"></a><span class="do">## loop over the values of k in data.frame p </span></span>
+<span id="cb26-5"><a href="#cb26-5"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(p)) {</span>
+<span id="cb26-6"><a href="#cb26-6"></a>  <span class="fu">print</span>(p<span class="sc">$</span>k[i])</span>
+<span id="cb26-7"><a href="#cb26-7"></a>  <span class="do">## calculate perplexity for the given value of k</span></span>
+<span id="cb26-8"><a href="#cb26-8"></a>  m <span class="ot">&lt;-</span> <span class="fu">LDA</span>(dtm_train, <span class="at">method =</span> <span class="st">"Gibbs"</span>, <span class="at">k =</span> p<span class="sc">$</span>k[i],  <span class="at">control =</span> <span class="fu">list</span>(<span class="at">alpha =</span> <span class="fl">0.01</span>))</span>
+<span id="cb26-9"><a href="#cb26-9"></a>  <span class="do">## store result in our data.frame</span></span>
+<span id="cb26-10"><a href="#cb26-10"></a>  p<span class="sc">$</span>perplexity[i] <span class="ot">=</span> <span class="fu">perplexity</span>(m, dtm_test)</span>
+<span id="cb26-11"><a href="#cb26-11"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3
+[1] 6
+[1] 12
+[1] 24
+[1] 48
+[1] 96</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="co"># Output</span></span>
+<span id="cb28-2"><a href="#cb28-2"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   k perplexity
+1  3   2665.177
+2  6   2417.928
+3 12   2170.333
+4 24   1991.856
+5 48   1854.943
+6 96   1800.028</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="visualizing-a-perplexity-curve" class="slide level2">
+<h2>Visualizing a perplexity curve</h2>
+<ul>
+<li><p>Technically, the best fitting model is the one with the lowest perplexity score</p>
+<ul>
+<li>But this will always be a model with a lot of topics!</li>
+</ul></li>
+<li><p>If we want to use topic modelling for bottom-up inductive analyses of text corpora, we need to look for a “knee” in the plot</p></li>
+</ul>
+<div class="cell columns column-output-location">
+<div class="column">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="fu">ggplot</span>(p, <span class="fu">aes</span>(<span class="at">x =</span> k, <span class="at">y =</span> perplexity)) <span class="sc">+</span> </span>
+<span id="cb30-2"><a href="#cb30-2"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb30-3"><a href="#cb30-3"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb30-4"><a href="#cb30-4"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Number of topics (k)"</span>,</span>
+<span id="cb30-5"><a href="#cb30-5"></a>       <span class="at">y =</span> <span class="st">"Perplexity"</span>,</span>
+<span id="cb30-6"><a href="#cb30-6"></a>       <span class="at">title =</span> <span class="st">"Perplexity curve"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column fragment">
+<div class="cell-output-display">
+<p><img data-src="04_unsupervisedlearning_files/figure-revealjs/unnamed-chunk-16-1.png" width="960"></p>
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section id="example-from-the-literature" class="title-slide slide level1 center" data-background-color="steelblue">
+<h1>Example from the literature</h1>
+
+</section>
+<section id="what-communication-scholars-write-about" class="slide level2">
+<h2>What communication scholars write about</h2>
+<ul>
+<li><p>Günther and Domahidi (2017) used LDA topic modeling to get an overview of research topics in 80 years of communication research</p></li>
+<li><p>Documents were 15,000 abstracts from academic journals</p></li>
+<li><p>To find a reasonable value k (number of topics), they ran 40 topic models with k = 5 to k = 200 and systematically compared them: The final model hat 145 topics</p></li>
+<li><p>For each document (abstract), they selected the two topics with the highest probability (minimum probability was .1)</p></li>
+<li><p>To ensure a meaningful interpretation, the authors validated the labels of the inferred topics by manually checking publications from every decade that contained the topic with high probability.</p></li>
+</ul>
+</section>
+<section id="core-topics-in-communication-research" class="slide level2">
+<h2>Core topics in communication research</h2>
+<p><img data-src="img/günther_table1_full.png"> ## Evolution of topics over time</p>
+<p><img data-src="img/günther_fig1.png"></p>
+</section>
+<section id="type-of-media-researched-over-time" class="slide level2">
+<h2>Type of media researched over time</h2>
+
+<img data-src="img/günther_fig4.png" class="r-stretch"></section></section>
+<section>
+<section id="conclusions-and-outlook" class="title-slide slide level1 center" data-background-color="steelblue">
+<h1>Conclusions and outlook</h1>
+
+</section>
+<section id="what-is-the-state-of-the-art" class="slide level2">
+<h2>What is the state of the art?</h2>
+<ul>
+<li><p>LDA is still one of the most used approaches to topic modeling and performs well in many circumstances</p></li>
+<li><p>Yet, there are many new approaches including e.g., structural topic modeling (see R package <code>stm</code>; Roberts et al., 2019)</p>
+<ul>
+<li>an extension of LDA that allow us to explicitly model text metadata such as date or author as covariates of the topic prevalence and/or topic words distributions</li>
+<li>Text contextual information into account!</li>
+</ul></li>
+<li><p>Recent advances have been made by using pre-trained transformer-based language models (BERT, BERTopic; Grootendorst, 2022)</p>
+<ul>
+<li>generates document embedding with pre-trained transformer-based language models</li>
+<li>clusters these embeddings</li>
+<li>generates topic representations with the class-based TF-IDF procedure.</li>
+</ul></li>
+</ul>
+</section>
+<section id="conclusion" class="slide level2">
+<h2>Conclusion</h2>
+<ul>
+<li><p>Topic Modeling reduces the dimensionality of a document-term matrix by clustering words and documents into “latent” topics</p></li>
+<li><p>Interpretation of resulting “topic solutions” must be done by the researcher (face validity)</p></li>
+<li><p>LDA is driven by the Dirichlet process that yields distributions</p>
+<ul>
+<li>skewed towards few topics, but controllable with alpha parameter</li>
+</ul></li>
+<li><p>Gibbs sampling is a non-deterministic way to fit LDA models</p></li>
+</ul>
+</section></section>
 <section>
 <section id="thank-you-for-your-attention" class="title-slide slide level1 center" data-background-color="steelblue">
 <h1>Thank you for your attention!</h1>
@@ -348,6 +1297,13 @@
 </section>
 <section id="references" class="slide level2 smaller">
 <h2>References</h2>
+<ul>
+<li><p>Blei, D. M., Ng, A. Y., &amp; Jordan, M. I. (2003). Latent dirichlet allocation. Journal of machine Learning research, 3(Jan), 993-1022.</p></li>
+<li><p>Grootendorst, M. (2022). BERTopic: Neural topic modeling with a class-based TF-IDF procedure. arXiv preprint arXiv:2203.05794</p></li>
+<li><p>Roberts, M. E., Stewart, B. M., &amp; Tingley, D. (2019). Stm: An R package for structural topic models. Journal of Statistical Software, 91, 1-40.</p></li>
+<li><p>Steyvers, M., &amp; Griffiths, T. (2007). Probabilistic topic models. In Handbook of latent semantic analysis (pp.&nbsp;439-460). Psychology Press.</p></li>
+<li><p>van Atteveldt, W., Trilling, D., &amp; Calderon, C. A. (2022). Computational Analysis of Communication. John Wiley &amp; Sons.</p></li>
+</ul>
 
 <img src="img/logo.png" class="slide-logo r-stretch"><div class="footer footer-default">
 
@@ -564,6 +1520,48 @@
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          // dispatch for htmlwidgets
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for reveal
+        if (window.Reveal) {
+          window.Reveal.addEventListener("slidechanged", function(event) {
+            fireSlideChanged(event.previousSlide, event.currentSlide);
+          });
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {
