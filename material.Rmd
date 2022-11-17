@@ -143,12 +143,12 @@ In the third part of the course, students will work on their own research projec
 #### Lecture: Machine Learning - Unsupervised Topic Modeling
 
 - Slides Lecture 4:
-    - [Download Slides] (available soon)
+    - [Download Slides](slides/04_unsupervisedlearning.html)
 
 #### Practical Session 1
 
 - Handouts: 
-    - [Unsupervised text classification I] (available soon) 
+    - [Unsupervised text classification I](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_unsupervised-text-classification.md) 
 
 #### Practical Session 2
 
