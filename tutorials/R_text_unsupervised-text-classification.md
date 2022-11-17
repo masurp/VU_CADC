@@ -273,13 +273,13 @@ topic_prob_long %>%
   facet_wrap(~docs) +
   labs(y = "Probability of a tweet being about a certain topic", 
        x = "Topic",
-       title = "Probabilites of a tweet being about a certain topic") +
+       title = "Probabilites of the first three tweets being about a certain topic") +
   theme(legend.position = "none")
 ```
 
 ## Assigning topics to tweets
 
-If we group by documents and filter out the max probabiliy, we assign
+If we group by documents and filter out the max probability, we assign
 each tweet the most probable topic (in some cases, this can mean that
 two topics with the same probabilities are both assigned to a text):
 
@@ -289,14 +289,17 @@ two topics with the same probabilities are both assigned to a text):
   filter(value == max(value)))
 ```
 
-Let’s have a look how often each of these topic occur in the data set
+Or let’s have a look how often e topic occur in the data set:
 
 ``` r
-topic_table %>%
+table %>%
   group_by(topic) %>%
-  count %>%
-  mutate(prob = n/nrow(topic_table)) %>%
-  arrange(-prob)
+  summarize(prop = mean(value)) %>%
+  ggplot(aes(x = fct_reorder(topic, prop), y = prop, fill = topic)) +
+    geom_col() +
+    coord_flip() +
+    theme(legend.position = "none") +
+    labs(x = "", y = "Proportion in the entire corpus")
 ```
 
 Bear in mind, we arbitrarily chose 10 topics for our LDA topic model. In
