@@ -318,7 +318,7 @@ prcomp(dtm_factor, rank. = 2)
 
 Let's assume that you are a journalist writing a 500 word news item. 
 
-1. Xou would choose one or more topics to write about, for example 70% healthcare and 30% economy. 
+1. You would choose one or more topics to write about, for example 70% healthcare and 30% economy. 
 
 2. For each word in the item, you randomly pick one of these topics based on their respective weight. 
 
@@ -344,8 +344,8 @@ Let's assume that you are a journalist writing a 500 word news item.
 
 - You are afraid to sit alone, so prefer a table with people 
   
-  - $P(ti) = ni / sum(n)$
-  - To avoid $sum(n)=0$ , every table starts at a baseline $n=\alpha$
+  - $P(t_i) = n_i / sum(n)$
+  - To avoid $sum(n)=0$ , every table starts at a baseline $n = \alpha$
 
 - Everyone does the same as they enter
     
@@ -390,15 +390,52 @@ Let's assume that you are a journalist writing a 500 word news item.
 
 For each document *d*:
 
-- Draw random topic proportions $\theta$
+- Draw random topic proportions $\theta_d$
 - For each word *n* in document *d*:
     - Draw a single topic $Z$ from $\theta_d$
     - Draw a word $W$ from $\beta_z$
 
-
 $\beta_k$ and $\theta_d$ are drawn from $Dir(\alpha)$ and thus not observed directly
 
-- How do we determine such parameters?
+- How can we determine these parameters
+
+:::
+
+## Think about a regression analysis...
+
+
+::: {.column width="45%"}
+
+- A regression analysis aims to predict $x$ from $y$
+
+- It assumes a linear relationship between the two variables that can be expressed as
+
+$y_i = \beta_0 + \beta_1*x_i + e_i$
+
+- Similar to the topic model, we have $x$ and $y$, but we don't actually have the parameter of interest: $\beta_0$, and $\beta_1$
+
+- Through methods such as least squares (including its most common variant, ordinary least squares), we try to find the value of the $\beta$'s  that minimize the sum of squared errors (distance from points to the regression line)
+
+:::
+::: {.column width="5%"}
+:::
+::: {.column width="45%"}
+
+
+```{r}
+set.seed(42)
+x <- rnorm(100, 0, 1)
+y <- 1.5*x + rnorm(100, 0, 2)
+
+ggplot(NULL, aes(x, y)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  theme_classic() +
+  labs(x = "Independent variable", y = "Dependent variable")
+
+
+```
+
 
 :::
 
@@ -407,12 +444,12 @@ $\beta_k$ and $\theta_d$ are drawn from $Dir(\alpha)$ and thus not observed dire
 
 - The generative model assumes we know the parameters and want the words
 
-- Our challenge is the opposite:
+- But similar to the regression analysis, our challenge is the opposite:
 
     - We know the actual words in the corpus
-    - What are the parameters?
+    - How can we find out the parameters?
 
-- Task: Find the parameters that maximize the likelihood of the corpus
+- Task: Find the parameters that maximize the *likelihood* of the corpus
 
 - Unfortunately, there is no analytic solution
 
@@ -424,13 +461,14 @@ $\beta_k$ and $\theta_d$ are drawn from $Dir(\alpha)$ and thus not observed dire
 
 ## Gibbs Sampling in LDA
 
+- Gibbs sampling refers to a Markov chain Monte Carlo (MCMC) algorithm for obtaining a sequence of observations which are approximated from a specified multivariate probability distribution from we cannot sample directly
+
 - Suppose you know the topics of all words except for one word $w$
 
-- This new word w is the new guest entering the restaurant
+- This new word $w$ is the new guest entering the restaurant
 
     - Pick a topic within the document proportional to existing topics in the document (plus alpha)
     - Pick a topic for the word proportional to existing topics for this word (plus eta)
-
 
 - This gives a joint probability for all topics for this word
 
@@ -438,9 +476,9 @@ $\beta_k$ and $\theta_d$ are drawn from $Dir(\alpha)$ and thus not observed dire
 
 1. Start with random assignments of topics to words
 
-2. For each word w in document $d$
+2. For each word $w$ in document $d$
 
-    - Compute proportion of topics in word and document (disregarding w itself)
+    - Compute proportion of topics in word and document (disregarding $w$ itself)
     - Compute probability of each topic $z$ given those proportions
     - Pick a new topic from that probability
     - Update proportions for next iteration
@@ -462,7 +500,7 @@ library(topicmodels)
 
 s1 <- read_csv("data/science articles/train.csv") %>%
   select(id = ID, title = TITLE, abstract = ABSTRACT) %>%
-  slice(1:5000)
+  slice(1:5000) # Make it a little smaller to run faster
 
 head(s1)
 ```
@@ -485,11 +523,15 @@ dtm
 
 ## Text preprocessing
 
-- Text preprocessing is more important for topic modelling than for other machine learning approaches
+- Text preprocessing is more important for topic modeling than for other machine learning approaches
 
 - For example keeping stopwords will lead to non-sensical "topics" because they co-occur so often
 
+- Stemming or lemmatizing will streamline words and thereby improve coherence between topics. 
+
 - We want to make sure that the model focuses on those words that really tell something about the topic
+
+- Text preprocessing stepts are often pivotal for the interpretability of the resulting topics
 
 
 ## Estimating a topic model in R
@@ -533,6 +575,8 @@ terms(m, 15) %>%
 
 <br>
 
+. . .
+
 - What topics do these wordlists stand for?
 
 ## Top words in each topic
@@ -570,13 +614,38 @@ wordcloud(names(topwords), topwords)
 
 :::
 
+## Alternative visualization
+
+```{r}
+tibble(topic = 1:6) %>%
+  apply(1, function(x) posterior(m)$terms[x,]) %>%
+  as.data.frame() %>%
+  rownames_to_column("terms") %>%
+  as_tibble %>%
+  gather(key, value, -terms) %>%
+  mutate(key = recode(key, V1 = "Statistics?", V2 = "Computer Science?", V3 = "(Astro-)Physics", 
+                         V4 = "Artificial Intelligence", V5 = "Math", V6 = "Physics")) %>%
+  group_by(key) %>%
+  arrange(key, -value) %>%
+  slice(1:10) %>%
+  ggplot(aes(x = fct_reorder(terms, value), 
+                y = value,
+             fill = key)) +
+  geom_col() +
+  facet_wrap(~key, scales = "free", nrow = 2) +
+  coord_flip() +
+  theme(legend.position = "none") +
+  labs(y = "Frequency", x = "",
+       title = "Topwords per Topic")
+```
+
+
 ## Probabilites of topics per document
 
 - From the topic model, we can extract a table that shows us the probabilities of a topic being written about in the different texts (bear in mind, several topics can be in one text)
 
-- We see for example, that there is a high probability of the text 7 being about topic 3 (astrophysics): if we look at the abstract of text 7, this seems to confirm the model!
+- We see for example, that there is a high probability of the text 7 being about topic 3 (astrophysics)
 
-::: {.column width="62%"}
 
 ```{r}
 #| echo: true
@@ -587,8 +656,8 @@ posterior(m)$topics %>%
   as_tibble
 ```
 
-:::
-::: {.column width="35%"}
+
+## Is text 7 really about astrophysics?
 
 
 ```{r}
@@ -599,8 +668,6 @@ s1 %>%
   select(abstract) %>%
   as.character()
 ```
-
-:::
 
 ## Probabilites of topics per document
 
@@ -630,6 +697,51 @@ s1 %>%
 ```
 
 :::
+
+## Substantive analyses
+
+Depending on the research questions, we now may want to describe the topic prevalence in the corpus or 
+
+```{r}
+#| echo: true
+#| output-location: column-fragment
+(table <-  posterior(m)$topics %>%
+  as.data.frame %>%
+  rownames_to_column("docs") %>%
+  gather(topic, value, -docs) %>%
+  as_tibble %>%
+  arrange(docs, value))
+```
+
+
+## Visualization of topic prevalence
+
+- Bear in mind that this is not the proportion of articles that are about this topic!
+
+- It is the overall proportion of the topic in the corpus given that articles can be about several topics
+
+
+```{r}
+#| echo: true
+#| output-location: column-fragment
+table %>%
+  group_by(topic) %>%
+  summarize(prop = mean(value)) %>%
+  mutate(topic = recode(topic, 
+                        "1" = "Statistics?", 
+                        "2" = "Computer Science?", 
+                        "3" = "(Astro-)Physics", 
+                         "4" = "Artificial Intelligence", 
+                        "5" = "Math", 
+                        "6" = "Physics")) %>%
+  ggplot(aes(x = fct_reorder(topic, prop), y = prop, fill = topic)) +
+    geom_col() +
+    coord_flip() +
+    theme(legend.position = "none") +
+    labs(x = "", y = "Proportion in the entire corpus")
+```
+
+
 
 ## Validation
 
@@ -766,15 +878,15 @@ ggplot(p, aes(x = k, y = perplexity)) +
 
 ## Core topics in communication research
 
-![](img/günther_table1_full.png)
+![](img/gunther_table1_full.png)
 ## Evolution of topics over time
 
-![](img/günther_fig1.png)
+![](img/gunther_fig1.png)
 
 
 ## Type of media researched over time
 
-![](img/günther_fig4.png)
+![](img/gunther_fig4.png)
 
 
 # Conclusions and outlook {background-color="steelblue"}
@@ -806,6 +918,7 @@ ggplot(p, aes(x = k, y = perplexity)) +
   
 - Gibbs sampling is a non-deterministic way to fit LDA models
 
+
 # Thank you for your attention! {background-color="steelblue"}
 
 ## Required Reading
@@ -831,4 +944,47 @@ Jacobi,C., van Atteveldt, W. & Welbers, K. (2016) Quantitative analysis of large
 - Steyvers, M., & Griffiths, T. (2007). Probabilistic topic models. In Handbook of latent semantic analysis (pp. 439-460). Psychology Press.
 
 - van Atteveldt, W., Trilling, D., & Calderon, C. A. (2022). Computational Analysis of Communication. John Wiley & Sons.
+
+------------------------------------------------------------------------
+
+## Example Exam Question (Multiple Choice)
+
+Which of the following statements is false? In an LDA model...
+
+A. ...each word can be in every topic and every document can be about every topic.
+
+B. ...each word is linked to one specific topic, but every document can be about several topics.
+
+C. ...each word can be in every topic, but every document is about one specific topic.
+
+D. ...each word is linke to one specific topic and every document is about one specific topic. 
+
+
+## Example Exam Question (Multiple Choice)
+
+Which of the following statements is false? In an LDA model...
+
+**A. ...each word can be in every topic and every document can be about every topic.**
+
+B. ...each word is linked to one specific topic, but every document can be about several topics.
+
+C. ...each word can be in every topic, but every document is about one specific topic.
+
+D. ...each word is linke to one specific topic and every document is about one specific topic. 
+
+
+
+## Example Exam Question (Open Question)
+
+
+Why is it important to carefully consider preprocessing steps in topic modelling?
+
+. . .
+
+A topic model does not analyse documents directly, but uses a so-called docu-
+ment–term matrix based on these documents. This matrix lists the frequency for each
+term (word) in each document. The first step in creating this matrix is tokenization,
+which means splitting the text into a list of words. For many machine learning approaches, no further steps are necessary. However, for topic modeling it is worth considering whether further preprocessing steps such as stemming or lemmatization, removal of stopwords (or otherwise frequent but non-informative words) or frequency trimming is fruitful as they can signicantly improve the interpretability of the resulting topics. 
+
+For example, stopwords do not really represent "topics". If they are kept in the document-term matrix, they would drive the topic selection in undesirable ways. Furthermore, differently conjugated words could end up in different topics, even though they stand for the same topic. Hence stemming or lemmatizing is usually a good choice for topic modelling.  
 

@@ -708,7 +708,7 @@ work         0.1082094 -0.42713988</code></pre>
 <h2>Example for the generative model</h2>
 <p>Let’s assume that you are a journalist writing a 500 word news item.</p>
 <ol type="1">
-<li><p>Xou would choose one or more topics to write about, for example 70% healthcare and 30% economy.</p></li>
+<li><p>You would choose one or more topics to write about, for example 70% healthcare and 30% economy.</p></li>
 <li><p>For each word in the item, you randomly pick one of these topics based on their respective weight.</p></li>
 <li><p>Finally, you pick a random word from the words associated with that topic, where again each word has a certain probability for that topic. For example, “hospital” might have a high probability for healthcare while “effectiveness” might have a lower probability but could still occur</p></li>
 </ol>
@@ -736,8 +736,8 @@ work         0.1082094 -0.42713988</code></pre>
 <li><p>You walk into the room for the conference dinner and want to sit somehwere</p></li>
 <li><p>You are afraid to sit alone, so prefer a table with people</p>
 <ul>
-<li><span class="math inline">\(P(ti) = ni / sum(n)\)</span></li>
-<li>To avoid <span class="math inline">\(sum(n)=0\)</span> , every table starts at a baseline <span class="math inline">\(n=\alpha\)</span></li>
+<li><span class="math inline">\(P(t_i) = n_i / sum(n)\)</span></li>
+<li>To avoid <span class="math inline">\(sum(n)=0\)</span> , every table starts at a baseline <span class="math inline">\(n = \alpha\)</span></li>
 </ul></li>
 <li><p>Everyone does the same as they enter</p>
 <ul>
@@ -782,7 +782,7 @@ work         0.1082094 -0.42713988</code></pre>
 <div class="column" style="width:30%;">
 <p>For each document <em>d</em>:</p>
 <ul>
-<li>Draw random topic proportions <span class="math inline">\(\theta\)</span></li>
+<li>Draw random topic proportions <span class="math inline">\(\theta_d\)</span></li>
 <li>For each word <em>n</em> in document <em>d</em>:
 <ul>
 <li>Draw a single topic <span class="math inline">\(Z\)</span> from <span class="math inline">\(\theta_d\)</span></li>
@@ -791,20 +791,44 @@ work         0.1082094 -0.42713988</code></pre>
 </ul>
 <p><span class="math inline">\(\beta_k\)</span> and <span class="math inline">\(\theta_d\)</span> are drawn from <span class="math inline">\(Dir(\alpha)\)</span> and thus not observed directly</p>
 <ul>
-<li>How do we determine such parameters?</li>
+<li>How can we determine these parameters</li>
 </ul>
+</div>
+</section>
+<section id="think-about-a-regression-analysis" class="slide level2">
+<h2>Think about a regression analysis…</h2>
+<div class="column" style="width:45%;">
+<ul>
+<li><p>A regression analysis aims to predict <span class="math inline">\(x\)</span> from <span class="math inline">\(y\)</span></p></li>
+<li><p>It assumes a linear relationship between the two variables that can be expressed as</p></li>
+</ul>
+<p><span class="math inline">\(y_i = \beta_0 + \beta_1*x_i + e_i\)</span></p>
+<ul>
+<li><p>Similar to the topic model, we have <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>, but we don’t actually have the parameter of interest: <span class="math inline">\(\beta_0\)</span>, and <span class="math inline">\(\beta_1\)</span></p></li>
+<li><p>Through methods such as least squares (including its most common variant, ordinary least squares), we try to find the value of the <span class="math inline">\(\beta\)</span>’s that minimize the sum of squared errors (distance from points to the regression line)</p></li>
+</ul>
+</div>
+<div class="column" style="width:5%;">
+
+</div>
+<div class="column" style="width:45%;">
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="04_unsupervisedlearning_files/figure-revealjs/unnamed-chunk-3-1.png" width="960"></p>
+</div>
+</div>
 </div>
 </section>
 <section id="reverse-engineering-the-generative-model" class="slide level2">
 <h2>Reverse-Engineering the generative model</h2>
 <ul>
 <li><p>The generative model assumes we know the parameters and want the words</p></li>
-<li><p>Our challenge is the opposite:</p>
+<li><p>But similar to the regression analysis, our challenge is the opposite:</p>
 <ul>
 <li>We know the actual words in the corpus</li>
-<li>What are the parameters?</li>
+<li>How can we find out the parameters?</li>
 </ul></li>
-<li><p>Task: Find the parameters that maximize the likelihood of the corpus</p></li>
+<li><p>Task: Find the parameters that maximize the <em>likelihood</em> of the corpus</p></li>
 <li><p>Unfortunately, there is no analytic solution</p>
 <ul>
 <li>Contrast with e.g.&nbsp;SVD and OLS that can be computed directly</li>
@@ -816,8 +840,9 @@ work         0.1082094 -0.42713988</code></pre>
 <section id="gibbs-sampling-in-lda" class="slide level2">
 <h2>Gibbs Sampling in LDA</h2>
 <ul>
+<li><p>Gibbs sampling refers to a Markov chain Monte Carlo (MCMC) algorithm for obtaining a sequence of observations which are approximated from a specified multivariate probability distribution from we cannot sample directly</p></li>
 <li><p>Suppose you know the topics of all words except for one word <span class="math inline">\(w\)</span></p></li>
-<li><p>This new word w is the new guest entering the restaurant</p>
+<li><p>This new word <span class="math inline">\(w\)</span> is the new guest entering the restaurant</p>
 <ul>
 <li>Pick a topic within the document proportional to existing topics in the document (plus alpha)</li>
 <li>Pick a topic for the word proportional to existing topics for this word (plus eta)</li>
@@ -829,9 +854,9 @@ work         0.1082094 -0.42713988</code></pre>
 <h2>Iterative Gibbs</h2>
 <ol type="1">
 <li><p>Start with random assignments of topics to words</p></li>
-<li><p>For each word w in document <span class="math inline">\(d\)</span></p>
+<li><p>For each word <span class="math inline">\(w\)</span> in document <span class="math inline">\(d\)</span></p>
 <ul>
-<li>Compute proportion of topics in word and document (disregarding w itself)</li>
+<li>Compute proportion of topics in word and document (disregarding <span class="math inline">\(w\)</span> itself)</li>
 <li>Compute probability of each topic <span class="math inline">\(z\)</span> given those proportions</li>
 <li>Pick a new topic from that probability</li>
 <li>Update proportions for next iteration</li>
@@ -852,7 +877,7 @@ work         0.1082094 -0.42713988</code></pre>
 <span id="cb5-5"><a href="#cb5-5"></a></span>
 <span id="cb5-6"><a href="#cb5-6"></a>s1 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/science articles/train.csv"</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb5-7"><a href="#cb5-7"></a>  <span class="fu">select</span>(<span class="at">id =</span> ID, <span class="at">title =</span> TITLE, <span class="at">abstract =</span> ABSTRACT) <span class="sc">%&gt;%</span></span>
-<span id="cb5-8"><a href="#cb5-8"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5000</span>)</span>
+<span id="cb5-8"><a href="#cb5-8"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5000</span>) <span class="co"># Make it a little smaller to run faster</span></span>
 <span id="cb5-9"><a href="#cb5-9"></a></span>
 <span id="cb5-10"><a href="#cb5-10"></a><span class="fu">head</span>(s1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -908,9 +933,11 @@ docs    related alterations neuroimaging
 <section id="text-preprocessing" class="slide level2">
 <h2>Text preprocessing</h2>
 <ul>
-<li><p>Text preprocessing is more important for topic modelling than for other machine learning approaches</p></li>
+<li><p>Text preprocessing is more important for topic modeling than for other machine learning approaches</p></li>
 <li><p>For example keeping stopwords will lead to non-sensical “topics” because they co-occur so often</p></li>
+<li><p>Stemming or lemmatizing will streamline words and thereby improve coherence between topics.</p></li>
 <li><p>We want to make sure that the model focuses on those words that really tell something about the topic</p></li>
+<li><p>Text preprocessing stepts are often pivotal for the interpretability of the resulting topics</p></li>
 </ul>
 </section>
 <section id="estimating-a-topic-model-in-r" class="slide level2">
@@ -971,9 +998,11 @@ docs    related alterations neuroimaging
 </div>
 </div>
 <p><br></p>
+<div class="fragment">
 <ul>
 <li>What topics do these wordlists stand for?</li>
 </ul>
+</div>
 </section>
 <section id="top-words-in-each-topic" class="slide level2">
 <h2>Top words in each topic</h2>
@@ -1011,23 +1040,28 @@ emission     0.003689495</code></pre>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">library</span>(wordcloud)</span>
 <span id="cb15-2"><a href="#cb15-2"></a><span class="fu">wordcloud</span>(<span class="fu">names</span>(topwords), topwords)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img data-src="04_unsupervisedlearning_files/figure-revealjs/unnamed-chunk-8-1.png" width="960"></p>
+<p><img data-src="04_unsupervisedlearning_files/figure-revealjs/unnamed-chunk-9-1.png" width="960"></p>
 </div>
 </div>
 </div>
 </section>
+<section id="alternative-visualization" class="slide level2">
+<h2>Alternative visualization</h2>
+
+<img data-src="04_unsupervisedlearning_files/figure-revealjs/unnamed-chunk-10-1.png" width="960" class="r-stretch"></section>
 <section id="probabilites-of-topics-per-document" class="slide level2">
 <h2>Probabilites of topics per document</h2>
 <ul>
 <li><p>From the topic model, we can extract a table that shows us the probabilities of a topic being written about in the different texts (bear in mind, several topics can be in one text)</p></li>
-<li><p>We see for example, that there is a high probability of the text 7 being about topic 3 (astrophysics): if we look at the abstract of text 7, this seems to confirm the model!</p></li>
+<li><p>We see for example, that there is a high probability of the text 7 being about topic 3 (astrophysics)</p></li>
 </ul>
-<div class="column" style="width:62%;">
-<div class="cell" data-output-location="fragment">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">posterior</span>(m)<span class="sc">$</span>topics <span class="sc">%&gt;%</span> </span>
 <span id="cb16-2"><a href="#cb16-2"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb16-3"><a href="#cb16-3"></a>  <span class="fu">rownames_to_column</span>(<span class="st">"doc"</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb16-4"><a href="#cb16-4"></a>  as_tibble</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5,000 × 7
    doc        `1`      `2`     `3`      `4`      `5`     `6`
@@ -1045,16 +1079,18 @@ emission     0.003689495</code></pre>
 # … with 4,990 more rows</code></pre>
 </div>
 </div>
-</div>
-<div class="column" style="width:35%;">
-<div class="cell" data-output-location="fragment">
+</section>
+<section id="is-text-7-really-about-astrophysics" class="slide level2">
+<h2>Is text 7 really about astrophysics?</h2>
+<div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>s1 <span class="sc">%&gt;%</span></span>
 <span id="cb18-2"><a href="#cb18-2"></a>  <span class="fu">filter</span>(id <span class="sc">==</span> <span class="dv">7</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb18-3"><a href="#cb18-3"></a>  <span class="fu">select</span>(abstract) <span class="sc">%&gt;%</span></span>
 <span id="cb18-4"><a href="#cb18-4"></a>  <span class="fu">as.character</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "We observed the newly discovered hyperbolic minor planet 1I/`Oumuamua (2017\nU1) on 2017 October 30 with Lowell Observatory's 4.3-m Discovery Channel\nTelescope. From these observations, we derived a partial lightcurve with\npeak-to-trough amplitude of at least 1.2 mag. This lightcurve segment rules out\nrotation periods less than 3 hr and suggests that the period is at least 5 hr.\nOn the assumption that the variability is due to a changing cross section, the\naxial ratio is at least 3:1. We saw no evidence for a coma or tail in either\nindividual images or in a stacked image having an equivalent exposure time of\n9000 s.\n"</code></pre>
-</div>
 </div>
 </div>
 </section>
@@ -1068,7 +1104,7 @@ emission     0.003689495</code></pre>
 <span id="cb20-3"><a href="#cb20-3"></a>topwords <span class="ot">&lt;-</span> <span class="fu">head</span>(<span class="fu">sort</span>(words, <span class="at">decreasing =</span> T), <span class="at">n=</span><span class="dv">50</span>)</span>
 <span id="cb20-4"><a href="#cb20-4"></a><span class="fu">wordcloud</span>(<span class="fu">names</span>(topwords), topwords)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img data-src="04_unsupervisedlearning_files/figure-revealjs/unnamed-chunk-11-1.png" width="960"></p>
+<p><img data-src="04_unsupervisedlearning_files/figure-revealjs/unnamed-chunk-13-1.png" width="960"></p>
 </div>
 </div>
 </div>
@@ -1080,6 +1116,67 @@ emission     0.003689495</code></pre>
 <span id="cb21-4"><a href="#cb21-4"></a>  <span class="fu">as.character</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Rotation invariance and translation invariance have great values in image\nrecognition tasks. In this paper, we bring a new architecture in convolutional\nneural network (CNN) named cyclic convolutional layer to achieve rotation\ninvariance in 2-D symbol recognition. We can also get the position and\norientation of the 2-D symbol by the network to achieve detection purpose for\nmultiple non-overlap target. Last but not least, this architecture can achieve\none-shot learning in some cases using those invariance.\n"</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="substantive-analyses" class="slide level2">
+<h2>Substantive analyses</h2>
+<p>Depending on the research questions, we now may want to describe the topic prevalence in the corpus or</p>
+<div class="cell columns column-output-location">
+<div class="column">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>(table <span class="ot">&lt;-</span>  <span class="fu">posterior</span>(m)<span class="sc">$</span>topics <span class="sc">%&gt;%</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a>  as.data.frame <span class="sc">%&gt;%</span></span>
+<span id="cb23-3"><a href="#cb23-3"></a>  <span class="fu">rownames_to_column</span>(<span class="st">"docs"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb23-4"><a href="#cb23-4"></a>  <span class="fu">gather</span>(topic, value, <span class="sc">-</span>docs) <span class="sc">%&gt;%</span></span>
+<span id="cb23-5"><a href="#cb23-5"></a>  as_tibble <span class="sc">%&gt;%</span></span>
+<span id="cb23-6"><a href="#cb23-6"></a>  <span class="fu">arrange</span>(docs, value))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 30,000 × 3
+   docs   topic    value
+   &lt;chr&gt;  &lt;chr&gt;    &lt;dbl&gt;
+ 1 text1  2     0.000569
+ 2 text1  5     0.000569
+ 3 text1  3     0.0177  
+ 4 text1  6     0.0518  
+ 5 text1  1     0.234   
+ 6 text1  4     0.695   
+ 7 text10 1     0.00124 
+ 8 text10 3     0.00124 
+ 9 text10 5     0.100   
+10 text10 4     0.212   
+# … with 29,990 more rows</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="visualization-of-topic-prevalence" class="slide level2">
+<h2>Visualization of topic prevalence</h2>
+<ul>
+<li><p>Bear in mind that this is not the proportion of articles that are about this topic!</p></li>
+<li><p>It is the overall proportion of the topic in the corpus given that articles can be about several topics</p></li>
+</ul>
+<div class="cell columns column-output-location">
+<div class="column">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>table <span class="sc">%&gt;%</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a>  <span class="fu">group_by</span>(topic) <span class="sc">%&gt;%</span></span>
+<span id="cb25-3"><a href="#cb25-3"></a>  <span class="fu">summarize</span>(<span class="at">prop =</span> <span class="fu">mean</span>(value)) <span class="sc">%&gt;%</span></span>
+<span id="cb25-4"><a href="#cb25-4"></a>  <span class="fu">mutate</span>(<span class="at">topic =</span> <span class="fu">recode</span>(topic, </span>
+<span id="cb25-5"><a href="#cb25-5"></a>                        <span class="st">"1"</span> <span class="ot">=</span> <span class="st">"Statistics?"</span>, </span>
+<span id="cb25-6"><a href="#cb25-6"></a>                        <span class="st">"2"</span> <span class="ot">=</span> <span class="st">"Computer Science?"</span>, </span>
+<span id="cb25-7"><a href="#cb25-7"></a>                        <span class="st">"3"</span> <span class="ot">=</span> <span class="st">"(Astro-)Physics"</span>, </span>
+<span id="cb25-8"><a href="#cb25-8"></a>                         <span class="st">"4"</span> <span class="ot">=</span> <span class="st">"Artificial Intelligence"</span>, </span>
+<span id="cb25-9"><a href="#cb25-9"></a>                        <span class="st">"5"</span> <span class="ot">=</span> <span class="st">"Math"</span>, </span>
+<span id="cb25-10"><a href="#cb25-10"></a>                        <span class="st">"6"</span> <span class="ot">=</span> <span class="st">"Physics"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb25-11"><a href="#cb25-11"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">fct_reorder</span>(topic, prop), <span class="at">y =</span> prop, <span class="at">fill =</span> topic)) <span class="sc">+</span></span>
+<span id="cb25-12"><a href="#cb25-12"></a>    <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb25-13"><a href="#cb25-13"></a>    <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb25-14"><a href="#cb25-14"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb25-15"><a href="#cb25-15"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">"Proportion in the entire corpus"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column fragment">
+<div class="cell-output-display">
+<p><img data-src="04_unsupervisedlearning_files/figure-revealjs/unnamed-chunk-16-1.png" width="960"></p>
 </div>
 </div>
 </div>
@@ -1140,17 +1237,17 @@ emission     0.003689495</code></pre>
 <li><p>Here we’ll use 75% for training, and held-out the remaining 25% for test data.</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="co"># Split sample</span></span>
-<span id="cb23-2"><a href="#cb23-2"></a>train <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">rownames</span>(dtm), <span class="fu">nrow</span>(dtm) <span class="sc">*</span> .<span class="dv">75</span>)</span>
-<span id="cb23-3"><a href="#cb23-3"></a>dtm_train <span class="ot">&lt;-</span> dtm[<span class="fu">rownames</span>(dtm) <span class="sc">%in%</span> train, ]</span>
-<span id="cb23-4"><a href="#cb23-4"></a>dtm_test <span class="ot">&lt;-</span> dtm[<span class="sc">!</span><span class="fu">rownames</span>(dtm) <span class="sc">%in%</span> train, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="co"># Split sample</span></span>
+<span id="cb26-2"><a href="#cb26-2"></a>train <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">rownames</span>(dtm), <span class="fu">nrow</span>(dtm) <span class="sc">*</span> .<span class="dv">75</span>)</span>
+<span id="cb26-3"><a href="#cb26-3"></a>dtm_train <span class="ot">&lt;-</span> dtm[<span class="fu">rownames</span>(dtm) <span class="sc">%in%</span> train, ]</span>
+<span id="cb26-4"><a href="#cb26-4"></a>dtm_test <span class="ot">&lt;-</span> dtm[<span class="sc">!</span><span class="fu">rownames</span>(dtm) <span class="sc">%in%</span> train, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>Then, we train the model and then, we calculate the perplexity:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>m_train <span class="ot">&lt;-</span> <span class="fu">LDA</span>(dtm_train, <span class="at">method =</span> <span class="st">"Gibbs"</span>, <span class="at">k =</span> <span class="dv">6</span>,  <span class="at">control =</span> <span class="fu">list</span>(<span class="at">alpha =</span> <span class="fl">0.01</span>))</span>
-<span id="cb24-2"><a href="#cb24-2"></a><span class="fu">perplexity</span>(m, dtm_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>m_train <span class="ot">&lt;-</span> <span class="fu">LDA</span>(dtm_train, <span class="at">method =</span> <span class="st">"Gibbs"</span>, <span class="at">k =</span> <span class="dv">6</span>,  <span class="at">control =</span> <span class="fu">list</span>(<span class="at">alpha =</span> <span class="fl">0.01</span>))</span>
+<span id="cb27-2"><a href="#cb27-2"></a><span class="fu">perplexity</span>(m, dtm_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1166,17 +1263,17 @@ emission     0.003689495</code></pre>
 </ul>
 <div class="cell columns column-output-location">
 <div class="column">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="do">## create a dataframe to store the perplexity scores for different values of k</span></span>
-<span id="cb26-2"><a href="#cb26-2"></a>p <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">k =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">6</span>,<span class="dv">12</span>,<span class="dv">24</span>,<span class="dv">48</span>,<span class="dv">96</span>), <span class="at">perplexity =</span> <span class="cn">NA</span>)</span>
-<span id="cb26-3"><a href="#cb26-3"></a></span>
-<span id="cb26-4"><a href="#cb26-4"></a><span class="do">## loop over the values of k in data.frame p </span></span>
-<span id="cb26-5"><a href="#cb26-5"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(p)) {</span>
-<span id="cb26-6"><a href="#cb26-6"></a>  <span class="fu">print</span>(p<span class="sc">$</span>k[i])</span>
-<span id="cb26-7"><a href="#cb26-7"></a>  <span class="do">## calculate perplexity for the given value of k</span></span>
-<span id="cb26-8"><a href="#cb26-8"></a>  m <span class="ot">&lt;-</span> <span class="fu">LDA</span>(dtm_train, <span class="at">method =</span> <span class="st">"Gibbs"</span>, <span class="at">k =</span> p<span class="sc">$</span>k[i],  <span class="at">control =</span> <span class="fu">list</span>(<span class="at">alpha =</span> <span class="fl">0.01</span>))</span>
-<span id="cb26-9"><a href="#cb26-9"></a>  <span class="do">## store result in our data.frame</span></span>
-<span id="cb26-10"><a href="#cb26-10"></a>  p<span class="sc">$</span>perplexity[i] <span class="ot">=</span> <span class="fu">perplexity</span>(m, dtm_test)</span>
-<span id="cb26-11"><a href="#cb26-11"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="do">## create a dataframe to store the perplexity scores for different values of k</span></span>
+<span id="cb29-2"><a href="#cb29-2"></a>p <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">k =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">6</span>,<span class="dv">12</span>,<span class="dv">24</span>,<span class="dv">48</span>,<span class="dv">96</span>), <span class="at">perplexity =</span> <span class="cn">NA</span>)</span>
+<span id="cb29-3"><a href="#cb29-3"></a></span>
+<span id="cb29-4"><a href="#cb29-4"></a><span class="do">## loop over the values of k in data.frame p </span></span>
+<span id="cb29-5"><a href="#cb29-5"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(p)) {</span>
+<span id="cb29-6"><a href="#cb29-6"></a>  <span class="fu">print</span>(p<span class="sc">$</span>k[i])</span>
+<span id="cb29-7"><a href="#cb29-7"></a>  <span class="do">## calculate perplexity for the given value of k</span></span>
+<span id="cb29-8"><a href="#cb29-8"></a>  m <span class="ot">&lt;-</span> <span class="fu">LDA</span>(dtm_train, <span class="at">method =</span> <span class="st">"Gibbs"</span>, <span class="at">k =</span> p<span class="sc">$</span>k[i],  <span class="at">control =</span> <span class="fu">list</span>(<span class="at">alpha =</span> <span class="fl">0.01</span>))</span>
+<span id="cb29-9"><a href="#cb29-9"></a>  <span class="do">## store result in our data.frame</span></span>
+<span id="cb29-10"><a href="#cb29-10"></a>  p<span class="sc">$</span>perplexity[i] <span class="ot">=</span> <span class="fu">perplexity</span>(m, dtm_test)</span>
+<span id="cb29-11"><a href="#cb29-11"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column fragment">
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3
@@ -1186,8 +1283,8 @@ emission     0.003689495</code></pre>
 [1] 48
 [1] 96</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="co"># Output</span></span>
-<span id="cb28-2"><a href="#cb28-2"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="co"># Output</span></span>
+<span id="cb31-2"><a href="#cb31-2"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   k perplexity
 1  3   2665.177
@@ -1211,15 +1308,15 @@ emission     0.003689495</code></pre>
 </ul>
 <div class="cell columns column-output-location">
 <div class="column">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="fu">ggplot</span>(p, <span class="fu">aes</span>(<span class="at">x =</span> k, <span class="at">y =</span> perplexity)) <span class="sc">+</span> </span>
-<span id="cb30-2"><a href="#cb30-2"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
-<span id="cb30-3"><a href="#cb30-3"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb30-4"><a href="#cb30-4"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Number of topics (k)"</span>,</span>
-<span id="cb30-5"><a href="#cb30-5"></a>       <span class="at">y =</span> <span class="st">"Perplexity"</span>,</span>
-<span id="cb30-6"><a href="#cb30-6"></a>       <span class="at">title =</span> <span class="st">"Perplexity curve"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="fu">ggplot</span>(p, <span class="fu">aes</span>(<span class="at">x =</span> k, <span class="at">y =</span> perplexity)) <span class="sc">+</span> </span>
+<span id="cb33-2"><a href="#cb33-2"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb33-3"><a href="#cb33-3"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb33-4"><a href="#cb33-4"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Number of topics (k)"</span>,</span>
+<span id="cb33-5"><a href="#cb33-5"></a>       <span class="at">y =</span> <span class="st">"Perplexity"</span>,</span>
+<span id="cb33-6"><a href="#cb33-6"></a>       <span class="at">title =</span> <span class="st">"Perplexity curve"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column fragment">
 <div class="cell-output-display">
-<p><img data-src="04_unsupervisedlearning_files/figure-revealjs/unnamed-chunk-16-1.png" width="960"></p>
+<p><img data-src="04_unsupervisedlearning_files/figure-revealjs/unnamed-chunk-20-1.png" width="960"></p>
 </div>
 </div>
 </div>
@@ -1241,13 +1338,13 @@ emission     0.003689495</code></pre>
 </section>
 <section id="core-topics-in-communication-research" class="slide level2">
 <h2>Core topics in communication research</h2>
-<p><img data-src="img/günther_table1_full.png"> ## Evolution of topics over time</p>
-<p><img data-src="img/günther_fig1.png"></p>
+<p><img data-src="img/gunther_table1_full.png"> ## Evolution of topics over time</p>
+<p><img data-src="img/gunther_fig1.png"></p>
 </section>
 <section id="type-of-media-researched-over-time" class="slide level2">
 <h2>Type of media researched over time</h2>
 
-<img data-src="img/günther_fig4.png" class="r-stretch"></section></section>
+<img data-src="img/gunther_fig4.png" class="r-stretch"></section></section>
 <section>
 <section id="conclusions-and-outlook" class="title-slide slide level1 center" data-background-color="steelblue">
 <h1>Conclusions and outlook</h1>
@@ -1304,9 +1401,33 @@ emission     0.003689495</code></pre>
 <li><p>Steyvers, M., &amp; Griffiths, T. (2007). Probabilistic topic models. In Handbook of latent semantic analysis (pp.&nbsp;439-460). Psychology Press.</p></li>
 <li><p>van Atteveldt, W., Trilling, D., &amp; Calderon, C. A. (2022). Computational Analysis of Communication. John Wiley &amp; Sons.</p></li>
 </ul>
+</section>
+<section id="example-exam-question-multiple-choice" class="slide level2">
+<h2>Example Exam Question (Multiple Choice)</h2>
+<p>Which of the following statements is false? In an LDA model…</p>
+<p>A. …each word can be in every topic and every document can be about every topic.</p>
+<p>B. …each word is linked to one specific topic, but every document can be about several topics.</p>
+<p>C. …each word can be in every topic, but every document is about one specific topic.</p>
+<p>D. …each word is linke to one specific topic and every document is about one specific topic.</p>
+</section>
+<section id="example-exam-question-multiple-choice-1" class="slide level2">
+<h2>Example Exam Question (Multiple Choice)</h2>
+<p>Which of the following statements is false? In an LDA model…</p>
+<p><strong>A. …each word can be in every topic and every document can be about every topic.</strong></p>
+<p>B. …each word is linked to one specific topic, but every document can be about several topics.</p>
+<p>C. …each word can be in every topic, but every document is about one specific topic.</p>
+<p>D. …each word is linke to one specific topic and every document is about one specific topic.</p>
+</section>
+<section id="example-exam-question-open-question" class="slide level2">
+<h2>Example Exam Question (Open Question)</h2>
+<p>Why is it important to carefully consider preprocessing steps in topic modelling?</p>
+<div class="fragment">
+<p>A topic model does not analyse documents directly, but uses a so-called docu- ment–term matrix based on these documents. This matrix lists the frequency for each term (word) in each document. The first step in creating this matrix is tokenization, which means splitting the text into a list of words. For many machine learning approaches, no further steps are necessary. However, for topic modeling it is worth considering whether further preprocessing steps such as stemming or lemmatization, removal of stopwords (or otherwise frequent but non-informative words) or frequency trimming is fruitful as they can signicantly improve the interpretability of the resulting topics.</p>
+<p>For example, stopwords do not really represent “topics”. If they are kept in the document-term matrix, they would drive the topic selection in undesirable ways. Furthermore, differently conjugated words could end up in different topics, even though they stand for the same topic. Hence stemming or lemmatizing is usually a good choice for topic modelling.</p>
+<p><img src="img/logo.png" class="slide-logo"></p>
+<div class="footer footer-default">
 
-<img src="img/logo.png" class="slide-logo r-stretch"><div class="footer footer-default">
-
+</div>
 </div>
 </section></section>
     </div>
