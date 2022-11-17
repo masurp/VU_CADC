@@ -770,7 +770,7 @@ work         0.1082094 -0.42713988</code></pre>
 </section>
 <section id="plate-notation-of-lda" class="slide level2">
 <h2>Plate notation of LDA</h2>
-<div class="column" style="width:60%;">
+<div class="column" style="width:55%;">
 <img data-src="img/lda_process.png">
 <p style="font-size:0.75em;">
 <em>Blei et al., 2003</em>
@@ -779,7 +779,7 @@ work         0.1082094 -0.42713988</code></pre>
 <div class="column" style="width:5%;">
 
 </div>
-<div class="column" style="width:30%;">
+<div class="column" style="width:35%;">
 <p>For each document <em>d</em>:</p>
 <ul>
 <li>Draw random topic proportions <span class="math inline">\(\theta_d\)</span></li>
@@ -790,10 +790,10 @@ work         0.1082094 -0.42713988</code></pre>
 </ul></li>
 </ul>
 <p><span class="math inline">\(\beta_k\)</span> and <span class="math inline">\(\theta_d\)</span> are drawn from <span class="math inline">\(Dir(\alpha)\)</span> and thus not observed directly</p>
-<ul>
-<li>How can we determine these parameters</li>
-</ul>
 </div>
+<ul>
+<li>How can we determine these parameters?</li>
+</ul>
 </section>
 <section id="think-about-a-regression-analysis" class="slide level2">
 <h2>Think about a regression analysis…</h2>
@@ -814,7 +814,7 @@ work         0.1082094 -0.42713988</code></pre>
 <div class="column" style="width:45%;">
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="04_unsupervisedlearning_files/figure-revealjs/unnamed-chunk-3-1.png" width="960"></p>
+<p><img data-src="04_unsupervisedlearning_files/figure-revealjs/unnamed-chunk-3-1.png" width="480"></p>
 </div>
 </div>
 </div>
@@ -897,7 +897,7 @@ work         0.1082094 -0.42713988</code></pre>
 </section>
 <section id="text-preprocessing-and-dtm" class="slide level2">
 <h2>Text Preprocessing and DTM</h2>
-<div class="cell">
+<div class="cell" data-r.options="{&quot;width&quot;:120}">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>dtm <span class="ot">&lt;-</span> s1 <span class="sc">%&gt;%</span></span>
 <span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">corpus</span>(<span class="at">text =</span> <span class="st">"abstract"</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">tokens</span>(<span class="at">remove_punct =</span> T, <span class="at">remove_numbers =</span> T) <span class="sc">%&gt;%</span></span>
@@ -907,25 +907,17 @@ work         0.1082094 -0.42713988</code></pre>
 <span id="cb7-7"><a href="#cb7-7"></a>  <span class="fu">dfm_trim</span>(<span class="at">min_termfreq =</span> <span class="dv">5</span>)</span>
 <span id="cb7-8"><a href="#cb7-8"></a>dtm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell fragment">
+<div class="cell fragment" data-r.options="{&quot;width&quot;:120}">
 <div class="cell-output cell-output-stdout">
 <pre><code>Document-feature matrix of: 5,000 documents, 9,238 features (99.33% sparse) and 2 docvars.
        features
-docs    predictive models allow subject-specific inference analyzing disease
-  text1          2      3     1                4         4         1       3
-  text2          0      0     0                0         0         0       0
-  text3          0      0     0                0         0         0       0
-  text4          0      0     0                0         0         0       0
-  text5          0      0     0                0         0         0       0
-  text6          0      0     0                0         0         0       0
-       features
-docs    related alterations neuroimaging
-  text1       1           1            2
-  text2       0           0            0
-  text3       0           0            0
-  text4       0           0            0
-  text5       0           0            0
-  text6       0           0            0
+docs    predictive models allow subject-specific inference analyzing disease related alterations neuroimaging
+  text1          2      3     1                4         4         1       3       1           1            2
+  text2          0      0     0                0         0         0       0       0           0            0
+  text3          0      0     0                0         0         0       0       0           0            0
+  text4          0      0     0                0         0         0       0       0           0            0
+  text5          0      0     0                0         0         0       0       0           0            0
+  text6          0      0     0                0         0         0       0       0           0            0
 [ reached max_ndoc ... 4,994 more documents, reached max_nfeat ... 9,228 more features ]</code></pre>
 </div>
 </div>
@@ -1122,7 +1114,7 @@ emission     0.003689495</code></pre>
 </section>
 <section id="substantive-analyses" class="slide level2">
 <h2>Substantive analyses</h2>
-<p>Depending on the research questions, we now may want to describe the topic prevalence in the corpus or</p>
+<p>Depending on the research questions, we now may for example want to describe the topic prevalence in the corpus.</p>
 <div class="cell columns column-output-location">
 <div class="column">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>(table <span class="ot">&lt;-</span>  <span class="fu">posterior</span>(m)<span class="sc">$</span>topics <span class="sc">%&gt;%</span></span>
@@ -1163,20 +1155,22 @@ emission     0.003689495</code></pre>
 <span id="cb25-2"><a href="#cb25-2"></a>  <span class="fu">group_by</span>(topic) <span class="sc">%&gt;%</span></span>
 <span id="cb25-3"><a href="#cb25-3"></a>  <span class="fu">summarize</span>(<span class="at">prop =</span> <span class="fu">mean</span>(value)) <span class="sc">%&gt;%</span></span>
 <span id="cb25-4"><a href="#cb25-4"></a>  <span class="fu">mutate</span>(<span class="at">topic =</span> <span class="fu">recode</span>(topic, </span>
-<span id="cb25-5"><a href="#cb25-5"></a>                        <span class="st">"1"</span> <span class="ot">=</span> <span class="st">"Statistics?"</span>, </span>
-<span id="cb25-6"><a href="#cb25-6"></a>                        <span class="st">"2"</span> <span class="ot">=</span> <span class="st">"Computer Science?"</span>, </span>
-<span id="cb25-7"><a href="#cb25-7"></a>                        <span class="st">"3"</span> <span class="ot">=</span> <span class="st">"(Astro-)Physics"</span>, </span>
-<span id="cb25-8"><a href="#cb25-8"></a>                         <span class="st">"4"</span> <span class="ot">=</span> <span class="st">"Artificial Intelligence"</span>, </span>
-<span id="cb25-9"><a href="#cb25-9"></a>                        <span class="st">"5"</span> <span class="ot">=</span> <span class="st">"Math"</span>, </span>
-<span id="cb25-10"><a href="#cb25-10"></a>                        <span class="st">"6"</span> <span class="ot">=</span> <span class="st">"Physics"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb25-11"><a href="#cb25-11"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">fct_reorder</span>(topic, prop), <span class="at">y =</span> prop, <span class="at">fill =</span> topic)) <span class="sc">+</span></span>
-<span id="cb25-12"><a href="#cb25-12"></a>    <span class="fu">geom_col</span>() <span class="sc">+</span></span>
-<span id="cb25-13"><a href="#cb25-13"></a>    <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb25-14"><a href="#cb25-14"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
-<span id="cb25-15"><a href="#cb25-15"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">"Proportion in the entire corpus"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb25-5"><a href="#cb25-5"></a>         <span class="st">"1"</span> <span class="ot">=</span> <span class="st">"Statistics?"</span>, </span>
+<span id="cb25-6"><a href="#cb25-6"></a>         <span class="st">"2"</span> <span class="ot">=</span> <span class="st">"Computer Science?"</span>, </span>
+<span id="cb25-7"><a href="#cb25-7"></a>         <span class="st">"3"</span> <span class="ot">=</span> <span class="st">"(Astro-)Physics"</span>, </span>
+<span id="cb25-8"><a href="#cb25-8"></a>         <span class="st">"4"</span> <span class="ot">=</span> <span class="st">"Artificial Intelligence"</span>, </span>
+<span id="cb25-9"><a href="#cb25-9"></a>         <span class="st">"5"</span> <span class="ot">=</span> <span class="st">"Math"</span>, </span>
+<span id="cb25-10"><a href="#cb25-10"></a>         <span class="st">"6"</span> <span class="ot">=</span> <span class="st">"Physics"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb25-11"><a href="#cb25-11"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">fct_reorder</span>(topic, prop), </span>
+<span id="cb25-12"><a href="#cb25-12"></a>             <span class="at">y =</span> prop, <span class="at">fill =</span> topic)) <span class="sc">+</span></span>
+<span id="cb25-13"><a href="#cb25-13"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb25-14"><a href="#cb25-14"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb25-15"><a href="#cb25-15"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb25-16"><a href="#cb25-16"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">""</span>, </span>
+<span id="cb25-17"><a href="#cb25-17"></a>       <span class="at">y =</span> <span class="st">"Proportion in the corpus"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column fragment">
 <div class="cell-output-display">
-<p><img data-src="04_unsupervisedlearning_files/figure-revealjs/unnamed-chunk-16-1.png" width="960"></p>
+<p><img data-src="04_unsupervisedlearning_files/figure-revealjs/unnamed-chunk-16-1.png" width="480"></p>
 </div>
 </div>
 </div>
@@ -1187,12 +1181,16 @@ emission     0.003689495</code></pre>
 <li><p>The first step after fitting a model is inspecting the results and establishing face validity</p></li>
 <li><p>Top words per topic are a good place to start, but one should also look at the top documents per topic to better understand how words are used in context.</p></li>
 <li><p>Also, it is good to inspect the relationships between topics and look at documents that load high on multiple topics to understand the relationship</p></li>
+</ul>
+<div class="fragment">
+<ul>
 <li><p>If one using topic models in a more confirmatory manner, e.g., the topics should match some sort of predefined categorization, you should use regular gold standard techniques for validation:</p>
 <ul>
 <li>code a sufficiently large random sample of documents with your predefined categories, and test whether the LDA topics match those categories (compute accuracy, precision, recall, F1-score)</li>
 <li>In general, however, in such cases it is a better idea to use a dictionary or supervised analysis technique as topic models often do not exactly capture our categories</li>
 </ul></li>
 </ul>
+</div>
 </section>
 <section id="choosing-the-right-number-of-topics" class="slide level2">
 <h2>Choosing the right number of topics</h2>
@@ -1202,18 +1200,25 @@ emission     0.003689495</code></pre>
 <li>This is a nice thing because it allows you to adjust the granularity of what topics measure: between a few broad topics and many more specific topics.</li>
 <li>But it begets the question what the best number of topics is.</li>
 </ul></li>
+</ul>
+<div class="fragment">
+<ul>
 <li><p>The short and perhaps disappointing answer is: The best number of topics does not exist</p>
 <ul>
 <li>there is no singular idea of what a topic even is is</li>
 <li>it depends on what you are interested in: e.g., if you want know what a corpus is about, you want to have a limited number of topics that provide a good representation of overall themes</li>
 </ul></li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
 <li><p>But even if the best number of topics does not exist, some values for k (i.e.&nbsp;the number of topics) are better than others.</p>
 <ul>
 <li>If we use too few topics, there will be variance in the data that is not accounted for,</li>
 <li>If you use too many topics you will overfit and get topics that are not interesting</li>
 </ul></li>
-<li><p>So how can we at least determine what a good number of topics is?</p></li>
 </ul>
+</div>
 </section>
 <section id="how-well-does-our-model-fit-the-data" class="slide level2">
 <h2>How well does our model fit the data?</h2>
@@ -1263,28 +1268,23 @@ emission     0.003689495</code></pre>
 </ul>
 <div class="cell columns column-output-location">
 <div class="column">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="do">## create a dataframe to store the perplexity scores for different values of k</span></span>
-<span id="cb29-2"><a href="#cb29-2"></a>p <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">k =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">6</span>,<span class="dv">12</span>,<span class="dv">24</span>,<span class="dv">48</span>,<span class="dv">96</span>), <span class="at">perplexity =</span> <span class="cn">NA</span>)</span>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>p <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">k =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">6</span>,<span class="dv">12</span>,<span class="dv">24</span>,<span class="dv">48</span>,<span class="dv">96</span>),</span>
+<span id="cb29-2"><a href="#cb29-2"></a>                <span class="at">perplexity =</span> <span class="cn">NA</span>)</span>
 <span id="cb29-3"><a href="#cb29-3"></a></span>
 <span id="cb29-4"><a href="#cb29-4"></a><span class="do">## loop over the values of k in data.frame p </span></span>
 <span id="cb29-5"><a href="#cb29-5"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(p)) {</span>
-<span id="cb29-6"><a href="#cb29-6"></a>  <span class="fu">print</span>(p<span class="sc">$</span>k[i])</span>
-<span id="cb29-7"><a href="#cb29-7"></a>  <span class="do">## calculate perplexity for the given value of k</span></span>
-<span id="cb29-8"><a href="#cb29-8"></a>  m <span class="ot">&lt;-</span> <span class="fu">LDA</span>(dtm_train, <span class="at">method =</span> <span class="st">"Gibbs"</span>, <span class="at">k =</span> p<span class="sc">$</span>k[i],  <span class="at">control =</span> <span class="fu">list</span>(<span class="at">alpha =</span> <span class="fl">0.01</span>))</span>
-<span id="cb29-9"><a href="#cb29-9"></a>  <span class="do">## store result in our data.frame</span></span>
-<span id="cb29-10"><a href="#cb29-10"></a>  p<span class="sc">$</span>perplexity[i] <span class="ot">=</span> <span class="fu">perplexity</span>(m, dtm_test)</span>
-<span id="cb29-11"><a href="#cb29-11"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb29-6"><a href="#cb29-6"></a>  <span class="co"># calculate perplexity for the given value of k</span></span>
+<span id="cb29-7"><a href="#cb29-7"></a>  m <span class="ot">&lt;-</span> <span class="fu">LDA</span>(dtm_train, </span>
+<span id="cb29-8"><a href="#cb29-8"></a>           <span class="at">method =</span> <span class="st">"Gibbs"</span>, </span>
+<span id="cb29-9"><a href="#cb29-9"></a>           <span class="at">k =</span> p<span class="sc">$</span>k[i],  </span>
+<span id="cb29-10"><a href="#cb29-10"></a>           <span class="at">control =</span> <span class="fu">list</span>(<span class="at">alpha =</span> <span class="fl">0.01</span>))</span>
+<span id="cb29-11"><a href="#cb29-11"></a>  <span class="co"># store result in our data.frame</span></span>
+<span id="cb29-12"><a href="#cb29-12"></a>  p<span class="sc">$</span>perplexity[i] <span class="ot">=</span> <span class="fu">perplexity</span>(m, dtm_test)</span>
+<span id="cb29-13"><a href="#cb29-13"></a>}</span>
+<span id="cb29-14"><a href="#cb29-14"></a></span>
+<span id="cb29-15"><a href="#cb29-15"></a><span class="co"># Output</span></span>
+<span id="cb29-16"><a href="#cb29-16"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column fragment">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 3
-[1] 6
-[1] 12
-[1] 24
-[1] 48
-[1] 96</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="co"># Output</span></span>
-<span id="cb31-2"><a href="#cb31-2"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   k perplexity
 1  3   2665.177
@@ -1308,15 +1308,15 @@ emission     0.003689495</code></pre>
 </ul>
 <div class="cell columns column-output-location">
 <div class="column">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="fu">ggplot</span>(p, <span class="fu">aes</span>(<span class="at">x =</span> k, <span class="at">y =</span> perplexity)) <span class="sc">+</span> </span>
-<span id="cb33-2"><a href="#cb33-2"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
-<span id="cb33-3"><a href="#cb33-3"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb33-4"><a href="#cb33-4"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Number of topics (k)"</span>,</span>
-<span id="cb33-5"><a href="#cb33-5"></a>       <span class="at">y =</span> <span class="st">"Perplexity"</span>,</span>
-<span id="cb33-6"><a href="#cb33-6"></a>       <span class="at">title =</span> <span class="st">"Perplexity curve"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="fu">ggplot</span>(p, <span class="fu">aes</span>(<span class="at">x =</span> k, <span class="at">y =</span> perplexity)) <span class="sc">+</span> </span>
+<span id="cb31-2"><a href="#cb31-2"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb31-3"><a href="#cb31-3"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb31-4"><a href="#cb31-4"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Number of topics (k)"</span>,</span>
+<span id="cb31-5"><a href="#cb31-5"></a>       <span class="at">y =</span> <span class="st">"Perplexity"</span>,</span>
+<span id="cb31-6"><a href="#cb31-6"></a>       <span class="at">title =</span> <span class="st">"Perplexity curve"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column fragment">
 <div class="cell-output-display">
-<p><img data-src="04_unsupervisedlearning_files/figure-revealjs/unnamed-chunk-20-1.png" width="960"></p>
+<p><img data-src="04_unsupervisedlearning_files/figure-revealjs/unnamed-chunk-20-1.png" width="480"></p>
 </div>
 </div>
 </div>
@@ -1338,9 +1338,12 @@ emission     0.003689495</code></pre>
 </section>
 <section id="core-topics-in-communication-research" class="slide level2">
 <h2>Core topics in communication research</h2>
-<p><img data-src="img/gunther_table1_full.png"> ## Evolution of topics over time</p>
-<p><img data-src="img/gunther_fig1.png"></p>
-</section>
+
+<img data-src="img/gunther_table1_full.png" class="r-stretch"></section>
+<section id="evolution-of-topics-over-time" class="slide level2">
+<h2>Evolution of topics over time</h2>
+
+<img data-src="img/gunther_fig1.png" class="r-stretch"></section>
 <section id="type-of-media-researched-over-time" class="slide level2">
 <h2>Type of media researched over time</h2>
 

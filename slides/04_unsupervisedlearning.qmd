@@ -375,7 +375,7 @@ Let's assume that you are a journalist writing a 500 word news item.
 ## Plate notation of LDA
 
 
-::: {.column width="60%"}
+::: {.column width="55%"}
 
 
 ![](img/lda_process.png)
@@ -385,7 +385,7 @@ Let's assume that you are a journalist writing a 500 word news item.
 :::
 ::: {.column width="5%"}
 :::
-::: {.column width="30%"}
+::: {.column width="35%"}
 
 
 For each document *d*:
@@ -397,9 +397,9 @@ For each document *d*:
 
 $\beta_k$ and $\theta_d$ are drawn from $Dir(\alpha)$ and thus not observed directly
 
-- How can we determine these parameters
-
 :::
+
+- How can we determine these parameters?
 
 ## Think about a regression analysis...
 
@@ -423,6 +423,8 @@ $y_i = \beta_0 + \beta_1*x_i + e_i$
 
 
 ```{r}
+#| fig-width: 5
+#| fig-height: 5
 set.seed(42)
 x <- rnorm(100, 0, 1)
 y <- 1.5*x + rnorm(100, 0, 2)
@@ -508,7 +510,7 @@ head(s1)
 
 ## Text Preprocessing and DTM
 
-```{r}
+```{r, R.options = list(width = 120)}
 #| echo: true
 #| output-location: fragment
 dtm <- s1 %>%
@@ -700,7 +702,7 @@ s1 %>%
 
 ## Substantive analyses
 
-Depending on the research questions, we now may want to describe the topic prevalence in the corpus or 
+Depending on the research questions, we now may for example want to describe the topic prevalence in the corpus. 
 
 ```{r}
 #| echo: true
@@ -724,21 +726,25 @@ Depending on the research questions, we now may want to describe the topic preva
 ```{r}
 #| echo: true
 #| output-location: column-fragment
+#| fig-width: 5
+#| fig-height: 4
 table %>%
   group_by(topic) %>%
   summarize(prop = mean(value)) %>%
   mutate(topic = recode(topic, 
-                        "1" = "Statistics?", 
-                        "2" = "Computer Science?", 
-                        "3" = "(Astro-)Physics", 
-                         "4" = "Artificial Intelligence", 
-                        "5" = "Math", 
-                        "6" = "Physics")) %>%
-  ggplot(aes(x = fct_reorder(topic, prop), y = prop, fill = topic)) +
-    geom_col() +
-    coord_flip() +
-    theme(legend.position = "none") +
-    labs(x = "", y = "Proportion in the entire corpus")
+         "1" = "Statistics?", 
+         "2" = "Computer Science?", 
+         "3" = "(Astro-)Physics", 
+         "4" = "Artificial Intelligence", 
+         "5" = "Math", 
+         "6" = "Physics")) %>%
+  ggplot(aes(x = fct_reorder(topic, prop), 
+             y = prop, fill = topic)) +
+  geom_col() +
+  coord_flip() +
+  theme(legend.position = "none") +
+  labs(x = "", 
+       y = "Proportion in the corpus")
 ```
 
 
@@ -750,6 +756,8 @@ table %>%
 - Top words per topic are a good place to start, but one should also look at the top documents per topic to better understand how words are used in context. 
 
 - Also, it is good to inspect the relationships between topics and look at documents that load high on multiple topics to understand the relationship
+
+. . .
 
 - If one using topic models in a more confirmatory manner, e.g., the topics should match some sort of predefined categorization, you should use regular gold standard techniques for validation: 
 
@@ -763,17 +771,20 @@ table %>%
     - This is a nice thing because it allows you to adjust the granularity of what topics measure: between a few broad topics and many more specific topics. 
     - But it begets the question what the best number of topics is.
 
+
+. . .
+
 - The short and perhaps disappointing answer is: The best number of topics does not exist
     
     - there is no singular idea of what a topic even is is
     - it depends on what you are interested in: e.g., if you want know what a corpus is about, you want to have a limited number of topics that provide a good representation of overall themes
 
+. . .
+
 - But even if the best number of topics does not exist, some values for k (i.e. the number of topics) are better than others. 
   
     - If we use too few topics, there will be variance in the data that is not accounted for, 
     - If you use too many topics you will overfit and get topics that are not interesting
-    
-- So how can we at least determine what a good number of topics is?
 
 
 ## How well does our model fit the data?
@@ -825,15 +836,17 @@ perplexity(m, dtm_test)
 ```{r}
 #| echo: true
 #| output-location: column-fragment
-## create a dataframe to store the perplexity scores for different values of k
-p <- data.frame(k = c(3,6,12,24,48,96), perplexity = NA)
+p <- data.frame(k = c(3,6,12,24,48,96),
+                perplexity = NA)
 
 ## loop over the values of k in data.frame p 
 for (i in 1:nrow(p)) {
-  print(p$k[i])
-  ## calculate perplexity for the given value of k
-  m <- LDA(dtm_train, method = "Gibbs", k = p$k[i],  control = list(alpha = 0.01))
-  ## store result in our data.frame
+  # calculate perplexity for the given value of k
+  m <- LDA(dtm_train, 
+           method = "Gibbs", 
+           k = p$k[i],  
+           control = list(alpha = 0.01))
+  # store result in our data.frame
   p$perplexity[i] = perplexity(m, dtm_test)
 }
 
@@ -853,6 +866,8 @@ p
 ```{r}
 #| echo: true
 #| output-location: column-fragment
+#| fig-height: 4
+#| fig-width: 5
 ggplot(p, aes(x = k, y = perplexity)) + 
   geom_line(color = "red") +
   theme_minimal() +
@@ -879,6 +894,8 @@ ggplot(p, aes(x = k, y = perplexity)) +
 ## Core topics in communication research
 
 ![](img/gunther_table1_full.png)
+
+
 ## Evolution of topics over time
 
 ![](img/gunther_fig1.png)
