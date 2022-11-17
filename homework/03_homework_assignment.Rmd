@@ -1,6 +1,6 @@
 ---
-title: 'Homework 3: Text Analysis and Dictionary Approaches'
-author: "Wouter van Atteveldt, Mariken van der Velden, & Philipp Masur"
+title: 'Homework 3: Supervised Text Classification'
+author: "Philipp Masur"
 date: ""
 output:
   html_document:
@@ -22,62 +22,63 @@ knitr::opts_chunk$set(echo = TRUE, results = TRUE, message = FALSE, warning = FA
 In the end, klick on "knit" and upload the respective html-output file to Canvas. Please add your name and lastname to the output file name:
 e.g., 02_homework_assignment_NAME-LASTNAME.html
 
+
 # Introduction 
 
-Wouter van Atteveldt, Mariken van der Velden and Mark Boukes have published an article titled [The Validity of Sentiment Analysis](https://raw.githubusercontent.com/vanatteveldt/ecosent/master/report/atteveldt_sentiment.pdf) (one of the required readings for week 4) in which they tested different methods' validity in assessing the sentiment in Dutch newspaper headlines. Special thanks to Wouter and Mariken for sharing their data and code for this exercise!
-
-Although all used scripts and data are available on the [github page](https://github.com/vanatteveldt/ecosent),
-it uses both Python and R.
-Note that you don't need to be able to read Dutch to be do this homework,
-although of course it can help for inspecting the data and doing error analysis.
-
-In this homework, you will reproduce some of the analyses from that paper,
-namely the quanteda-based Dutch dictionaries approach. Note that the outcome will not be identical as both preprocessing and ML implementation will be different,
-but the outcomes are comparable. 
+In this homework, you are going to work with data provided by Ahmed, Traore, & Saad (2018), who studying the detection of fake news in online news articles. We ask you to evaluate how well a Naive Bayes algorithm succeeds in predicting whether a news article is fake or not. 
 
 
-# Data 
+## Loading data
 
-We can simply load the data from the respective github repository with the following code. 
+First, we are going to load the data. It comes in two batches (download it from canvas: Fake.csv & True.csv): the first contains more than 20,000 fake news articles; the second contains 21,000 true articles. We load both individually, add a column that designates them as either fake or true (fake: true = no; true: true = yes). We then combine both and have a look at the data set.
 
 ```{r}
-# Needed packages
 library(tidyverse)
-library(quanteda)
-library(quanteda.textplots)
-library(quanteda.textstats)
+fake <- read_csv("Fake.csv") %>% mutate(true = "no")
+true <- read_csv("True.csv") %>% mutate(true = "yes")
 
-# Load data
-url <- "https://raw.githubusercontent.com/vanatteveldt/ecosent/master/data/intermediate/sentences_ml.csv"
-d <- read_csv(url) %>% 
-  select(doc_id = id, text = headline, lemmata, sentiment=value) %>%
-  mutate(doc_id = as.character(doc_id))
+d <- rbind(fake, true)
 head(d)
 ```
 
-This dataset contains Dutch newspaper headlines of articles mentioning the economy. 
-The `sentiment` column is a manual coding of the state of the economy, 
-i.e. whether according to the headline one would conclude the economy is doing well or not. 
+As you can see, the data set contains articles of different subjects. Can you create a bar plot that shows how many articles per subject are included in the data set? (Bonus: Try to reorder the bar plot so that the subject with the most articles is shown first and the subject with the least articles at last).
 
-```{r}
-table(d$sentiment)
-```
+**Question:** Which subjects dominate the corpus?
 
-In total, there are 6,322 headlines, roughly half of them are neutral, ~2000 are rather negative and ~1500 are rather positive.  
-
-It is important to note that we have both the original "text" and the "lemmatized" version of the text. We can run analyses on both, but you should from now on work with the lemmatized text!
-
-# Analysis
-
-## Creating the document-feature matrix
-
-In a first step, make a document-term-matrix from the lemmatized texts. This means first creating a "corpus" (bear in mind to set `text-field = "lemmata"`), engage in reasonable preprocessing (e.g., removing punctuation, frequency trimming, but don't engage in anything more elaborate such as stopword removal or stemming as we already lemmatized!)
 
 ```{r}
 # Solution here
 ```
 
-Let's quickly make a word cloud to get an idea what these headlines are about (set max_words = 25). What is the most often used word (even if it is probably a stop word)?
+**Answer:** [Add your answer here]
+
+## Combining title and text
+
+Similar to the Amazon Review, we have two potential sources of information for the classification: The title and the text itself. It would be unfortunate to only use one of them. For example, not using the title would be a shame as it is very possible that the title already tells a lot about whether or not a news article is fake. We hence combine both columns into one. 
+
+```{r}
+d <- d %>%
+  mutate(text2 = str_c(title, text, sep = " "))
+```
+
+
+# Text preprocessing
+
+Next, we engage in the preprocessing. For supervised machine learning, this means create a train and test data set and thinking about meaningful text preprocessing steps. 
+
+## Creating train and test set
+
+First, create a training and a test set. Think about meaningful partitions. Please justify why you choose a certain percentage. Don't forget to use set.seed to ensure reproducibility. 
+
+```{r}
+# Solution here
+```
+
+**Answer:** [Add your answer here]
+
+## Text preprocessing 
+
+Now think about meaningful text preprocessing (Removing stopwords? Trimming the data set?). Also justify your steps below. 
 
 ```{r}
 # Solution here
@@ -86,42 +87,32 @@ Let's quickly make a word cloud to get an idea what these headlines are about (s
 **Answer:** [Add your answer here]
 
 
-## Applying a dictionary
+# Machine Learning
 
-Next, you need to download and apply the NRC dictionary for Dutch: ([original code](https://github.com/vanatteveldt/ecosent/blob/master/src/data-processing/11_apply_dictionaries_quanteda.R)).
-First, we download the dictionary and turn it into a quanteda dictionary:
+## Training the algorithm
 
-```{r}
-url <- "https://raw.githubusercontent.com/vanatteveldt/ecosent/master/data/raw/dictionaries/NRC-Emotion-Lexicon-v0.92-In105Languages-Nov2017Translations.csv"
-nrc <- read_csv(url) %>% select(term = `Dutch (nl)`, Positive, Negative, Fear, Trust) %>% filter(term != 'NO TRANSLATION')
-dict <- dictionary(list(positive = nrc$term[nrc$Positive==1],
-                        negative = nrc$term[nrc$Negative==1],
-                        fear = nrc$term[nrc$Fear==1],
-                        trust = nrc$term[nrc$Trust==1]))
-dict
-```
-
-
-Next, try to apply to the dictionary to the dtm we created earlier. The resulting dtm contains information about which headlines contains positive, negative, fear-related, and trust-related words. Can you create table that shows the absolute frequency of each word? Which words occur most often?
+Now, we can train the model. Don't forget to load the package "quanteda.textmodels". 
 
 ```{r}
 # Solution here
 ```
 
-**Answer:** [Answer here]
+## Testing the model on the training set
 
-Now try to convert the results into a data.frame (or better a tibble) and compute a sentiment score by substracting the sum of "negative" and "fear" related words from the the sum of "positive" and "trust" related words (i.e., `score = (positive + trust) - (negative + fear)`). This is a slightly different score than we produced in the practical session. 
-
-Furthermore, recode the resulting score so that positive values (> 0) are coded as 1, neutral (= 0) are coded as 0 and negative values (< 0) as -1. This can be done in various ways, but the easiest way is to use another mutate command and simply wrap the computed score with the function `sign()`. 
+Now, we should quickly check the accuracy of the algorithm in predicting the "train" set. This of course should be really high as we trained it on this set. 
 
 ```{r}
-# Solution
+# Solution here
 ```
 
-Now, you should be able to join these results with the original data set. Try to compute the confusion matrix (using the `table()` function) and then produce the accuracy score. What do we learn?
+
+## Validating on the test data
+
+More importantly, we need to validate the algorithm performance. To do this, we need to preprocess the "test" data set in the exact same way as the train data set. Don't forget to use `dfm_match()` to make sure that the features are ordered in the same way. Then move on to compute the accuracy and other performance indicators (e.g., precision, recall, F1-Score). You can use the `caret` package for this as well. How well does the algorithm predict fake news in the data set?
 
 ```{r}
-# Solution
+# Solution here
 ```
 
-**Answer:** [Add answer here]
+**Answer:** [Add your answer here]
+
