@@ -78,7 +78,7 @@ editor: visual
 ::: {.column width="45%"}
 - Topic modeling is a method for unsupervised classification of documents
 
-- It is somewhat similar to clustering on numeric data, which finds natural groups of items even when we’re not sure what we’re looking for
+- It is somewhat similar to clustering on numeric data, which finds natural groups of items even when we're not sure what we’re looking for
 
 - The goal is to find a set of topics consisting of clusters of words that co-occur in these documents according to certain patterns
 
@@ -129,7 +129,7 @@ editor: visual
 
 - Used Latent Dirichlet Allocation (LDA) topic modeling to extract topics
 
-- They then analyzed their occurrence over time
+- They then analyzed the occurrence of topics over time
 
 - It is a nice example of what topic modelling can and can't do
 
@@ -186,7 +186,7 @@ This example highlights a number of interesting points about LDA topic modelling
 
 # Topic Models as Dimensionality Reduction {background-color="steelblue"}
 
-## Using factor analysis to extract topics?
+## Using factor or cluster analysis to extract topics?
 
 ::: {.column width="45%"}
 
@@ -351,6 +351,8 @@ Let's assume that you are a journalist writing a 500 word news item.
     
   - Empty tables stay empty, full tables keep getting more people proportionally
   - After many people enter, an equilibrium emerges
+  
+[Demo](http://topicmodels.west.uni-koblenz.de/ckling/tmt/restaurant.html?parameters=3,2,1,5)
 
 ## Effect of the hyperparameter $\alpha$
 
@@ -463,6 +465,16 @@ ggplot(NULL, aes(x, y)) +
 
 ## Gibbs Sampling in LDA
 
+::: {.column width="45%"}
+
+
+![](https://mr-easy.github.io/files/blog/gibbs/gibbs.gif)
+
+:::
+::: {.column width="5%"}
+:::
+::: {.column width="45%"}
+
 - Gibbs sampling refers to a Markov chain Monte Carlo (MCMC) algorithm for obtaining a sequence of observations which are approximated from a specified multivariate probability distribution from we cannot sample directly
 
 - Suppose you know the topics of all words except for one word $w$
@@ -474,7 +486,10 @@ ggplot(NULL, aes(x, y)) +
 
 - This gives a joint probability for all topics for this word
 
-## Iterative Gibbs
+:::
+
+## Iterative Gibbs Sampling
+
 
 1. Start with random assignments of topics to words
 
@@ -487,7 +502,15 @@ ggplot(NULL, aes(x, y)) +
 
 3. Repeat from 2 until converged
 
-<p style="font-size:0.75em;">_Steyvers & Griths, 2007_</p>
+
+<br><br>
+
+. . .
+
+- I understand that this sounds complicated and we won't dive deeper into this topic. 
+
+- If you are interested in how this works in detail, check out the blog post ["LDA under the hood"](http://brooksandrew.github.io/simpleblog/articles/latent-dirichlet-allocation-under-the-hood/) by A. Brook! 
+
 
 
 ## Let's look at an Example in R
@@ -746,7 +769,6 @@ table %>%
   labs(x = "", 
        y = "Proportion in the corpus")
 ```
-
 
 
 ## Validation

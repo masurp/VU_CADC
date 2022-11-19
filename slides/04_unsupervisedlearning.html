@@ -500,7 +500,7 @@
 <li><p>Jacobi, Welbers &amp; Van Atteveld (2016) analyzed the coverage of <em>nuclear technology</em> from 1945 to 2013 in the New York Times</p></li>
 <li><p>Overall, they analyzed 51,528 news stories (headline and lead): Way too much for human coding!</p></li>
 <li><p>Used Latent Dirichlet Allocation (LDA) topic modeling to extract topics</p></li>
-<li><p>They then analyzed their occurrence over time</p></li>
+<li><p>They then analyzed the occurrence of topics over time</p></li>
 <li><p>It is a nice example of what topic modelling can and can’t do</p></li>
 </ul>
 </div>
@@ -549,8 +549,8 @@
 <h1>Topic Models as Dimensionality Reduction</h1>
 
 </section>
-<section id="using-factor-analysis-to-extract-topics" class="slide level2">
-<h2>Using factor analysis to extract topics?</h2>
+<section id="using-factor-or-cluster-analysis-to-extract-topics" class="slide level2">
+<h2>Using factor or cluster analysis to extract topics?</h2>
 <div class="column" style="width:45%;">
 <ul>
 <li><p>Problem: Texts are unstructured data and it is thus difficult to do standard statistical analysis with them</p></li>
@@ -745,6 +745,7 @@ work         0.1082094 -0.42713988</code></pre>
 <li>After many people enter, an equilibrium emerges</li>
 </ul></li>
 </ul>
+<p><a href="http://topicmodels.west.uni-koblenz.de/ckling/tmt/restaurant.html?parameters=3,2,1,5">Demo</a></p>
 </section>
 <section id="effect-of-the-hyperparameter-alpha" class="slide level2">
 <h2>Effect of the hyperparameter <span class="math inline">\(\alpha\)</span></h2>
@@ -839,6 +840,13 @@ work         0.1082094 -0.42713988</code></pre>
 </section>
 <section id="gibbs-sampling-in-lda" class="slide level2">
 <h2>Gibbs Sampling in LDA</h2>
+<div class="column" style="width:45%;">
+<p><img data-src="https://mr-easy.github.io/files/blog/gibbs/gibbs.gif"></p>
+</div>
+<div class="column" style="width:5%;">
+
+</div>
+<div class="column" style="width:45%;">
 <ul>
 <li><p>Gibbs sampling refers to a Markov chain Monte Carlo (MCMC) algorithm for obtaining a sequence of observations which are approximated from a specified multivariate probability distribution from we cannot sample directly</p></li>
 <li><p>Suppose you know the topics of all words except for one word <span class="math inline">\(w\)</span></p></li>
@@ -849,9 +857,10 @@ work         0.1082094 -0.42713988</code></pre>
 </ul></li>
 <li><p>This gives a joint probability for all topics for this word</p></li>
 </ul>
+</div>
 </section>
-<section id="iterative-gibbs" class="slide level2">
-<h2>Iterative Gibbs</h2>
+<section id="iterative-gibbs-sampling" class="slide level2">
+<h2>Iterative Gibbs Sampling</h2>
 <ol type="1">
 <li><p>Start with random assignments of topics to words</p></li>
 <li><p>For each word <span class="math inline">\(w\)</span> in document <span class="math inline">\(d\)</span></p>
@@ -863,9 +872,13 @@ work         0.1082094 -0.42713988</code></pre>
 </ul></li>
 <li><p>Repeat from 2 until converged</p></li>
 </ol>
-<p style="font-size:0.75em;">
-<em>Steyvers &amp; Griths, 2007</em>
-</p>
+<p><br><br></p>
+<div class="fragment">
+<ul>
+<li><p>I understand that this sounds complicated and we won’t dive deeper into this topic.</p></li>
+<li><p>If you are interested in how this works in detail, check out the blog post <a href="http://brooksandrew.github.io/simpleblog/articles/latent-dirichlet-allocation-under-the-hood/">“LDA under the hood”</a> by A. Brook!</p></li>
+</ul>
+</div>
 </section>
 <section id="lets-look-at-an-example-in-r" class="slide level2">
 <h2>Let’s look at an Example in R</h2>
