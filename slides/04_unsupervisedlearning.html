@@ -792,9 +792,11 @@ work         0.1082094 -0.42713988</code></pre>
 </ul>
 <p><span class="math inline">\(\beta_k\)</span> and <span class="math inline">\(\theta_d\)</span> are drawn from <span class="math inline">\(Dir(\alpha)\)</span> and thus not observed directly</p>
 </div>
+<div class="fragment">
 <ul>
 <li>How can we determine these parameters?</li>
 </ul>
+</div>
 </section>
 <section id="think-about-a-regression-analysis" class="slide level2">
 <h2>Think about a regression analysis…</h2>
@@ -806,7 +808,7 @@ work         0.1082094 -0.42713988</code></pre>
 <p><span class="math inline">\(y_i = \beta_0 + \beta_1*x_i + e_i\)</span></p>
 <ul>
 <li><p>Similar to the topic model, we have <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>, but we don’t actually have the parameter of interest: <span class="math inline">\(\beta_0\)</span>, and <span class="math inline">\(\beta_1\)</span></p></li>
-<li><p>Through methods such as least squares (including its most common variant, ordinary least squares), we try to find the value of the <span class="math inline">\(\beta\)</span>’s that minimize the sum of squared errors (distance from points to the regression line)</p></li>
+<li><p>Through methods such as ordinary least squares, we try to find the value of the <span class="math inline">\(\beta\)</span>’s that minimize the sum of squared errors</p></li>
 </ul>
 </div>
 <div class="column" style="width:5%;">
@@ -840,15 +842,15 @@ work         0.1082094 -0.42713988</code></pre>
 </section>
 <section id="gibbs-sampling-in-lda" class="slide level2">
 <h2>Gibbs Sampling in LDA</h2>
-<div class="column" style="width:45%;">
+<div class="column" style="width:25%;">
 <p><img data-src="https://mr-easy.github.io/files/blog/gibbs/gibbs.gif"></p>
 </div>
 <div class="column" style="width:5%;">
 
 </div>
-<div class="column" style="width:45%;">
+<div class="column" style="width:65%;">
 <ul>
-<li><p>Gibbs sampling refers to a Markov chain Monte Carlo (MCMC) algorithm for obtaining a sequence of observations which are approximated from a specified multivariate probability distribution from we cannot sample directly</p></li>
+<li><p>Gibbs sampling refers to a Markov chain Monte Carlo (MCMC) algorithm for obtaining a sequence of observations which are approximated from a specified multivariate probability distribution from which we cannot sample directly</p></li>
 <li><p>Suppose you know the topics of all words except for one word <span class="math inline">\(w\)</span></p></li>
 <li><p>This new word <span class="math inline">\(w\)</span> is the new guest entering the restaurant</p>
 <ul>

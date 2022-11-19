@@ -401,6 +401,8 @@ $\beta_k$ and $\theta_d$ are drawn from $Dir(\alpha)$ and thus not observed dire
 
 :::
 
+. . .
+
 - How can we determine these parameters?
 
 ## Think about a regression analysis...
@@ -416,7 +418,7 @@ $y_i = \beta_0 + \beta_1*x_i + e_i$
 
 - Similar to the topic model, we have $x$ and $y$, but we don't actually have the parameter of interest: $\beta_0$, and $\beta_1$
 
-- Through methods such as least squares (including its most common variant, ordinary least squares), we try to find the value of the $\beta$'s  that minimize the sum of squared errors (distance from points to the regression line)
+- Through methods such as ordinary least squares, we try to find the value of the $\beta$'s  that minimize the sum of squared errors
 
 :::
 ::: {.column width="5%"}
@@ -465,7 +467,7 @@ ggplot(NULL, aes(x, y)) +
 
 ## Gibbs Sampling in LDA
 
-::: {.column width="45%"}
+::: {.column width="25%"}
 
 
 ![](https://mr-easy.github.io/files/blog/gibbs/gibbs.gif)
@@ -473,9 +475,9 @@ ggplot(NULL, aes(x, y)) +
 :::
 ::: {.column width="5%"}
 :::
-::: {.column width="45%"}
+::: {.column width="65%"}
 
-- Gibbs sampling refers to a Markov chain Monte Carlo (MCMC) algorithm for obtaining a sequence of observations which are approximated from a specified multivariate probability distribution from we cannot sample directly
+- Gibbs sampling refers to a Markov chain Monte Carlo (MCMC) algorithm for obtaining a sequence of observations which are approximated from a specified multivariate probability distribution from which we cannot sample directly
 
 - Suppose you know the topics of all words except for one word $w$
 
