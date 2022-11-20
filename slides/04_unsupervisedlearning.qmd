@@ -96,12 +96,40 @@ editor: visual
 <p style="font-size:0.75em;">_Blei, Ng, & Jordan, 2003_</p>
 :::
 
+
+## Why should we care?
+
+::: {.column width="45%"}
+
+- Topic models were originally developed as a text-mining tool and as such has wide applications in research that is based on understanding texts 
+
+- But topic models have applications in other fields such as bioinformatics and computer vision
+
+    - can be used to detect structures in data such as genetic information
+    - can also detect similaries in data based on images or networks
+    
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="45%"}
+
+- More importantly, they are also used in various practical fields:
+
+    - In news or content recommenders, which aim to suggest content based on similar topics
+    - Used to power conversational agents (e.g., chatbots)
+    - Spam filter (again!)
+    - And many more...
+
+:::
+
 ## Content of the lecture
 
 
 1. What is topic modeling?
 
-2. Topic Models as Dimensionality Reduction
+2. Topic Modeling as Dimensionality Reduction
 
 3. Latent Dirichlet Allocation - LDA topic modeling
 
@@ -184,7 +212,7 @@ This example highlights a number of interesting points about LDA topic modelling
 ![](img/Jacobi_topicmodelling.png)
 
 
-# Topic Models as Dimensionality Reduction {background-color="steelblue"}
+# Topic Modeling as Dimensionality Reduction {background-color="steelblue"}
 
 ## Using factor or cluster analysis to extract topics?
 
@@ -258,9 +286,13 @@ prcomp(dtm_factor, rank. = 2)
 
 ## Latent Semantic Analysis
 
-- Apply Singular Value Decomposition to the DTM
+::: {.column width="60%"}
 
-    - Similar to factor analysis
+- Latent Semantic Analysis assumes that words that are close in meaning will occur in similar pieces of text
+
+- *Singular value decomposition* (SVD) is used to reduce the number of rows in a document-feature matrix while preserving the similarity structure among columns
+
+- Overall, similar to factor analysis, but developed in the field of natural language processing
 
 - Found to mimic (some) human generalizations and even errors
 
@@ -273,9 +305,18 @@ prcomp(dtm_factor, rank. = 2)
 <p style="font-size:0.65em;">_e.g. Deerwester et al., 1990_</p>
 
 
+:::
+::: {.column width="4%"}
+:::
+::: {.column width="32%"}
+
+![](https://upload.wikimedia.org/wikipedia/commons/e/e9/Singular_value_decomposition.gif)
+
+:::
+
 ## Preliminary conclusion
 
-- Clustering, factor analysis, principal component analyis and its extension "latent semantic analysis" can all be used to reduce the dimensionality of a document-term matrix
+- Clustering, factor analysis, principal component analyis and its extension in the form of latent semantic analysis can all be used to reduce the dimensionality of a document-term matrix
 
 - The resulting dimension may be a basis for extracting topics (after all it is words with loadings onto different factors = topics)
 
@@ -284,16 +325,10 @@ prcomp(dtm_factor, rank. = 2)
     - Negative values difficult to interpret
     - The underlying model is hard to intepret
 
+- These models are perhaps useful for understand which words load onto a topic, but they are less good at representing the distribution of topics in documents
+
 
 # Latent Dirichlet Allocation - LDA Topic Modeling {background-color="steelblue"}
-
-
-## Intuitions behind LDA topic modelling
-
-![](img/blei_lda.png)
-
-<p style="font-size:0.75em;">_Blei et al., 2003_</p>
-
 
 
 ## Latent Dirichlet Allocation - LDA topic modeling
@@ -318,29 +353,64 @@ prcomp(dtm_factor, rank. = 2)
 
 Let's assume that you are a journalist writing a 500 word news item. 
 
+<br>
+
+. . .
+
 1. You would choose one or more topics to write about, for example 70% healthcare and 30% economy. 
+
+. . .
 
 2. For each word in the item, you randomly pick one of these topics based on their respective weight. 
 
+. . .
+
 3. Finally, you pick a random word from the words associated with that topic, where again each word has a certain probability for that topic. For example, "hospital" might have a high probability for healthcare while "effectiveness" might have a lower probability but could still occur
+
+<br>
 
 <p style="font-size:0.75em;">_Van Atteveldt, Trilling & Calderon, 2021_</p>
 
 
-## Dirichlet Distribution
+## Intuitions behind LDA topic modelling
 
-- Every topic and document is a probability distribution (over words / topics resp.)
-    - How likely is word w in topic z, or topic z in document d?
+![](img/blei_lda.png)
 
-- These distributions are themselves randomly drawn
+<p style="font-size:0.75em;">_Blei et al., 2003_</p>
 
-    - From a "dirichlet distribution" which yields multinomial distributions
+
+## Sampling from the Dirichlet Distribution
+
+
+- In topic modeling, we assume the following:
+
+    - Every topic and document is a probability distribution (over words / topics resp.)
+    - We wonder: How likely is word $w$ in topic $z$, or topic $z$ in document $d$?
+    - These distributions are themselves randomly drawn from the "dirichlet distribution" which yields multinomial distributions
+
+::: {.column width="65%"}
 
 - So, what is a "Dirichlet distribution"?
 
-## The conference dinner...
+- Named after Peter Gustav Lejeune Dirichlet
 
-- You walk into the room for the conference dinner and want to sit somehwere
+- It is a family of continuous multivariate probability distributions parameterized by a vector $\alpha$ of positive reals
+
+- Can also be seen as a multivariate generalization of the beta distribution
+
+:::
+::: {.column width="5%"}
+:::
+::: {.column width="25%"}
+
+![](https://upload.wikimedia.org/wikipedia/commons/3/32/Peter_Gustav_Lejeune_Dirichlet.jpg)
+
+:::
+
+
+## Explaining a Dirichlet Distribution...
+
+- You walk into the room for a get-to-gether (e.g., at a conference) and want to sit somewhere
 
 - You are afraid to sit alone, so prefer a table with people 
   
@@ -350,17 +420,19 @@ Let's assume that you are a journalist writing a 500 word news item.
 - Everyone does the same as they enter
     
   - Empty tables stay empty, full tables keep getting more people proportionally
-  - After many people enter, an equilibrium emerges
-  
-[Demo](http://topicmodels.west.uni-koblenz.de/ckling/tmt/restaurant.html?parameters=3,2,1,5)
+  - After many people have entered, an equilibrium emerges
+
+<br>
+
+<center> -- [Visual Demonstration of the Dirichlet Distribution](http://topicmodels.west.uni-koblenz.de/ckling/tmt/restaurant.html?parameters=3,2,1,5) -- </center>
 
 ## Effect of the hyperparameter $\alpha$
 
-- The restaurant converges to multinomial distribution
+- The restaurant converges to a multinomial distribution
       
-  - E.g. the topics per document, of words per topic
+  - E.g. the topics per document, or words per topic
 
-- The initial number of people at the tables is the alpha hyperparameter
+- The initial number of people at the tables is the $\alpha$ hyperparameter
     
     - Hyperparameter = ‘setting’/choice that affects how other parameters are estimated
 
@@ -403,7 +475,7 @@ $\beta_k$ and $\theta_d$ are drawn from $Dir(\alpha)$ and thus not observed dire
 
 . . .
 
-- How can we determine these parameters?
+**Question:** How can we determine these parameters?
 
 ## Think about a regression analysis...
 
@@ -446,16 +518,23 @@ ggplot(NULL, aes(x, y)) +
 :::
 
 
-## Reverse-Engineering the generative model
+## Reverse-Engineering the Generative Model
 
-- The generative model assumes we know the parameters and want the words
+::: {.column width="45%"}
+
+- The generative model assumes we know the parameters and want to find the words
 
 - But similar to the regression analysis, our challenge is the opposite:
 
     - We know the actual words in the corpus
-    - How can we find out the parameters?
+    - How can we find out the parameters of the model the explain their occurence?
 
 - Task: Find the parameters that maximize the *likelihood* of the corpus
+
+:::
+::: {.column width="5%"}
+:::
+::: {.column width="45%"}
 
 - Unfortunately, there is no analytic solution
 
@@ -464,10 +543,11 @@ ggplot(NULL, aes(x, y)) +
 
 - Need to do iterative approximation of best solution
 
+:::
 
 ## Gibbs Sampling in LDA
 
-::: {.column width="25%"}
+::: {.column width="30%"}
 
 
 ![](https://mr-easy.github.io/files/blog/gibbs/gibbs.gif)
@@ -475,9 +555,9 @@ ggplot(NULL, aes(x, y)) +
 :::
 ::: {.column width="5%"}
 :::
-::: {.column width="65%"}
+::: {.column width="60%"}
 
-- Gibbs sampling refers to a Markov chain Monte Carlo (MCMC) algorithm for obtaining a sequence of observations which are approximated from a specified multivariate probability distribution from which we cannot sample directly
+- refers to a Markov chain Monte Carlo (MCMC) algorithm for obtaining a sequence of observations which are approximated from a specified multivariate probability distribution
 
 - Suppose you know the topics of all words except for one word $w$
 
@@ -509,9 +589,9 @@ ggplot(NULL, aes(x, y)) +
 
 . . .
 
-- I understand that this sounds complicated and we won't dive deeper into this topic. 
+- This may sounds complicated and we won't dive deeper into this topic. 
 
-- If you are interested in how this works in detail, check out the blog post ["LDA under the hood"](http://brooksandrew.github.io/simpleblog/articles/latent-dirichlet-allocation-under-the-hood/) by A. Brook! 
+- However, if you are interested in how this works in detail, check out the blog post ["LDA under the hood"](http://brooksandrew.github.io/simpleblog/articles/latent-dirichlet-allocation-under-the-hood/) by A. Brook! 
 
 
 
@@ -565,7 +645,6 @@ dtm
 
 ```{r}
 #| echo: true
-#| output-location: fragment
 library(topicmodels)
 
 # Convert dtm to topicmodels' specific format
@@ -596,6 +675,7 @@ By using the function `terms()`, we can have a look at the most probable words i
 
 ```{r}
 #| echo: true
+#| output-location: fragment
 terms(m, 15) %>%
   as_tibble
 ```
@@ -686,6 +766,7 @@ posterior(m)$topics %>%
 
 ## Is text 7 really about astrophysics?
 
+::: {.column width="45%"}
 
 ```{r}
 #| echo: true
@@ -695,6 +776,15 @@ s1 %>%
   select(abstract) %>%
   as.character()
 ```
+
+:::
+::: {.column width="5%"}
+:::
+::: {.column width="45%"}
+
+![](https://upload.wikimedia.org/wikipedia/commons/2/2f/Hubble_ultra_deep_field.jpg)
+
+:::
 
 ## Probabilites of topics per document
 
@@ -949,6 +1039,15 @@ ggplot(p, aes(x = k, y = perplexity)) +
 
 ## Conclusion
 
+::: {.column width="45%"}
+
+![](img/topic_slides/Slide4.png)
+
+:::
+::: {.column width="5%"}
+:::
+::: {.column width="45%"}
+
 - Topic Modeling reduces the dimensionality of a document-term matrix by clustering words and documents into "latent" topics
 
 - Interpretation of resulting "topic solutions" must be done by the researcher (face validity)
@@ -958,6 +1057,8 @@ ggplot(p, aes(x = k, y = perplexity)) +
   - skewed towards few topics, but controllable with alpha parameter
   
 - Gibbs sampling is a non-deterministic way to fit LDA models
+
+:::
 
 
 # Thank you for your attention! {background-color="steelblue"}

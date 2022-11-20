@@ -472,11 +472,38 @@
 </p>
 </div>
 </section>
+<section id="why-should-we-care" class="slide level2">
+<h2>Why should we care?</h2>
+<div class="column" style="width:45%;">
+<ul>
+<li><p>Topic models were originally developed as a text-mining tool and as such has wide applications in research that is based on understanding texts</p></li>
+<li><p>But topic models have applications in other fields such as bioinformatics and computer vision</p>
+<ul>
+<li>can be used to detect structures in data such as genetic information</li>
+<li>can also detect similaries in data based on images or networks</li>
+</ul></li>
+</ul>
+</div>
+<div class="column" style="width:4%;">
+
+</div>
+<div class="column" style="width:45%;">
+<ul>
+<li><p>More importantly, they are also used in various practical fields:</p>
+<ul>
+<li>In news or content recommenders, which aim to suggest content based on similar topics</li>
+<li>Used to power conversational agents (e.g., chatbots)</li>
+<li>Spam filter (again!)</li>
+<li>And many more…</li>
+</ul></li>
+</ul>
+</div>
+</section>
 <section id="content-of-the-lecture" class="slide level2">
 <h2>Content of the lecture</h2>
 <ol type="1">
 <li><p>What is topic modeling?</p></li>
-<li><p>Topic Models as Dimensionality Reduction</p></li>
+<li><p>Topic Modeling as Dimensionality Reduction</p></li>
 <li><p>Latent Dirichlet Allocation - LDA topic modeling</p>
 <ul>
 <li>Basic Principles</li>
@@ -545,8 +572,8 @@
 
 <img data-src="img/Jacobi_topicmodelling.png" class="r-stretch"></section></section>
 <section>
-<section id="topic-models-as-dimensionality-reduction" class="title-slide slide level1 center" data-background-color="steelblue">
-<h1>Topic Models as Dimensionality Reduction</h1>
+<section id="topic-modeling-as-dimensionality-reduction" class="title-slide slide level1 center" data-background-color="steelblue">
+<h1>Topic Modeling as Dimensionality Reduction</h1>
 
 </section>
 <section id="using-factor-or-cluster-analysis-to-extract-topics" class="slide level2">
@@ -644,11 +671,11 @@ work         0.1082094 -0.42713988</code></pre>
 </section>
 <section id="latent-semantic-analysis" class="slide level2">
 <h2>Latent Semantic Analysis</h2>
+<div class="column" style="width:60%;">
 <ul>
-<li><p>Apply Singular Value Decomposition to the DTM</p>
-<ul>
-<li>Similar to factor analysis</li>
-</ul></li>
+<li><p>Latent Semantic Analysis assumes that words that are close in meaning will occur in similar pieces of text</p></li>
+<li><p><em>Singular value decomposition</em> (SVD) is used to reduce the number of rows in a document-feature matrix while preserving the similarity structure among columns</p></li>
+<li><p>Overall, similar to factor analysis, but developed in the field of natural language processing</p></li>
 <li><p>Found to mimic (some) human generalizations and even errors</p></li>
 <li><p>Also problematic to interpret:</p>
 <ul>
@@ -660,30 +687,31 @@ work         0.1082094 -0.42713988</code></pre>
 <p style="font-size:0.65em;">
 <em>e.g.&nbsp;Deerwester et al., 1990</em>
 </p>
+</div>
+<div class="column" style="width:4%;">
+
+</div>
+<div class="column" style="width:32%;">
+<p><img data-src="https://upload.wikimedia.org/wikipedia/commons/e/e9/Singular_value_decomposition.gif"></p>
+</div>
 </section>
 <section id="preliminary-conclusion" class="slide level2">
 <h2>Preliminary conclusion</h2>
 <ul>
-<li><p>Clustering, factor analysis, principal component analyis and its extension “latent semantic analysis” can all be used to reduce the dimensionality of a document-term matrix</p></li>
+<li><p>Clustering, factor analysis, principal component analyis and its extension in the form of latent semantic analysis can all be used to reduce the dimensionality of a document-term matrix</p></li>
 <li><p>The resulting dimension may be a basis for extracting topics (after all it is words with loadings onto different factors = topics)</p></li>
 <li><p>Yet, there are several problems</p>
 <ul>
 <li>Negative values difficult to interpret</li>
 <li>The underlying model is hard to intepret</li>
 </ul></li>
+<li><p>These models are perhaps useful for understand which words load onto a topic, but they are less good at representing the distribution of topics in documents</p></li>
 </ul>
 </section></section>
 <section>
 <section id="latent-dirichlet-allocation---lda-topic-modeling" class="title-slide slide level1 center" data-background-color="steelblue">
 <h1>Latent Dirichlet Allocation - LDA Topic Modeling</h1>
 
-</section>
-<section id="intuitions-behind-lda-topic-modelling" class="slide level2">
-<h2>Intuitions behind LDA topic modelling</h2>
-
-<img data-src="img/blei_lda.png" class="r-stretch"><p style="font-size:0.75em;">
-<em>Blei et al., 2003</em>
-</p>
 </section>
 <section id="latent-dirichlet-allocation---lda-topic-modeling-1" class="slide level2">
 <h2>Latent Dirichlet Allocation - LDA topic modeling</h2>
@@ -707,33 +735,63 @@ work         0.1082094 -0.42713988</code></pre>
 <section id="example-for-the-generative-model" class="slide level2">
 <h2>Example for the generative model</h2>
 <p>Let’s assume that you are a journalist writing a 500 word news item.</p>
+<p><br></p>
+<div class="fragment">
 <ol type="1">
-<li><p>You would choose one or more topics to write about, for example 70% healthcare and 30% economy.</p></li>
-<li><p>For each word in the item, you randomly pick one of these topics based on their respective weight.</p></li>
-<li><p>Finally, you pick a random word from the words associated with that topic, where again each word has a certain probability for that topic. For example, “hospital” might have a high probability for healthcare while “effectiveness” might have a lower probability but could still occur</p></li>
+<li>You would choose one or more topics to write about, for example 70% healthcare and 30% economy.</li>
 </ol>
+</div>
+<div class="fragment">
+<ol start="2" type="1">
+<li>For each word in the item, you randomly pick one of these topics based on their respective weight.</li>
+</ol>
+</div>
+<div class="fragment">
+<ol start="3" type="1">
+<li>Finally, you pick a random word from the words associated with that topic, where again each word has a certain probability for that topic. For example, “hospital” might have a high probability for healthcare while “effectiveness” might have a lower probability but could still occur</li>
+</ol>
+<p><br></p>
 <p style="font-size:0.75em;">
 <em>Van Atteveldt, Trilling &amp; Calderon, 2021</em>
 </p>
+</div>
 </section>
-<section id="dirichlet-distribution" class="slide level2">
-<h2>Dirichlet Distribution</h2>
+<section id="intuitions-behind-lda-topic-modelling" class="slide level2">
+<h2>Intuitions behind LDA topic modelling</h2>
+
+<img data-src="img/blei_lda.png" class="r-stretch"><p style="font-size:0.75em;">
+<em>Blei et al., 2003</em>
+</p>
+</section>
+<section id="sampling-from-the-dirichlet-distribution" class="slide level2">
+<h2>Sampling from the Dirichlet Distribution</h2>
 <ul>
-<li><p>Every topic and document is a probability distribution (over words / topics resp.)</p>
+<li><p>In topic modeling, we assume the following:</p>
 <ul>
-<li>How likely is word w in topic z, or topic z in document d?</li>
+<li>Every topic and document is a probability distribution (over words / topics resp.)</li>
+<li>We wonder: How likely is word <span class="math inline">\(w\)</span> in topic <span class="math inline">\(z\)</span>, or topic <span class="math inline">\(z\)</span> in document <span class="math inline">\(d\)</span>?</li>
+<li>These distributions are themselves randomly drawn from the “dirichlet distribution” which yields multinomial distributions</li>
 </ul></li>
-<li><p>These distributions are themselves randomly drawn</p>
-<ul>
-<li>From a “dirichlet distribution” which yields multinomial distributions</li>
-</ul></li>
-<li><p>So, what is a “Dirichlet distribution”?</p></li>
 </ul>
-</section>
-<section id="the-conference-dinner" class="slide level2">
-<h2>The conference dinner…</h2>
+<div class="column" style="width:65%;">
 <ul>
-<li><p>You walk into the room for the conference dinner and want to sit somehwere</p></li>
+<li><p>So, what is a “Dirichlet distribution”?</p></li>
+<li><p>Named after Peter Gustav Lejeune Dirichlet</p></li>
+<li><p>It is a family of continuous multivariate probability distributions parameterized by a vector <span class="math inline">\(\alpha\)</span> of positive reals</p></li>
+<li><p>Can also be seen as a multivariate generalization of the beta distribution</p></li>
+</ul>
+</div>
+<div class="column" style="width:5%;">
+
+</div>
+<div class="column" style="width:25%;">
+<p><img data-src="https://upload.wikimedia.org/wikipedia/commons/3/32/Peter_Gustav_Lejeune_Dirichlet.jpg"></p>
+</div>
+</section>
+<section id="explaining-a-dirichlet-distribution" class="slide level2">
+<h2>Explaining a Dirichlet Distribution…</h2>
+<ul>
+<li><p>You walk into the room for a get-to-gether (e.g., at a conference) and want to sit somewhere</p></li>
 <li><p>You are afraid to sit alone, so prefer a table with people</p>
 <ul>
 <li><span class="math inline">\(P(t_i) = n_i / sum(n)\)</span></li>
@@ -742,19 +800,22 @@ work         0.1082094 -0.42713988</code></pre>
 <li><p>Everyone does the same as they enter</p>
 <ul>
 <li>Empty tables stay empty, full tables keep getting more people proportionally</li>
-<li>After many people enter, an equilibrium emerges</li>
+<li>After many people have entered, an equilibrium emerges</li>
 </ul></li>
 </ul>
-<p><a href="http://topicmodels.west.uni-koblenz.de/ckling/tmt/restaurant.html?parameters=3,2,1,5">Demo</a></p>
+<p><br></p>
+<center>
+– <a href="http://topicmodels.west.uni-koblenz.de/ckling/tmt/restaurant.html?parameters=3,2,1,5">Visual Demonstration of the Dirichlet Distribution</a> –
+</center>
 </section>
 <section id="effect-of-the-hyperparameter-alpha" class="slide level2">
 <h2>Effect of the hyperparameter <span class="math inline">\(\alpha\)</span></h2>
 <ul>
-<li><p>The restaurant converges to multinomial distribution</p>
+<li><p>The restaurant converges to a multinomial distribution</p>
 <ul>
-<li>E.g. the topics per document, of words per topic</li>
+<li>E.g. the topics per document, or words per topic</li>
 </ul></li>
-<li><p>The initial number of people at the tables is the alpha hyperparameter</p>
+<li><p>The initial number of people at the tables is the <span class="math inline">\(\alpha\)</span> hyperparameter</p>
 <ul>
 <li>Hyperparameter = ‘setting’/choice that affects how other parameters are estimated</li>
 </ul></li>
@@ -793,9 +854,7 @@ work         0.1082094 -0.42713988</code></pre>
 <p><span class="math inline">\(\beta_k\)</span> and <span class="math inline">\(\theta_d\)</span> are drawn from <span class="math inline">\(Dir(\alpha)\)</span> and thus not observed directly</p>
 </div>
 <div class="fragment">
-<ul>
-<li>How can we determine these parameters?</li>
-</ul>
+<p><strong>Question:</strong> How can we determine these parameters?</p>
 </div>
 </section>
 <section id="think-about-a-regression-analysis" class="slide level2">
@@ -823,15 +882,23 @@ work         0.1082094 -0.42713988</code></pre>
 </div>
 </section>
 <section id="reverse-engineering-the-generative-model" class="slide level2">
-<h2>Reverse-Engineering the generative model</h2>
+<h2>Reverse-Engineering the Generative Model</h2>
+<div class="column" style="width:45%;">
 <ul>
-<li><p>The generative model assumes we know the parameters and want the words</p></li>
+<li><p>The generative model assumes we know the parameters and want to find the words</p></li>
 <li><p>But similar to the regression analysis, our challenge is the opposite:</p>
 <ul>
 <li>We know the actual words in the corpus</li>
-<li>How can we find out the parameters?</li>
+<li>How can we find out the parameters of the model the explain their occurence?</li>
 </ul></li>
 <li><p>Task: Find the parameters that maximize the <em>likelihood</em> of the corpus</p></li>
+</ul>
+</div>
+<div class="column" style="width:5%;">
+
+</div>
+<div class="column" style="width:45%;">
+<ul>
 <li><p>Unfortunately, there is no analytic solution</p>
 <ul>
 <li>Contrast with e.g.&nbsp;SVD and OLS that can be computed directly</li>
@@ -839,18 +906,19 @@ work         0.1082094 -0.42713988</code></pre>
 </ul></li>
 <li><p>Need to do iterative approximation of best solution</p></li>
 </ul>
+</div>
 </section>
 <section id="gibbs-sampling-in-lda" class="slide level2">
 <h2>Gibbs Sampling in LDA</h2>
-<div class="column" style="width:25%;">
+<div class="column" style="width:30%;">
 <p><img data-src="https://mr-easy.github.io/files/blog/gibbs/gibbs.gif"></p>
 </div>
 <div class="column" style="width:5%;">
 
 </div>
-<div class="column" style="width:65%;">
+<div class="column" style="width:60%;">
 <ul>
-<li><p>Gibbs sampling refers to a Markov chain Monte Carlo (MCMC) algorithm for obtaining a sequence of observations which are approximated from a specified multivariate probability distribution from which we cannot sample directly</p></li>
+<li><p>refers to a Markov chain Monte Carlo (MCMC) algorithm for obtaining a sequence of observations which are approximated from a specified multivariate probability distribution</p></li>
 <li><p>Suppose you know the topics of all words except for one word <span class="math inline">\(w\)</span></p></li>
 <li><p>This new word <span class="math inline">\(w\)</span> is the new guest entering the restaurant</p>
 <ul>
@@ -877,8 +945,8 @@ work         0.1082094 -0.42713988</code></pre>
 <p><br><br></p>
 <div class="fragment">
 <ul>
-<li><p>I understand that this sounds complicated and we won’t dive deeper into this topic.</p></li>
-<li><p>If you are interested in how this works in detail, check out the blog post <a href="http://brooksandrew.github.io/simpleblog/articles/latent-dirichlet-allocation-under-the-hood/">“LDA under the hood”</a> by A. Brook!</p></li>
+<li><p>This may sounds complicated and we won’t dive deeper into this topic.</p></li>
+<li><p>However, if you are interested in how this works in detail, check out the blog post <a href="http://brooksandrew.github.io/simpleblog/articles/latent-dirichlet-allocation-under-the-hood/">“LDA under the hood”</a> by A. Brook!</p></li>
 </ul>
 </div>
 </section>
@@ -964,8 +1032,6 @@ docs    predictive models allow subject-specific inference analyzing disease rel
 <span id="cb9-12"><a href="#cb9-12"></a>         <span class="at">k =</span> <span class="dv">6</span>,  </span>
 <span id="cb9-13"><a href="#cb9-13"></a>         <span class="at">control =</span> <span class="fu">list</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>))</span>
 <span id="cb9-14"><a href="#cb9-14"></a>m</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell fragment">
 <div class="cell-output cell-output-stdout">
 <pre><code>A LDA_Gibbs topic model with 6 topics.</code></pre>
 </div>
@@ -983,6 +1049,8 @@ docs    predictive models allow subject-specific inference analyzing disease rel
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">terms</span>(m, <span class="dv">15</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb11-2"><a href="#cb11-2"></a>  as_tibble</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 15 × 6
    `Topic 1`    `Topic 2`   `Topic 3`    `Topic 4`   `Topic 5` `Topic 6` 
@@ -1089,16 +1157,22 @@ emission     0.003689495</code></pre>
 </section>
 <section id="is-text-7-really-about-astrophysics" class="slide level2">
 <h2>Is text 7 really about astrophysics?</h2>
-<div class="cell">
+<div class="column" style="width:45%;">
+<div class="cell" data-output-location="fragment">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>s1 <span class="sc">%&gt;%</span></span>
 <span id="cb18-2"><a href="#cb18-2"></a>  <span class="fu">filter</span>(id <span class="sc">==</span> <span class="dv">7</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb18-3"><a href="#cb18-3"></a>  <span class="fu">select</span>(abstract) <span class="sc">%&gt;%</span></span>
 <span id="cb18-4"><a href="#cb18-4"></a>  <span class="fu">as.character</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell fragment">
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "We observed the newly discovered hyperbolic minor planet 1I/`Oumuamua (2017\nU1) on 2017 October 30 with Lowell Observatory's 4.3-m Discovery Channel\nTelescope. From these observations, we derived a partial lightcurve with\npeak-to-trough amplitude of at least 1.2 mag. This lightcurve segment rules out\nrotation periods less than 3 hr and suggests that the period is at least 5 hr.\nOn the assumption that the variability is due to a changing cross section, the\naxial ratio is at least 3:1. We saw no evidence for a coma or tail in either\nindividual images or in a stacked image having an equivalent exposure time of\n9000 s.\n"</code></pre>
 </div>
+</div>
+</div>
+<div class="column" style="width:5%;">
+
+</div>
+<div class="column" style="width:45%;">
+<p><img data-src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Hubble_ultra_deep_field.jpg"></p>
 </div>
 </section>
 <section id="probabilites-of-topics-per-document-1" class="slide level2">
@@ -1387,6 +1461,13 @@ emission     0.003689495</code></pre>
 </section>
 <section id="conclusion" class="slide level2">
 <h2>Conclusion</h2>
+<div class="column" style="width:45%;">
+<p><img data-src="img/topic_slides/Slide4.png"></p>
+</div>
+<div class="column" style="width:5%;">
+
+</div>
+<div class="column" style="width:45%;">
 <ul>
 <li><p>Topic Modeling reduces the dimensionality of a document-term matrix by clustering words and documents into “latent” topics</p></li>
 <li><p>Interpretation of resulting “topic solutions” must be done by the researcher (face validity)</p></li>
@@ -1396,6 +1477,7 @@ emission     0.003689495</code></pre>
 </ul></li>
 <li><p>Gibbs sampling is a non-deterministic way to fit LDA models</p></li>
 </ul>
+</div>
 </section></section>
 <section>
 <section id="thank-you-for-your-attention" class="title-slide slide level1 center" data-background-color="steelblue">
