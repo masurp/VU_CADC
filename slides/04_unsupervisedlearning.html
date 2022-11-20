@@ -400,7 +400,7 @@
 <section class="slide level2">
 
 <div class="column" style="width:45%;">
-<h3 id="supervised-learning">Supervised learning</h3>
+<h3 id="supervised-learning-last-lecture">Supervised learning (last lecture)</h3>
 <ul>
 <li><p>Algorithms build a model based on sample data, known as “training data”, in order to make predictions or decisions without being explicitly programmed to do so</p></li>
 <li><p>Combines the scalability of automatic coding with the validity of manual coding (requires pre-labeled data to train algorithm)</p></li>
@@ -415,13 +415,13 @@
 
 </div>
 <div class="column" style="width:45%;">
-<h3 id="unsupervised-learning-next-lecture">Unsupervised learning (next lecture)</h3>
+<h3 id="unsupervised-learning-this-lecture">Unsupervised learning (this lecture)</h3>
 <ul>
 <li><p>Algorithm detects clusters, patterns, or associations in data that has not been labeled previously, but researcher needs to interpret results</p></li>
 <li><p>Very helpful to make sense of new data (similar to cluster analysis or exploratory factor analysis)</p></li>
 <li><p>Examples:</p>
 <ul>
-<li>Topic modeling: Extracting topics from unlabeled (text) data</li>
+<li><strong>Topic modeling: Extracting topics from unlabeled (text) data</strong></li>
 <li>Customer segmentation: Better understanding different customer groups around which to build marketing or other business strategies</li>
 </ul></li>
 </ul>
@@ -444,8 +444,8 @@
 <h2>Easy for humans…</h2>
 
 <img data-src="img/topic_slides/Slide3.png" class="r-stretch"></section>
-<section id="computer-can-only-rely-on-the-words" class="slide level2">
-<h2>Computer can only rely on the words</h2>
+<section id="but-the-computer-can-only-rely-on-words" class="slide level2">
+<h2>But the computer can only rely on words</h2>
 
 <img data-src="img/topic_slides/Slide5.png" class="r-stretch"></section>
 <section id="but-each-word-may-belong-to-a-certain-topic" class="slide level2">
@@ -1074,9 +1074,7 @@ docs    predictive models allow subject-specific inference analyzing disease rel
 </div>
 <p><br></p>
 <div class="fragment">
-<ul>
-<li>What topics do these wordlists stand for?</li>
-</ul>
+<p><strong>Question:</strong> What topics do these wordlists stand for?</p>
 </div>
 </section>
 <section id="top-words-in-each-topic" class="slide level2">
@@ -1337,7 +1335,7 @@ emission     0.003689495</code></pre>
 <span id="cb26-4"><a href="#cb26-4"></a>dtm_test <span class="ot">&lt;-</span> dtm[<span class="sc">!</span><span class="fu">rownames</span>(dtm) <span class="sc">%in%</span> train, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
-<li>Then, we train the model and then, we calculate the perplexity:</li>
+<li>Then, we train the model and then, we calculate the perplexity by testing the model on the test data</li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>m_train <span class="ot">&lt;-</span> <span class="fu">LDA</span>(dtm_train, <span class="at">method =</span> <span class="st">"Gibbs"</span>, <span class="at">k =</span> <span class="dv">6</span>,  <span class="at">control =</span> <span class="fu">list</span>(<span class="at">alpha =</span> <span class="fl">0.01</span>))</span>

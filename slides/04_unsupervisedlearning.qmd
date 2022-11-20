@@ -20,7 +20,7 @@ editor: visual
 ---
 
 ::: {.column width="45%"}
-### Supervised learning
+### Supervised learning (last lecture)
 
 -   Algorithms build a model based on sample data, known as "training data", in order to make predictions or decisions without being explicitly programmed to do so
 
@@ -36,7 +36,7 @@ editor: visual
 :::
 
 ::: {.column width="45%"}
-### Unsupervised learning (next lecture)
+### Unsupervised learning (this lecture)
 
 -   Algorithm detects clusters, patterns, or associations in data that has not been labeled previously, but researcher needs to interpret results
 
@@ -44,7 +44,7 @@ editor: visual
 
 -   Examples:
 
-    -   Topic modeling: Extracting topics from unlabeled (text) data
+    -   **Topic modeling: Extracting topics from unlabeled (text) data**
     -   Customer segmentation: Better understanding different customer groups around which to build marketing or other business strategies
 :::
 
@@ -64,7 +64,7 @@ editor: visual
 
 ![](img/topic_slides/Slide3.png)
 
-## Computer can only rely on the words
+## But the computer can only rely on words
 
 ![](img/topic_slides/Slide5.png)
 
@@ -684,7 +684,7 @@ terms(m, 15) %>%
 
 . . .
 
-- What topics do these wordlists stand for?
+**Question:** What topics do these wordlists stand for?
 
 ## Top words in each topic
 
@@ -932,7 +932,7 @@ dtm_train <- dtm[rownames(dtm) %in% train, ]
 dtm_test <- dtm[!rownames(dtm) %in% train, ]
 ```
 
-- Then, we train the model and then, we calculate the perplexity:
+- Then, we train the model and then, we calculate the perplexity by testing the model on the test data
 
 ```{r}
 #| echo: true
