@@ -1,4 +1,4 @@
-Unsupervised Text Classification: Topic Modeling
+Unsupervised Text Classification I: Basics of Topic Modeling
 ================
 Wouter van Atteveldt, Kasper Welbers &Philipp Masur
 2022-11
@@ -42,12 +42,13 @@ we’ll do here. First, let’s load some data. In this case, it is a data
 set of tweets on new years resolutions.
 
 ``` r
+library(tidyverse)
 library(quanteda)
 library(quanteda.textplots)
 library(quanteda.textstats)
 
 # Load data
-d <- read_csv2("new_year_resolutions_dataset.csv")
+d <- read_csv2("data/new_year_resolutions_dataset.csv")
 head(d)
 ```
 
@@ -55,18 +56,20 @@ As we can see, we get quite some information about the tweets. Although
 we have already some “topics” in the data set, let’s assume we don’t
 know yet about them and try to figure out what people write about.
 
-Let’s first create a document term matrix from the tweets in quanteda.
-Because it is tweets, we can already remove the “\#” and also get rid of
-numbers and punctuations. For topic models, stopwords are really not
-that useful, so we will get rid of them too:
-
 ## Text Preprocessing
 
+Let’s first create a document term matrix from the tweets in `quanteda`.
+Because it is tweets, we can already remove the “\#” and also get rid of
+numbers and punctuation. For topic models, stopwords are really not that
+useful, so we will get rid of them too:
+
 ``` r
+# Removing hashtags and creating a corpus (always useful for later!)
 corp <- d %>%
   mutate(text = str_remove_all(text, "#")) %>%
   corpus(text = "text")
 
+# Further preprocessing
 dtm <- corp %>%
   tokens(remove_punct = T, remove_numbers = T) %>%
   tokens_remove(stopwords("en")) %>%
@@ -89,18 +92,23 @@ As we can see, almost all tweets contain the words
 “newyearsresolution,”new”, “resolution”, or “year(s)”. These words
 should be excluded, as they do not tell us anything about the topic,
 they were probably part of the search queries used to scrape these
-tweets.
+tweets. We further have Twitter-specific things such as “rt” (= retweet)
+and “@” (=account mentions). We would probably do well by removing both
+account names and abbreviations such as “rt”. We add asterix (\*) to
+most of these words, so that the plural is remove as well.
 
 ``` r
+# Textpreprocessing
 dtm <- corp %>%
   tokens(remove_punct = T, remove_numbers = T) %>%
   tokens_remove(stopwords("en")) %>%
-  tokens_remove(c("newyearsresolution", "new", 
-                  "year*", "newyear", "resolution*", 
+  tokens_remove(c("newyearsresolution*", "new", 
+                  "year*", "newyear*", "resolution*", 
                   "rt", "happynewyear", "@*")) %>%
   tokens_select(min_nchar = 2) %>%
   dfm
 
+# PLotting most frequent words
 textplot_wordcloud(dtm, max_words = 75)
 ```
 
@@ -112,8 +120,9 @@ modeling.
 ## Running the LDA model
 
 To run LDA from a dfm, first convert to the topicmodels format, and then
-run LDA. Note the useof set.seed(.) to make sure that the analysis is
-reproducible.
+run LDA. Note the use of set.seed(.) to make sure that the analysis is
+reproducible. We arbitrarily choose 10 topics (but we could have chosen
+another number as well!)
 
 ``` r
 # Loading package
@@ -140,6 +149,12 @@ distributions. For now, we won’t go into details, but do note that we
 could also have asked for 100 topics, and our results would have been
 much different.
 
+Also a
+![\alpha](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Calpha "\alpha")
+value of 0.1 for all topics makes sure that we do not necessarily skew
+towards one topic per tweet (as many tweets even contain lists of
+several new year’s resolutions).
+
 ## Inspecting the resulting topic word lists
 
 We can use `terms()` to look at the top terms per topic:
@@ -155,9 +170,9 @@ documents to topics, which can be used to plot a word cloud of terms
 proportional to their occurrence:
 
 ``` r
-topic <- 9
+topic <- 7
 words <- posterior(m)$terms[topic, ]
-topwords <- head(sort(words, decreasing = T), n = 20)
+topwords <- head(sort(words, decreasing = T), n = 50)
 head(topwords, 10) 
 ```
 
@@ -168,6 +183,10 @@ library(wordcloud)
 wordcloud(names(topwords), topwords)
 ```
 
+This topic seems about “stopping” something and particularly about
+stopping to smoke, but there are other words that suggest that these
+topic is more complex.
+
 **Exercise:** Pick another topic and check out the most used words. What
 is it about?
 
@@ -176,7 +195,8 @@ is it about?
 ```
 
 Of course, it would be interesting to plot all topwords of all topics in
-one go. We can do that with a little data wrangling:
+one go. We can do that with a little data wrangling. Run each line after
+another to understand what is happening here.
 
 ``` r
 tibble(topic = 1:10) %>%
@@ -203,7 +223,7 @@ We can also look at the topics per document, to find the top documents
 per topic:
 
 ``` r
-topic.docs <- posterior(m)$topics[, 9] 
+topic.docs <- posterior(m)$topics[, 7] 
 topic.docs <- sort(topic.docs, decreasing=T)
 head(topic.docs)
 ```
@@ -255,16 +275,22 @@ head(topic_prob) %>%
   round(4)
 ```
 
+As we can see, most tweets are about several topics (suggesting that
+people mention several resolutions per tweet). But text 3, for example,
+has a quite high probability to be about topic 6!
+
 We can of course also plot this as a bar plot:
 
 ``` r
-topic_prob_long <- topic_prob %>%
+# Transforming the data set for plotting
+(topic_prob_long <- topic_prob %>%
   as.data.frame %>%
   rownames_to_column("docs") %>%
   gather(topic, value, -docs) %>%
   as_tibble %>%
-  arrange(docs, value) 
+  arrange(docs, value))
 
+# Picking three tweets and plot their probabilitees
 topic_prob_long %>%
   filter(docs == "text1" | docs == "text2" | docs == "text3") %>%
   ggplot(aes(x = fct_reorder(topic, value), y = value, fill = docs)) +
@@ -276,6 +302,9 @@ topic_prob_long %>%
        title = "Probabilites of the first three tweets being about a certain topic") +
   theme(legend.position = "none")
 ```
+
+Here we can see that text1 contains more than one topic. Text 3, in
+contrast, seems to be only about topic 6.
 
 ## Assigning topics to tweets
 
@@ -289,7 +318,9 @@ two topics with the same probabilities are both assigned to a text):
   filter(value == max(value)))
 ```
 
-Or let’s have a look how often e topic occur in the data set:
+Rather than using an arbitrary threshold, we can also work with the raw
+probabilities and, for example, look the prevalence of the topics in the
+data set.
 
 ``` r
 table %>%
@@ -305,3 +336,11 @@ table %>%
 Bear in mind, we arbitrarily chose 10 topics for our LDA topic model. In
 the next session, we will explore ways to identify the best number of
 topics.
+
+**Exercise:** Re-run the topic model with a different number of topics
+(e.g., 20, 50, 100). How do the resulting topics differ from the first
+analysis? Are they more or less interpretable?
+
+``` r
+# Solution here
+```
