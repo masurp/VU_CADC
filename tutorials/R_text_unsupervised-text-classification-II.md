@@ -69,7 +69,7 @@ library(quanteda)
 library(topicmodels)
 
 # Loading data
-d <- read_csv("data/netflix_titles.csv")
+d <- read_csv("netflix_titles.csv")
 head(d)
 ```
 
