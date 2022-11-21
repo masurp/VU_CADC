@@ -153,7 +153,7 @@ In the third part of the course, students will work on their own research projec
 #### Practical Session 2
 
 - Handouts:
-    - [Unsupervised text classification II] (available soon) 
+    - [Unsupervised text classification II](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_unsupervised-text-classification-II.md)  
     
 
 #### Homework
