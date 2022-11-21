@@ -1407,6 +1407,53 @@ emission     0.003689495</code></pre>
 </div>
 </div>
 </div>
+</section>
+<section id="new-model-with-12-topics" class="slide level2">
+<h2>New model with 12 topics</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a>m2 <span class="ot">&lt;-</span> <span class="fu">LDA</span>(dtm, </span>
+<span id="cb32-2"><a href="#cb32-2"></a>         <span class="at">method =</span> <span class="st">"Gibbs"</span>, </span>
+<span id="cb32-3"><a href="#cb32-3"></a>         <span class="at">k =</span> <span class="dv">12</span>,  </span>
+<span id="cb32-4"><a href="#cb32-4"></a>         <span class="at">control =</span> <span class="fu">list</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>))</span>
+<span id="cb32-5"><a href="#cb32-5"></a><span class="fu">terms</span>(m2, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>      Topic 1        Topic 2     Topic 3     Topic 4       Topic 5       
+ [1,] "mass"         "method"    "network"   "system"      "data"        
+ [2,] "observations" "using"     "networks"  "systems"     "model"       
+ [3,] "galaxies"     "images"    "model"     "can"         "models"      
+ [4,] "stars"        "image"     "can"       "performance" "distribution"
+ [5,] "find"         "signal"    "dynamics"  "paper"       "method"      
+ [6,] "star"         "can"       "different" "code"        "can"         
+ [7,] "stellar"      "noise"     "nodes"     "power"       "methods"     
+ [8,] "galaxy"       "based"     "models"    "network"     "estimation"  
+ [9,] "emission"     "detection" "time"      "data"        "results"     
+[10,] "can"          "imaging"   "social"    "memory"      "used"        
+      Topic 6       Topic 7        Topic 8         Topic 9       Topic 10 
+ [1,] "data"        "algorithm"    "control"       "magnetic"    "mathbb" 
+ [2,] "analysis"    "problem"      "system"        "phase"       "show"   
+ [3,] "research"    "algorithms"   "can"           "energy"      "prove"  
+ [4,] "can"         "problems"     "approach"      "field"       "group"  
+ [5,] "paper"       "optimization" "learning"      "spin"        "also"   
+ [6,] "using"       "can"          "policy"        "quantum"     "mathcal"
+ [7,] "information" "show"         "reinforcement" "state"       "paper"  
+ [8,] "users"       "number"       "model"         "states"      "study"  
+ [9,] "study"       "optimal"      "environment"   "temperature" "groups" 
+[10,] "different"   "matrix"       "using"         "surface"     "finite" 
+      Topic 11   Topic 12   
+ [1,] "learning" "equation" 
+ [2,] "neural"   "solutions"
+ [3,] "model"    "equations"
+ [4,] "network"  "system"   
+ [5,] "deep"     "theory"   
+ [6,] "data"     "can"      
+ [7,] "training" "method"   
+ [8,] "networks" "numerical"
+ [9,] "models"   "systems"  
+[10,] "can"      "nonlinear"</code></pre>
+</div>
+</div>
 </section></section>
 <section>
 <section id="example-from-the-literature" class="title-slide slide level1 center" data-background-color="steelblue">

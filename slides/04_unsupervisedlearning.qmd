@@ -990,6 +990,19 @@ ggplot(p, aes(x = k, y = perplexity)) +
        title = "Perplexity curve")
 ```
 
+## New model with 12 topics
+
+```{r}
+#| echo: true
+#| output-location: fragment
+m2 <- LDA(dtm, 
+         method = "Gibbs", 
+         k = 12,  
+         control = list(alpha = 0.1))
+terms(m2, 10)
+```
+
+
 
 # Example from the literature {background-color="steelblue"}
 
