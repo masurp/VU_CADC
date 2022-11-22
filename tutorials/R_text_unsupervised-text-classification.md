@@ -39,7 +39,8 @@ model in R.
 A good first step towards understanding what topic models are and how
 they can be useful, is to simply play around with them, so that’s what
 we’ll do here. First, let’s load some data. In this case, it is a data
-set of tweets on new years resolutions.
+set of tweets on new years resolutions (you can download it from
+Canvas).
 
 ``` r
 library(tidyverse)
@@ -48,7 +49,7 @@ library(quanteda.textplots)
 library(quanteda.textstats)
 
 # Load data
-d <- read_csv2("data/new_year_resolutions_dataset.csv")
+d <- read_csv2("new_year_resolutions_dataset.csv")
 head(d)
 ```
 

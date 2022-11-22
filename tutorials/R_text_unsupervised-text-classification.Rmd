@@ -18,7 +18,7 @@ library(printr)
 
 LDA, which stands for Latent Dirichlet Allocation, is one of the most popular approaches for probabilistic topic modeling. The goal of topic modeling is to automatically assign topics to documents without requiring human supervision. Although the idea of an algorithm figuring out topics might sound close to magical (mostly because people have too high expectations of what these ‘topics’ are), and the mathematics might be a bit challenging, it is actually really simple fit an LDA topic model in R.
 
-A good first step towards understanding what topic models are and how they can be useful, is to simply play around with them, so that’s what we’ll do here. First, let’s load some data. In this case, it is a data set of tweets on new years resolutions. 
+A good first step towards understanding what topic models are and how they can be useful, is to simply play around with them, so that’s what we’ll do here. First, let’s load some data. In this case, it is a data set of tweets on new years resolutions (you can download it from Canvas).
 
 
 ```{r}
@@ -28,13 +28,11 @@ library(quanteda.textplots)
 library(quanteda.textstats)
 
 # Load data
-d <- read_csv2("data/new_year_resolutions_dataset.csv")
+d <- read_csv2("new_year_resolutions_dataset.csv")
 head(d)
 ```
 
 As we can see, we get quite some information about the tweets. Although we have already some "topics" in the data set, let's assume we don't know yet about them and try to figure out what people write about. 
-
-
 
 
 ## Text Preprocessing
