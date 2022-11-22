@@ -44,17 +44,15 @@ topics, and there will be variance in the data that is not accounted
 for, but use too many topics and you will overfit. So how can we at
 least determine what a good number of topics is?
 
-In this document we discuss two general approaches. The first approach
-is to look at how well our model fits the data. As a probabilistic
-model, we can calculate the (log) likelihood of observing data (a
-corpus) given the model parameters (the distributions of a trained LDA
-model). For models with different settings for k, and different
-hyperparameters, we can then see which model best fits the data. The
-nice thing about this approach is that it’s easy and free to compute.
-However, it still has the problem that no human interpretation is
-involved. The second approach does take this into account but is much
-more time consuming: we can develop tasks for people to do that can give
-us an idea of how coherent topics are in human interpretation.
+One approach is to look at how well our model fits the data. As a
+probabilistic model, we can calculate the (log) likelihood of observing
+data (a corpus) given the model parameters (the distributions of a
+trained LDA model). For models with different settings for k, and
+different hyperparameters, we can then see which model best fits the
+data. The nice thing about this approach is that it’s easy and free to
+compute. However, it still has the problem that no human interpretation
+is involved. We still need to look at the solutions and “make sense of
+it”.
 
 ## Loading Netflix data
 
