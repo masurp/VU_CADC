@@ -49,7 +49,7 @@ library(quanteda.textplots)
 library(quanteda.textstats)
 
 # Load data
-d <- read_csv2("data/new_year_resolutions_dataset.csv")
+d <- read_csv2("new_year_resolutions_dataset.csv")
 head(d)
 ```
 
