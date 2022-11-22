@@ -173,20 +173,20 @@ In the third part of the course, students will work on their own research projec
 #### Exam week 
 
 - Date and Time of the Exam
-    - **Date:** tba
-    - **Time:** tba
-    - **Location:** tba
+    - **Date:** 2nd December 2022
+    - **Time:** 08:30am
+    - **Location:** TenT (blok1 Blauw; blok 4 Lime; both DDX & DTX)
     - Make sure to be there on time
     
 - Format
     - The exam will be on **TestVision**
-    - Multiple Choice Questions & Open Questions
+    - It consists of Multiple Choice Questions & Open Questions
     - Example questions are provided at the end of all lecture slides
 
 - What do you need to know?
     - Content of the lectures
     - The required readings (see lecture slides and Canvas)
-    - The practical sessions will further help to deepen your understanding of the concepts and approaches, but you will not be required to write R code in the exam.
+    - The practical sessions will further help to deepen your understanding of the concepts and approaches (e.g., how to interpret results), but you will not be required to write R code in the exam.
 
 <br>
 <hr>
