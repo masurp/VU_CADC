@@ -49,7 +49,7 @@ library(quanteda.textplots)
 library(quanteda.textstats)
 
 # Load data
-d <- read_csv2("new_year_resolutions_dataset.csv")
+d <- read_csv2("data/new_year_resolutions_dataset.csv")
 head(d)
 ```
 
@@ -210,7 +210,7 @@ tibble(topic = 1:10) %>%
   arrange(key, -value) %>%
   slice(1:10) %>%
   ggplot(aes(x = fct_reorder(terms, value), 
-                y = value,
+             y = value,
              fill = key)) +
   geom_col() +
   facet_wrap(~key, scales = "free", nrow = 2) +
@@ -238,6 +238,9 @@ topdoc <- names(topic.docs)[1]
 topdoc_corp <- corp[docnames(corp) == topdoc]
 texts(topdoc_corp)
 ```
+
+This seems to be indeed about this type of new years resolutions. What
+about the second most probable tweet?
 
 ## Visualizing LDA with LDAvis
 
@@ -324,7 +327,7 @@ probabilities and, for example, look the prevalence of the topics in the
 data set.
 
 ``` r
-table %>%
+topic_prob_long %>%
   group_by(topic) %>%
   summarize(prop = mean(value)) %>%
   ggplot(aes(x = fct_reorder(topic, prop), y = prop, fill = topic)) +
