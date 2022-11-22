@@ -1,6 +1,6 @@
 ---
-title: 'Homework 4: Supervised Text Classification'
-author: "Wouter van Atteveldt, Mariken van der Velden, & Philipp Masur"
+title: 'Homework 4: Advanced Supervised and Unsupervised Text Classification'
+author: "Philipp Masur"
 date: ""
 output:
   html_document:
@@ -23,77 +23,60 @@ In the end, klick on "knit" and upload the respective html-output file to Canvas
 e.g., 02_homework_assignment_NAME-LASTNAME.html
 
 
+# Introduction
 
-# Introduction 
+In this homework assignment, you are going to practice several things that we have learned throughout the course. So in order to solve and answer the questions, you may have to go back to several handouts and not just the ones from this week. 
 
-In the last homework, we replicated parts of the article [The Validity of Sentiment Analysis](https://raw.githubusercontent.com/vanatteveldt/ecosent/master/report/atteveldt_sentiment.pdf) by Wouter van Atteveldt, Mariken van der Velden and Mark Boukes in which they tested different methods' validity in assessing the sentiment in Dutch newspaper headlines. Again, special thanks to Wouter and Mariken for sharing their data and code for this exercise!
+## Loading packages and data
 
-In this homework, we will replicate a different part of their paper. As you already realized in the last homework, the sentiment analysis based on a dictionary did not work very well. The accuracy (in comparison to the gold standard) was below .50, so close to chance!
-
-In this homework, you will use supervised machine learning algorithms and check whether they perform better at classifying the sentiment of the Dutch newspaper headlines. 
-
-
-# Data 
-
-We again load the data from the respective github repository with the following code. 
+For this assignment, you are going to work with a data set that contains app reviews for TikTok from the google play store. Each review comes with upvotes. We are going to subset the dataset to only the first 5000 reviews, so that it won't take as long to fit different models. 
 
 ```{r}
-# Needed packages
 library(tidyverse)
 library(quanteda)
 library(quanteda.textplots)
-library(quanteda.textstats)
+library(quanteda.textmodels)
+library(topicmodels)
+library(caret)
 
-# Load data
-url <- "https://raw.githubusercontent.com/vanatteveldt/ecosent/master/data/intermediate/sentences_ml.csv"
-d <- read_csv(url) %>% 
-  select(doc_id = id, text = headline, lemmata, sentiment=value) %>%
-  mutate(doc_id = as.character(doc_id))
+
+d <- read_csv("tiktok_reviews.csv") %>%
+  select(text = review_text, upvotes, app_version, posted_date) %>%
+  mutate(cat_votes = case_when(upvotes == 0 ~ "none",
+                               upvotes > 0 & upvotes < 20 ~ "few",
+                               upvotes >= 20 ~ "many"))
 head(d)
 ```
 
-Just as in the last homework, this dataset contains Dutch newspaper headlines of articles mentioning the economy. 
-The `sentiment` column is a manual coding of the state of the economy, 
-i.e. whether according to the headline one would conclude the economy is doing well or not. 
 
-# Analysis
+## Explore the data set
 
-## Splitting the data into a training and test data set
-
-First, you need to split the data set into a training and a test data set. The original data set contains more than 6,000 headlines, so think about a reasonable percentage split. Please justify your decision for a certain percentage below. 
+**Question:** What are the most frequently used words in the corpus? (Tip: You may want to remove some very common words such as e.g., "tiktok"). Can you plot this?
 
 ```{r}
 # Solution here
 ```
 
-**Answer:** [Your response here.]
+**Answer:** [write your answer/interpretation here]
 
-## Creating the document-feature matrix
+# Supervised machine learning
 
-Once you have created the training data set, make a document-term-matrix that can be passed to the machine learning algorithm. This means first creating a "corpus" (bear in mind to set `text-field = "lemmata"`), engage in reasonable preprocessing (if necessary) and transform into a dtm!
+**Question:** Use machine learning models to predict the upvotes (use the categrized version cat_votes) from the app reviews. Test both Naive Bayes and Support Vector Machines algorithms. Which performs better? What can you learn from the confusion matrix and respective performance scores? Where does the algorithm perform particularly bad?
 
 ```{r}
 # Solution here
 ```
 
-## Training the algorithm
+**Answer:** [write your answer/interpretation here]
 
-Now use the Naive Bayes Classifier to train a model based on the training data. Bear in mind, the outcome varibale is the column `sentiment`.
+
+# Unsupervised text classification
+
+**Questions:** What topics can you find in the app reviews? Use topic modeling to meaningfully classify the data set. I already did some text preprocessing as this is somewhat difficult here. Pay attention to the last line: here, I am filtering out words that are too frequent and thus don't really help in creating meaningful topics. Now, try out models with different numbers of topics and make sense of the output. Decide which one works best (you may want to take perplexity into account). Best on your chosen solutions, which topics are most often occurring (can you plot this?)? 
 
 ```{r}
-library(quanteda.textmodels)
 # Solution here
 ```
 
 
-## Testing against the gold standard
-
-In a final step, test the resulting predictions using the test data. How well did the algorithm perform? (Provide an elaborate interpretation of the results that takes different valdiation scores into account.)
-
-
-```{r}
-library(caret)
-# Solution here
-```
-
-**Answer:** [Your interpretation here]
+**Answer:** [write your answer/interpretation here]
