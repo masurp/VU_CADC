@@ -63,7 +63,7 @@ In the third part of the course, students will work on their own research projec
 
     
 - Complete this assignment (available on canvas in the module "Homework Templates & Datasets)
-    - 01_homework_assignment.rmd
+    - 01_homework_assignment.rmd ([Version with solutions](https://github.com/masurp/VU_CADC/blob/main/homework/01_homework_assignment_complete.md))
  
 
 #### Additional resources
@@ -98,7 +98,7 @@ In the third part of the course, students will work on their own research projec
 #### Homework
 
 - Complete this assignment (available on canvas in the module "Homework Templates & Datasets)
-    - 02_homework_assignment.rmd
+    - 02_homework_assignment.rmd ([Version with solutions](https://github.com/masurp/VU_CADC/blob/main/homework/02_homework_assignment_complete.md))
 
 #### Additional resources
 
@@ -117,18 +117,18 @@ In the third part of the course, students will work on their own research projec
 #### Practical Session 1
 
 - Handouts: 
-    - [Supervised text classification I](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_supervised-text-classification.md) ([Version with Solutions](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_supervised-text-classification.md) )
+    - [Supervised text classification I](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_supervised-text-classification.md) ([Version with Solutions](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_supervised-text-classification_complete.md))
 
 #### Practical Session 2
 
 - Handouts:
-    - [Supervised text classification II](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_supervised-text-classification_part-II.md) 
+    - [Supervised text classification II](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_supervised-text-classification_part-II.md) ([Version with Solutions](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_supervised-text-classification_part-II_complete.md) )
     
 
 #### Homework
 
 - Complete this assignment (available on canvas in the module "Homework Templates & Datasets)
-    - 03_homework_assignment.rmd
+    - 03_homework_assignment.rmd 
     
 #### Additional resources: 
 
