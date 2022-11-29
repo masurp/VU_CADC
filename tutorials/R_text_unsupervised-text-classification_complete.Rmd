@@ -1,0 +1,294 @@
+---
+title: 'Unsupervised Text Classification I: Basics of Topic Modeling (With solutions)'
+author: "Wouter van Atteveldt, Kasper Welbers & Philipp Masur"
+date: "2022-11"
+output: 
+  github_document:
+    toc: yes
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, echo=F, message=F}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+library(printr)
+```
+
+# Introduction
+
+LDA, which stands for Latent Dirichlet Allocation, is one of the most popular approaches for probabilistic topic modeling. The goal of topic modeling is to automatically assign topics to documents without requiring human supervision. Although the idea of an algorithm figuring out topics might sound close to magical (mostly because people have too high expectations of what these ‘topics’ are), and the mathematics might be a bit challenging, it is actually really simple fit an LDA topic model in R.
+
+A good first step towards understanding what topic models are and how they can be useful, is to simply play around with them, so that’s what we’ll do here. First, let’s load some data. In this case, it is a data set of tweets on new years resolutions (you can download it from Canvas).
+
+
+```{r}
+library(tidyverse)
+library(quanteda)
+library(quanteda.textplots)
+library(quanteda.textstats)
+
+# Load data
+d <- read_csv2("data/new_year_resolutions_dataset.csv")
+head(d)
+```
+
+As we can see, we get quite some information about the tweets. Although we have already some "topics" in the data set, let's assume we don't know yet about them and try to figure out what people write about. 
+
+
+## Text Preprocessing
+
+Let's first create a document term matrix from the tweets in `quanteda`. Because it is tweets, we can already remove the "#" and also get rid of numbers and punctuation. For topic models, stopwords are really not that useful, so we will get rid of them too:
+
+```{r}
+# Removing hashtags and creating a corpus (always useful for later!)
+corp <- d %>%
+  mutate(text = str_remove_all(text, "#")) %>%
+  corpus(text = "text")
+
+# Further preprocessing
+dtm <- corp %>%
+  tokens(remove_punct = T, remove_numbers = T) %>%
+  tokens_remove(stopwords("en")) %>%
+  dfm
+dtm
+```
+
+Let's quickly make a wordcloud of the most used words in the tweets. This is often an important as it will tell as about potential words that we might want to include before running the topic model. 
+
+```{r}
+textplot_wordcloud(dtm, max_words = 75)
+textstat_frequency(dtm, n = 15)  
+```
+
+
+## Excluding very frequent words
+
+As we can see, almost all tweets contain the words "newyearsresolution, "new", "resolution", or "year(s)". These words should be excluded, as they do not tell us anything about the topic, they were probably part of the search queries used to scrape these tweets. We further have Twitter-specific things such as "rt" (= retweet) and "@" (=account mentions). We would probably do well by removing both account names and abbreviations such as "rt". We add asterix (*) to most of these words, so that the plural is remove as well. 
+
+```{r}
+# Textpreprocessing
+dtm <- corp %>%
+  tokens(remove_punct = T, remove_numbers = T) %>%
+  tokens_remove(stopwords("en")) %>%
+  tokens_remove(c("newyearsresolution*", "new", 
+                  "year*", "newyear*", "resolution*", 
+                  "rt", "happynewyear", "@*")) %>%
+  tokens_select(min_nchar = 2) %>%
+  dfm
+
+# PLotting most frequent words
+textplot_wordcloud(dtm, max_words = 75)
+```
+
+This looks a lot better and we can proceed with the actual topic modeling. 
+
+# Estimating the topic model
+
+## Running the LDA model
+
+To run LDA from a dfm, first convert to the topicmodels format, and then run LDA. Note the use of set.seed(.) to make sure that the analysis is reproducible. We arbitrarily choose 10 topics (but we could have chosen another number as well!)
+
+```{r}
+# Loading package
+library(topicmodels)
+
+# Convert dtm to topicmodels' specific format
+dtm <- convert(dtm, to = "topicmodels") 
+
+# Set seed to make it reproducible
+set.seed(1)
+
+# Fit topic model
+m <- LDA(dtm, 
+         method = "Gibbs", 
+         k = 10,  
+         control = list(alpha = 0.1))
+m
+```
+
+Although LDA will figure out the topics, we do need to decide ourselves how many topics we want. Also, there are certain hyperparameters (alpha) that we can tinker with to have some control over the topic distributions. For now, we won’t go into details, but do note that we could also have asked for 100 topics, and our results would have been much different.
+
+Also a $\alpha$ value of 0.1 for all topics makes sure that we do not necessarily skew towards one topic per tweet (as many tweets even contain lists of several new year's resolutions).
+
+## Inspecting the resulting topic word lists
+
+We can use `terms()` to look at the top terms per topic:
+
+```{r}
+terms(m, 15)
+```
+
+**Question:** Any ideas what these topics stand for?
+
+The posterior function gives the posterior distribution of words and documents to topics, which can be used to plot a word cloud of terms proportional to their occurrence:
+
+```{r}
+topic <- 7
+words <- posterior(m)$terms[topic, ]
+topwords <- head(sort(words, decreasing = T), n = 50)
+head(topwords, 10) 
+```
+
+Now we can plot these words:
+
+```{r}
+library(wordcloud)
+wordcloud(names(topwords), topwords)
+```
+
+This topic seems about "stopping" something and particularly about stopping to smoke, but there are other words that suggest that these topic is more complex. 
+
+**Exercise:** Pick another topic and check out the most used words. What is it about?
+
+```{r}
+topic <- 2
+words <- posterior(m)$terms[topic, ]
+topwords <- head(sort(words, decreasing = T), n = 50)
+head(topwords, 10) 
+wordcloud(names(topwords), topwords)
+```
+
+
+Of course, it would be interesting to plot all topwords of all topics in one go. We can do that with a little data wrangling. Run each line after another to understand what is happening here.
+
+```{r}
+tibble(topic = 1:10) %>%
+  apply(1, function(x) posterior(m)$terms[x,]) %>%
+  as.data.frame() %>%
+  rownames_to_column("terms") %>%
+  as_tibble %>%
+  gather(key, value, -terms) %>%
+  group_by(key) %>%
+  arrange(key, -value) %>%
+  slice(1:10) %>%
+  ggplot(aes(x = fct_reorder(terms, value), 
+             y = value,
+             fill = key)) +
+  geom_col() +
+  facet_wrap(~key, scales = "free", nrow = 2) +
+  coord_flip() +
+  theme(legend.position = "none") +
+  labs(y = "Frequency", x = "",
+       title = "Topwords per Topic")
+```
+
+
+We can also look at the topics per document, to find the top documents per topic:
+
+```{r}
+topic.docs <- posterior(m)$topics[, 7] 
+topic.docs <- sort(topic.docs, decreasing=T)
+head(topic.docs)
+```
+
+We see for example that the tweets 1979 has a 93% probability of being about topic 9 (stop smoking/drinking).
+Given the document ids of the top documents, we can look up the text in the corp corpus
+
+
+```{r}
+topdoc <- names(topic.docs)[1]
+topdoc_corp <- corp[docnames(corp) == topdoc]
+texts(topdoc_corp)
+```
+
+This seems to be indeed about this type of new years resolutions. What about the second most probable tweet?
+
+## Visualizing LDA with LDAvis
+
+`LDAvis` is a nice interactive visualization of LDA results. It needs the LDA and DTM information in a slightly different format than what’s readily available, but you can use the code below to create that format from the lda model `m` and the `dtm`. If you don’t have it yet, you’ll have to install the `LDAvis` package, and you might also have to install the `servr` package.
+
+```{r}
+library(LDAvis)   
+
+dtm <- dtm[slam::row_sums(dtm) > 0, ]
+phi <- as.matrix(posterior(m)$terms)
+theta <- as.matrix(posterior(m)$topics)
+vocab <- colnames(phi)
+doc.length <- slam::row_sums(dtm)
+term.freq <- slam::col_sums(dtm)[match(vocab, colnames(dtm))]
+
+json <- createJSON(phi = phi, theta = theta, vocab = vocab,
+     doc.length = doc.length, term.frequency = term.freq)
+serVis(json)
+```
+
+
+# What are the tweets about?
+
+## Probabilities of topics per tweet
+
+The posterior function also gives the posterior distribution documents to topics. This is interesting to understand which tweet is about what:
+
+```{r}
+topic_prob <- posterior(m)$topics
+head(topic_prob) %>%
+  round(4)
+```
+
+As we can see, most tweets are about several topics (suggesting that people mention several resolutions per tweet). But text 3, for example, has a quite high probability to be about topic 6!
+
+We can of course also plot this as a bar plot:
+
+```{r}
+# Transforming the data set for plotting
+(topic_prob_long <- topic_prob %>%
+  as.data.frame %>%
+  rownames_to_column("docs") %>%
+  gather(topic, value, -docs) %>%
+  as_tibble %>%
+  arrange(docs, value)) %>%
+  head()
+
+# Picking three tweets and plot their probabilitees
+topic_prob_long %>%
+  filter(docs == "text1" | docs == "text2" | docs == "text3") %>%
+  ggplot(aes(x = fct_reorder(topic, value), y = value, fill = docs)) +
+  geom_col() +
+  coord_flip() +
+  facet_wrap(~docs) +
+  labs(y = "Probability of a tweet being about a certain topic", 
+       x = "Topic",
+       title = "Probabilites of the first three tweets being about a certain topic") +
+  theme(legend.position = "none")
+```
+
+Here we can see that text1 contains more than one topic. Text 3, in contrast, seems to be only about topic 6. 
+
+## Assigning topics to tweets
+
+If we group by documents and filter out the max probability, we assign each tweet the most probable topic (in some cases, this can mean that two topics with the same probabilities are both assigned to a text):
+
+```{r}
+(topic_table <- topic_prob_long %>%
+  group_by(docs) %>%
+  filter(value == max(value)))
+```
+
+Rather than using an arbitrary threshold, we can also work with the raw probabilities and, for example, look the prevalence of the topics in the data set.
+
+```{r}
+topic_prob_long %>%
+  group_by(topic) %>%
+  summarize(prop = mean(value)) %>%
+  ggplot(aes(x = fct_reorder(topic, prop), y = prop, fill = topic)) +
+    geom_col() +
+    coord_flip() +
+    theme(legend.position = "none") +
+    labs(x = "", y = "Proportion in the entire corpus")
+```
+
+
+Bear in mind, we arbitrarily chose 10 topics for our LDA topic model. In the next session, we will explore ways to identify the best number of topics.
+
+**Exercise:** Re-run the topic model with a different number of topics (e.g., 20, 50, 100). How do the resulting topics differ from the first analysis? Are they more or less interpretable?
+
+```{r}
+m2 <- LDA(dtm, 
+         method = "Gibbs", 
+         k = 20,  
+         control = list(alpha = 0.1))
+terms(m2, 10)
+```
+
+
+
