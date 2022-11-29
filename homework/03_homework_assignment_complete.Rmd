@@ -3,7 +3,7 @@ title: 'Homework 3: Supervised Text Classification (With solutions)'
 author: "Philipp Masur"
 date: ""
 output:
-  html_document:
+  github_document:
     toc: yes
 editor_options:
   chunk_output_type: console

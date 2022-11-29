@@ -1,14 +1,27 @@
-Homework 3: Text Analysis and Dictionary Approaches
+Homework 3: Supervised Text Classification (With solutions)
 ================
-Wouter van Atteveldt, Mariken van der Velden, & Philipp Masur
+Philipp Masur
 
--   [Formalities](#formalities)
--   [Introduction](#introduction)
--   [Data](#data)
--   [Analysis](#analysis)
-    -   [Creating the document-feature
-        matrix](#creating-the-document-feature-matrix)
-    -   [Applying a dictionary](#applying-a-dictionary)
+-   <a href="#formalities" id="toc-formalities">Formalities</a>
+-   <a href="#introduction" id="toc-introduction">Introduction</a>
+    -   <a href="#loading-data" id="toc-loading-data">Loading data</a>
+    -   <a href="#combining-title-and-text"
+        id="toc-combining-title-and-text">Combining title and text</a>
+-   <a href="#text-preprocessing" id="toc-text-preprocessing">Text
+    preprocessing</a>
+    -   <a href="#creating-train-and-test-set"
+        id="toc-creating-train-and-test-set">Creating train and test set</a>
+    -   <a href="#text-preprocessing-1" id="toc-text-preprocessing-1">Text
+        preprocessing</a>
+-   <a href="#machine-learning" id="toc-machine-learning">Machine
+    Learning</a>
+    -   <a href="#training-the-algorithm"
+        id="toc-training-the-algorithm">Training the algorithm</a>
+    -   <a href="#testing-the-model-on-the-training-set"
+        id="toc-testing-the-model-on-the-training-set">Testing the model on the
+        training set</a>
+    -   <a href="#validating-on-the-test-data"
+        id="toc-validating-on-the-test-data">Validating on the test data</a>
 
 # Formalities
 
@@ -17,222 +30,311 @@ Wouter van Atteveldt, Mariken van der Velden, & Philipp Masur
 
 In the end, klick on “knit” and upload the respective html-output file
 to Canvas. Please add your name and lastname to the output file name:
-e.g., 02\_homework\_assignment\_NAME-LASTNAME.html
+e.g., 02_homework_assignment_NAME-LASTNAME.html
 
 # Introduction
 
-Wouter van Atteveldt, Mariken van der Velden and Mark Boukes have
-published an article titled [The Validity of Sentiment
-Analysis](https://raw.githubusercontent.com/vanatteveldt/ecosent/master/report/atteveldt_sentiment.pdf)
-(one of the required readings for week 4) in which they tested different
-methods’ validity in assessing the sentiment in Dutch newspaper
-headlines. Special thanks to Wouter and Mariken for sharing their data
-and code for this exercise!
+In this homework, you are going to work with data provided by Ahmed,
+Traore, & Saad (2018), who studying the detection of fake news in online
+news articles. We ask you to evaluate how well a Naive Bayes algorithm
+succeeds in predicting whether a news article is fake or not.
 
-Although all used scripts and data are available on the [github
-page](https://github.com/vanatteveldt/ecosent), it uses both Python and
-R. Note that you don’t need to be able to read Dutch to be do this
-homework, although of course it can help for inspecting the data and
-doing error analysis.
+## Loading data
 
-In this homework, you will reproduce some of the analyses from that
-paper, namely the quanteda-based Dutch dictionaries approach. Note that
-the outcome will not be identical as both preprocessing and ML
-implementation will be different, but the outcomes are comparable.
-
-# Data
-
-We can simply load the data from the respective github repository with
-the following code.
+First, we are going to load the data. It comes in two batches: the first
+contains more than 20,000 fake news articles; the second contains 21,000
+true articles. We load both individually, add a column that designates
+them as either fake or true (fake: true = no; true: true = yes). We then
+combine both and have a look at the data set.
 
 ``` r
-# Needed packages
 library(tidyverse)
-library(quanteda)
-library(quanteda.textplots)
-library(quanteda.textstats)
 
 # Load data
-url <- "https://raw.githubusercontent.com/vanatteveldt/ecosent/master/data/intermediate/sentences_ml.csv"
-d <- read_csv(url) %>% 
-  select(doc_id = id, text = headline, lemmata, sentiment=value) %>%
-  mutate(doc_id = as.character(doc_id))
+fake <- read_csv("Fake.csv") %>% mutate(true = "no")
+true <- read_csv("True.csv") %>% mutate(true = "yes")
+
+# Merge data
+d <- rbind(fake, true)
 head(d)
 ```
 
-    ## # A tibble: 6 x 4
-    ##   doc_id text                           lemmata                        sentiment
-    ##   <chr>  <chr>                          <chr>                              <dbl>
-    ## 1 10007  Rabobank voorspelt flinke sti… Rabobank voorspellen flink st…         0
-    ## 2 10027  D66 wil reserves provincies a… D66 willen reserve provincie …         0
-    ## 3 10037  UWV: dit jaar meer banen       UWV dit jaar veel baan                 1
-    ## 4 10059  Proosten op geslaagde beursga… proost op geslaagd beursgang …         1
-    ## 5 10099  Helft werknemers gaat na 65st… helft werknemer gaan na 65ste…         0
-    ## 6 10101  Europa groeit voorzichtig dan… Europa groeien voorzichtig da…         1
+    ## # A tibble: 6 × 5
+    ##   title                                                text  subject date  true 
+    ##   <chr>                                                <chr> <chr>   <chr> <chr>
+    ## 1 Donald Trump Sends Out Embarrassing New Year’s Eve … Dona… News    Dece… no   
+    ## 2 Drunk Bragging Trump Staffer Started Russian Collus… Hous… News    Dece… no   
+    ## 3 Sheriff David Clarke Becomes An Internet Joke For T… On F… News    Dece… no   
+    ## 4 Trump Is So Obsessed He Even Has Obama’s Name Coded… On C… News    Dece… no   
+    ## 5 Pope Francis Just Called Out Donald Trump During Hi… Pope… News    Dece… no   
+    ## 6 Racist Alabama Cops Brutalize Black Boy While He Is… The … News    Dece… no
 
-This dataset contains Dutch newspaper headlines of articles mentioning
-the economy. The `sentiment` column is a manual coding of the state of
-the economy, i.e. whether according to the headline one would conclude
-the economy is doing well or not.
+As you can see, the data set contains articles of different subjects.
+Can you create a bar plot that shows how many articles per subject are
+included in the data set? (Bonus: Try to reorder the bar plot so that
+the subject with the most articles is shown first and the subject with
+the least articles at last).
+
+**Question:** Which subjects dominate the corpus?
 
 ``` r
-table(d$sentiment)
+# Descriptive analyses
+d %>%
+  group_by(subject) %>%
+  count %>%
+  arrange(-n) %>%
+  mutate(prop = n/nrow(d))
 ```
 
+    ## # A tibble: 8 × 3
+    ## # Groups:   subject [8]
+    ##   subject             n   prop
+    ##   <chr>           <int>  <dbl>
+    ## 1 politicsNews    11272 0.251 
+    ## 2 worldnews       10145 0.226 
+    ## 3 News             9050 0.202 
+    ## 4 politics         6841 0.152 
+    ## 5 left-news        4459 0.0993
+    ## 6 Government News  1570 0.0350
+    ## 7 US_News           783 0.0174
+    ## 8 Middle-east       778 0.0173
+
+``` r
+# Bar plot
+ggplot(d, aes(x = fct_reorder(subject, subject, .fun='length'))) +
+  geom_bar(fill = "steelblue") +
+  coord_flip() +
+  theme_classic() +
+  labs(x = "Subject", y = "Count", 
+       title = "Number of articles per subject")
+```
+
+![](03_homework_assignment_complete_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
+
+**Answer:** We can see that political news makes up 25% of the entire
+corpus. However, this is distribution is somewhat “wrong” as all items
+are news articles and the subject labels are somewhat overlapping.
+
+## Combining title and text
+
+Similar to the Amazon Review, we have two potential sources of
+information for the classification: The title and the text itself. It
+would be unfortunate to only use one of them. For example, not using the
+title would be a shame as it is very possible that the title already
+tells a lot about whether or not a news article is fake. We hence
+combine both columns into one.
+
+``` r
+# Merge title and text
+d <- d %>%
+  mutate(text2 = str_c(title, text, sep = " "))
+```
+
+# Text preprocessing
+
+Next, we engage in the preprocessing. For supervised machine learning,
+this means create a train and test data set and thinking about
+meaningful text preprocessing steps.
+
+## Creating train and test set
+
+First, create a training and a test set. Think about meaningful
+partitions. Please justify why you choose a certain percentage.
+
+``` r
+# To ensure replicability
+set.seed(42)
+
+# Sample 
+trainset <- sample(nrow(d), size=round(nrow(d) * 0.75))
+news_train <- d %>% slice(trainset)
+news_test <- d %>% slice(-trainset)
+```
+
+**Answer:** The corpus is comparatively large. From this point of view,
+it may not matter too much what percentage of it constitutes the
+training data set. Yet, to use most of the data set for training the
+algorithm, while retaining sufficient test data, I decided to split it
+75/25. This way, the machine learning algorithm is trained on more than
+33,000 news articles, but we still have more than 11,000 articles left
+to test its performance.
+
+## Text preprocessing
+
+Now think about meaningful text preprocessing (Removing stopwords?
+Trimming the data set?). Also justify your steps below.
+
+``` r
+library(quanteda)
+
+# Text preprocessing I
+dfm_train <- news_train %>% 
+  corpus(text = "text2") %>% 
+  tokens(remove_punct = T, remove_numbers = T) %>%
+  dfm 
+
+# Text preprocessing II
+dfm_train2 <- news_train %>% 
+  corpus(text = "text2") %>% 
+  tokens(remove_punct = T, remove_numbers = T) %>%
+  tokens_wordstem() %>%
+  tokens_remove(stopwords("en")) %>%
+  dfm 
+```
+
+**Answer:** Removing punctuations and numbers is probably meaningful,
+but we have seen that further test preprocessing often doesn’t lead to
+better results (see e.g., the study by Scharkow, 2012). However, to be
+sure, I created two training data sets that differ with regard to
+whether or not stemming was used and whether or not stopwords were
+removed (I am showing you here how different approaches can be compared,
+for a correct solution, you can only run one approach, of course).
+
+# Machine Learning
+
+## Training the algorithm
+
+Now, we can train the model. Don’t forget to load the package
+“quanteda.textmodels”.
+
+``` r
+library(quanteda.textmodels) 
+nbmodel1 <- textmodel_nb(dfm_train, dfm_train$true)
+nbmodel2 <- textmodel_nb(dfm_train2, dfm_train2$true)
+```
+
+## Testing the model on the training set
+
+Now, we should quickly check the accuracy of the algorithm in predicting
+the “train” set. This of course should be really high as we trained it
+on this set.
+
+``` r
+predictions1 <- predict(nbmodel1, dfm_train)
+predictions2 <- predict(nbmodel2, dfm_train2)
+mean(predictions1 == dfm_train$true)
+```
+
+    ## [1] 0.974758
+
+``` r
+mean(predictions2 == dfm_train2$true)
+```
+
+    ## [1] 0.9727683
+
+## Validating on the test data
+
+More importantly, we need to validate the algorithm performance. To do
+this, we need to preprocess the “test” data set in the exact same way as
+the train data set. Don’t forget to use `dfm_match()` to make sure that
+the features are ordered in the same way. Then move on to compute the
+accuracy and other performance indicators (e.g., precision, recall,
+F1-Score). You can use the `caret` package for this as well. How well
+does the algorithm predict fake news in the data set?
+
+``` r
+# Match training and test data sets
+dfm_test1 <- news_test %>% 
+  corpus(text = "text2") %>% 
+  tokens(remove_punct = T, remove_numbers = T) %>%
+  dfm %>%
+  dfm_match(features = featnames(dfm_train))
+dfm_test2 <- news_test %>% 
+  corpus(text = "text2") %>% 
+  tokens(remove_punct = T, remove_numbers = T) %>%
+  dfm %>%
+  dfm_match(features = featnames(dfm_train2))
+
+# Check performance
+library(caret)
+predictions1 <- predict(nbmodel1, dfm_test1)
+predictions2 <- predict(nbmodel2, dfm_test2)
+
+# Without preprcoessing
+(nb1 <- confusionMatrix(table(predictions1, actual = dfm_test1$true), mode = "prec_recall"))
+```
+
+    ## Confusion Matrix and Statistics
     ## 
-    ##   -1    0    1 
-    ## 2071 2785 1466
-
-In total, there are 6,322 headlines, roughly half of them are neutral,
-\~2000 are rather negative and \~1500 are rather positive.
-
-It is important to note that we have both the original “text” and the
-“lemmatized” version of the text. We can run analyses on both, but you
-should from now on work with the lemmatized text!
-
-# Analysis
-
-## Creating the document-feature matrix
-
-In a first step, make a document-term-matrix from the lemmatized texts.
-This means first creating a “corpus” (bear in mind to set
-`text-field = "lemmata"`), engage in reasonable preprocessing (e.g.,
-removing punctuation, frequency trimming, but don’t engage in anything
-more elaborate such as stopword removal or stemming as we already
-lemmatized!)
-
-``` r
-dtm <- d %>% 
-  corpus(text_field = "lemmata") %>%
-  tokens %>%
-  dfm
-```
-
-Let’s quickly make a word cloud to get an idea what these headlines are
-about (set max\_words = 25). What is the most often used word (even if
-it is probably a stop word)?
+    ##             actual
+    ## predictions1   no  yes
+    ##          no  5635  121
+    ##          yes  218 5250
+    ##                                           
+    ##                Accuracy : 0.9698          
+    ##                  95% CI : (0.9665, 0.9729)
+    ##     No Information Rate : 0.5215          
+    ##     P-Value [Acc > NIR] : < 2.2e-16       
+    ##                                           
+    ##                   Kappa : 0.9395          
+    ##                                           
+    ##  Mcnemar's Test P-Value : 1.848e-07       
+    ##                                           
+    ##               Precision : 0.9790          
+    ##                  Recall : 0.9628          
+    ##                      F1 : 0.9708          
+    ##              Prevalence : 0.5215          
+    ##          Detection Rate : 0.5020          
+    ##    Detection Prevalence : 0.5128          
+    ##       Balanced Accuracy : 0.9701          
+    ##                                           
+    ##        'Positive' Class : no              
+    ## 
 
 ``` r
-textplot_wordcloud(dtm, max_words = 25)
+# Without preprocessing
+(nb2 <- confusionMatrix(table(predictions2, actual = dfm_test2$true), mode = "prec_recall"))
 ```
 
-![](03_homework_assignment_complete_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
-
-**Answer:** The most used word is “in”.
-
-## Applying a dictionary
-
-Next, you need to download and apply the NRC dictionary for Dutch:
-([original
-code](https://github.com/vanatteveldt/ecosent/blob/master/src/data-processing/11_apply_dictionaries_quanteda.R)).
-First, we download the dictionary and turn it into a quanteda
-dictionary:
+    ## Confusion Matrix and Statistics
+    ## 
+    ##             actual
+    ## predictions2   no  yes
+    ##          no  5851 3217
+    ##          yes    2 2154
+    ##                                           
+    ##                Accuracy : 0.7132          
+    ##                  95% CI : (0.7047, 0.7216)
+    ##     No Information Rate : 0.5215          
+    ##     P-Value [Acc > NIR] : < 2.2e-16       
+    ##                                           
+    ##                   Kappa : 0.4108          
+    ##                                           
+    ##  Mcnemar's Test P-Value : < 2.2e-16       
+    ##                                           
+    ##               Precision : 0.6452          
+    ##                  Recall : 0.9997          
+    ##                      F1 : 0.7843          
+    ##              Prevalence : 0.5215          
+    ##          Detection Rate : 0.5213          
+    ##    Detection Prevalence : 0.8079          
+    ##       Balanced Accuracy : 0.7004          
+    ##                                           
+    ##        'Positive' Class : no              
+    ## 
 
 ``` r
-url <- "https://raw.githubusercontent.com/vanatteveldt/ecosent/master/data/raw/dictionaries/NRC-Emotion-Lexicon-v0.92-In105Languages-Nov2017Translations.csv"
-nrc <- read_csv(url) %>% select(term = `Dutch (nl)`, Positive, Negative, Fear, Trust) %>% filter(term != 'NO TRANSLATION')
-dict <- dictionary(list(positive = nrc$term[nrc$Positive==1],
-                        negative = nrc$term[nrc$Negative==1],
-                        fear = nrc$term[nrc$Fear==1],
-                        trust = nrc$term[nrc$Trust==1]))
-dict
+# Compare accuracy
+bind_rows(nb1$overall, nb2$overall) %>%
+  mutate(algorithm = c("Naive Bayes\n(without preprocessing)", "Naive Bayes\n(with preprocessing)")) %>%
+  select(algorithm, everything()) %>%
+  ggplot(aes(x = algorithm, y = Accuracy, ymin = AccuracyLower, ymax = AccuracyUpper)) +
+  geom_col(aes(fill = algorithm)) +
+  geom_errorbar(width = .3) +
+  coord_flip() +
+  theme(legend.position = "none") +
+  labs(x = "", title = "Comparison of Accuracy",
+      subtitle = "Naive Bayes with vs. without text preprocessing")
 ```
 
-    ## Dictionary object with 4 key entries.
-    ## - [positive]:
-    ##   - abba, vermogen, absoluut, absolutie, geabsorbeerd, overvloed, overvloedig, academische, academie, aanvaardbaar, aanvaarding, beschikbaar, accolade, accommodatie, begeleiding, bereiken, volbracht, prestatie, overeenstemming, verantwoording [ ... and 2,012 more ]
-    ## - [negative]:
-    ##   - in de steek laten, verlaten, verlatenheid, ontvoering, afwijkend, aberratie, verafschuwen, weerzinwekkend, verachtelijk, abnormaal, afschaffen, afschaffing, afschuwelijk, gruwel, afbreken, abortus, vruchteloos, schuring, abces, afwezigheid [ ... and 2,717 more ]
-    ## - [fear]:
-    ##   - in de steek laten, verlaten, verlatenheid, ontvoering, verafschuwen, weerzinwekkend, afschuwelijk, gruwel, abortus, afwezigheid, misbruik, afgrond, ongeval, onopzettelijk, vervloekt, verdachte, aanklager, beschuldigen, acrobaat, adder [ ... and 1,278 more ]
-    ## - [trust]:
-    ##   - telraam, abt, absolutie, overvloed, academische, accolade, begeleiding, overeenstemming, account, verantwoording, verantwoordelijk, accountant, rekeningen, geaccrediteerd, accuraat, bereiken, prestatie, acrobaat, hechtende, administratief [ ... and 1,108 more ]
+![](03_homework_assignment_complete_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
 
-Next, try to apply to the dictionary to the dtm we created earlier. The
-resulting dtm contains information about which headlines contains
-positive, negative, fear-related, and trust-related words. Can you
-create table that shows the absolute frequency of each word? Which words
-occur most often?
-
-``` r
-# Dictionary analysis
-dtm_result <- dtm %>%
-  dfm_lookup(dict)
-dtm_result
-```
-
-    ## Document-feature matrix of: 6,322 documents, 4 features (65.23% sparse) and 2 docvars.
-    ##        features
-    ## docs    positive negative fear trust
-    ##   10007        1        0    0     0
-    ##   10027        1        1    0     1
-    ##   10037        1        0    0     0
-    ##   10059        1        0    0     1
-    ##   10099        1        1    1     1
-    ##   10101        2        0    1     2
-    ## [ reached max_ndoc ... 6,316 more documents ]
-
-``` r
-# Frequency of dictionary results
-textstat_frequency(dtm_result)
-```
-
-    ##    feature frequency rank docfreq group
-    ## 1 positive      4053    1    2964   all
-    ## 2 negative      2921    2    2253   all
-    ## 3    trust      2527    3    1989   all
-    ## 4     fear      1877    4    1586   all
-
-**Answer:** The text contain mostly “positive” words (4053 positive
-words in 2964 headlines).
-
-Now try to convert the results into a data.frame (or better a tibble)
-and compute a sentiment score by substracting the sum of “negative” and
-“fear” related words from the the sum of “positive” and “trust” related
-words (i.e., `score = (positive + trust) - (negative + fear)`). This is
-a slightly different score than we produced in the practical session.
-
-Furthermore, recode the resulting score so that positive values (&gt; 0)
-are coded as 1, neutral (= 0) are coded as 0 and negative values (&lt;
-0) as -1. This can be done in various ways, but the easiest way is to
-use another mutate command and simply wrap the computed score with the
-function `sign()`.
-
-``` r
-result <- dtm_result %>%
-  convert(to="data.frame") %>%
-  as_tibble %>%
-  mutate(score = (positive + trust) - (negative + fear),  ## Creating score
-         dict_sentiment = sign(score))                    ## Transformation
-```
-
-Now, you should be able to join these results with the original data
-set. Try to compute the confusion matrix (using the `table()` function)
-and then produce the accuracy score. What do we learn?
-
-``` r
-# Joining
-result <- inner_join(d, result)
-
-# Confusion matrix
-cm <- table(manual = result$sentiment, dictionary = result$dict_sentiment)
-cm
-```
-
-    ##       dictionary
-    ## manual   -1    0    1
-    ##     -1  783  699  589
-    ##     0   642 1144  999
-    ##     1   183  433  850
-
-``` r
-# Accuracy
-sum(diag(cm)) / sum(cm)
-```
-
-    ## [1] 0.4392597
-
-**Answer:** We can see that there are quite a lot of false positives and
-false negatives. Overall, the accuracy is 43.9% which means that the
-dictionary does not perform very well in classifying the headlines’
-sentiment.
+**Answer:** Overall, testing the algorithm on the test data set revealed
+that it does very well in predicting whether news are fake or real.
+Without preprocessing, the accuracy is very high (97.1%), also precision
+(98.3%), recall (96.2%), and the overall F1-score (97.2%) are very high,
+suggesting excellent performance. Yet, we also see that the performance
+significantly drops if we engage in text preprocessing such as stemmping
+and stopword removal. We hence should not modify the input data too
+much.

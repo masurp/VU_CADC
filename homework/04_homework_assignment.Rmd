@@ -61,7 +61,7 @@ head(d)
 
 # Supervised machine learning
 
-**Question:** Use machine learning models to predict the upvotes (use the categrized version cat_votes) from the app reviews. Test both Naive Bayes and Support Vector Machines algorithms. Which performs better? What can you learn from the confusion matrix and respective performance scores? Where does the algorithm perform particularly bad?
+**Question:** Use machine learning models to predict the upvotes (use the categorized version "cat_votes") from the app reviews. Test both Naive Bayes and Support Vector Machines algorithms. Which performs better? What can you learn from the confusion matrix and respective performance scores? When does the algorithm perform particularly bad?
 
 ```{r}
 # Solution here
@@ -72,9 +72,18 @@ head(d)
 
 # Unsupervised text classification
 
-**Questions:** What topics can you find in the app reviews? Use topic modeling to meaningfully classify the data set. I already did some text preprocessing as this is somewhat difficult here. Pay attention to the last line: here, I am filtering out words that are too frequent and thus don't really help in creating meaningful topics. Now, try out models with different numbers of topics and make sense of the output. Decide which one works best (you may want to take perplexity into account). Best on your chosen solutions, which topics are most often occurring (can you plot this?)? 
+**Questions:** What topics can you find in the app reviews? Use topic modeling to meaningfully classify the data set. I already did some text preprocessing as this is somewhat difficult here. Pay attention to the last line: here, I am filtering out words that are too frequent and thus don't really help in creating meaningful topics. Now, try out models with different numbers of topics and make sense of the output. Decide which one works best (you may want to take perplexity into account). Based on your chosen solutions, which topics are most often occurring (can you plot this?)? 
 
 ```{r}
+# Textpreprocessing
+dtm <- d %>%
+  corpus(text = "text") %>%
+  tokens(remove_punct = T, remove_numbers = T, remove_symbols = T) %>%
+  tokens_remove(stopwords("en")) %>%
+  tokens_remove(c("tiktok", "app", "tok", "tik")) %>%
+  dfm %>%
+  dfm_trim(max_docfreq = 100)
+
 # Solution here
 ```
 
