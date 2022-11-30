@@ -240,17 +240,17 @@ ggplot(data, aes(x, y)) +
 
 ## Differences
 
-- Goal of 'normal' modeling: explaining/understanding
-    
-    - Serves to make inferences about a population ("Does X relate to Y?")
-    - Doesn't use too many variables to avoid the difficult of interpreting too many parameters
-    - Requires interpretable parameters
+-   Goal of 'normal' modeling: explaining/understanding
 
-- Goal of machine learning: best possible prediction
-    
-    - make generalizable predictions ("How to best predict Y?")
-    - Use as many variables as you need, and don’t worry about interpretability of parameters
-    - Always train (fit) and test (validate) on distinct data
+    -   Serves to make inferences about a population ("Does X relate to Y?")
+    -   Doesn't use too many variables to avoid the difficult of interpreting too many parameters
+    -   Requires interpretable parameters
+
+-   Goal of machine learning: best possible prediction
+
+    -   make generalizable predictions ("How to best predict Y?")
+    -   Use as many variables as you need, and don't worry about interpretability of parameters
+    -   Always train (fit) and test (validate) on distinct data
 
 . . .
 
@@ -310,11 +310,11 @@ How do these algorithms work?
 
 . . .
 
--   The algorithm now "learns" (based on the document-feature matrix) that the word "viagra" can often be found in spam mails. This probability is known as the likelihood *P(viagra\|spam)* (= predictor prior probability, e.g., .20%)
+-   The algorithm now "learns" (based on the document-feature matrix) that the word "viagra" can often be found in spam mails. This probability is known as the likelihood *P(viagra\|spam)* (e.g., .20%)
 
 . . .
 
--   The algorithm also "learns" the probability of the word "viagra" appearing in any mail *P(viagra)* (likelihood, e.g. 5%). Applying the Bayes Theorem, we get:
+-   The algorithm also "learns" the probability of the word "viagra" appearing in any mail *P(viagra)* (predictor prior probability, e.g. 5%). Applying the Bayes Theorem, we get:
 
 . . .
 
@@ -970,43 +970,37 @@ How is this used in research?
 ![](img/juergen_face2.png)
 :::
 
-
 ## BERT language models
 
-- Bidirectional Encoder Representations from Transformers (BERT)
+-   Bidirectional Encoder Representations from Transformers (BERT)
 
-- A machine learning technique for natural language processing, pre-training and developed by Google
+-   A machine learning technique for natural language processing, pre-training and developed by Google
 
-- A deep learning model in which every output element is connected to every input element, and the weightings between them are dynamically calculated based upon their connection
+-   A deep learning model in which every output element is connected to every input element, and the weightings between them are dynamically calculated based upon their connection
 
-- BERT is pre-trained on two different tasks: Masked Language Modeling and Next Sentence Prediction.
+-   BERT is pre-trained on two different tasks: Masked Language Modeling and Next Sentence Prediction.
 
-    - Masked Language Model training is to hide a word in a sentence and then have the program predict what word has been hidden (masked) based on the hidden word's context
-    - Next Sentence Prediction training is to have the program predict whether two given sentences have a logical, sequential connection or whether their relationship is simply random
+    -   Masked Language Model training is to hide a word in a sentence and then have the program predict what word has been hidden (masked) based on the hidden word's context
+    -   Next Sentence Prediction training is to have the program predict whether two given sentences have a logical, sequential connection or whether their relationship is simply random
 
 ## BERT language models - Schematic Overview
 
 ![](https://miro.medium.com/max/1400/1*p4LFBwyHtCw_Qq9paDampA.png)
 
-
 ## BERT in R?
 
 ::: {.column width="50%"}
+-   There is a new package (very recently released) that allows to use such pre-trained, large scale language models in R
 
-- There is a new package (very recently released) that allows to use such pre-trained, large scale language models in R
+-   If you are interested check the package "text": https://r-text.org/
 
-- If you are interested check the package "text": https://r-text.org/
-
-- But: Be mindful! Running a BERT model can take a long time and might even require a more powerful computer than yours!
-
+-   But: Be mindful! Running a BERT model can take a long time and might even require a more powerful computer than yours!
 :::
 
 ::: {.column width="2%"}
 :::
 
 ::: {.column width="45%"}
-
-
 ![](https://r-text.org/reference/figures/text_logo_animation.gif)
 :::
 
@@ -1021,7 +1015,6 @@ How is this used in research?
 ## Conclusion
 
 ::: {.column width="45%"}
-
 -   Machine learning is a useful tool for generalizing from sample
 
 -   It is very useful to reduce the amount of manual coding needed
@@ -1029,16 +1022,13 @@ How is this used in research?
 -   Many different models exist (each with many parameters/options)
 
 -   We always need to validate model on unseen and representative test data!
-
 :::
 
 ::: {.column width="2%"}
 :::
 
 ::: {.column width="45%"}
-
 ![](img/machinelearning_process.png)
-
 :::
 
 # Thank you for your attention! {background-color="steelblue"}
