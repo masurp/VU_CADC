@@ -16,8 +16,7 @@ editor: visual
 
 ![](img/machinelearning.png)
 
-
----
+------------------------------------------------------------------------
 
 ::: {.column width="45%"}
 ### Supervised learning (last lecture)
@@ -50,7 +49,6 @@ editor: visual
 
 # Computers can detect "topics"? {background-color="steelblue"}
 
-
 ## What are we trying to achieve?
 
 ![](img/topic_slides/Slide1.png)
@@ -58,7 +56,6 @@ editor: visual
 ## What topics can be extracted from the documents?
 
 ![](img/topic_slides/Slide2.png)
-
 
 ## Easy for humans...
 
@@ -74,99 +71,89 @@ editor: visual
 
 ## Goals of topic modeling
 
-
 ::: {.column width="45%"}
-- Topic modeling is a method for unsupervised classification of documents
+-   Topic modeling is a method for unsupervised classification of documents
 
-- It is somewhat similar to clustering on numeric data, which finds natural groups of items even when we're not sure what we’re looking for
+-   It is somewhat similar to clustering on numeric data, which finds natural groups of items even when we're not sure what we're looking for
 
-- The goal is to find a set of topics consisting of clusters of words that co-occur in these documents according to certain patterns
+-   The goal is to find a set of topics consisting of clusters of words that co-occur in these documents according to certain patterns
 
-- However, the researchers must interpret the results of a topic model and there is usually more than one solution...
-
+-   However, the researchers must interpret the results of a topic model and there is usually more than one solution...
 :::
 
 ::: {.column width="4%"}
 :::
 
 ::: {.column width="45%"}
-
 ![](img/blei_lda.png)
 
-<p style="font-size:0.75em;">_Blei, Ng, & Jordan, 2003_</p>
-:::
+<p style="font-size:0.75em;">
 
+*Blei, Ng, & Jordan, 2003*
+
+</p>
+:::
 
 ## Why should we care?
 
 ::: {.column width="45%"}
+-   Topic models were originally developed as a text-mining tool and as such has wide applications in research that is based on understanding texts
 
-- Topic models were originally developed as a text-mining tool and as such has wide applications in research that is based on understanding texts 
+-   But topic models have applications in other fields such as bioinformatics and computer vision
 
-- But topic models have applications in other fields such as bioinformatics and computer vision
-
-    - can be used to detect structures in data such as genetic information
-    - can also detect similaries in data based on images or networks
-    
+    -   can be used to detect structures in data such as genetic information
+    -   can also detect similaries in data based on images or networks
 :::
 
 ::: {.column width="4%"}
 :::
 
 ::: {.column width="45%"}
+-   More importantly, they are also used in various practical fields:
 
-- More importantly, they are also used in various practical fields:
-
-    - In news or content recommenders, which aim to suggest content based on similar topics
-    - Used to power conversational agents (e.g., chatbots)
-    - Spam filter (again!)
-    - And many more...
-
+    -   In news or content recommenders, which aim to suggest content based on similar topics
+    -   Used to power conversational agents (e.g., chatbots)
+    -   Spam filter (again!)
+    -   And many more...
 :::
 
 ## Content of the lecture
 
+1.  What is topic modeling?
 
-1. What is topic modeling?
+2.  Topic Modeling as Dimensionality Reduction
 
-2. Topic Modeling as Dimensionality Reduction
+3.  Latent Dirichlet Allocation - LDA topic modeling
 
-3. Latent Dirichlet Allocation - LDA topic modeling
+    -   Basic Principles
+    -   Dirichlet Distribution
+    -   Gibbs Sampling
+    -   How to determine the right number of topics
 
-    - Basic Principles
-    - Dirichlet Distribution
-    - Gibbs Sampling
-    - How to determine the right number of topics
+4.  (More) Examples from the literature
 
-4. (More) Examples from the literature
-
-5. Conclusion and outlook
-
+5.  Conclusion and outlook
 
 # What is topic modeling? {background-color="steelblue"}
 
-
 ## Let's start with an example
 
+::: {.column width="45%"}
+-   Jacobi, Welbers & Van Atteveld (2016) analyzed the coverage of *nuclear technology* from 1945 to 2013 in the New York Times
+
+-   Overall, they analyzed 51,528 news stories (headline and lead): Way too much for human coding!
+
+-   Used Latent Dirichlet Allocation (LDA) topic modeling to extract topics
+
+-   They then analyzed the occurrence of topics over time
+
+-   It is a nice example of what topic modelling can and can't do
+:::
+
+::: {.column width="4%"}
+:::
 
 ::: {.column width="45%"}
-
-- Jacobi, Welbers & Van Atteveld (2016) analyzed the coverage of *nuclear technology* from 1945 to 2013 in the New York Times
-
-- Overall, they analyzed 51,528 news stories (headline and lead): Way too much for human coding!
-
-- Used Latent Dirichlet Allocation (LDA) topic modeling to extract topics
-
-- They then analyzed the occurrence of topics over time
-
-- It is a nice example of what topic modelling can and can't do
-
-:::
-:::{.column width="4%"}
-:::
-:::{.column width="45%"}
-
-
 ![](https://upload.wikimedia.org/wikipedia/commons/4/4e/Nuclear_Power_Plant_Cattenom.jpg)
 :::
 
@@ -176,64 +163,53 @@ editor: visual
 
 ## Characteristics of a topic model
 
-
 This example highlights a number of interesting points about LDA topic modelling
 
-1. The document is split between two main topics, *Cold War* and *Nuclear Accidents*: In a coding scheme forced to have a single topic per document, it would be very difficult to choose the dominant topic for this article.
+1.  The document is split between two main topics, *Cold War* and *Nuclear Accidents*: In a coding scheme forced to have a single topic per document, it would be very difficult to choose the dominant topic for this article.
 
-2. Not all words are included in the analysis: Most are not used because they are non-substantive words such as determiners or prepositions ("the" or "it"), which the authors excluded, or because they are too rare ("Elbe", "perish") or too common ("have" but in this context also "nuclear", since that was used to select the articles). 
+2.  Not all words are included in the analysis: Most are not used because they are non-substantive words such as determiners or prepositions ("the" or "it"), which the authors excluded, or because they are too rare ("Elbe", "perish") or too common ("have" but in this context also "nuclear", since that was used to select the articles).
 
-3. No a priori coding scheme was used by the computer, so the topics in this document were found completely automatically. 
-
-
+3.  No a priori coding scheme was used by the computer, so the topics in this document were found completely automatically.
 
 ## So what does a result of a Topic model look like?
 
 ::: {.column width="45%"}
+-   Typical table resulting from a topic model
 
-- Typical table resulting from a topic model
+-   Contains most representative words per topic (in this case 10 topics)
 
-- Contains most representative words per topic (in this case 10 topics)
-
-- The authors then interpreted the outcome and labeled each topic accordingly
-
-
+-   The authors then interpreted the outcome and labeled each topic accordingly
 :::
+
 ::: {.column width="4%"}
 :::
-::: {.column width="45%"}
 
+::: {.column width="45%"}
 ![](img/jacobi_table1.png)
 :::
-
 
 ## Using topics for substantive analyses
 
 ![](img/Jacobi_topicmodelling.png)
-
 
 # Topic Modeling as Dimensionality Reduction {background-color="steelblue"}
 
 ## Using factor or cluster analysis to extract topics?
 
 ::: {.column width="45%"}
+-   Problem: Texts are unstructured data and it is thus difficult to do standard statistical analysis with them
 
-- Problem: Texts are unstructured data and it is thus difficult to do standard statistical analysis with them
+-   Solution: Convert the texts into a document-term matrix, where documents represent cases and words are variables/characteristics of these cases
 
-- Solution: Convert the texts into a document-term matrix, where documents represent cases and words are variables/characteristics of these cases
-
-- Now we can use standard cluster/factor analysis techniques to reduce these dimensions?
-
+-   Now we can use standard cluster/factor analysis techniques to reduce these dimensions?
 :::
+
 ::: {.column width="4%"}
 :::
+
 ::: {.column width="45%"}
-
-
-
 ![](https://www.researchgate.net/publication/338434397/figure/fig1/AS:844756024311809@1578416939705/The-results-obtained-from-Confirmatory-Factor-Analysis-CAF-for-the-APQ-P-First.png)
 :::
-
 
 ## Dimensionality reduction using PCA
 
@@ -260,7 +236,6 @@ texts <- c("LDA is a topic model algorithm",
   select(-doc_id))
 ```
 
-
 ## Dimensionality reduction using PCA
 
 ::: {.column width="45%"}
@@ -270,207 +245,204 @@ texts <- c("LDA is a topic model algorithm",
 prcomp(dtm_factor, rank. = 2)
 
 ```
-
 :::
+
 ::: {.column width="4%"}
 :::
+
 ::: {.column width="45%"}
+-   Factor/Principal component analysis can reduce the number of columns (= reduce the dimensionality of the dataset)
 
-- Factor/Principal component analysis can reduce the number of columns (= reduce the dimensionality of the dataset)
+-   It assumes the manifest words are determined by (fewer) underlying latent factors
 
-- It assumes the manifest words are determined by (fewer) underlying latent factors
-
-- In this simple example, it works to a certain degree, but we also see problems
-
+-   In this simple example, it works to a certain degree, but we also see problems
 :::
 
 ## Latent Semantic Analysis
 
 ::: {.column width="60%"}
+-   Latent Semantic Analysis assumes that words that are close in meaning will occur in similar pieces of text
 
-- Latent Semantic Analysis assumes that words that are close in meaning will occur in similar pieces of text
+-   *Singular value decomposition* (SVD) is used to reduce the number of rows in a document-feature matrix while preserving the similarity structure among columns
 
-- *Singular value decomposition* (SVD) is used to reduce the number of rows in a document-feature matrix while preserving the similarity structure among columns
+-   Overall, similar to factor analysis, but developed in the field of natural language processing
 
-- Overall, similar to factor analysis, but developed in the field of natural language processing
+-   Found to mimic (some) human generalizations and even errors
 
-- Found to mimic (some) human generalizations and even errors
+-   Also problematic to interpret:
 
-- Also problematic to interpret:
+    -   Negative values
+    -   Not robust to ambiguous terms and antonyms
+    -   No theoretical interpretation of mechanism
 
-    - Negative values
-    - Not robust to ambiguous terms and antonyms
-    - No theoretical interpretation of mechanism
- 
-<p style="font-size:0.65em;">_e.g. Deerwester et al., 1990_</p>
+<p style="font-size:0.65em;">
 
+*e.g. Deerwester et al., 1990*
 
+</p>
 :::
+
 ::: {.column width="4%"}
 :::
+
 ::: {.column width="32%"}
-
 ![](https://upload.wikimedia.org/wikipedia/commons/e/e9/Singular_value_decomposition.gif)
-
 :::
 
 ## Preliminary conclusion
 
-- Clustering, factor analysis, principal component analyis and its extension in the form of latent semantic analysis can all be used to reduce the dimensionality of a document-term matrix
+-   Clustering, factor analysis, principal component analyis and its extension in the form of latent semantic analysis can all be used to reduce the dimensionality of a document-term matrix
 
-- The resulting dimension may be a basis for extracting topics (after all it is words with loadings onto different factors = topics)
+-   The resulting dimension may be a basis for extracting topics (after all it is words with loadings onto different factors = topics)
 
-- Yet, there are several problems
+-   Yet, there are several problems
 
-    - Negative values difficult to interpret
-    - The underlying model is hard to intepret
+    -   Negative values difficult to interpret
+    -   The underlying model is hard to intepret
 
-- These models are perhaps useful for understand which words load onto a topic, but they are less good at representing the distribution of topics in documents
-
+-   These models are perhaps useful for understand which words load onto a topic, but they are less good at representing the distribution of topics in documents
 
 # Latent Dirichlet Allocation - LDA Topic Modeling {background-color="steelblue"}
 
-
 ## Latent Dirichlet Allocation - LDA topic modeling
 
-- Evolution of Latent Semantic Analysis
+-   Evolution of Latent Semantic Analysis
 
-- Is Based on generative statistical model that aligns with how articles or documents are written
+-   Is Based on generative statistical model that aligns with how articles or documents are written
 
-    - It ‘assumes’ an author who...
-    - chooses a mix of topics to write about.
-    - For each word, s/he select one of the topics... 
-    - and then select a word from this topic.
+    -   It 'assumes' an author who...
+    -   chooses a mix of topics to write about.
+    -   For each word, s/he select one of the topics...
+    -   and then select a word from this topic.
 
-- This basically results in a mixture model:
+-   This basically results in a mixture model:
 
-    - Words can be in multiple topics (→ deals with ambiguity)
-    - Documents in multiple topics (→ deals with mixed content)
-    - But skewed towards a couple of topics, depending on $\alpha$ hyperparameter (more on this later)
-
+    -   Words can be in multiple topics (→ deals with ambiguity)
+    -   Documents in multiple topics (→ deals with mixed content)
+    -   But skewed towards a couple of topics, depending on $\alpha$ hyperparameter (more on this later)
 
 ## Example for the generative model
 
-Let's assume that you are a journalist writing a 500 word news item. 
+Let's assume that you are a journalist writing a 500 word news item.
 
 <br>
 
 . . .
 
-1. You would choose one or more topics to write about, for example 70% healthcare and 30% economy. 
+1.  You would choose one or more topics to write about, for example 70% healthcare and 30% economy.
 
 . . .
 
-2. For each word in the item, you randomly pick one of these topics based on their respective weight. 
+2.  For each word in the item, you randomly pick one of these topics based on their respective weight.
 
 . . .
 
-3. Finally, you pick a random word from the words associated with that topic, where again each word has a certain probability for that topic. For example, "hospital" might have a high probability for healthcare while "effectiveness" might have a lower probability but could still occur
+3.  Finally, you pick a random word from the words associated with that topic, where again each word has a certain probability for that topic. For example, "hospital" might have a high probability for healthcare while "effectiveness" might have a lower probability but could still occur
 
 <br>
 
-<p style="font-size:0.75em;">_Van Atteveldt, Trilling & Calderon, 2021_</p>
+<p style="font-size:0.75em;">
 
+*Van Atteveldt, Trilling & Calderon, 2021*
+
+</p>
 
 ## Intuitions behind LDA topic modelling
 
 ![](img/blei_lda.png)
 
-<p style="font-size:0.75em;">_Blei et al., 2003_</p>
+<p style="font-size:0.75em;">
 
+*Blei et al., 2003*
+
+</p>
 
 ## Sampling from the Dirichlet Distribution
 
+-   In topic modeling, we assume the following:
 
-- In topic modeling, we assume the following:
-
-    - Every topic and document is a probability distribution (over words / topics resp.)
-    - We wonder: How likely is word $w$ in topic $z$, or topic $z$ in document $d$?
-    - These distributions are themselves randomly drawn from the "dirichlet distribution" which yields multinomial distributions
+    -   Every topic and document is a probability distribution (over words / topics resp.)
+    -   We wonder: How likely is word $w$ in topic $z$, or topic $z$ in document $d$?
+    -   These distributions are themselves randomly drawn from the "dirichlet distribution" which yields multinomial distributions
 
 ::: {.column width="65%"}
+-   So, what is a "Dirichlet distribution"?
 
-- So, what is a "Dirichlet distribution"?
+-   Named after Peter Gustav Lejeune Dirichlet
 
-- Named after Peter Gustav Lejeune Dirichlet
+-   It is a family of continuous multivariate probability distributions parameterized by a vector $\alpha$ of positive reals
 
-- It is a family of continuous multivariate probability distributions parameterized by a vector $\alpha$ of positive reals
-
-- Can also be seen as a multivariate generalization of the beta distribution
-
+-   Can also be seen as a multivariate generalization of the beta distribution
 :::
+
 ::: {.column width="5%"}
 :::
+
 ::: {.column width="25%"}
-
 ![](https://upload.wikimedia.org/wikipedia/commons/3/32/Peter_Gustav_Lejeune_Dirichlet.jpg)
-
 :::
-
 
 ## Explaining a Dirichlet Distribution...
 
-- You walk into the room for a get-to-gether (e.g., at a conference) and want to sit somewhere
+-   You walk into the room for a get-to-gether (e.g., at a conference) and want to sit somewhere
 
-- You are afraid to sit alone, so prefer a table with people 
-  
-  - $P(t_i) = n_i / sum(n)$
-  - To avoid $sum(n)=0$ , every table starts at a baseline $n = \alpha$
+-   You are afraid to sit alone, so prefer a table with people
 
-- Everyone does the same as they enter
-    
-  - Empty tables stay empty, full tables keep getting more people proportionally
-  - After many people have entered, an equilibrium emerges
+    -   $P(t_i) = n_i / sum(n)$
+    -   To avoid $sum(n)=0$ , every table starts at a baseline $n = \alpha$
+
+-   Everyone does the same as they enter
+
+    -   Empty tables stay empty, full tables keep getting more people proportionally
+    -   After many people have entered, an equilibrium emerges
 
 <br>
 
-<center> -- [Visual Demonstration of the Dirichlet Distribution](http://topicmodels.west.uni-koblenz.de/ckling/tmt/restaurant.html?parameters=3,2,1,5) -- </center>
+<center>-- [Visual Demonstration of the Dirichlet Distribution](http://topicmodels.west.uni-koblenz.de/ckling/tmt/restaurant.html?parameters=3,2,1,5) --</center>
 
 ## Effect of the hyperparameter $\alpha$
 
-- The restaurant converges to a multinomial distribution
-      
-  - E.g. the topics per document, or words per topic
+-   The restaurant converges to a multinomial distribution
 
-- The initial number of people at the tables is the $\alpha$ hyperparameter
-    
-    - Hyperparameter = ‘setting’/choice that affects how other parameters are estimated
+    -   E.g. the topics per document, or words per topic
 
-- Intuitive effect of lower alpha:
-    
-    - initial choices of ‘customers’ have larger effect
-    - likelier that a single table will get all participants
+-   The initial number of people at the tables is the $\alpha$ hyperparameter
 
-- Lower alpha = fewer topics per document
-    
-    - but means topic have to include more words / have more overlap, as each word needs to be assigned
+    -   Hyperparameter = 'setting'/choice that affects how other parameters are estimated
 
+-   Intuitive effect of lower alpha:
+
+    -   initial choices of 'customers' have larger effect
+    -   likelier that a single table will get all participants
+
+-   Lower alpha = fewer topics per document
+
+    -   but means topic have to include more words / have more overlap, as each word needs to be assigned
 
 ## Plate notation of LDA
 
-
 ::: {.column width="55%"}
-
-
 ![](img/lda_process.png)
-<p style="font-size:0.75em;">_Blei et al., 2003_</p>
 
+<p style="font-size:0.75em;">
 
+*Blei et al., 2003*
+
+</p>
 :::
+
 ::: {.column width="5%"}
 :::
+
 ::: {.column width="35%"}
-
-
 For each document *d*:
 
-- Draw random topic proportions $\theta_d$
-- For each word *n* in document *d*:
-    - Draw a single topic $Z$ from $\theta_d$
-    - Draw a word $W$ from $\beta_z$
+-   Draw random topic proportions $\theta_d$
+-   For each word *n* in document *d*:
+    -   Draw a single topic $Z$ from $\theta_d$
+    -   Draw a word $W$ from $\beta_z$
 
 $\beta_k$ and $\theta_d$ are drawn from $Dir(\alpha)$ and thus not observed directly
-
 :::
 
 . . .
@@ -479,25 +451,22 @@ $\beta_k$ and $\theta_d$ are drawn from $Dir(\alpha)$ and thus not observed dire
 
 ## Think about a regression analysis...
 
-
 ::: {.column width="45%"}
+-   A regression analysis aims to predict $x$ from $y$
 
-- A regression analysis aims to predict $x$ from $y$
-
-- It assumes a linear relationship between the two variables that can be expressed as
+-   It assumes a linear relationship between the two variables that can be expressed as
 
 $y_i = \beta_0 + \beta_1*x_i + e_i$
 
-- Similar to the topic model, we have $x$ and $y$, but we don't actually have the parameter of interest: $\beta_0$, and $\beta_1$
+-   Similar to the topic model, we have $x$ and $y$, but we don't actually have the parameter of interest: $\beta_0$, and $\beta_1$
 
-- Through methods such as ordinary least squares, we try to find the value of the $\beta$'s  that minimize the sum of squared errors
-
+-   Through methods such as ordinary least squares, we try to find the value of the $\beta$'s that minimize the sum of squared errors
 :::
+
 ::: {.column width="5%"}
 :::
+
 ::: {.column width="45%"}
-
-
 ```{r}
 #| fig-width: 5
 #| fig-height: 5
@@ -513,87 +482,75 @@ ggplot(NULL, aes(x, y)) +
 
 
 ```
-
-
 :::
-
 
 ## Reverse-Engineering the Generative Model
 
 ::: {.column width="45%"}
+-   The generative model assumes we know the parameters and want to find the words
 
-- The generative model assumes we know the parameters and want to find the words
+-   But similar to the regression analysis, our challenge is the opposite:
 
-- But similar to the regression analysis, our challenge is the opposite:
+    -   We know the actual words in the corpus
+    -   How can we find out the parameters of the model the explain their occurence?
 
-    - We know the actual words in the corpus
-    - How can we find out the parameters of the model the explain their occurence?
-
-- Task: Find the parameters that maximize the *likelihood* of the corpus
-
+-   Task: Find the parameters that maximize the *likelihood* of the corpus
 :::
+
 ::: {.column width="5%"}
 :::
+
 ::: {.column width="45%"}
+-   Unfortunately, there is no analytic solution
 
-- Unfortunately, there is no analytic solution
+    -   Contrast with e.g. SVD and OLS that can be computed directly
+    -   Similar to multilevel models, this is not the case for LDA
 
-    - Contrast with e.g. SVD and OLS that can be computed directly
-    - Similar to multilevel models, this is not the case for LDA
-
-- Need to do iterative approximation of best solution
-
+-   Need to do iterative approximation of best solution
 :::
 
 ## Gibbs Sampling in LDA
 
 ::: {.column width="30%"}
-
-
 ![](https://mr-easy.github.io/files/blog/gibbs/gibbs.gif)
-
 :::
+
 ::: {.column width="5%"}
 :::
+
 ::: {.column width="60%"}
+-   refers to a Markov chain Monte Carlo (MCMC) algorithm for obtaining a sequence of observations which are approximated from a specified multivariate probability distribution
 
-- refers to a Markov chain Monte Carlo (MCMC) algorithm for obtaining a sequence of observations which are approximated from a specified multivariate probability distribution
+-   Suppose you know the topics of all words except for one word $w$
 
-- Suppose you know the topics of all words except for one word $w$
+-   This new word $w$ is the new guest entering the restaurant
 
-- This new word $w$ is the new guest entering the restaurant
+    -   Pick a topic within the document proportional to existing topics in the document (plus alpha)
+    -   Pick a topic for the word proportional to existing topics for this word (plus eta)
 
-    - Pick a topic within the document proportional to existing topics in the document (plus alpha)
-    - Pick a topic for the word proportional to existing topics for this word (plus eta)
-
-- This gives a joint probability for all topics for this word
-
+-   This gives a joint probability for all topics for this word
 :::
 
 ## Iterative Gibbs Sampling
 
+1.  Start with random assignments of topics to words
 
-1. Start with random assignments of topics to words
+2.  For each word $w$ in document $d$
 
-2. For each word $w$ in document $d$
+    -   Compute proportion of topics in word and document (disregarding $w$ itself)
+    -   Compute probability of each topic $z$ given those proportions
+    -   Pick a new topic from that probability
+    -   Update proportions for next iteration
 
-    - Compute proportion of topics in word and document (disregarding $w$ itself)
-    - Compute probability of each topic $z$ given those proportions
-    - Pick a new topic from that probability
-    - Update proportions for next iteration
-
-3. Repeat from 2 until converged
-
+3.  Repeat from 2 until converged
 
 <br><br>
 
 . . .
 
-- This may sounds complicated and we won't dive deeper into this topic. 
+-   This may sounds complicated and we won't dive deeper into this topic.
 
-- However, if you are interested in how this works in detail, check out the blog post ["LDA under the hood"](http://brooksandrew.github.io/simpleblog/articles/latent-dirichlet-allocation-under-the-hood/) by A. Brook! 
-
-
+-   However, if you are interested in how this works in detail, check out the blog post ["LDA under the hood"](http://brooksandrew.github.io/simpleblog/articles/latent-dirichlet-allocation-under-the-hood/) by A. Brook!
 
 ## Let's look at an Example in R
 
@@ -612,7 +569,6 @@ s1 <- read_csv("data/science articles/train.csv") %>%
 head(s1)
 ```
 
-
 ## Text Preprocessing and DTM
 
 ```{r, R.options = list(width = 120)}
@@ -630,16 +586,15 @@ dtm
 
 ## Text preprocessing
 
-- Text preprocessing is more important for topic modeling than for other machine learning approaches
+-   Text preprocessing is more important for topic modeling than for other machine learning approaches
 
-- For example keeping stopwords will lead to non-sensical "topics" because they co-occur so often
+-   For example keeping stopwords will lead to non-sensical "topics" because they co-occur so often
 
-- Stemming or lemmatizing will streamline words and thereby improve coherence between topics. 
+-   Stemming or lemmatizing will streamline words and thereby improve coherence between topics.
 
-- We want to make sure that the model focuses on those words that really tell something about the topic
+-   We want to make sure that the model focuses on those words that really tell something about the topic
 
-- Text preprocessing stepts are often pivotal for the interpretability of the resulting topics
-
+-   Text preprocessing stepts are often pivotal for the interpretability of the resulting topics
 
 ## Estimating a topic model in R
 
@@ -663,11 +618,11 @@ m
 
 <br>
 
-- We need to chose the sampling method: usually Gibbs sampling
+-   We need to chose the sampling method: usually Gibbs sampling
 
-- We need to specify the number of topics ($k$) a priori, but we can of course try out different solutions
+-   We need to specify the number of topics ($k$) a priori, but we can of course try out different solutions
 
-- We can set the alpha parameter for the Dirichlet distribution
+-   We can set the alpha parameter for the Dirichlet distribution
 
 ## Inspecting LDA results
 
@@ -693,7 +648,6 @@ But because we gain a probability with which a word is in a topic, we can also l
 <br>
 
 ::: {.column width="45%"}
-
 ```{r}
 #| echo: true
 #| output-location: fragment
@@ -705,20 +659,18 @@ topwords <- sort(words,
 head(topwords, 10) %>% 
   as.data.frame
 ```
-
-
 :::
+
 ::: {.column width="5%"}
 :::
-::: {.column width="45%"}
 
+::: {.column width="45%"}
 ```{r}
 #| echo: true
 #| output-location: fragment
 library(wordcloud)
 wordcloud(names(topwords), topwords)
 ```
-
 :::
 
 ## Alternative visualization
@@ -746,13 +698,11 @@ tibble(topic = 1:6) %>%
        title = "Topwords per Topic")
 ```
 
-
 ## Probabilites of topics per document
 
-- From the topic model, we can extract a table that shows us the probabilities of a topic being written about in the different texts (bear in mind, several topics can be in one text)
+-   From the topic model, we can extract a table that shows us the probabilities of a topic being written about in the different texts (bear in mind, several topics can be in one text)
 
-- We see for example, that there is a high probability of the text 7 being about topic 3 (astrophysics)
-
+-   We see for example, that there is a high probability of the text 7 being about topic 3 (astrophysics)
 
 ```{r}
 #| echo: true
@@ -763,11 +713,9 @@ posterior(m)$topics %>%
   as_tibble
 ```
 
-
 ## Is text 7 really about astrophysics?
 
 ::: {.column width="45%"}
-
 ```{r}
 #| echo: true
 #| output-location: fragment
@@ -776,14 +724,13 @@ s1 %>%
   select(abstract) %>%
   as.character()
 ```
-
 :::
+
 ::: {.column width="5%"}
 :::
+
 ::: {.column width="45%"}
-
 ![](https://upload.wikimedia.org/wikipedia/commons/2/2f/Hubble_ultra_deep_field.jpg)
-
 :::
 
 ## Probabilites of topics per document
@@ -791,7 +738,6 @@ s1 %>%
 Let's check out another one: text 2 seems to be primarily about topic 4 (machine learning?):
 
 ::: {.column width="62%"}
-
 ```{r}
 #| echo: true
 #| output-location: fragment
@@ -800,10 +746,9 @@ words <- posterior(m)$terms[topic, ]
 topwords <- head(sort(words, decreasing = T), n=50)
 wordcloud(names(topwords), topwords)
 ```
-
 :::
-::: {.column width="35%"}
 
+::: {.column width="35%"}
 ```{r}
 #| echo: true
 #| output-location: fragment
@@ -812,12 +757,11 @@ s1 %>%
   select(abstract) %>%
   as.character()
 ```
-
 :::
 
 ## Substantive analyses
 
-Depending on the research questions, we now may for example want to describe the topic prevalence in the corpus. 
+Depending on the research questions, we now may for example want to describe the topic prevalence in the corpus.
 
 ```{r}
 #| echo: true
@@ -830,13 +774,11 @@ Depending on the research questions, we now may for example want to describe the
   arrange(docs, value))
 ```
 
-
 ## Visualization of topic prevalence
 
-- Bear in mind that this is not the proportion of articles that are about this topic!
+-   Bear in mind that this is not the proportion of articles that are about this topic!
 
-- It is the overall proportion of the topic in the corpus given that articles can be about several topics
-
+-   It is the overall proportion of the topic in the corpus given that articles can be about several topics
 
 ```{r}
 #| echo: true
@@ -862,67 +804,63 @@ table %>%
        y = "Proportion in the corpus")
 ```
 
-
 ## Validation
 
-- The first step after fitting a model is inspecting the results and establishing face validity
+-   The first step after fitting a model is inspecting the results and establishing face validity
 
-- Top words per topic are a good place to start, but one should also look at the top documents per topic to better understand how words are used in context. 
+-   Top words per topic are a good place to start, but one should also look at the top documents per topic to better understand how words are used in context.
 
-- Also, it is good to inspect the relationships between topics and look at documents that load high on multiple topics to understand the relationship
+-   Also, it is good to inspect the relationships between topics and look at documents that load high on multiple topics to understand the relationship
 
 . . .
 
-- If one using topic models in a more confirmatory manner, e.g., the topics should match some sort of predefined categorization, you should use regular gold standard techniques for validation: 
+-   If one using topic models in a more confirmatory manner, e.g., the topics should match some sort of predefined categorization, you should use regular gold standard techniques for validation:
 
-    - code a sufficiently large random sample of documents with your predefined categories, and test whether the LDA topics match those categories (compute accuracy, precision, recall, F1-score)
-    - In general, however, in such cases it is a better idea to use a dictionary or supervised analysis technique as topic models often do not exactly capture our categories
+    -   code a sufficiently large random sample of documents with your predefined categories, and test whether the LDA topics match those categories (compute accuracy, precision, recall, F1-score)
+    -   In general, however, in such cases it is a better idea to use a dictionary or supervised analysis technique as topic models often do not exactly capture our categories
 
 ## Choosing the right number of topics
 
-- Topic models such as LDA allow you to specify the number of topics in the model
+-   Topic models such as LDA allow you to specify the number of topics in the model
 
-    - This is a nice thing because it allows you to adjust the granularity of what topics measure: between a few broad topics and many more specific topics. 
-    - But it begets the question what the best number of topics is.
-
-
-. . .
-
-- The short and perhaps disappointing answer is: The best number of topics does not exist
-    
-    - there is no singular idea of what a topic even is is
-    - it depends on what you are interested in: e.g., if you want know what a corpus is about, you want to have a limited number of topics that provide a good representation of overall themes
+    -   This is a nice thing because it allows you to adjust the granularity of what topics measure: between a few broad topics and many more specific topics.
+    -   But it begets the question what the best number of topics is.
 
 . . .
 
-- But even if the best number of topics does not exist, some values for k (i.e. the number of topics) are better than others. 
-  
-    - If we use too few topics, there will be variance in the data that is not accounted for, 
-    - If you use too many topics you will overfit and get topics that are not interesting
+-   The short and perhaps disappointing answer is: The best number of topics does not exist
 
+    -   there is no singular idea of what a topic even is is
+    -   it depends on what you are interested in: e.g., if you want know what a corpus is about, you want to have a limited number of topics that provide a good representation of overall themes
+
+. . .
+
+-   But even if the best number of topics does not exist, some values for k (i.e. the number of topics) are better than others.
+
+    -   If we use too few topics, there will be variance in the data that is not accounted for,
+    -   If you use too many topics you will overfit and get topics that are not interesting
 
 ## How well does our model fit the data?
 
-- One  approach to the "best" number of topics is to check which model best predicts the data
+-   One approach to the "best" number of topics is to check which model best predicts the data
 
-- This is comparable to goodness-of-fit measures for statistical models (e.g., log likelihood, CFI, etc.)
+-   This is comparable to goodness-of-fit measures for statistical models (e.g., log likelihood, CFI, etc.)
 
-- For LDA topic models, a commonly usd indicator is **perplexity** (Blei, Ng, & Jordan, 2003), where lower perplexity indicate better predictin/fit
+-   For LDA topic models, a commonly usd indicator is **perplexity** (Blei, Ng, & Jordan, 2003), where lower perplexity indicate better predictin/fit
 
-- To calculate perplexity, we follow an already known procedure (last lecture!):
+-   To calculate perplexity, we follow an already known procedure (last lecture!):
 
-    - We first train an LDA model on a portion of the data 
-    - Then, we model is evaluatd using the held-out portion of the data
-    - This procedure is repeated for models with different numbers of topics so that it becomes clear which one leads to the lowest perplexity
-
+    -   We first train an LDA model on a portion of the data
+    -   Then, we model is evaluatd using the held-out portion of the data
+    -   This procedure is repeated for models with different numbers of topics so that it becomes clear which one leads to the lowest perplexity
 
 ## Calculating perplexity in R
 
-- We first have to split up our data into data for training and testing the model
+-   We first have to split up our data into data for training and testing the model
 
-- This way we prevent overfitting the model
+-   This way we prevent overfitting the model
 
-- Here we'll use 75% for training, and held-out the remaining 25% for test data.
+-   Here we'll use 75% for training, and held-out the remaining 25% for test data.
 
 ```{r}
 #| echo: true
@@ -932,7 +870,7 @@ dtm_train <- dtm[rownames(dtm) %in% train, ]
 dtm_test <- dtm[!rownames(dtm) %in% train, ]
 ```
 
-- Then, we train the model and then, we calculate the perplexity by testing the model on the test data
+-   Then, we train the model and then, we calculate the perplexity by testing the model on the test data
 
 ```{r}
 #| echo: true
@@ -943,9 +881,9 @@ perplexity(m, dtm_test)
 
 ## Estimating several model and perplexity scores
 
-- A single perplexity score is not really useful as we have nothing to compare it against 
+-   A single perplexity score is not really useful as we have nothing to compare it against
 
-- Instead, we calculate the perplexity score for models with different parameters, to see how this affects the perplexity
+-   Instead, we calculate the perplexity score for models with different parameters, to see how this affects the perplexity
 
 ```{r}
 #| echo: true
@@ -968,14 +906,13 @@ for (i in 1:nrow(p)) {
 p
 ```
 
-
 ## Visualizing a perplexity curve
 
-- Technically, the best fitting model is the one with the lowest perplexity score
-  
-  - But this will always be a model with a lot of topics!
+-   Technically, the best fitting model is the one with the lowest perplexity score
 
-- If we want to use topic modelling for bottom-up inductive analyses of text corpora, we need to look for a "knee" in the plot
+    -   But this will always be a model with a lot of topics!
+
+-   If we want to use topic modelling for bottom-up inductive analyses of text corpora, we need to look for a "knee" in the plot
 
 ```{r}
 #| echo: true
@@ -1002,77 +939,69 @@ m2 <- LDA(dtm,
 terms(m2, 10)
 ```
 
-
-
 # Example from the literature {background-color="steelblue"}
 
 ## What communication scholars write about
 
-- Günther and Domahidi (2017) used LDA topic modeling to get an overview of research topics in 80 years of communication research
+-   Günther and Domahidi (2017) used LDA topic modeling to get an overview of research topics in 80 years of communication research
 
-- Documents were 15,000 abstracts from academic journals
+-   Documents were 15,000 abstracts from academic journals
 
-- To find a reasonable value k (number of topics), they ran 40 topic models with k = 5 to k = 200 and systematically compared them: The final model hat 145 topics
+-   To find a reasonable value k (number of topics), they ran 40 topic models with k = 5 to k = 200 and systematically compared them: The final model hat 145 topics
 
-- For each document (abstract), they selected the two topics with the highest probability (minimum probability was .1)
+-   For each document (abstract), they selected the two topics with the highest probability (minimum probability was .1)
 
-- To ensure a meaningful interpretation, the authors validated the labels of the inferred topics by manually checking publications from every decade that contained the topic with high probability. 
+-   To ensure a meaningful interpretation, the authors validated the labels of the inferred topics by manually checking publications from every decade that contained the topic with high probability.
 
 ## Core topics in communication research
 
 ![](img/gunther_table1_full.png)
 
-
 ## Evolution of topics over time
 
 ![](img/gunther_fig1.png)
-
 
 ## Type of media researched over time
 
 ![](img/gunther_fig4.png)
 
-
 # Conclusions and outlook {background-color="steelblue"}
 
 ## What is the state of the art?
 
-- LDA is still one of the most used approaches to topic modeling and performs well in many circumstances
+-   LDA is still one of the most used approaches to topic modeling and performs well in many circumstances
 
-- Yet, there are many new approaches including e.g., structural topic modeling (see R package `stm`; Roberts et al., 2019)
-    
-    - an extension of LDA that allow us to explicitly model text metadata such as date or author as covariates of the topic prevalence and/or topic words distributions
-    - Text contextual information into account!
+-   Yet, there are many new approaches including e.g., structural topic modeling (see R package `stm`; Roberts et al., 2019)
 
-- Recent advances have been made by using pre-trained transformer-based language models (BERT, BERTopic; Grootendorst, 2022) 
+    -   an extension of LDA that allow us to explicitly model text metadata such as date or author as covariates of the topic prevalence and/or topic words distributions
+    -   Text contextual information into account!
 
-    - generates document embedding with pre-trained transformer-based language models
-    - clusters these embeddings
-    - generates topic representations with the class-based TF-IDF procedure.
+-   Recent advances have been made by using pre-trained transformer-based language models (BERT, BERTopic; Grootendorst, 2022)
+
+    -   generates document embedding with pre-trained transformer-based language models
+    -   clusters these embeddings
+    -   generates topic representations with the class-based TF-IDF procedure.
 
 ## Conclusion
 
 ::: {.column width="45%"}
-
 ![](img/topic_slides/Slide4.png)
-
 :::
+
 ::: {.column width="5%"}
 :::
+
 ::: {.column width="45%"}
+-   Topic Modeling reduces the dimensionality of a document-term matrix by clustering words and documents into "latent" topics
 
-- Topic Modeling reduces the dimensionality of a document-term matrix by clustering words and documents into "latent" topics
+-   Interpretation of resulting "topic solutions" must be done by the researcher (face validity)
 
-- Interpretation of resulting "topic solutions" must be done by the researcher (face validity)
+-   LDA is driven by the Dirichlet process that yields distributions
 
-- LDA is driven by the Dirichlet process that yields distributions 
+    -   skewed towards few topics, but controllable with alpha parameter
 
-  - skewed towards few topics, but controllable with alpha parameter
-  
-- Gibbs sampling is a non-deterministic way to fit LDA models
-
+-   Gibbs sampling is a non-deterministic way to fit LDA models
 :::
-
 
 # Thank you for your attention! {background-color="steelblue"}
 
@@ -1090,21 +1019,21 @@ Jacobi,C., van Atteveldt, W. & Welbers, K. (2016) Quantitative analysis of large
 
 ## References {.smaller}
 
-- Blei, D. M., Ng, A. Y., & Jordan, M. I. (2003). Latent dirichlet allocation. Journal of machine Learning research, 3(Jan), 993-1022.
+-   Blei, D. M., Ng, A. Y., & Jordan, M. I. (2003). Latent dirichlet allocation. Journal of machine Learning research, 3(Jan), 993-1022.
 
-- Grootendorst, M. (2022). BERTopic: Neural topic modeling with a class-based TF-IDF procedure. arXiv preprint arXiv:2203.05794
+-   Grootendorst, M. (2022). BERTopic: Neural topic modeling with a class-based TF-IDF procedure. arXiv preprint arXiv:2203.05794
 
-- Roberts, M. E., Stewart, B. M., & Tingley, D. (2019). Stm: An R package for structural topic models. Journal of Statistical Software, 91, 1-40.
+-   Roberts, M. E., Stewart, B. M., & Tingley, D. (2019). Stm: An R package for structural topic models. Journal of Statistical Software, 91, 1-40.
 
-- Steyvers, M., & Griffiths, T. (2007). Probabilistic topic models. In Handbook of latent semantic analysis (pp. 439-460). Psychology Press.
+-   Steyvers, M., & Griffiths, T. (2007). Probabilistic topic models. In Handbook of latent semantic analysis (pp. 439-460). Psychology Press.
 
-- van Atteveldt, W., Trilling, D., & Calderon, C. A. (2022). Computational Analysis of Communication. John Wiley & Sons.
+-   van Atteveldt, W., Trilling, D., & Calderon, C. A. (2022). Computational Analysis of Communication. John Wiley & Sons.
 
 ------------------------------------------------------------------------
 
 ## Example Exam Question (Multiple Choice)
 
-Which of the following statements is false? In an LDA model...
+Which of the following statements is correct? In an LDA model...
 
 A. ...each word can be in every topic and every document can be about every topic.
 
@@ -1112,12 +1041,11 @@ B. ...each word is linked to one specific topic, but every document can be about
 
 C. ...each word can be in every topic, but every document is about one specific topic.
 
-D. ...each word is linke to one specific topic and every document is about one specific topic. 
-
+D. ...each word is linked to one specific topic and every document is about one specific topic.
 
 ## Example Exam Question (Multiple Choice)
 
-Which of the following statements is false? In an LDA model...
+Which of the following statements is correct? In an LDA model...
 
 **A. ...each word can be in every topic and every document can be about every topic.**
 
@@ -1125,21 +1053,14 @@ B. ...each word is linked to one specific topic, but every document can be about
 
 C. ...each word can be in every topic, but every document is about one specific topic.
 
-D. ...each word is linke to one specific topic and every document is about one specific topic. 
-
-
+D. ...each word is linked to one specific topic and every document is about one specific topic.
 
 ## Example Exam Question (Open Question)
-
 
 Why is it important to carefully consider preprocessing steps in topic modelling?
 
 . . .
 
-A topic model does not analyse documents directly, but uses a so-called docu-
-ment–term matrix based on these documents. This matrix lists the frequency for each
-term (word) in each document. The first step in creating this matrix is tokenization,
-which means splitting the text into a list of words. For many machine learning approaches, no further steps are necessary. However, for topic modeling it is worth considering whether further preprocessing steps such as stemming or lemmatization, removal of stopwords (or otherwise frequent but non-informative words) or frequency trimming is fruitful as they can signicantly improve the interpretability of the resulting topics. 
+A topic model does not analyse documents directly, but uses a so-called docu- ment--term matrix based on these documents. This matrix lists the frequency for each term (word) in each document. The first step in creating this matrix is tokenization, which means splitting the text into a list of words. For many machine learning approaches, no further steps are necessary. However, for topic modeling it is worth considering whether further preprocessing steps such as stemming or lemmatization, removal of stopwords (or otherwise frequent but non-informative words) or frequency trimming is fruitful as they can signicantly improve the interpretability of the resulting topics.
 
-For example, stopwords do not really represent "topics". If they are kept in the document-term matrix, they would drive the topic selection in undesirable ways. Furthermore, differently conjugated words could end up in different topics, even though they stand for the same topic. Hence stemming or lemmatizing is usually a good choice for topic modelling.  
-
+For example, stopwords do not really represent "topics". If they are kept in the document-term matrix, they would drive the topic selection in undesirable ways. Furthermore, differently conjugated words could end up in different topics, even though they stand for the same topic. Hence stemming or lemmatizing is usually a good choice for topic modelling.
