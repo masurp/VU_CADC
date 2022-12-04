@@ -33,9 +33,9 @@ editor: visual
 
 _see Wickham & Grolemund, 2014_
 
----
 
-# Example: Political migration discourse on Facebook 
+
+## Example: Political migration discourse on Facebook 
 
 
 1. Import: Scraping data from Facebook and importing it into R
@@ -52,7 +52,7 @@ _see Wickham & Grolemund, 2014_
 
 _Heidenreich et al., 2019_
 
----
+
 
 # What exactly did you learn in this (and previous) courses?{background-color="steelblue"}
 
@@ -65,9 +65,9 @@ _Heidenreich et al., 2019_
 
 - **Multiple linear regression:** Predicting a dependent variable with multiple independent variables
         
-      - With numeric variables
-      - With categorical variables
-      - Testing assumptions
+  - With numeric variables
+  - With categorical variables
+  - Testing assumptions
       
 - **Mediation analysis:** Understanding how something may indirectly affect/relate to something else
 

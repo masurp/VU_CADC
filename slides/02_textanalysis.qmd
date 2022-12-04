@@ -1074,7 +1074,6 @@ How is this used in research?
 
 -   We always need to validate model our analyis using manually coded material
 
-
 # Thank you for your attention! {background-color="steelblue"}
 
 ## Required Reading
