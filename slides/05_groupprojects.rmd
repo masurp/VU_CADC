@@ -39,9 +39,9 @@ output:
 
 ---
 
-# You survived R...
+## You survived R and text analysis...
 
-![](https://memegenerator.net/img/instances/36091441.jpg)
+![](https://miro.medium.com/max/400/1*V9iViGtxOnBE3_Y8SzIJCg.jpeg)
 ---
 
 class: inverse, center, middle
@@ -68,7 +68,7 @@ _see Wickham & Grolemund, 2014_
 
 2. Tidy: Removing noise, summarizing data to creating a tidy data set
 
-3. Transform: Transforming the data into a document-feature matrix and run a sentiment analysist to classify the tweets
+3. Transform: Transforming the data into a document-feature matrix and run a sentiment analysis to classify the tweets
 
 4. Model: Predicting sentiment towards migration with party ideology
 

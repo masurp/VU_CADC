@@ -28,6 +28,70 @@
       margin: 0 0.8em 0.2em -1.6em;
       vertical-align: middle;
     }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="05_groupprojects_files/libs/revealjs/dist/theme/quarto.css" id="theme">
   <link href="05_groupprojects_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -329,14 +393,13 @@
   <p class="author">Dr.&nbsp;Philipp K. Masur</p>
 </section>
 
-<section>
-<section id="you-survived-r" class="title-slide slide level1 center">
-<h1>You survived R…</h1>
+<section id="you-survived-r-and-text-analysis" class="slide level2">
+<h2>You survived R and text analysis…</h2>
 
-</section>
+<img data-src="https://miro.medium.com/max/400/1*V9iViGtxOnBE3_Y8SzIJCg.jpeg" class="r-stretch"></section>
 <section class="slide level2">
 
-</section></section>
+</section>
 <section>
 <section id="what-was-this-course-about" class="title-slide slide level1 center" data-background-color="steelblue">
 <h1>What was this course about?</h1>
@@ -358,7 +421,11 @@
 <li><p>Communicate: Creating a table and figure and report results in text</p></li>
 </ol>
 <p><em>Heidenreich et al., 2019</em></p>
-</section></section>
+</section>
+<section id="results-of-heidenreich-et-al." class="slide level2">
+<h2>Results of Heidenreich et al.</h2>
+
+<img data-src="img/heidenreich_table3.png" class="r-stretch"></section></section>
 <section>
 <section id="what-exactly-did-you-learn-in-this-and-previous-courses" class="title-slide slide level1 center" data-background-color="steelblue">
 <h1>What exactly did you learn in this (and previous) courses?</h1>
@@ -393,6 +460,64 @@
 </ul>
 </div>
 </section>
+<section id="in-r" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">In R…</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb1-1" class="hljs-ln-code"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2" class="hljs-ln-code"><a href="#cb1-2"></a>d <span class="ot">&lt;-</span> mtcars <span class="sc">%&gt;%</span> <span class="fu">select</span>(mpg, hp, wt)</span>
+<span id="cb1-3" class="hljs-ln-code"><a href="#cb1-3"></a>m <span class="ot">&lt;-</span> <span class="fu">lm</span>(mpg <span class="sc">~</span> hp, d)</span>
+<span id="cb1-4" class="hljs-ln-code"><a href="#cb1-4"></a><span class="fu">summary</span>(m)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = mpg ~ hp, data = d)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-5.7121 -2.1122 -0.8854  1.5819  8.2360 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 30.09886    1.63392  18.421  &lt; 2e-16 ***
+hp          -0.06823    0.01012  -6.742 1.79e-07 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 3.863 on 30 degrees of freedom
+Multiple R-squared:  0.6024,    Adjusted R-squared:  0.5892 
+F-statistic: 45.46 on 1 and 30 DF,  p-value: 1.788e-07</code></pre>
+</div>
+</div>
+</section>
+<section id="and-visualized" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">…and visualized</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb3-1" class="hljs-ln-code"><a href="#cb3-1"></a>d<span class="sc">$</span>predicted <span class="ot">&lt;-</span> <span class="fu">predict</span>(m)   </span>
+<span id="cb3-2" class="hljs-ln-code"><a href="#cb3-2"></a>d<span class="sc">$</span>residuals <span class="ot">&lt;-</span> <span class="fu">residuals</span>(m)</span>
+<span id="cb3-3" class="hljs-ln-code"><a href="#cb3-3"></a></span>
+<span id="cb3-4" class="hljs-ln-code"><a href="#cb3-4"></a><span class="fu">ggplot</span>(d, <span class="fu">aes</span>(<span class="at">x =</span> hp, <span class="at">y =</span> mpg)) <span class="sc">+</span></span>
+<span id="cb3-5" class="hljs-ln-code"><a href="#cb3-5"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb3-6" class="hljs-ln-code"><a href="#cb3-6"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span></span>
+<span id="cb3-7" class="hljs-ln-code"><a href="#cb3-7"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="05_groupprojects_files/figure-revealjs/unnamed-chunk-2-1.png" width="480" class="r-stretch"></section>
+<section id="and-visualized-1" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">…and visualized</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb4-1" class="hljs-ln-code"><a href="#cb4-1"></a>d<span class="sc">$</span>predicted <span class="ot">&lt;-</span> <span class="fu">predict</span>(m)   </span>
+<span id="cb4-2" class="hljs-ln-code"><a href="#cb4-2"></a>d<span class="sc">$</span>residuals <span class="ot">&lt;-</span> <span class="fu">residuals</span>(m)</span>
+<span id="cb4-3" class="hljs-ln-code"><a href="#cb4-3"></a></span>
+<span id="cb4-4" class="hljs-ln-code"><a href="#cb4-4"></a><span class="fu">ggplot</span>(d, <span class="fu">aes</span>(<span class="at">x =</span> hp, <span class="at">y =</span> mpg)) <span class="sc">+</span></span>
+<span id="cb4-5" class="hljs-ln-code"><a href="#cb4-5"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb4-6" class="hljs-ln-code"><a href="#cb4-6"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> F) <span class="sc">+</span></span>
+<span id="cb4-7" class="hljs-ln-code"><a href="#cb4-7"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">xend =</span> hp, <span class="at">yend =</span> predicted), <span class="at">alpha =</span> .<span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb4-8" class="hljs-ln-code"><a href="#cb4-8"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="05_groupprojects_files/figure-revealjs/unnamed-chunk-3-1.png" width="480" class="r-stretch"></section>
 <section id="p2-comp.-analysis-of-digital-communication" class="slide level2">
 <h2>P2: Comp. Analysis of Digital Communication</h2>
 <div class="column" style="width:45%;">
@@ -429,6 +554,7 @@
 </ul>
 </div>
 </section></section>
+<section>
 <section id="additional-methods" class="title-slide slide level1 center">
 <h1>Additional methods</h1>
 <p>We have created more knowledge clips and tutorials that you can work through by yourself. These tutorials cover some things that you already know (but haven’t done in R) and some things that might be interesting for the research projects:</p>
@@ -457,7 +583,42 @@
 </ul>
 </div>
 </section>
+<section id="in-r-1" class="slide level2">
+<h2>In R…</h2>
+<div class="cell" data-r.options="{&quot;width&quot;:120}">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">library</span>(quanteda)</span>
+<span id="cb5-2"><a href="#cb5-2"></a>url <span class="ot">&lt;-</span> <span class="st">'https://bit.ly/2QoqUQS'</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>corp <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(url) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-4"><a href="#cb5-4"></a>  <span class="fu">mutate</span>(<span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a>  <span class="fu">corpus</span>(d, <span class="at">text_field =</span> <span class="st">'text'</span>, <span class="at">docid_field =</span> <span class="st">"id"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a>  <span class="fu">tokens</span>(<span class="at">remove_punct =</span> T, <span class="at">remove_numbers =</span> T, <span class="at">remove_symbols =</span> T) <span class="sc">%&gt;%</span>   </span>
+<span id="cb5-7"><a href="#cb5-7"></a>  tokens_tolower <span class="sc">%&gt;%</span>                                                    </span>
+<span id="cb5-8"><a href="#cb5-8"></a>  <span class="fu">tokens_remove</span>(<span class="fu">stopwords</span>(<span class="st">'en'</span>)) <span class="sc">%&gt;%</span>                                     </span>
+<span id="cb5-9"><a href="#cb5-9"></a>  tokens_wordstem <span class="sc">%&gt;%</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a>  dfm</span>
+<span id="cb5-11"><a href="#cb5-11"></a>corp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Document-feature matrix of: 23,469 documents, 16,032 features (99.78% sparse) and 4 docvars.
+    features
+docs embrac great satisfact opportun now present congratul favor prospect public
+   1      1     1         1        1   1       2         1     1        1      1
+   2      0     0         0        0   0       1         0     0        0      0
+   3      0     0         0        0   0       0         0     0        0      0
+   4      0     0         0        0   0       0         0     0        0      0
+   5      0     0         0        0   0       0         0     0        0      0
+   6      0     0         0        0   0       0         0     0        0      0
+[ reached max_ndoc ... 23,463 more documents, reached max_nfeat ... 16,022 more features ]</code></pre>
+</div>
+</div>
+</section>
+<section id="visualized" class="slide level2">
+<h2>Visualized</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">library</span>(quanteda.textplots)</span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="fu">textplot_wordcloud</span>(corp, <span class="at">max_words =</span> <span class="dv">50</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
+</div>
+<img data-src="05_groupprojects_files/figure-revealjs/unnamed-chunk-5-1.png" width="480" class="r-stretch"></section></section>
 <section>
 <section id="what-happens-now" class="title-slide slide level1 center" data-background-color="steelblue">
 <h1>What happens now?</h1>
@@ -924,6 +1085,48 @@
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          // dispatch for htmlwidgets
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for reveal
+        if (window.Reveal) {
+          window.Reveal.addEventListener("slidechanged", function(event) {
+            fireSlideChanged(event.previousSlide, event.currentSlide);
+          });
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {

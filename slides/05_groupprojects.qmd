@@ -14,7 +14,9 @@ format:
 editor: visual
 ---
 
-# You survived R...
+## You survived R and text analysis...
+
+![](https://miro.medium.com/max/400/1*V9iViGtxOnBE3_Y8SzIJCg.jpeg)
 
 ---
 
@@ -52,6 +54,9 @@ _see Wickham & Grolemund, 2014_
 
 _Heidenreich et al., 2019_
 
+## Results of Heidenreich et al.
+
+![](img/heidenreich_table3.png)
 
 
 # What exactly did you learn in this (and previous) courses?{background-color="steelblue"}
@@ -90,6 +95,56 @@ _Heidenreich et al., 2019_
 
 
 :::
+
+
+## In R...{auto-animate="true"}
+
+
+
+```{r}
+#| echo: true
+#| output-location: fragment
+library(tidyverse)
+d <- mtcars %>% select(mpg, hp, wt)
+m <- lm(mpg ~ hp, d)
+summary(m)
+
+```
+
+
+## ...and visualized{auto-animate="true"}
+
+```{r}
+#| echo: true
+#| fig-width: 5
+#| fig-height: 4.5
+d$predicted <- predict(m)   
+d$residuals <- residuals(m)
+
+ggplot(d, aes(x = hp, y = mpg)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  theme_classic()
+```
+
+
+## ...and visualized{auto-animate="true"}
+
+```{r}
+#| echo: true
+#| fig-width: 5
+#| fig-height: 4.5
+d$predicted <- predict(m)   
+d$residuals <- residuals(m)
+
+ggplot(d, aes(x = hp, y = mpg)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = F) +
+  geom_segment(aes(xend = hp, yend = predicted), alpha = .2) +
+  theme_classic()
+```
+
+
 
 
 ## P2: Comp. Analysis of Digital Communication
@@ -157,6 +212,35 @@ We have created more knowledge clips and tutorials that you can work through by 
 - **Advanced Text Analysis**: Structural topic modeling
     
 :::
+
+## In R...
+
+```{r, R.options = list(width = 120)}
+#| echo: true
+library(quanteda)
+url <- 'https://bit.ly/2QoqUQS'
+corp <- read_csv(url) %>% 
+  mutate(id = 1:n()) %>%
+  corpus(d, text_field = 'text', docid_field = "id") %>%
+  tokens(remove_punct = T, remove_numbers = T, remove_symbols = T) %>%   
+  tokens_tolower %>%                                                    
+  tokens_remove(stopwords('en')) %>%                                     
+  tokens_wordstem %>%
+  dfm
+corp
+```
+
+
+## Visualized
+
+```{r}
+#| echo: true
+#| fig-width: 5
+#| fig-height: 4.5
+library(quanteda.textplots)
+textplot_wordcloud(corp, max_words = 50)
+```
+
 
 # What happens now?{background-color="steelblue"}
 
