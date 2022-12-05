@@ -205,6 +205,7 @@ In the third part of the course, students will work on their own research projec
     
 - Basic Statistics in R
     - [Basic Statistics (ANOVA, regression, t-test, etc.)](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/simple_modeling.md) ([Video tutorial](https://www.youtube.com/watch?v=1K3SKsEj9eI)) 
+    - [Mediation Analysis](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/mediation_analysis.md)
 
 - Test theory and factor analyses
     - [Test theory and confirmatory factor analyses](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R_test-theory_1_cfa.md) ([Video tutorial](https://www.youtube.com/watch?v=uKlagNgC-GY))
@@ -214,9 +215,10 @@ In the third part of the course, students will work on their own research projec
     - [Advanced Statistics Overview](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/advanced_modeling.md)
     - [Generalized linear model](https://htmlpreview.github.io/?https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/generalized_linear_models.html) ([Video tutorial](https://www.youtube.com/watch?v=WnmwuD8OwMw&list=PL-i7GM-A1wBarcTV3wN2f-AAuEK3j76M0&index=3))
     - [Multilevel Modeling](https://htmlpreview.github.io/?https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/multilevel_models.html) ([Video tutorial](https://www.youtube.com/watch?v=1Tw1eIfSyEQ&list=PL-i7GM-A1wBarcTV3wN2f-AAuEK3j76M0&index=4))
+    - [Structural Equation Modeling](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R_sem_1_lavaan.md)
     
 - Additional text analysis
-    - [Unsupervised topic modeling](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/r_text_lda.md) ([Video tutorial](https://youtu.be/4YyoMGv1nkc))
+    - [Structural topic modeling](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/r_text_stm.md) ([Video tutorial](https://www.youtube.com/watch?v=37yvQdQw5j8&list=PLjXODJ_lGN_U02yQyZG5YpBgseVpiS9s2&index=3))
     
 - Web Scraping
     - [Web scraping using Rvest](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/rvest.md) ([Video tutorial](https://www.youtube.com/watch?v=9GR26Y4z_v4))
