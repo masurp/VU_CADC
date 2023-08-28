@@ -45,14 +45,12 @@ In the third part of the course, students will work on their own research projec
 #### Practical Session 1: Data Wrangling
 
 - Handouts: 
-    - [Transforming and Summarizing](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_tidy_transforming-and-summarizing.md) ([Version with solutions](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_tidy_transforming-and-summarizing_complete.md))
-    
+    - [Transforming and Summarizing](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_tidy_transforming-and-summarizing.md)
     
 #### Practical Session 2: Data visualization
 
 - Handouts:
-    - [Data Visualization](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_basics_data-visualization.md) ([Version with solutions](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_basics_data-visualization_complete.md))
-
+    - [Data Visualization](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_basics_data-visualization.md) 
    
 #### Homework
 
@@ -87,18 +85,18 @@ In the third part of the course, students will work on their own research projec
 #### Practical Session 1
 
 - Handouts: 
-    - [Basic Text Analysis](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_basics-of-text-analysis.md) ([Version with solutions](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_basics-of-text-analysis_complete.md))
+    - [Basic Text Analysis](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_basics-of-text-analysis.md) 
 
 #### Practical Session 2 
 
 - Handouts: 
 
-  - [Dictionary Approaches](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_dictionary-approaches.md) ([Version with solutions](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_dictionary-approaches_complete.md))
+  - [Dictionary Approaches](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_dictionary-approaches.md)
 
 #### Homework
 
 - Complete this assignment (available on canvas in the module "Homework Templates & Datasets)
-    - 02_homework_assignment.rmd ([Version with solutions](https://github.com/masurp/VU_CADC/blob/main/homework/02_homework_assignment_complete.md))
+    - 02_homework_assignment.rmd 
 
 #### Additional resources
 
@@ -117,18 +115,18 @@ In the third part of the course, students will work on their own research projec
 #### Practical Session 1
 
 - Handouts: 
-    - [Supervised text classification I](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_supervised-text-classification.md) ([Version with Solutions](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_supervised-text-classification_complete.md))
+    - [Supervised text classification I](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_supervised-text-classification.md) 
 
 #### Practical Session 2
 
 - Handouts:
-    - [Supervised text classification II](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_supervised-text-classification_part-II.md) ([Version with Solutions](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_supervised-text-classification_part-II_complete.md) )
+    - [Supervised text classification II](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_supervised-text-classification_part-II.md) 
     
 
 #### Homework
 
 - Complete this assignment (available on canvas in the module "Homework Templates & Datasets)
-    - 03_homework_assignment.rmd ([Version with solutions](https://github.com/masurp/VU_CADC/blob/main/homework/03_homework_assignment_complete.md))
+    - 03_homework_assignment.rmd 
     
 #### Additional resources: 
 
@@ -148,12 +146,12 @@ In the third part of the course, students will work on their own research projec
 #### Practical Session 1
 
 - Handouts: 
-    - [Unsupervised text classification I](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_unsupervised-text-classification.md) ([Version with Solutions](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_unsupervised-text-classification_complete.md))
+    - [Unsupervised text classification I](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_unsupervised-text-classification.md) 
 
 #### Practical Session 2
 
 - Handouts:
-    - [Unsupervised text classification II](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_unsupervised-text-classification-II.md) ([Version with Solutions](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_unsupervised-text-classification-II_complete.md))
+    - [Unsupervised text classification II](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_unsupervised-text-classification-II.md) 
     
 
 #### Homework
