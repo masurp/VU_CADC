@@ -13,12 +13,12 @@ library(tidyverse)
 library(knitr)
 library(kableExtra)
 tribble(~Class, ~Teacher, ~Time, ~Room,
-        "Lectures", "Dr. Philipp Masur", "Monday  9:00am", "HG-14A00",
-        "Practical Session 1", "Dr. Alberto López Ortega", "Wednesday, 9:00 & Thursday, 13:30", "HG-05A37",
-        "Practical Session 2", "Dr. Alberto López Ortega", "Wednesday, 11:00 & Thursday, 15:30", "HG-05A37",
-        "Practical Session 3", "Santiago Gómez-Echeverry", "Wednesday, 9:00 & Friday, 09:00", "HG-05A36 & HG-05A37",
-        "Practical Session 4", "Santiago Gómez-Echeverry", "Wednesday, 11:00 & Friday, 11:00", "HG-05A36",
-        "Practical Session 5", "Dr. Kasper Welbers", "Wednesday, 9:00 & Friday, 09:00", "HG-06A37 & BV-0H53") %>%
+        "Lectures", "Dr. Philipp Masur", "Monday  9:00am", "Theater3-NU-2C33",
+        "Practical Session 1", "tba", "Tuesday, 9:00 & Thursday, 11:00", "HG-05A36",
+        "Practical Session 2", "tba", "Tuesday, 11:00 & Thursday, 09:00", "HG-05A36",
+        "Practical Session 3", "tba", "Tuesday, 9:00 & Thursday, 11:00", "HG-05A37",
+        "Practical Session 4", "tba", "Tuesday, 11:00 & Thursday, 9:00", "HG-05A37",
+        "Practical Session 5", "tba", "Tuesday, 9:00 & Thursday, 11:00", "HG-06A37") %>%
   kable(format = "html") %>%
   kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive")) %>%
   kable_styling(fixed_thead = T) %>%
