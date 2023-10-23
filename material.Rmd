@@ -115,7 +115,7 @@ In the third part of the course, students will work on their own research projec
 #### Practical Session 1
 
 - Handouts: 
-    - [Supervised text classification with Naive Bayes and SVM] tba
+    - [Supervised text classification using Naive Bayes and SVM] tba
 
 #### Practical Session 2
 
