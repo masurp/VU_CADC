@@ -23,7 +23,7 @@ Before the first practical session, please make sure that you have R and Rstudio
 
 #### Familiarize yourself with the course
 
-Lectures are every *Monday* (see [overview](overview.html) for exact dates and times). In these lectures, a particular research problem will be introduced and we will discuss methodological solutions. We will get to know respective computational methods and contextualize them within the broader research process. Practical sessions are every **Wednesday*, *Thursday*, and *Friday* (see [overview](overview.html) for exact dates and times). For the practical sessions, the class will be split into 5-6 groups of equal size. In these practical sessions, we will work with RStudio and ran analyses on real-world data sets. We therefore engage in various data analytic exercises. We expect you to: 
+Lectures are every *Monday* from 9-10.45 (see [overview](overview.html) for exact dates and times). In these lectures, a particular research problem will be introduced and we will discuss methodological solutions. We will get to know respective computational methods and contextualize them within the broader research process. Practical sessions are every **Tuesday* and *Thursday* between 9-10.45 or 11-12.45 (again see [overview](overview.html) for exact dates and times). For the practical sessions, the class will be split into 5-6 groups of equal size. In these practical sessions, we will work with RStudio and ran analyses on real-world data sets. We therefore engage in various data analytic exercises. We expect you to: 
 
 - Bring your own computer
 - Run the scripts and work through the code 
@@ -37,20 +37,20 @@ In the third part of the course, students will work on their own research projec
 
 ## Week 1
 
-#### Lecture: Introduction to Computational Methods
+#### Lecture: Introduction to Computational Methods in Communication Science
 
 - Slides Lecture 1:
-    - [Download Slides](slides/01_introduction.html)
+    - [Download Slides] tba
 
 #### Practical Session 1: Data Wrangling
 
 - Handouts: 
-    - [Transforming and Summarizing](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_tidy_transforming-and-summarizing.md)
+    - [Data Wrangling usig the tidyverse and tidytext] tba
     
 #### Practical Session 2: Data visualization
 
 - Handouts:
-    - [Data Visualization](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_basics_data-visualization.md) 
+    - [Exploratory Data Analysis and Data Visualization] tba 
    
 #### Homework
 
@@ -61,7 +61,7 @@ In the third part of the course, students will work on their own research projec
 
     
 - Complete this assignment (available on canvas in the module "Homework Templates & Datasets)
-    - 01_homework_assignment.rmd ([Version with solutions](https://github.com/masurp/VU_CADC/blob/main/homework/01_homework_assignment_complete.md))
+    - 01_homework_assignment.rmd
  
 
 #### Additional resources
@@ -77,21 +77,21 @@ In the third part of the course, students will work on their own research projec
 
 ## Week 2
 
-#### Lecture: Text as Data - Basics of Automatic Text Analysis
+#### Lecture: Automated Text Analysis and Dictionary Approaches
 
 - Slides Lecture 2:
-    - [Download Slides](slides/02_textanalysis.html)
+    - [Download Slides](tba)
 
 #### Practical Session 1
 
 - Handouts: 
-    - [Basic Text Analysis](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_basics-of-text-analysis.md) 
+    - [Basic Text Analysis using tidytext] tba 
 
 #### Practical Session 2 
 
 - Handouts: 
 
-  - [Dictionary Approaches](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_dictionary-approaches.md)
+   - [Dictionary Approaches using tidytext] tba
 
 #### Homework
 
@@ -107,20 +107,20 @@ In the third part of the course, students will work on their own research projec
 
 ## Week 3
 
-#### Lecture: Machine Learning - Supervised Text Classification
+#### Lecture: Text Classification and Classic Machine Learning
 
 - Slides Lecture 3:
-    - [Download Slides](slides/03_supervisedlearning.html)
+    - [Download Slides] tba
 
 #### Practical Session 1
 
 - Handouts: 
-    - [Supervised text classification I](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_supervised-text-classification.md) 
+    - [Supervised text classification using Naive Bayes and SVM] tba
 
 #### Practical Session 2
 
 - Handouts:
-    - [Supervised text classification II](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_supervised-text-classification_part-II.md) 
+    - [Supervised text classification with neural networks] tba 
     
 
 #### Homework
@@ -138,20 +138,20 @@ In the third part of the course, students will work on their own research projec
 
 ## Week 4
 
-#### Lecture: Machine Learning - Unsupervised Topic Modeling
+#### Lecture: Word Embeddings, Transformers and Large Language Models
 
 - Slides Lecture 4:
-    - [Download Slides](slides/04_unsupervisedlearning.html)
+    - [Download Slides] tba
 
 #### Practical Session 1
 
 - Handouts: 
-    - [Unsupervised text classification I](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_unsupervised-text-classification.md) 
+    - [Text classification using Transformers] tba
 
 #### Practical Session 2
 
 - Handouts:
-    - [Unsupervised text classification II](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_unsupervised-text-classification-II.md) 
+    - [Zero-Shot Classification using GPT-4] tba
     
 
 #### Homework
@@ -161,7 +161,7 @@ In the third part of the course, students will work on their own research projec
     
 #### Additional resources: 
 
-- Chapter 11 in [Computational Analysis of Communication](https://cssbook.net/) by Van Atteveldt et al. 
+- tba
 
 <br>
 <hr>
@@ -171,9 +171,9 @@ In the third part of the course, students will work on their own research projec
 #### Exam week 
 
 - Date and Time of the Exam
-    - **Date:** 2nd December 2022
+    - **Date:** 1st December 2023
     - **Time:** 08:30am
-    - **Location:** TenT (blok1 Blauw; blok 4 Lime; both DDX & DTX)
+    - **Location:** (T) TenT blok 2 Rood (85) (T) TenT blok 5 Wit (45)
     - Make sure to be there on time
     
 - Format
@@ -184,7 +184,7 @@ In the third part of the course, students will work on their own research projec
 - What do you need to know?
     - Content of the lectures
     - The required readings (see lecture slides and Canvas)
-    - The practical sessions will further help to deepen your understanding of the concepts and approaches (e.g., how to interpret results), but you will not be required to write R code in the exam.
+    - The practical sessions will further help to deepen your understanding of the concepts and approaches (e.g., how to interpret results). While you will not be required to write R code in the exam, we expect you to be able to read it and interpret R output.
 
 <br>
 <hr>
@@ -194,7 +194,7 @@ In the third part of the course, students will work on their own research projec
 #### Introduction to Group Research Projects
 
 - Slides Lecture 5:
-    - [Download Slides](slides/05_groupprojects.html)
+    - [Download Slides](tba)
     
 #### Additional methods and resources (handouts and video tutorials)
 
@@ -216,6 +216,7 @@ In the third part of the course, students will work on their own research projec
     - [Structural Equation Modeling](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/R_sem_1_lavaan.md)
     
 - Additional text analysis
+    - [LDA topic modeling](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/tidytext-topicmodel.md)
     - [Structural topic modeling](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/r_text_stm.md) ([Video tutorial](https://www.youtube.com/watch?v=37yvQdQw5j8&list=PLjXODJ_lGN_U02yQyZG5YpBgseVpiS9s2&index=3))
     
 - Web Scraping
@@ -233,7 +234,9 @@ In the third part of the course, students will work on their own research projec
 
 - At a final "mini-conference", you will present the findings of your research projects!
 
-- Time and Date: tba
+- Date: 18th December 2023
+
+- Time: 09.00 to 12.00
 
     - There will be three parallel sessions
     - More information soon (including exact schedule)
