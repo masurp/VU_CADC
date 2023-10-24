@@ -81,7 +81,7 @@ In the third part of the course, students will work on their own research projec
 #### Lecture: Automated Text Analysis and Dictionary Approaches
 
 - Slides Lecture 2:
-    - [Download Slides](tba)
+    - [Download Slides] tba
 
 #### Practical Session 1
 
