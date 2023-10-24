@@ -1,0 +1,1124 @@
+---
+title: "Computational Analysis of Digital Communication"
+subtitle: "Week 1: Introduction to Computational Methods in Communication Science"
+author: "Dr. Philipp K. Masur"
+format:
+  revealjs: 
+    theme: [default, theme.scss]
+    logo: img/logo.png
+    background-transition: fade
+    footer: Computational Analysis of Digital Communication
+    slide-number: c/t
+    title-slide-attributes:
+        data-background-image: https://storage.googleapis.com/exenzo-jobboard/bb/public/thumb/logo-jpg-57.jpg
+        data-background-position: "top right"
+        data-background-size: auto
+editor: visual
+---
+
+
+
+## {background="#43464B" background-video="video/world.mp4" background-video-loop="true" background-video-muted="true"}
+
+
+## Increasing amount of data available online
+
+![](img/hilbert_lopez.png){width=80%}
+
+<span style="font-size:0.6em;">Hilbert & Lopez, 2011</span>
+
+## TIMELINE OF NATURAL LANGUAGE PROCESSING {transition="slide-out"}
+
+![](img/timeline/Slide1.png)
+
+## TIMELINE OF NATURAL LANGUAGE PROCESSING {transition="slide-in slide-out"}
+
+![](img/timeline/Slide2.png)
+
+## TIMELINE OF NATURAL LANGUAGE PROCESSING {transition="slide-in"}
+
+![](img/timeline/Slide3.png)
+
+## {background="#43464B" background-video="video/gpt.mov" background-video-loop="true" background-video-muted="true"}
+
+
+## Much of what we know about human behavior...
+
+::: columns
+::: {.column width="45%"}
+...is based on what people tell us:
+
+- in self-report measures in surveys
+- in responses in experimental research
+- in qualitative interviews
+
+<br>
+
+**Note:** Although valuable, this measurements can be biased (Scharkow, 2013; Parry et al., 2021)!
+
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="45%"}
+
+![](img/survey.jpg)
+:::
+:::: 
+
+
+## But a lot of (mass) communication looks like this...
+
+
+![](img/nyt_page.png){.absolute top=150 left=0 width="600"}
+
+![](img/travel.png){.absolute top=50 right=0 width="450"}
+
+![](img/volkskrant.png){.absolute bottom=0 right=50 width="500"}
+
+
+
+## ...or is based on user-generated content
+
+![](https://blog.hootsuite.com/wp-content/uploads/2022/04/instagram-video-2.png){.absolute top=40 right=0 width="600"}
+
+![](img/tiktok.png){.absolute top=150 left=0 width="600"}
+
+
+![](img/socialmediafeed.jpg){.absolute bottom=40 right=150 width="200"}
+
+# How can we analyze large amount of texts? {background-color="steelblue"}
+
+This is what we will learn in this course!
+
+
+## Objectives and Learning goals
+
+:::: {.columns}
+
+::: {.column width=50%}
+
+After completion of the course, you will...
+
+1.   be able to identify data analytic problems, analyze them critically, and find appropriate solutions
+
+2.   have a good understanding of the general text classification pipeline 
+
+3.   have knowledge about different approaches of text classification (incl. machine learning, large language models...)
+    
+:::
+
+::: {.column width=50%}
+
+![](https://miro.medium.com/v2/resize:fit:708/1*UBQsA95cecKRUxLNFbXf4g.png)
+
+:::
+
+::::
+
+
+## Skills and methods
+
+:::: {.columns}
+
+::: {.column width=55%}
+
+With regard to the specific methods being taught in R, you will be able to...
+
+-   gather, potentially scrape, and import data from different file types, APIs, and websites
+
+-   link data from different sources to create new insights
+
+-   clean and transform messy data into a tidy data format ready for text classification and analysis
+
+-   use different approaches (e.g., dictionary, classical machine learning, transformer, LLMs) to extract information from textual data
+
+-   perform statistical analyses on the substantive data
+:::
+
+::: {.column width=5%}
+
+:::
+
+::: {.column width=40%}
+
+![](img/example_ML.png)
+
+:::
+
+::::
+
+
+## Content of this lecture 
+
+<br><br>
+
+1. What is computational social science?
+
+2. What is computational communication science?
+
+3. Ethics of computational communication research
+
+4. Introduction to automated text analysis
+
+5. The general text classification pipeline
+
+5. Course formalities
+
+
+# What is computational social science? {background-color="steelblue"}
+
+...and why should we care?
+
+
+## Example: Surprising sources of information
+
+::: columns
+::: {.column width="45%"}
+
+-   In 2009, researchers wanted to study wealth and poverty in Rwanda
+
+-   They conducted a survey with a random sample of 1,000 customers of the largest mobile phone provider
+
+-   They collected demographics, social, and economic characteristics (incl. wealth)
+
+-   So far, traditional social science, right?
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="45%"}
+
+-   The authors also had access to complete call records from 1.5 million people
+
+-   Combining both data sources, they used the survey data to "train" a machine learning model to predict a person's wealth based on their call records
+
+-   They also estimated the places of residence based on the geographic information embedded in call records
+:::
+:::
+
+
+<br>
+
+<span style="font-size:0.65em;">Blumenstock, Cadamura, & On, 2015</span>
+
+## {background-image="img/Blumenstock_et_al_Rwanda.png"}
+
+## Computational Social Science
+
+-   Field of social science that uses algorithmic tools and large/unstructured data to understand human and social behavior
+
+-   Complements rather than replaces traditional methodologies: Methods are not the goal, but contribute to data generation
+
+-   Includes methods such as, e.g.,:
+
+    -   Data mining (e.g., scraping and gathering of large data sets)
+    -   Software development for social science experiments
+    -   Automated text analysis (e.g., sentiment analysis, keyword extraction, dictionary approaches)
+    -   Image classification (e.g., face recognition, visual topic modeling)
+    -   Machine learning approaches (e.g., for classification, prediction, topic modeling)
+    -   Actor-based modeling (e.g., simulation of social behavior, spreading of information)
+    -   ...
+
+## Why is this important now?
+
+-   Vast **amounts of digitally available data**, ranging from social media messages and other digital traces to web archives and newly digitized newspaper and other historical archives
+
+-   Large-scale records (**big data**) of persons or businesses are created constantly
+
+-   Powerful and comparatively cheap **processing power**, and easy to use **computing infrastructure** for processing these data
+
+-   Improved **tools to analyze** this data, including network analysis methods and automatic text analysis methods such as supervised text classification, topic modeling, word embeddings, as well as large language models
+
+## 10 Characteristics of Big Data
+
+```{=html}
+<style>
+td {
+  font-size: 22px
+}
+</style>
+```
+
+|  # | Characteristic | Description                                                                                                                                                                                                                                                                     |
+|---|:------|:------------------------------------------------------|
+| 1   | Big            | The scale or volume of some current datasets is often impressive. However, big datasets are not an end in themselves, but they can enable certain kinds of research including the study of rare events, the estimation of heterogeneity, and the detection of small differences |
+| 2   | Always-on      | Many big data systems are constantly collecting data and thus enable to study unexpected events and allow for real-time measurement                                                                                                                                             |
+| 3   | Nonreactive    | Participants are generally not aware that their data are being captured or they have become so accustomed to this data collection that it no longer changes their behavior.                                                                                                     |
+| 4   | Incomplete     | Most big data sources are incomplete, in the sense that they don't have the information that you will want for your research. This is a common feature of data that were created for purposes other than research.                                                              |
+| 5   | Inaccessible   | Data held by companies and governments are difficult for researchers to access.                                                                                                                                                                                                 |
+
+## 10 Characteristics of Big Data
+
+|   #  | Characteristic                 | Description                                                                                                                                   |
+|---|:---------|:------------------------------------------------|
+| 6   | Nonrepresentative              | Most big datasets are nonetheless not representative of certain populations. Out-of-sample generalizations are hence difficult or impossible. |
+| 7   | Drifting                       | Many big data systems are changing constantly, thus making it difficult to study long-term trends                                             |
+| 8   | Algorithmically <br>confounded | Behavior in big data systems is not natural; it is driven by the engineering goals of the systems.                                            |
+| 9   | Dirty                          | Big data often includes a lot of noise (e.g., junk, spam, spurious data points...)                                                            |
+| 10  | Sensitive                      | Some of the information that companies and governments have is sensitive.                                                                     |
+
+<br><br>
+
+<span style="font-size:0.65em;">Salganik, 2017, chap. 2.3</span>
+
+
+## Pro's and Con's of Computational Methods
+
+::: columns
+::: {.column width="45%"}
+
+**Advantages** 
+
+-   We can study actual behavior instead of simply self-reports
+-   We can study human beings in their social context instead of in an artificial lab setting
+-   We can increase our N (higher power)
+-   Potential to uncover patterns and insights that we couldn't investigate before
+
+:::
+::: {.column width="10%"}
+
+:::
+::: {.column width="45%"}
+
+**Disadvantages**
+
+-   Techniques often (rather) complicated
+-   Data is often proprietary (not shared openly)
+-   Samples are often biased
+-   Often, data have only insufficient metadata
+
+:::
+:::
+
+# Computational Communication Science {background-color="steelblue"}
+
+Why computational methods are important for communication research...
+
+## Definition
+
+::: columns
+::: {.column width="70%"}
+<br>
+
+> "Computational Communication Science (CCS) is the label applied to the emerging subfield that investigates the use of computational algorithms to gather and analyze big and often semi- or unstructured data sets to develop and test communication science theories"
+
+<br>
+<p style="font-size:0.75em;">
+*Van Atteveldt & Peng, 2018*
+</p>
+
+:::
+::: {.column width="30%"}
+
+![](img/ccr__cover_hr.png)
+
+:::
+::::
+
+## Typical research areas
+::: columns
+::: {.column width="47.5%"}
+Computational communication science studies thus usually involve:
+
+(1) large and complex data set
+(2) consisting of digital traces and other “naturally occurring” data
+(3) requiring algorithmic solutions to analyze
+(4) allowing the study of human communication by applying and testing communication theory
+
+:::
+::: {.column width="5%"}
+:::
+::: {.column width="47.5%"}
+
+- Political Communication
+
+    - Democratization and Polarization
+    - Hate Speech
+
+- Social Media Use
+
+    - Tracking of social media use and relationships with developmental and health outcome
+    - Spreading of behavior, information or emotions
+
+- Health Communication
+
+    - Prevalence of health information online
+
+
+
+
+:::
+::::
+
+## Example 1: Analyzing news coverage
+
+::: columns
+::: {.column width="35%"}
+
+-   Jacobi and colleagues (2016) analyzed the coverage of nuclear technology from 1945 to 2014 in the New York Times
+
+-   Analysis of 51,528 news stories (headline and lead): Way too much for human coding!
+
+-   Used "LDA topic modeling" to extract latent topics and analyzed their occurrence over time
+:::
+
+::: {.column width="65%"}
+
+![](img/Jacobi_topicmodelling.png)
+
+:::
+:::
+
+## Example 2: Dutch Telegramsphere
+
+::: columns
+::: {.column width="50%"}
+-   Simon et al. (2022) collected the full messaging history (N = 2,033,661) of 174 Dutch-language public Telegram chats/channels
+
+-   Used state-of-the-art web-mining, neural topic modeling, and social network analysis techniques
+
+-   Their findings raise concerns with respect to Telegram's polarization and radicalization capacity
+
+-   They observed that Telegram users are active in and share content across different communities (see Figure on the right)
+:::
+
+::: {.column width="50%"}
+![](img/simon_figure3.png)
+<span style="font-size:0.65em;">Topic similarity network</span>
+
+:::
+:::
+
+
+## Example 2: Dutch Telegramsphere
+
+
+-   They further found that over time, conspiracy-themed, far-right activist, and COVID-19-sceptical communities dominated
+
+::: {layout="[49, 51]"}
+
+![Telegram user activity over time](img/simon_figure4.png)
+
+![The top 20 topics overtime](img/simon_figure5.png)
+:::
+
+
+
+# Ethics of Computational Communication Research {background-color="steelblue"}
+
+Why computational methods and big data can be unethical.
+
+
+## Two (un-)ethical studies?
+
+::: columns
+::: {.column width="45%"}
+::: {style="background: #c3dbe6; padding: 15px; height: 10em; "}
+700,000 Facebook users were put into an experiment that may have altered their emotions. The participants did not give consent and the study was not subject to third party ethical oversight (Kramer et al., 2014)
+:::
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="45%"}
+::: {style="background: #c3dbe6; padding: 15px; height: 10em;"}
+Researcher scraped students' data from Facebook, merged it with university records, used these data for research and then shared them with other researchers (Wimmer & Lewis, 2010).
+:::
+:::
+:::
+
+. . .
+
+<br>
+
+**Question:** Do you think these studies are problematic? If yes, why?
+
+## The "Facebook mood manipulation" study
+
+-   Massive online experiment (N \~ 700k)
+
+-   Main Research Question: Is emotion contagious?
+
+-   Experimental groups: positive / negative / control
+
+-   Stimulus: Hide (negative / positive / random) messages from FB timeline
+
+-   Measurement / dependent variables: sentiment of posts by user
+
+<br><br>
+
+<span style="font-size:0.65em;">Kramer et al., 2014</span>
+
+## Computational Method: Sentiment Analysis
+
+::: columns
+::: {.column width="45%"}
+-   LIWC word list (Linguistic Inquiry and Word Count; Pennebaker et al.)
+
+    -   406 positive words: e.g., love, nice, sweet, etc.
+
+    -   399 negative words: e.g. hurt, ugly, nasty
+
+-   Count occurrences of words in both categories, subtract negative from positive
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="45%"}
+![](img/facebook_pnas.jpg)
+:::
+:::
+
+## Is this good science? Why not?
+
+. . .
+
+-   Positive aspects
+    -   Potentially interesting research question
+    -   Actual behavior measured as well as self-report measures
+
+. . .
+    
+-   Problematic aspects
+    -   Not replicable
+    -   Low internal validity (sentiment even indicative of mood?)
+    -   Low measurement accuracy (Are word counts indicative of sentiment?)
+
+. . .
+
+- Ethical issues
+    -   Overt manipulation of people's life
+    -   No informed consent and no debriefing
+
+
+## Ethical challenges with computational methods
+
+-   More power over participants than in the past
+
+    -   Data collection without awareness/consent
+    -   Manipulation without awareness/consent
+    -   Data potentially sensitive, individual users identifiable
+    -   Privacy and Data Security
+
+. . .
+
+- Tend to reproduce Biases
+
+    - Pre-trained models are known to reproduce bias and discrimination
+    - Large language models (such as GPT) can hallucinate
+    - Need to be careful in using such methods for our research
+    - Validation of utmost importance!
+
+. . .
+
+-  In case of commercial models, privacy of data subjects
+
+    - Should we really share personal information with large tech companies?
+    - Informed consent technically necessary, but often unattainable
+
+
+## General ethical guidelines
+
+Salganik (2013) proposes the following four ethical guidelines for evaluating the ethical nature of a computational study. They are loosely based on the Belmont Report (1978), which is a fundamental document in prescribing ethical guidelines for the protection of human subjects of research.  
+
+- **Respect for persons:** Treating people as autonomous and honoring their wishes
+
+- **Beneficence:** Understanding and improving the risk/benefit profile of a study
+
+- **Justice:** Risks and benefits should be evenly distributed
+
+-  **Respect for law and public interest**: Respect privacy, copyright, and access rights
+
+
+## Ethical principles for computational research
+
+1. **Ownership**: We need to respect that individuals "own" their data
+
+2. **Transparency**: If an individual's personal data is used, they should have transparent access to (information about) the algorithm design used to generate aggregate data sets and be informed about potential harm that can arise from the research (e.g., bias, discrimination)
+    
+3. **Consent:** If an individual or legal entity would like to use personal data, one needs informed and explicitly expressed consent of what personal data moves to whom, when, and for what purpose from the owner of the data (if this is not possible, the risks/benefits profile of a study needs to be acceptable)
+
+4. **Privacy and Data Security:** If data transactions occur all reasonable effort needs to be made to preserve privacy and security, particularly of sensitive personal data
+
+5. **Currency:** Individuals should be aware of financial transactions resulting from the use of their personal data and the scale of these transactions
+
+6. **Openness:** Whenever possible (see point 4), aggregate data sets should be freely available. 
+
+<span style="font-size:0.65em;">Salganik, 2018, chap. 6</span>
+
+
+# Introduction to Automated Text Analysis {background-color="steelblue"}
+
+Understanding text as data!
+
+
+## A "new" kind of data
+
+```{r, echo = F}
+library(tidyverse)
+library(hrbrthemes)
+library(ggthemes)
+library(paletteer)
+library(ggwordcloud)
+```
+
+-   A lot of communication is encoded in texts
+
+-   But text does not look like data we can easily analyze...
+
+<br><br>
+
+::: columns
+::: {.column width="47.5%"}
+**Experimental data**
+
+```{r}
+#| echo: false 
+#| R.options: list(width = 40)
+#| code-line-numbers: true
+#| class-output: output
+tibble(id = c(1:100),
+       condition = rep(c("A", "B"), 50),
+       sns_use = runif(100, min = 1, max = 5),
+       well_being = rnorm(100, 2, 3),
+       pers1 = runif(100, min = 1, max = 7)) %>%
+  head()
+```
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="47.5%"}
+**Text data**
+
+```{r, echo = F,  R.options = list(width = 40)}
+#| code-line-numbers: true
+#| class-output: output
+tibble(text = c("North Korea launched a ballistic missile – possibly from a submarine – into the Sea of Japan, South Korea’s military has said, in the latest in a series of tests by Pyongyang over recent weeks.
+
+One ballistic missile was launched about 10:17am local time from the vicinity of Sinpo, South Korea’s joint chiefs of staff said, where North Korea keeps submarines as well as equipment for test firing submarine-launched ballistic missiles (SLBMs).",
+"Tributes poured in for former Republican secretary of state Colin Powell after the announcement of his death on Monday morning at the age of 84.
+
+Leading praise from the US and around the world, Joe Biden hailed “a dear friend and patriot of unmatched honor and dignity” on behalf of himself and the first lady, Jill Biden.",
+"An Indian couple have arrived for their wedding in unusual style after sailing through the flooded streets of their town in a cooking pot after heavy rains wrecked havoc in the southern state of Kerala.
+
+Footage shared across social media showed the newlyweds squeezed inside the aluminium vessel while two men and a photographer paddled the pair down a submerged street.",
+"Unique events that led to civilisation mean its demise could ‘eliminate meaning in galaxy for ever'",
+"Billionaire Peter Thiel is facing opposition from New Zealand environmental groups over his plans to build a luxury lodge in Wānaka, an alpine town on the South Island.
+
+A company owned by Thiel had lodged a consent application for a sprawling lodge on his property, which would include a “pod” for the owner himself, water features and meditation space. The consent describes “a series of stand-alone buildings, including a lodge for visitor accommodation for up to 24 guests, accommodation pod for the owner, together with associated lodge management buildings, infrastructure, landscape treatment, water features and meditation space”. The earthworks required to build it would cover over 73,700m² of land.", "In some ways, accounts of “human origins” play a similar role for us today as myth did for ancient Greeks or Polynesians. This is not to cast aspersions on the scientific rigour or value of these accounts. It is simply to observe that the two fulfil somewhat similar functions. If we think on a scale of, say, the last 3m years, there actually was a time when someone, after all, did have to light a fire, cook a meal or perform a marriage ceremony for the first time. We know these things happened. Still, we really don’t know how. It is very difficult to resist the temptation to make up stories about what might have happened: stories which necessarily reflect our own fears, desires, obsessions and concerns. As a result, such distant times can become a vast canvas for the working out of our collective fantasies.")) %>%
+  head()
+```
+:::
+:::
+
+
+
+## Traditional *content/text* analysis
+
+
+::: columns
+::: {.column width=55%}
+
+**1.** Selecting the content one wants to analyze
+
+**2.** Choosing the texts that contain the content and one wants to analyze
+
+**3.** Define the units and categories of analysis
+
+**4.** Develop a set of rules for the manual coding process
+
+**5.** Coding the text according to the rules
+
+**6.** Analyze frequencies, relationships, differences, similarities between units/codes
+
+:::
+::: {.column width=45%}
+
+![](https://www.researchgate.net/publication/290265437/figure/fig1/AS:445388512600066@1483200304706/Process-flow-of-a-structured-content-analysis-Mayring-2008-84.png)
+:::
+:::
+
+
+**Problem:** Requires a lot of work and there are always more texts than humans can possibly code manually!
+
+
+## Definition
+
+![](https://www.asc.upenn.edu/sites/default/files/styles/360x360/public/2020-09/Klaus_Krippendorff_360_0.jpg?h=5273c5c2&itok=d-IFcUP8){style="float: right; padding-left: 40px;" width="400"}
+
+> Text analysis is "a research technique for making replicable and valid inferences from texts (or other meaningful matter) to the contexts of their use"
+>
+> Krippendorff, 2004
+
+
+## What is text?
+
+::: {layout="[30, 30, 30]"}
+![](img/symbols.jpg)
+
+![](img/symbols2.png)
+
+![](https://upload.wikimedia.org/wikipedia/commons/7/74/Handwriting-virginia-woolf-10921544-600-870.jpg)
+:::
+
+## Symbols and Meaning
+
+-   Text consists of *symbols*
+
+-   Symbols by themselves do not have meaning
+
+-   A symbol itself is a mark, sign, or word that indicates, signifies, or is understood as representing an idea, object, or relationship
+
+-   Symbols thereby allow people to go beyond what is known or seen by creating linkages between otherwise very different concepts and experiences
+
+-   Text (a collection of symbols) only attains meaning when interpreted (in its context)
+
+-   Main challenge in Automatic Text Analysis: Bridge the gap from symbols to meaningful interpretation
+
+## Understanding language
+
+![](img/hvitfeld_book.png){style="float: right; padding-left: 40px;" width="300"}
+
+> "As natural language processing (NLP) practitioners, we bring our assumptions about what language is and how language works into the task of creating modeling features from natural language and using those features as inputs to statistical models. This is true even when we don't think about how language works very deeply or when our understanding is unsophisticated or inaccurate [...] We can improve our machine learning models for text by heightening that knowledge."
+>
+> *Hvitfeldt & Silge, 2021*
+
+## A short overview of linguistics
+
+::: columns
+::: {.column width="45%"}
+-   Each field studies a *different level* at which language exhibits organization
+
+-   When we engage in text analysis, we use these levels of organization to create language features (e.g., tokens, n-grams,...)
+
+-   They often depend on the morphological characteristics of language, such as when text is broken into sequences of characters, words, sentences
+
+<p style="font-size:0.75em;">
+
+*Hvitfeldt & Silge, 2021, chap. 1*
+
+</p>
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="45%"}
+| Subfield   | What does it focus on?                    |
+|:-----------|:------------------------------------------|
+| Phonetics  | Sounds that people use in language        |
+| Phonology  | Systems of sounds in particular languages |
+| Morphology | How words are formed                      |
+| Syntax     | How sentences are formed from words       |
+| Semantics  | What sentences mean                       |
+| Pragmatics | How language is used in context           |
+:::
+:::
+
+
+## Morphology 
+
+- When we build text classification models for text data, we use these levels of organization to create natural language features (i.e. predictors for our models)
+
+- What features we extract often depend on the morphological characteristics of language, such as when text is broken into sequences of characters
+
+- Yet, because the organization and the rules of language can be ambiguous, our ability to create text features for machine learning is constrained by the very nature of language
+
+<br>
+
+| Type of  Feature | Example |
+|:------ |:-------------------|
+| Ambigous sentence | "Include Your Children When Baking Cookies" |
+| Word tokens | "Include", "Your", "Children", "When", "Baking",  "Cookies" |
+| Bi-grams | "Include", "Your Children", "When", "Baking Cookies" |
+| 3-grams | "Include Your Children", "When Baking Cookies" |
+
+
+
+
+
+# General Text Classification Workflow {background-color="steelblue"}
+
+A Framework for this Course
+
+
+## General Text Classification Pipeline
+
+![](img/text_analysis_fundamentals/Slide1.png)
+
+- Goal is generally to label (or annotate) previously unlabeled text
+
+- Although the specific methods may change, the steps usually remain the same
+
+
+## (1) Obtaining text
+
+
+![](img/text_analysis_fundamentals/obtainging_text.png){.absolute top=30 right=0 width="350"}
+
+-   Publicly available data sets
+
+    -   e.g.: Political texts, news from publisher / library
+    -   Great if you can find it, often not available
+
+
+
+-   Scraping primary sources
+
+    -   e.g.: Press releases from party website, existing archives
+    -   Writing scrapers can be trivial or very complex depending on web site
+    -   Make sure to check legal issues
+    
+-   Proprietary texts from third parties
+
+    -   e.g.: digital archives (LexisNexis, factiva etc.), social media APIs
+    -   Often custom format, API restrictions, API changes
+    -   Terms of use not conducive to research, sharing
+
+## (2) Feature engineering
+
+![](img/text_analysis_fundamentals/feature_engineering.png){.absolute top=30 right=0 width="320"}
+
+-   Feature engineering is the process of selecting, manipulating, <br>
+    and transforming raw data into so-called features 
+
+-   What type of feature engineering is necessary or useful <br> strongly 
+    depends on the method used, but may include
+
+      - **feature creation:** breaking down text into the features that we want to analyze (so-called tokens such as words, sentence, bi-grams...)
+      - **feature transformation:** involves text cleaning such as stopword removal, stemming, normalization
+      - **feature selection:** frequency trimming
+      - **creation of structured data:** e.g., a document-feature matrix (for classic ML approaches)
+      
+-   Modern approaches such require less and less feature engineering and at times, make it entirely obsolete
+
+
+## (3) Text classification
+
+![](img/text_analysis_fundamentals/text_classification.png){.absolute top=0 right=0 width="300"}
+
+<br>
+
+![](img/approaches.png)
+
+## (4) Validation
+
+
+![](img/text_analysis_fundamentals/validation.png){.absolute top=10 right=0 width="300"}
+
+::: columns
+::: {.column width="55%"}
+
+-   Many text analysis processes are 'black boxes'
+
+    -   even manual coding
+    -   dictionaries are ultimately opaque
+    -   complex algorithms cannot be deciphered
+
+-   Computer does not 'understand' natural language
+
+    -   It just predicts labels based on features
+    -   False-positive and false-negatives occur
+
+-   We need to prove that the analysis is valid
+
+    -   Validate by comparing text analyis output to a known good
+    -   Reference: often manual annotation of a 'gold standard'
+
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="40%"}
+
+
+![](https://miro.medium.com/v2/resize:fit:1400/1*fxiTNIgOyvAombPJx5KGeA.png){.absolute top=270 right=0 width="400"}
+:::
+:::
+
+
+## A very small example
+
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+# Loading package
+library(tidytext)
+
+# Raw text
+data <- tibble(
+  docs = c(1:4),
+  text = c("Computational methods include various approaches to text classification.",
+           "Oppenheimer is a 2023 biographical thriller film written and directed by Christopher Nolan.",
+           "Communication Science analyzes contents, uses, and consequences of media and communication.",
+           "Barbie is a 2023 fantasy comedy film directed by Greta Gerwig.")
+  )
+
+# Feature engineering
+tokens <- data |> 
+  unnest_tokens(word, text)
+head(tokens, n = 10)
+
+```
+
+## A very simple example: Dictionary approach
+
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+# Creating a simple dictionary
+dictionary <- tibble(movie = c("film", "movie", "director", "actor"),
+                     methods = c("methods", "classification", "analysis", "science"))
+print(dictionary)
+
+# Text classification
+tokens |>
+  left_join(dictionary |>
+  gather(label, word)) |>
+  group_by(docs, label) |>
+  summarize(n = n()) %>%
+  spread(label, n)
+```
+
+
+## Zero-shot classification with BERT transformer
+
+```{r, echo = F}
+load("data/results.RData")
+```
+
+
+```{r, eval = F}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+library(hfapi)
+
+# Test classification
+results <- text_zeroshot(data$text, labels = c("movie", "methods", "science"),
+                         url = "https://api-inference.huggingface.co/models/facebook/bart-large-mnli")
+results %>%
+  unnest(cols = c("labels", "scores")) %>%
+  as_tibble %>%
+  spread(labels, scores)
+```
+
+```{r, echo = F}
+results %>%
+  unnest(cols = c("labels", "scores")) %>%
+  as_tibble %>%
+  spread(labels, scores)
+```
+
+
+
+# Formalities {background-color="steelblue"}
+
+How this course is going to work?
+
+## Teachers
+
+|     Dr. Philipp K. Masur      |     | Dr. Kaspar Welbers  |     | Emma Diel |     | Roan Buma |     
+|:------:|------|:------:|------|:------:|------|:------:|
+|     ![](img/philipp2.jpg)      |     | ![](img/kasper.jpg) |     |   ![](img/emma.jpg)   |     |  ![](img/buma.jpg)   |   
+| Lecturer & Course Coordinator |     |       Teacher       |     |         Teacher          |     |         Teacher          |  
+
+## R help desk
+
+
+
+- Not everything will work at the first time. 
+
+- Because we work with code, tiny mistakes can produce errors. 
+
+- If you have any problems related to installing software, running packages or code, or simply an error message you do not understand, you can address the R Help Desk:
+
+**Office Hours:** Mondays and Wednesdays 14.00 to 16.00 on Zoom (see canvas)
+
+
+## Information and Materials
+
+::: columns
+::: {.column width="45%"}
+The major hub for this course is the following website:
+
+-   <https://masurp.github.io/VU_CADC/>
+
+Communication and assignment submission via Canvas:
+
+-   S_CADC: Computationele analyse van digitale communicatie
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="45%"}
+![](img/course_screenshot.png)
+
+
+:::
+:::
+
+
+## Course Schedule
+
+![](img/schedule1.png)
+
+## Course Schedule
+
+![](img/schedule2.png)
+
+## Attendance
+
+You will realize that this course has a comparatively **steep learning curve**. We will learn about complex research papers and recreate their analyses in R. It is thus generally recommended to follow all lectures and practical sessions! Despite some initial challenges, you will also experience a lot of self-efficacy: Learning R and computational methods is very rewarding and at the end, you can be proud of what you have achieved!
+
+<br>
+
+-   Attendance during the regular lectures is highly recommended (this is the content for the exam!).
+
+-   Attendance of the practical sessions is mandatory.
+
+-   One absence from one of the workgroup sessions, for serious health, family, or work reasons, can be excused if the instructor is advised **in advance**.
+
+## Exam
+
+After the first two cycles, there will be a written exam (**40% of the final grade**):
+
+<br>
+
+-   The exam will consist of \~28-36 multiple choice questions and \~6-10 open-ended questions
+
+-   Exam questions will be based on all material discussed in the first two cycles, including lecture content, class materials, and required readings
+
+-   Example questions will be provided throughout the course
+
+-   Please register for the exam via VUweb
+
+## Homework
+
+After each week, students are required to hand in a "homework", which represents a practical application of some of the taught analysis methods (e.g. with a new data set, specific research question) (**30% of the final grade**):
+
+<br>
+
+-   Each week's assignment requires students to apply the methods they have learned to a new data set
+
+-   Students will receive an RMarkdown template for their code and the respective data set(s)
+
+-   Students are required to hand in the RMarkdown file and a compiled html on Thursday (24:00, hard deadline!) the week after. All homework assignments must be submitted to pass.
+
+-   Homework assignment will be graded as follows as *fail*, *pass* or *good*
+
+## Group presentation
+
+In the third cycle, students will be assigned to small working groups in which they independently conduct a research project. A final presentation will be graded per group (**30% of the final grade**).
+
+<br>
+
+-   A 10-minute talk (including appropriate slides) in which you:
+    -   introduce the research project (1-2 slides)
+    -   describe theory and hypotheses (1 slide)
+    -   explain the methods (1 slide)
+    -   present the results (2 slides)
+    -   discuss the findings (1-2 slides)
+
+Students are required to hand in the slides and analyses beforehand (Deadline: 17th of December 2021 at 24:00, hard deadline!)
+
+
+# Questions? {background-color="steelblue"}
+
+If anything is unclear, do ask now!
+
+
+## {background="#43464B" background-video="video/info.mp4" background-video-loop="true" background-video-muted="true"}
+
+
+# Thank you for your attention! {background-color="steelblue"}
+
+## Required Reading
+
+<br><br>
+
+-   Kramer, A. D. I., Guillory, J. E, & Hancock, J. (2014). Experimental Evidence of Massive-Scale Emotional Contagion Through Social Networks. Proceedings of the National Academy of Sciences, 111(24), 8788-8790.
+
+-   Van Atteveldt, W., & Peng, T.-Q. (2018). When communication meets computation: Opportunities, challenges, and pitfalls in computational communication science. Communication Methods and Measures, 12(2-3), 81--92. https://doi.org/10.1080/19312458.2018.1458084
+
+*(available on Canvas)*
+
+------------------------------------------------------------------------
+
+## References {.smaller}
+
+-   Blumenstock, J. E., Cadamuro, G. , and On, R. (2015). Predicting Poverty and Wealth from Mobile Phone Metadata. Science, 350(6264), 1073--6. https://doi.org/10.1126/science.aac4420.
+
+-   Haim, M., Scherr, S., & Arendt, F. (2021). How search engines may help reduce drug-related suicides. Drug and Alcohol Dependence, 226(108874). https://dx.doi.org/10.1016/j.drugalcdep.2021.108874
+
+-   Jacobi,C., van Atteveldt, W. & Welbers, K. (2016) Quantitative analysis of large amounts of journalistic texts using topic modelling. Digital Journalism, 4(1), 89-106, DOI: 10.1080/21670811.2015.1093271
+
+-   Jürgens, P., Meltzer, C., & Scharkow, M. (2021, in press). Age and Gender Representation on German TV: A Longitudinal Computational Analysis. Computational Communication Research.
+
+-   Kramer, A. D. I., Guillory, J. E, & Hancock, J. (2014). Experimental Evidence of Massive-Scale Emotional Contagion Through Social Networks. Proceedings of the National Academy of Sciences, 111(24), 8788-8790.
+
+-   Salganik, M. J. (2018). Bit by Bit: Social Research in the Digital Age. Princeton University Press.
+
+-   Simon, M., Welbers, K., Kroon, A. C. & Trilling, D. (2022). Linked in the dark: A network approach to understanding information flows within the Dutch Telegramsphere. Information, Communication & Society, https://doi.org/10.1080/1369118X.2022.2133549
+
+-   Thompson, T. (2010). Crime software may help police predict violent offences. The Observer. Retrieved from https://www.theguardian.com/uk/2010/jul/25/police-software-crime-prediction
+
+-   Van Atteveldt, W., & Peng, T.-Q. (2018). When communication meets computation: Opportunities, challenges, and pitfalls in computational communication science. Communication Methods and Measures, 12(2-3), 81--92. https://doi.org/10.1080/19312458.2018.1458084
+
+-   Wimmer, A. & Lewis, K., (2010). Beyond and Below Racial Homophily: ERG Models of a Friendship Network Documented on Facebook. American Journal of Sociology, 116(2), 583-642.
+
+## Example Exam Question (Multiple Choice)
+
+Why is the "Facebook Manipulation Study" by Kramer et al. ethically problematic?
+
+<br>
+
+A. People did not know that they took part in a study (no informed consent).
+
+B. It overtly manipulated people's emotion.
+
+C. Both A and B are true.
+
+D. The study was not ethically problematic.
+
+## Example Exam Question (Multiple Choice)
+
+Why is the "Facebook Manipulation Study" by Kramer et al. ethically problematic?
+
+<br>
+
+A. People did not know that they took part in a study (no informed consent).
+
+B. It overtly manipulated people's emotion.
+
+**C. Both A and B are true.**
+
+D. The study was not ethically problematic.
+
+## Example Exam Question (Open Format)
+
+Name and explain two characteristics of big data.
+
+*(4 points, 2 points for correctly naming them and 2 points for correctly explaining them)*
+
+. . .
+
+1.  Big data are often "incomplete": This means they do not have the information that you will want for your research. This is a common feature of data that were created for purposes other than research. For example, log data (e.g., browser history) includes all links a person has visited over time, but does not provide any additional information. More over, it may contain gaps where the software failed or the person purposefully hid his surfing behavior.
+
+2.  Big data are often "algorithmically confounded": Behavior in big data systems is not natural; it is driven by the engineering goals of the systems. For example, what you see on a facebook news feed depends on algorithm that Facebook has built into their platform. Behavior of individuals is thus also driven by these system-immanent features.

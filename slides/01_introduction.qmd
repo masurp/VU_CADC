@@ -121,7 +121,7 @@ My name is Philipp Masur, I am an Assistant Professor at the Department of Commu
 
     -   Advanced data wrangling/data science
     -   Combining of different data sets
-    -   Automated Text Analysis
+    -   Automated Text Analysis and Text Classification
     -   Machine Learning (supervised and unsupervised)
     -   Actor-based modelling
     -   Simulations
@@ -153,7 +153,7 @@ td {
 </style>
 ```
 |     | Characteristic | Description                                                                                                                                                                                                                                                                     |
-|------------------|:-----------------|:------------------------------------|
+|----|:--------|:------------------------------------------------------|
 | 1   | Big            | The scale or volume of some current datasets is often impressive. However, big datasets are not an end in themselves, but they can enable certain kinds of research including the study of rare events, the estimation of heterogeneity, and the detection of small differences |
 | 2   | Always-on      | Many big data systems are constantly collecting data and thus enable to study unexpected events and allow for real-time measurement                                                                                                                                             |
 | 3   | Nonreactive    | Participants are generally not aware that their data are being captured or they have become so accustomed to this data collection that it no longer changes their behavior.                                                                                                     |
@@ -163,7 +163,7 @@ td {
 ## 10 Characteristics of Big Data
 
 |     | Characteristic                 | Description                                                                                                                                   |
-|------------------|:-----------------|:-----------------------------------|
+|----|:-----------|:------------------------------------------------|
 | 6   | Nonrepresentative              | Most big datasets are nonetheless not representative of certain populations. Out-of-sample generalizations are hence difficult or impossible. |
 | 7   | Drifting                       | Many big data systems are changing constantly, thus making it difficult to study long-term trends                                             |
 | 8   | Algorithmically <br>confounded | Behavior in big data systems is not natural; it is driven by the engineering goals of the systems.                                            |
@@ -617,7 +617,7 @@ Communication and assignment submission via Canvas
 ::: {.column width="45%"}
 -   **Cycle 1:** Data Wrangling, Visualization and Text Analysis
 
-    -   Introduction to computational methods
+    -   Introduction to Computational Methods
     -   Text as data: Introduction to text analysis and dictionary approaches
 
 <br>
