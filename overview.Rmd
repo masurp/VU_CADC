@@ -35,7 +35,7 @@ tribble(~Class, ~Teacher, ~Time, ~Room,
 ```{r, echo = F, message = F, warning = F}
 tribble(~Date, ~Week, ~Type, ~Content, ~Assignment,
        "30/10/23", "1", "Lecture", "Introduction to Computational Methods in Communication Science", "",
-       "31/10/23", "1", "Practical session", "Data Wrangling usig the tidyverse and tidytext", "",
+       "31/10/23", "1", "Practical session", "Data Wrangling using the tidyverse and tidytext", "",
        "02/11/23" , "1", "Practical session",  "Exploratory Data Analysis and Data Visualization", "Homework Assignment 1",
        "06/11/23", "2", "Lecture", "Automated Text Analysis and Dictionary Approaches", "",
        "07/11/23", "2", "Practical session", "Basic Text Analysis using tidytext", "",
@@ -60,7 +60,7 @@ tribble(~Date, ~Week, ~Type, ~Content, ~Assignment,
   column_spec(1, bold = T, width = "8em") %>%
   row_spec(0, color = "white", background = "#39423E") %>%
   pack_rows("Part I: Introduction and Automated Text Analysis", 1, 6, label_row_css = "background-color: #9BD6BB;") %>%
-  pack_rows("Part II: Machine Learning", 7, 13, label_row_css = "background-color: #9BD6BB;") %>%
+  pack_rows("Part II: Text Classification using Machine Learning", 7, 13, label_row_css = "background-color: #9BD6BB;") %>%
   pack_rows("Exam week", 13, 13, label_row_css = "background-color: #9BD6BB;") %>%
   pack_rows("Part III: Practical Group Projects", 14, 20, label_row_css = "background-color: #9BD6BB;")
 ```
