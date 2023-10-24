@@ -14,15 +14,9 @@ Do you have any questions? Please contact us via mail.
 
 - Philipp Masur 
 - Kasper Welbers
-- Santiago Gómez-Echeverry
-- Alberto López Ortega
 - Emma Diel
+- Roan Buma
 
-### Teaching assistants
-
-- tba
-
-<hr>
 
 <p style = "margin-left: auto; margin-right: 0;">
 This course is published under the following [license](https://github.com/masurp/VU_CADC/blob/main/LICENSE.md). 

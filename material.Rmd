@@ -40,17 +40,18 @@ In the third part of the course, students will work on their own research projec
 #### Lecture: Introduction to Computational Methods in Communication Science
 
 - Slides Lecture 1:
-    - [Download Slides] tba
+    - [Download Slides](slides/01_introduction_2023.html)
 
 #### Practical Session 1: Data Wrangling
 
 - Handouts: 
-    - [Data Wrangling usig the tidyverse and tidytext] tba
+    - Tidyverse I ([online tutorial](https://vanatteveldt.shinyapps.io/tidy-1-select), [handout](https://github.com/vanatteveldt/ccslearnr/blob/master/handouts/tidy-1-select.md))
+    - Tidyverse II ([online tutorial](https://vanatteveldt.shinyapps.io/tidy-summarize), [handout](https://github.com/vanatteveldt/ccslearnr/blob/master/handouts/tidy-summarize.md))
     
 #### Practical Session 2: Data visualization
 
 - Handouts:
-    - [Exploratory Data Analysis and Data Visualization] tba 
+    - Data visualization ([online tutorial](https://vanatteveldt.shinyapps.io/ggplot), [handout](https://github.com/vanatteveldt/ccslearnr/blob/master/handouts/ggplot.md)) 
    
 #### Homework
 
