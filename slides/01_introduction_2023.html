@@ -401,6 +401,11 @@
 
 <img data-src="img/hilbert_lopez.png" style="width:80.0%" class="r-stretch"><p><span style="font-size:0.6em;">Hilbert &amp; Lopez, 2011</span></p>
 </section>
+<section>
+<section id="what-can-we-learn-from-this-much-data" class="title-slide slide level1 center" data-background-color="steelblue">
+<h1>What can we learn from this much data?</h1>
+
+</section>
 <section id="timeline-of-natural-language-processing" class="slide level2" data-transition="slide-out">
 <h2>TIMELINE OF NATURAL LANGUAGE PROCESSING</h2>
 
@@ -446,11 +451,11 @@
 <p><img data-src="https://blog.hootsuite.com/wp-content/uploads/2022/04/instagram-video-2.png" class="absolute" style="top: 40px; right: 0px; width: 600px; "></p>
 <p><img data-src="img/tiktok.png" class="absolute" style="top: 150px; left: 0px; width: 600px; "></p>
 <p><img data-src="img/socialmediafeed.jpg" class="absolute" style="bottom: 40px; right: 150px; width: 200px; "></p>
-</section>
+</section></section>
 <section>
 <section id="how-can-we-analyze-large-amount-of-texts" class="title-slide slide level1 center" data-background-color="steelblue">
 <h1>How can we analyze large amount of texts?</h1>
-<p>This is what we will learn in this course!</p>
+<p>This is what we will discuss in this course!</p>
 </section>
 <section id="objectives-and-learning-goals" class="slide level2">
 <h2>Objectives and Learning goals</h2>
@@ -460,7 +465,7 @@
 <ol type="1">
 <li><p>be able to identify data analytic problems, analyze them critically, and find appropriate solutions</p></li>
 <li><p>have a good understanding of the general text classification pipeline</p></li>
-<li><p>have knowledge about different approaches of text classification (incl.&nbsp;machine learning, large language models…)</p></li>
+<li><p>have practical knowledge about different approaches of text classification (incl.&nbsp;dictionary approaches, machine learning, large language models…)</p></li>
 </ol>
 </div><div class="column" style="width:50%;">
 <p><img data-src="https://miro.medium.com/v2/resize:fit:708/1*UBQsA95cecKRUxLNFbXf4g.png"></p>
@@ -473,10 +478,10 @@
 <div class="column" style="width:55%;">
 <p>With regard to the specific methods being taught in R, you will be able to…</p>
 <ul>
-<li><p>gather, potentially scrape, and import data from different file types, APIs, and websites</p></li>
+<li><p>gather, scrape, and import data from different file types, APIs, and websites</p></li>
 <li><p>link data from different sources to create new insights</p></li>
 <li><p>clean and transform messy data into a tidy data format ready for text classification and analysis</p></li>
-<li><p>use different approaches (e.g., dictionary, classical machine learning, transformer, LLMs) to extract information from textual data</p></li>
+<li><p>use different approaches (e.g., dictionary, classic machine learning, transformer, LLMs) to extract information from textual data</p></li>
 <li><p>perform statistical analyses on the substantive data</p></li>
 </ul>
 </div><div class="column" style="width:5%;">
@@ -486,25 +491,48 @@
 </div>
 </div>
 </section>
-<section id="content-of-this-lecture" class="slide level2">
+<section id="content-of-this-lecture" class="slide level2 smaller">
 <h2>Content of this lecture</h2>
-<p><br><br></p>
+<div class="columns">
+<div class="column" style="width:45%;">
 <ol type="1">
-<li><p>What is computational social science?</p></li>
-<li><p>What is computational communication science?</p></li>
-<li><p>Ethics of computational communication research</p></li>
-<li><p>Introduction to automated text analysis</p></li>
-<li><p>The general text classification pipeline</p></li>
-<li><p>Course formalities</p></li>
+<li><p>What is Computational Social Science?</p>
+<p>1.1. Definition and Examples</p>
+<p>1.2. Relevance of Computational Methods</p>
+<p>1.3. Characteristics of Big Data</p>
+<p>1.4. Opportunities and Pitfalls</p></li>
+<li><p>What is Computational Communication Science?</p>
+<p>2.1. Definition</p>
+<p>2.2. Typical Research Areas</p>
+<p>2.3. Examples of Computational Communication Research</p></li>
+<li><p>Ethics of Computational Communication Research</p>
+<p>3.1. A Controversional Study (Kramer et al., 2014)</p>
+<p>3.2. Ethical Challenges</p>
+<p>3.3. Practical Guidelines</p></li>
 </ol>
+</div><div class="column" style="width:5%;">
+
+</div><div class="column" style="width:45%;">
+<ol start="4" type="1">
+<li><p>Introduction to Automated Text Analysis</p>
+<p>4.1. Text as Data</p>
+<p>4.2. The General Text Classification Pipeline</p>
+<p>4.3. A Small Example</p></li>
+<li><p>Course Formalities</p>
+<p>5.1. Introduction of Teachers</p>
+<p>5.2. Course Material and Schedule</p>
+<p>5.3. Attendance and Assignments</p></li>
+</ol>
+</div>
+</div>
 </section></section>
 <section>
 <section id="what-is-computational-social-science" class="title-slide slide level1 center" data-background-color="steelblue">
-<h1>What is computational social science?</h1>
+<h1>What is Computational Social Science?</h1>
 <p>…and why should we care?</p>
 </section>
 <section id="example-surprising-sources-of-information" class="slide level2">
-<h2>Example: Surprising sources of information</h2>
+<h2>Example: Surprising Sources of Information</h2>
 <div class="columns">
 <div class="column" style="width:45%;">
 <ul>
@@ -654,7 +682,7 @@ td {
 <h2>Pro’s and Con’s of Computational Methods</h2>
 <div class="columns">
 <div class="column" style="width:45%;">
-<p><strong>Advantages</strong></p>
+<p><strong>Opportunities</strong></p>
 <ul>
 <li>We can study actual behavior instead of simply self-reports</li>
 <li>We can study human beings in their social context instead of in an artificial lab setting</li>
@@ -664,7 +692,7 @@ td {
 </div><div class="column" style="width:10%;">
 
 </div><div class="column" style="width:45%;">
-<p><strong>Disadvantages</strong></p>
+<p><strong>Pitfalls</strong></p>
 <ul>
 <li>Techniques often (rather) complicated</li>
 <li>Data is often proprietary (not shared openly)</li>
@@ -716,19 +744,24 @@ td {
 </ul></li>
 <li><p>Social Media Use</p>
 <ul>
-<li>Tracking of social media use and relationships with developmental and health outcome</li>
-<li>Spreading of behavior, information or emotions</li>
+<li>Tracking of actual social media use</li>
+<li>Spreading of behavior, information, or emotions</li>
 </ul></li>
 <li><p>Health Communication</p>
 <ul>
 <li>Prevalence of health information online</li>
+</ul></li>
+<li><p>(Online) Journalism</p>
+<ul>
+<li>News coverage across decaces</li>
+<li>Gender equality</li>
 </ul></li>
 </ul>
 </div>
 </div>
 </section>
 <section id="example-1-analyzing-news-coverage" class="slide level2">
-<h2>Example 1: Analyzing news coverage</h2>
+<h2>Example 1: Analyzing News Coverage</h2>
 <div class="columns">
 <div class="column" style="width:35%;">
 <ul>
@@ -741,8 +774,24 @@ td {
 </div>
 </div>
 </section>
-<section id="example-2-dutch-telegramsphere" class="slide level2">
-<h2>Example 2: Dutch Telegramsphere</h2>
+<section id="example-2-facebook-data-to-predict-personality" class="slide level2">
+<h2>Example 2: Facebook Data to Predict Personality</h2>
+<ul>
+<li><p>Kosinski and colleagues (2013) used a dataset of over 58,000 volunteers who provided their Facebook Likes, detailed demographic profiles, and the results of several psychometric test</p></li>
+<li><p>Were able to show that one can predict a variety of personal characteristics and personality traits from simple Facebook likes</p></li>
+</ul>
+<div class="columns">
+<div class="column" style="width:38%;">
+<p><img data-src="img/kosinski_personality3.png" style="width:75.0%"></p>
+</div><div class="column" style="width:12%;">
+
+</div><div class="column" style="width:48%;">
+<p><img data-src="img/kosinski_personality1.png" style="width:75.0%"></p>
+</div>
+</div>
+</section>
+<section id="example-3-dutch-telegramsphere" class="slide level2">
+<h2>Example 3: Dutch Telegramsphere</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
@@ -756,8 +805,8 @@ td {
 </div>
 </div>
 </section>
-<section id="example-2-dutch-telegramsphere-1" class="slide level2">
-<h2>Example 2: Dutch Telegramsphere</h2>
+<section id="example-3-dutch-telegramsphere-1" class="slide level2">
+<h2>Example 3: Dutch Telegramsphere</h2>
 <ul>
 <li>They further found that over time, conspiracy-themed, far-right activist, and COVID-19-sceptical communities dominated</li>
 </ul>
@@ -782,8 +831,8 @@ td {
 </div>
 </div>
 </section>
-<section id="example-3-gender-stereotypes-in-political-news" class="slide level2">
-<h2>Example 3: Gender Stereotypes in Political News</h2>
+<section id="example-4-gender-stereotypes-in-political-news" class="slide level2">
+<h2>Example 4: Gender Stereotypes in Political News</h2>
 <div class="columns">
 <div class="column" style="width:40%;">
 <ul>
@@ -798,6 +847,27 @@ td {
 <li><p>They studied the media’s attribution of gender-linked (feminine, masculine) and political (leadership, competence, integrity, empathy) traits to U.S. politicians</p></li>
 <li><p>All three masculine traits were more strongly associated with male politicians, but only the feminine physical traits were more strongly associated with female politicians</p></li>
 </ul>
+</section>
+<section id="example-5-gender-representation-in-tv" class="slide level2">
+<h2>Example 5: Gender representation in TV</h2>
+<ul>
+<li><p>Jürgens and colleagues (2021) investigated gender representations in over ten years of daytime TV programming</p></li>
+<li><p>Usually, this would have required hours and hours (!) of manual coding (i.e., watching a hell lot of TV), but they used neural networks to automatically detect gender in shown faces</p></li>
+</ul>
+
+<img data-src="img/juergen_face.png" class="r-stretch"></section>
+<section id="example-5-gender-representation-in-tv-1" class="slide level2">
+<h2>Example 5: Gender representation in TV</h2>
+<div class="columns">
+<div class="column" style="width:35%;">
+<ul>
+<li><p>Women on average remained underrepresented on TV, with 6.3 million female faces out of 16 million total (estimated proportion .39, 95% CI: .37-.42)</p></li>
+<li><p>This strong overall bias was mirrored across specific subsamples (news, sports, advertising…)</p></li>
+</ul>
+</div><div class="column" style="width:65%;">
+<p><img data-src="img/juergen_face2.png"></p>
+</div>
+</div>
 </section></section>
 <section>
 <section id="ethics-of-computational-communication-research" class="title-slide slide level1 center" data-background-color="steelblue">
@@ -943,12 +1013,12 @@ td {
 <div class="sourceCode" id="cb1"><pre class="sourceCode numberSource output number-lines code-with-copy"><code class="sourceCode"><span id="cb1-1"><a href="#cb1-1"></a># A tibble: 6 × 5</span>
 <span id="cb1-2"><a href="#cb1-2"></a>     id condition sns_use well_being pers1</span>
 <span id="cb1-3"><a href="#cb1-3"></a>  &lt;int&gt; &lt;chr&gt;       &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt;</span>
-<span id="cb1-4"><a href="#cb1-4"></a>1     1 A            1.47      2.28   6.71</span>
-<span id="cb1-5"><a href="#cb1-5"></a>2     2 B            4.93     -3.94   5.24</span>
-<span id="cb1-6"><a href="#cb1-6"></a>3     3 A            1.99      0.845  4.82</span>
-<span id="cb1-7"><a href="#cb1-7"></a>4     4 B            2.33      3.03   2.98</span>
-<span id="cb1-8"><a href="#cb1-8"></a>5     5 A            2.57      4.78   5.78</span>
-<span id="cb1-9"><a href="#cb1-9"></a>6     6 B            4.91      4.59   3.92</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a href="#cb1-4"></a>1     1 A            1.19      3.01   1.48</span>
+<span id="cb1-5"><a href="#cb1-5"></a>2     2 B            4.42      0.669  5.15</span>
+<span id="cb1-6"><a href="#cb1-6"></a>3     3 A            2.52     -0.729  1.83</span>
+<span id="cb1-7"><a href="#cb1-7"></a>4     4 B            4.91     -1.59   1.18</span>
+<span id="cb1-8"><a href="#cb1-8"></a>5     5 A            4.06      6.00   4.83</span>
+<span id="cb1-9"><a href="#cb1-9"></a>6     6 B            2.10      2.19   6.86</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div><div class="column" style="width:5%;">
@@ -1149,7 +1219,7 @@ td {
 <section id="general-text-classification-pipeline" class="slide level2">
 <h2>General Text Classification Pipeline</h2>
 
-<img data-src="img/text_analysis_fundamentals/Slide1.png" class="r-stretch"><ul>
+<img data-src="img/text_analysis_fundamentals/Slide01a.png" class="r-stretch"><ul>
 <li><p><strong>General Goal:</strong> to label (or annotate) previously unlabeled text</p>
 <ul>
 <li>Entails labeling a sentence, paragraph, or entire text (e.g., with the topic, the sentiment,…)</li>
@@ -1251,6 +1321,8 @@ td {
 <span id="cb3-14"><a href="#cb3-14"></a>tokens <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> </span>
 <span id="cb3-15"><a href="#cb3-15"></a>  <span class="fu">unnest_tokens</span>(word, text)</span>
 <span id="cb3-16"><a href="#cb3-16"></a><span class="fu">head</span>(tokens, <span class="at">n =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
 <div class="cell-output cell-output-stdout">
 <div class="sourceCode" id="cb4"><pre class="sourceCode numberSource output number-lines code-with-copy"><code class="sourceCode"><span id="cb4-1"><a href="#cb4-1"></a># A tibble: 10 × 2</span>
 <span id="cb4-2"><a href="#cb4-2"></a>    docs word          </span>
@@ -1272,18 +1344,20 @@ td {
 <h2>A very simple example: Dictionary approach</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5" data-code-line-numbers="true"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Creating a simple dictionary</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a>dictionary <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">movie =</span> <span class="fu">c</span>(<span class="st">"film"</span>, <span class="st">"movie"</span>, <span class="st">"director"</span>, <span class="st">"actor"</span>),</span>
-<span id="cb5-3"><a href="#cb5-3"></a>                     <span class="at">methods =</span> <span class="fu">c</span>(<span class="st">"methods"</span>, <span class="st">"classification"</span>, <span class="st">"analysis"</span>, <span class="st">"science"</span>))</span>
+<span id="cb5-2"><a href="#cb5-2"></a>dictionary <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">movie =</span> <span class="fu">c</span>(<span class="st">"film"</span>, <span class="st">"movie"</span>),</span>
+<span id="cb5-3"><a href="#cb5-3"></a>                     <span class="at">methods =</span> <span class="fu">c</span>(<span class="st">"methods"</span>, <span class="st">"science"</span>))</span>
 <span id="cb5-4"><a href="#cb5-4"></a><span class="fu">print</span>(dictionary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource output number-lines code-with-copy"><code class="sourceCode"><span id="cb6-1"><a href="#cb6-1"></a># A tibble: 4 × 2</span>
-<span id="cb6-2"><a href="#cb6-2"></a>  movie    methods       </span>
-<span id="cb6-3"><a href="#cb6-3"></a>  &lt;chr&gt;    &lt;chr&gt;         </span>
-<span id="cb6-4"><a href="#cb6-4"></a>1 film     methods       </span>
-<span id="cb6-5"><a href="#cb6-5"></a>2 movie    classification</span>
-<span id="cb6-6"><a href="#cb6-6"></a>3 director analysis      </span>
-<span id="cb6-7"><a href="#cb6-7"></a>4 actor    science       </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource output number-lines code-with-copy"><code class="sourceCode"><span id="cb6-1"><a href="#cb6-1"></a># A tibble: 2 × 2</span>
+<span id="cb6-2"><a href="#cb6-2"></a>  movie methods</span>
+<span id="cb6-3"><a href="#cb6-3"></a>  &lt;chr&gt; &lt;chr&gt;  </span>
+<span id="cb6-4"><a href="#cb6-4"></a>1 film  methods</span>
+<span id="cb6-5"><a href="#cb6-5"></a>2 movie science</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div class="cell">
 <div class="sourceCode cell-code" id="cb7" data-code-line-numbers="true"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># Text classification</span></span>
 <span id="cb7-2"><a href="#cb7-2"></a>tokens <span class="sc">|&gt;</span></span>
 <span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">left_join</span>(dictionary <span class="sc">|&gt;</span></span>
@@ -1291,12 +1365,14 @@ td {
 <span id="cb7-5"><a href="#cb7-5"></a>  <span class="fu">group_by</span>(docs, label) <span class="sc">|&gt;</span></span>
 <span id="cb7-6"><a href="#cb7-6"></a>  <span class="fu">summarize</span>(<span class="at">n =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
 <span id="cb7-7"><a href="#cb7-7"></a>  <span class="fu">spread</span>(label, n)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
 <div class="cell-output cell-output-stdout">
 <div class="sourceCode" id="cb8"><pre class="sourceCode numberSource output number-lines code-with-copy"><code class="sourceCode"><span id="cb8-1"><a href="#cb8-1"></a># A tibble: 4 × 4</span>
 <span id="cb8-2"><a href="#cb8-2"></a># Groups:   docs [4]</span>
 <span id="cb8-3"><a href="#cb8-3"></a>   docs methods movie `&lt;NA&gt;`</span>
 <span id="cb8-4"><a href="#cb8-4"></a>  &lt;int&gt;   &lt;int&gt; &lt;int&gt;  &lt;int&gt;</span>
-<span id="cb8-5"><a href="#cb8-5"></a>1     1       2    NA      6</span>
+<span id="cb8-5"><a href="#cb8-5"></a>1     1       1    NA      7</span>
 <span id="cb8-6"><a href="#cb8-6"></a>2     2      NA     1     12</span>
 <span id="cb8-7"><a href="#cb8-7"></a>3     3       1    NA     10</span>
 <span id="cb8-8"><a href="#cb8-8"></a>4     4      NA     1     10</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1309,7 +1385,7 @@ td {
 
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9" data-code-line-numbers="true"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">library</span>(hfapi)</span>
+<div class="sourceCode cell-code" id="cb9" data-code-line-numbers="true"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">library</span>(ccsamsterdamR)</span>
 <span id="cb9-2"><a href="#cb9-2"></a></span>
 <span id="cb9-3"><a href="#cb9-3"></a><span class="co"># Test classification</span></span>
 <span id="cb9-4"><a href="#cb9-4"></a>results <span class="ot">&lt;-</span> <span class="fu">text_zeroshot</span>(data<span class="sc">$</span>text, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"movie"</span>, <span class="st">"methods"</span>, <span class="st">"science"</span>),</span>
@@ -1321,13 +1397,13 @@ td {
 </div>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 4 × 4
-  sequence                                                methods  movie science
-  &lt;chr&gt;                                                     &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
-1 Barbie is a 2023 fantasy comedy film directed by Greta…  0.0293 0.968  0.00255
-2 Communication Science analyzes contents, uses, and con…  0.0925 0.0167 0.891  
-3 Computational methods include various approaches to te…  0.977  0.0120 0.0114 
-4 Oppenheimer is a 2023 biographical thriller film writt…  0.0529 0.917  0.0300 </code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource output number-lines code-with-copy"><code class="sourceCode"><span id="cb10-1"><a href="#cb10-1"></a># A tibble: 4 × 4</span>
+<span id="cb10-2"><a href="#cb10-2"></a>  sequence                                                methods  movie science</span>
+<span id="cb10-3"><a href="#cb10-3"></a>  &lt;chr&gt;                                                     &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;</span>
+<span id="cb10-4"><a href="#cb10-4"></a>1 Barbie is a 2023 fantasy comedy film directed by Greta…  0.0293 0.968  0.00255</span>
+<span id="cb10-5"><a href="#cb10-5"></a>2 Communication Science analyzes contents, uses, and con…  0.0925 0.0167 0.891  </span>
+<span id="cb10-6"><a href="#cb10-6"></a>3 Computational methods include various approaches to te…  0.977  0.0120 0.0114 </span>
+<span id="cb10-7"><a href="#cb10-7"></a>4 Oppenheimer is a 2023 biographical thriller film writt…  0.0529 0.917  0.0300 </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </section></section>
@@ -1388,7 +1464,16 @@ td {
 <li><p>Because we work with code, tiny mistakes can produce errors.</p></li>
 <li><p>If you have any problems related to installing software, running packages or code, or simply an error message you do not understand, you can address the R Help Desk:</p></li>
 </ul>
-<p><strong>Office Hours:</strong> Mondays and Wednesdays 14.00 to 16.00 on Zoom (see canvas)</p>
+<p><br></p>
+<p><strong>Office Hours:</strong></p>
+<ul>
+<li>Mondays: 15:30 - 17:30</li>
+<li>Wednesday: 11:15 - 13:15</li>
+</ul>
+<p><strong>Where:</strong></p>
+<ul>
+<li>On Zoom (Link provided on Canvas)</li>
+</ul>
 </section>
 <section id="information-and-materials" class="slide level2">
 <h2>Information and Materials</h2>
@@ -1472,11 +1557,6 @@ td {
 </section>
 <section id="section-3" class="slide level2" data-background="#43464B" data-background-video="video/info.mp4" data-background-video-loop="true" data-background-video-muted="true">
 <h2></h2>
-</section></section>
-<section>
-<section id="thank-you-for-your-attention" class="title-slide slide level1 center" data-background-color="steelblue">
-<h1>Thank you for your attention!</h1>
-
 </section>
 <section id="required-reading" class="slide level2">
 <h2>Required Reading</h2>
@@ -1496,8 +1576,15 @@ td {
 <li><p>Jacobi,C., van Atteveldt, W. &amp; Welbers, K. (2016) Quantitative analysis of large amounts of journalistic texts using topic modelling. Digital Journalism, 4(1), 89-106, DOI: 10.1080/21670811.2015.1093271</p></li>
 <li><p>Jürgens, P., Meltzer, C., &amp; Scharkow, M. (2021, in press). Age and Gender Representation on German TV: A Longitudinal Computational Analysis. Computational Communication Research.</p></li>
 <li><p>Kramer, A. D. I., Guillory, J. E, &amp; Hancock, J. (2014). Experimental Evidence of Massive-Scale Emotional Contagion Through Social Networks. Proceedings of the National Academy of Sciences, 111(24), 8788-8790.</p></li>
+<li><p>Parry, D. A., Davidson, B. I., Sewall, C. J., Fisher, J. T., Mieczkowski, H., &amp; Quintana, D. S. (2021). A systematic review and meta-analysis of discrepancies between logged and self-reported digital media use. Nature Human Behaviour, 5(11), 1535-1547.</p></li>
 <li><p>Salganik, M. J. (2018). Bit by Bit: Social Research in the Digital Age. Princeton University Press.</p></li>
+<li><p>Scharkow, M. (2016). The accuracy of self-reported internet use—A validation study using client log data. Communication Methods and Measures, 10(1), 13-27.</p></li>
 <li><p>Simon, M., Welbers, K., Kroon, A. C. &amp; Trilling, D. (2022). Linked in the dark: A network approach to understanding information flows within the Dutch Telegramsphere. Information, Communication &amp; Society, https://doi.org/10.1080/1369118X.2022.2133549</p></li>
+</ul>
+</section>
+<section id="references-1" class="slide level2 smaller">
+<h2>References</h2>
+<ul>
 <li><p>Thompson, T. (2010). Crime software may help police predict violent offences. The Observer. Retrieved from https://www.theguardian.com/uk/2010/jul/25/police-software-crime-prediction</p></li>
 <li><p>Van Atteveldt, W., &amp; Peng, T.-Q. (2018). When communication meets computation: Opportunities, challenges, and pitfalls in computational communication science. Communication Methods and Measures, 12(2-3), 81–92. https://doi.org/10.1080/19312458.2018.1458084</p></li>
 <li><p>Wimmer, A. &amp; Lewis, K., (2010). Beyond and Below Racial Homophily: ERG Models of a Friendship Network Documented on Facebook. American Journal of Sociology, 116(2), 583-642.</p></li>
@@ -1530,12 +1617,15 @@ td {
 <li><p>Big data are often “incomplete”: This means they do not have the information that you will want for your research. This is a common feature of data that were created for purposes other than research. For example, log data (e.g., browser history) includes all links a person has visited over time, but does not provide any additional information. More over, it may contain gaps where the software failed or the person purposefully hid his surfing behavior.</p></li>
 <li><p>Big data are often “algorithmically confounded”: Behavior in big data systems is not natural; it is driven by the engineering goals of the systems. For example, what you see on a facebook news feed depends on algorithm that Facebook has built into their platform. Behavior of individuals is thus also driven by these system-immanent features.</p></li>
 </ol>
-<p><img src="img/logo.png" class="slide-logo"></p>
-<div class="footer footer-default">
-<p>Computational Analysis of Digital Communication</p>
-</div>
 </div>
 </section></section>
+<section id="thank-you-for-your-attention" class="title-slide slide level1 center" data-background-color="steelblue">
+<h1>Thank you for your attention!</h1>
+
+<img src="img/logo.png" class="slide-logo r-stretch"><div class="footer footer-default">
+<p>Computational Analysis of Digital Communication</p>
+</div>
+</section>
     </div>
   </div>
 
