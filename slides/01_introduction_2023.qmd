@@ -26,15 +26,15 @@ editor: visual
 
 # What can we learn from this much data? {background-color="steelblue"}
 
-## TIMELINE OF NATURAL LANGUAGE PROCESSING {transition="slide-out"}
+## TIMELINE OF NATURAL LANGUAGE PROCESSING {transition="slide"}
 
 ![](img/timeline/Slide1.png)
 
-## TIMELINE OF NATURAL LANGUAGE PROCESSING {transition="slide-in slide-out"}
+## TIMELINE OF NATURAL LANGUAGE PROCESSING {transition="slide"}
 
 ![](img/timeline/Slide2.png)
 
-## TIMELINE OF NATURAL LANGUAGE PROCESSING {transition="slide-in"}
+## TIMELINE OF NATURAL LANGUAGE PROCESSING {transition="slide"}
 
 ![](img/timeline/Slide3.png)
 
@@ -126,62 +126,74 @@ With regard to the specific methods being taught in R, you will be able to...
 :::
 :::
 
+## Who am I?
+
+- Assistant Professor of Communication Science
+
+- Research Interest
+
+    - Privacy & Data Protection Online
+    - Social Influence and Contagion
+    - Media Literacy
+
+- Methodological Interests
+
+    - Scale Development and Validation
+    - Bayesian Statistics
+    - Flexibility in Data Analysis
+    - Computational Methods and Machine Learning
+
+
 ## Content of this lecture {.smaller}
 
 ::: columns
 ::: {.column width="45%"}
-
 1.  What is Computational Social Science?
 
     1.1. Definition and Examples
-    
+
     1.2. Relevance of Computational Methods
-    
+
     1.3. Characteristics of Big Data
-    
+
     1.4. Opportunities and Pitfalls
 
 2.  What is Computational Communication Science?
 
     2.1. Definition
-    
-    2.2. Typical Research Areas 
-    
+
+    2.2. Typical Research Areas
+
     2.3. Examples of Computational Communication Research
 
 3.  Ethics of Computational Communication Research
 
     3.1. A Controversional Study (Kramer et al., 2014)
-    
+
     3.2. Ethical Challenges
-    
+
     3.3. Practical Guidelines
 :::
 
 ::: {.column width="5%"}
-
 :::
 
 ::: {.column width="45%"}
-
 4.  Introduction to Automated Text Analysis
 
     4.1. Text as Data
-    
+
     4.2. The General Text Classification Pipeline
-    
+
     4.3. A Small Example
 
 5.  Course Formalities
 
     5.1. Introduction of Teachers
-    
-    5.2. Course Material and Schedule
-    
-    5.3. Attendance and Assignments
-    
-    
 
+    5.2. Course Material and Schedule
+
+    5.3. Attendance and Assignments
 :::
 :::
 
@@ -255,13 +267,13 @@ td {
 }
 </style>
 ```
-| \#  | Characteristic | Description                                                                                                                                                                                                                                                                     |
-|-----------|:----------|:--------------------------------------------------|
+| \#  | Characteristic | Description                                                                                                                                                                                                                                                                       |
+|---------|:--------|:------------------------------------------------------|
 | 1   | Big            | The scale or volume of some current data sets is often impressive. However, big data sets are not an end in themselves, but they can enable certain kinds of research including the study of rare events, the estimation of heterogeneity, and the detection of small differences |
-| 2   | Always-on      | Many big data systems are constantly collecting data and thus enable to study unexpected events and allow for real-time measurement                                                                                                                                             |
-| 3   | Nonreactive    | Participants are generally not aware that their data are being captured or they have become so accustomed to this data collection that it no longer changes their behavior.                                                                                                     |
-| 4   | Incomplete     | Most big data sources are incomplete, in the sense that they don't have the information that you will want for your research. This is a common feature of data that were created for purposes other than research.                                                              |
-| 5   | Inaccessible   | Data held by companies and governments are difficult for researchers to access.                                                                                                                                                                                                 |
+| 2   | Always-on      | Many big data systems are constantly collecting data and thus enable to study unexpected events and allow for real-time measurement                                                                                                                                               |
+| 3   | Nonreactive    | Participants are generally not aware that their data are being captured or they have become so accustomed to this data collection that it no longer changes their behavior.                                                                                                       |
+| 4   | Incomplete     | Most big data sources are incomplete, in the sense that they don't have the information that you will want for your research. This is a common feature of data that were created for purposes other than research.                                                                |
+| 5   | Inaccessible   | Data held by companies and governments are difficult for researchers to access.                                                                                                                                                                                                   |
 
 ## 10 Characteristics of Big Data
 
@@ -316,10 +328,7 @@ Why computational methods are important for communication research...
 
 <br>
 
-
 [Van Atteveldt & Peng, 2018]{style="font-size:0.75em;"}
-
-
 :::
 
 ::: {.column width="30%"}
@@ -368,13 +377,11 @@ Computational communication science studies thus usually involve:
 
 ::: columns
 ::: {.column width="35%"}
-
 -   Jacobi and colleagues (2016) analyzed the coverage of nuclear technology from 1945 to 2014 in the New York Times
 
 -   Analysis of 51,528 news stories (headline and lead): Way too much for human coding!
 
 -   Used "LDA topic modeling" to extract latent topics and analyzed their occurrence over time
-
 :::
 
 ::: {.column width="65%"}
@@ -384,26 +391,22 @@ Computational communication science studies thus usually involve:
 
 ## Example 2: Facebook Data to Predict Personality
 
-- Kosinski and colleagues (2013) used a dataset of over 58,000 volunteers who provided their Facebook Likes, detailed demographic profiles, and the results of several psychometric test
+-   Kosinski and colleagues (2013) used a dataset of over 58,000 volunteers who provided their Facebook Likes, detailed demographic profiles, and the results of several psychometric test
 
-- Were able to show that one can predict a variety of personal characteristics and personality traits from simple Facebook likes
+-   Were able to show that one can predict a variety of personal characteristics and personality traits from simple Facebook likes
 
 ::: columns
 ::: {.column width="38%"}
-
 ![](img/kosinski_personality3.png){width="75%"}
 :::
+
 ::: {.column width="12%"}
-
 :::
+
 ::: {.column width="48%"}
-
 ![](img/kosinski_personality1.png){width="75%"}
-
 :::
 :::
-
-
 
 ## Example 3: Dutch Telegramsphere
 
@@ -437,12 +440,9 @@ Computational communication science studies thus usually involve:
 
 ::: columns
 ::: {.column width="40%"}
-- Andrich et al (2023) studied gender differences in political news coverage to determine whether the media employ stereotypical traits in portrayals of 1,095 U.S. politicians
+-   Andrich et al (2023) studied gender differences in political news coverage to determine whether the media employ stereotypical traits in portrayals of 1,095 U.S. politicians
 
-- The sample consisted of over 5 million U.S. news stories published from 2010 to 2020
-
-
-
+-   The sample consisted of over 5 million U.S. news stories published from 2010 to 2020
 :::
 
 ::: {.column width="60%"}
@@ -450,10 +450,9 @@ Computational communication science studies thus usually involve:
 :::
 :::
 
-- They studied the media’s attribution of gender-linked (feminine, masculine) and political (leadership, competence, integrity, empathy) traits to U.S. politicians
+-   They studied the media's attribution of gender-linked (feminine, masculine) and political (leadership, competence, integrity, empathy) traits to U.S. politicians
 
-
-- All three masculine traits were more strongly associated with male politicians, but only the feminine physical traits were more strongly associated with female politicians
+-   All three masculine traits were more strongly associated with male politicians, but only the feminine physical traits were more strongly associated with female politicians
 
 ## Example 5: Gender representation in TV
 
@@ -476,7 +475,6 @@ Computational communication science studies thus usually involve:
 ![](img/juergen_face2.png)
 :::
 :::
-
 
 # Ethics of Computational Communication Research {background-color="steelblue"}
 
@@ -567,23 +565,21 @@ Researcher scraped students' data from Facebook, merged it with university recor
 
 ## Ethical challenges in computational research (1)
 
-1. **Privacy and Data Security:** A key ethical concern is the handling of personal data, including the risk of data breaches and misuse. When using proprietary software/algorithms, should we share personal data with the company behind it (e.g., OpenAI, Google)?
+1.  **Privacy and Data Security:** A key ethical concern is the handling of personal data, including the risk of data breaches and misuse. When using proprietary software/algorithms, should we share personal data with the company behind it (e.g., OpenAI, Google)?
 
-2. **Bias and Fairness:** Computational methods can inherit biases from the data they are trained on. This can result in unfair or discriminatory outcomes, especially when later applied to contexts like hiring, lending, and criminal justice. Addressing these biases remains an ongoing challenge. Validation is of utmost importance!
+2.  **Bias and Fairness:** Computational methods can inherit biases from the data they are trained on. This can result in unfair or discriminatory outcomes, especially when later applied to contexts like hiring, lending, and criminal justice. Addressing these biases remains an ongoing challenge. Validation is of utmost importance!
 
-3. **Transparency and Accountability:** Many computational algorithms are complex and not easily understandable by humans. This lack of transparency can make it difficult to hold individuals or organizations accountable for the decisions made by these algorithms. Lack of explainability can lead to a lack of trust.
+3.  **Transparency and Accountability:** Many computational algorithms are complex and not easily understandable by humans. This lack of transparency can make it difficult to hold individuals or organizations accountable for the decisions made by these algorithms. Lack of explainability can lead to a lack of trust.
 
-4. **Social Manipulation:** Computational methods can be used to manipulate public opinion or behavior, often in unethical ways (see Kramer et al.). This includes spreading misinformation or conducting social experiments without consent and debriefing.
-
+4.  **Social Manipulation:** Computational methods can be used to manipulate public opinion or behavior, often in unethical ways (see Kramer et al.). This includes spreading misinformation or conducting social experiments without consent and debriefing.
 
 ## Ethical challenges in computational research (2)
 
+5.  **Environmental Impact:** The massive computational power required for some methods, such as training deep learning models, can have a significant environmental impact, contributing to concerns about energy consumption and climate change.
 
-5. **Environmental Impact:** The massive computational power required for some methods, such as training deep learning models, can have a significant environmental impact, contributing to concerns about energy consumption and climate change.
+6.  **Ownership and Intellectual Property:** Questions of intellectual property rights, data and model ownership, and access to computational methods can raise more ethical issues. Some may argue that access to certain methods should be open to all (see also point 3 transparency), while others may seek to protect intellectual property (among other things, to e.g., prevent misuse).
 
-6. **Ownership and Intellectual Property:** Questions of intellectual property rights, data and model ownership, and access to computational methods can raise more ethical issues. Some may argue that access to certain methods should be open to all (see also point 3 transparency), while others may seek to protect intellectual property (among other things, to e.g., prevent misuse).
-
-7. **Ethical AI:** In the field of artificial intelligence (AI) and machine learning, ethical concerns often revolve around the development of AI systems that can make autonomous decisions. Ensuring these decisions align with human values is a significant challenge. Ethical dilemmas arise around the degree of control we should and are able to maintain over these systems and who should be responsible for their actions.
+7.  **Ethical AI:** In the field of artificial intelligence (AI) and machine learning, ethical concerns often revolve around the development of AI systems that can make autonomous decisions. Ensuring these decisions align with human values is a significant challenge. Ethical dilemmas arise around the degree of control we should and are able to maintain over these systems and who should be responsible for their actions.
 
 <br>
 
@@ -601,13 +597,11 @@ Salganik (2013) proposes the following four ethical guidelines for evaluating th
 
 -   **Respect for law and public interest**: Respect privacy, copyright, and access rights
 
-<br><br>
-[Salganik, 2018, chap. 6]{style="font-size:0.65em;"}
+<br><br> [Salganik, 2018, chap. 6]{style="font-size:0.65em;"}
 
 ## Ethical principles for CCR
 
 ![](img/ethical_guidelines.png)
-
 
 # Introduction to Automated Text Analysis {background-color="steelblue"}
 
@@ -678,18 +672,17 @@ A company owned by Thiel had lodged a consent application for a sprawling lodge 
 
 ::: columns
 ::: {.column width="55%"}
+-   Choosing the texts that contain the content and one wants to analyze (1)
 
-- Choosing the texts that contain the content and one wants to analyze (1)
+-   Define the units and categories of analysis (2) & (3)
 
-- Define the units and categories of analysis (2) & (3)
+-   Describe categories and develop a set of rules for the manual coding process (4)
 
-- Describe categories and develop a set of rules for the manual coding process (4)
+-   Coding the text according to the rules (5), which usually requires a lot of manual work
 
-- Coding the text according to the rules (5), which usually requires a lot of manual work
+-   Make sense of codes (6) and rework the codes and rules (7) and redo the analysis
 
-- Make sense of codes (6) and rework the codes and rules (7) and redo the analysis
-
-- Analyze frequencies, relationships, differences, similarities between units/codes
+-   Analyze frequencies, relationships, differences, similarities between units/codes
 :::
 
 ::: {.column width="45%"}
@@ -710,7 +703,6 @@ A company owned by Thiel had lodged a consent application for a sprawling lodge 
 ## What is text?
 
 ::: {layout="[30, 30, 30]"}
-
 ![](img/symbols.jpg)
 
 ![](img/symbols2.png)
@@ -730,8 +722,7 @@ A company owned by Thiel had lodged a consent application for a sprawling lodge 
 
 ## Symbols and Meaning
 
-![](https://m.media-amazon.com/images/I/71ziF48659L._AC_UF350,350_QL50_.jpg){.absolute top=140 right=0 width="400"}
-
+![](https://m.media-amazon.com/images/I/71ziF48659L._AC_UF350,350_QL50_.jpg){.absolute top="140" right="0" width="400"}
 
 -   Text consists of *symbols*
 
@@ -766,15 +757,12 @@ A company owned by Thiel had lodged a consent application for a sprawling lodge 
 <br>
 
 [Hvitfeldt & Silge, 2021 (chap. 1)]{style="font-size:0.75em;"}
-
 :::
 
 ::: {.column width="5%"}
 :::
 
 ::: {.column width="45%"}
-
-
 | Subfield   | What does it focus on?                    |
 |:-----------|:------------------------------------------|
 | Phonetics  | Sounds that people use in language        |
@@ -783,7 +771,6 @@ A company owned by Thiel had lodged a consent application for a sprawling lodge 
 | Syntax     | How sentences are formed from words       |
 | Semantics  | What sentences mean                       |
 | Pragmatics | How language is used in context           |
-
 :::
 :::
 
@@ -798,12 +785,14 @@ A company owned by Thiel had lodged a consent application for a sprawling lodge 
 <br><br>
 
 <center>
-| Type of Feature   | Example                                                    |
-|:------------------|:----------------------------------------------------|
-| Sentence | "Include Your Children When Baking Cookies"                |
-| Word       | "Include", "Your", "Children", "When", "Baking", "Cookies" |
-| Bigrams          | "Include", "Your Children", "When", "Baking Cookies"       |
-| n-grams           | "Include Your Children", "When Baking Cookies"             |
+
+| Type of Feature | Example                                                    |
+|:-----------------|:-----------------------------------------------------|
+| Sentence        | "Include Your Children When Baking Cookies"                |
+| Word            | "Include", "Your", "Children", "When", "Baking", "Cookies" |
+| Bigrams         | "Include", "Your Children", "When", "Baking Cookies"       |
+| n-grams         | "Include Your Children", "When Baking Cookies"             |
+
 </center>
 
 # General Text Classification Workflow {background-color="steelblue"}
@@ -816,10 +805,10 @@ A Framework for this Course
 
 -   **General Goal:** to label (or annotate) previously unlabeled text
 
-    - Entails labeling a sentence, paragraph, or entire text (e.g., with the topic, the sentiment,...)
-    - Specific methods may differ, but the necessary steps (1-4) usually remain the same
-    
-- We will always come back to this general pipeline to make sure we understand the core principles and goals
+    -   Entails labeling a sentence, paragraph, or entire text (e.g., with the topic, the sentiment,...)
+    -   Specific methods may differ, but the necessary steps (1-4) usually remain the same
+
+-   We will always come back to this general pipeline to make sure we understand the core principles and goals
 
 ## (1) Obtaining text
 
@@ -896,12 +885,34 @@ A Framework for this Course
 :::
 :::
 
-## A very small example
+## A very small example {auto-animate="true"}
 
 ```{r}
 #| echo: true
 #| include: true
-#| output-location: fragment
+#| code-line-numbers: true
+#| class-output: output
+# Loading package
+library(tidytext)
+
+# Raw text
+data <- tibble(
+  docs = c(1:4),
+  text = c("Computational methods include various approaches to text classification.",
+           "Oppenheimer is a 2023 biographical thriller film written and directed by Christopher Nolan.",
+           "Communication Science analyzes contents, uses, and consequences of media and communication.",
+           "Barbie is a 2023 fantasy comedy film directed by Greta Gerwig.")
+  )
+
+head(data)
+
+```
+
+## A very small example {auto-animate="true"}
+
+```{r}
+#| echo: true
+#| include: true
 #| code-line-numbers: true
 #| class-output: output
 # Loading package
@@ -920,30 +931,33 @@ data <- tibble(
 tokens <- data |> 
   unnest_tokens(word, text)
 head(tokens, n = 10)
-
 ```
 
-## A very simple example: Dictionary approach
+## A very simple example: Dictionary approach {auto-animate="true"}
 
 ```{r}
 #| echo: true
 #| include: true
 #| code-line-numbers: true
 #| class-output: output
-#| output-location: fragment
 # Creating a simple dictionary
 dictionary <- tibble(movie = c("film", "movie"),
                      methods = c("methods", "science"))
 print(dictionary)
 ```
 
+## A very simple example: Dictionary approach {auto-animate="true"}
 
 ```{r}
 #| echo: true
 #| include: true
 #| code-line-numbers: true
 #| class-output: output
-#| output-location: fragment
+# Creating a simple dictionary
+dictionary <- tibble(movie = c("film", "movie"),
+                     methods = c("methods", "science"))
+print(dictionary)
+
 # Text classification
 tokens |>
   left_join(dictionary |>
@@ -992,7 +1006,7 @@ How this course is going to work?
 ## Teachers
 
 |     Dr. Philipp K. Masur      |     | Dr. Kaspar Welbers  |     |     Emma Diel     |     |     Roan Buma     |
-|:---------:|-----------|:---------:|-----------|:---------:|-----------|:---------:|
+|:--------:|-----|:--------:|-----|:--------:|-----|:--------:|
 |     ![](img/philipp2.jpg)     |     | ![](img/kasper.jpg) |     | ![](img/emma.jpg) |     | ![](img/buma.jpg) |
 | Lecturer & Course Coordinator |     |       Teacher       |     |      Teacher      |     |      Teacher      |
 
@@ -1006,14 +1020,14 @@ How this course is going to work?
 
 <br>
 
-**Office Hours:** 
+**Office Hours:**
 
-- Mondays:    15:30 - 17:30
-- Wednesday:  11:15 - 13:15
+-   Mondays: 15:30 - 17:30
+-   Wednesday: 11:15 - 13:15
 
 **Where:**
 
-- On Zoom (Link provided on Canvas)
+-   On Zoom (Link provided on Canvas)
 
 ## Information and Materials
 
@@ -1131,11 +1145,11 @@ If anything is unclear, do ask now.
 
 -   Kramer, A. D. I., Guillory, J. E, & Hancock, J. (2014). Experimental Evidence of Massive-Scale Emotional Contagion Through Social Networks. Proceedings of the National Academy of Sciences, 111(24), 8788-8790.
 
-- Parry, D. A., Davidson, B. I., Sewall, C. J., Fisher, J. T., Mieczkowski, H., & Quintana, D. S. (2021). A systematic review and meta-analysis of discrepancies between logged and self-reported digital media use. Nature Human Behaviour, 5(11), 1535-1547.
+-   Parry, D. A., Davidson, B. I., Sewall, C. J., Fisher, J. T., Mieczkowski, H., & Quintana, D. S. (2021). A systematic review and meta-analysis of discrepancies between logged and self-reported digital media use. Nature Human Behaviour, 5(11), 1535-1547.
 
 -   Salganik, M. J. (2018). Bit by Bit: Social Research in the Digital Age. Princeton University Press.
 
-- Scharkow, M. (2016). The accuracy of self-reported internet use—A validation study using client log data. Communication Methods and Measures, 10(1), 13-27.
+-   Scharkow, M. (2016). The accuracy of self-reported internet use---A validation study using client log data. Communication Methods and Measures, 10(1), 13-27.
 
 -   Simon, M., Welbers, K., Kroon, A. C. & Trilling, D. (2022). Linked in the dark: A network approach to understanding information flows within the Dutch Telegramsphere. Information, Communication & Society, https://doi.org/10.1080/1369118X.2022.2133549
 
@@ -1146,7 +1160,6 @@ If anything is unclear, do ask now.
 -   Van Atteveldt, W., & Peng, T.-Q. (2018). When communication meets computation: Opportunities, challenges, and pitfalls in computational communication science. Communication Methods and Measures, 12(2-3), 81--92. https://doi.org/10.1080/19312458.2018.1458084
 
 -   Wimmer, A. & Lewis, K., (2010). Beyond and Below Racial Homophily: ERG Models of a Friendship Network Documented on Facebook. American Journal of Sociology, 116(2), 583-642.
-
 
 ## Example Exam Question (Multiple Choice)
 
@@ -1187,6 +1200,5 @@ Name and explain two characteristics of big data.
 1.  Big data are often "incomplete": This means they do not have the information that you will want for your research. This is a common feature of data that were created for purposes other than research. For example, log data (e.g., browser history) includes all links a person has visited over time, but does not provide any additional information. More over, it may contain gaps where the software failed or the person purposefully hid his surfing behavior.
 
 2.  Big data are often "algorithmically confounded": Behavior in big data systems is not natural; it is driven by the engineering goals of the systems. For example, what you see on a facebook news feed depends on algorithm that Facebook has built into their platform. Behavior of individuals is thus also driven by these system-immanent features.
-
 
 # Thank you for your attention! {background-color="steelblue"}

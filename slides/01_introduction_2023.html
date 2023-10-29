@@ -406,15 +406,15 @@
 <h1>What can we learn from this much data?</h1>
 
 </section>
-<section id="timeline-of-natural-language-processing" class="slide level2" data-transition="slide-out">
+<section id="timeline-of-natural-language-processing" class="slide level2" data-transition="slide">
 <h2>TIMELINE OF NATURAL LANGUAGE PROCESSING</h2>
 
 <img data-src="img/timeline/Slide1.png" class="r-stretch"></section>
-<section id="timeline-of-natural-language-processing-1" class="slide level2" data-transition="slide-in slide-out">
+<section id="timeline-of-natural-language-processing-1" class="slide level2" data-transition="slide">
 <h2>TIMELINE OF NATURAL LANGUAGE PROCESSING</h2>
 
 <img data-src="img/timeline/Slide2.png" class="r-stretch"></section>
-<section id="timeline-of-natural-language-processing-2" class="slide level2" data-transition="slide-in">
+<section id="timeline-of-natural-language-processing-2" class="slide level2" data-transition="slide">
 <h2>TIMELINE OF NATURAL LANGUAGE PROCESSING</h2>
 
 <img data-src="img/timeline/Slide3.png" class="r-stretch"></section>
@@ -490,6 +490,25 @@
 <p><img data-src="img/example_ML.png"></p>
 </div>
 </div>
+</section>
+<section id="who-am-i" class="slide level2">
+<h2>Who am I?</h2>
+<ul>
+<li><p>Assistant Professor of Communication Science</p></li>
+<li><p>Research Interest</p>
+<ul>
+<li>Privacy &amp; Data Protection Online</li>
+<li>Social Influence and Contagion</li>
+<li>Media Literacy</li>
+</ul></li>
+<li><p>Methodological Interests</p>
+<ul>
+<li>Scale Development and Validation</li>
+<li>Bayesian Statistics</li>
+<li>Flexibility in Data Analysis</li>
+<li>Computational Methods and Machine Learning</li>
+</ul></li>
+</ul>
 </section>
 <section id="content-of-this-lecture" class="slide level2 smaller">
 <h2>Content of this lecture</h2>
@@ -592,9 +611,9 @@ td {
 </style>
 <table>
 <colgroup>
-<col style="width: 15%">
-<col style="width: 15%">
-<col style="width: 69%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 75%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1013,12 +1032,12 @@ td {
 <div class="sourceCode" id="cb1"><pre class="sourceCode numberSource output number-lines code-with-copy"><code class="sourceCode"><span id="cb1-1"><a href="#cb1-1"></a># A tibble: 6 × 5</span>
 <span id="cb1-2"><a href="#cb1-2"></a>     id condition sns_use well_being pers1</span>
 <span id="cb1-3"><a href="#cb1-3"></a>  &lt;int&gt; &lt;chr&gt;       &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt;</span>
-<span id="cb1-4"><a href="#cb1-4"></a>1     1 A            1.19      3.01   1.48</span>
-<span id="cb1-5"><a href="#cb1-5"></a>2     2 B            4.42      0.669  5.15</span>
-<span id="cb1-6"><a href="#cb1-6"></a>3     3 A            2.52     -0.729  1.83</span>
-<span id="cb1-7"><a href="#cb1-7"></a>4     4 B            4.91     -1.59   1.18</span>
-<span id="cb1-8"><a href="#cb1-8"></a>5     5 A            4.06      6.00   4.83</span>
-<span id="cb1-9"><a href="#cb1-9"></a>6     6 B            2.10      2.19   6.86</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a href="#cb1-4"></a>1     1 A            2.30      6.18   2.83</span>
+<span id="cb1-5"><a href="#cb1-5"></a>2     2 B            1.62      1.73   1.91</span>
+<span id="cb1-6"><a href="#cb1-6"></a>3     3 A            4.34      0.770  5.50</span>
+<span id="cb1-7"><a href="#cb1-7"></a>4     4 B            1.51      8.91   2.20</span>
+<span id="cb1-8"><a href="#cb1-8"></a>5     5 A            3.97      0.303  1.54</span>
+<span id="cb1-9"><a href="#cb1-9"></a>6     6 B            3.84      1.41   3.30</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div><div class="column" style="width:5%;">
@@ -1181,8 +1200,8 @@ td {
 <center>
 <table>
 <colgroup>
-<col style="width: 26%">
-<col style="width: 73%">
+<col style="width: 25%">
+<col style="width: 75%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1302,8 +1321,8 @@ td {
 </div>
 </div>
 </section>
-<section id="a-very-small-example" class="slide level2">
-<h2>A very small example</h2>
+<section id="a-very-small-example" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">A very small example</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3" data-code-line-numbers="true"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Loading package</span></span>
 <span id="cb3-2"><a href="#cb3-2"></a><span class="fu">library</span>(tidytext)</span>
@@ -1317,65 +1336,100 @@ td {
 <span id="cb3-10"><a href="#cb3-10"></a>           <span class="st">"Barbie is a 2023 fantasy comedy film directed by Greta Gerwig."</span>)</span>
 <span id="cb3-11"><a href="#cb3-11"></a>  )</span>
 <span id="cb3-12"><a href="#cb3-12"></a></span>
-<span id="cb3-13"><a href="#cb3-13"></a><span class="co"># Feature engineering</span></span>
-<span id="cb3-14"><a href="#cb3-14"></a>tokens <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> </span>
-<span id="cb3-15"><a href="#cb3-15"></a>  <span class="fu">unnest_tokens</span>(word, text)</span>
-<span id="cb3-16"><a href="#cb3-16"></a><span class="fu">head</span>(tokens, <span class="at">n =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell fragment">
+<span id="cb3-13"><a href="#cb3-13"></a><span class="fu">head</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource output number-lines code-with-copy"><code class="sourceCode"><span id="cb4-1"><a href="#cb4-1"></a># A tibble: 10 × 2</span>
-<span id="cb4-2"><a href="#cb4-2"></a>    docs word          </span>
-<span id="cb4-3"><a href="#cb4-3"></a>   &lt;int&gt; &lt;chr&gt;         </span>
-<span id="cb4-4"><a href="#cb4-4"></a> 1     1 computational </span>
-<span id="cb4-5"><a href="#cb4-5"></a> 2     1 methods       </span>
-<span id="cb4-6"><a href="#cb4-6"></a> 3     1 include       </span>
-<span id="cb4-7"><a href="#cb4-7"></a> 4     1 various       </span>
-<span id="cb4-8"><a href="#cb4-8"></a> 5     1 approaches    </span>
-<span id="cb4-9"><a href="#cb4-9"></a> 6     1 to            </span>
-<span id="cb4-10"><a href="#cb4-10"></a> 7     1 text          </span>
-<span id="cb4-11"><a href="#cb4-11"></a> 8     1 classification</span>
-<span id="cb4-12"><a href="#cb4-12"></a> 9     2 oppenheimer   </span>
-<span id="cb4-13"><a href="#cb4-13"></a>10     2 is            </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource output number-lines code-with-copy"><code class="sourceCode"><span id="cb4-1"><a href="#cb4-1"></a># A tibble: 4 × 2</span>
+<span id="cb4-2"><a href="#cb4-2"></a>   docs text                                                                    </span>
+<span id="cb4-3"><a href="#cb4-3"></a>  &lt;int&gt; &lt;chr&gt;                                                                   </span>
+<span id="cb4-4"><a href="#cb4-4"></a>1     1 Computational methods include various approaches to text classification.</span>
+<span id="cb4-5"><a href="#cb4-5"></a>2     2 Oppenheimer is a 2023 biographical thriller film written and directed b…</span>
+<span id="cb4-6"><a href="#cb4-6"></a>3     3 Communication Science analyzes contents, uses, and consequences of medi…</span>
+<span id="cb4-7"><a href="#cb4-7"></a>4     4 Barbie is a 2023 fantasy comedy film directed by Greta Gerwig.          </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </section>
-<section id="a-very-simple-example-dictionary-approach" class="slide level2">
-<h2>A very simple example: Dictionary approach</h2>
+<section id="a-very-small-example-1" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">A very small example</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5" data-code-line-numbers="true"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Creating a simple dictionary</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a>dictionary <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">movie =</span> <span class="fu">c</span>(<span class="st">"film"</span>, <span class="st">"movie"</span>),</span>
-<span id="cb5-3"><a href="#cb5-3"></a>                     <span class="at">methods =</span> <span class="fu">c</span>(<span class="st">"methods"</span>, <span class="st">"science"</span>))</span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="fu">print</span>(dictionary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell fragment">
+<div class="sourceCode cell-code" id="cb5" data-code-line-numbers="true"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Loading package</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="fu">library</span>(tidytext)</span>
+<span id="cb5-3"><a href="#cb5-3"></a></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="co"># Raw text</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a>data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb5-6"><a href="#cb5-6"></a>  <span class="at">docs =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>),</span>
+<span id="cb5-7"><a href="#cb5-7"></a>  <span class="at">text =</span> <span class="fu">c</span>(<span class="st">"Computational methods include various approaches to text classification."</span>,</span>
+<span id="cb5-8"><a href="#cb5-8"></a>           <span class="st">"Oppenheimer is a 2023 biographical thriller film written and directed by Christopher Nolan."</span>,</span>
+<span id="cb5-9"><a href="#cb5-9"></a>           <span class="st">"Communication Science analyzes contents, uses, and consequences of media and communication."</span>,</span>
+<span id="cb5-10"><a href="#cb5-10"></a>           <span class="st">"Barbie is a 2023 fantasy comedy film directed by Greta Gerwig."</span>)</span>
+<span id="cb5-11"><a href="#cb5-11"></a>  )</span>
+<span id="cb5-12"><a href="#cb5-12"></a></span>
+<span id="cb5-13"><a href="#cb5-13"></a><span class="co"># Feature engineering</span></span>
+<span id="cb5-14"><a href="#cb5-14"></a>tokens <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> </span>
+<span id="cb5-15"><a href="#cb5-15"></a>  <span class="fu">unnest_tokens</span>(word, text)</span>
+<span id="cb5-16"><a href="#cb5-16"></a><span class="fu">head</span>(tokens, <span class="at">n =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource output number-lines code-with-copy"><code class="sourceCode"><span id="cb6-1"><a href="#cb6-1"></a># A tibble: 2 × 2</span>
-<span id="cb6-2"><a href="#cb6-2"></a>  movie methods</span>
-<span id="cb6-3"><a href="#cb6-3"></a>  &lt;chr&gt; &lt;chr&gt;  </span>
-<span id="cb6-4"><a href="#cb6-4"></a>1 film  methods</span>
-<span id="cb6-5"><a href="#cb6-5"></a>2 movie science</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource output number-lines code-with-copy"><code class="sourceCode"><span id="cb6-1"><a href="#cb6-1"></a># A tibble: 10 × 2</span>
+<span id="cb6-2"><a href="#cb6-2"></a>    docs word          </span>
+<span id="cb6-3"><a href="#cb6-3"></a>   &lt;int&gt; &lt;chr&gt;         </span>
+<span id="cb6-4"><a href="#cb6-4"></a> 1     1 computational </span>
+<span id="cb6-5"><a href="#cb6-5"></a> 2     1 methods       </span>
+<span id="cb6-6"><a href="#cb6-6"></a> 3     1 include       </span>
+<span id="cb6-7"><a href="#cb6-7"></a> 4     1 various       </span>
+<span id="cb6-8"><a href="#cb6-8"></a> 5     1 approaches    </span>
+<span id="cb6-9"><a href="#cb6-9"></a> 6     1 to            </span>
+<span id="cb6-10"><a href="#cb6-10"></a> 7     1 text          </span>
+<span id="cb6-11"><a href="#cb6-11"></a> 8     1 classification</span>
+<span id="cb6-12"><a href="#cb6-12"></a> 9     2 oppenheimer   </span>
+<span id="cb6-13"><a href="#cb6-13"></a>10     2 is            </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
+</section>
+<section id="a-very-simple-example-dictionary-approach" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">A very simple example: Dictionary approach</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7" data-code-line-numbers="true"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># Text classification</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a>tokens <span class="sc">|&gt;</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">left_join</span>(dictionary <span class="sc">|&gt;</span></span>
-<span id="cb7-4"><a href="#cb7-4"></a>  <span class="fu">gather</span>(label, word)) <span class="sc">|&gt;</span></span>
-<span id="cb7-5"><a href="#cb7-5"></a>  <span class="fu">group_by</span>(docs, label) <span class="sc">|&gt;</span></span>
-<span id="cb7-6"><a href="#cb7-6"></a>  <span class="fu">summarize</span>(<span class="at">n =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
-<span id="cb7-7"><a href="#cb7-7"></a>  <span class="fu">spread</span>(label, n)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell fragment">
+<div class="sourceCode cell-code" id="cb7" data-code-line-numbers="true"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># Creating a simple dictionary</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>dictionary <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">movie =</span> <span class="fu">c</span>(<span class="st">"film"</span>, <span class="st">"movie"</span>),</span>
+<span id="cb7-3"><a href="#cb7-3"></a>                     <span class="at">methods =</span> <span class="fu">c</span>(<span class="st">"methods"</span>, <span class="st">"science"</span>))</span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="fu">print</span>(dictionary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource output number-lines code-with-copy"><code class="sourceCode"><span id="cb8-1"><a href="#cb8-1"></a># A tibble: 4 × 4</span>
-<span id="cb8-2"><a href="#cb8-2"></a># Groups:   docs [4]</span>
-<span id="cb8-3"><a href="#cb8-3"></a>   docs methods movie `&lt;NA&gt;`</span>
-<span id="cb8-4"><a href="#cb8-4"></a>  &lt;int&gt;   &lt;int&gt; &lt;int&gt;  &lt;int&gt;</span>
-<span id="cb8-5"><a href="#cb8-5"></a>1     1       1    NA      7</span>
-<span id="cb8-6"><a href="#cb8-6"></a>2     2      NA     1     12</span>
-<span id="cb8-7"><a href="#cb8-7"></a>3     3       1    NA     10</span>
-<span id="cb8-8"><a href="#cb8-8"></a>4     4      NA     1     10</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource output number-lines code-with-copy"><code class="sourceCode"><span id="cb8-1"><a href="#cb8-1"></a># A tibble: 2 × 2</span>
+<span id="cb8-2"><a href="#cb8-2"></a>  movie methods</span>
+<span id="cb8-3"><a href="#cb8-3"></a>  &lt;chr&gt; &lt;chr&gt;  </span>
+<span id="cb8-4"><a href="#cb8-4"></a>1 film  methods</span>
+<span id="cb8-5"><a href="#cb8-5"></a>2 movie science</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</section>
+<section id="a-very-simple-example-dictionary-approach-1" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">A very simple example: Dictionary approach</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9" data-code-line-numbers="true"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># Creating a simple dictionary</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>dictionary <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">movie =</span> <span class="fu">c</span>(<span class="st">"film"</span>, <span class="st">"movie"</span>),</span>
+<span id="cb9-3"><a href="#cb9-3"></a>                     <span class="at">methods =</span> <span class="fu">c</span>(<span class="st">"methods"</span>, <span class="st">"science"</span>))</span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="fu">print</span>(dictionary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource output number-lines code-with-copy"><code class="sourceCode"><span id="cb10-1"><a href="#cb10-1"></a># A tibble: 2 × 2</span>
+<span id="cb10-2"><a href="#cb10-2"></a>  movie methods</span>
+<span id="cb10-3"><a href="#cb10-3"></a>  &lt;chr&gt; &lt;chr&gt;  </span>
+<span id="cb10-4"><a href="#cb10-4"></a>1 film  methods</span>
+<span id="cb10-5"><a href="#cb10-5"></a>2 movie science</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="sourceCode cell-code" id="cb11" data-code-line-numbers="true"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># Text classification</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>tokens <span class="sc">|&gt;</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a>  <span class="fu">left_join</span>(dictionary <span class="sc">|&gt;</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a>  <span class="fu">gather</span>(label, word)) <span class="sc">|&gt;</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a>  <span class="fu">group_by</span>(docs, label) <span class="sc">|&gt;</span></span>
+<span id="cb11-6"><a href="#cb11-6"></a>  <span class="fu">summarize</span>(<span class="at">n =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb11-7"><a href="#cb11-7"></a>  <span class="fu">spread</span>(label, n)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource output number-lines code-with-copy"><code class="sourceCode"><span id="cb12-1"><a href="#cb12-1"></a># A tibble: 4 × 4</span>
+<span id="cb12-2"><a href="#cb12-2"></a># Groups:   docs [4]</span>
+<span id="cb12-3"><a href="#cb12-3"></a>   docs methods movie `&lt;NA&gt;`</span>
+<span id="cb12-4"><a href="#cb12-4"></a>  &lt;int&gt;   &lt;int&gt; &lt;int&gt;  &lt;int&gt;</span>
+<span id="cb12-5"><a href="#cb12-5"></a>1     1       1    NA      7</span>
+<span id="cb12-6"><a href="#cb12-6"></a>2     2      NA     1     12</span>
+<span id="cb12-7"><a href="#cb12-7"></a>3     3       1    NA     10</span>
+<span id="cb12-8"><a href="#cb12-8"></a>4     4      NA     1     10</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </section>
@@ -1385,25 +1439,25 @@ td {
 
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9" data-code-line-numbers="true"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">library</span>(ccsamsterdamR)</span>
-<span id="cb9-2"><a href="#cb9-2"></a></span>
-<span id="cb9-3"><a href="#cb9-3"></a><span class="co"># Test classification</span></span>
-<span id="cb9-4"><a href="#cb9-4"></a>results <span class="ot">&lt;-</span> <span class="fu">text_zeroshot</span>(data<span class="sc">$</span>text, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"movie"</span>, <span class="st">"methods"</span>, <span class="st">"science"</span>),</span>
-<span id="cb9-5"><a href="#cb9-5"></a>                         <span class="at">url =</span> <span class="st">"https://api-inference.huggingface.co/models/facebook/bart-large-mnli"</span>)</span>
-<span id="cb9-6"><a href="#cb9-6"></a>results <span class="sc">%&gt;%</span></span>
-<span id="cb9-7"><a href="#cb9-7"></a>  <span class="fu">unnest</span>(<span class="at">cols =</span> <span class="fu">c</span>(<span class="st">"labels"</span>, <span class="st">"scores"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb9-8"><a href="#cb9-8"></a>  as_tibble <span class="sc">%&gt;%</span></span>
-<span id="cb9-9"><a href="#cb9-9"></a>  <span class="fu">spread</span>(labels, scores)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13" data-code-line-numbers="true"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">library</span>(ccsamsterdamR)</span>
+<span id="cb13-2"><a href="#cb13-2"></a></span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="co"># Test classification</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a>results <span class="ot">&lt;-</span> <span class="fu">text_zeroshot</span>(data<span class="sc">$</span>text, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"movie"</span>, <span class="st">"methods"</span>, <span class="st">"science"</span>),</span>
+<span id="cb13-5"><a href="#cb13-5"></a>                         <span class="at">url =</span> <span class="st">"https://api-inference.huggingface.co/models/facebook/bart-large-mnli"</span>)</span>
+<span id="cb13-6"><a href="#cb13-6"></a>results <span class="sc">%&gt;%</span></span>
+<span id="cb13-7"><a href="#cb13-7"></a>  <span class="fu">unnest</span>(<span class="at">cols =</span> <span class="fu">c</span>(<span class="st">"labels"</span>, <span class="st">"scores"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb13-8"><a href="#cb13-8"></a>  as_tibble <span class="sc">%&gt;%</span></span>
+<span id="cb13-9"><a href="#cb13-9"></a>  <span class="fu">spread</span>(labels, scores)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource output number-lines code-with-copy"><code class="sourceCode"><span id="cb10-1"><a href="#cb10-1"></a># A tibble: 4 × 4</span>
-<span id="cb10-2"><a href="#cb10-2"></a>  sequence                                                methods  movie science</span>
-<span id="cb10-3"><a href="#cb10-3"></a>  &lt;chr&gt;                                                     &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;</span>
-<span id="cb10-4"><a href="#cb10-4"></a>1 Barbie is a 2023 fantasy comedy film directed by Greta…  0.0293 0.968  0.00255</span>
-<span id="cb10-5"><a href="#cb10-5"></a>2 Communication Science analyzes contents, uses, and con…  0.0925 0.0167 0.891  </span>
-<span id="cb10-6"><a href="#cb10-6"></a>3 Computational methods include various approaches to te…  0.977  0.0120 0.0114 </span>
-<span id="cb10-7"><a href="#cb10-7"></a>4 Oppenheimer is a 2023 biographical thriller film writt…  0.0529 0.917  0.0300 </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource output number-lines code-with-copy"><code class="sourceCode"><span id="cb14-1"><a href="#cb14-1"></a># A tibble: 4 × 4</span>
+<span id="cb14-2"><a href="#cb14-2"></a>  sequence                                                methods  movie science</span>
+<span id="cb14-3"><a href="#cb14-3"></a>  &lt;chr&gt;                                                     &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;</span>
+<span id="cb14-4"><a href="#cb14-4"></a>1 Barbie is a 2023 fantasy comedy film directed by Greta…  0.0293 0.968  0.00255</span>
+<span id="cb14-5"><a href="#cb14-5"></a>2 Communication Science analyzes contents, uses, and con…  0.0925 0.0167 0.891  </span>
+<span id="cb14-6"><a href="#cb14-6"></a>3 Computational methods include various approaches to te…  0.977  0.0120 0.0114 </span>
+<span id="cb14-7"><a href="#cb14-7"></a>4 Oppenheimer is a 2023 biographical thriller film writt…  0.0529 0.917  0.0300 </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </section></section>
@@ -1414,15 +1468,15 @@ td {
 </section>
 <section id="teachers" class="slide level2">
 <h2>Teachers</h2>
-<table style="width:100%;">
+<table>
 <colgroup>
-<col style="width: 14%">
-<col style="width: 14%">
-<col style="width: 14%">
-<col style="width: 14%">
-<col style="width: 14%">
-<col style="width: 14%">
-<col style="width: 14%">
+<col style="width: 18%">
+<col style="width: 9%">
+<col style="width: 18%">
+<col style="width: 9%">
+<col style="width: 18%">
+<col style="width: 9%">
+<col style="width: 18%">
 </colgroup>
 <thead>
 <tr class="header">
