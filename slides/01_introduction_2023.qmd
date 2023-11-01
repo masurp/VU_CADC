@@ -128,21 +128,20 @@ With regard to the specific methods being taught in R, you will be able to...
 
 ## Who am I?
 
-- Assistant Professor of Communication Science
+-   Assistant Professor of Communication Science
 
-- Research Interest
+-   Research Interest
 
-    - Privacy & Data Protection Online
-    - Social Influence and Contagion
-    - Media Literacy
+    -   Privacy & Data Protection Online
+    -   Social Influence and Contagion
+    -   Media Literacy
 
-- Methodological Interests
+-   Methodological Interests
 
-    - Scale Development and Validation
-    - Bayesian Statistics
-    - Flexibility in Data Analysis
-    - Computational Methods and Machine Learning
-
+    -   Scale Development and Validation
+    -   Bayesian Statistics
+    -   Flexibility in Data Analysis
+    -   Computational Methods and Machine Learning
 
 ## Content of this lecture {.smaller}
 
@@ -933,7 +932,7 @@ tokens <- data |>
 head(tokens, n = 10)
 ```
 
-## A very simple example: Dictionary approach {auto-animate="true"}
+## A very simple example: Dictionary approach x
 
 ```{r}
 #| echo: true
@@ -1006,7 +1005,7 @@ How this course is going to work?
 ## Teachers
 
 |     Dr. Philipp K. Masur      |     | Dr. Kaspar Welbers  |     |     Emma Diel     |     |     Roan Buma     |
-|:--------:|-----|:--------:|-----|:--------:|-----|:--------:|
+|:-----------:|----------|:--------:|----------|:--------:|----------|:--------:|
 |     ![](img/philipp2.jpg)     |     | ![](img/kasper.jpg) |     | ![](img/emma.jpg) |     | ![](img/buma.jpg) |
 | Lecturer & Course Coordinator |     |       Teacher       |     |      Teacher      |     |      Teacher      |
 
