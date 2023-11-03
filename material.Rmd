@@ -57,7 +57,7 @@ In the third part of the course, students will work on their own research projec
 
 - Work through this tutorial: 
     - [R Markdown: Basics](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_basics_r-markdown.md)
-    - [R Markdown: Demonstration Video](https://canvas.vu.nl/courses/63769/files/folder/Uploaded%20Media?preview=5576627)
+    - [R Markdown: Demonstration Video](https://canvas.vu.nl/courses/71798/files/6906449?module_item_id=1165159)
     - [R Markdown: Additional material](https://rmarkdown.rstudio.com/lesson-1.html)
 
 - Complete this assignment (available on canvas in the modules "Homework Assignments" & "Data Sets)
