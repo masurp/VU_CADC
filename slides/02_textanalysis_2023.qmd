@@ -1,0 +1,1356 @@
+---
+title: "Computational Analysis of Digital Communication"
+subtitle: "Week 2: Basics of Automated Text Analysis and Dictionary Approaches"
+author: "Dr. Philipp K. Masur"
+format:
+  revealjs: 
+    theme: [default, theme.scss]
+    logo: img/logo.png
+    background-transition: fade
+    footer: Computational Analysis of Digital Communication
+    slide-number: c/t
+    title-slide-attributes:
+        data-background-image: https://storage.googleapis.com/exenzo-jobboard/bb/public/thumb/logo-jpg-57.jpg
+        data-background-position: "top right"
+        data-background-size: auto
+editor: visual
+---
+
+##  {background-image="img/britishlibrary.jpg"}
+
+## Largest encyclopedias in the world
+
+::: columns
+::: {.column width="60%"}
+-   Encyclopedia Britannica
+
+    -   maintained by about 100 full-time editors and more than 4,000 contributors
+    -   2010 version of the 15th edition, which spans 32 volumes and 32,640 pages, was the last printed edition
+    -   Today, 40 million words on half a million topics
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="35%"}
+![Encyclopedia Britannica](https://images.rawpixel.com/image_800/cHJpdmF0ZS9zdGF0aWMvaW1hZ2Uvd2Vic2l0ZS8yMDIyLTA0L2xyL3B4MTMzMTgwMS1pbWFnZS1rejJlYWxtcC5qcGc.jpg)
+:::
+:::
+
+-   Wikipedia
+
+    -   Biggest encyclopedia worldwide
+    -   more than 280,000 active editors and 110,461,483 registered users
+    -   \~61 million articles
+
+## General Text Classification Pipeline
+
+![](img/text_analysis_fundamentals/Slide01.png)
+
+
+## Text Classification Pipeline Using Dictionaries
+
+![](img/text_analysis_fundamentals/Slide02.png)
+
+
+## Content of this lecture {.smaller}
+
+::: columns
+::: {.column width="45%"}
+1.  Basics of Automated Text Analysis
+
+    1.1. Text as Data
+
+    1.2. Tokenization
+
+    1.3. Ways to Organize Text(s) Numerically
+
+    1.4. Text cleaning, stopwords, stemming, lemmatization
+
+    1.5. Descriptive Text Analyses
+
+    1.6. Keyword-in-Context Searches
+
+2.  Dictionary Approaches
+
+    3.1. Text Classification Pipeline Using Dictionaries
+
+    3.3. Feature Engineering
+
+    3.4. Text Classification
+
+    3.5. Validation
+:::
+
+::: {.column width="45%"}
+
+4.  Examples from the literature
+
+    4.1. Sourcing Pandemic News (Mellado et al., 2021)
+
+    4.2. Political discourses on social media (Heidenreich et al., 2019)
+
+5.  Summary and Conclusion
+:::
+:::
+
+# Basics of Text Analysis {background-color="steelblue"}
+
+From raw text to numerical presentations of texts.
+
+
+## Basic Text Analysis
+
+- Before we start to classify unlabeled text, we often engage in what we call "basic text analysis"
+
+- The first goal is find ways to represent texts in numerical frameworks
+
+- Then, we often want to conduct simple descriptive analyses on the texts (e.g., which words are used most often)
+
+![](img/text_analysis_fundamentals/basic_textanalysis.png)
+
+## A challenge at the beginning
+
+-   Texts are strings composed of words, spaces, numbers, and punctation.
+
+-   Handling this type of complex, at times messy, data requires some thought and effort.
+
+-   Problem: Algorithms process numbers, they do not read text!
+
+-   Consider the following string, representing a (very) short text:
+
+<br>
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+#| output-location: fragment
+text <- "To be, or not to be: that is the question." 
+print(text)
+```
+
+## From text to tokens {auto-animate="true"}
+
+-   The elements in this string do not contain any metadata or information to tell the computer which characters are words and which are not (of course it is easy for us to tell, but not for a computer).
+
+-   Identifying these kinds of boundaries between words is where the process of **tokenization** comes in.
+
+-   For example, we can use the simple function `str_split()` to tell R to split the string into separate strings, whenever there is an "white space", resulting in somewhat meaningful tokens:
+
+<br>
+
+```{r, R.options = list(width = 80)}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+library(tidyverse)
+str_split(text, 
+          pattern = " ")      # <-- separate words by white space between them
+```
+
+## From text to tokens {auto-animate="true"}
+
+-   The elements in this string do not contain any metadata or information to tell the computer which characters are words and which are not (of course it is easy for us to tell, but not for a computer).
+
+-   Identifying these kinds of boundaries between words is where the process of **tokenization** comes in.
+
+-   For example, we can use the simple function `str_split()` to tell R to split the string into separate strings, whenever there is an "white space", resulting in somewhat meaningful tokens:
+
+<br>
+
+```{r, R.options = list(width = 80)}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+library(tidyverse)
+str_split(text, 
+          pattern = ":")          # <-- separate words by identifying the colon
+```
+
+## From text to tokens {auto-animate="true"}
+
+-   The elements in this string do not contain any metadata or information to tell the computer which characters are words and which are not (of course it is easy for us to tell, but not for a computer).
+
+-   Identifying these kinds of boundaries between words is where the process of **tokenization** comes in.
+
+-   For example, we can use the simple function `str_split()` to tell R to split the string into separate strings, whenever there is an "white space", resulting in somewhat meaningful tokens:
+
+<br>
+
+```{r, R.options = list(width = 80)}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+library(tidyverse)
+str_split(text, 
+          pattern = "[[:punct:]]")  # <-- separate words by identifying punctuation symbols
+```
+
+## Tokenization
+
+::: columns
+::: {.column width="50%"}
+-   Separating based on white space or specific "regular expressions" sounds correct intuitively, but is not a very principled approach
+
+-   More generally, tokenization means:
+
+    -   taking an input (e.g., a string of characters that represent natural language) and
+    -   a token type (a meaningful unit of text, such as a character, word, or sentence)
+    -   and splitting the input (string) into pieces (tokens) that correspond to the type (e.g., word)
+:::
+
+::: {.column width="48%"}
+![](img/tokenization.png)
+:::
+:::
+
+## Understanding tokenization
+
+There are many different R packages for implementing tokenization, e.g., tokenizers, quanteda, tidytext...
+
+```{r, R.options = list(width = 200)}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+library(tokenizers)
+text_data <- tibble(docid = paste0("text", 1:2),
+                    author = c("William Shakespeare", "William Wordsworth"), 
+                    work = c("Hamlet", "The Tables Turned"),
+                    text = c("To be, or not to be: that is the question.", 
+                             "Come forth into the light of things, Let Nature be your teacher."))
+text_data
+```
+
+```{r, R.options = list(width = 200)}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+text_data$text |>
+  tokenize_words()   # <-- tokenize into words using the "tokenizers" package
+```
+
+## Types of Tokens
+
+-   Thinking of a token as a **word** is a useful start.
+
+-   Tokenizing at the word level is perhaps the most common and widely used tokenization.
+
+-   However, we can generalize the idea of a token beyond only a single word to other units of text.
+
+<br>
+
+<center>
+
+| Type of token | Example                                                                    |
+|:---------------|:-------------------------------------------------------|
+| characters    | "I", "l", "o", "v", "e", "y", "o", "u", "v", "e", "r" ,"y",...             |
+| words         | "I", "love", "you", "very", "much"                                         |
+| sentences     | "I love you very much"                                                     |
+| lines         | "He went to her and said 'I love", "you very much.' She responded quickly" |
+| bi-grams      | "I love", "love you", "you very,"very much"                                |
+| n-grams       | "I love you", "love you very", "you very much"                             |
+
+</center>
+
+## More than one word: n-grams
+
+-   The simplest case is a bigram (or 2-gram), where each feature is a pair of adjacent words.
+
+-   Notice how the words in the bigrams overlap so that the word "be" appears at the end of the first bigram and beginning of the second bigram
+
+-   In other words, n-gram tokenization slides along the text to create overlapping sets of tokens
+
+```{r,  R.options = list(width = 120)}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+text_data$text |> 
+  tokenize_ngrams(n = 2)
+```
+
+## Logic of n-grams
+
+-   Using a higher value for `n` keeps more information, but the vector space of tokens increases dramatically, corresponding to a reduction in token counts.
+
+-   The longer the n-gram, the larger the list of unique combinations, which leads to a worse data scarcity problems, so even more attention must be paid to feature selection and/or trimming
+
+```{r}
+#| echo: false
+library(tidytext)
+library(hcandersenr)
+library(ggridges)
+hcandersen_en |>
+  filter(book == "The ugly duckling") |>
+  unnest_tokens(ngram, text, token = "ngrams", n = 3, n_min = 1) |>
+  distinct() |>
+  mutate(word_n = sapply(gregexpr("\\W+", ngram), function(x) sum(x > 0))+1) |>
+  group_by(word_n) |>
+  summarize(n = n()) |>
+  filter(word_n != 4) |>
+  ggplot(aes(x = paste0(word_n, "-gram"), y = n, fill = word_n)) +
+  geom_col(width = .5) +
+  geom_text(aes(label = n), color = "white", nudge_y = -180, size = 5) +
+  labs(x = "", y = "Number of unique n-grams",
+       title = "Increase in vector space of tokens by n-gram",
+       subtitle = "Text source: The Ugly Duckling by H.C. Andersen") +
+  coord_flip() +
+  theme_ridges() +
+  theme(legend.position = "none")
+```
+
+## A tidy format for text analysis
+
+![](img/tidy_format.png)
+
+## The "tidytext" package
+
+::: columns
+::: {.column width="38%"}
+-   In this course, we will use the package `tidytext`, whose core data format is a regular data frame where each row is a word
+
+-   The function `unnest_tokens()` also tokenizes, but the resulting data structure differs (a tidy data set)
+
+-   It thereby determines how we move forward in our analysis 
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="60%"}
+```{r}
+#| R.options: list(width = 80)
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+#| output-location: fragment
+library(tidytext)
+tokens <- text_data|>
+  unnest_tokens(word, text)   
+print(tokens, n = 20)         
+```
+:::
+:::
+
+## How to present text numerically?
+
+::: columns
+::: {.column width="60%"}
+-   The simplest approach is to count how many times each unique token is included in each text
+
+-   By summarizing our tokens across documents and words, we gain a first numerical presentation of our data
+
+-   The resulting tidy data frame contains three columns
+
+    -   **doc_id:** A unique identifier for each document in the corpus
+    -   **word:** the list of words included in each document
+    -   **n:** The number of times the word appears in each document
+:::
+
+::: {.column width="40%"}
+```{r}
+#| echo: true
+#| code-line-numbers: true
+#| class-output: output
+tokens |>
+  group_by(docid, word) |>   
+  summarise(n = n()) |>
+  arrange(-n)
+```
+:::
+:::
+
+## The document-term matrix (DTM)
+
+-   Based on this summarized table, we can quickly create one of the most common text as data representations: the document-term matrix (also called the term-document matrix or document-feature matrix)
+
+-   It represents a set of documents as a matrix, where each row represents a document, each column represents a term (word), and the numbers in each cell show how often that word occurs in that document.
+
+-   This is very similar to a standard two-dimensional data set (e.g., resulting from a survey) and can thus be treated similarly
+
+```{r, R.options = list(width = 120)}
+#| echo: true
+#| code-line-numbers: true
+#| class-output: output
+tokens |>
+  group_by(docid, word) |>          # <-- group by document id and word
+  summarise(n = n()) |>             # <-- summarize number of words per document
+  pivot_wider(names_from = word,    # <-- transform from long to wide
+              values_from = n) %>%  
+  replace(is.na(.), 0)              # <-- replace NAs with zero
+```
+
+## Tidy format vs. DTM
+
+![](img/tidy_format2.png)
+
+## The State of the Union Speeches Corpus
+
+-   For the following explanation, we are going to look at a more realistic corpus of texts.
+
+-   This corpus contains all State of the Union (SOTU) speeches of U.S. presidents from 1790 to 2020.
+
+![](https://s26162.pcdn.co/wp-content/uploads/2019/05/us-prsidents.jpg)
+
+## The Data Set
+
+```{r, R.options = list(width = 120)}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+#| output-location: fragment
+library(sotu)
+sotu_text <- bind_cols(sotu_meta, text = sotu_text) |>  # <-- bind texts and meta data
+  rename(docid = X) |>                                  # <-- rename unique identifier
+  as_tibble()                                           # <-- transform to tidy format
+print(sotu_text, n = 25)
+```
+
+## A speech by Barack Obama in 2009
+
+::: columns
+::: {.column width="80%"}
+```{r, R.options = list(width = 120)}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+sotu_text |>
+  filter(president == "Barack Obama" & year == "2009") |> # <-- filter based on name and year
+  select(text) |>                                         # <-- select only text
+  as.character() |>                                       # <-- transform to characters
+  writeLines()                                            # <-- print all lines
+```
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="18%"}
+![](https://upload.wikimedia.org/wikipedia/commons/2/2b/Official_portrait_of_Barack_Obama_%28cropped%29.jpg)
+:::
+:::
+
+## The DTM as a sparse matrix
+
+-   We can use the function `cast_dfm()` to transforming the tidy "one-term-per-document-per-row" into a document-term (feature) matrix as used in the quite commonly used `quanteda` package
+
+```{r, R.options = list(width = 120)}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+tidy_text <- sotu_text |>
+  unnest_tokens(word, text) |>                         # <-- tokenize into words and tidy format
+  group_by(docid, word) |>                             # <-- group by document id and words
+  summarise(n = n()) |>                                # <-- summarize number of words per document
+  ungroup()                                            # <-- ungroup the data set (to be sure)
+dfm_text <- tidy_text |> 
+  cast_dfm(document = docid, term = word,  value = n)  # <-- create document-term matrix
+dfm_text
+```
+
+## Sparsity
+
+-   DTMs are called **sparse** because they contain a lot of zeros
+
+-   More technically, a set of numbers (e.g. vector, matrix, etc.), is considered **sparse** when a high percentage of the values are assigned a constant default value (e.g. zero)
+
+-   Sparsity creates some problems:
+
+    -   Increase in model complexity (leads to more coefficients/features being included in the model)
+    -   Risk for overfitting: With too many features, models tend to fit the noise in the data and not generalize well
+    -   Size of the data set: Leads to computationally expensive procedures
+
+## Tidy text format is less sparse
+
+-   The tidy text format is considerably less sparse as it doesn't include any zeros (there are no rows for words that are not included in the document!)
+
+-   Can speed up computations, but also allows us to stay within the framework established by the `tidyverse`
+
+::: columns
+::: {.column width="50%"}
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+tidy_text |> 
+  arrange(-n)
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+# Cells in the DTM format
+length(dfm_text) * nrow(dfm_text)
+
+# Cells in the tidy format
+length(tidy_text) * nrow(tidy_text)
+
+```
+:::
+:::
+
+## "Bag-of-Words" Approach
+
+-   Both representations follow the so-called "bag-of-word" model
+
+-   Such a model disregards grammar and word order and only focus on word frequencies
+
+![](img/bagofwords.png)
+
+
+## Descriptive analyses of the "bag-of-word" model
+
+-   Since the tidy token list is a regular data frame, we can simply group by word and summarize to get frequency information
+
+-   This way, we can compute a variety of descriptive frequencies such as word frequency overall, occurence in number of speeches, occurrence in all speeches, etc.
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+sotu_tokens <- sotu_text |>
+  unnest_tokens(word, text)                             # <-- tokenize into words
+frequencies <- sotu_tokens |>          
+  group_by(word) |>                                     # <-- group by word
+  summarize(termfreq=n(),                               # <-- computer overall occurrences of a word
+            docfreq=length(unique(docid)),              # <-- number of speeches in which it occurs
+            relfreq=(docfreq/nrow(sotu_text))*100) |>   # <-- relative occurrence in all speeches
+  arrange(-termfreq, -docfreq)                          # <-- sort results
+head(frequencies, n = 8) 
+```
+
+## The (un-)avoidable wordcloud
+
+::: columns
+::: {.column width="48%"}
+-   One of the most famous text visualizations is the word cloud, an image where each word is displayed in a size that is representative of its frequency.
+
+-   Word clouds are often criticized since they are (sometimes) pretty but mostly not very informative.
+
+-   Only a single aspect of the words is visualized (frequency), which is often not that informative: the most frequent words are generally uninformative "stop words" like "the" and "I".
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="50%"}
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+#| fig.width: 5
+#| fig.height: 4
+library(ggwordcloud)
+frequencies |> 
+  slice_max(termfreq, n = 100) |> 
+  ggplot() +
+  geom_text_wordcloud(aes(label = word,
+                          size = termfreq,
+                          color = termfreq),
+                      rm_outside = T) +
+  theme_void(base_size = 15)
+```
+:::
+:::
+
+## Alternative (better?) visualization
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+#| fig.width: 5
+#| fig.height: 5
+#| output-location: column-fragment
+frequencies |> 
+  slice_max(termfreq, n = 30) |> 
+  ggplot(aes(x = fct_reorder(word, termfreq), 
+             y = termfreq, 
+             fill = termfreq)) +
+  geom_col() +
+  coord_flip() +
+  theme_minimal() +
+  theme(legend.position = "none") +
+  labs(x = "Token frequency", 
+       y = "", 
+       title = "Most frequent words in the SOTU corpus")
+```
+
+
+
+## Weighting and Selecting Documents and Terms
+
+-   So far, the text-as-numbers representations simply show the count of each word in each document.
+
+-   Many words, however, are not informative for many questions.
+
+-   This was especially apparent if you look at the last word cloud, in which the most frequent words were "the", "of", "and", "to", etc.
+
+-   An unfiltered document-term matrix contains a lot of relevant information: For example, if a president uses the word "terrorism" more often than the word "economy", that could be an indication of their policy priorities.
+
+-   However, there is also a lot of noise crowding out this signal, which is why we engage in a form of weighting and selecting (also known as text preprocessing or cleaning)
+
+## Text cleaning, stemming, lemmatizing
+
+-   Text contains a lot of noise
+
+    -   Very uncommon words
+    -   Spelling, scraping mistakes (HTML code, boilerplate, etc)
+    -   Stop words (e.g., a, the, I, will)
+    -   Conjugations of the same word (want, wants)
+    -   Near synonyms (wants, loves)
+
+-   Cleaning steps needed to reduce noise:
+
+    -   Removing unnecessary symbols (e.g., punctuations, numbers...)
+    -   Removing stopwords (e.g., 'a', 'the'...)
+    -   Frequency trimming (removing rare words)
+    -   Normalization: Stemming (wants -\> want) *OR* lemmatizing (ran -\> run)
+    -   Frequency transformation: tf-idf
+
+## Removing stopwords
+
+-   Common words that carry little (or perhaps no) meaningful information are called **stop words** (e.g., 'a', 'the', 'didn't', 'of'...)
+
+-   It is common advice and practice to remove stop words for various text analysis tasks, but stop word removal is more nuanced than many resources may lead you to believe
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+sotu_tokens |> pull(word) |> head(n = 8) 
+sotu_tokens |> anti_join(stop_words, by = "word") |> pull(word) |> head(n = 8)
+```
+
+## Trimming overally infrequent words
+
+-   A second useful step can be to trim (or prune) the most infrequent words.
+
+-   These words are often a relatively large part of the total vocabulary, but play only a very minor role in most analyses.
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+sotu_tokens |> pull(word) |> unique() |> length()
+sotu_tokens |> group_by(word) |> filter(n() >= 100) |> pull(word) |> unique() |> length()
+```
+
+## Normalization: Stemming
+
+-   What if we aren't interested in the difference between e.g., "trees" and "tree" and we want to treat both together?
+
+-   Stemming refers to the process of identifying the base word (or stem) for a data set of words and is thus concerned with the linguistics subfield of morphology (i.e., how words are formed).
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+#| output-location: column-fragment
+sotu_tokens |>
+  mutate(stem = SnowballC::wordStem(word)) |>
+  select(word, stem) |>
+  print(n = 12)
+```
+
+## Normalization: Lemmatization
+
+-   Instead of using set rules to cut words down to their stems, lemmatization uses knowledge about a language's structure to reduce words down to their lemmas, the canonical or dictionary forms of words
+
+-   Lemmatizers use a rich lexical database like 'WordNet' to look up word meanings for a given part-of-speech use (Miller 1995)
+
+-   We can use the package `textstem` to lemmatize our words
+
+```{r, R.options = list(width = 80)}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+#| output-location: column-fragment
+sotu_tokens |>
+  mutate(lemmata = textstem::lemmatize_words(word)) |>
+  select(word, lemmata) |>
+  print(n = 12)
+```
+
+## The effect of such text cleaning
+
+```{r, echo = F}
+library(ggwordcloud)
+sotu_text |> 
+  unnest_tokens(word, text) |>
+  anti_join(stop_words) |>
+  mutate(word = textstem::lemmatize_words(word)) |>
+  group_by(word) |>
+  summarize(termfreq=n(), 
+            docfreq=length(unique(docid)),
+            relfreq=docfreq/nrow(sotu_text)) |>
+  slice_max(termfreq, n=50) |> 
+  ggplot() + 
+  geom_text_wordcloud(aes(label=word, size=termfreq, color=relfreq), 
+                      area_corr = TRUE, show.legend = T, rm_outside = T) +
+  scale_size_area(max_size = 15) +
+  theme_minimal(base_size = 13)
+```
+
+
+## tf-idf transformation (weighting)
+
+-   So far, we looked at how frequent a word occurs in a document (speech).
+
+-   Another approach is to look at a term's *inverse document frequency* (idf), which decreases the weight for commonly used words and increases the weight for words that are not used very much in a collection of documents.
+
+-   This can be combined with term frequency to calculate a term's tf-idf (the two quantities multiplied together), the frequency of a term adjusted for how rarely it is used.
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+#| output-location: column-fragment
+sotu_if_idf <- sotu_tokens |>
+  filter(president %in% c("Barack Obama", 
+                          "Donald Trump", 
+                          "George W. Bush", 
+                          "William J. Clinton")) |> 
+  anti_join(stop_words, by = "word") |> 
+  group_by(president, word) |>
+  summarize(n = n()) |>
+  bind_tf_idf(word, president, n) |>
+  group_by(president) |> 
+  arrange(-tf_idf)
+sotu_if_idf
+```
+
+## Most "important" words in presidents' speeches
+
+The statistic **tf-idf** is intended to measure how important a word is to a document in a collection of documents, for example, to one president in a collection of speeches:
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+#| output-location: column-fragment
+#| fig.width: 5
+#| fig.height: 5
+sotu_if_idf |> 
+  slice_max(tf_idf, n = 15) %>%
+  ungroup() %>%
+  ggplot(aes(x = tf_idf, 
+             y = fct_reorder(word, tf_idf), 
+             fill = president)) +
+  geom_col(show.legend = FALSE) +
+  facet_wrap(~president, ncol = 2, 
+             scales = "free_y") +
+  labs(x = "tf-idf", y = NULL)
+```
+
+# Break (5 Minutes) {background-color="black"}
+
+# Deductive Approaches: Dictionary Analysis {background-color="steelblue"}
+
+Using fixed set of terms per concept to automatically code texts.
+
+## What are deductive approaches?
+
+
+::: columns
+::: {.column width="63%"}
+
+-   Quite old technique of content analysis (since 60s)
+
+-   Coding rules are set *a priori* by researcher based on a predefined "text theory"
+
+-   Computer then uses these rules to decode text in a deterministic way
+
+-   Rules can differ substantially:
+
+    -   based on individual words or group of words (e.g., articles that contain "government" are coded as "politics")
+    -   based on patterns (e.g., the sender of a mail can be identified by looking for "FROM:")
+    -   combinations of both
+    
+:::
+
+::: {.column width="2%"}
+
+:::
+
+::: {.column width="35%"}
+![](img/lexicon.jpg)
+:::
+:::
+
+## Text Classification Pipeline Using Dictionaries
+
+![](img/text_analysis_fundamentals/Slide01.png)
+
+## Text Classification Pipeline Using Dictionaries
+
+![](img/text_analysis_fundamentals/Slide02.png)
+
+## Keyword-in-Context Searches
+
+-   The basic idea of a dictionary is to look for one or several keywords in the text
+
+-   So-called "keyword-in-context" searches can be very helpful to understand how these words have been used in different documents (here: speeches)
+
+```{r, R.Options = list(width = 160)}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+options(width = 250)
+library(ccsamsterdamR)
+tidy_kwic(sotu_text, "terror", window = 5) |>
+  select(pre:docid, president, year) |>
+  head(n = 18)
+```
+
+## Getting a dictionary for emotions
+
+-   For this example, we are going to use the NRC word-emotion association lexicon (Mohammad & Turney, 2013)
+
+::: columns
+::: {.column width="50%"}
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+library(textdata)
+nrc <- lexicon_nrc()
+head(nrc) 
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+nrc %>%
+  group_by(sentiment) |> # <-- group by sentiment
+  tally()                # <-- count words
+```
+:::
+:::
+
+## Feature Engineering for dictionary approaches
+
+-   For dictionary analyses, we need to extract words as dictionaries contain word lists the reflect a particular concept
+
+-   But we also want to make sure that the words from the raw texts are transformed in a way that the reflect their true form (i.e., how it is likely to be included in the dictionary)
+
+-   Stemming wouldn't work because most dictionaries do not include word stems, yet lemmatization is meaningful as it reduces e.g., plural to singular, etc.
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+# Without lemmatization
+sotu_dict <- sotu_text |>
+  unnest_tokens(word, text)            
+
+# With lemmatization
+sotu_dict2 <- sotu_text |>
+  unnest_tokens(word, text) |>          
+  mutate(word = textstem::lemmatize_words(word))  
+```
+
+## The Actual Dictionary Analysis
+
+::: columns
+::: {.column width="45%"}
+-   We use the text corpus containing all speeches
+
+-   We tokenize the speeches (separating them into words)
+
+-   We can explore lemmatization as meaningful feature engineering
+
+-   We join the dictionary and the tokenized data set (note how `left_join()` preserves unmatched tokens)
+:::
+
+::: {.column width="55%"}
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+# Combining raw text tokens and emotion dictionary
+sotu_emotions <- left_join(sotu_dict, nrc, 
+                           relationship = "many-to-many") 
+
+# Combining lemmatized text tokens and emotion dictionary
+sotu_emotions2 <- left_join(sotu_dict2, nrc, 
+                            relationship = "many-to-many") 
+
+# Comparison
+sotu_emotions  |> filter(!is.na(sentiment)) |> nrow()
+sotu_emotions2 |> filter(!is.na(sentiment)) |> nrow() 
+```
+:::
+:::
+
+## Descriptive analyses with the new created dataset
+
+-   The result of our dictionary analysis is a new column called "sentiment", which contains the codes for particular words in the speeches
+
+-   This new data set contains all information needed to do a more substantial analysis
+
+```{r, R.Options = list(width = 120)}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+head(sotu_emotions2, n = 10)
+```
+
+## Emotionality per speech
+
+-   For example, we can compute the amount of words coded with a particular emotions per speech
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+#| output-location: column-fragment
+library(ggridges)
+
+# Summarize data
+sotu_plot_data <- sotu_emotions2 |>
+  group_by(docid, sentiment) |>
+  summarize(n = n()) |>
+  mutate(prop = n/sum(n))
+sotu_plot_data
+```
+
+## Emotionality per speech {auto-animate="true"}
+
+-   For example, we can compute the amount of words coded with a particular emotions per speech
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+#| output-location: column-fragment
+#| fig-width: 6.5
+#| fig-height: 5.8
+library(ggridges)
+
+# Summarize data
+sotu_plot_data <- sotu_emotions2 |>
+  group_by(docid, sentiment) |>   
+  summarize(n = n()) |>            
+  mutate(prop = n/sum(n)) |>       
+  filter(!is.na(sentiment))        
+
+# Plotting the data
+ggplot() +
+ geom_line(data = sotu_plot_data,  
+           aes(x = sentiment, y = prop*100, 
+               group = docid), 
+           linewidth = .5,
+           alpha = .05, color = "grey50")+
+ geom_line(data = sotu_plot_data |> filter(docid == 1), 
+           aes(x = sentiment, y = prop*100, group = 1), 
+           linewidth = 2, 
+           color = "steelblue", 
+           alpha = .6) +
+ annotate("text", x = "fear", y = 8.5, size = 4.5,
+          label = "First speech by Washington",
+          color = "steelblue", ) +
+ theme_ridges(font_size = 16) +
+ coord_flip() +
+ labs(x = "", y = "Proportion of words in speech",
+      title = "Emotionality in SOTU speeches")
+```
+
+## Emotions over the years
+
+```{r}
+#| fig-width: 6
+#| fig-height: 6
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+#| output-location: column-fragment
+# Summarize data
+sotu_emo_time <- sotu_emotions2 |>   
+  group_by(year, sentiment) |>        
+  summarize(n = n())  |>              
+  mutate(prop = n / sum(n)) |>        
+  ungroup() |>                       
+  filter(!is.na(sentiment))          
+
+# Plot the summarized data
+ggplot(sotu_emo_time) +
+  geom_ridgeline(aes(x=year, y=sentiment, 
+                     height=prop/max(prop), 
+                     fill=sentiment)) +
+  theme_ridges() + 
+  guides(fill="none") +
+  labs(title = "Emotionality over the years")
+```
+
+
+## Validation
+
+-   To estimate the validity of our dictionary analysis, we manually code a random sample of the documents and compare the coding with the dictionary results
+
+-   General procedure
+
+    -   Draw a random subsample of the documents
+    -   Code actual documents with human coders (the 'gold standard')
+    -   Combine the manual coding results with the results from the automated sentiment analysis
+    -   Produce reliability and validation scores, e.g., correlation between manual and automated coding, precision, recall...
+
+-   Agreement with manual coding, which is often regarded as the 'gold-standard', is often seen as validity (but this holds only if human beings are inerrant!)
+
+## Validation procedure
+
+![](img/validation.png)
+
+## Confusion Matrix
+
+::: columns
+::: {.column width="40%"}
+![](img/confusionmatrix.png)
+:::
+
+::: {.column width="60%"}
+-   Basis for all validity/performance scores is always the confusion matrix between algorithm and manual coder that assessed the same content
+
+-   Disadvantages
+
+    -   No correction of random chance agreements
+    -   only nominal scales
+    -   no accounting for missings
+
+-   Alternative: Cronbach's Alpha (but often seen as too strict)
+:::
+:::
+
+## Typical validity/performance scores
+
+- Whereas we talk about "reliability and validity" in the context of statistical measurement theory, we usually talk about "performance" in the context of text classification
+
+-   From the confusion matrix, we can compute all relevant performance scores:
+
+    -   **Accuracy:** Share of correct classifications overall (sum of the diagonale / sum of the entire matrix)
+
+    -   **Precision:** Probability of a positively coded document is relevant
+
+    -   **Recall:** Probability that a relevant document is coded positively
+
+    -   **F1-Score:** Mean between precision and recall
+
+## Performance scores
+
+::: columns
+::: {.column width="35%"}
+
+![](img/confusionmatrix2.png)
+
+:::
+
+::: {.column width="65%"}
+
+
+-   No clear thresholds: need to be assessed in the research context, but values closer to 1 are desirable
+
+-   Can be used to compare the performance of different approaches!
+:::
+:::
+
+<br>
+
+
+![](img/performance.png)
+
+## Advantages and disadvantages
+
+-   Advantages:
+
+    -   Technically easy, many dictionaries exists
+    -   Transparent and replicable, if dictionary is shared
+    -   Few resources needed, efficient
+
+-   Disadvantages:
+
+    -   Low validity for non-trivial concepts (sentiment, frames, specific topics)
+        -   categories needs be identifiable by simple word lists
+        -   needs to be tested sufficiently (Validation!!!)
+    -   May require considerable preprocessing to reduce ambiguity
+    -   Difficult to create/maintain large dictionaries
+    -   Can encode biases
+
+## How can we develop a dictionary?
+
+-   Define categories
+
+-   Inspecting keywords-in-context lists
+
+-   Manually coding and comparing word frequencies per category
+
+-   Inclusion of different spellings
+
+-   Deletion of words the lead to false-positives
+
+-   Testing, testing, testing...
+
+# Examples in the literature {background-color="steelblue"}
+
+Studies that used the dictionary approach
+
+## Example 1: Sourcing Pandemic News (Mellado et al)
+
+::: columns
+
+::: {.column width="70%"}
+
+
+-   The study analyzes the sources and actors present in more than 940,000 posts on COVID-19 published in the 227 Facebook, Instagram, and Twitter accounts of 78 sampled news outlets between January 1 and December 31 of 2020
+
+-   The analysis shows the dominance of political sources across countries and platforms, particularly in Latin America
+
+-   It demonstrates the strong role of the state in constructing pandemic news and suggesting that mainstream news organizations' social media posts maintain a strong elite orientation
+
+-   Health sources were also prominent, while significant diversity of sources, including citizen sources, emerged as the pandemic went on
+
+:::
+::: {.column width="30%"}
+
+![](https://images.pexels.com/photos/3902732/pexels-photo-3902732.jpeg)
+:::
+:::
+
+
+[Mellado et al., 2021]{style="font-size:0.75em;"}
+
+## Example 1: Methods
+
+-   The authors identified eleven categories (political, business, health, scientific and academic sources, police/security, legal, civil society, citizen, media, sports, and celebrity sources)
+
+-   The broke these down into sub-categories that represent formal positions, names of individuals, institutions, organizations and groups, as well as each of their nicknames and acronyms (if any).
+
+-   Each national team was responsible for translating the sub-categories into their own language
+
+-   Based on this, a manual **dictionary** was created for the seven countries included in the study, which contains over (10,102) entities that belonged to each sub-category at the time of data collection
+
+-   This dictionary was used to categorize all posts automatically
+
+## Example 1: Results - Source distribution per country
+
+![](img/Mellado_table2.png)
+
+## Example 1: Results - Source distribution over time
+
+![](img/Mellado_fig1.png)
+
+## Example 2: Political migration on social media
+
+::: columns
+
+::: {.column width="65%"}
+
+-   Heidenreich and colleagues (2019), analyzed migration discourses in the Facebook accounts of political actors (n=1702) across six European countries (Spain, UK, Germany, Austria, Sweden and Poland)
+
+-   present new insights into the visibility of migration as a topic
+
+-   investigated sentiment about migration, revealing country- and party-specific patterns
+
+:::
+
+::: {.column width="35%"}
+
+![](https://images.pexels.com/photos/6168/hands-woman-laptop-notebook.jpg)
+:::
+
+:::
+
+[Heidenreich et al., 2019]{style="font-size:0.75em;"}
+
+## Example 2: Methods
+
+::: columns
+::: {.column width="55%"}
+-   Downloaded textual data for all migration-related posts (n = 24,578) of members of parliaments (n = 1702) in six countries
+
+-   Used automated contend analysis to estimate sentiment towards migration in each post
+
+-   Machine translated the whole corpus into English
+
+![](img/heidenreich_table1.png)
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="40%"}
+-   Used a dictionary-approach (Lexicoder; Young and Soroka, 2012) to cound positive and negative words
+
+-   Computed sentiment for each document by calculating as the sum of the scores for all words bearing positive sentiment minus the sum of all scores from negative words, divided by the number of words.
+:::
+:::
+
+## Example 2: Results - Visibility
+
+::: {.column width="45%"}
+-   In Germany and Austria there is indeed descriptive evidence that parties of the right discuss migration more frequently in their Facebook status posts than other parties
+
+-   Conversely, in Spain, the UK and Poland the topic tended to be more prominent in the posts of left-wing parties
+
+-   At first glance, Sweden seems to be an outlier.
+
+-   In sum there is no consistent overall pattern supporting the hypothesis that right wing parties pay more attention to the topic of migration on Facebook than left leaning parties
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="45%"}
+![](img/heidenreich_table2.png)
+:::
+
+## Example 2: Results - Sentiment
+
+![](img/heidenreich_table3.png)
+
+## Example 2: Results - Predicting sentiment
+
+![](img/heidenreich_table4.png)
+
+## Example 2: Conclusion
+
+-   Migration is a more prominent in countries with positive net migration than in countries where net migration is neutral or negative
+
+-   They did not find support for the assumption that right-leaning parties talk more, and more negatively, about migration
+
+-   However, political actors from parties of the extreme left and the extreme right of the political spectrum address migration more frequently and more negatively than more moderate political players
+
+-   Potential limitations
+
+    -   How valid is the automated translation of text into English?
+    -   How valid is the sentiment approximation based on dictionaries?
+
+# Summary and Conclusion {background-color="steelblue"}
+
+What have we learned?
+
+## Overview
+
+![](img/text_analysis_fundamentals/Slide02.png)
+
+
+## Conclusion
+
+-   Automated text analysis is a useful for working with large-scale text corpora
+
+-   Dictionaries can be extremely helpful in detecting certain specific terms (e.g., authors, certain words, labels, names...)
+
+-   Yet, they are not very good at coding more complex concepts.
+
+-   After all, their validity depends on how well a concept can be represented by a simple word list
+
+-   We always need to validate our analysis using manually coded material!
+
+
+##  {background-image="img/britishlibrary.jpg"}
+
+## Required Reading
+
+<br><br>
+
+-   Welbers, K., Van Atteveldt, W., & Benoit, K. (2017). Text analysis in R. Communication Methods and Measures, 11(4), 245-265.
+
+-   Heidenreich, T., Eberl, J.-M., Lind, F. & Boomgaarden, H. (2020). Political migration discourses on social media: a comparative perspective on visibility and sentiment across political Facebook accounts in Europe. Journal of Ethnic and Migration Studies, (46)7, 1261-1280, https://doi.org/10.1080/1369183X.2019.1665990
+
+-   Mellado, C., Hallin, D., Cárcamo, L. Alfaro, R. ... & Ramos, A. (2021) Sourcing Pandemic News: A Cross-National Computational Analysis of Mainstream Media Coverage of COVID-19 on Facebook, Twitter, and Instagram. Digital Journalism, 9(9), 1271-1295, https://doi.org/10.1080/21670811.2021.1942114
+
+<br>
+
+*(available on Canvas)*
+
+## References {.smaller}
+
+-   Boumans, J. W., & Trilling, D. (2016). Taking stock of the toolkit: An overview of relevant automated content analysis approaches and techniques for digital journalism scholars. Digital journalism, 4(1), 8-23.
+
+-   Heidenreich, T., Eberl, J.-M., Lind, F. & Boomgaarden, H. (2020). Political migration discourses on social media: a comparative perspective on visibility and sentiment across political Facebook accounts in Europe. Journal of Ethnic and Migration Studies, (46)7, 1261-1280, DOI: 10.1080/1369183X.2019.1665990
+
+-   Hilbert, M., & López, P. (2011). The World's Technological Capacity to Store, Communicate, and Compute Information. Science, 332(6025), 60 --65. https://doi.org/10.1126/science.1200970
+
+-   Hvitfeld, E. & Silge, J. (2021). Supervised Machine Learning for Text Analysis in R. CRC Press. https://smltar.com/
+
+-   Krippendorff, K. (2004). Content Analysis. Sage.
+
+-   Mohammad, S. and Turney, P. (2013). Crowdsourcing a Word-Emotion Association Lexicon. Computational Intelligence, 29(3): 436-465.
+
+-   Xue, S. (1982). Chinese Lexicography Past and Present, Dictionaries, 4, 151--169. https://doi.org/10.1353/dic.1982.0009
+
+## Example Exam Question (Multiple Choice)
+
+When using dictionaries, a very important step refers to "transforming the text to structured data" of feature engineering. What are typical preprocessing steps in this phase?
+
+<br>
+
+A. Tokenization, translation, combination, and frequency trimming.
+
+B. Tokenization, stopword removal, normalization, and frequency trimming.
+
+C. Tokenization, inclusion of annotations, interpretation, and frequency trimming.
+
+D. Tokenization, stopword removal, combination, and inclusion of annotations.
+
+## Example Exam Question (Multiple Choice)
+
+When using dictionaries, a very important step refers to "transforming the text to structured data" of feature engineering. What are typical preprocessing steps in this phase?
+
+<br>
+
+A. Tokenization, translation, combination, and frequency trimming.
+
+**B. Tokenization, stopword removal, normalization, and frequency trimming.**
+
+C. Tokenization, inclusion of annotations, interpretation, and frequency trimming.
+
+D. Tokenization, stopword removal, combination, and inclusion of annotations.
+
+## Example Exam Question (Open Format)
+
+Name and explain two disadvantages of dictionary approaches. <br> *(4 points, 2 points for correctly naming two disadvantages and 2 points for correctly explaining them)*
+
+. . .
+
+1.  Low validity: Dictionary approaches measure the concepts of interest based on simple word lists. Particularly with non-trivial and complex concepts (e.g., sentiment, frames, topics,...), the assumption that this word in a reliable and valid way may be problematic. For example, true sentiment is more than just counting positive and negative words.
+
+2.  May requires considerable text preprocessing: To reduce ambiguity, dictionary approaches require a lot of text preprocessing (e.g., removing stopwords, punctuation, numbers, stemming, lemmatization). For example, the word "like" would be coded as a positive word in most sentiment dictionaries, but in most sentences, it only refers to something being "like" something else.
+
+# Thank you for your attention! {background-color="steelblue"}
