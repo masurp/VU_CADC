@@ -51,7 +51,7 @@ In the third part of the course, students will work on their own research projec
 #### Practical Session 2: Data visualization
 
 - Handouts:
-    - Data visualization (available via message in Canvas) 
+    - Data visualization ([online tutorial](https://vanatteveldt.shinyapps.io/ggplot), [handout](https://github.com/vanatteveldt/ccslearnr/blob/master/handouts/ggplot.md))
    
 #### Homework
 
@@ -80,12 +80,12 @@ In the third part of the course, students will work on their own research projec
 #### Lecture: Automated Text Analysis and Dictionary Approaches
 
 - Slides Lecture 2:
-    - [Download Slides] tba
+    - [Download Slides](slides/02_textanalysis_2023.html)
 
 #### Practical Session 1
 
 - Handouts: 
-    - [Basic Text Analysis using tidytext] tba 
+    - [Basic Text Analysis using tidytext](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_basics-of-text-analysis_2023.md)
 
 #### Practical Session 2 
 
