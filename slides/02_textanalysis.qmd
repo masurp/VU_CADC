@@ -616,7 +616,7 @@ Using fixed set of terms per concept to automatically code texts.
 library(quanteda.corpora)
 library(quanteda.dictionaries)
 library(quanteda.textplots)
-
+library(quanteda)
 data_df <- convert(data_corpus_sotu, "data.frame") %>% as_tibble
 data_df
 ```
