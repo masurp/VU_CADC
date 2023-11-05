@@ -43,14 +43,14 @@ editor: visual
     -   more than 280,000 active editors and 110,461,483 registered users
     -   \~61 million articles
 
-## General Text Classification Pipeline
+## Automated text analysis...
 
-![](img/text_analysis_fundamentals/Slide01.png)
+![](img/dictionary01.png)
 
 
-## Text Classification Pipeline Using Dictionaries
+## ...width dictionaries!
 
-![](img/text_analysis_fundamentals/Slide02.png)
+![](img/dictionary02.png)
 
 
 ## Content of this lecture {.smaller}
@@ -778,7 +778,7 @@ Using fixed set of terms per concept to automatically code texts.
 
 
 ::: columns
-::: {.column width="63%"}
+::: {.column width="58%"}
 
 -   Quite old technique of content analysis (since 60s)
 
@@ -798,8 +798,8 @@ Using fixed set of terms per concept to automatically code texts.
 
 :::
 
-::: {.column width="35%"}
-![](img/lexicon.jpg)
+::: {.column width="40%"}
+![](img/timeline/Slide2.png)
 :::
 :::
 
@@ -1283,7 +1283,10 @@ What have we learned?
 -   We always need to validate our analysis using manually coded material!
 
 
+
 ##  {background-image="img/britishlibrary.jpg"}
+
+
 
 ## Required Reading
 
