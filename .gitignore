@@ -23,4 +23,5 @@
 /tutorials/*cache
 /tutorials/*.csv
 /tutorials/*.json
+/tutorials/test*
 /homework/archive_homework/
