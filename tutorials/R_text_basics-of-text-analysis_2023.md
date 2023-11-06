@@ -513,7 +513,10 @@ comparison |>
        caption = "Source: SOTU speech corpus")
 ```
 
-**Exercise:** Can you create a similar plot for all presidents?
+**Exercise:** Can you create a similar plot for all presidents? Tip: Use
+only the 10 most frequent words per president, otherwise the
+visualization will be to noisy. If actually rendering the visualization
+takes a bit longer, do not despair! R has to work on this a little…
 
 ``` r
 # Code
