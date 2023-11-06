@@ -91,7 +91,7 @@ In the third part of the course, students will work on their own research projec
 
 - Handouts: 
 
-   - [Dictionary Approaches using tidytext] tba
+   - Dictionary Approaches using tidytext ([handout](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_dictionary-approaches_2023.md))
 
 #### Homework
 
