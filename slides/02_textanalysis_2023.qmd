@@ -1,6 +1,6 @@
 ---
-title: "Computational Analysis of Digital Communication"
-subtitle: "Week 2: Basics of Automated Text Analysis and Dictionary Approaches"
+title: "Basics of Automated Text Analysis and Dictionary Approaches"
+subtitle: "Week 2: Wrangling Text and Classification with Wordlists"
 author: "Dr. Philipp K. Masur"
 format:
   revealjs: 
@@ -47,11 +47,9 @@ editor: visual
 
 ![](img/dictionary01.png)
 
-
-## ...width dictionaries!
+## ...with dictionaries!
 
 ![](img/dictionary02.png)
-
 
 ## Content of this lecture {.smaller}
 
@@ -83,7 +81,6 @@ editor: visual
 :::
 
 ::: {.column width="45%"}
-
 4.  Examples from the literature
 
     4.1. Sourcing Pandemic News (Mellado et al., 2021)
@@ -98,14 +95,13 @@ editor: visual
 
 From raw text to numerical presentations of texts.
 
-
 ## Basic Text Analysis
 
-- Before we start to classify unlabeled text, we often engage in what we call "basic text analysis"
+-   Before we start to classify unlabeled text, we often engage in what we call "basic text analysis"
 
-- The first goal is find ways to represent texts in numerical frameworks
+-   The first goal is find ways to represent texts in numerical frameworks
 
-- Then, we often want to conduct simple descriptive analyses on the texts (e.g., which words are used most often)
+-   Then, we often want to conduct simple descriptive analyses on the texts (e.g., which words are used most often)
 
 ![](img/text_analysis_fundamentals/basic_textanalysis.png)
 
@@ -249,7 +245,7 @@ text_data$text |>
 <center>
 
 | Type of token | Example                                                                    |
-|:---------------|:-------------------------------------------------------|
+|:-----------------|:-----------------------------------------------------|
 | characters    | "I", "l", "o", "v", "e", "y", "o", "u", "v", "e", "r" ,"y",...             |
 | words         | "I", "love", "you", "very", "much"                                         |
 | sentences     | "I love you very much"                                                     |
@@ -318,7 +314,7 @@ hcandersen_en |>
 
 -   The function `unnest_tokens()` also tokenizes, but the resulting data structure differs (a tidy data set)
 
--   It thereby determines how we move forward in our analysis 
+-   It thereby determines how we move forward in our analysis
 :::
 
 ::: {.column width="2%"}
@@ -513,7 +509,6 @@ length(tidy_text) * nrow(tidy_text)
 
 ![](img/bagofwords.png)
 
-
 ## Descriptive analyses of the "bag-of-word" model
 
 -   Since the tidy token list is a regular data frame, we can simply group by word and summarize to get frequency information
@@ -594,8 +589,6 @@ frequencies |>
        y = "", 
        title = "Most frequent words in the SOTU corpus")
 ```
-
-
 
 ## Weighting and Selecting Documents and Terms
 
@@ -715,7 +708,6 @@ sotu_text |>
   theme_minimal(base_size = 13)
 ```
 
-
 ## tf-idf transformation (weighting)
 
 -   So far, we looked at how frequent a word occurs in a document (speech).
@@ -776,10 +768,8 @@ Using fixed set of terms per concept to automatically code texts.
 
 ## What are deductive approaches?
 
-
 ::: columns
 ::: {.column width="58%"}
-
 -   Quite old technique of content analysis (since 60s)
 
 -   Coding rules are set *a priori* by researcher based on a predefined "text theory"
@@ -791,11 +781,9 @@ Using fixed set of terms per concept to automatically code texts.
     -   based on individual words or group of words (e.g., articles that contain "government" are coded as "politics")
     -   based on patterns (e.g., the sender of a mail can be identified by looking for "FROM:")
     -   combinations of both
-    
 :::
 
 ::: {.column width="2%"}
-
 :::
 
 ::: {.column width="40%"}
@@ -1020,7 +1008,6 @@ ggplot(sotu_emo_time) +
   labs(title = "Emotionality over the years")
 ```
 
-
 ## Validation
 
 -   To estimate the validity of our dictionary analysis, we manually code a random sample of the documents and compare the coding with the dictionary results
@@ -1060,7 +1047,7 @@ ggplot(sotu_emo_time) +
 
 ## Typical validity/performance scores
 
-- Whereas we talk about "reliability and validity" in the context of statistical measurement theory, we usually talk about "performance" in the context of text classification
+-   Whereas we talk about "reliability and validity" in the context of statistical measurement theory, we usually talk about "performance" in the context of text classification
 
 -   From the confusion matrix, we can compute all relevant performance scores:
 
@@ -1076,14 +1063,10 @@ ggplot(sotu_emo_time) +
 
 ::: columns
 ::: {.column width="35%"}
-
 ![](img/confusionmatrix2.png)
-
 :::
 
 ::: {.column width="65%"}
-
-
 -   No clear thresholds: need to be assessed in the research context, but values closer to 1 are desirable
 
 -   Can be used to compare the performance of different approaches!
@@ -1091,7 +1074,6 @@ ggplot(sotu_emo_time) +
 :::
 
 <br>
-
 
 ![](img/performance.png)
 
@@ -1133,10 +1115,7 @@ Studies that used the dictionary approach
 ## Example 1: Sourcing Pandemic News (Mellado et al)
 
 ::: columns
-
 ::: {.column width="70%"}
-
-
 -   The study analyzes the sources and actors present in more than 940,000 posts on COVID-19 published in the 227 Facebook, Instagram, and Twitter accounts of 78 sampled news outlets between January 1 and December 31 of 2020
 
 -   The analysis shows the dominance of political sources across countries and platforms, particularly in Latin America
@@ -1144,14 +1123,12 @@ Studies that used the dictionary approach
 -   It demonstrates the strong role of the state in constructing pandemic news and suggesting that mainstream news organizations' social media posts maintain a strong elite orientation
 
 -   Health sources were also prominent, while significant diversity of sources, including citizen sources, emerged as the pandemic went on
-
 :::
-::: {.column width="30%"}
 
+::: {.column width="30%"}
 ![](https://images.pexels.com/photos/3902732/pexels-photo-3902732.jpeg)
 :::
 :::
-
 
 [Mellado et al., 2021]{style="font-size:0.75em;"}
 
@@ -1178,22 +1155,17 @@ Studies that used the dictionary approach
 ## Example 2: Political migration on social media
 
 ::: columns
-
 ::: {.column width="65%"}
-
 -   Heidenreich and colleagues (2019), analyzed migration discourses in the Facebook accounts of political actors (n=1702) across six European countries (Spain, UK, Germany, Austria, Sweden and Poland)
 
 -   present new insights into the visibility of migration as a topic
 
 -   investigated sentiment about migration, revealing country- and party-specific patterns
-
 :::
 
 ::: {.column width="35%"}
-
 ![](https://images.pexels.com/photos/6168/hands-woman-laptop-notebook.jpg)
 :::
-
 :::
 
 [Heidenreich et al., 2019]{style="font-size:0.75em;"}
@@ -1269,7 +1241,6 @@ What have we learned?
 
 ![](img/text_analysis_fundamentals/Slide02.png)
 
-
 ## Conclusion
 
 -   Automated text analysis is a useful for working with large-scale text corpora
@@ -1282,11 +1253,7 @@ What have we learned?
 
 -   We always need to validate our analysis using manually coded material!
 
-
-
 ##  {background-image="img/britishlibrary.jpg"}
-
-
 
 ## Required Reading
 

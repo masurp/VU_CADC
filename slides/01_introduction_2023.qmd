@@ -267,7 +267,7 @@ td {
 </style>
 ```
 | \#  | Characteristic | Description                                                                                                                                                                                                                                                                       |
-|---------|:--------|:------------------------------------------------------|
+|-----|:---------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | 1   | Big            | The scale or volume of some current data sets is often impressive. However, big data sets are not an end in themselves, but they can enable certain kinds of research including the study of rare events, the estimation of heterogeneity, and the detection of small differences |
 | 2   | Always-on      | Many big data systems are constantly collecting data and thus enable to study unexpected events and allow for real-time measurement                                                                                                                                               |
 | 3   | Nonreactive    | Participants are generally not aware that their data are being captured or they have become so accustomed to this data collection that it no longer changes their behavior.                                                                                                       |
@@ -277,7 +277,7 @@ td {
 ## 10 Characteristics of Big Data
 
 | \#  | Characteristic                 | Description                                                                                                                                   |
-|------------|:-----------|:------------------------------------------------|
+|-----|:-------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------|
 | 6   | Nonrepresentative              | Most big datasets are nonetheless not representative of certain populations. Out-of-sample generalizations are hence difficult or impossible. |
 | 7   | Drifting                       | Many big data systems are changing constantly, thus making it difficult to study long-term trends                                             |
 | 8   | Algorithmically <br>confounded | Behavior in big data systems is not natural; it is driven by the engineering goals of the systems.                                            |
@@ -786,7 +786,7 @@ A company owned by Thiel had lodged a consent application for a sprawling lodge 
 <center>
 
 | Type of Feature | Example                                                    |
-|:-----------------|:-----------------------------------------------------|
+|:----------------|:-----------------------------------------------------------|
 | Sentence        | "Include Your Children When Baking Cookies"                |
 | Word            | "Include", "Your", "Children", "When", "Baking", "Cookies" |
 | Bigrams         | "Include", "Your Children", "When", "Baking Cookies"       |
@@ -1005,7 +1005,7 @@ How this course is going to work?
 ## Teachers
 
 |     Dr. Philipp K. Masur      |     | Dr. Kaspar Welbers  |     |     Emma Diel     |     |     Roan Buma     |
-|:-----------:|----------|:--------:|----------|:--------:|----------|:--------:|
+|:-----------------------------:|-----|:-------------------:|-----|:-----------------:|-----|:-----------------:|
 |     ![](img/philipp2.jpg)     |     | ![](img/kasper.jpg) |     | ![](img/emma.jpg) |     | ![](img/buma.jpg) |
 | Lecturer & Course Coordinator |     |       Teacher       |     |      Teacher      |     |      Teacher      |
 
