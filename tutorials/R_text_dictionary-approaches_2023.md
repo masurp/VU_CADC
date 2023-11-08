@@ -52,9 +52,11 @@ standard.
 
 # Getting some data
 
-For this example, we will use ~3200 tweets of four different mobile
-phone companies (Google, Huawei, Samsung, and Sony; scraped in 2022).
-You can find the data set on Canvas.
+For this example, we will dive into possible applications of
+computational methods in the context of corporate communication. We will
+use ~3200 tweets of four different mobile phone companies (Google,
+Huawei, Samsung, and Sony; scraped in 2022). You can find the data set
+on Canvas.
 
 ``` r
 library(tidyverse)
@@ -189,6 +191,8 @@ dict_results
 
 We know have a data frame in which each word that exists in the
 dictionary is labeled with the respective brand personality dimension.
+In the first 10 rows of the data set, only the word “able” was coded
+with the label “competence”.
 
 ## Fundamental analysis using the labels
 
@@ -223,7 +227,10 @@ plot_data |>
 **Exercise:** Can you create a plot that shows the amount of words
 related to each brand personality dimensions for each brand across time?
 The code below transforms the `created_at` variable to simply the date.
-Can you extend the pipeline of this code to create the plot?
+Can you extend the pipeline of this code to create the plot? Tip: Don’t
+forget to filter out unlabeled words, thinking about which aspects to
+color and which to map onto different facets. It might also be a good
+idea to set `scales = "free"`, when you use e.g., `facet_wrap()`.
 
 ``` r
 dict_results |>
@@ -234,10 +241,10 @@ dict_results |>
 
 # Inspecting dictionary hits
 
-Sometime, it can be meaningful
-
-Using the `tokenbrowser` package developed by Kasper Welbers, we can
-inspect the hits in their original context.
+Sometimes, it can be meaningful to inspect what the dictionary analysis
+actually labeled and whether the word was actually used in this way in
+its context. Using the `tokenbrowser` package developed by Kasper
+Welbers, we can inspect the hits in their original context.
 
 (Note that due to an unfortunate bug, this package requires the document
 id column is called `doc_id`)
@@ -307,7 +314,7 @@ corona_tweets
 # Getting a dictionary for the sentiment analysis
 library(SentimentAnalysis)
 positive <- tibble(positive = DictionaryGI$positive) |> pivot_longer(positive)
-negative <- tibble(negative = DictionaryGI$positive) |> pivot_longer(negative)
+negative <- tibble(negative = DictionaryGI$negative) |> pivot_longer(negative)
 sentiment_dict <- bind_rows(positive, negative)
 head(sentiment_dict)
 ```
@@ -315,12 +322,17 @@ head(sentiment_dict)
 **Exercise:** Can you assess the sentiment of these tweets? Apply
 everything that you have learned throughout this tutorial: Tokenize, if
 necessary, lemmatize, and join the dictionary. As a final step, try to
-plot the sentiment across time. Did tweets become more negative? Tip: To
-gain a general sentiment score for each tweet, researchers often use the
-following formula `(positive - negative) / (positive + negative)`. Can
-you produce a line graph that shows the development of this sentiment
-score over time?
+plot the sentiment across time (there are different ways to do this!).
+Did tweets become more negative?
 
 ``` r
+corona_tweets <- corona_tweets |>
+  group_by(screen_name) |> 
+  mutate(post_id = paste(user_id, 1:n(), sep = "_")) |> 
+  select(user_id, post_id, created_at, screen_name, text, favorite_count, retweet_count) |> 
+  mutate(text = str_remove_all(text, "#")) |> 
+  ungroup() 
+corona_tweets
+
 # Code here
 ```
