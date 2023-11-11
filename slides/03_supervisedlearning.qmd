@@ -199,6 +199,7 @@ We can now use machine learning models to classify text into specific sets of ca
 ## General Idea
 
 -   ![](https://quantdare.com/wp-content/uploads/2016/03/Imagen1-1150x552.png){style="float: right; padding-left: 40px;" width="600"}Model relation between...
+
     -   Input features
         -   Similar to independent variables in statistics
         -   Can be MANY features (e.g., all words in a DTM)
@@ -206,7 +207,7 @@ We can now use machine learning models to classify text into specific sets of ca
         -   Similar to dependent variables
         -   Can be categories (e.g., sentiment, topic classification) or continuous (e.g., stock market value)
 
-## Statistical Modeling vs. Machine Learning?
+## Statistical Modeling vs. Supervised Machine Learning?
 
 ::: {.column width="45%"}
 -   Machine learning is thus *similar* to normal statistical modeling
@@ -437,6 +438,7 @@ ggplot(NULL, aes(x = x, y = y)) +
   theme_get() +
   labs(subtitle = "data: y = x^3  + e",
        x = "", y = "") +
+  ylim(-50, 300) +
   theme(plot.margin = unit(c(0, 3, 0, 3), units = "cm"))
 ```
 
@@ -449,6 +451,7 @@ ggplot(NULL, aes(x = x, y = y)) +
   geom_smooth(method = "lm", se = F) +
   labs(subtitle = "data: y = x^3  + e, linear regression",
        x = "", y = "")+
+  ylim(-50, 300) +
   theme(plot.margin = unit(c(0, 3, 0, 3), units = "cm"))
 ```
 
@@ -461,6 +464,7 @@ ggplot(NULL, aes(x = x, y = y)) +
   stat_smooth(formula = y ~ x^3, se = F) +
   labs(subtitle = "data: y = x^3  + e, exponential fit",
        x = "", y = "")+
+  ylim(-50, 300) +
   theme(plot.margin = unit(c(0, 3, 0, 3), units = "cm"))
 ```
 
@@ -473,6 +477,7 @@ ggplot(NULL, aes(x = x, y = y)) +
   stat_smooth(method="lm", se = F, formula=y ~ poly(x, 9)) +
   labs(subtitle = "data: y = x^3  + e, fit with 9-degree polynomial",
        x = "", y = "")+
+  ylim(-50, 300) +
   theme(plot.margin = unit(c(0, 3, 0, 3), units = "cm"))
 ```
 

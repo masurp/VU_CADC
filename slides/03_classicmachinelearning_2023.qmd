@@ -1,0 +1,2132 @@
+---
+title: "Text Classification Using Classic Machine Learning"
+subtitle: "Week 3: From Naive Bayes to Neural Networks"
+author: "Dr. Philipp K. Masur"
+format:
+  revealjs: 
+    theme: [default, theme.scss]
+    logo: img/logo.png
+    background-transition: fade
+    footer: Computational Analysis of Digital Communication
+    slide-number: c/t
+    title-slide-attributes:
+        data-background-image: https://storage.googleapis.com/exenzo-jobboard/bb/public/thumb/logo-jpg-57.jpg
+        data-background-position: "top right"
+        data-background-size: auto
+editor: visual
+---
+
+
+##  {background="#43464B" background-video="video/ml.mp4" background-video-loop="true" background-video-muted="true"}
+
+## So what are we actually talking about?
+
+-   Machine learning is the study of computer algorithms that can **improve automatically** through experience and by the use of data
+
+-   The field originated in an environment where the available data, statistical methods, and computing power rapidly and simultaneously evolved
+
+-   Due to the "black box" nature of the algorithm's operations, it is often seen as a form of **artificial intelligence**
+
+![Source: qlik](https://www.qlik.com/us/-/media/images/global-us/site-content/augmented-analytics/machine-learning-vs-ai/machine-learning-diagram-image.png)
+
+
+## Some success stories
+
+![Source: Eschenzweig/Wikimedia](https://www.electricmotorengineering.com/files/2020/07/Autonomous-driving-Barcelona.jpg){style="float: right; padding-left: 40px;" width="400"}Applying machine learning in practical context:
+
+-   Identification of spam messages in mails
+-   Segmentation of customers for targeted advertising
+-   Weather forecasts and long-term climate changes
+-   Reduction of fraudulent credit card transactions
+-   Prediction of election outcomes
+-   Auto-piloting and self-driving cars
+-   Face recognition
+-   Optimization of energy use in homes and buildings
+-   Discovery of genetic sequences linked to diseases -....
+
+## Content of this lecture {.smaller}
+
+::: columns
+::: {.column width="45%"}
+
+1.  What is Machine Learning?
+
+    1.1. Concepts and Principles
+
+    1.2. The General Machine Learning Pipeline
+
+    1.3. Difference between statistics and machine learning
+
+    1.4. Over- vs. underfitting
+
+    1.5. Training vs. Testing
+
+    1.6. Example Data: Predicting Genre from Lyrics
+
+2.  Supervised text classification with different "algorithms"
+
+    2.1. Naive Bayes
+
+    2.2. Logistic Regression
+
+    2.3. Support Vector Machines
+
+    2.4. Artificial Neural Networks
+:::
+
+::: {.column width="45%"}
+3.  Testing Different Approaches
+
+    3.1. Performance of different approaches
+
+    3.2. Fine-tuning preprocessing and hyperparameters
+    
+    3.3. Effect of text preprocessing
+    
+    3.4. Validity of different text classification approaches
+
+4.  Examples from the Literature
+
+    4.1. Incivility on Facebook (Su et al., 2018)
+
+    4.2. Electoral News Sharing (de León et al., 2021)
+
+5.  Summary and Conclusion
+:::
+:::
+
+# What is machine learning? {background-color="steelblue"}
+
+## Deductive vs. inductive approaches
+
+-   In the previous lecture, we talked about deductive approaches (such as dictionary approaches)
+
+-   These are **deterministic** and are based on a priori text theory (e.g., happy -\> positive, hate -\> negative)
+
+-   Yet, natural language is often ambiguous and a **probabilistic** coding may be better
+
+-   Dictionary-based or generally rule-based approaches are not very similar to manual coding; a human being assesses much more than just a list of words
+
+-   Inductive approaches promise to combine the scalability of automatic coding with the validity of manual coding (**supervised learning**) or can even identify things or relations that we as human beings cannot identify (**unsupervised learning**)
+
+------------------------------------------------------------------------
+
+![](img/machinelearning.png)
+
+## Example of supervised text classification
+
+<center>
+![](img/ml_newspaper_example.png)
+</center>
+
+## General text classification pipeline
+
+![](img/text_analysis_fundamentals/Slide01.png)
+
+## Supervised Text Classification Pipeline
+
+![](img/text_analysis_fundamentals/Slide03.png)
+
+## Basic idea of Machine Learning Algorithms
+
+-   The general goal, however, is always the same: Model the relationship between...
+
+    -   Input features
+        -   Similar to independent variables in statistics
+        -   Can be MANY features (e.g., all words in a corpus)
+    -   Output class
+        -   Similar to dependent variables
+        -   Can be categories or continuous
+
+![](img/algorithm_scheme.png)
+
+## Statistical modeling vs. Supervised Machine learning
+
+::: columns
+::: {.column width="50%"}
+
+-   Machine learning, many people joke, is nothing other than a fancy name for statistics.
+
+-   There is some truth to this: if you say "logistic regression", this will sound familiar to both statisticians and machine learning practitioners.
+
+-   Still, there are some differences between traditional statistical approaches and the machine learning approach, even if some of the same mathematical tools are used.
+:::
+
+::: {.column width="50%"}
+
+![Source: Demetri Pananos/stackoverflow](https://i.stack.imgur.com/7U552.png)
+:::
+:::
+
+## Statistical Modeling
+
+::: columns
+::: {.column width="50%"}
+
+-   Statistical modeling is about understanding the relationship between one (or several predictors) and an outcom variable
+
+-   Learn $f$ so you can predict $y$ from $x$:
+
+<center>$y = f(x)$</center>
+
+-   In a linear regression model, we aim to find the best fitting "line" that best predicts `y` based on `x`:
+
+<center>$y = -0.16 + 2.31 * x + \epsilon$</center>
+
+-   In a typical communication science paper, we would say something like: when `x` increases by one unit,`y` increases by 2.31 units.
+
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="45%"}
+
+```{r, echo = F}
+#| fig-height: 5
+#| fig-width: 5
+set.seed(20)
+library(tidyverse)
+data <- tibble(x = rnorm(50, 3, 2),
+               y = 2*x + rnorm(50, 0, 4))
+ggplot(data, aes(x, y)) +
+  geom_point(size = 3, alpha = .5, color = "steelblue") +
+  geom_smooth(method = "lm", se = F, color = "grey30") +
+  theme_classic() 
+```
+:::
+:::
+
+## Machine Learning
+
+::: columns
+::: {.column width="50%"}
+
+-   Machine learning is less about understanding the relationship, but about maximizing prediction.
+
+-   A statistical model such as the one estimated can be used to predict most likely `y` values based on new `x` data.
+
+-   For example, despite not being in the data, `x = -1` should be `y = -2.47`; `x = 5` should be `y = 11.41` based on the fitted line!
+
+-   In other words, machine learnings doesn't focus on explanation, but emphasizes prediction.
+
+:::
+
+::: {.column width="5%"}
+
+:::
+
+::: {.column width="45%"}
+
+```{r, echo = F}
+#| fig-height: 5
+#| fig-width: 5
+ggplot(data, aes(x, y)) +
+  geom_point(size = 3, alpha = .5, color = "steelblue") +
+  geom_smooth(method = "lm", se = F, color = "grey30") +
+  theme_classic() +
+  geom_point(aes(x = -1, y = -2.477), shape = 1, size = 6, color = "darkred") +
+  geom_point(aes(x = 5, y = 11.41), shape = 1, size = 6, color = "darkred") +
+  geom_hline(yintercept = -2.477, linetype = "dashed", color = "grey") +
+  geom_vline(xintercept = -1, linetype = "dashed", color = "grey") +
+  geom_hline(yintercept = 11.41, linetype = "dashed", color = "grey") +
+  geom_vline(xintercept = 5, linetype = "dashed", color = "grey")
+```
+
+:::
+:::
+
+## Differences in language
+
+<center>![Source: van Atteveldt et al., 2021](img/lingo.png){width="75%"}</center>
+
+## Differences in Goals
+
+-   Goal of statistical modeling: explaining/understanding
+
+    -   Serves to make inferences about a population ("Does X relate to Y?")
+    -   Doesn't use too many variables to avoid the difficulty of interpreting too many parameters
+    -   Requires interpretable parameters
+
+-   Goal of machine learning: best possible prediction
+
+    -   make generalizable predictions ("How to best predict Y?")
+    -   We do not care about the actual values of the coefficients, we just need them for our prediction.
+    -   In fact, in many machine learning models, we will have so many of them that we do not even bother to report them.
+
+. . .
+
+**Note:** Machine learning models often have 1000's of collinear independent variables and can have many latent variables!
+
+## Over- vs. underfit
+
+-   Problem in Machine Learning: Sufficiently complex algorithms can "predict" all training data perfectly
+
+-   But such an algorithm does not generalize to new data (the actual goal!)
+
+-   Essentially, we want the model to have a good fit to the data, but we also want it to not optimize on things that are specific to the training data set
+
+-   Problem of under- vs- overfit
+
+## Examplifying over- and underfit
+
+```{r, echo = F, fig.width = 10, fig.height = 5.2}
+library(tidyverse)
+library(ggthemes)
+set.seed(42)
+x <- runif(15, 1, 7)
+y <- x^3 + rnorm(15, 0, 10)
+
+ggplot(NULL, aes(x = x, y = y)) +
+  geom_point(alpha = .8, size = 2, color = "steelblue") +
+  #geom_smooth(method = "lm", se = F, color = "grey20") +
+  theme_grey(base_size = 14) +
+  labs(subtitle = "data: y = x^3  + e",
+       x = "", y = "") +
+  ylim(-50, 300) +
+  theme(plot.margin = unit(c(0, 3, 0, 3), units = "cm"))
+```
+
+## Linear fit (underfit)
+
+```{r, echo = F, fig.width = 10, fig.height = 5.2}
+ggplot(NULL, aes(x = x, y = y)) +
+  geom_point(alpha = .8, size = 2, color = "steelblue") +
+  geom_smooth(method = "lm", se = F, color = "grey20") +
+  theme_grey(base_size = 14) +
+  labs(subtitle = "data: y = x^3  + e, linear regression",
+       x = "", y = "")+
+  ylim(-50, 300) +
+  theme(plot.margin = unit(c(0, 3, 0, 3), units = "cm"))
+```
+
+
+## Overfit
+
+```{r, echo = F, fig.width = 10, fig.height = 5.2}
+ggplot(NULL, aes(x = x, y = y)) +
+  geom_point(alpha = .8, size = 2, color = "steelblue") +
+  theme_grey(base_size = 14) +
+  stat_smooth(method="lm", se = F, formula=y ~ poly(x, 9), color = "grey20") +
+  labs(subtitle = "data: y = x^3  + e, fit with 9-degree polynomial",
+       x = "", y = "")+
+  ylim(-50, 300) +
+  theme(plot.margin = unit(c(0, 3, 0, 3), units = "cm"))
+```
+
+
+## Good fit
+
+```{r, echo = F, fig.width = 10, fig.height = 5.2}
+ggplot(NULL, aes(x = x, y = y)) +
+  geom_point(alpha = .8, size = 2, color = "steelblue") +
+  theme_grey(base_size = 14) +
+  stat_smooth(formula = y ~ x^3, se = F, color = "grey20") +
+  labs(subtitle = "data: y = x^3  + e, exponential fit",
+       x = "", y = "")+
+  ylim(-50, 300) +
+  theme(plot.margin = unit(c(0, 3, 0, 3), units = "cm"))
+```
+
+## Preventing overfitting
+
+-   Regularization during fitting process
+
+    -   'Punish' complexity
+    -   Constrain flexibility
+    -   Removing noise
+
+-   Out-of-sample validation
+
+    -   To see whether a model generalizes to new data, simply test it on new data
+    -   This validation set clearly detects overfitting
+
+-   In sum, we need to validate our new classifier on unseen data
+
+## Solution: Training and Testing
+
+-   As models (almost) always overfit, it is clear that performance on only training data is not a good indicator of the real quality of the classifier
+
+-   The standard solution is to split the labeled data into a training and test data sets: This way, we can train the algorithm on one part and then evaluate its validity / performance on the held-out part of the data.
+
+-   We prevent overfit if the classifier still perform well on unseen data and not just on the training data!
+
+## Integrating testing in the pipeline
+
+![](img/testing_training.png)
+
+## Testing = Validation
+
+::: columns
+::: {.column width="70%"}
+-   Remember how we validated dictionary approaches?
+
+    -   We manually coded a small set of the text
+    -   Compared this gold standard to the dictionary result
+
+-   In supervised text classification, the procedure is similar
+
+    -   We use the classifier (trained on the training data) to predict the outcome in the test data
+    -   Because the test data is only a subset of our labeled data, it also contains the true outcome
+    -   We can compare the predicted with the actual outcome and compute the same performance scores (Accuracy, Precision,...)
+:::
+
+::: {.column width="30%"}
+![](img/validation_ml.png)
+:::
+:::
+
+## A Small Note on Dealing with non-determinism
+
+-   Many aspects of machine learning are non-deterministic, i.e., there is a certain randomness in the procedure
+
+    -   Randomly splitting the available labeled data into training and test sets
+    -   Some algorithms start from random initial states (e.g., drawing a random number)
+
+-   Problem: Research thereby becomes not replicable and the outcome may be affected
+
+-   To ensure replicability
+
+    -   We can set a so-called random seed in R with `set.seed(123)`
+    -   This way, we force R to use the exact same procedure (even when we repeat it)
+
+-   For valid outcome:
+
+    -   Repeat the procedure X times
+    -   Report average performance
+
+## Example: Predicting music genre from lyrics
+
+-   For the remainder of this lecture, I will exemplify different approaches to supervised text classification using a data set that contains song lyrics and the genre of the artist.
+
+-   The goal is to investigate whether we can train an algorithm sufficiently well to predict the genre from only song lyrics.
+
+```{r, R.options = list(width = 120)}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+#| output-location: fragment
+library(tidyverse)
+
+# Set seed
+set.seed(42)
+
+# Read data
+lyrics_data <- read_csv("data/lyrics-data-prep.csv") |>               
+  mutate(binary_genre = factor(ifelse(Genre =="Rock","rock", "other"),  # <-- create binary outcome 
+                               levels = c("rock", "other") )) |>        # <-- order categories!
+  sample_frac(size = .20) |>                                            # <-- Sample 20% of the data
+  select(doc_id = SLink, Artist, Song = SName, 
+         Genre, binary_genre, text = Lyric)
+head(lyrics_data)
+```
+
+## The data set
+
+::: columns
+::: {.column width="45%"}
+-   This data is scraped from the "Vagalume" website, so it depends on their storing and sharing millions of song lyrics (not really representative or complete)
+
+-   Contains artist name, song name, lyrics, and genre of the artist (not the song)
+
+-   The following genres are in this subsample of the data set:
+
+    -   Rock
+    -   Hip Hop
+    -   Pop Music
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="45%"}
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+#| output-location: fragment
+#| fig-width: 4.6
+#| fig.height: 3
+lyrics_data |> 
+  group_by(Genre) |>  
+  tally() |> 
+  ggplot(aes(x = reorder(Genre, n), y = n, 
+             fill = Genre)) +
+  geom_col() +
+  scale_fill_brewer(palette = "Pastel2") +
+  coord_flip() +
+  ggridges::theme_ridges() +
+  guides(fill = F) +
+  labs(x = "", 
+       y = "Number of Songs", 
+       title = "Songs per Genre")
+```
+:::
+:::
+
+## Let's check out a song
+
+::: columns
+::: {.column width="80%"}
+```{r, R.options = list(width = 120)}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+library(tidytext)
+lyrics_data |> 
+  filter(Artist == "Radiohead" & Song == "Paranoid Android") |> 
+  unnest_tokens(lines, text, token = "sentences") |> 
+  select(lines) |> 
+  print(n = 20)
+  
+```
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="18%"}
+![](https://upload.wikimedia.org/wikipedia/en/b/ba/Radioheadokcomputer.png)
+:::
+:::
+
+## Splitting the data into a train and a test set
+
+::: columns
+::: {.column width="60%\""}
+-   There are different way to think about creating a test vs. training data set
+
+-   Simplest form: split-half (or any other percentage distribution)
+
+-   But there are also other, more complex procedures that fall under the term "cross-validation"
+
+    -   Leave-1-out
+    -   k-fold
+    
+- What approach is meaningful depends on the question and goal!
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="35%"}
+<br>
+
+![Leave-1-out cross validation](https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/LOOCV.gif/600px-LOOCV.gif)
+
+<br><br>
+
+![k-fold cross validation](https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/KfoldCV.gif/700px-KfoldCV.gif)
+:::
+:::
+
+## Splitting the data set in R
+
+-   For the entire model fitting process, we are going to use the package `tidymodels`, which nicely intersects with the already known package `tidytext`
+
+-   Here, we can use the functions `initial_split` to split our data set. The functions `training` and `testing` create the actual data sets from the splits.
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+library(tidymodels)
+
+# Set seed to insure replicability
+set.seed(42)
+
+# Create initial split proporations
+split <- initial_split(lyrics_data, prop = .60)
+
+# Create training and test data
+train_data <- training(split)
+test_data <- testing(split)
+
+# Check
+tibble(dataset = c("training", "testing"),
+       n_songs = c(nrow(train_data), nrow(test_data)))
+```
+
+# Algorithms for Supervised text classification {background-color="steelblue"}
+
+From Logistic Regression to Neural Networks.
+
+## Feature Engineering
+
+-   Classic machine learning models require a numerical representation of text (e.g., document-feature matrix)
+
+-   They further need the outcome variable that they should predict
+
+-   All text-preprocessing steps (e.g., stopword removal, stemming, lemmatization, frequency trimming, weighting, etc.) may change the performance, but no clear rules on what works and what does not
+
+-   Only solution: Trial and error!
+
+## Text Preprocessing with TidyText
+
+```{r, R.options = list(width = 120)}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+library(tidytext)
+
+# Text Preprocessing
+dfm_train <- train_data |>
+  unnest_tokens(word, text) |> 
+  anti_join(stop_words) |> 
+  group_by(doc_id, word) |> 
+  summarize(n = n()) |> 
+  pivot_wider(names_from = word, values_from = n, values_fill = 0)
+
+# Check
+dfm_train |> head()
+```
+
+## Alternative in tidymodels: Creating A "Recipe"
+
+```{r, R.options = list(width = 120)}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+library(textrecipes)
+
+# Create recipe for text preprocessing
+rec <- recipe(binary_genre ~ text, data = lyrics_data) |>
+  step_tokenize(text, options = list(strip_punct = T, strip_numeric = T)) |>  
+  step_stopwords(text, language = "en") |>    
+  step_tokenfilter(text, min_times = 20, max_tokens = 1000 ) |> 
+  step_tf(all_predictors()) 
+
+# "Bake" (check) based on recipe to see text preprocessing
+rec |> 
+  prep(train_data) |>
+  bake(new_data=NULL)
+```
+
+## Workflow in Tidymodels
+
+::: columns
+::: {.column width="70%"}
+-   The collection `tidymodels` contains a variety of packages that facilitates and streamlines machine learning in R
+
+-   The basic procedure is the following:
+
+    1.  Create a **recipe** (this includes already a formula and all pre-processing steps)
+    2.  **Bake** training and testing data using the **recipe** (not explicitly necesssary)
+    3.  Create a designated **model function** (depending on what type of algorithm should be used)
+    4.  Bind all together using a **workflow**
+    5.  Fit the entire **workflow** and evaluate performance
+
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="28%"}
+![](https://rviews.rstudio.com/2020/04/21/the-case-for-tidymodels/tidymodels.png)
+:::
+:::
+
+## Setting up a recipe for our example
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+# Load specific support library
+library(textrecipes)
+
+# Create recipe
+rec <- recipe(binary_genre ~ text, data = lyrics_data)                 # <-- predict binary_genre by text
+```
+
+## Setting up a recipe for our example {auto-animate="true"}
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+# Load specific support library
+library(textrecipes)
+
+# Create recipe
+rec <- recipe(binary_genre ~ text, data = lyrics_data) |>              # <-- predict binary_genre by text
+  step_tokenize(text, options = list(strip_punct = T,                  # <-- tokenize, remove punctuation
+                                     strip_numeric = T))               # <-- remove numbers
+```
+
+## Setting up a recipe for our example {auto-animate="true"}
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+# Load specific support library
+library(textrecipes)
+
+# Create recipe
+rec <- recipe(binary_genre ~ text, data = lyrics_data) |>              # <-- predict binary_genre by text
+  step_tokenize(text, options = list(strip_punct = T,                  # <-- tokenize, remove punctuation
+                                     strip_numeric = T)) |>            # <-- remove numbers
+  step_stopwords(text, language = "en") |>                             # <-- remove stopwords                 
+  step_tokenfilter(text, min_times = 20, max_tokens = 1000)            # <-- filter out rare words and use only top 1000                         
+```
+
+## Setting up a recipe for our example {auto-animate="true"}
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+# Load specific support library
+library(textrecipes)
+
+# Create recipe
+rec <- recipe(binary_genre ~ text, data = lyrics_data) |>              # <-- predict binary_genre by text
+  step_tokenize(text, options = list(strip_punct = T,                  # <-- tokenize, remove punctuation
+                                     strip_numeric = T)) |>            # <-- remove numbers
+  step_stopwords(text, language = "en") |>                             # <-- remove stopwords                 
+  step_tokenfilter(text, min_times = 20, max_tokens = 1000) |>         # <-- filter out rare words and use only top 1000              
+  step_tf(all_predictors())                                            # <-- create document-feature matrix
+```
+
+## Setting up a recipe for our example {auto-animate="true"}
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+# Load specific support library
+library(textrecipes)
+
+# Create recipe
+rec <- recipe(binary_genre ~ text, data = lyrics_data) |>              # <-- predict binary_genre by text
+  step_tokenize(text, options = list(strip_punct = T,                  # <-- tokenize, remove punctuation
+                                     strip_numeric = T)) |>            # <-- remove numbers
+  step_stopwords(text, language = "en") |>                             # <-- remove stopwords                 
+  step_tokenfilter(text, min_times = 20, max_tokens = 1000) |>         # <-- filter out rare words and use only top 1000     
+  step_tf(all_predictors())                                            # <-- create document-feature matrix
+
+# Small adaption to the recipe (for SVM and neural networks)
+rec_norm <- rec |> 
+  step_normalize(all_predictors())    
+```
+
+```{r, echo = F}
+# Bake training and test data based on recipe 
+train_baked <- rec |> prep(train_data) |> bake(new_data=NULL) 
+test_baked <- rec |> prep(test_data) |>  bake(new_data=NULL) 
+
+# Check
+head(train_baked)
+```
+
+## Overview of different algorithms
+
+-   There are many different "algorithms" or classifiers that we can use:
+
+    -   Naive Bayes
+    -   Logistic regression
+    -   Support Vector Machines
+    -   Decision trees
+    -   Artificial neural networks
+    -   ... and many more
+
+-   Most of these algorithms have certain hyperparameters that need to be set
+
+    -   e.g., learning rate, regularization, structure...
+
+-   Unfortunately, there is no good theoretical basis for selecting an algorithm or hyperparameters
+
+    -   Solution: Choose algorithm that performs best
+
+# Naive Bayes {background-color="steelblue"}
+
+Using the Bayes Theorem for Classification
+
+## Theoretical background
+
+::: columns
+::: {.column width="55%"}
+
+-   Goes back to the Bayes' Theorem published in 1763!
+
+-   Computes the prior probability ( *P* ) for every category ( *c* = outcome variable ) based on the training data set
+
+-   Computes the probability of every feature ( *x* ) to be a characteristic of the class ( *c* ); i.e., the relative frequency of the feature in category
+
+-   For every probability of a category in light of certain features ( *P(c\|X)* ), all feature probabilities ( *x* ) are multiplied
+
+-   The algorithm hence chooses the class that has highest weighted sum of inputs
+
+:::
+::: {.column width="45%"}
+
+![](img/naive_bayes.png)
+
+:::
+:::
+
+
+## Applying the Naive Bayes classifier to our example
+
+-   Without any knowledge about the genre, the best estimate of whether or not a song is rock would be *P(rock)*, i.e., the probability that any prior song is rock (= class prior probability, here 54.2%)
+
+. . .
+
+-   The algorithm now "learns" (based on the document-feature matrix) that the word "death" can often be found in rock songs. This probability is known as the likelihood *P(death\|rock)* (e.g., 15%)
+
+. . .
+
+-   The algorithm also "learns" the probability of the word "death" appearing in any song *P(death)* (predictor prior probability, e.g. 5%). Applying the Bayes Theorem, we get:
+
+. . .
+
+<br>
+
+<center>$P(rock|death) = \frac{P(death|rock) * P(rock)}{P(death)} = \frac{.15 * .54}{.05} = .162$</center>
+
+## Why using Naive Bayes?
+
+### Strengths
+
+-   Simple, fast, very effective
+-   Does well with noisy and missing data
+-   Requires relatively few examples for training, but also works with large numbers of examples
+-   Easy to obtain the estimated probability of an estimation
+
+### Weaknesses
+
+-   Relies on an often-faulty assumption that all features are equally important and independent
+-   Not ideal for data sets with many numeric features
+-   Estimated probabilities are less reliable than predicted classes
+
+<br>
+
+[Lantz, 2013]{style="font-size:0.6em;"}
+
+## Fitting a Naive Bayes model
+
+```{r, echo = F}
+load("results/m_nb.Rdata")
+library(naivebayes)
+m_nb <- naivebayes::naive_bayes(binary_genre ~ ., data = train_baked)
+#save(m_nb, file = "results/m_nb.RData")
+```
+
+```{r, eval = F}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+# Create workflow 
+nb_workflow <- workflow() |>                        # We initiate a workflow
+  add_recipe(rec) |>                                # We add our text preprocessing recipe to the workflow
+  add_model(naive_Bayes(mode = "classification",    # We choose Naive Bayes for classification
+                        engine = "naiveBayes"))     # Engine = R package to be used
+
+# Fitting the naive bayes model
+m_nb <- fit(nb_workflow, data = training(split))     # Fitting the model
+```
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+# Predict outcome in test set
+predict_nb <- tibble(.pred_class = predict(m_nb, test_baked)) |>     # Using 'predict' to predict genre in test set 
+  bind_cols(select(testing(split), binary_genre)) |>                 # Add actual genre of test set
+  rename(predicted=.pred_class, actual=binary_genre) 
+
+# Check
+predict_nb 
+```
+
+## Validation on the test data
+
+-  Using the function `conf_mat` on the actual and predicted genre columns, we can now inspect the confusion matrix
+
+- We already see that there are many "false-positives" (1890!), but less false negatives.
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+# Confusion Matrix
+predict_nb |> 
+  conf_mat(truth = actual, estimate = predicted)
+```
+
+## Assessing performance scores
+
+-   In `tidymodels`, we have to define a set of measures that we want to compute based on the predictions in the test set.
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+# Define a set of performance scores to be computed
+class_metrics <- metric_set(accuracy, precision, recall, f_meas)
+```
+
+- We can then use this custom function to extract the relevant measures
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+#| output-location: fragment
+# Performance Scores
+predict_nb |> 
+  class_metrics(truth = actual, estimate = predicted)
+```
+
+. . .
+
+-   Overall accuracy is 69%, which is better than chance, but not very good.
+
+-   Precision is also low because of a lot of false positives (65.2%)
+
+-   Yet, recall is quite high as only few rock songs were classified as another genre (92.9%)
+
+# Logistic Regression {background-color="steelblue"}
+
+Why not use a simple statistical model for binary classification
+
+## Theoretical background
+
+::: columns
+::: {.column width="60%"}
+
+-   As mentioned earlier, a linear regression can be described with the following formula:
+
+    <center>
+
+$Y_i = b_0 + b_1 x_i + \epsilon_i$
+
+</center>
+
+-   When we classify text, the dependent variable (the outcome class: $Y_i$) is not metric, but has only two values (1 = "is class", 0 = "is not class").
+
+-   We thus need to estimate the probability of $Y = 1$ by using the so-called sigmoid function:
+
+<center>$P(Y) = \frac {1}{1+e^{-(\beta_0 + \beta_1 x)}}$</center>
+
+-   $P(Y)$: Probability of $Y$
+-   $e$: Basis of the natural logarithm
+:::
+
+::: {.column width="40%"}
+```{r, echo = F}
+#| fig.height: 4.7
+#| fig.width: 5
+set.seed(666)
+x1 = rnorm(100)           # some continuous variables 
+x2 = rnorm(100)
+z = 1 + 2*x1 + 3*x2        # linear combination with a bias
+pr = 1/(1+exp(-z))         # pass through an inv-logit function
+y = rbinom(100,1,pr)
+x1 = scales::rescale(x1, to = c(0, 5))
+df = data.frame(y=y,x1=x1,x2=x2)
+
+glmOut = glm(y ~ x1, 
+             family = "binomial", df)
+predProbs = predict(glmOut, 
+                    type="response")
+
+ggplot(df, 
+       aes(x = x1, y = y)) + 
+  geom_point(size = 3, alpha =.7, color = "steelblue") + scale_y_continuous(breaks=seq(0, 1, 1)) + 
+  labs(x = "Frequencies of a particular word in different documents" , 
+       y = "P(Class = 1)") +
+  theme_classic(base_size = 15) +
+  theme(panel.grid.major = element_line())
+```
+:::
+:::
+
+## Inverse logit (sigmoid) function
+
+::: columns
+::: {.column width="60%"}
+-   In both classic statistics as well as machine learning, this is know as **logistic regression**
+
+-   In machine learning, we see it as an algorithm that accomplishes binary classification tasks by predicting the probability of an outcome, event, or observation
+
+-   To train a classifier during text classification tasks, we simply fit a logistic regression model with all text features (e.g., the frequencies of words per document) as input (predictors) and provide the outcome class as output (dependent variable)
+
+-   In contrast to statistical models that use logistic regression, the machine learning model contains thus only much more variables!
+:::
+
+::: {.column width="40%"}
+```{r}
+#| fig.height: 4.7
+#| fig.width: 5
+ggplot() +
+  geom_point(aes(x=x1, y=y), size = 3, alpha =.7, color = "steelblue") +
+  geom_line(aes(x=x1, y=predProbs), 
+            color="grey20", size = 1) +
+  ylim(0,1) + 
+  scale_y_continuous(breaks=seq(0, 1, 1)) + 
+  labs(x = "Frequencies of a particular word in different documents" , 
+       y = "P(Class = 1)") +
+  theme_classic(base_size = 15) +
+  theme(panel.grid.major = element_line())
+```
+:::
+:::
+
+## Why using logistic regression?
+
+### Strengths
+
+-   Comparatively simple model
+-   We can look under the hood and investigate coefficients of individual words (-\> proxy for a words importance in predicting the outcome class)
+-   Does comparatively well for many classification tasks!
+
+### Weaknesses
+
+-   Dependent variable must be binary
+-   Relies on an often-faulty assumption that all features are equally important and independent
+-   Quite slow with many data sets and features
+
+[Lantz, 2013]{style="font-size:0.6em;"}
+
+## Fitting a Logistic Regression model
+
+```{r, echo = F}
+load("results/m_logistic.RData")
+#save(m_logistic, file = "results/m_logistic.Rdata")
+```
+
+```{r, eval = F}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+# Additional package needed
+library(discrim)
+
+# Creating a workflow
+lr_workflow <- workflow() |>                            # Initate the workflow
+  add_recipe(rec) |>                                    # Add recipe
+  add_model(logistic_reg(mixture = 0, penalty = 0.1,    # Choose logistic regression
+                         engine = "glm"))               # Standard engine
+
+# Fitting the logistic regression model
+m_logistic <- fit(lr_workflow, data = training(split))  # Fit model
+```
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+# Predict outcome in test set
+predict_lr <- predict(m_logistic, new_data=test_data) |>  # Predict outcome in test data
+  bind_cols(select(testing(split), binary_genre)) |>      # Add actual outcome
+  rename(predicted=.pred_class, actual=binary_genre) 
+
+# Check
+predict_lr
+```
+
+## Validation
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+# Confusion Matrix
+predict_lr |> 
+  conf_mat(truth = actual, estimate = predicted)
+```
+
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+#| output-location: fragment
+# Performance Scores
+predict_lr |> 
+  class_metrics(truth = actual, estimate = predicted)
+```
+
+. . .
+
+-   Overall accuracy of the Logistic Regression classifier is 74.7%, which is better than the Naive Bayes!
+
+-   Precision is also ok due to less false positives (73.8%)
+
+-   Yet, recall is slightly lower, but still good (83.3%)
+
+## What words best predict rock?
+
+-   Because a logistic regression model estimates "slopes" for individual words, we can extract those words the best predict whether a song is rock (or not)
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+#| output-location: column-fragment
+#| fig.height: 4.5
+#| fig.width: 5
+m_logistic |> 
+  extract_fit_parsnip() |>
+  vip::vi() |> 
+  group_by(Sign) |>
+  mutate(Sign = recode(Sign, 
+                       POS = "negative", 
+                       NEG = "positive")) |> 
+  top_n(20, wt = abs(Importance)) |> 
+  ungroup() |>
+  mutate(
+    Importance = abs(Importance),
+    Variable = str_remove(Variable, "tf_text_"),
+    Variable = fct_reorder(Variable, Importance)
+  ) |>
+  ggplot(aes(x = Importance, 
+             y = Variable, 
+             fill = Sign)) +
+  geom_col(show.legend = FALSE) +
+  facet_wrap(~Sign, scales = "free_y") +
+  labs(y = NULL)
+```
+
+# Break (5 Minutes) {background-color="black"}
+
+# Support Vector Machines {background-color="steelblue"}
+
+A versatile black box method
+
+## Theoretical background
+
+-   Very often used machine learning method, due to its high performance in a variety of tasks
+
+-   A support vector machine (SVM) can be imagined as a "surface" that creates the greatest separation between two groups in a multidimensional space representing classes and their feature values
+
+-   Tries to find decision boundary between points that maximizes margin between classes while minimizing errors
+
+-   More formally, a support-vector machine constructs a hyperplane or set of hyperplanes in a high- or infinite-dimensional space (wait what?)
+
+## Classification with hyperplanes
+
+::: columns
+::: {.column width="45%"}
+
+-  The following figure depicts two data that can be group by two dimensions (here, I show only two dimensions because it is difficult to imagine or illustrate space in greater than two dimensions)
+
+- Because the groups are perfectly separatable by a straight line, they are said to be linearly separable (but hyperplanes don't have to be linear)
+
+:::
+
+::: {.column width="55%"}
+
+```{r, echo = F}
+#| fig.height: 5
+#| fig.width: 5.5
+set.seed(42)
+x <- rnorm(30, c(2,6))
+z <- rep(c(0, 1), 15)
+y <- .5*x + 4*(x*z) + rnorm(30, 0, 5)
+data = tibble(x, y, z)
+p <- ggplot(data, aes(x = x, y = y, color = factor(z))) +
+  geom_point(size = 4) +
+  theme_classic() +
+  xlim(-1, 9) +
+  ylim(-14, 38) +
+  theme(legend.position = "none",
+        axis.title = element_blank(),
+        axis.text = element_blank(),
+        axis.ticks = element_blank())
+p
+```
+
+
+:::
+:::
+
+## Classification with hyperplanes
+
+::: columns
+::: {.column width="45%"}
+
+-  The following figure depicts two data that can be group by two dimensions (here, I show only two dimensions because it is difficult to imagine or illustrate space in greater than two dimensions)
+
+- Because the groups are perfectly separatable by a straight line, they are said to be linearly separable (but hyperplanes don't have to be linear)
+
+:::
+
+::: {.column width="55%"}
+```{r, echo = F}
+#| fig.height: 5
+#| fig.width: 5.5
+p + 
+  geom_abline(intercept = 28, slope = -5, color = "grey30")
+```
+:::
+:::
+
+## Classification with hyperplanes
+
+::: columns
+::: {.column width="45%"}
+
+- The task of the SVM algorithm is to identify a line that separates the two classes, but there os always more than one choice
+
+- Therefore, the algorithm searches for the maximum margin hyperplane (MMH) that creates the greatest separation between the two classes, although any of the three lines separates the classes, the line that leads to the greatest separation will generalize best to new data
+
+- The support vectors are the points from each class that are closest to the MMH (each class must have at least on support vector) 
+
+:::
+
+::: {.column width="55%"}
+```{r, echo = F}
+#| fig.height: 5
+#| fig.width: 5.5
+p + 
+  geom_abline(intercept = 28, slope = -5, color = "grey30") + 
+  geom_abline(intercept = 47, slope = -10, color = "grey30", linetype = "dotted") +
+  geom_abline(intercept = 22, slope = -3, color = "grey30", linetype = "dashed") +
+  geom_text(data = tibble(x = c(0, 0.9, 2), y = c(20, 26, 30), label = c("a", "b", "c")), 
+            mapping = aes(x = x, y= y, label = label), color = "grey30")
+```
+
+
+:::
+:::
+
+## Classification with hyperplanes
+
+::: columns
+::: {.column width="45%"}
+
+- The task of the SVM algorithm is to identify a line that separates the two classes, but there os always more than one choice
+
+- Therefore, the algorithm searches for the maximum margin hyperplane (MMH) that creates the greatest separation between the two classes, although any of the three lines separates the classes, the line that leads to the greatest separation will generalize best to new data
+
+- The support vectors are the points from each class that are closest to the MMH (each class must have at least on support vector) 
+
+:::
+
+::: {.column width="55%"}
+
+```{r, echo = F}
+#| fig.height: 5
+#| fig.width: 5.5
+p + 
+  geom_abline(intercept = 27.6, slope = -3.2, color = "grey50", linetype = "dotted") + 
+  geom_abline(intercept = 21.6, slope = -3.2, color = "grey30") + 
+  geom_abline(intercept = 15.6, slope = -3.2, color = "grey50", linetype = "dotted")  +
+  annotate("text", x = c(-0.1, 2), y = c(6.5, 28), label = c("support vectors", "support vectors"), 
+           color = "grey30") +
+  geom_segment(mapping = aes(x = -0.1, y = 7.5, xend = 1.6, yend = 8.7), 
+            arrow = arrow(length=unit(0.20,"cm"), type = "closed"), 
+            color = "grey30") +
+  geom_segment(mapping = aes(x = 2, y = 26.5, xend = 4, yend = 15.9), 
+            arrow = arrow(length=unit(0.20,"cm"), type = "closed"), 
+            color = "grey30") +
+  annotate("text", x = 8, y = 12, label = c("Maximum\nMargin\nHyperplane"), 
+           color = "grey30") +
+  geom_segment(mapping = aes(x = 8, y = 8, xend = 5.7, yend = 4), 
+            arrow = arrow(length=unit(0.20,"cm"), type = "closed"), 
+            color = "grey30")
+
+```
+:::
+:::
+
+## Why using support vector machines?
+
+### Strengths
+
+-   Can be used for classification or numeric prediction
+-   Not overly influenced by noisy data, not prone to overfitting
+-   Easier to use than neural networks
+-   Often high accuracy!
+
+### Weaknesses
+
+-   Finding the best model requires testing of various combinations of model parameters
+-   Can be slow to train, particularly with many features
+-   Results in a complex 'black box' that is difficult, if not impossible to understand
+
+
+[Lantz, 2013]{style="font-size:0.6em;"}
+
+## Fitting a SVM model
+
+```{r, echo = T}
+load("results/m_svm.Rdata")
+#save(m_svm, file = "results/m_svm.Rdata")
+```
+
+```{r, eval = F}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+library(LiblineaR)
+svm_workflow <- workflow() |>
+  add_recipe(rec_norm) |>
+  add_model(svm_linear(mode = "classification", 
+                     engine = "LiblineaR"))
+
+# Fitting the logistic regression model
+m_svm <- fit(svm_workflow, data = train_data)
+```
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+# Predict outcome in test data
+predict_svm <- predict(m_svm, new_data=testing(split)) |>
+  bind_cols(select(testing(split), binary_genre)) |>
+  rename(predicted=.pred_class, actual=binary_genre)
+
+# Check
+predict_svm
+```
+
+## Validation
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+# Confusion matrix
+predict_svm |> 
+  conf_mat(truth = actual, estimate = predicted)
+```
+
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+#| output-location: fragment
+# Performance scores
+predict_svm |> 
+  class_metrics(truth = actual, estimate = predicted)
+```
+
+
+. . .
+
+-   Overall performance is very similar to logistic regression
+
+-  Can probably be improved with fine-tuning of hyper-parameters
+
+# Artificial Neural Networks {background-color="steelblue"}
+
+The human brain abstracted to a numerical model
+
+## Theoretical background
+
+-   An artificial neural network (ANN) models the relationship between a set of input signals and an output signal using a model derived from our understanding of the human brain
+
+-   Just like a brain uses a network of interconnected cells called "neurons" to provide fast learning cabilities, ANN uses a network of artifical neurons or nodes to solves learning tasks
+
+![](https://miro.medium.com/v2/resize:fit:850/1*30YDnisanIYRHpC-L2Br-g.png)
+
+## Architecture of a neural network
+
+-   ![](img/neuralnetwork.png){style="float: right; padding-left: 40px;" width="350"}Inspired by human brain (but abstracted to mathematical model)
+
+-   Each 'neuron' is a linear model with activation function: <br><br>$y = f(w_1x_1 + … + w_nx_n)$<br><br>
+
+-   Activation functions: logistic, linear, block, tanh, elu, sigmoid...
+
+-   Each neuron is practically a generalized linear model
+
+-   Networks differ with regard to three main characteristics:
+
+    -   The number of (hidden) layers
+    -   Whether information is allowed to travel backward
+    -   The number of nodes within each layer
+
+## Hidden layers and Backpropagation
+
+-   ![](img/neuralnetwork2.png){style="float: right; padding-left: 40px;" width="370"}Simple model cannot combine features
+-   But we can add "hidden" layers (latent variables)
+-   Estimated iteratively via backpropagation<br><br>1. Start with random assignments<br>2. Optimize final layer to predict output<br>3. Optimize second layer (etc) given 'best' final layer<br>4. Repeat from 2 until converged
+
+<br>
+
+**Universal approximator:** Neural Networks with single hidden layer can represent every continuous function!
+
+## Why use neural networks?
+
+### Strengths
+
+-   Can be adapted to almost any prediction problem
+-   Capable of modelling more complex patterns than nearly any other algorithm
+-   Makes few assumptions about the data's underlying characteristics
+
+### Weaknesses
+
+-   Extremely computationally intensive and thus slow (however, simple models still fast)
+-   Very prone to overfitting
+-   Results in a complex 'black box' that is difficult, if not impossible to interpret
+
+
+[Lantz, 2013]{style="font-size:0.6em;"}
+
+## Fitting an artifical neural network
+
+```{r, echo = F}
+load("results/m_ann.Rdata")
+#save(m_ann, file = "results/m_ann.Rdata")
+```
+
+```{r, eval = F}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+# For replication purposes
+set.seed(42)
+
+# Specify multilayer perceptron
+nnet_spec <- 
+  mlp(epochs = 400,          # <- times that algorithm will work through train set
+      hidden_units = c(6),   # <- nodes in hidden units
+      penalty = 0.01,        # <- regularization
+      learn_rate = 0.2) |>   # <- shrinkage
+  set_engine("brulee") |>    # <-- engine = R package
+  set_mode("classification")
+```
+
+
+![](img/text_neural_network.png)
+
+
+## Fitting an artifical neural network
+
+```{r, eval = F}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+# For replication purposes
+set.seed(42)
+
+# Specify multilayer perceptron
+nnet_spec <- 
+  mlp(epochs = 400,          # <- times that algorithm will work through train set
+      hidden_units = c(6),   # <- nodes in hidden units
+      penalty = 0.01,        # <- regularization
+      learn_rate = 0.2) |>   # <- shrinkage
+  set_engine("brulee") |>    # <-- engine = R package
+  set_mode("classification")
+```
+
+
+![](img/text_neural_network2.png)
+
+
+## Fitting an artifical neural network
+
+```{r, eval = F}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+# For replication purposes
+set.seed(42)
+
+# Specify multilayer perceptron
+nnet_spec <- 
+  mlp(epochs = 400,          # <- times that algorithm will work through train set
+      hidden_units = c(6),   # <- nodes in hidden units
+      penalty = 0.01,        # <- regularization
+      learn_rate = 0.2) |>   # <- shrinkage
+  set_engine("brulee") |>    # <-- engine = R package
+  set_mode("classification")
+```
+
+
+![](img/text_neural_network3.png)
+
+
+## Fitting an artifical neural network {auto-animate="true"}
+
+```{r, echo = F}
+load("results/m_ann.Rdata")
+#save(m_ann, file = "results/m_ann.Rdata")
+```
+
+```{r, eval = F}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+# For replication purposes
+set.seed(42)
+
+# Specify multilayer perceptron
+nnet_spec <- 
+  mlp(epochs = 400,          # <- times that algorithm will work through train set
+      hidden_units = c(6),   # <- nodes in hidden units
+      penalty = 0.01,        # <- regularization
+      learn_rate = 0.2) |>   # <- shrinkage
+  set_engine("brulee") |>    # <-- engine = R package
+  set_mode("classification")
+
+# Create workflow
+ann_workflow <- workflow() |>
+  add_recipe(rec_norm) |>    # Use updated recipe with normalization
+  add_model(nnet_spec)
+```
+
+
+## Fitting an artifical neural network {auto-animate="true"}
+
+```{r, echo = F}
+load("results/m_ann.Rdata")
+#save(m_ann, file = "results/m_ann.Rdata")
+```
+
+```{r, eval = F}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+# For replication purposes
+set.seed(42)
+
+# Specify multilayer perceptron
+nnet_spec <- 
+  mlp(epochs = 400,          # <- times that algorithm will work through train set
+      hidden_units = c(6),   # <- nodes in hidden units
+      penalty = 0.01,        # <- regularization
+      learn_rate = 0.2) |>   # <- shrinkage
+  set_engine("brulee") |>    # <-- engine = R package
+  set_mode("classification")
+
+# Create workflow
+ann_workflow <- workflow() |>
+  add_recipe(rec_norm) |>    # Use updated recipe with normalization
+  add_model(nnet_spec)
+
+# Fit model
+m_ann <- fit(ann_workflow, train_data)
+```
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+# Predict outcome in test data
+predict_ann <- predict(m_ann, new_data=test_data) |>
+  bind_cols(select(testing(split), binary_genre)) |>
+  rename(predicted=.pred_class, actual=binary_genre)
+
+# Check
+predict_ann |> head(n = 4)
+```
+
+
+## Validation
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+# Confusion matrix
+predict_ann |> 
+  conf_mat(truth = actual, estimate = predicted)
+```
+
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+#| output-location: fragment
+# Performance score
+predict_ann |> 
+  class_metrics(truth = actual, estimate = predicted)
+```
+
+. . .
+
+- Highest accuracy of all four algorithms (74.9%)
+
+- Most balanced performance scores
+
+- Yet, performance overall similar to logistic regression and SVM
+
+
+# Testing Different Algorithms and Recipes {background-color="steelblue"}
+
+## Comparison of the previous approaches
+
+```{r}
+#| echo: false
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+bind_rows(
+predict_lr |> 
+  class_metrics(truth = actual, estimate = predicted) |>
+  mutate(algorithm = "logistic regression"),
+predict_nb |> 
+  class_metrics(truth = actual, estimate = predicted) |>
+  mutate(algorithm = "naive bayes"),
+predict_svm |> 
+  class_metrics(truth = actual, estimate = predicted) |>
+  mutate(algorithm = "support vector machines"),
+predict_ann |> 
+  class_metrics(truth = actual, estimate = predicted) |>
+  mutate(algorithm = "neural network")) |> 
+  ggplot(aes(x = .metric, y = .estimate, fill = algorithm)) +
+  geom_col(position = position_dodge(), alpha = .5) +
+  geom_text(aes(label = round(.estimate, 3)), position = position_dodge(width = 1)) +
+  ylim(0, 1) +
+  coord_flip() +
+  scale_fill_brewer(palette = "Dark2") +
+  theme_minimal(base_size = 15) +
+  labs(y = "Performance Score", x = "", 
+       title = "Performance of the different approaches",
+       fill = "")
+```
+
+## Fine-tuning preprocessing and hyperparameter
+
+-   You may have noticed that I always set some **hyperparameter** in all of the models
+
+-   There is no clear rule of how to set these parameters and their influence on performance is often unknown
+
+-   Using trail and error, we simply compare many different model specifications to find optimal hyperparameters
+
+-   Very good examples are the hyperparameters of support vector machines: it is hard to know how soft our margins should be and we may also be unsure about the right kernel , or in the case of a polynomial kernel, how many degrees we want to consider
+
+-   Similarly, we have to simply try out whether a neural network needs more than one hidden layer or how many nodes make sense, what learning rate works best, etc.
+
+-  Good machine learning practice is to conduct a so-called **grid-search**, i.e. systematically run combinations of different specifications (but computationally expensive!!!)
+
+[Hvitfeld & Silge (2021)]{style="font-size:0.6em;"}
+
+## Grid search for best neural network architecture
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+# Create a model function for tuning a multilayer perceptrion neural network
+mlp_spec <- mlp(hidden_units = tune(),     #
+                penalty = tune(), 
+                epochs = tune()) %>% 
+  set_engine("brulee", trace = 0) %>% 
+  set_mode("classification")
+```
+
+## Grid search for best neural network architecture {auto-animate="true"}
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+# Create a model function for tuning a multilayer perceptrion neural network
+mlp_spec <- mlp(hidden_units = tune(),     
+                penalty = tune(), 
+                epochs = tune()) |> 
+  set_engine("brulee", trace = 0) |>  
+  set_mode("classification")
+
+# Estract "dials" for parameter tuning
+mlp_param <- extract_parameter_set_dials(mlp_spec)
+
+# Simple combinatorial design
+mlp_param |> grid_regular(levels = c(hidden_units = 2, penalty = 2, epochs = 2)) 
+```
+
+## Grid search for best neural network architecture {auto-animate="true"}
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+# Create a model function for tuning a multilayer perceptrion neural network
+mlp_spec <- mlp(hidden_units = tune(),     
+                penalty = tune(), 
+                epochs = tune()) |> 
+  set_engine("brulee", trace = 0) |>  
+  set_mode("classification")
+
+# Estract "dials" for parameter tuning
+mlp_param <- extract_parameter_set_dials(mlp_spec)
+
+# Random design with 1000 combinations
+mlp_param |> grid_random(size = 1000) |> summary()
+```
+
+## Random design
+
+- We can plot the random combinations to get an idea what they will cover
+
+- Bear in mind, such a grid search would be quite computationally intensive as 50 neural networks would need to be fitted!
+
+```{r}
+#| echo: false
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+#| output-location: column-fragment
+library(ggforce)
+mlp_param |> 
+  grid_random(size = 50, original = FALSE) |>
+  ggplot(aes(x = .panel_x, y = .panel_y)) + 
+  geom_point(size = 2, color = "steelblue") +
+  geom_blank() +
+  facet_matrix(vars(hidden_units, penalty, epochs), layer.diag = 2) + 
+  labs(title = "Random design with 50 candidates")
+```
+
+
+## Fitting models across the grid
+
+```{r, eval = F}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+set.seed(42)
+
+# Create new workflow
+mlp_wflow <- workflow() |> 
+  add_recipe(rec_norm) |> 
+  add_model(mlp_spec)
+
+# Adjust parameter extremes
+mlp_param <- mlp_wflow  |>  
+  extract_parameter_set_dials() |> 
+  update(epochs = epochs(c(200, 600)),
+         hidden_units = hidden_units(c(1, 9)),
+         penalty = penalty(c(-10, -1)))
+
+# Set metric of interest
+acc <- metric_set(accuracy)
+
+# Define resampling strategy
+twofold <- vfold_cv(lyrics_data, v = 2) 
+
+# Run the tuning process
+mlp_reg_tune <- mlp_wflow  |> 
+  tune_grid(
+    resamples = twofold,
+    grid = mlp_param  |>  
+      grid_regular(levels = c(hidden_units = 4, penalty = 4, epochs = 3)),
+    metrics = acc
+  )
+```
+
+```{r, echo = F}
+#save(mlp_reg_tune, file = "results/mlp_reg_tune.Rdata")
+load("results/mlp_reg_tune.Rdata")
+```
+
+## Evaluation
+
+- The result of this tuning grid search is a table that shows the best combinations of parameters in descending order
+
+- We can see here that 9 nodes in one hidden layer, a penalty of 0.0001 and 600 epochs lead to the best accuracy, but it is actually worse than our original model with 6 nodes and a penalty of 0.001 and 400 epochs
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+# Get best fit
+best_fit <- show_best(mlp_reg_tune, n = 48) |> 
+  select(-.estimator, -.config, -.metric) |> 
+  rename(accuracy = mean)
+best_fit
+```
+
+
+## Evaluation
+
+- The effect of parameters becomes even more clear, when we visualize the grid search:
+
+```{r}
+#| echo: false
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+#| fig.height: 5.5
+#| fig.width: 9
+# Plot grid results
+best_fit |> 
+  ggplot(aes(x = factor(hidden_units), y = accuracy, color = factor(penalty))) +
+  geom_point(size = 2) +
+  geom_line(aes(group = penalty)) +
+  scale_color_brewer(palette = "Spectral") +
+  ylim(.55, .76) +
+  facet_wrap(~epochs) +
+  labs(x = "Number of nodes in hidden layer", y = "Accuracy", 
+       color = "Penalty\n(Regularization)", title = "Results of the Grid Search", 
+       subtitle = "48 combinations of hidden units, epochs, and penality paramters")
+```
+
+## Using the best neural network classifier
+
+```{r, echo = F}
+test_songs <- tibble(
+artist = c("Joan Jett & the Blackhearts", "Celine Dion"),
+song = c("I love rock'n'roll", "The Power of Love"),
+text = c("I saw him dancing there by the record machine
+I knew he must have been about 17
+The beat was going strong, playing my favorite song
+I could tell it wouldn't be long 'till he was with me
+Yeah me
+I could tell it wouldn't be long 'till he was with me
+Yeah me
+Singing I love rock and roll
+So put another dime in the jukebox baby
+I love rock and roll
+So come and take your time and dance with me", 
+"The whispers in the morning
+Of lovers sleeping tight
+Are rolling by like thunder now
+As I look in your eyes
+I hold on to your whole body
+And feel each move you make
+Your voice is warm and tender
+A love that I could not forsake
+'Cause I'm your lady
+And you are my man
+Whenever you reach for me
+I'll do all that I can
+Lost is how I'm feeling lying in your arms
+When the world outside's too much to take
+That all ends when I'm with you
+Even though there may be times
+It seems I'm far away
+Never wonder where I am
+'Cause I am always by your side
+'Cause I'm your lady
+And you are my man
+Whenever you reach for me
+I'll do all that I can
+We're heading for something
+Somewhere I've never been
+Sometimes I am frightened
+But I'm ready to learn
+Of the power of love
+The sound of your heart beating
+Made it clear suddenly
+The feeling that I can't go on
+Is light years away
+'Cause I'm your lady
+And you are my man
+Whenever you reach for me
+I'll do all that I can
+We're heading for something
+Somewhere I've never been
+Sometimes I am frightened
+But I'm ready to learn
+Of the power of love
+The power of love
+The power of love
+Sometimes I am frightened
+But I'm ready to learn
+Of the power of love
+The power of love
+As I look in your eyes
+The power of love"))
+```
+
+- The best fitting model is actually our first model:
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+# Model architecture
+m_ann |> extract_fit_parsnip()
+```
+
+## How does it perform on some completely new songs?
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+# Some test songs (not in the training nor test data)
+test_songs
+```
+
+- We can simply use the `predict` function and supply the new songs. This code could of course also be used in a software that detects genre from song lyric
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+#| output-location: fragment
+# Predict genre
+predict(m_ann, test_songs)
+```
+
+
+## Impact of text preprocessing on performance?
+
+-   Scharkow ran a simple simulation study in which he systematically varied text preprocessing
+
+-   The classifier was always Naive Bayes, below we see the average difference in performance
+
+![](img/scharkow_table3.png)
+
+## General Drivers of model performance
+
+1.  Task difficulty
+
+2.  Amount of training data
+
+3.  Choice of features (n-grams, lemmata, etc)
+
+4.  Text preprocessing (e.g., exclude or include stopwords?)
+
+5.  Representation of text (tf, tf-idf, word-embedding)
+
+6.  Tuning of algorithm (what we did in the grid search)
+
+
+## Validity of different approaches
+
+-   Van Atteveldt et al. (2021) re-analysised data reported in Boukes et al. (2020) to understand the validity of different text classification approaches for sentiment analysis
+
+-   The data included news from a total of ten newspapers and five websites published between February 1 and July 7, 2015:
+
+    -   three quality newspapers (NRC Handelsblad, Trouw, de Volkskrant)
+    -   a financial newspaper (Financieel Dagblad)
+    -   three popular newspapers (Algemeen Dagblad, Metro, De Telegraaf)
+    -   three regional outlets (Dagblad van het Noorden, de Gelderlander, Noordhollands Dagblad)
+
+
+## Main results
+
+![](img/vanatteveldt_table2.png)
+
+
+# Examples from the literature {background-color="steelblue"}
+
+How Machine Learning is used in Communication Science
+
+
+## Example 1: Incivility in Facebook comments
+
+-   Su et al. (2018) examined the extent and patterns of incivility in the comment sections of 42 US news outlets' Facebook pages in 2015--2016
+
+-   News source outlets included
+
+    -   National-news outlets (e.g., ABC, CBS, CNN...)
+    -   Local-new outlets (e.g., The Denver Post, San Francisco Chronicle...)
+    -   Conservative and liberal partisan news outlets (e.g., Breitbart, The Daily Show...)
+
+-   Implemented a combination of manual coding and supervised machine learning to code:
+
+    -   Civility
+    -   Interpersonal rudeness
+    -   Personal rudeness
+    -   Impersonal extreme incivility
+    -   Personal extreme incivility
+  
+
+## Results: Overall differences
+
+![](img/sug_fig2.png)
+
+
+## Example 2: Electoral news sharing in Mexico
+
+::: columns
+::: {.column width="85%"}
+- de León et al. (2021) explored how elections transform news sharing behaviour on Facebook
+
+- They investigated changes in news coverage and news sharing behaviour on Facebook 
+
+    - by comparing election and routine periods, and 
+    - by addressing the ‘news gap’ between preferences of journalists and news consumers on social media. 
+    
+- Employed a novel data set of news articles (N = 83,054) in Mexico
+
+- First coded 2,000 articles manually into topics (Politics, Crime and Disasters, Culture and Entertainment, Economic and Business, Sports, and Other), then used support vector machines to classify the rest
+
+:::
+
+::: {.column width="15%"}
+
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Flag_of_Mexico.svg/1024px-Flag_of_Mexico.svg.png)
+
+:::
+:::
+
+## Results
+
+- During periods of heightened political activity, both the publication and dissemination of political news increases
+
+- The gap between the news choices of journalists and consumers narrows, and increased political news sharing leading to a decrease in the sharing of other news.
+
+![](img/trilling_et_al.png)
+
+# Summary, Conclusion, and Outlook {background-color="steelblue"}
+
+Next week, we reach the present!
+
+## Machine Learning Text Classification Pipeline
+
+![](img/text_analysis_fundamentals/Slide03.png)
+
+
+## General considerations
+
+
+-   Machine learning in the social sciences generally used to solve an engineering problem
+
+-   Output of Machine Learning is input for "actual" statistical model (e.g., we classify text, but run an analysis of variance with the output)
+
+
+- Ethical concerns
+
+    -   Is it okay to use a model we can't possibly understand (e.g., SVM, neural networks)?
+
+    -  If they lead to false positives or false negatives, which in turn discriminate someone or lead to bias, it is difficult to find the source and denote responsibility
+
+
+-   We always need to validate model on unseen and representative test data!
+
+- Think before you run models or you will waste a lot of computational resources
+
+
+
+
+## Conclusion and outlook
+
+
+-   Classic machine learning is a useful tool for generalizing from a sample
+
+-   It is very useful to reduce the amount of manual coding needed
+
+-   That said, the field has moved on and innovations are fast-paced these days:
+
+    - Deep Learning, Transfer Learning, Attention, Self-Attention.... (Next week!!!)
+
+<br>
+
+<center>
+
+![](https://lawtomated.com/wp-content/uploads/2019/04/MLvsDL.png){width="60%"}
+
+</center>
+
+# Thank you for your attention! {background-color="steelblue"}
+
+## Required Reading
+
+<br><br>
+
+van Atteveldt, W., van der Velden, M. A. C. G., & Boukes, M.. (2021). The Validity of Sentiment Analysis: Comparing Manual Annotation, Crowd-Coding, Dictionary Approaches, and Machine Learning Algorithms. Communication Methods and Measures, (15)2, 121-140, https://doi.org/10.1080/19312458.2020.1869198
+
+Su, L. Y.-F., Xenos, M. A., Rose, K. M., Wirz, C., Scheufele, D. A., & Brossard, D. (2018). Uncivil and personal? Comparing patterns of incivility in comments on the Facebook pages of news outlets. New Media & Society, 20(10), 3678--3699. https://doi.org/10.1177/1461444818757205
+
+<br>
+
+*(available on Canvas)*
+
+------------------------------------------------------------------------
+
+## References {.smaller}
+
+-   Boumans, J. W., & Trilling, D. (2016). Taking stock of the toolkit: An overview of relevant automated content analysis approaches and techniques for digital journalism scholars. Digital journalism, 4(1), 8-23.
+
+- de León, E., Vermeer, S. & Trilling, D. (2023). Electoral news sharing: a study of changes in news coverage and Facebook sharing behaviour during the 2018 Mexican elections. Information, Communication & Society, 26(6), 1193-1209. https://doi.org/10.1080/1369118X.2021.1994629
+
+-   Hvitfeld, E. & Silge, J. (2021). Supervised Machine Learning for Text Analysis in R. CRC Press. https://smltar.com/
+
+-   Lantz, B. (2013). Machine learning in R. Packt Publishing Ltd.
+
+-   Scharkow, M. (2013). Thematic content analysis using supervised machine learning: An empirical evaluation using german online news. Quality & Quantity, 47(2), 761--773. https://doi.org/10.1007/s11135-011-9545-7
+
+-   Su, L. Y.-F., Xenos, M. A., Rose, K. M., Wirz, C., Scheufele, D. A., & Brossard, D. (2018). Uncivil and personal? Comparing patterns of incivility in comments on the Facebook pages of news outlets. New Media & Society, 20(10), 3678--3699. https://doi.org/10.1177/1461444818757205
+
+-   van Atteveldt, W., van der Velden, M. A. C. G., & Boukes, M.. (2021). The Validity of Sentiment Analysis: Comparing Manual Annotation, Crowd-Coding, Dictionary Approaches, and Machine Learning Algorithms. Communication Methods and Measures, (15)2, 121-140, https://doi.org/10.1080/19312458.2020.1869198
+
+
+## Example Exam Question (Multiple Choice)
+
+Van Atteveldt and colleagues (2020) tested the validity of various automated text analysis approaches. What was their main result?
+
+<br>
+
+A. English dictionaries performed better than Dutch dictionaries in classifying the sentiment of Dutch news paper headlines.
+
+B. Dictionary approaches were as good as machine learning approaches in classifying the sentiment of Dutch news paper headlines.
+
+C. Of all automated approaches, supervised machine learning approaches performed the best in classifying the sentiment of Dutch news paper headlines.
+
+D. Manual coding and supervised machine learning approaches performed similarly well in classifying the sentiment of Dutch news paper headlines.
+
+------------------------------------------------------------------------
+
+## Example Exam Question (Multiple Choice)
+
+Van Atteveldt and colleagues (2020) tested the validity of various automated text analysis approaches. What was their main result?
+
+<br>
+
+A. English dictionaries performed better than Dutch dictionaries in classifying the sentiment of Dutch news paper headlines.
+
+B. Dictionary approaches were as good as machine learning approaches in classifying the sentiment of Dutch news paper headlines.
+
+**C. Of all automated approaches, supervised machine learning approaches performed the best in classifying the sentiment of Dutch news paper headlines.**
+
+D. Manual coding and supervised machine learning approaches performed similarly well in classifying the sentiment of Dutch news paper headlines.
+
+## Example Exam Question (Open Format)
+
+Describe the typical process used in supervised text classification.
+
+. . .
+
+Any supervised machine learning procedure to analyze text usually contains at least 4 steps:
+
+1.  One has to manually code a small set of documents for whatever variable(s) you care about (e.g., topics, sentiment, source,...).
+
+2.  One has to train a machine learning model on the hand-coded /gold-standard data, using the variable as the outcome of interest and the text features of the documents as the predictors.
+
+3.  One has to evaluate the effectiveness of the machine learning model via cross-validation. This means one has to test the model test on new (held-out) data.
+
+4.  Once one has trained a model with sufficient predictive accuracy, precision and recall, one can apply the model to more documents that have never been hand-coded or use it for the purpose it was designed for (e.g., a spam filter detection software)
