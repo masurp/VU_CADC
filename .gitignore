@@ -9,6 +9,7 @@
 /slides/*cache
 /slides/*.pdf
 /slides/data/
+/slides/results/
 /literature/
 /admin/
 /exam/
