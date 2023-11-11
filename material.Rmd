@@ -110,12 +110,12 @@ In the third part of the course, students will work on their own research projec
 #### Lecture: Text Classification and Classic Machine Learning
 
 - Slides Lecture 3:
-    - [Download Slides]((slides/03_classicmachinelearning_2023.html))
+    - [Download Slides](slides/03_classicmachinelearning_2023.html)
 
 #### Practical Session 1
 
 - Handouts: 
-    - Supervised text classification using Naive Bayes, Logistic Regression and SVM ([handout](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_supervised-text-classification_2023.md))
+    - Supervised text classification using Naive Bayes, Logistic Regression and SVM ([handout](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_supervised-text-classification_2013.md))
 
 #### Practical Session 2
 
