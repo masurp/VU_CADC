@@ -1,0 +1,302 @@
+Supervised Text Classification
+================
+Philipp Masur, Wouter van Atteveldt & Kasper Welbers
+2023-11
+
+- [Introduction](#introduction)
+- [Getting Amazon Review Data](#getting-amazon-review-data)
+- [Data Preprocessing](#data-preprocessing)
+  - [Splitting into training and test
+    data](#splitting-into-training-and-test-data)
+- [Supervised Machine Learning](#supervised-machine-learning)
+  - [Building a recipe](#building-a-recipe)
+  - [Training the algorithm](#training-the-algorithm)
+  - [Validating on the test data](#validating-on-the-test-data)
+  - [Note on Understanding
+    TidyModels](#note-on-understanding-tidymodels)
+
+# Introduction
+
+In supervised text classification, we train a statistical model on the
+*features* of our data (e.g. the word frequencies) to predict the
+*class* of our texts (e.g. the sentiment). As mentioned in the lecture,
+the general workflow can be visualized like this:
+
+![](img/Slide03.png)
+
+It involves training an algorithm (e.g., Naive Bayes, Logistic
+Regression, Support Vector Machines, Neural Network…) on a labeled data
+set to build a classifier that then has the ability to label new data on
+its own.
+
+While building the classifier, we directly include validation steps by
+splitting the labeled data into a training and testing set. We train the
+algorithm on the training set and validate it with the unseen test set.
+
+For this example, we will use functions from the `tidymodels` package
+collection. The benefit of using this package collection is that its
+syntax follows the tidyverse-style that we are already familiar with.
+Although it otherwise involves a bit more steps than other packages,
+using tidymodels allows more flexibility in selecting and tuning the
+best models.
+
+# Getting Amazon Review Data
+
+For this example, we will use Amazon reviews. These reviews have the
+benefit of being relatively straightforward and explicit in their
+expressed sentiment (e.g. compared to parliamentary speeches), and there
+is a large amount of existing reviews that can be downloaded.
+
+We use the reviews from [Amazon Review
+Dataset](https://nijianmo.github.io/amazon/index.html) (scroll down to
+the ‘small’ data sets which are freely available). These reviews are
+stored in gzipped json-lines format, meaning it is a compressed file in
+which each line is a json document. This sounds complicated, but you can
+directly read this into an R data frame using the `jsonlite::stream_in`
+function on the url using the `gzcon` function to decompress.
+
+For this example, we pick the digital music category, mostly because it
+is relatively small and still interesting. If you select a category with
+more data, it will take longer to download and run the models, but
+results might well be better.
+
+``` r
+library(tidyverse)
+library(tidytext)
+library(tidymodels)
+```
+
+``` r
+reviews <- jsonlite::stream_in(gzcon(url("http://snap.stanford.edu/data/amazon/productGraph/categoryFiles/reviews_Digital_Music_5.json.gz"))) 
+
+reviews <- reviews |>  
+   as_tibble() |>  
+   sample_frac(size = .10) |>  # Just to increase speed, feel free to use larger parts or even the entire data set! But, be ready to wait...
+  select(reviewerID, asin, overall, summary, reviewText)
+head(reviews)
+
+# In case the stream in of the json file doesn't work, go to canvas, download the 
+# review data set and load it directly into R by using the following line of code:
+# reviews <- read_csv("reviews.csv")
+```
+
+In this file, `reviewID` identifies the user that placed the reivew,
+`asin` identifies the reviewed product, `overall` is the amount of
+stars, and `summary` and `reviewText` are the review text as entered by
+the user. Taken together, `reviewID` and `asin` uniquely identify a row.
+
+Let us quickly check, how often 5 stars are given.
+
+``` r
+reviews |> 
+  ggplot(aes(x = overall)) +
+  geom_histogram(bins = 5, fill = "lightblue", color = "white") +
+  theme_minimal()
+
+table(reviews$overall < 5) |>  
+  prop.table()
+```
+
+We can see that most reviews are really positive (5 stars!). The
+training data may hence not provide much information to differentiate
+e.g., reviews with a score of 3 from a score of 2.
+
+Before proceeding to the text classification, we will thus compute a
+binary target class (five-star or not) and create a text variable
+combining the summary and review text:
+
+``` r
+reviews <- reviews |>  
+  mutate(fivestar = factor(ifelse(overall == 5, "5", "< 5"), levels = c("5", "< 5")))
+```
+
+**Exercise 1:** What are the most used words in these reviews? How do
+they differ between 5-star and less good reviews? Can you plot the
+difference (either a wordcloud or a barplot).
+
+``` r
+# Code here.
+```
+
+# Data Preprocessing
+
+## Splitting into training and test data
+
+Before we can train a model, we need to split the model into training
+and text data. We do this with regular R and tidyverse functions, in
+this case we sample from the row indices and use `slice` to select the
+appropriate rows (using the negative selection for the test set to
+select everything except for the training set):
+
+``` r
+# To ensure replicability
+set.seed(42)
+
+# Sample 
+trainset <- initial_split(reviews, prop = .50)
+reviews_train <- training(trainset)
+reviews_test <- testing(trainset)
+```
+
+# Supervised Machine Learning
+
+## Building a recipe
+
+First, we use the package `textrecipes`, which is an extension of
+tidymodels to create a so-called model and preprocessing recipe. This
+involves the actual recipe, i.e., which outcome class (`fivestar`) is
+predicted by which text columns (here, we use both the `summary` and the
+actual `reviewText`), as well as all text-preprocessing steps that we
+want to do. In this case, we will not do much, we simply:
+
+1.  Tokenize into words (bag-of-word model)
+2.  Filter out words that are mentioned less than 3 times and only keep
+    the 1000 most frequent words
+3.  Create the document-feature matrix
+
+``` r
+library(textrecipes)
+rec <- recipe(fivestar ~ summary + reviewText, data=reviews) |>
+  step_tokenize(all_predictors())  |>
+  step_tokenfilter(all_predictors(), min_times = 3, max_tokens = 100) |>  # will speed up computation, but should be larger
+  step_tf(all_predictors())
+```
+
+We can inspect the results of the preprocessing by prepping the recipe
+and baking the training data (this will take a moment as it is a quite
+large data set):
+
+``` r
+rec |> 
+  prep(reviews) |>
+  bake(new_data=NULL) |> 
+  select(1:10)
+```
+
+## Training the algorithm
+
+First, we create a worflow from the recipe and model specification.
+Let’s start with model based on logistic regression:
+
+``` r
+library(discrim)
+lr_workflow <- workflow() |>
+  add_recipe(rec) |>
+  add_model(logistic_reg(mixture = 0, penalty = 0.1,
+                         engine = "glm"))
+```
+
+``` r
+# Fit the model
+m_lr <- fit(lr_workflow, data = reviews_train)
+m_lr
+```
+
+The summary of the model already provides us with some idea about how it
+predicted the outcome class: All words basically received a slope that
+corresponds to it strength in contributing to the prediction.
+
+## Validating on the test data
+
+Let’s test it on the training data set (note, this should always yield
+good results unless something went wrong)
+
+``` r
+# Predict outcome in test data
+predict_lr <- predict(m_lr, new_data=reviews_test) |>
+  bind_cols(select(reviews_test, fivestar)) |>
+  rename(predicted=.pred_class, actual=fivestar) 
+predict_lr
+
+# Build confusion matrix
+predict_lr |> 
+  conf_mat(truth = actual, estimate = predicted)
+```
+
+This results shows us the confusion matrix.
+
+Creating and use the function `class_metrics`, we can get all
+performance scores including precision (if it predicted 5 stars, was it
+correct), recall (out of all 5-star reviews, how many did it predict),
+and F1 (harmonic mean of precision and recall).
+
+``` r
+# Define what to extract
+class_metrics <- metric_set(accuracy, precision, recall, f_meas)
+
+# Extract performance scores
+predict_lr |>
+  class_metrics(truth = actual, estimate = predicted)
+```
+
+To see which words are the most important predictors, we can use the vip
+package to extract the predictors, and then use regular tidyverse/ggplot
+functions to visualize it:
+
+``` r
+library(vip)
+m_lr |> extract_fit_parsnip() |>
+  vi() |> 
+  mutate(Sign = recode(Sign, POS = "negative", NEG = "positive")) |> # reverse code to ensure correct labeling
+  group_by(Sign) |>
+  top_n(20, wt = abs(Importance)) %>%
+  ungroup() |>
+  mutate(
+    Importance = abs(Importance),
+    Variable = str_remove(Variable, "tf_"),
+    Variable = fct_reorder(Variable, Importance)
+  ) |>
+  ggplot(aes(x = Importance, y = Variable, fill = Sign)) +
+  geom_col(show.legend = FALSE) +
+  facet_wrap(~Sign, scales = "free_y") +
+  labs(y = NULL)
+```
+
+**Exercise 2:** If we would train another algorithm (e.g., support
+vector machines), would the results differ? Think carefully what you
+need to change in the code. In most cases, you’ll need to update the
+recipe (e.g., for SVM, you should add
+`step_normalize(all_predictors())`) and the workflow (adding the correct
+model). Check out the lecture slides, if you are unsure how to do this.
+(Note: this may take some time depending on your computing power…). If
+this does not work, try out some extra text preprocessing steps (e.g.,
+removing stopwords, frequency trimming) and whether these improve or
+reduce the performance. Can you make a plot that shows the performance
+of the logistic regression model and the SVM model next to one another?
+
+``` r
+# solution here
+```
+
+## Note on Understanding TidyModels
+
+In tidymodels, anytime we `fit()`, we in fact are running through the
+entire workflow, i.e., we process the data using the “recipe” and then
+fit the model that was added to the workflow. This is great, because it
+streamlines the use of different algorithms from different packages and
+provides us with a single workflow syntax.
+
+Yet, technically, we can also do all steps separately and sometimes,
+this unfortunately is necessary (e.g., when the procedure somehow
+doesn’t work with these procedure). In the case of naive bayes (which
+according to the website of tidymodels should work with the
+recipe+workflow combination), errors occur. We can nonetheless fit the
+model if we separate the steps.
+
+``` r
+# Bake training and test data based on recipe 
+train_baked <- rec |> prep(reviews_train) |> bake(new_data=NULL) 
+test_baked <- rec |> prep(reviews_test) |>  bake(new_data=NULL) 
+
+# Fitting the model
+library(naivebayes)
+m_nb <- naive_bayes(fivestar ~ ., data = train_baked) 
+
+# Predict outcome in test set
+predict_nb <- tibble(.pred_class = predict(m_nb, test_baked)) |>  
+  bind_cols(select(test_baked, fivestar)) |>               
+  rename(predicted=.pred_class, actual=fivestar) 
+
+predict_nb |> conf_mat(truth = actual, estimate = predicted)
+predict_nb |> class_metrics(truth = actual, estimate = predicted)
+```
