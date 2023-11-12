@@ -68,9 +68,9 @@ In the third part of the course, students will work on their own research projec
 
 
 - Chapter 5 & 6 in [Computational Analysis of Communication](https://cssbook.net/) by Van Atteveldt et al. 
-- [Online book "R for Data Science"](https://r4ds.had.co.nz/) 
-- [Online book "Data Visualization" by Kieran Healy](https://socviz.co/)
-- [Website "Data-To-Viz" (great overview on visualizations with code examples)](https://www.data-to-viz.com/)
+- [Online book "R for Data Science"](https://r4ds.had.co.nz/) (Very good resource!)
+- [Online book "Data Visualization" by Kieran Healy](https://socviz.co/) (Great book on good visualizations)
+- [Website "Data-To-Viz" (great overview on visualizations with code examples)](https://www.data-to-viz.com/) (A website with a lot of examples and R Code)
 
 <br>
 <hr>
@@ -131,7 +131,8 @@ In the third part of the course, students will work on their own research projec
 #### Additional resources: 
 
 - Chapter 8 & 11 in [Computational Analysis of Communication](https://cssbook.net/) by Van Atteveldt et al. 
-- [Supervised Machine Learning for Text Analysis in R](https://smltar.com/)
+- [Supervised Machine Learning for Text Analysis in R](https://smltar.com/) (Online Book on Machine Learning in R)
+- 3Blue1Brown: [What is a neural network?](https://www.youtube.com/watch?v=aircAruvnKk) (Fantastic explanation of basic principles!)
 
 <br>
 <hr>
