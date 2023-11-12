@@ -1119,18 +1119,20 @@
 <section id="theoretical-background" class="slide level2">
 <h2>Theoretical background</h2>
 <div class="columns">
-<div class="column" style="width:55%;">
+<div class="column" style="width:43%;">
 <ul>
 <li><p>Goes back to the Bayes’ Theorem published in 1763!</p></li>
 <li><p>Computes the prior probability ( <em>P</em> ) for every category ( <em>c</em> = outcome variable ) based on the training data set</p></li>
 <li><p>Computes the probability of every feature ( <em>x</em> ) to be a characteristic of the class ( <em>c</em> ); i.e., the relative frequency of the feature in category</p></li>
-<li><p>For every probability of a category in light of certain features ( <em>P(c|X)</em> ), all feature probabilities ( <em>x</em> ) are multiplied</p></li>
-<li><p>The algorithm hence chooses the class that has highest weighted sum of inputs</p></li>
 </ul>
-</div><div class="column" style="width:45%;">
+</div><div class="column" style="width:57%;">
 <p><img data-src="img/naive_bayes.png"></p>
 </div>
 </div>
+<ul>
+<li><p>For every probability of a category in light of certain features ( <em>P(c|X)</em> ), all feature probabilities ( <em>x</em> ) are multiplied</p></li>
+<li><p>The algorithm hence chooses the class that has highest weighted sum of inputs</p></li>
+</ul>
 </section>
 <section id="applying-the-naive-bayes-classifier-to-our-example" class="slide level2">
 <h2>Applying the Naive Bayes classifier to our example</h2>
@@ -1150,7 +1152,7 @@
 <div class="fragment">
 <p><br></p>
 <center>
-<span class="math inline">\(P(rock|death) = \frac{P(death|rock) * P(rock)}{P(death)} = \frac{.15 * .54}{.05} = .162\)</span>
+<p><span class="math inline">\(P(rock|death) = \frac{P(death|rock) * P(rock)}{P(death)} = \frac{.15 * .54}{.05} = .162\)</span></p>
 </center>
 </div>
 </section>
@@ -1230,7 +1232,8 @@
 <span id="cb22-4"><a href="#cb22-4"></a>     other  271  1267</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-</section>
+
+<img data-src="img/confusionmatrix.png" class="r-stretch"></section>
 <section id="assessing-performance-scores" class="slide level2">
 <h2>Assessing performance scores</h2>
 <ul>
@@ -1476,7 +1479,7 @@
 <div class="columns">
 <div class="column" style="width:45%;">
 <ul>
-<li><p>The following figure depicts two data that can be group by two dimensions (here, I show only two dimensions because it is difficult to imagine or illustrate space in greater than two dimensions)</p></li>
+<li><p>The following figure depicts two groups of data that can be plotted in two dimensions (here, I show only two dimensions because it is difficult to imagine or illustrate space in greater than two dimensions)</p></li>
 <li><p>Because the groups are perfectly separatable by a straight line, they are said to be linearly separable (but hyperplanes don’t have to be linear)</p></li>
 </ul>
 </div><div class="column" style="width:55%;">
@@ -1493,7 +1496,7 @@
 <div class="columns">
 <div class="column" style="width:45%;">
 <ul>
-<li><p>The following figure depicts two data that can be group by two dimensions (here, I show only two dimensions because it is difficult to imagine or illustrate space in greater than two dimensions)</p></li>
+<li><p>The following figure depicts two groups of data that can be plotted in two dimensions (here, I show only two dimensions because it is difficult to imagine or illustrate space in greater than two dimensions)</p></li>
 <li><p>Because the groups are perfectly separatable by a straight line, they are said to be linearly separable (but hyperplanes don’t have to be linear)</p></li>
 </ul>
 </div><div class="column" style="width:55%;">
@@ -1645,34 +1648,83 @@
 <h2>Theoretical background</h2>
 <ul>
 <li><p>An artificial neural network (ANN) models the relationship between a set of input signals and an output signal using a model derived from our understanding of the human brain</p></li>
-<li><p>Just like a brain uses a network of interconnected cells called “neurons” to provide fast learning cabilities, ANN uses a network of artifical neurons or nodes to solves learning tasks</p></li>
+<li><p>Like a brain uses a network of interconnected cells called “neurons” (a) to provide fast learning capabilities, ANN uses a network of artificial neurons (b) to solves learning tasks</p></li>
 </ul>
 
-<img data-src="https://miro.medium.com/v2/resize:fit:850/1*30YDnisanIYRHpC-L2Br-g.png" class="r-stretch"></section>
-<section id="architecture-of-a-neural-network" class="slide level2">
-<h2>Architecture of a neural network</h2>
+<img data-src="https://miro.medium.com/v2/resize:fit:850/1*30YDnisanIYRHpC-L2Br-g.png" class="r-stretch quarto-figure-center"><p class="caption">Source: Arthur Arnx/Medium</p></section>
+<section id="how-does-a-neural-network-work" class="slide level2">
+<h2>How does a neural network work?</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="img/neuralnetwork2.png"></p>
+</div><div class="column" style="width:50%;">
 <ul>
-<li><p><img data-src="img/neuralnetwork.png" style="float: right; padding-left: 40px;" width="350">Inspired by human brain (but abstracted to mathematical model)</p></li>
-<li><p>Each ‘neuron’ is a linear model with activation function: <br><br><span class="math inline">\(y = f(w_1x_1 + … + w_nx_n)\)</span><br><br></p></li>
-<li><p>Activation functions: logistic, linear, block, tanh, elu, sigmoid…</p></li>
-<li><p>Each neuron is practically a generalized linear model</p></li>
-<li><p>Networks differ with regard to three main characteristics:</p>
+<li><p>The operation of an ANN is straightforward:</p>
 <ul>
-<li>The number of (hidden) layers</li>
-<li>Whether information is allowed to travel backward</li>
-<li>The number of nodes within each layer</li>
+<li>One enters variables as inputs (e.g., features of a text)</li>
+<li>And after some calculations via different neurons, an output is returned (e.g.&nbsp;the word “politics”)</li>
 </ul></li>
+<li><p>In the simplest form, neurons on are stacked on top of one another and a neuron of colum <code>n</code> can only be connected to inputs from column <code>n-1</code> and provide outputs to neurons in column <code>n+1</code></p></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="the-neuron-as-generalized-linear-model" class="slide level2">
+<h2>The Neuron as generalized linear model</h2>
+<ul>
+<li><p>First, a neuron adds up the value of every neurons from the previous column it is connected to (here <code>x1</code>, <code>x2</code>, and <code>x3</code>)</p></li>
+<li><p>This value is multiplied, before being added, by another variable called “weight” (<code>w1</code>, <code>w2</code>, <code>w3</code>): the strength of connection between two neurons</p></li>
+<li><p>A bias value may be added (e.g., to regularize the network)</p></li>
+<li><p>After all those summations, the neuron finally applies a function called <strong>activation function</strong> to the obtained value</p></li>
+</ul>
+
+<img data-src="https://miro.medium.com/v2/resize:fit:1302/format:webp/1*UA30b0mJUPYoPvN8yJr2iQ.jpeg" class="r-stretch quarto-figure-center"><p class="caption">Source: Arthur Arnx/Medium</p></section>
+<section id="the-activation-function" class="slide level2">
+<h2>The activation function</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li><p>The activation function serves to turn the total value calculated to a number between 0 and 1</p></li>
+<li><p>A threshold then defines at what value the function should “fire” the output to the next neuron (of course this can be probabilistic)</p></li>
+<li><p>We can choose from different activation functions; which works best is sometimes hard to tell</p></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/activation-functions.jpg"></p>
+<p></p><figcaption>Source: AI Wiki</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="how-the-neural-network-learns" class="slide level2">
+<h2>How the neural network learns</h2>
+<ul>
+<li><p><img data-src="https://developer-blogs.nvidia.com/wp-content/uploads/2022/02/DS-Guide-to-Gradient-Descent_Pic5.gif" style="float:right; padding-left: 2em; padding-bottom: 2em;" alt="Source: 3Blue1Brown">In a first try, the ANN randomly sets weights and thus can’t get the right output (except with luck)</p></li>
+<li><p>If the (random) choice was a good one, actual parameters are kept and the next input is given. If the obtained output doesn’t match the desired output, the weights are changed.</p></li>
+<li><p>To determine which weight is better to modify, a ANN uses <strong>backpropagation</strong>, which consists of “going back” on the neural network and inspect every connection to check how the output would behave according to a change on the weight</p></li>
+<li><p>The <strong>learning rate</strong> thereby determines the speed a neural network will learn, i.e., how it will modify a weight (e.g., little by little or by bigger steps).</p></li>
+<li><p>Learning rate and number of learning cycles (epochs) have to be set manually upfront!</p></li>
 </ul>
 </section>
-<section id="hidden-layers-and-backpropagation" class="slide level2">
-<h2>Hidden layers and Backpropagation</h2>
+<section id="architecture-of-a-neural-network" class="slide level2">
+<h2>Architecture of a neural network</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p><img data-src="img/neuralnetwork2.png"></p>
+</div><div class="column" style="width:60%;">
 <ul>
-<li><img data-src="img/neuralnetwork2.png" style="float: right; padding-left: 40px;" width="370">Simple model cannot combine features</li>
-<li>But we can add “hidden” layers (latent variables)</li>
-<li>Estimated iteratively via backpropagation<br><br>1. Start with random assignments<br>2. Optimize final layer to predict output<br>3. Optimize second layer (etc) given ‘best’ final layer<br>4. Repeat from 2 until converged</li>
+<li><p>A simple model with just inputs and outputs is called a perceptron</p></li>
+<li><p>Despite its usefulness for many tasks, it cannot combine features</p></li>
+<li><p>But we can add “hidden” layers (latent variables), creating a multilayer perceptron, which is able to process more complex inputs</p></li>
+<li><p>Backpropagation is thus the way a neural network adjusts the weights of its connections (-&gt; Can take a long time to find the right solutions)</p></li>
 </ul>
-<p><br></p>
+</div>
+</div>
+<div class="fragment">
 <p><strong>Universal approximator:</strong> Neural Networks with single hidden layer can represent every continuous function!</p>
+</div>
 </section>
 <section id="why-use-neural-networks" class="slide level2">
 <h2>Why use neural networks?</h2>
@@ -2204,7 +2256,7 @@
 </ul>
 <p><br></p>
 <center>
-<p><img data-src="https://lawtomated.com/wp-content/uploads/2019/04/MLvsDL.png" style="width:60.0%"></p>
+<img data-src="https://lawtomated.com/wp-content/uploads/2019/04/MLvsDL.png" style="width:60.0%">
 </center>
 </section></section>
 <section>

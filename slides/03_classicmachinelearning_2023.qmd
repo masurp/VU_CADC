@@ -16,7 +16,6 @@ format:
 editor: visual
 ---
 
-
 ##  {background="#43464B" background-video="video/ml.mp4" background-video-loop="true" background-video-muted="true"}
 
 ## So what are we actually talking about?
@@ -28,7 +27,6 @@ editor: visual
 -   Due to the "black box" nature of the algorithm's operations, it is often seen as a form of **artificial intelligence**
 
 ![Source: qlik](https://www.qlik.com/us/-/media/images/global-us/site-content/augmented-analytics/machine-learning-vs-ai/machine-learning-diagram-image.png)
-
 
 ## Some success stories
 
@@ -48,7 +46,6 @@ editor: visual
 
 ::: columns
 ::: {.column width="45%"}
-
 1.  What is Machine Learning?
 
     1.1. Concepts and Principles
@@ -80,9 +77,9 @@ editor: visual
     3.1. Performance of different approaches
 
     3.2. Fine-tuning preprocessing and hyperparameters
-    
+
     3.3. Effect of text preprocessing
-    
+
     3.4. Validity of different text classification approaches
 
 4.  Examples from the Literature
@@ -115,9 +112,7 @@ editor: visual
 
 ## Example of supervised text classification
 
-<center>
-![](img/ml_newspaper_example.png)
-</center>
+<center>![](img/ml_newspaper_example.png)</center>
 
 ## General text classification pipeline
 
@@ -144,7 +139,6 @@ editor: visual
 
 ::: columns
 ::: {.column width="50%"}
-
 -   Machine learning, many people joke, is nothing other than a fancy name for statistics.
 
 -   There is some truth to this: if you say "logistic regression", this will sound familiar to both statisticians and machine learning practitioners.
@@ -153,7 +147,6 @@ editor: visual
 :::
 
 ::: {.column width="50%"}
-
 ![Source: Demetri Pananos/stackoverflow](https://i.stack.imgur.com/7U552.png)
 :::
 :::
@@ -162,7 +155,6 @@ editor: visual
 
 ::: columns
 ::: {.column width="50%"}
-
 -   Statistical modeling is about understanding the relationship between one (or several predictors) and an outcom variable
 
 -   Learn $f$ so you can predict $y$ from $x$:
@@ -174,14 +166,12 @@ editor: visual
 <center>$y = -0.16 + 2.31 * x + \epsilon$</center>
 
 -   In a typical communication science paper, we would say something like: when `x` increases by one unit,`y` increases by 2.31 units.
-
 :::
 
 ::: {.column width="5%"}
 :::
 
 ::: {.column width="45%"}
-
 ```{r, echo = F}
 #| fig-height: 5
 #| fig-width: 5
@@ -201,7 +191,6 @@ ggplot(data, aes(x, y)) +
 
 ::: columns
 ::: {.column width="50%"}
-
 -   Machine learning is less about understanding the relationship, but about maximizing prediction.
 
 -   A statistical model such as the one estimated can be used to predict most likely `y` values based on new `x` data.
@@ -209,15 +198,12 @@ ggplot(data, aes(x, y)) +
 -   For example, despite not being in the data, `x = -1` should be `y = -2.47`; `x = 5` should be `y = 11.41` based on the fitted line!
 
 -   In other words, machine learnings doesn't focus on explanation, but emphasizes prediction.
-
 :::
 
 ::: {.column width="5%"}
-
 :::
 
 ::: {.column width="45%"}
-
 ```{r, echo = F}
 #| fig-height: 5
 #| fig-width: 5
@@ -232,13 +218,16 @@ ggplot(data, aes(x, y)) +
   geom_hline(yintercept = 11.41, linetype = "dashed", color = "grey") +
   geom_vline(xintercept = 5, linetype = "dashed", color = "grey")
 ```
-
 :::
 :::
 
 ## Differences in language
 
-<center>![Source: van Atteveldt et al., 2021](img/lingo.png){width="75%"}</center>
+<center>
+
+![Source: van Atteveldt et al., 2021](img/lingo.png){width="75%"}
+
+</center>
 
 ## Differences in Goals
 
@@ -300,7 +289,6 @@ ggplot(NULL, aes(x = x, y = y)) +
   theme(plot.margin = unit(c(0, 3, 0, 3), units = "cm"))
 ```
 
-
 ## Overfit
 
 ```{r, echo = F, fig.width = 10, fig.height = 5.2}
@@ -313,7 +301,6 @@ ggplot(NULL, aes(x = x, y = y)) +
   ylim(-50, 300) +
   theme(plot.margin = unit(c(0, 3, 0, 3), units = "cm"))
 ```
-
 
 ## Good fit
 
@@ -505,8 +492,8 @@ lyrics_data |>
 
     -   Leave-1-out
     -   k-fold
-    
-- What approach is meaningful depends on the question and goal!
+
+-   What approach is meaningful depends on the question and goal!
 :::
 
 ::: {.column width="5%"}
@@ -621,7 +608,6 @@ rec |>
     3.  Create a designated **model function** (depending on what type of algorithm should be used)
     4.  Bind all together using a **workflow**
     5.  Fit the entire **workflow** and evaluate performance
-
 :::
 
 ::: {.column width="2%"}
@@ -757,26 +743,23 @@ Using the Bayes Theorem for Classification
 ## Theoretical background
 
 ::: columns
-::: {.column width="55%"}
-
+::: {.column width="43%"}
 -   Goes back to the Bayes' Theorem published in 1763!
 
 -   Computes the prior probability ( *P* ) for every category ( *c* = outcome variable ) based on the training data set
 
 -   Computes the probability of every feature ( *x* ) to be a characteristic of the class ( *c* ); i.e., the relative frequency of the feature in category
 
+:::
+
+::: {.column width="57%"}
+![](img/naive_bayes.png)
+:::
+:::
+
 -   For every probability of a category in light of certain features ( *P(c\|X)* ), all feature probabilities ( *x* ) are multiplied
 
 -   The algorithm hence chooses the class that has highest weighted sum of inputs
-
-:::
-::: {.column width="45%"}
-
-![](img/naive_bayes.png)
-
-:::
-:::
-
 
 ## Applying the Naive Bayes classifier to our example
 
@@ -794,7 +777,11 @@ Using the Bayes Theorem for Classification
 
 <br>
 
-<center>$P(rock|death) = \frac{P(death|rock) * P(rock)}{P(death)} = \frac{.15 * .54}{.05} = .162$</center>
+<center>
+
+$P(rock|death) = \frac{P(death|rock) * P(rock)}{P(death)} = \frac{.15 * .54}{.05} = .162$
+
+</center>
 
 ## Why using Naive Bayes?
 
@@ -855,9 +842,9 @@ predict_nb
 
 ## Validation on the test data
 
--  Using the function `conf_mat` on the actual and predicted genre columns, we can now inspect the confusion matrix
+-   Using the function `conf_mat` on the actual and predicted genre columns, we can now inspect the confusion matrix
 
-- We already see that there are many "false-positives" (1890!), but less false negatives.
+-   We already see that there are many "false-positives" (1890!), but less false negatives.
 
 ```{r}
 #| echo: true
@@ -868,6 +855,8 @@ predict_nb
 predict_nb |> 
   conf_mat(truth = actual, estimate = predicted)
 ```
+
+![](img/confusionmatrix.png)
 
 ## Assessing performance scores
 
@@ -882,7 +871,7 @@ predict_nb |>
 class_metrics <- metric_set(accuracy, precision, recall, f_meas)
 ```
 
-- We can then use this custom function to extract the relevant measures
+-   We can then use this custom function to extract the relevant measures
 
 ```{r}
 #| echo: true
@@ -911,7 +900,6 @@ Why not use a simple statistical model for binary classification
 
 ::: columns
 ::: {.column width="60%"}
-
 -   As mentioned earlier, a linear regression can be described with the following formula:
 
     <center>
@@ -1057,7 +1045,6 @@ predict_lr |>
   conf_mat(truth = actual, estimate = predicted)
 ```
 
-
 ```{r}
 #| echo: true
 #| include: true
@@ -1131,15 +1118,12 @@ A versatile black box method
 
 ::: columns
 ::: {.column width="45%"}
+-   The following figure depicts two groups of data that can be plotted in two dimensions (here, I show only two dimensions because it is difficult to imagine or illustrate space in greater than two dimensions)
 
--  The following figure depicts two data that can be group by two dimensions (here, I show only two dimensions because it is difficult to imagine or illustrate space in greater than two dimensions)
-
-- Because the groups are perfectly separatable by a straight line, they are said to be linearly separable (but hyperplanes don't have to be linear)
-
+-   Because the groups are perfectly separatable by a straight line, they are said to be linearly separable (but hyperplanes don't have to be linear)
 :::
 
 ::: {.column width="55%"}
-
 ```{r, echo = F}
 #| fig.height: 5
 #| fig.width: 5.5
@@ -1159,8 +1143,6 @@ p <- ggplot(data, aes(x = x, y = y, color = factor(z))) +
         axis.ticks = element_blank())
 p
 ```
-
-
 :::
 :::
 
@@ -1168,11 +1150,9 @@ p
 
 ::: columns
 ::: {.column width="45%"}
+-   The following figure depicts two groups of data that can be plotted in two dimensions (here, I show only two dimensions because it is difficult to imagine or illustrate space in greater than two dimensions)
 
--  The following figure depicts two data that can be group by two dimensions (here, I show only two dimensions because it is difficult to imagine or illustrate space in greater than two dimensions)
-
-- Because the groups are perfectly separatable by a straight line, they are said to be linearly separable (but hyperplanes don't have to be linear)
-
+-   Because the groups are perfectly separatable by a straight line, they are said to be linearly separable (but hyperplanes don't have to be linear)
 :::
 
 ::: {.column width="55%"}
@@ -1189,13 +1169,11 @@ p +
 
 ::: columns
 ::: {.column width="45%"}
+-   The task of the SVM algorithm is to identify a line that separates the two classes, but there os always more than one choice
 
-- The task of the SVM algorithm is to identify a line that separates the two classes, but there os always more than one choice
+-   Therefore, the algorithm searches for the maximum margin hyperplane (MMH) that creates the greatest separation between the two classes, although any of the three lines separates the classes, the line that leads to the greatest separation will generalize best to new data
 
-- Therefore, the algorithm searches for the maximum margin hyperplane (MMH) that creates the greatest separation between the two classes, although any of the three lines separates the classes, the line that leads to the greatest separation will generalize best to new data
-
-- The support vectors are the points from each class that are closest to the MMH (each class must have at least on support vector) 
-
+-   The support vectors are the points from each class that are closest to the MMH (each class must have at least on support vector)
 :::
 
 ::: {.column width="55%"}
@@ -1209,8 +1187,6 @@ p +
   geom_text(data = tibble(x = c(0, 0.9, 2), y = c(20, 26, 30), label = c("a", "b", "c")), 
             mapping = aes(x = x, y= y, label = label), color = "grey30")
 ```
-
-
 :::
 :::
 
@@ -1218,17 +1194,14 @@ p +
 
 ::: columns
 ::: {.column width="45%"}
+-   The task of the SVM algorithm is to identify a line that separates the two classes, but there os always more than one choice
 
-- The task of the SVM algorithm is to identify a line that separates the two classes, but there os always more than one choice
+-   Therefore, the algorithm searches for the maximum margin hyperplane (MMH) that creates the greatest separation between the two classes, although any of the three lines separates the classes, the line that leads to the greatest separation will generalize best to new data
 
-- Therefore, the algorithm searches for the maximum margin hyperplane (MMH) that creates the greatest separation between the two classes, although any of the three lines separates the classes, the line that leads to the greatest separation will generalize best to new data
-
-- The support vectors are the points from each class that are closest to the MMH (each class must have at least on support vector) 
-
+-   The support vectors are the points from each class that are closest to the MMH (each class must have at least on support vector)
 :::
 
 ::: {.column width="55%"}
-
 ```{r, echo = F}
 #| fig.height: 5
 #| fig.width: 5.5
@@ -1268,7 +1241,6 @@ p +
 -   Finding the best model requires testing of various combinations of model parameters
 -   Can be slow to train, particularly with many features
 -   Results in a complex 'black box' that is difficult, if not impossible to understand
-
 
 [Lantz, 2013]{style="font-size:0.6em;"}
 
@@ -1320,7 +1292,6 @@ predict_svm |>
   conf_mat(truth = actual, estimate = predicted)
 ```
 
-
 ```{r}
 #| echo: true
 #| include: true
@@ -1332,12 +1303,11 @@ predict_svm |>
   class_metrics(truth = actual, estimate = predicted)
 ```
 
-
 . . .
 
 -   Overall performance is very similar to logistic regression
 
--  Can probably be improved with fine-tuning of hyper-parameters
+-   Can probably be improved with fine-tuning of hyper-parameters
 
 # Artificial Neural Networks {background-color="steelblue"}
 
@@ -1347,35 +1317,107 @@ The human brain abstracted to a numerical model
 
 -   An artificial neural network (ANN) models the relationship between a set of input signals and an output signal using a model derived from our understanding of the human brain
 
--   Just like a brain uses a network of interconnected cells called "neurons" to provide fast learning cabilities, ANN uses a network of artifical neurons or nodes to solves learning tasks
+-   Like a brain uses a network of interconnected cells called "neurons" (a) to provide fast learning capabilities, ANN uses a network of artificial neurons (b) to solves learning tasks
 
-![](https://miro.medium.com/v2/resize:fit:850/1*30YDnisanIYRHpC-L2Br-g.png)
+![Source: Arthur Arnx/Medium](https://miro.medium.com/v2/resize:fit:850/1*30YDnisanIYRHpC-L2Br-g.png)
+
+
+## How does a neural network work?
+
+::: columns
+::: {.column width="50%"}
+
+![](img/neuralnetwork2.png)
+
+:::
+::: {.column width="50%"}
+
+- The operation of an ANN is straightforward: 
+
+    - One enters variables as inputs (e.g., features of a text)
+    - And after some calculations via different neurons, an output is returned (e.g. the word “politics”)
+    
+- In the simplest form, neurons on are stacked on top of one another and a neuron of colum `n` can only be connected to inputs from column `n-1` and provide outputs to neurons in column `n+1`
+
+:::
+:::
+
+## The Neuron as generalized linear model
+
+- First, a neuron adds up the value of every neurons from the previous column it is connected to (here `x1`, `x2`, and `x3`)
+
+- This value is multiplied, before being added, by another variable called "weight" (`w1`, `w2`, `w3`): the strength of connection between two neurons 
+
+- A bias value may be added (e.g., to regularize the network)
+
+- After all those summations, the neuron finally applies a function called **activation function** to the obtained value
+
+
+![Source: Arthur Arnx/Medium](https://miro.medium.com/v2/resize:fit:1302/format:webp/1*UA30b0mJUPYoPvN8yJr2iQ.jpeg)
+
+
+## The activation function
+
+
+::: columns
+::: {.column width="50%"}
+
+- The activation function serves to turn the total value calculated to a number between 0 and 1
+
+- A threshold then defines at what value the function should "fire" the output to the next neuron (of course this can be probabilistic)
+
+- We can choose from different activation functions; which works best is sometimes hard to tell
+
+
+:::
+
+::: {.column width="50%"}
+
+![Source: AI Wiki](img/activation-functions.jpg)
+
+
+:::
+:::
+
+## How the neural network learns
+
+- ![Source: 3Blue1Brown](https://developer-blogs.nvidia.com/wp-content/uploads/2022/02/DS-Guide-to-Gradient-Descent_Pic5.gif){style="float:right; padding-left: 2em; padding-bottom: 2em;"}In a first try, the ANN randomly sets weights and thus can't get the right output (except with luck)
+
+- If the (random) choice was a good one, actual parameters are kept and the next input is given. If the obtained output doesn’t match the desired output, the weights are changed.
+
+- To determine which weight is better to modify, a ANN uses **backpropagation**, which consists of "going back" on the neural network and inspect every connection to check how the output would behave according to a change on the weight
+
+- The **learning rate** thereby determines the speed a neural network will learn, i.e., how it will modify a weight (e.g., little by little or by bigger steps).
+    
+- Learning rate and number of learning cycles (epochs) have to be set manually upfront!
 
 ## Architecture of a neural network
 
--   ![](img/neuralnetwork.png){style="float: right; padding-left: 40px;" width="350"}Inspired by human brain (but abstracted to mathematical model)
+::: columns
 
--   Each 'neuron' is a linear model with activation function: <br><br>$y = f(w_1x_1 + … + w_nx_n)$<br><br>
+::: {.column width="40%"}
 
--   Activation functions: logistic, linear, block, tanh, elu, sigmoid...
+![](img/neuralnetwork2.png)
 
--   Each neuron is practically a generalized linear model
+:::
 
--   Networks differ with regard to three main characteristics:
+::: {.column width="60%"}
 
-    -   The number of (hidden) layers
-    -   Whether information is allowed to travel backward
-    -   The number of nodes within each layer
+-   A simple model with just inputs and outputs is called a perceptron
 
-## Hidden layers and Backpropagation
+-   Despite its usefulness for many tasks, it cannot combine features
 
--   ![](img/neuralnetwork2.png){style="float: right; padding-left: 40px;" width="370"}Simple model cannot combine features
--   But we can add "hidden" layers (latent variables)
--   Estimated iteratively via backpropagation<br><br>1. Start with random assignments<br>2. Optimize final layer to predict output<br>3. Optimize second layer (etc) given 'best' final layer<br>4. Repeat from 2 until converged
+-   But we can add "hidden" layers (latent variables), creating a multilayer perceptron, which is able to process more complex inputs
 
-<br>
+-   Backpropagation is thus the way a neural network adjusts the weights of its connections (-> Can take a long time to find the right solutions)
+
+:::
+:::
+
+. . .
 
 **Universal approximator:** Neural Networks with single hidden layer can represent every continuous function!
+
 
 ## Why use neural networks?
 
@@ -1390,7 +1432,6 @@ The human brain abstracted to a numerical model
 -   Extremely computationally intensive and thus slow (however, simple models still fast)
 -   Very prone to overfitting
 -   Results in a complex 'black box' that is difficult, if not impossible to interpret
-
 
 [Lantz, 2013]{style="font-size:0.6em;"}
 
@@ -1419,9 +1460,7 @@ nnet_spec <-
   set_mode("classification")
 ```
 
-
 ![](img/text_neural_network.png)
-
 
 ## Fitting an artifical neural network
 
@@ -1442,11 +1481,9 @@ nnet_spec <-
   set_engine("brulee") |>    # <-- engine = R package
   set_mode("classification")
 ```
-
 
 ![](img/text_neural_network2.png)
 
-
 ## Fitting an artifical neural network
 
 ```{r, eval = F}
@@ -1467,9 +1504,7 @@ nnet_spec <-
   set_mode("classification")
 ```
 
-
 ![](img/text_neural_network3.png)
-
 
 ## Fitting an artifical neural network {auto-animate="true"}
 
@@ -1500,7 +1535,6 @@ ann_workflow <- workflow() |>
   add_recipe(rec_norm) |>    # Use updated recipe with normalization
   add_model(nnet_spec)
 ```
-
 
 ## Fitting an artifical neural network {auto-animate="true"}
 
@@ -1549,7 +1583,6 @@ predict_ann <- predict(m_ann, new_data=test_data) |>
 predict_ann |> head(n = 4)
 ```
 
-
 ## Validation
 
 ```{r}
@@ -1561,7 +1594,6 @@ predict_ann |> head(n = 4)
 predict_ann |> 
   conf_mat(truth = actual, estimate = predicted)
 ```
-
 
 ```{r}
 #| echo: true
@@ -1576,12 +1608,11 @@ predict_ann |>
 
 . . .
 
-- Highest accuracy of all four algorithms (74.9%)
+-   Highest accuracy of all four algorithms (74.9%)
 
-- Most balanced performance scores
+-   Most balanced performance scores
 
-- Yet, performance overall similar to logistic regression and SVM
-
+-   Yet, performance overall similar to logistic regression and SVM
 
 # Testing Different Algorithms and Recipes {background-color="steelblue"}
 
@@ -1629,7 +1660,7 @@ predict_ann |>
 
 -   Similarly, we have to simply try out whether a neural network needs more than one hidden layer or how many nodes make sense, what learning rate works best, etc.
 
--  Good machine learning practice is to conduct a so-called **grid-search**, i.e. systematically run combinations of different specifications (but computationally expensive!!!)
+-   Good machine learning practice is to conduct a so-called **grid-search**, i.e. systematically run combinations of different specifications (but computationally expensive!!!)
 
 [Hvitfeld & Silge (2021)]{style="font-size:0.6em;"}
 
@@ -1692,9 +1723,9 @@ mlp_param |> grid_random(size = 1000) |> summary()
 
 ## Random design
 
-- We can plot the random combinations to get an idea what they will cover
+-   We can plot the random combinations to get an idea what they will cover
 
-- Bear in mind, such a grid search would be quite computationally intensive as 50 neural networks would need to be fitted!
+-   Bear in mind, such a grid search would be quite computationally intensive as 50 neural networks would need to be fitted!
 
 ```{r}
 #| echo: false
@@ -1711,7 +1742,6 @@ mlp_param |>
   facet_matrix(vars(hidden_units, penalty, epochs), layer.diag = 2) + 
   labs(title = "Random design with 50 candidates")
 ```
-
 
 ## Fitting models across the grid
 
@@ -1757,9 +1787,9 @@ load("results/mlp_reg_tune.Rdata")
 
 ## Evaluation
 
-- The result of this tuning grid search is a table that shows the best combinations of parameters in descending order
+-   The result of this tuning grid search is a table that shows the best combinations of parameters in descending order
 
-- We can see here that 9 nodes in one hidden layer, a penalty of 0.0001 and 600 epochs lead to the best accuracy, but it is actually worse than our original model with 6 nodes and a penalty of 0.001 and 400 epochs
+-   We can see here that 9 nodes in one hidden layer, a penalty of 0.0001 and 600 epochs lead to the best accuracy, but it is actually worse than our original model with 6 nodes and a penalty of 0.001 and 400 epochs
 
 ```{r}
 #| echo: true
@@ -1773,10 +1803,9 @@ best_fit <- show_best(mlp_reg_tune, n = 48) |>
 best_fit
 ```
 
-
 ## Evaluation
 
-- The effect of parameters becomes even more clear, when we visualize the grid search:
+-   The effect of parameters becomes even more clear, when we visualize the grid search:
 
 ```{r}
 #| echo: false
@@ -1866,7 +1895,7 @@ As I look in your eyes
 The power of love"))
 ```
 
-- The best fitting model is actually our first model:
+-   The best fitting model is actually our first model:
 
 ```{r}
 #| echo: true
@@ -1888,7 +1917,7 @@ m_ann |> extract_fit_parsnip()
 test_songs
 ```
 
-- We can simply use the `predict` function and supply the new songs. This code could of course also be used in a software that detects genre from song lyric
+-   We can simply use the `predict` function and supply the new songs. This code could of course also be used in a software that detects genre from song lyric
 
 ```{r}
 #| echo: true
@@ -1899,7 +1928,6 @@ test_songs
 # Predict genre
 predict(m_ann, test_songs)
 ```
-
 
 ## Impact of text preprocessing on performance?
 
@@ -1923,7 +1951,6 @@ predict(m_ann, test_songs)
 
 6.  Tuning of algorithm (what we did in the grid search)
 
-
 ## Validity of different approaches
 
 -   Van Atteveldt et al. (2021) re-analysised data reported in Boukes et al. (2020) to understand the validity of different text classification approaches for sentiment analysis
@@ -1935,16 +1962,13 @@ predict(m_ann, test_songs)
     -   three popular newspapers (Algemeen Dagblad, Metro, De Telegraaf)
     -   three regional outlets (Dagblad van het Noorden, de Gelderlander, Noordhollands Dagblad)
 
-
 ## Main results
 
 ![](img/vanatteveldt_table2.png)
 
-
 # Examples from the literature {background-color="steelblue"}
 
 How Machine Learning is used in Communication Science
-
 
 ## Example 1: Incivility in Facebook comments
 
@@ -1963,42 +1987,37 @@ How Machine Learning is used in Communication Science
     -   Personal rudeness
     -   Impersonal extreme incivility
     -   Personal extreme incivility
-  
 
 ## Results: Overall differences
 
 ![](img/sug_fig2.png)
 
-
 ## Example 2: Electoral news sharing in Mexico
 
 ::: columns
 ::: {.column width="85%"}
-- de León et al. (2021) explored how elections transform news sharing behaviour on Facebook
+-   de León et al. (2021) explored how elections transform news sharing behaviour on Facebook
 
-- They investigated changes in news coverage and news sharing behaviour on Facebook 
+-   They investigated changes in news coverage and news sharing behaviour on Facebook
 
-    - by comparing election and routine periods, and 
-    - by addressing the ‘news gap’ between preferences of journalists and news consumers on social media. 
-    
-- Employed a novel data set of news articles (N = 83,054) in Mexico
+    -   by comparing election and routine periods, and
+    -   by addressing the 'news gap' between preferences of journalists and news consumers on social media.
 
-- First coded 2,000 articles manually into topics (Politics, Crime and Disasters, Culture and Entertainment, Economic and Business, Sports, and Other), then used support vector machines to classify the rest
+-   Employed a novel data set of news articles (N = 83,054) in Mexico
 
+-   First coded 2,000 articles manually into topics (Politics, Crime and Disasters, Culture and Entertainment, Economic and Business, Sports, and Other), then used support vector machines to classify the rest
 :::
 
 ::: {.column width="15%"}
-
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Flag_of_Mexico.svg/1024px-Flag_of_Mexico.svg.png)
-
 :::
 :::
 
 ## Results
 
-- During periods of heightened political activity, both the publication and dissemination of political news increases
+-   During periods of heightened political activity, both the publication and dissemination of political news increases
 
-- The gap between the news choices of journalists and consumers narrows, and increased political news sharing leading to a decrease in the sharing of other news.
+-   The gap between the news choices of journalists and consumers narrows, and increased political news sharing leading to a decrease in the sharing of other news.
 
 ![](img/trilling_et_al.png)
 
@@ -2010,31 +2029,23 @@ Next week, we reach the present!
 
 ![](img/text_analysis_fundamentals/Slide03.png)
 
-
 ## General considerations
-
 
 -   Machine learning in the social sciences generally used to solve an engineering problem
 
 -   Output of Machine Learning is input for "actual" statistical model (e.g., we classify text, but run an analysis of variance with the output)
 
-
-- Ethical concerns
+-   Ethical concerns
 
     -   Is it okay to use a model we can't possibly understand (e.g., SVM, neural networks)?
 
-    -  If they lead to false positives or false negatives, which in turn discriminate someone or lead to bias, it is difficult to find the source and denote responsibility
-
+    -   If they lead to false positives or false negatives, which in turn discriminate someone or lead to bias, it is difficult to find the source and denote responsibility
 
 -   We always need to validate model on unseen and representative test data!
 
-- Think before you run models or you will waste a lot of computational resources
-
-
-
+-   Think before you run models or you will waste a lot of computational resources
 
 ## Conclusion and outlook
-
 
 -   Classic machine learning is a useful tool for generalizing from a sample
 
@@ -2042,15 +2053,11 @@ Next week, we reach the present!
 
 -   That said, the field has moved on and innovations are fast-paced these days:
 
-    - Deep Learning, Transfer Learning, Attention, Self-Attention.... (Next week!!!)
+    -   Deep Learning, Transfer Learning, Attention, Self-Attention.... (Next week!!!)
 
 <br>
 
-<center>
-
-![](https://lawtomated.com/wp-content/uploads/2019/04/MLvsDL.png){width="60%"}
-
-</center>
+<center>![](https://lawtomated.com/wp-content/uploads/2019/04/MLvsDL.png){width="60%"}</center>
 
 # Thank you for your attention! {background-color="steelblue"}
 
@@ -2072,7 +2079,7 @@ Su, L. Y.-F., Xenos, M. A., Rose, K. M., Wirz, C., Scheufele, D. A., & Brossard,
 
 -   Boumans, J. W., & Trilling, D. (2016). Taking stock of the toolkit: An overview of relevant automated content analysis approaches and techniques for digital journalism scholars. Digital journalism, 4(1), 8-23.
 
-- de León, E., Vermeer, S. & Trilling, D. (2023). Electoral news sharing: a study of changes in news coverage and Facebook sharing behaviour during the 2018 Mexican elections. Information, Communication & Society, 26(6), 1193-1209. https://doi.org/10.1080/1369118X.2021.1994629
+-   de León, E., Vermeer, S. & Trilling, D. (2023). Electoral news sharing: a study of changes in news coverage and Facebook sharing behaviour during the 2018 Mexican elections. Information, Communication & Society, 26(6), 1193-1209. https://doi.org/10.1080/1369118X.2021.1994629
 
 -   Hvitfeld, E. & Silge, J. (2021). Supervised Machine Learning for Text Analysis in R. CRC Press. https://smltar.com/
 
@@ -2083,7 +2090,6 @@ Su, L. Y.-F., Xenos, M. A., Rose, K. M., Wirz, C., Scheufele, D. A., & Brossard,
 -   Su, L. Y.-F., Xenos, M. A., Rose, K. M., Wirz, C., Scheufele, D. A., & Brossard, D. (2018). Uncivil and personal? Comparing patterns of incivility in comments on the Facebook pages of news outlets. New Media & Society, 20(10), 3678--3699. https://doi.org/10.1177/1461444818757205
 
 -   van Atteveldt, W., van der Velden, M. A. C. G., & Boukes, M.. (2021). The Validity of Sentiment Analysis: Comparing Manual Annotation, Crowd-Coding, Dictionary Approaches, and Machine Learning Algorithms. Communication Methods and Measures, (15)2, 121-140, https://doi.org/10.1080/19312458.2020.1869198
-
 
 ## Example Exam Question (Multiple Choice)
 
