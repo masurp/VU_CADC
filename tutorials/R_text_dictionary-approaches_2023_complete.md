@@ -212,18 +212,18 @@ brandPers |>
               values_from = word)
 ```
 
-|  id | competence    | excitement    | ruggedness | sincerity      | sophistication |
-|----:|:--------------|:--------------|:-----------|:---------------|:---------------|
-|   1 | prosper       | exalting      | perdurable | standard       | glib_tongued   |
-|   2 | unshakable    | stimulating   | challenge  | congenial      | voluptuary     |
-|   3 | foolproof     | modern_day    | cruel      | verity         | well_bred      |
-|   4 | prospering    | elevate       | alfresco   | virtuous       | prominent      |
-|   5 | unflagging    | strong_willed | sunset     | honourableness | aristocracy    |
-|   6 | dexterous     | juvenile      | unpolished | civil          | high_profile   |
-|   7 | craftiness    | lone          | outdoorsy  | direct         | exclusivity    |
-|   8 | forefront     | unconstrained | jeans      | glad           | graceful       |
-|   9 | award_winning | in_vogue      | struggle   | bonafide       | captivate      |
-|  10 | witty         | energising    | labourious | originality    | in_style       |
+|  id | competence   | excitement     | ruggedness  | sincerity     | sophistication |
+|----:|:-------------|:---------------|:------------|:--------------|:---------------|
+|   1 | competence   | colorful       | uneven      | unglamourous  | refined        |
+|   2 | firm         | tonic          | forcible    | content       | mellifluous    |
+|   3 | unattackable | courageousness | saloon      | benevolent    | distinction    |
+|   4 | unbendable   | awesome        | uncovered   | proper        | charming       |
+|   5 | imperishable | determined     | leathery    | merry         | glittering     |
+|   6 | lucrative    | present_day    | precarious  | well_mannered | lustrous       |
+|   7 | adroit       | energising     | insensitive | approachable  | royal          |
+|   8 | blooming     | stirring       | hard        | legitimate    | profligate     |
+|   9 | unflagging   | inventive      | granitic    | polite        | feminine       |
+|  10 | celebratory  | liven_up       | jerky       | valid         | noble          |
 
 As we can see, the dictionary includes extensive (\> 140 words per
 category) for each of the five brand personality dimensions. Note: Some
@@ -406,144 +406,8 @@ transform into a tidy tibble.
 
 ``` r
 # Getting a data set (again on canvas)
-corona_tweets <- read_csv("corona_tweets.csv")
-corona_tweets |> 
-  head()
-```
+corona_tweets <- read_csv("corona_tweets.csv") |> as_tibble()
 
-|      user_id |    status_id | created_at          | screen_name | text                                                                                                                                                                                                                                                                            | source             | display_text_width | reply_to_status_id | reply_to_user_id | reply_to_screen_name | is_quote | is_retweet | favorite_count | retweet_count | quote_count | reply_count | hashtags | symbols | urls_url | urls_t.co | urls_expanded_url | media_url | media_t.co | media_expanded_url | media_type | ext_media_url | ext_media_t.co | ext_media_expanded_url | ext_media_type | mentions_user_id | mentions_screen_name | lang | quoted_status_id | quoted_text                                                                        | quoted_created_at | quoted_source | quoted_favorite_count | quoted_retweet_count | quoted_user_id | quoted_screen_name | quoted_name | quoted_followers_count | quoted_friends_count | quoted_statuses_count | quoted_location | quoted_description | quoted_verified | retweet_status_id | retweet_text | retweet_created_at | retweet_source | retweet_favorite_count | retweet_retweet_count | retweet_user_id | retweet_screen_name | retweet_name | retweet_followers_count | retweet_friends_count | retweet_statuses_count | retweet_location | retweet_description | retweet_verified | place_url | place_name | place_full_name | place_type | country | country_code | geo_coords | coords_coords | bbox_coords | status_url | name | location | description | url | protected | followers_count | friends_count | listed_count | statuses_count | favourites_count | account_created_at | verified | profile_url | profile_expanded_url | account_lang | profile_banner_url | profile_background_url | profile_image_url |
-|-------------:|-------------:|:--------------------|:------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------|-------------------:|-------------------:|-----------------:|:---------------------|:---------|:-----------|---------------:|--------------:|:------------|:------------|:---------|:--------|:---------|:----------|:------------------|:----------|:-----------|:-------------------|:-----------|:--------------|:---------------|:-----------------------|:---------------|:-----------------|:---------------------|:-----|-----------------:|:-----------------------------------------------------------------------------------|:------------------|:--------------|----------------------:|---------------------:|---------------:|:-------------------|:------------|-----------------------:|---------------------:|----------------------:|:----------------|:-------------------|:----------------|:------------------|:-------------|:-------------------|:---------------|:-----------------------|:----------------------|:----------------|:--------------------|:-------------|:------------------------|:----------------------|:-----------------------|:-----------------|:--------------------|:-----------------|:----------|:-----------|:----------------|:-----------|:--------|:-------------|:-----------|:--------------|:------------|:-----------|:-----|:---------|:------------|:----|:----------|----------------:|--------------:|-------------:|---------------:|-----------------:|:-------------------|:---------|:------------|:---------------------|:-------------|:-------------------|:-----------------------|:------------------|
-| 2.562060e+07 | 1.459879e+18 | 2021-11-14 13:38:59 | biderman    | \#Truth. It is never right to compare a \#VaccineMandate to the \#Holocaust. \#COVID19 \#coronavirus \#Corona \#COVID-19 \#getthejab @HolocaustMuseum @ADL @RamazSchool @AIPAC @jstreetdotorg @BnaiBrith @TheDemocrats @HouseGOP \#Moderna \#vaccines <https://t.co/VRvEBFOxI7> | Twitter for iPhone |                235 |                 NA |               NA | NA                   | TRUE     | FALSE      |              0 |             0 | NA          | NA          | NA       | NA      | NA       | NA        | NA                | NA        | NA         | NA                 | NA         | NA            | NA             | NA                     | NA             | NA               | NA                   | en   |     1.459876e+18 | Occasions where it it appropriate to compare \#VaccineMandates to the \#Holocaust: |                   |               |                       |                      |                |                    |             |                        |                      |                       |                 |                    |                 |                   |              |                    |                |                        |                       |                 |                     |              |                         |                       |                        |                  |                     |                  |           |            |                 |            |         |              |            |               |             |            |      |          |             |     |           |                 |               |              |                |                  |                    |          |             |                      |              |                    |                        |                   |
-
-1.  NEVER
-2.  NEVER
-3.  NEVER
-4.  NEVER
-5.  NEVER
-6.  NEVER
-7.  NEVER
-8.  NEVER
-9.  NEVER
-10. NEVER <https://t.co/QyEtb7bLGX> \|2021-11-14 13:28:52 \|TweetDeck \|
-    15\| 2\| 351120282\|Ostrov_A \|Arsen Ostrovsky \| 92108\| 5556\|
-    180331\|Israel \|International Human Rights Lawyer ➡️ Focus:
-    \#MiddleEast 🌍 , \#Israel 🇮🇱, \#HumanRights ⚖️, \#DigitalDiplomacy
-    📲, \#Innovation 💡, \#Food🍴. My O’s, RT≠E \|TRUE \|NA \|NA \|NA
-    \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA
-    \|<https://api.twitter.com/1.1/geo/id/d6819fe60643ebc1.json>
-    \|Alexandria \|Alexandria, VA \|city \|United States \|US \|NA \|NA
-    \|NA \|<https://twitter.com/biderman/status/1459878530213371911>
-    \|David Biderman \|Vienna, Virginia \|Sports loving association
-    executive, advocate & former lawyer who really cares about worker
-    safety, the environment, his family, the weather, and loves travel.
-    \|<https://t.co/Evvt4UeNQx> \|FALSE \| 970\| 620\| 24\| 5326\|
-    10175\|2009-03-21 02:01:36 \|FALSE \|<https://t.co/Evvt4UeNQx>
-    \|<http://www.swana.org> \|NA \|NA
-    \|<http://abs.twimg.com/images/themes/theme1/bg.png>
-    \|<http://pbs.twimg.com/profile_images/1039758951/Headshot_normal.jpg>
-    \| \| 3.843144e+08\| 1.459877e+18\|2021-11-14 13:33:53
-    \|fuelyourlife100 \|#corona Dashboard \#coronamaatregelen
-    \#coronavirus \#vaccinaties \#Coronatest \#vaccineren
-
-<https://t.co/JFY4IfcDJC> \|Twitter for Android \| 111\| NA\| NA\|NA
-\|FALSE \|FALSE \| 0\| 0\|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA
-\|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|en \| NA\|NA \|NA \|NA \| NA\|
-NA\| NA\|NA \|NA \| NA\| NA\| NA\|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA
-\|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA
-\|NA \|NA \|NA \|NA \|NA
-\|<https://twitter.com/fuelyourlife100/status/1459877245384810502>
-\|Real Estate \|Nederland \|<https://t.co/OyV8siqyEd> Vastgoed en
-Vastgoedonderhoud. Realist. Aanhanger van feiten en wetenschap \|NA
-\|FALSE \| 32091\| 28167\| 119\| 1103\| 110\|2011-10-03 13:28:32 \|FALSE
-\|NA \|NA \|NA
-\|<https://pbs.twimg.com/profile_banners/384314397/1630740348>
-\|<http://abs.twimg.com/images/themes/theme1/bg.png>
-\|<http://pbs.twimg.com/profile_images/1427167475117002756/vChbj4TM_normal.jpg>
-\| \| 8.241114e+07\| 1.459877e+18\|2021-11-14 13:32:13 \|\_Erwin
-\|Interessant! \#Corona \#coronamaatregelen / via @DrZemouri
-<https://t.co/3V94Qz75eJ> \|Twitter for Android \| 56\| NA\| NA\|NA
-\|TRUE \|FALSE \| 0\| 0\|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA
-\|NA \|NA \|NA \|NA \|NA \|NA \|NA \|en \| 1.459615e+18\|In Ireland half
-of the people who died from \#Covid19 were infected in fewer than 400
-buildings
-
-Ireland has \>2,500,000 buildings
-
-Risk is about buildings, not behaviour
-
-Spread is about clusters, not contacts
-
-Control is about eliminating the hot spots (pic: @mdc_martinus )
-<https://t.co/CKcVWYWAud> \|2021-11-13 20:11:23 \|Twitter for iPhone \|
-1659\| 735\| 1543321040\|Orla_Hegarty \|Orla Hegarty \| 14149\| 3381\|
-29707\|Dublin City, Ireland \|Architect, Asst Professor at @UCDDublin
-@UCDArch FRIAI RIBA ARB …opinions my own etc \#Housing \#Sustainability
-\#Architecture \#Construction \#CovidIsAirborne \|FALSE \|NA \|NA \|NA
-\|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA
-\|NA \|NA \|NA \|NA \|NA \|NA \|NA
-\|<https://twitter.com/_Erwin/status/1459876826445144069> \|\_Erwin
-\|Amsterdam / Decentralized \|Communications ‘Dutch Veggie Association’
-@Vegetariersbond / Good Doer / Taoism, QiGong, Flamenco / Future Digital
-Nomad \|<https://t.co/yiv4esDiUQ> \|FALSE \| 1940\| 1125\| 173\| 37715\|
-15687\|2009-10-14 17:30:03 \|FALSE \|<https://t.co/yiv4esDiUQ>
-\|<https://www.linkedin.com/in/erwinpolderman> \|NA
-\|<https://pbs.twimg.com/profile_banners/82411138/1552744359>
-\|<http://abs.twimg.com/images/themes/theme1/bg.png>
-\|<http://pbs.twimg.com/profile_images/958094370003177472/S5wGOblJ_normal.jpg>
-\| \| 3.744430e+07\| 1.459876e+18\|2021-11-14 13:28:16 \|Rarame
-\|@1968ingrid @dartagnanneke It’s called \#WWP World Wide Propaganda.
-\#GreatReset \#WEF \#Corona \#Covid19 \#2G \|Twitter for iPhone \| 78\|
-1.459803e+18\| 270909134\|1968ingrid \|FALSE \|FALSE \| 0\| 0\|NA \|NA
-\|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA
-\|NA \|en \| NA\|NA \|NA \|NA \| NA\| NA\| NA\|NA \|NA \| NA\| NA\|
-NA\|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA
-\|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA
-\|<https://twitter.com/Rarame/status/1459875831929618437> \|Criticaster
-des Vaderlands \|Amsterdam \|Niet zo logisch deze bio \|NA \|FALSE \|
-180\| 262\| 3\| 22530\| 512\|2009-05-03 16:15:13 \|FALSE \|NA \|NA \|NA
-\|<https://pbs.twimg.com/profile_banners/37444295/1549304208>
-\|<http://abs.twimg.com/images/themes/theme1/bg.png>
-\|<http://pbs.twimg.com/profile_images/1221048552601849856/dyK-O_BB_normal.jpg>
-\| \| 1.302118e+18\| 1.459876e+18\|2021-11-14 13:27:15 \|MostakA26276799
-\|Superb android app in 2021 guys very helpful app
-
-Apps Google Play Store Android Mobile Application:
-<https://t.co/YYpwLcqq4Q>
-
-\#mobileappreview \#androidgamedev \#gametime \#followforfollowback \#ai
-\#healthcare \#corona \#influencermarketing \#mobileappmarketing
-\#androidgamedevelopment \|Twitter Web App \| 278\| NA\| NA\|NA \|FALSE
-\|FALSE \| 1\| 0\|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA
-\|NA \|NA \|NA \|NA \|NA \|NA \|en \| NA\|NA \|NA \|NA \| NA\| NA\|
-NA\|NA \|NA \| NA\| NA\| NA\|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA
-\|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA
-\|NA \|NA \|NA \|NA
-\|<https://twitter.com/MostakA26276799/status/1459875577276481541>
-\|Mostak Ahammed \|Thakurgaon \|I am Online marketer I can promote your
-online business I am expert in \#B2B_Leadgeneration \#email_marketing
-\#Data_Entry \#linkedin_leadgeneration \|NA \|FALSE \| 2281\| 3782\| 1\|
-974\| 3676\|2020-09-05 05:36:03 \|FALSE \|NA \|NA \|NA
-\|<https://pbs.twimg.com/profile_banners/1302118192463003654/1600659879>
-\|NA
-\|<http://pbs.twimg.com/profile_images/1302992221486997504/FOvbCjs4_normal.jpg>
-\| \| 1.615013e+09\| 1.459875e+18\|2021-11-14 13:24:50 \|snoopbee1
-\|#COVIDー19 \#Corona Study at home \#math \#tutoring at
-<https://t.co/pLnSNgyjmu> \|snoopbee \| 74\| NA\| NA\|NA \|FALSE \|FALSE
-\| 0\| 0\|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA
-\|NA \|NA \|NA \|NA \|en \| NA\|NA \|NA \|NA \| NA\| NA\| NA\|NA \|NA \|
-NA\| NA\| NA\|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA
-\|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA \|NA
-\|NA \|<https://twitter.com/snoopbee1/status/1459874970037805060>
-\|snoopbee \|NA \|online shopping site - \#music, \#travel, \#dating,
-\#health, \#weight_loss, \#recipes, \#pets , \#math and more
-\|<http://t.co/JOtJIroAXP> \|FALSE \| 127\| 409\| 179\| 194062\|
-552\|2013-07-23 11:03:18 \|FALSE \|<http://t.co/JOtJIroAXP>
-\|<http://www.snoopbee.com> \|NA \|NA
-\|<http://abs.twimg.com/images/themes/theme1/bg.png>
-\|<http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png>
-\|
-
-``` r
 # Getting a dictionary for the sentiment analysis
 library(SentimentAnalysis)
 positive <- tibble(positive = DictionaryGI$positive) |> pivot_longer(positive)

@@ -132,8 +132,11 @@ As it stored in a zip-file on the website, we can use R to download it, unzip an
 ```{r}
 download.file("https://provalisresearch.com/Download/BrandPersonality.zip", "BrandPersonality.zip")
 unzip("BrandPersonality.zip", 'Brand Personality.cat')
-brandPers <- dictionary(file="Brand Personality.cat")
-brandPers
+brandPers <- read_dict_wordstat(file="Brand Personality.cat")
+brandPers %>%
+  as_tibble
+
+load(file = "Brand")
 ```
 
 As we can see, the dictionary includes extensive (> 120 words per category) for each of the five brand personality dimensions. Note: Some of the words are actually not unigrams (i.e., more than one word such as "award_winning"). In this form, they are more or less useless to try to code text that is tokenized into single words. This is a potential drawback of this particular dictionary. We could try to recode the dictionary or try to tokenize the text differently. For the time being, we will just go ahead with this limitation. 

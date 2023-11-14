@@ -245,9 +245,7 @@ For easy use, the package `SentimentAnalysis` contains 3 dictionaries: `Dictiona
 
 ```{r}
 # Getting a data set (again on canvas)
-corona_tweets <- read_csv("corona_tweets.csv")
-corona_tweets |> 
-  head()
+corona_tweets <- read_csv("corona_tweets.csv") |> as_tibble()
 
 # Getting a dictionary for the sentiment analysis
 library(SentimentAnalysis)
