@@ -115,7 +115,7 @@ In the third part of the course, students will work on their own research projec
 #### Practical Session 1
 
 - Handouts: 
-    - Supervised text classification using Naive Bayes, Logistic Regression and SVM ([handout](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_supervised-text-classification_2013.md))
+    - Supervised text classification using Naive Bayes, Logistic Regression and SVM ([handout](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_supervised-text-classification_2013.md), [completed handout](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_supervised-text-classification_2013_complete.md))
 
 #### Practical Session 2
 
