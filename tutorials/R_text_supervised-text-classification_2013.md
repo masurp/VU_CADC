@@ -155,6 +155,9 @@ want to do. In this case, we will not do much, we simply:
 3.  Create the document-feature matrix
 
 ``` r
+# Apparently, the text recipes package was taken off CRAN (the general R archive for packages) yesterday! So we need to install it from the github repository. Uncomment the next line and it should work!
+#remotes::install_github("tidymodels/textrecipes")
+
 library(textrecipes)
 rec <- recipe(fivestar ~ summary + reviewText, data=reviews) |>
   step_tokenize(all_predictors())  |>
