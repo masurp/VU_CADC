@@ -72,7 +72,7 @@ table(reviews$overall < 5) %>%
   prop.table
 ```
 
-We can see that most reviews are really positive (5 stars!). The training data may hence not provide much information to differentiate e.g., reviews with a scor of 3 from a score of 2. 
+We can see that most reviews are really positive (5 stars!). The training data may hence not provide much information to differentiate e.g., reviews with a score of 3 from a score of 2. 
 
 Before proceeding to the text classification, we will thus compute a binary target class (five-star or not) and create a text variable combining the summary and review text:
 
