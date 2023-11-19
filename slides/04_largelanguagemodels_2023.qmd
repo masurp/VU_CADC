@@ -183,7 +183,7 @@ d[1:3,]|>
 :::
 
 
-# Machine Learning vs. Deep Learning
+# Machine Learning vs. Deep Learning {background-color="steelblue"}
 
 ## Text Classification Pipeline
 
@@ -1301,6 +1301,8 @@ D. By counting the frequency of words in a given text
 What does zero-shot learning refer to in the context of large language models?
 
 . . .
+
+<br>
 
 In the context of large language models, zero-shot learning refers to the ability of a model to perform a task or make predictions on a set of classes or concepts that it has never seen or been explicitly trained on. Essentially, the model can generalize its knowledge to new, unseen tasks without specific examples or training data for those tasks.
 
