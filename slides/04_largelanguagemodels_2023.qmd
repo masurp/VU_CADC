@@ -1,0 +1,1309 @@
+---
+title: "Computational Analysis of Digital Communication"
+subtitle: "Week 4: Word Embeddings, Transformers, and Large Language Models"
+author: "Dr. Philipp K. Masur"
+format:
+  revealjs: 
+    theme: [default, theme.scss]
+    logo: img/logo.png
+    background-transition: fade
+    footer: Computational Analysis of Digital Communication
+    slide-number: c/t
+    title-slide-attributes:
+        data-background-image: https://storage.googleapis.com/exenzo-jobboard/bb/public/thumb/logo-jpg-57.jpg
+        data-background-position: "top right"
+        data-background-size: auto
+editor: visual
+---
+
+##  {background="#43464B" background-video="video/imagination.mp4" background-video-loop="true" background-video-muted="true"}
+
+
+## How we did things so far...
+
+- Remember the last practical session?
+
+- We dealt with the following data set of Dutch finance news headlines:
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+#| output-location: fragment
+# Load data
+library(tidyverse)
+url <- "https://raw.githubusercontent.com/vanatteveldt/ecosent/master/data/intermediate/sentences_ml.csv"
+d <- read_csv(url) |> 
+  select(id, text = headline, lemmata, sentiment=value) |> 
+  mutate(sentiment = factor(sentiment, levels = c(-1, 0, 1),
+                            labels = c("negative", "neutral", "positive")))
+head(d)
+```
+
+## The classic machine learning approach
+
+- A lot of different steps...
+
+```{r, eval = F}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+# Create test and train data sets
+split <- initial_split(d, prop = .50)
+
+# Feature engineering
+rec <- recipe(sentiment ~ lemmata, data = d) |> 
+  step_tokenize(lemmata) |> 
+  step_tf(all_predictors())  |> 
+  step_normalize(all_predictors())
+
+# Setup algorithm/model
+mlp_spec <- mlp(epochs = 600, hidden_units = c(6),  
+                penalty = 0.01, learn_rate = 0.2) |>   
+  set_engine("brulee") |>    
+  set_mode("classification")
+
+# Create workflow
+mlp_workflow <- workflow() |> 
+  add_recipe(rec) |> 
+  add_model(mlp_spec)
+
+# Fit model
+m_mlp <- fit(mlp_workflow, data = training(split))
+```
+
+## What if things were easier?
+
+- Wouldn't it be great if we would not have to wrangle with the data, not engage in text preprocessing, and simply let the "computer" figure this out? 
+
+```{r}
+#save(results, file = "results/motivation_example.RData")
+load(file = "results/motivation_example.RData")
+```
+
+```{r, eval = F, R.options = list(width = 120)}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+gpt_zeroshot(txt = d[1:3,]$text,
+             labels = c("negative", "neutral", "positive"))
+```
+
+```{r, echo = F, R.options = list(width = 160)}
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+results
+```
+
+. . .
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+d[1:3,]|> 
+  bind_cols(results) |> 
+  select(id, text, truth=sentiment, predicted=labels)
+```
+
+
+## {background-image="https://ychef.files.bbci.co.uk/976x549/p01pqw85.jpg"}
+
+
+## Content of this Lecture {.smaller}
+
+::: columns
+::: {.column width="45%"}
+
+
+1.  Machine Learning vs. Deep Learning
+
+    1.1. Reminder: Machine Learning Text classification Pipeline
+    
+    1.2. How did the field move on?
+
+2.  From Term Frequencies to Word-Embeddings
+    
+    2.1. Basic principles
+
+    2.2. Similarity of words and texts
+  
+    2.3. Pre-trained Word-Embeddings
+    
+    2.4. Text Classification Pipeline with Word-Embeddings
+    
+    2.5. Examples in the literature
+
+3.  The Rise of Transformers and Transfer Learning
+
+    3.1. Overview and Principles
+    
+    3.2. Architecture of the Transformer Model
+    
+    3.3. The Transformer/LLM Text Classification Pipeline
+
+    3.4. The Concept of Fine-Tuning
+    
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="45%"}
+
+4.  Large Language Models: BERT, GPT and the "AI Revolution"?
+
+    4.1. What are Large Language Models and Generative AI?
+    
+    4.2. A Peek into the Architecture of Famous LLMs
+
+    4.3. Zero-Shot Text Classification Using BERT and GPT
+
+    4.4. Validation, validation, validation!
+    
+    4.5. Examples in the Literature
+    
+5. Summary and conclusion
+
+    5.1. A Look Back at the Chronology of NLP
+    
+    5.2. State-of-the-Art in Classification
+    
+    5.3. Ethical considerations
+    
+    5.4. Conclusion
+
+
+:::
+:::
+
+
+# Machine Learning vs. Deep Learning
+
+## Text Classification Pipeline
+
+![](img/text_analysis_fundamentals/Slide01.png)
+
+
+## Machine Learning (1990-2010)
+
+![](img/text_analysis_fundamentals/Slide03.png)
+
+## And now?
+
+![](img/timeline/Slide3.png) 
+
+
+## Massive advancements in recent years
+
+1. Massive advancement in how text can be represented at numbers
+
+    - From simple word counts to word embeddings
+    - Static vs. contextual word embeddings
+    
+2. Pretraining and transfer learning
+
+    - Word embeddings can be trained on large scale corpus
+    - Pretrained word embeddings can fine-tuned (less training data) and then used for downstream tasks
+
+3. Transformers and Generative AI
+
+    - Larger and larger "language models" 
+    - Ever more powerful in solving rather complex tasks
+    - Conversational frameworks (e.g., GPT)
+
+
+# From Term Frequencies to Word-Embeddings {background-color="steelblue"}
+
+More powerful and informative ways to represent text as numbers.
+
+
+## Rember: The initial problem of text analysis
+
+- Computers don't read text, they only can deal with numbers
+
+- For this reason, so far, we tokenized our texts (e.g., in words) and summarized their frequency across texts to create a document-feature matrix within the bag-of-words model
+
+![](img/simple_dfm.png)
+
+- Such a text representation has some issues:
+
+    - Treats words as equally important (→ requires removal of noise, stopwords...)
+    - Ignores word order and context
+    - Results in a sparse matrix (→ computationally expensive)
+
+
+## Alternative: Map words into a vector space
+
+![](img/word_embeddings1.png)
+
+## (Static) Word embeddings
+
+- Word embeddings are a "learned" type of **word representation** that allows words with similar meaning to have a similar representation via a *k*-dimensional vector space
+
+- The first core idea behind word embeddings is that the meaning of a word can be expressed using a relatively small embedding vector, generally consisting of around 300 numbers which can be interpreted as dimensions of meaning. 
+
+- The second core idea is that these embedding vectors can be derived by scanning the context of each word in millions and millions of documents.
+
+- This means that words that are used in similar ways in the training data result in similar representations, thereby capturing their similar meaning. 
+
+- This can be contrasted with the crisp but rather limited representation of words in a bag of words model where different words have different representations, regardless of how they are used.
+
+      
+## How do we get these "values" for each word?
+
+- All word embedding methods learn a real-valued vector representation for a predefined fixed sized vocabulary from a corpus of text.
+
+- There are many different ways to "learn" or use word embeddings: 
+
+<br>
+
+1. Via an embedding layer in a neural network designed for a particular downstream task
+
+
+2. Learning word embeddings using a shallow neural network and context windows (e.g., **word2vec**)
+
+
+3. Leatning word embeddings by aggregating global word-word co-occurrence matrix (e.g., GloVe) 
+
+
+## Word2Vec: Continuous Bag-of-words (CBOW)
+
+![](img/cbow/Slide1.png)
+
+## Word2Vec: Continuous Bag-of-words (CBOW)
+
+![](img/cbow/Slide2.png)
+
+## Word2Vec: Continuous Bag-of-words (CBOW)
+
+![](img/cbow/Slide3.png)
+
+
+
+
+## Word2Vec: Continuous Bag-of-words (CBOW)
+
+![](img/cbow/Slide4.png)
+
+## Word2Vec: Continuous Bag-of-words (CBOW)
+
+![](img/cbow/Slide5.png)
+
+## Word2Vec: Continuous Bag-of-words (CBOW)
+
+![](img/cbow/Slide6.png)
+
+## Pre-trained Word embeddings: GloVe
+
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+#| # Download Global Vector Embeddings with 10.000 words and 50 dimensions
+glove_fn = "glove.6B.50d.10k.w2v.txt"
+url = glue::glue("https://cssbook.net/d/{glove_fn}")
+if (!file.exists(glove_fn)) 
+    download.file(url, glove_fn)
+
+# Data wrangling
+wv_tibble <- read_delim(glove_fn, skip=1, delim=" ", quote="", 
+    col_names = c("word", paste0("d", 1:50)))
+
+# 10 highest scoring words on dimension 1
+wv_tibble |> 
+  arrange(-d1) |> 
+  select(1:10)
+```
+
+
+## Similarities between words
+
+As mentioned before, we can compute similarity scores for word pairs:
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+wv <- as.matrix(wv_tibble[-1])
+rownames(wv) <- wv_tibble$word
+wv <- wv / sqrt(rowSums(wv^2))
+wvector <- function(wv, word) wv[word,,drop=F]
+wv_similar <- function(wv, target, n=5) {
+  similarities = wv %*% t(target)
+  similarities |>  
+    as_tibble(rownames = "word") |> 
+    rename(similarity=2) |> 
+    arrange(-similarity) |>  
+    head(n=n)  
+}
+```
+
+::: columns
+::: {.column width="50%"}
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+#| output-location: fragment
+wv_similar(wv, wvector(wv, "basketball"))
+```
+
+:::
+::: {.column width="50%"}
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+#| output-location: fragment
+wv_similar(wv, wvector(wv, "netherlands"))
+```
+
+:::
+:::
+
+## Similarity of entire sentences or texts
+
+But we can also generalize word embeddings to entire sentences (or even texts): 
+
+```{r, R.options = list(width = 120)}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+library(ccsamsterdamR)
+
+# Example sentences
+movies <- tibble(sentences = c("This movie is great, I loved it.", 
+                               "The film was fantastic, a real treat!",
+                               "I did not like this movie, it was not great.",
+                               "Today, I went to the cinema and watched a movie",
+                               "I had pizza for lunch."))
+                     
+# Get embeddings from a sentence transformer
+movie_embeddings <- hf_embeddings(txt = movies$sentences)
+
+# Each text has now 384 values
+movie_embeddings 
+```
+
+
+## The subtle similarity of some texts in the example
+
+- We can see that text 2 is most similar to text 1: Both express a very similar sentiment, just with different words ("great" ≈ "fantastic"; "I loved it" ≈  "A real treat")
+
+- Text 2 is still similar to text 3 (after all it is about movies), but less so compared to text 1 ("fantastic" is the opposite of "not great")
+
+- Text 4 still shares similarities (the context is the cinema/watching movies), but text 5 is very different as it doesn't contain similar words and is not about similar things (except "I"). 
+
+
+```{r, R.options = list(width = 120)}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+# Similarity between 2nd and the other sentences
+movies |> 
+  mutate(similarity = as.matrix(movie_embeddings) %*% t(as.matrix(movie_embeddings)[2,, drop = F]))
+
+```
+
+
+## Word Embeddings as Input 
+
+- Word, sentence, or text embedding vectors can then be used as features in further text analysis tasks
+
+- Think about the example we just investigated: The sentence embeddings did capturesome difference between:
+
+    - "The film was fantastic, a real treat!" (*positive*)
+    - "I did not like this moive, it was not great." (*negative*)
+
+- Approaches from the last lecture (classic machine learning) would have a hard time to detect the negation "not great". 
+
+- Yet, bear in mind: We do not actually know what the 100+ (often >300) dimensions actually mean (→ we cannot look under the hood later!)
+
+
+## From Sparse to Dense Matrix Representation
+
+
+- Using embedding vectors instead of word frequencies further has the advantages of strongly reducing the dimensionality of the DTM: instead of (tens of) thousands of columns for each unique word we only need hundreds of columns for the embedding vectors (→ dense instead of sparse)
+
+- This means that further processing can be more efficient as fewer parameters need to be fit, or conversely that more complicated models can be used without blowing up the parameter space. 
+
+
+## Text classification with Word-Embeddings
+
+![](img/text_analysis_fundamentals/Slide04.png)
+
+## Doing analysis with word-embedding themselves
+
+- Based on vector-based computations, we can also analyse semantic relationships
+
+- This is a quite common approach by now in research on gender and other types of stereotypes
+
+![Source: https://developers.google.com](https://miro.medium.com/v2/resize:fit:2000/1*SYiW1MUZul1NvL1kc1RxwQ.png)
+
+
+## Example from the literature: Gender-Stereotypes
+
+
+- ![](img/andrich_example.png){style="float: right; padding-left: 40px;" width="400"}Andrich et al. (2023) examine stereotypical traits in portrayals of 1,095 U.S. politicians. 
+
+- Analyzed 5 million U.S. news stories published from 2010 to 2020 to study gender-linked (feminine, masculine) and political (leadership, competence, integrity, empathy) traits
+
+- Methodologically, they estimated word embeddings using the Continuous Bag of Words (CBOW) model, meaning that a target word (e.g., honest) is predicted from its context (e.g., Who thinks President Trump is [target word]?)
+
+- Bias can thus be identified if e.g., gender-neutral words (e.g., competent) are closer to words that represent one gender (e.g., donald_trump) than to words that represent the opposite gender (e.g., hillary_clinton).
+
+## Results
+
+::: {layout="[49, 51]"}
+
+![](img/andrich_fig2.png)
+
+
+![](img/andrich_fig1.jpeg)
+:::
+
+- All three masculine traits were more strongly associated with male politicians.
+
+- In contrast, only the feminine physical traits were more strongly associated with female politicians. 
+
+- Differences remained stable across time.
+
+# The Rise of Transformers and Transfer Learning {.centered background-color="steelblue"}
+
+<center>![](https://pyxis.nymag.com/v1/imgs/7e2/b83/01a7d3094f5856a53f409a59b9d16e392e-22-transformers-fighting.2x.rhorizontal.w710.jpg){width="65%"}</center>
+
+
+## Origin of Transformer Models
+
+- Until 2017, the state-of-the-art for natural language processing was using a deep neural network (e.g., recurrent neural networks, long short-term memory and gated recurrent neural networks)
+
+- In a preprint called "Attention is all you need", published in 2017 and cited more than 95,000 times, the team of Google Brain introduced the so-called **Transformer**, a a neural network-type architecture that learns context and thus meaning by tracking relationships in sequential data like the words in this sentence.
+
+- Transformer models apply an evolving set of mathematical techniques, called **attention** or **self-attention**, to detect subtle ways even distant data elements in a series influence and depend on each other.
+
+- The proposed network structure had notable characteristics:
+
+    - No need for recurrent or convolutional network structures
+    - Based solely on attention mechanism (stacked on top of one another)
+    - Requires less training time (can be parallelized)
+    - Outperformed prior state-of-the-art models in a variety of tasks
+
+
+## OVerview of the architecture
+
+
+::: columns
+
+::: {.column width="60%"}
+
+- The figure on the right represent an abstract overview of a transformer's architecture
+
+- It can be used for sequence-to-sequence predictions
+
+    - classic example is translation: e.g., english-to-dutch
+    - but also: question-to-answer, text-to-summary, sentence-to-next-sentence...
+
+- Although models can differ, they generally include:
+
+    - An encoder-decoder framework
+    - Word embeddings + positional embedding
+    - Attention and self-attention modules
+    
+- We won't cover any of these in much detail and just aim for a high-level understanding
+
+[Vaswani et al. 2017]{style="font-size:0.55em;"}
+
+:::
+
+::: {.column width="40%"}
+
+![](img/transformer_architecture.png)
+
+:::
+:::
+
+## Basic Encoder-Decoder Framework (for Translation)
+
+![](img/transformer/Slide01.png)
+
+## Stacked Encoders and Decoders
+
+![](img/transformer/Slide02.png)
+
+## More elaborate encoding of words
+
+![Source: Alammar, 2018](img/transformer/Slide03.png)
+
+## Inside of an encoder and a decoder
+
+
+- The word, position, and time signal embeddings are passed to the first encoder
+
+- Here, they flow through a self-attention layer, which further refines the encoding by "looking at other words" as it encodes a specific word
+
+- The outputs of the self-attention layer are fed to a feed-forward neural network.
+
+- The decoder likewise has both layers as well, but also an extra attention layer that helps to focus on different parts of the input (e.g., the encoders outputs)
+
+
+![Source: Alammar, 2018](img/transformer/encoder-decoder.png)
+
+
+## Encoding pipeline
+
+- The embedding only happens in the bottom-most encoder. 
+
+- In other encoders, it would be the output of the encoder that’s directly below. 
+
+![Source: Alammar, 2018](img/transformer/encoding-pipline.png)
+
+
+## Self-Attention
+
+
+- In general terms, self-attention works encodes how similar each word is to all the words in the sentence, including itself.
+
+- Once the similarities are calculated, they are used to determine how the transformers encodes each word.
+
+
+![](img/transformer2/Slide1.png)
+
+## Self-Attention
+
+
+- In general terms, self-attention works encodes how similar each word is to all the words in the sentence, including itself.
+
+- Once the similarities are calculated, they are used to determine how the transformers encodes each word.
+
+
+![](img/transformer2/Slide2.png)
+
+## Self-Attention
+
+
+- In general terms, self-attention works encodes how similar each word is to all the words in the sentence, including itself.
+
+- Once the similarities are calculated, they are used to determine how the transformers encodes each word.
+
+![](img/transformer2/Slide3.png)
+
+
+## Self-Attention
+
+
+- In general terms, self-attention works encodes how similar each word is to all the words in the sentence, including itself.
+
+- Once the similarities are calculated, they are used to determine how the transformers encodes each word.
+
+
+![](img/transformer2/Slide5.png)
+
+
+## Self-Attention at a High Level
+
+- As the encoder processes each word (each position in the input sequence), self attention allows it to look at other positions in the input sequence for clues that can help lead to a better encoding for this word.
+
+- On the decoder side, the self-attention layer is only allowed to attend to earlier positions in the output sequence. This is done by masking future positions (setting them to -inf) before the softmax step in the self-attention calculation.
+
+- The actual architecture of this step is incredibly complex, so we keep it at that for now.
+
+
+## Putting it all together
+
+![Source: Alammar, 2018](img/transformer/Slide10.png)
+
+
+
+## High-level process
+
+::: columns
+
+::: {.column width="60%"}
+
+1. The transformers starts by creating word embeddings (combinations of similarity, position, time signal)
+
+2. The encoder start by processing the input sequence (embeddings). 
+
+3. The output of the top encoder is then transformed into a set of attention vectors which are used by each decoder in its “encoder-decoder attention” layer which helps the decoder focus on appropriate places in the input sequence
+
+4. The decoder spits out a first output (e.g., the word "I"), which then becomes the input for the decoder in follow-up steps
+
+4. The decoder repeats these steps until a special symbol (e.g., <EOS> = "end of sentence") is reached. 
+
+:::
+
+::: {.column width="40%"}
+
+![Source: Vaswani et al., 2017](img/transformer_architecture.png)
+
+:::
+:::
+
+
+## Text Classification Pipeline Using Transformers
+
+![](img/text_analysis_fundamentals/Slide05.png)
+
+## Pre-training and transfer learning
+
+- Generally, transformer models are pre-trained using specific natural language processing tasks
+
+- It has been shown that these (often self- or unsupervised) trainings are often sufficient to let the model perform well on many down-stream tasks
+
+- However, the general idea would be to use a pre-trained model and then "fine-tune" it on the specific tasks it is supposed to perform (e.g., annotating text with topics or sentiment)
+
+- Although the transformer's architecture has made training more efficient (due to the ability to parallelize), it nonetheless requires significant computing power to fine-tune a model
+
+- Luckily, transformers are the back-bone of today's large language models, which - due to their immense training - are able to perform very well on most task without any specific fine-tuning (called: zero-shooting). 
+
+- As pre-training often involves tasks that are different than what we want the model to do, this is often denoted as "transfer learning", thus a type of learning that transfers to other task as well
+
+
+# Large Language Models: BERT, GPT and the "AI Revolution"? {.centered background-color="steelblue"}
+
+<center>
+
+![](https://miro.medium.com/v2/resize:fit:1400/1*tjHTmF_1SUY6_pykU6_VpQ.gif){width="65%"}
+
+[Source: [Christian Behler on Medium](https://betterprogramming.pub/how-to-create-the-matrix-text-effect-with-javascript-325c6bb7d96e)]{style="font-size:55em;"}
+
+</center>
+
+## What are large language models
+
+- A large language model (LLM) is a type of language model notable for its ability to achieve general-purpose language understanding and generation. 
+
+- LLMs acquire these abilities by using massive amounts of data to learn billions of parameters during training and consuming large computational resources during their training and operation.
+
+- LLMs are still just a type of artificial neural networks (mainly transformers!) and are (pre-)trained using self-supervised learning and semi-supervised learning.
+
+- As so-called autoregressive language models, they take an **input text** and repeatedly **predicting the next token** or word.
+
+
+## Fine-tuning vs. zero-shot learning
+
+
+- Up to 2020, fine tuning was the only way a model could be adapted to be able to accomplish specific tasks.
+
+- Larger sized models (since BERT and GPT-2 and 3), however, can be prompt-engineered to achieve similar results.
+
+- They are thought to acquire embodied knowledge about syntax, semantics and "ontology" inherent in human language corpora, but also inaccuracies and biases present in the corpora. 
+
+- Notable examples include: 
+
+    - OpenAI's GPT models (e.g., GPT-3.5 and GPT-4, used in ChatGPT)
+    - Google's BERT and PaLM (used in Bard),
+    - Meta's LLaMa
+
+
+## Next token prediction (as in GPT-2)
+
+
+![](img/gpt2-1.png)
+
+## Next token prediction (as in GPT-2)
+
+
+![](img/gpt2-2.png)
+
+## Next token prediction 
+
+
+![](img/gpt2-3.png)
+
+
+## Different architectures
+
+- Encoder-Decoder Transformers:
+
+    - BART (Lewis et al., 2019): language generation, tanslation, comprehension,...
+    
+- Encoder-Only Transformer
+
+    - BERT (Devlin et al., 2019): Question answering, language inference,...
+    
+- Decoder-Only Transformer:
+
+    - GPT-series (OpenAI)
+
+- In the following, we will focus on BERT and GPT
+
+
+
+<br>
+
+**Note:** Whereas many large language models are open source AND free to use (e.g., BERT), others are free to use only in limited capacity and essentially a black box when it comes to details about the architecture and training form and training data (e.g., GPT-3 or GPT-4). 
+
+
+## Bert
+
+
+::: columns
+
+::: {.column width="85%"}
+- Bidirectional Encoder Representations from Transformers (BERT) is a family of language models introduced in October 2018 by researchers at Google.
+
+- BERT is an "encoder-only" transformer architecture.
+
+- Generally speaking, BERT consists of three modules:
+
+    - **Embedding.** This module converts an array of one-hot encoded tokens into an array of vectors representing the tokens.
+    - **Stack of encoders.** These encoders are the Transformer encoders (BERT-base = 12, BERT-large = 24). They perform transformations over the array of representation vectors.
+    - **Un-embedding.** This module converts the final representation vectors into one-hot encoded tokens again.
+
+[Devlin et al. 2018]{style="font-size:0.55em;"} 
+
+
+
+
+:::
+
+::: {.column width="15%"}
+
+![](https://static.wikia.nocookie.net/muppet/images/e/e1/Bert_smile.png)
+:::
+:::
+
+
+## Why un-embedding?
+
+- The un-embedding module is necessary for pretraining, but it is often unnecessary for downstream tasks. 
+
+- Here, one would take the representation vectors output at the end of the stack of encoders, and use those as a vector representation of the text input, and train a smaller model on top of that (technically anything we covered last lecture!)
+
+
+
+## Training and Fine-Tuning of BERT
+
+- Pretrained on two task: 
+
+    - Mask Language Modelling (LM): simply mask some percentage of the input tokens at random, and then predict those masked tokens
+    - Next sentence prediction (NSP): predict sentence B from sentence A to model relationships between sentences
+    
+- This pre-training led to great performances in downstream tasks 
+
+
+![Source: Devlin et al., 2018](img/bert_training.png)
+
+
+## GPT-Series by OpenAI
+
+- Generative Pre-trained Transformer (GPT), is a set of state-of-the-art large language model developed by OpenAI.
+
+- Particularly GPT-3, released publicly in November 2022 together with a chat interface, caused a lot of public attention. 
+
+- Millions of users in a very short amount of time (faster than Facebook, Instagram, TikTok, etc...), now 1.5 Billion users
+
+<center>
+![](https://i0.wp.com/chatgptdutch.org/wp-content/uploads/2023/08/cropped-chatgpt-icon-logo.png){width="50%"}
+
+</center>
+
+
+## High-level architecture and training of GPT
+
+
+- GPT are decoder-only models
+
+
+![Source: Wikipedia](img/gpt-series.png)
+
+## Zero-Shot Text Classification with LLMS
+
+![](img/text_analysis_fundamentals/Slide06.png)
+## Fundamentals of zero-shot Learning
+
+- Zero-shot learning refers to the ability of a model to perform a task or make predictions on a set of classes or concepts that it has never seen or been explicitly trained on. 
+
+- In other words, the model can generalize its pre-trained knowledge to new, unseen tasks without specific examples or training data for those tasks.
+
+- Classic machine learning models (last lecture) are typically trained on a specific set of classes, and their performance is evaluated on the same set of classes during testing.
+
+- Zero-shot learning extends this capability by allowing the model to handle tasks or categories that were not part of its training set be
+
+- This works, because of the model's ability to capture and generalize information from the vast and varied data it has been exposed to during training.
+
+
+## Many LLMS are available at huggingface.co
+
+![](img/hugginface.png)
+
+## Workflow
+
+- There are generally two ways in which we can work with these models:
+
+    - Assess the model via the hugging face API (only smaller rates, but still useful)
+    - Download and use the model on our own computer (requires Python, computationally intensive)
+
+- In this course, we are going to "play around" with BERT models via the hugging face API
+
+    - We created a set of simple functions that allow to use different types of models for different purposes
+    - To use them, it makes sense to create an account on hugging face and set an Access token
+
+- For the project-phase, I will provide a more elaborate tutorial on how to use such models on your computer
+
+    - Will require to install python and use it via R
+
+
+## Using a BERT model to zero-shot topics
+
+```{r, echo = F}
+#save(results, file="results/hf_zeroshot1.RData")
+load("results/hf_zeroshot1.RData")
+```
+
+
+```{r, R.options = list(width = 120), eval = F}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+library(ccsamsterdamR)
+
+example_corpus <- tibble(
+  id = c(1:6),
+  text = c("To be, or not to be: that is the question.", 
+          "An atom is a particle that consists of a nucleus of protons and neutrons.",
+          "Senate passes stopgap bill to avert government shutdown.",
+          "S&P 500 ends Friday slightly higher, major averages cruise to third week of gains: Live updates",
+          "Joe Burrow out for season: League to investigate Bengals over injury, looking whether team violated NFL policy",
+          "Joe Biden attended the final NFL game together with French president Emmanuel Macron."))
+
+output <- hf_zeroshot(txt = example_corpus$text, 
+                      labels = c("Poetry", "Politics", "Physics", "Finance", "Sport" ),
+                      url = "https://api-inference.huggingface.co/models/MoritzLaurer/deberta-v3-large-zeroshot-v1")
+
+results <- output |> 
+  unnest(cols = c("labels", "scores")) %>%
+  as_tibble %>%
+  spread(labels, scores)
+results
+```
+
+```{r, echo = F}
+#| code-line-numbers: true
+#| class-output: output
+results |> 
+  mutate_if(is.numeric, round, 4)
+```
+
+
+## Using GPT for text classification
+
+- The simplest way to use GPT is to simply paste text into the chat and ask for the relevant topics (in fact, let's try this now!)
+
+- Yet, for larger text corpora this is not feasible and would not be "automatic"
+
+- To use GPT for text analysis purposes, we need to access the models via the Open AI API
+
+    - We created functions that allow to use the GPT models similarly to how we used any hugging face model
+    - Requires to pay per token (luckily not too expensive, we provide some accounts)
+
+
+## Using GPT-3.5-turbo for a simple topic classification
+
+```{r, echo = F}
+#save(result, file="results/gpt_zeroshot1.RData")
+load("results/gpt_zeroshot1.RData")
+```
+
+- We simply pass the corpus to the function `gpt_zeroshot()` included in the package `ccsamsterdamR`
+
+- We further pass a vector of labels that we want GPT to classify the text with.
+
+```{r, eval = F}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+library(ccsamsterdamR)
+
+output <- gpt_zeroshot(txt = example_corpus, 
+                       labels = c("Poetry", "Politics", "Physics", "Finance", "Sport"),
+                       model = "gpt-3.5-turbo-1106",
+                       justification = TRUE)
+
+result <- example_corpus |> 
+  left_join(output) 
+result
+```
+
+```{r, echo = F, R.options = list(width = 250)}
+#| code-line-numbers: true
+#| class-output: output
+result
+```
+
+
+## Comparison with classic machine learning
+
+- Let's compare the zero-shot performance of GPT-3.5 against our best neural network classifier from last week in predicting genre from music lyrics. 
+
+- To make things easier, we only use 87 songs from the lyrics data set.
+
+```{r, R.options = list(width = 120)}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+library(tidyverse)
+library(textrecipes)
+library(tidymodels)
+
+# Set seed
+set.seed(42)
+
+# Read data
+lyrics_data <- read_csv("data/lyrics-data-prep.csv") |>               
+  mutate(binary_genre = factor(ifelse(Genre =="Rock","rock", "other"),  
+                               levels = c("rock", "other") )) |>        
+  sample_frac(size = .001) |>                                           
+  select(doc_id = SLink, Artist, Song = SName, 
+         Genre, binary_genre, text = Lyric)
+head(lyrics_data)
+```
+
+
+## Predict genre with the neural network classifier
+
+- Because I saved the classifier from last week, I can now simply use it to predict the genre in the new subset
+
+- Remember, it was multilayer perceptrion with 1 hidden layer (6 nodes) and trained on 10,445 songs.
+
+```{r, R.options = list(width = 120)}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+# Setting relevant metrics
+class_metrics = metric_set(accuracy, precision, recall, f_meas)
+
+# Loading the model from last week
+load("results/m_ann.Rdata")
+
+# Predicting the new subset of the sample (the 87 songs!)
+predict_ann <- predict(m_ann, new_data=lyrics_data) |>
+  bind_cols(select(lyrics_data, binary_genre)) |>
+  rename(predicted=.pred_class, actual=binary_genre)
+```
+
+## Predicting genre with GPT-3.5
+
+- To predict the data with GPT (I am choosing the GPT-3.5 Turbo version here), we don't have to engage in elaborate preprocessing. We simply create an id-variable (helps to later combine predictions and actual gold standard). 
+
+- However, the GPT API allows on a certain amount of tokens per minute (~10,000) AND also only a certain amount of tokens per prompt (for this model at least 32,000)
+
+- This requires us to get creative and do a few things:
+
+    - split the sample in smaller chunks so that we can prompt one after the other
+    - map across those chunks and capture prediction in each step
+    - add a delay (`Sys.sleep(10)` = 10 seconds break) in between prompts
+
+## Predicting genre with GPT-3.5
+
+```{r, echo = F}
+#save(map_results, file="results/gpt_results.RData")
+load("results/gpt_results.RData")
+```
+
+
+- First, we have to create and ID-variable and split the data in small chunks:
+
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+# Create id variable
+lyrics_data_gpt <- lyrics_data |> mutate(id = 1:n()) |> select(id, text)
+
+# Split data set in smaller chunks
+splits <- lyrics_data_gpt |> gpt_split_data(n_per_group = 2)
+```
+
+```{r, eval = F}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+# Actual prompting via the API
+map_results <- map_df(splits, function(x) {
+  output <- gpt_zeroshot(
+    txt = x,
+    expertise = "You are in expert in classifying the genre of a song based on its lyrics.",
+    labels = c("rock", "other"),
+    model = "gpt-3.5-turbo-1106")
+  Sys.sleep(10)   # Adding 10 seconds delay between prompts to avoid token-per-minute rate limit
+  output
+})
+```
+
+- Finally, we can join the resulting predictions with the original data:
+
+```{r, eval = F}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+# Join predictions and original gold standard
+predict_gpt <- lyrics_data_gpt |>  
+  left_join(map_results) |> left_join(lyrics_data) |> select(id, labels, binary_genre) |> 
+  mutate(labels = factor(labels, levels = c("rock", "other")))
+```
+
+## Comparison between neural network and GPT-3.5
+
+- We can see that the neural network does better overall, but bear in mind that it was trained on a lot of data (10,445 songs!)
+
+- GPT-3.5 yields a quite astonishing performance, given that it was not trained to do this task at all!
+
+::: colums
+
+::: {.column width="50%"}
+
+```{r, eval = F}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+#| fig.width: 5
+#| fig.height: 4
+#| output-location: column-fragment
+bind_rows(
+  predict_ann |> 
+  class_metrics(truth = actual, 
+                estimate = predicted) |> 
+  mutate(approach = "classic ML: neural network"),
+  predict_gpt |> 
+  class_metrics(truth = binary_genre, 
+                estimate = labels) |> 
+  mutate(approach = "zero-shot learning: gpt-3.5")
+ ) |> 
+  ggplot(aes(x = .metric, y = .estimate, 
+             fill = approach)) +
+  geom_col(position = position_dodge()) +
+  geom_text(aes(y = .estimate -.05, 
+                label = round(.estimate, 2)), 
+            position = position_dodge(width = .75)) +
+  ylim(0, 1) +
+  coord_flip() +
+  theme(legend.position = "bottom") +
+  labs(x = "", y = "Score", fill = "")
+```
+
+
+:::
+
+::: {.column width="48%"}
+
+![](img/gpt_results.png)
+
+:::
+
+:::
+
+
+## Examples in the literature
+
+::: columns
+
+::: {.column width="80%"}
+
+- Baluff et al. (2023) investigated a recent case of media capture, a mutually corrupting relationship between political actors and
+media organizations.
+
+- This case involves former Austrian chancellor who allegedly colluded with a tabloid newspaper to receive better news coverage in exchange for increased ad placements by government institutions. 
+
+- They implemented automated content analysis (using BERT) of political news articles from six prominent Austrian news outlets spanning 2012 to 2021 (n = 188,203) and adopted a difference-in-differences approach to scrutinize political actors’ visibility and favorability in news coverage for patterns indicative of the alleged serious breach of professional political and journalistic norms. 
+
+:::
+
+::: {.column width="20%"}
+
+![](https://upload.wikimedia.org/wikipedia/commons/8/82/Sebastian_Kurz_%282018-02-28%29_%28cropped%29.jpg)
+
+:::
+:::
+
+## Methods
+
+- Uused a German-language GottBERT model (Scheible et al., 2020) that they further fine-tuned for the task using publicly available data from the AUTNES Manual Content Analysis of the Media Coverage 2017 and 2019 (Galyga et al., 2022; Litvyak et al., 2022c) 
+
+- Comparatively difficult task, but were able to reach a satisfactory F1-Score of 0.77 (precision = 0.77, recall = 0.77).
+
+
+![](img/kurz1.png)
+
+## Findings
+
+- Our findings indicate a substantial increase in the news coverage of the former Austrian chancellor within the news outlet that is alleged
+to have received bribes.
+
+- In contrast, several other political actors did not experience similar shifts in visibility nor are similar patterns identified in other media outlets. 
+
+![](img/kurz2.png)
+
+
+# Summary and conclusion {background-color="steelblue"}
+
+
+## A Look Back at the Chronology of NLP
+
+![](img/timeline/Slide1.png)
+
+## A Look Back at the Chronology of NLP
+
+![](img/timeline/Slide3.png)
+
+
+## A Look Back at the Chronology of NLP
+
+![](img/timeline/Slide3.png)
+
+## Explosion in model size?
+
+```{r, echo = F}
+#| fig.width: 8
+#| fig.height: 5
+options(scipen = 100000000)
+tibble(model = c("ELMo", "BERT-Large", "GPT-2", "Megatron-LM", "T5", "Turing NLG", "GPT-3", "Megatron-Turing NLG", "GPT-4"),
+       date = c("2018-02", "2018-10", "2019-02", "2019-08", "2019-09", "2020-02", "2020-07", "2021-10", "2023-03"),
+       size = c(94, 340, 1500, 8300, 11000, 17200, 175000, 530000, 1760000),
+       size_label = c("94M", "340M", "1.5B", "8.3B", "11B", "17.2B", "175B", "530B", "1.76T")) |> 
+  ggplot(aes(x = date, y = size)) +
+  geom_line(aes(group = 1), color = "grey10") +
+  geom_point(size = 3, color = "steelblue") +
+  geom_text(aes(label = size_label), nudge_y = -.15, nudge_x = .1, size = 3, color = "grey20") +
+  geom_text(aes(label = model), nudge_y = .2, nudge_x = -.25) +
+  scale_y_log10(breaks = scales::log_breaks()) +
+  theme_classic(base_size = 15) +
+  labs(x = "", y = "Model size (in Millions of Parameters)")
+```
+
+## Environmental Impact
+
+![](https://hai.stanford.edu/sites/default/files/inline-images/AIIndex_2023_StateofAI_Blog_4.jpg)
+
+
+
+## Ethical considerations
+
+- Training large language models requires significant computational resources, contributing to a substantial carbon footprint. Ethical considerations involve assessing the environmental impact of developing and deploying such models.
+
+- LLMs can inherit and perpetuate biases present in their training data. 
+
+- This can result in the generation of biased or unfair content, reflecting and potentially amplifying societal biases and stereotypes.
+
+- Developers and users must be aware of the potential for bias and take steps to mitigate it during model training and deployment.
+
+- The fact that some LLMs are developed, trained, and employed behind closed doors causes yet another ethical dilemma in using them!
+
+
+
+## Conclusion
+
+
+- We live in exciting times!
+
+- Advancement in NLP and AI are fast-paced; difficult to keep up
+
+- LLMs promise immense potential for communication research 
+
+    - Better performance on classification tasks
+    - Interesting insights can be gained from word and text embeddings
+
+- Yet, large language models can contain biases or even hallucinate!
+
+    - Validation, validation, validation!
+
+
+## {background-video="video/info.mp4"}
+
+
+# Thank you for your attention! {background-color="steelblue"}
+
+## Required Reading
+
+<br><br>
+
+Kroon, A., Welbers, K., Trilling, D., & van Atteveldt, W. (2023). Advancing Automated Content Analysis for a New Era of Media Effects Research: The Key Role of Transfer Learning. Communication Methods and Measures, 1-21
+
+<br>
+
+*(available on Canvas)*
+
+------------------------------------------------------------------------
+
+
+## Reference {.smaller}
+
+- Alammar, J. (2018). The illustrated Transformer. Retrieved from: https://jalammar.github.io/illustrated-transformer/
+
+-   Andrich, A., Bachl, M., & Domahidi, E. (2023). Goodbye, Gender Stereotypes? Trait Attributions to Politicians in 11 Years of News Coverage. Journalism & Mass Communication Quarterly, 100(3), 473-497. https://doi-org.vu-nl.idm.oclc.org/10.1177/10776990221142248
+
+-   Balluff, P., Eberl, J., Oberhänsli, S. J., Bernhard, J., Boomgaarden, H. G., Fahr, A., & Huber, M. (2023, September 15). The Austrian Political Advertisement Scandal: Searching for Patterns of "Journalism for Sale". https://doi.org/10.31235/osf.io/m5qx4
+
+- Devlin, J., Chang, M. W., Lee, K., & Toutanova, K. (2018). Bert: Pre-training of deep bidirectional transformers for language understanding. arXiv preprint arXiv:1810.04805.
+
+- Kroon, A., Welbers, K., Trilling, D., & van Atteveldt, W. (2023). Advancing Automated Content Analysis for a New Era of Media Effects Research: The Key Role of Transfer Learning. Communication Methods and Measures, 1-21
+
+- Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., ... & Polosukhin, I. (2017). Attention is all you need. Advances in neural information processing systems, 30.
+
+
+## Example Exam Question (Multiple Choice)
+
+How are word embeddings learned?
+
+<br>
+
+A. By assigning random numerical values to each word
+
+B. By analyzing the pronunciation of words
+
+C. By scanning the context of each word in a large corpus of documents
+
+D. By counting the frequency of words in a given text
+
+
+## Example Exam Question (Multiple Choice)
+
+How are word embeddings learned?
+
+<br>
+
+A. By assigning random numerical values to each word
+
+B. By analyzing the pronunciation of words
+
+**C. By scanning the context of each word in a large corpus of documents**
+
+D. By counting the frequency of words in a given text
+
+
+## Example Exam Question (Open Format)
+
+What does zero-shot learning refer to in the context of large language models?
+
+. . .
+
+In the context of large language models, zero-shot learning refers to the ability of a model to perform a task or make predictions on a set of classes or concepts that it has never seen or been explicitly trained on. Essentially, the model can generalize its knowledge to new, unseen tasks without specific examples or training data for those tasks.
+
+In traditional machine learning, models are typically trained on a specific set of classes, and their performance is evaluated on the same set of classes during testing. Zero-shot learning extends this capability by allowing the model to handle tasks or categories that were not part of its training set.
+
+In the case of large language models like GPT-3, which is trained on a diverse range of internet text, zero-shot learning means the model can understand and generate relevant responses for queries or prompts related to concepts it hasn't been explicitly trained on. This is achieved through the model's ability to capture and generalize information from the vast and varied data it has been exposed to during training.
