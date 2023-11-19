@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.1.251">
 
   <meta name="author" content="Dr.&nbsp;Philipp K. Masur">
-  <title>Computational Analysis of Digital Communication</title>
+  <title>Word Embeddings, Transformers, and Large Language Models</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -388,8 +388,8 @@
     <div class="slides">
 
 <section id="title-slide" data-background-image="https://storage.googleapis.com/exenzo-jobboard/bb/public/thumb/logo-jpg-57.jpg" data-background-position="top right" data-background-size="auto" class="center">
-  <h1 class="title">Computational Analysis of Digital Communication</h1>
-  <p class="subtitle">Week 4: Word Embeddings, Transformers, and Large Language Models</p>
+  <h1 class="title">Word Embeddings, Transformers, and Large Language Models</h1>
+  <p class="subtitle">Week 4: Bert, GPT, and Co</p>
   <p class="author">Dr.&nbsp;Philipp K. Masur</p>
 </section>
 
@@ -1125,9 +1125,8 @@
 </ul>
 
 <img data-src="img/gpt-series.png" class="r-stretch quarto-figure-center"><p class="caption">Source: Wikipedia</p></section>
-<section id="zero-shot-text-classification-with-llms" class="slide level2">
-<h2>Zero-Shot Text Classification with LLMS</h2>
-<p><img data-src="img/text_analysis_fundamentals/Slide06.png"> ## Fundamentals of zero-shot Learning</p>
+<section id="zero-shot-learning" class="slide level2">
+<h2>Zero-shot Learning</h2>
 <ul>
 <li><p>Zero-shot learning refers to the ability of a model to perform a task or make predictions on a set of classes or concepts that it has never seen or been explicitly trained on.</p></li>
 <li><p>In other words, the model can generalize its pre-trained knowledge to new, unseen tasks without specific examples or training data for those tasks.</p></li>
@@ -1136,6 +1135,10 @@
 <li><p>This works, because of the model’s ability to capture and generalize information from the vast and varied data it has been exposed to during training.</p></li>
 </ul>
 </section>
+<section id="zero-shot-text-classification-with-llms" class="slide level2">
+<h2>Zero-Shot Text Classification with LLMS</h2>
+
+<img data-src="img/text_analysis_fundamentals/Slide06.png" class="r-stretch"></section>
 <section id="many-llms-are-available-at-huggingface.co" class="slide level2">
 <h2>Many LLMS are available at huggingface.co</h2>
 
@@ -1145,17 +1148,18 @@
 <ul>
 <li><p>There are generally two ways in which we can work with these models:</p>
 <ul>
-<li>Assess the model via the hugging face API (only smaller rates, but still useful)</li>
-<li>Download and use the model on our own computer (requires Python, computationally intensive)</li>
+<li>Assess the model via the hugging face API (only smaller rates per minute, but still useful)</li>
+<li>Download and use the model on our own computer/GPU (requires Python, can be computationally intensive)</li>
 </ul></li>
 <li><p>In this course, we are going to “play around” with BERT models via the hugging face API</p>
 <ul>
 <li>We created a set of simple functions that allow to use different types of models for different purposes</li>
-<li>To use them, it makes sense to create an account on hugging face and set an Access token</li>
+<li>To use them, it makes sense to create an account on hugging face and create an access token (homework!)</li>
 </ul></li>
-<li><p>For the project-phase, I will provide a more elaborate tutorial on how to use such models on your computer</p>
+<li><p>For the project-phase, I will provide a more elaborate tutorial on how to use such models on your computer (but you don’t have to, if you don’t want to)</p>
 <ul>
-<li>Will require to install python and use it via R</li>
+<li>This will require to install python and use it via R</li>
+<li>Generally a bit more complicated</li>
 </ul></li>
 </ul>
 </section>
@@ -1203,12 +1207,15 @@
 <section id="using-gpt-for-text-classification" class="slide level2">
 <h2>Using GPT for text classification</h2>
 <ul>
-<li><p>The simplest way to use GPT is to simply paste text into the chat and ask for the relevant topics (in fact, let’s try this now!)</p></li>
-<li><p>Yet, for larger text corpora this is not feasible and would not be “automatic”</p></li>
+<li>The simplest way to use GPT is to simply paste text into the chat and ask for the relevant topics (in fact, let’s try this now!)</li>
+</ul>
+
+<img data-src="img/gpt_textprompt.png" class="r-stretch"><ul>
+<li><p>Yet, for larger text corpora this is not feasible</p></li>
 <li><p>To use GPT for text analysis purposes, we need to access the models via the Open AI API</p>
 <ul>
-<li>We created functions that allow to use the GPT models similarly to how we used any hugging face model</li>
-<li>Requires to pay per token (luckily not too expensive, we provide some accounts)</li>
+<li>We created functions that allow to use the GPT models similarly to how we used the hugging face models</li>
+<li>Requires to pay per token (luckily not too expensive, we will provide some accounts)</li>
 </ul></li>
 </ul>
 </section>
@@ -1404,7 +1411,7 @@
 <section id="methods" class="slide level2">
 <h2>Methods</h2>
 <ul>
-<li><p>Uused a German-language GottBERT model (Scheible et al., 2020) that they further fine-tuned for the task using publicly available data from the AUTNES Manual Content Analysis of the Media Coverage 2017 and 2019 (Galyga et al., 2022; Litvyak et al., 2022c)</p></li>
+<li><p>Used a German-language GottBERT model (Scheible et al., 2020) that they further fine-tuned for the task using publicly available data from the AUTNES Manual Content Analysis of the Media Coverage 2017 and 2019 (Galyga et al., 2022; Litvyak et al., 2022c)</p></li>
 <li><p>Comparatively difficult task, but were able to reach a satisfactory F1-Score of 0.77 (precision = 0.77, recall = 0.77).</p></li>
 </ul>
 
@@ -1425,15 +1432,15 @@
 <section id="a-look-back-at-the-chronology-of-nlp" class="slide level2">
 <h2>A Look Back at the Chronology of NLP</h2>
 
-<img data-src="img/timeline/Slide1.png" class="r-stretch"></section>
+<img data-src="img/timeline/Slide1b.png" class="r-stretch"></section>
 <section id="a-look-back-at-the-chronology-of-nlp-1" class="slide level2">
 <h2>A Look Back at the Chronology of NLP</h2>
 
-<img data-src="img/timeline/Slide3.png" class="r-stretch"></section>
+<img data-src="img/timeline/Slide2b.png" class="r-stretch"></section>
 <section id="a-look-back-at-the-chronology-of-nlp-2" class="slide level2">
 <h2>A Look Back at the Chronology of NLP</h2>
 
-<img data-src="img/timeline/Slide3.png" class="r-stretch"></section>
+<img data-src="img/timeline/Slide3b.png" class="r-stretch"></section>
 <section id="explosion-in-model-size" class="slide level2">
 <h2>Explosion in model size?</h2>
 
@@ -1455,18 +1462,41 @@
 <section id="conclusion" class="slide level2">
 <h2>Conclusion</h2>
 <ul>
-<li><p>We live in exciting times!</p></li>
 <li><p>Advancement in NLP and AI are fast-paced; difficult to keep up</p></li>
-<li><p>LLMs promise immense potential for communication research</p>
-<ul>
-<li>Better performance on classification tasks</li>
-<li>Interesting insights can be gained from word and text embeddings</li>
-</ul></li>
+<li><p>LLMs promise immense potential for communication research</p></li>
 <li><p>Yet, large language models can contain biases or even hallucinate!</p>
 <ul>
 <li>Validation, validation, validation!</li>
 </ul></li>
 </ul>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="https://s3.amazonaws.com/static.rogerebert.com/uploads/review/primary_image/reviews/great-movie-ai-artificial-intelligence-2001/EB20110707REVIEWS08110709988AR.jpg"></p>
+<p></p><figcaption>A.I (Steven Spielberg)</figcaption><p></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/ea5cab25137457.563425fa7c93f.png"></p>
+<p></p><figcaption>Her (Spike Jones)</figcaption><p></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="https://www.azcentral.com/gcdn/-mm-/8595b75e3791fcb4aef999b94940f74898e5ea59/c=3-0-1591-897/local/-/media/2015/04/22/Phoenix/Phoenix/635653113360425789-alicia-vikander.jpg"></p>
+<p></p><figcaption>Ex Machina (Alex Garland)</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="section-2" class="slide level2" data-background-video="video/info.mp4">
 <h2></h2>

@@ -1,6 +1,6 @@
 ---
-title: "Computational Analysis of Digital Communication"
-subtitle: "Week 4: Word Embeddings, Transformers, and Large Language Models"
+title: "Word Embeddings, Transformers, and Large Language Models"
+subtitle: "Week 4: Bert, GPT, and Co"
 author: "Dr. Philipp K. Masur"
 format:
   revealjs: 
@@ -823,10 +823,7 @@ movies |>
 
 ![Source: Wikipedia](img/gpt-series.png)
 
-## Zero-Shot Text Classification with LLMS
-
-![](img/text_analysis_fundamentals/Slide06.png)
-## Fundamentals of zero-shot Learning
+## Zero-shot Learning
 
 - Zero-shot learning refers to the ability of a model to perform a task or make predictions on a set of classes or concepts that it has never seen or been explicitly trained on. 
 
@@ -838,6 +835,10 @@ movies |>
 
 - This works, because of the model's ability to capture and generalize information from the vast and varied data it has been exposed to during training.
 
+## Zero-Shot Text Classification with LLMS
+
+![](img/text_analysis_fundamentals/Slide06.png)
+
 
 ## Many LLMS are available at huggingface.co
 
@@ -847,17 +848,18 @@ movies |>
 
 - There are generally two ways in which we can work with these models:
 
-    - Assess the model via the hugging face API (only smaller rates, but still useful)
-    - Download and use the model on our own computer (requires Python, computationally intensive)
+    - Assess the model via the hugging face API (only smaller rates per minute, but still useful)
+    - Download and use the model on our own computer/GPU (requires Python, can be computationally intensive)
 
 - In this course, we are going to "play around" with BERT models via the hugging face API
 
     - We created a set of simple functions that allow to use different types of models for different purposes
-    - To use them, it makes sense to create an account on hugging face and set an Access token
+    - To use them, it makes sense to create an account on hugging face and create an access token (homework!)
 
-- For the project-phase, I will provide a more elaborate tutorial on how to use such models on your computer
+- For the project-phase, I will provide a more elaborate tutorial on how to use such models on your computer (but you don't have to, if you don't want to)
 
-    - Will require to install python and use it via R
+    - This will require to install python and use it via R
+    - Generally a bit more complicated
 
 
 ## Using a BERT model to zero-shot topics
@@ -907,12 +909,15 @@ results |>
 
 - The simplest way to use GPT is to simply paste text into the chat and ask for the relevant topics (in fact, let's try this now!)
 
-- Yet, for larger text corpora this is not feasible and would not be "automatic"
+
+![](img/gpt_textprompt.png)
+
+- Yet, for larger text corpora this is not feasible
 
 - To use GPT for text analysis purposes, we need to access the models via the Open AI API
 
-    - We created functions that allow to use the GPT models similarly to how we used any hugging face model
-    - Requires to pay per token (luckily not too expensive, we provide some accounts)
+    - We created functions that allow to use the GPT models similarly to how we used the hugging face models
+    - Requires to pay per token (luckily not too expensive, we will provide some accounts)
 
 
 ## Using GPT-3.5-turbo for a simple topic classification
@@ -1143,7 +1148,7 @@ media organizations.
 
 ## Methods
 
-- Uused a German-language GottBERT model (Scheible et al., 2020) that they further fine-tuned for the task using publicly available data from the AUTNES Manual Content Analysis of the Media Coverage 2017 and 2019 (Galyga et al., 2022; Litvyak et al., 2022c) 
+- Used a German-language GottBERT model (Scheible et al., 2020) that they further fine-tuned for the task using publicly available data from the AUTNES Manual Content Analysis of the Media Coverage 2017 and 2019 (Galyga et al., 2022; Litvyak et al., 2022c) 
 
 - Comparatively difficult task, but were able to reach a satisfactory F1-Score of 0.77 (precision = 0.77, recall = 0.77).
 
@@ -1165,16 +1170,16 @@ to have received bribes.
 
 ## A Look Back at the Chronology of NLP
 
-![](img/timeline/Slide1.png)
+![](img/timeline/Slide1b.png)
 
 ## A Look Back at the Chronology of NLP
 
-![](img/timeline/Slide3.png)
+![](img/timeline/Slide2b.png)
 
 
 ## A Look Back at the Chronology of NLP
 
-![](img/timeline/Slide3.png)
+![](img/timeline/Slide3b.png)
 
 ## Explosion in model size?
 
@@ -1219,18 +1224,26 @@ tibble(model = c("ELMo", "BERT-Large", "GPT-2", "Megatron-LM", "T5", "Turing NLG
 ## Conclusion
 
 
-- We live in exciting times!
-
 - Advancement in NLP and AI are fast-paced; difficult to keep up
 
 - LLMs promise immense potential for communication research 
 
-    - Better performance on classification tasks
-    - Interesting insights can be gained from word and text embeddings
-
 - Yet, large language models can contain biases or even hallucinate!
 
     - Validation, validation, validation!
+
+
+::: {layout="[32, 32, 32]"}
+
+![A.I (Steven Spielberg)](https://s3.amazonaws.com/static.rogerebert.com/uploads/review/primary_image/reviews/great-movie-ai-artificial-intelligence-2001/EB20110707REVIEWS08110709988AR.jpg)
+
+![Her (Spike Jones)](https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/ea5cab25137457.563425fa7c93f.png)
+
+
+![Ex Machina (Alex Garland)](https://www.azcentral.com/gcdn/-mm-/8595b75e3791fcb4aef999b94940f74898e5ea59/c=3-0-1591-897/local/-/media/2015/04/22/Phoenix/Phoenix/635653113360425789-alicia-vikander.jpg)
+
+:::
+
 
 
 ## {background-video="video/info.mp4"}
