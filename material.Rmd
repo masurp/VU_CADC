@@ -142,7 +142,7 @@ In the third part of the course, students will work on their own research projec
 #### Lecture: Word Embeddings, Transformers and Large Language Models
 
 - Slides Lecture 4:
-    - [Download Slides] tba
+    - [Download Slides](slides/04_largelanguagemodels_2023.html)
 
 #### Practical Session 1
 
