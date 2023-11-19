@@ -245,7 +245,7 @@ text_data$text |>
 <center>
 
 | Type of token | Example                                                                    |
-|:-----------------|:-----------------------------------------------------|
+|:------------------|:----------------------------------------------------|
 | characters    | "I", "l", "o", "v", "e", "y", "o", "u", "v", "e", "r" ,"y",...             |
 | words         | "I", "love", "you", "very", "much"                                         |
 | sentences     | "I love you very much"                                                     |

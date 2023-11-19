@@ -46,6 +46,7 @@ editor: visual
 
 ::: columns
 ::: {.column width="45%"}
+
 1.  What is Machine Learning?
 
     1.1. Concepts and Principles
@@ -749,7 +750,6 @@ Using the Bayes Theorem for Classification
 -   Computes the prior probability ( *P* ) for every category ( *c* = outcome variable ) based on the training data set
 
 -   Computes the probability of every feature ( *x* ) to be a characteristic of the class ( *c* ); i.e., the relative frequency of the feature in category
-
 :::
 
 ::: {.column width="57%"}
@@ -777,11 +777,7 @@ Using the Bayes Theorem for Classification
 
 <br>
 
-<center>
-
-$P(rock|death) = \frac{P(death|rock) * P(rock)}{P(death)} = \frac{.15 * .54}{.05} = .162$
-
-</center>
+<center>$P(rock|death) = \frac{P(death|rock) * P(rock)}{P(death)} = \frac{.15 * .54}{.05} = .162$</center>
 
 ## Why using Naive Bayes?
 
@@ -1321,103 +1317,84 @@ The human brain abstracted to a numerical model
 
 ![Source: Arthur Arnx/Medium](https://miro.medium.com/v2/resize:fit:850/1*30YDnisanIYRHpC-L2Br-g.png)
 
-
 ## How does a neural network work?
 
 ::: columns
 ::: {.column width="50%"}
-
 ![](img/neuralnetwork2.png)
-
 :::
+
 ::: {.column width="50%"}
+-   The operation of an ANN is straightforward:
 
-- The operation of an ANN is straightforward: 
+    -   One enters variables as inputs (e.g., features of a text)
+    -   And after some calculations via different neurons, an output is returned (e.g. the word "politics")
 
-    - One enters variables as inputs (e.g., features of a text)
-    - And after some calculations via different neurons, an output is returned (e.g. the word “politics”)
-    
-- In the simplest form, neurons on are stacked on top of one another and a neuron of colum `n` can only be connected to inputs from column `n-1` and provide outputs to neurons in column `n+1`
-
+-   In the simplest form, neurons on are stacked on top of one another and a neuron of colum `n` can only be connected to inputs from column `n-1` and provide outputs to neurons in column `n+1`
 :::
 :::
 
 ## The Neuron as generalized linear model
 
-- First, a neuron adds up the value of every neurons from the previous column it is connected to (here `x1`, `x2`, and `x3`)
+-   First, a neuron adds up the value of every neurons from the previous column it is connected to (here `x1`, `x2`, and `x3`)
 
-- This value is multiplied, before being added, by another variable called "weight" (`w1`, `w2`, `w3`): the strength of connection between two neurons 
+-   This value is multiplied, before being added, by another variable called "weight" (`w1`, `w2`, `w3`): the strength of connection between two neurons
 
-- A bias value may be added (e.g., to regularize the network)
+-   A bias value may be added (e.g., to regularize the network)
 
-- After all those summations, the neuron finally applies a function called **activation function** to the obtained value
-
+-   After all those summations, the neuron finally applies a function called **activation function** to the obtained value
 
 ![Source: Arthur Arnx/Medium](https://miro.medium.com/v2/resize:fit:1302/format:webp/1*UA30b0mJUPYoPvN8yJr2iQ.jpeg)
 
-
 ## The activation function
-
 
 ::: columns
 ::: {.column width="50%"}
+-   The activation function serves to turn the total value calculated to a number between 0 and 1
 
-- The activation function serves to turn the total value calculated to a number between 0 and 1
+-   A threshold then defines at what value the function should "fire" the output to the next neuron (of course this can be probabilistic)
 
-- A threshold then defines at what value the function should "fire" the output to the next neuron (of course this can be probabilistic)
-
-- We can choose from different activation functions; which works best is sometimes hard to tell
-
-
+-   We can choose from different activation functions; which works best is sometimes hard to tell
 :::
 
 ::: {.column width="50%"}
-
 ![Source: AI Wiki](img/activation-functions.jpg)
-
-
 :::
 :::
 
 ## How the neural network learns
 
-- ![Source: 3Blue1Brown](https://developer-blogs.nvidia.com/wp-content/uploads/2022/02/DS-Guide-to-Gradient-Descent_Pic5.gif){style="float:right; padding-left: 2em; padding-bottom: 2em;"}In a first try, the ANN randomly sets weights and thus can't get the right output (except with luck)
+-   ![Source: 3Blue1Brown](https://developer-blogs.nvidia.com/wp-content/uploads/2022/02/DS-Guide-to-Gradient-Descent_Pic5.gif){style="float:right; padding-left: 2em; padding-bottom: 2em;"}In a first try, the ANN randomly sets weights and thus can't get the right output (except with luck)
 
-- If the (random) choice was a good one, actual parameters are kept and the next input is given. If the obtained output doesn’t match the desired output, the weights are changed.
+-   If the (random) choice was a good one, actual parameters are kept and the next input is given. If the obtained output doesn't match the desired output, the weights are changed.
 
-- To determine which weight is better to modify, a ANN uses **backpropagation**, which consists of "going back" on the neural network and inspect every connection to check how the output would behave according to a change on the weight
+-   To determine which weight is better to modify, a ANN uses **backpropagation**, which consists of "going back" on the neural network and inspect every connection to check how the output would behave according to a change on the weight
 
-- The **learning rate** thereby determines the speed a neural network will learn, i.e., how it will modify a weight (e.g., little by little or by bigger steps).
-    
-- Learning rate and number of learning cycles (epochs) have to be set manually upfront!
+-   The **learning rate** thereby determines the speed a neural network will learn, i.e., how it will modify a weight (e.g., little by little or by bigger steps).
+
+-   Learning rate and number of learning cycles (epochs) have to be set manually upfront!
 
 ## Architecture of a neural network
 
 ::: columns
-
 ::: {.column width="40%"}
-
 ![](img/neuralnetwork2.png)
-
 :::
 
 ::: {.column width="60%"}
-
 -   A simple model with just inputs and outputs is called a perceptron
 
 -   Despite its usefulness for many tasks, it cannot combine features
 
 -   But we can add "hidden" layers (latent variables), creating a multilayer perceptron, which is able to process more complex inputs
 
--   Backpropagation is thus the way a neural network adjusts the weights of its connections (-> Can take a long time to find the right solutions)
-
+-   Backpropagation is thus the way a neural network adjusts the weights of its connections (-\> Can take a long time to find the right solutions)
 :::
 :::
 
 . . .
 
 **Universal approximator:** Neural Networks with single hidden layer can represent every continuous function!
-
 
 ## Why use neural networks?
 
@@ -1674,8 +1651,8 @@ predict_ann |>
 # Create a model function for tuning a multilayer perceptrion neural network
 mlp_spec <- mlp(hidden_units = tune(),     #
                 penalty = tune(), 
-                epochs = tune()) %>% 
-  set_engine("brulee", trace = 0) %>% 
+                epochs = tune()) |> 
+  set_engine("brulee", trace = 0) |>  
   set_mode("classification")
 ```
 
