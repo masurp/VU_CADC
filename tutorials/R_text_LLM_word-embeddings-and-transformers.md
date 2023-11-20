@@ -77,7 +77,7 @@ date, as well as a first categorization of the tweets into “topics” or
 
 ``` r
 # Tweets on "New Year's Resolution
-tweets <- read_csv2("data/new_year_resolutions_dataset.csv")
+tweets <- read_csv2("new_year_resolutions_dataset.csv")
 tweets |> 
   head()
 ```
