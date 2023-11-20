@@ -11,7 +11,7 @@ editor_options:
 
 
 ```{r, echo=F, message=F}
-knitr::opts_chunk$set(echo = TRUE, results = FALSE, eval = F, message = FALSE, warning = FALSE, fig.keep = "none")
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 library(printr)
 ```
 

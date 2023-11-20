@@ -79,6 +79,15 @@ d <- read_csv(url) |>
 head(d)
 ```
 
+| doc_id | text                                                  | lemmata                                              | sentiment |
+|:-------|:------------------------------------------------------|:-----------------------------------------------------|:----------|
+| 10007  | Rabobank voorspelt flinke stijging hypotheekrente     | Rabobank voorspellen flink stijging hypotheekrente   | 0         |
+| 10027  | D66 wil reserves provincies aanspreken voor groei     | D66 willen reserve provincie aanspreken voor groei   | 0         |
+| 10037  | UWV: dit jaar meer banen                              | UWV dit jaar veel baan                               | 1         |
+| 10059  | Proosten op geslaagde beursgang Bols                  | proost op geslaagd beursgang bols                    | 1         |
+| 10099  | Helft werknemers gaat na 65ste met pensioen           | helft werknemer gaan na 65ste met pensioen           | 0         |
+| 10101  | Europa groeit voorzichtig dankzij lage energieprijzen | Europa groeien voorzichtig dankzij laag energieprijs | 1         |
+
 Here, we already did some minor preprocessing, including renaming some
 variables, and changing the gold standard from numeric to factor (which
 the tidymodels approach needs).
@@ -184,6 +193,8 @@ bind_rows(
   theme_minimal()
 ```
 
+![](R_text_supervised-text-classification-II_2023_complete_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
+
 **Small question:** What do we see here? Which algorithm performs
 better? Is the overall performance good?
 
@@ -210,21 +221,51 @@ to the results by van Atteveldt et al.?
 # Confusion matrix for SVM
 predict_svm |> 
   conf_mat(truth = actual, estimate = predicted)
+```
 
+    ##           Truth
+    ## Prediction  -1   0   1
+    ##         -1 397 294 104
+    ##         0  420 780 257
+    ##         1  223 310 376
+
+``` r
 # Precision per class
 predict_svm |> 
   group_by(predicted) |> 
   precision(truth = actual, estimate = predicted)
+```
 
+| predicted | .metric   | .estimator | .estimate |
+|:----------|:----------|:-----------|----------:|
+| -1        | precision | macro      | 0.4993711 |
+| 0         | precision | macro      | 0.5353466 |
+| 1         | precision | macro      | 0.4136414 |
+
+``` r
 # Confusion matrix for MLP
 predict_svm |> 
   conf_mat(truth = actual, estimate = predicted)
+```
 
+    ##           Truth
+    ## Prediction  -1   0   1
+    ##         -1 397 294 104
+    ##         0  420 780 257
+    ##         1  223 310 376
+
+``` r
 # Precision per class
 predict_mlp |> 
   group_by(predicted) |> 
   precision(truth = actual, estimate = predicted)
 ```
+
+| predicted | .metric   | .estimator | .estimate |
+|:----------|:----------|:-----------|----------:|
+| -1        | precision | macro      | 0.5613333 |
+| 0         | precision | macro      | 0.5460674 |
+| 1         | precision | macro      | 0.5467512 |
 
 There are many reasons for the differences in performance of the models
 original paper and our models here. Among other things, the following
@@ -261,8 +302,46 @@ performance scores from these two new models against the two previous
 models?
 
 ``` r
-# Code here
+# SVM with workflow
+m_svm2 <- fit(svm_workflow, data = train_data2)
+
+# Neural network with workflow
+m_mlp2 <- fit(mlp_workflow, data = train_data2)
+
+# Testing the SVM
+predict_svm2 <- predict(m_svm2, test_data2) |>    
+  bind_cols(select(test_data2, sentiment)) |>                    
+  rename(predicted=.pred_class, actual=sentiment) 
+
+# Testing the MLP
+predict_mlp2 <- predict(m_mlp2, test_data2) |>    
+  bind_cols(select(test_data2, sentiment)) |>                    
+  rename(predicted=.pred_class, actual=sentiment) 
+
+# Plot
+bind_rows(
+  class_metrics(predict_svm, truth = actual, estimate = predicted) |> 
+    mutate(algorithm = "Support Vector Machines",
+           recipe = "50% training data"),
+  class_metrics(predict_mlp, truth = actual, estimate = predicted) |> 
+    mutate(algorithm = "Neural Network",
+           recipe = "50% training data"),
+  class_metrics(predict_svm2, truth = actual, estimate = predicted) |> 
+    mutate(algorithm = "Support Vector Machines",
+           recipe = "95% training data"),
+  class_metrics(predict_mlp2, truth = actual, estimate = predicted) |> 
+    mutate(algorithm = "Neural Network",
+           recipe = "95% training data")
+  ) |> 
+  ggplot(aes(x = .metric, y = .estimate, label = round(.estimate, 2), fill = algorithm)) +
+  geom_col(alpha = .8, position = position_dodge()) +
+  geom_text(position = position_dodge(width = .75)) +
+  coord_flip() +
+  facet_wrap(~recipe, nrow = 2) +
+  ylim(0, 1)
 ```
+
+![](R_text_supervised-text-classification-II_2023_complete_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
 
 ## Grid search
 
@@ -340,7 +419,30 @@ cross-validation), resulting in 8 overall fits.
 # Check combinations
 mlp_param  |>  
       grid_regular(levels = c(hidden_units = 3, penalty = 3, epochs = 2))
+```
 
+| hidden_units |   penalty | epochs |
+|-------------:|----------:|-------:|
+|            6 | 0.0000100 |    600 |
+|           12 | 0.0000100 |    600 |
+|           18 | 0.0000100 |    600 |
+|            6 | 0.0003162 |    600 |
+|           12 | 0.0003162 |    600 |
+|           18 | 0.0003162 |    600 |
+|            6 | 0.0100000 |    600 |
+|           12 | 0.0100000 |    600 |
+|           18 | 0.0100000 |    600 |
+|            6 | 0.0000100 |   1000 |
+|           12 | 0.0000100 |   1000 |
+|           18 | 0.0000100 |   1000 |
+|            6 | 0.0003162 |   1000 |
+|           12 | 0.0003162 |   1000 |
+|           18 | 0.0003162 |   1000 |
+|            6 | 0.0100000 |   1000 |
+|           12 | 0.0100000 |   1000 |
+|           18 | 0.0100000 |   1000 |
+
+``` r
 # Run the tuning process (lean back, this will take a while as 18 * 2 = 36 neural networks need to be trained)
 mlp_reg_tune <- mlp_wflow_tune  |> 
   tune_grid(
@@ -360,7 +462,17 @@ in the best performance.
 # Which specification resulted in the highest performance?
 mlp_reg_tune |> 
   show_best()
+```
 
+| hidden_units |   penalty | epochs | .metric  | .estimator |      mean |   n |   std_err | .config               |
+|-------------:|----------:|-------:|:---------|:-----------|----------:|----:|----------:|:----------------------|
+|           18 | 0.0003162 |   1000 | accuracy | multiclass | 0.5498509 |   2 | 0.0013249 | Preprocessor1_Model15 |
+|           18 | 0.0003162 |    600 | accuracy | multiclass | 0.5481948 |   2 | 0.0000000 | Preprocessor1_Model06 |
+|            6 | 0.0100000 |    600 | accuracy | multiclass | 0.5480291 |   2 | 0.0051342 | Preprocessor1_Model07 |
+|           18 | 0.0000100 |    600 | accuracy | multiclass | 0.5447168 |   2 | 0.0031467 | Preprocessor1_Model03 |
+|           18 | 0.0000100 |   1000 | accuracy | multiclass | 0.5442199 |   2 | 0.0066247 | Preprocessor1_Model12 |
+
+``` r
 # Plot
 mlp_reg_tune |> 
   show_best(n = 32) |> 
@@ -372,6 +484,8 @@ mlp_reg_tune |>
   labs(x = "Number of nodes in hidden layer", y = "Accuracy",
        color = "Penalty")
 ```
+
+![](R_text_supervised-text-classification-II_2023_complete_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
 
 The best combination seems to be 12 nodes in the hidden layer, a penalty
 of 0.01 and 1000 epochs. Yet, we cannot get much closer to the value
