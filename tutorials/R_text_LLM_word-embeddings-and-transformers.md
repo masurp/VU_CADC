@@ -265,8 +265,8 @@ corpus the result is most similar to:
 
 ``` r
 # Extract word embeddings
-college <- tweet_matrix |> as.data.frame() |>  filter(grepl("college", rownames(tweet_matrix)))
-drinking <- tweet_matrix |> as.data.frame() |>  filter(grepl("drinking", rownames(tweet_matrix))) 
+college <- wvector(tweet_matrix, "college")
+drinking <- wvector(tweet_matrix, "drinking")
 
 # Compute the result
 whatisthis <- college - drinking 
