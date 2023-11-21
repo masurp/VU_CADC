@@ -150,7 +150,8 @@ Let's quickly check out this data set. If we e.g., arrange after the first dimen
 # 10 highest scoring words on dimension 1
 word_embeddings |> 
   arrange(-d1) |> 
-  select(1:10)
+  select(1:10) |> 
+  head(n = 10)
 ```
 
 
@@ -266,14 +267,16 @@ library(ccsamsterdamR)
 results <- hf_zeroshot(txt = tweets$text[1:10],
                        labels = c("health", "personal growth", "education", "career", "family", "relationship", "hobby"),
                        url = "https://api-inference.huggingface.co/models/MoritzLaurer/deberta-v3-large-zeroshot-v1")
-results
+results |> 
+  head()
 ```
 
 
 ```{r, echo = F}
 #save(results, file = "R_text_LLM_word-embeddings-and-transformers_complete_files/results.RData")
 load("R_text_LLM_word-embeddings-and-transformers_complete_files/results.RData")
-results
+results |> 
+  head()
 ```
 
 
@@ -289,13 +292,15 @@ result_table <- results |>
   as_tibble() |> 
   spread(labels, scores) |> 
   mutate_if(is.numeric, round, 5)
-result_table
+result_table |> 
+  head()
 
 # Get topic per tweet
 result_table |> 
   pivot_longer(career:relationship) |> 
   group_by(sequence) |> 
-  filter(value == max(value)) 
+  filter(value == max(value)) |> 
+  head()
 ```
 
 ## A more elaborate example
@@ -332,13 +337,15 @@ map_results <- map_df(splits, function(x) {
 })
 
 # Check
-map_results
+map_results |> 
+  head()
 ```
 
 ```{r, echo = F}
 #save(map_results, file = "R_text_LLM_word-embeddings-and-transformers_complete_files/map_results.RData")
 load("R_text_LLM_word-embeddings-and-transformers_complete_files/map_results.RData")
-map_results
+map_results |> 
+  head()
 ```
 
 
