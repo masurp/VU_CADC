@@ -162,7 +162,8 @@ In the third part of the course, students will work on their own research projec
     
 #### Additional resources: 
 
-- tba
+- The "original" [transformer paper](https://arxiv.org/abs/1706.03762) by Vaswani et al. 2017.
+- A fun, but suprisingly detailed [Intro to Transformers](https://www.youtube.com/watch?v=zxQyTK8quyY&t=845sSt) on Youtube (StatsQuest with Josh Starmer)
 
 <br>
 <hr>
