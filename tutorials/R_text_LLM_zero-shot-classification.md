@@ -68,12 +68,13 @@ movies |>
   tally() |> 
   filter(Genre != "unknown") |> 
   slice_max(n, n = 25) |> 
-  ggplot(aes(x = fct_reorder(Genre, n), y = n)) +
-  geom_col(fill = "steelblue") +
-  geom_label(aes(label = n), size = 2.5) +
+  ggplot(aes(x = fct_reorder(Genre, n), y = n, fill = Genre)) +
+  geom_col() +
+  geom_label(aes(label = n), fill = "white", size = 2.5) +
   coord_flip() +
   labs(x = "", y = "Number of movies in data set") +
-  theme_minimal()
+  theme_minimal() +
+  theme(legend.position = "none")
 ```
 
 As we can see, most movies are classified as “drama”, but we also have a
@@ -356,6 +357,10 @@ does quite well in classifying the movie genre.
 
 **Exercise:** If the API allows, try to up the number of splits that
 should be coded and reassess the performance.
+
+``` r
+# Solution here
+```
 
 # Some bonus stuff!
 
