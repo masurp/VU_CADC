@@ -152,7 +152,7 @@ In the third part of the course, students will work on their own research projec
 #### Practical Session 2
 
 - Handouts:
-    - [Zero-Shot Classification using GPT-4] tba
+    - Zero-Shot Classification using GPT ([handout](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_LLM_zero-shot-classification.md))
     
 
 #### Homework
