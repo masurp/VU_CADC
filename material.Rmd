@@ -147,7 +147,7 @@ In the third part of the course, students will work on their own research projec
 #### Practical Session 1
 
 - Handouts: 
-    - Text classification using Transformers ([handout](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_LLM_word-embeddings-and-transformers.md))
+    - Text classification using Transformers ([handout](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_LLM_word-embeddings-and-transformers.md), [handout completed](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_LLM_word-embeddings-and-transformers_complete.md))
 
 #### Practical Session 2
 
