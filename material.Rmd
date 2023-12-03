@@ -196,7 +196,7 @@ In the third part of the course, students will work on their own research projec
 #### Introduction to Group Research Projects
 
 - Slides Lecture 5:
-    - [Download Slides](tba)
+    - [Download Slides](slides/05_groupprojects.html)
     
 #### Additional methods and resources (handouts and video tutorials)
 
