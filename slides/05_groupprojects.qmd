@@ -14,95 +14,119 @@ format:
 editor: visual
 ---
 
-## You survived R and text analysis...
 
-![](https://miro.medium.com/max/400/1*V9iViGtxOnBE3_Y8SzIJCg.jpeg)
+
+
+# What was this first part of the course about? {background-color="steelblue"}
+
+Recap and overview.
+
 
 ---
 
+## A General Text Classification Pipeline
 
-
-
-# What was this course about?{background-color="steelblue"}
-
-
-
-## A General Model of Data Science
-
-![](img/datascience_model.png)
-
-
-
-_see Wickham & Grolemund, 2014_
+![](img/text_analysis_fundamentals/Slide01.png)
 
 
 
 ## Example: Political migration discourse on Facebook 
 
 
-1. Import: Scraping data from Facebook and importing it into R
+1. **Obtaining Text**: Scraping data from Facebook and importing it into R
 
-2. Tidy: Removing noise, summarizing data to creating a tidy data set
+2. **Feature Engineering:** Removing noise, summarizing data to creating a tidy data set, transforming the data into a document-feature matrix 
 
-3. Transform: Transforming the data into a document-feature matrix and run a sentiment analysis to classify the tweets
+3. **Text classification:** Run a sentiment analysis to classify the tweets (using a dictionary approach)
 
-4. Model: Predicting sentiment towards migration with party ideology
+4. **Validation:** Assessing the classification result against a gold-standard
 
-5. Visualize: Plotting the relationship between sentiment and party ideology with ggplot2
 
-6. Communicate: Creating a table and figure and report results in text
+. . .
+
+
+5. **Substantive Analysis**: Predicting sentiment towards migration with party ideology
+
+6. **Visualize**: Plotting the relationship between sentiment and party ideology with ggplot2
+
+7. **Communicate**: Creating a table and figure and report results in the paper
+
+<br>
 
 _Heidenreich et al., 2019_
 
-## Results of Heidenreich et al.
+
+## Example: Political migration discourse on Facebook
+
+
+::: {layout="[50, 50]"}
 
 ![](img/heidenreich_table3.png)
 
+![](img/heidenreich_table4.png)
 
-# What exactly did you learn in this (and previous) courses?{background-color="steelblue"}
+:::
+
+
+## Dictionary Approach
+
+![](img/text_analysis_fundamentals/Slide02.png)
+
+## Classic Machine Learning
+
+![](img/text_analysis_fundamentals/Slide03.png)
+
+
+## Machine Learning with Word-Embeddings
+
+![](img/text_analysis_fundamentals/Slide04.png)
+
+
+## Large Language Models with fine-tuning
+
+![](img/text_analysis_fundamentals/Slide05.png)
+
+## Large Language Models (zero-shot learning)
+
+![](img/text_analysis_fundamentals/Slide06.png)
+
+# What exactly did you learn in this (and previous) courses? {background-color="steelblue"}
 
 
 ## P1: Research Methods in Communication Science
 
-
 ::: {.column width="45%"}
-- **Bivariate regression:** Estimating relationships between two variables
+-   **Bivariate regression:** Estimating relationships between two variables
 
-- **Multiple linear regression:** Predicting a dependent variable with multiple independent variables
-        
-  - With numeric variables
-  - With categorical variables
-  - Testing assumptions
-      
-- **Mediation analysis:** Understanding how something may indirectly affect/relate to something else
+-   **Multiple linear regression:** Predicting a dependent variable with multiple independent variables
 
+    -   With numeric variables
+    -   With categorical variables
+    -   Testing assumptions
 
+-   **Mediation analysis:** Understanding how something may indirectly affect/relate to something else
 :::
 
 ::: {.column width="4%"}
 :::
 
 ::: {.column width="45%"}
+-   **Moderation analysis:** Testing whether a third variable influences a relationships or effect
 
+-   **Analysis of Variance:** Differences in variables
 
-- **Moderation analysis:** Testing whether a third variable influences a relationships or effect
-
-- **Analysis of Variance:** Differences in variables
-  
-    - Repeated Measurement ANOVAS
-    - Mixed Design ANOVAS
-    - MANOVAS
-
-
+    -   Repeated Measurement ANOVAS
+    -   Mixed Design ANOVAS
+    -   MANOVAS
 :::
 
-
-## In R...{auto-animate="true"}
-
-
+## Example: Regression in R... {auto-animate="true"}
 
 ```{r}
 #| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
 #| output-location: fragment
 library(tidyverse)
 d <- mtcars %>% select(mpg, hp, wt)
@@ -111,11 +135,13 @@ summary(m)
 
 ```
 
-
-## ...and visualized{auto-animate="true"}
+## ...and visualized {auto-animate="true"}
 
 ```{r}
 #| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
 #| fig-width: 5
 #| fig-height: 4.5
 d$predicted <- predict(m)   
@@ -127,11 +153,13 @@ ggplot(d, aes(x = hp, y = mpg)) +
   theme_classic()
 ```
 
-
-## ...and visualized{auto-animate="true"}
+## ...and visualized {auto-animate="true"}
 
 ```{r}
 #| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
 #| fig-width: 5
 #| fig-height: 4.5
 d$predicted <- predict(m)   
@@ -144,358 +172,505 @@ ggplot(d, aes(x = hp, y = mpg)) +
   theme_classic()
 ```
 
-
-
-
 ## P2: Comp. Analysis of Digital Communication
 
 ::: {.column width="45%"}
+-   **Data Wrangling:** Transforming and reshaping data to suit specific needs
 
-- **Data Wrangling:** Transforming and reshaping data to suit specific needs
+    -   Importing data in various formats (e.g., csv, json, text,...)
+    -   Transforming and summarizing data
+    -   Reshaping and joining data frames
 
-    - Importing data in various formats (e.g., csv, json, text,...)
-    - Transforming and summarizing data
-    - Reshaping and joining data frames
+-   **Data Visualization:** Creating insights with graphs and figures
 
-- **Data Visualization:** Creating insights with graphs and figures
-    
-    - Creating plots with ggplot2
-
+    -   Creating plots with ggplot2
 :::
 
 ::: {.column width="4%"}
 :::
 
 ::: {.column width="45%"}
+-   **Basics of Text Analysis:** Extracting meaning from text / text as data
 
-- **Basics of Text Analysis:** Extracting meaning from text / text as data
+    -   Text Preprocessing
+    -   Word frequencies and word clouds
+    -   Keyword searches
 
-    - Text Preprocessing 
-    - Word frequencies and word clouds
-    - Keyword searches
+-   **Automatic Text Analysis:** Classifying big corpora
 
-- **Automatic Text Analysis:** Classifying big corpora
-
-    - Dictionary Approaches
-    - Supervised text classification
-    - Unsupervised text classification: Topic Modeling
-
+    -   Dictionary Approaches
+    -   Supervised text classification
+    -   Word embeddings and Zero-Shot Classification With Large Language Models
 :::
 
 
-# Additional methods
-
-We have created more knowledge clips and tutorials that you can work through by yourself. These tutorials cover some things that you already know (but haven't done in R) and some things that might be interesting for the research projects:
-
-::: {.column width="45%"}
-
-- **Test theory and factor analyses:** Measuring abstract concepts
-
-    - Confirmatory factor analyses
-    - Exploratory factor analyses
-
-- **Advanced statistical modeling**: Dealing with non-normal data
-
-    - General linear model
-    - Multilevel Modeling
-    - Structural Equation Modeling
-
-:::
-
-::: {.column width="4%"}
-:::
-
-::: {.column width="45%"}
-
-- **Web Scraping:** Getting data from online sources
-
-- **Advanced Text Analysis**: Structural topic modeling
-    
-:::
 
 ## In R...
 
 ```{r, R.options = list(width = 120)}
 #| echo: true
-library(quanteda)
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+library(tidytext)
 url <- 'https://bit.ly/2QoqUQS'
-corp <- read_csv(url) %>% 
-  mutate(id = 1:n()) %>%
-  corpus(d, text_field = 'text', docid_field = "id") %>%
-  tokens(remove_punct = T, remove_numbers = T, remove_symbols = T) %>%   
-  tokens_tolower %>%                                                    
-  tokens_remove(stopwords('en')) %>%                                     
-  tokens_wordstem %>%
-  dfm
+corp <- read_csv(url) |> 
+  unnest_tokens(output = word, input = text) |> 
+  anti_join(stop_words) |> 
+  group_by(paragraph, word) |> 
+  summarize(n = n()) |> 
+  filter(n() > 100) |> 
+  cast_dfm(document = paragraph, term = word, value = n)
 corp
 ```
-
 
 ## Visualized
 
 ```{r}
 #| echo: true
-#| fig-width: 5
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+#| fig-width: 8
 #| fig-height: 4.5
 library(quanteda.textplots)
-textplot_wordcloud(corp, max_words = 50)
+textplot_wordcloud(corp, max_words = 100)
 ```
 
 
-# What happens now?{background-color="steelblue"}
+## Additional methods
+
+For the purpose of this course, we have created more knowledge clips and tutorials that you can work through by yourself (if necessary for the project at hand). These tutorials cover some things that you already know (but haven't done in R) as well as some new methods that might be interesting for the research projects:
+
+::: {.column width="45%"}
+-   **Test theory and factor analyses:** Measuring abstract concepts
+
+    -   Confirmatory factor analyses
+    -   Exploratory factor analyses
+    -   Item Responsy Theory (IRT) Analyses
+
+-   **Advanced statistical modeling**:
+
+    -   General linear model
+    -   Multilevel Modeling
+    -   Structural Equation Modeling
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="45%"}
+-   **Web Scraping:** Getting data from online sources
+-   **More Text Analysis**: Unsupervised Machine Learning: Topic modeling
+
+:::
+
+
+# What happens now? {background-color="steelblue"}
 
 ## Research projects
 
-- We create small working groups (4 students per group)
+-   We create small working groups (4 students per group)
 
-- You will conduct your own research projects
-    
-    - Getting data
-    - Preparing, coding, transforming....
-    - Visualizing
-    - Testing assumptions/hypotheses
-    
-- Teachers will supervise your progress and support you during practical sessions
+-   You will conduct your own research projects
 
-- At the end, you will present your findings in a mini-conference (19th of December)
+    -   Getting data
+    -   Preparing, coding, transforming....
+    -   Classifying texts
+    -   Visualizing
+    -   Testing assumptions/hypotheses
+
+-   Teachers will supervise your progress and support you during the practical sessions times
+
+-   At the end, you will present your findings at a mini-conference (18th of December)
+
 
 ## How will the supervision work?
 
-- Each group will be assigned to a) a teacher (Kasper, Alberto, or Santiago) and b) a particular time slot (during the usual practical session times)
+-   Each group will be assigned to a) a teacher (Kasper, Emma or Roan) and b) a particular time slot (during the usual practical session times)
 
-- You will have 15 minute time slots with your supervisor 
+-   You will have 15 minute time slots with your supervisor
 
-- In the first supervision session, you will explore ideas and find a topic
+-   The first supervision session is not on Tuesday, but on Thursday (so that you can go to the master thesis information session)
 
-- In the following sessions, we expect you to come prepared:
+-   Yet, until Tuesday night, you will need to send a short proposal for the research project to your teacher. 
+
+    - What is the topic? 
+    - What are your main research questions? 
+    - What method are you planning to use?
+
+-   In the actual supervision sessions, we expect you to come prepared:
 
     - Have concrete questions
     - Have the analysis up and running on your computer, so that we can help with problems
-    
+
 ## Final presentation at the "mini-conference"
 
-- Time and Date: 19th December from 9:00 to 12:00
+-   This mini-conference is going to be a so-called "poster-market" 
 
-    - There will be two parallel sessions
-    - More information soon (including exact schedule)
+-   You will create an academic poster (DIN A0) that we will put on the wall
 
-- You will give a 10-minute talk (including appropriate slides) in which you:
+-   During the conference, everybody (including some colleagues) will be able to check out everybody's project and discuss the results!
 
-    - introduce the research project (1-2 slides)
-    - describe theory and hypotheses (1 slide)
-    - explain the methods (1 slide)
-    - present the results (2 slides)
-    - discuss the findings (1-2 slides)
+-   Time and Date: 18th December from 9:30 to 11:30
 
-- You are required to hand in the RMarkdown, a compiled html output, and the slides beforehand (Sharp Deadline: 18th of December 2021 at 24:00)!
+    -   There will be three parallel sessions, but you can switch between them at all times
+    -   More information soon (including exact schedule)
 
 
-## Visual summary (Poster)
+## Poster sessions
 
-You are further required to create one summary poster that we will post on the course website:
+![Source: ECMWF on Flickr](https://live.staticflickr.com/65535/49127315191_95455d5cbd_b.jpg)
+
+
+
+## Example Posters
 
 ::: {.column width="45%"}
-
 ![](https://masurp.github.io/VU_CADC/poster/rg4.png)
-
 :::
 
 ::: {.column width="4%"}
 :::
 
 ::: {.column width="45%"}
-
 ![](https://masurp.github.io/VU_CADC/poster/rg29.png)
-
 :::
 
-# Let's build groups!{background-color="steelblue"}
 
+
+## What is a poster? {.smaller}
+
+::: columns
+::: {.column width="50%"}
+
+**Structural Elements:**
+
+- Title:
+
+    - Clearly state the main idea of your research.
+    - List the names of all contributors under the title
+
+-   Introduction:
+
+    - Briefly introduce the background of your resear
+    - Clearly outline the goals/hypotheses of your project
+
+- Methods:
+
+    - Describe your research methods concisely
+    - Use visuals like flowcharts or diagrams
+
+- Results:
+
+    - Display key findings using graphs, charts, and tables.
+    - Focus on clarity and avoid overwhelming details.
+
+- Discussion:
+  
+    - Interpret your results and relate them to the research objectives.
+    - Discuss implications and potential applications.
+
+- Reference
+
+:::
+::: {.column width="50%"}
+
+**Tips and Tricks for Design:**
+
+- Visual Hierarchy:
+
+    - Prioritize information using font size, color, and layout.
+    - Guide the viewer's eye through the content logically.
+
+- Consistent and Balanced Style:
+
+    - Maintain a consistent font style and color scheme.
+    - Choose few, clear, ad readable fonts.
+    - Ensure a balanced layout that is not too crowded.
+
+- Use of Images and Graphics:
+
+    - Include high-quality images, charts, and graphs.
+
+-   Color Scheme:
+
+    - Use a cohesive color scheme.
+    - Ensure good contrast between text and background colors.
+
+- Limited Text:
+
+    - Keep text concise and to the point.
+    - Use bullet points and short phrases instead of dense paragraphs.
+    
+:::
+:::
+
+
+## Two more examples
+
+::: {.column width="45%"}
+![](https://masurp.github.io/VU_CADC/poster/rg34.png)
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="45%"}
+![](https://masurp.github.io/VU_CADC/poster/rg20.png)
+:::
+
+
+## Deadlines
+
+-   You are required to hand in the RMarkdown, a compiled html output beforehand (Sharp Deadline: 17th of December 2021 at 24:00)!
+
+-   If you want to have your poster printed by us, you need to submit it via mail as PDF to p.k.masur@vu.nl on Thursday, the 14th of December 2023 (at 24.00 latest). We need the Friday to actually print them. 
+
+-   You can choose to print it yourself later, but unfortunately, we won't be able to reimburse you then. 
+
+<br>
+
+Any questions?
+
+# Let's build groups! {background-color="steelblue"}
 
 ## Canvas
 
-- Please go to Canvas
+-   Please go to Canvas
 
-- You can assign yourself to a group (max 4 people)
+-   You can assign yourself to a group (max 4 people)
 
-- In the end, I will put remaining people randomly into the groups with open places
+-   In the end, I will put remaining people randomly into the groups with open places
 
-- **Note:** Please only build groups with people from groups that have the same time slot (otherwise your supervision will be in at a different time than the practical sessions!)
-
+-   **Note:** Please only build groups with people from groups that have the same time slot (otherwise your supervision will be in at a different time than the practical sessions!)
 
 . . .
 
-- Go!
+-   Go!
 
 
-# Inspiration{background-color="steelblue"}
-
-
-## Where to get data?
-
-- Publicly repositories of research data sets
-
-   - http://gesis.org (Archive for social sciences)
-   - http://www.worldvaluessurvey.org/ (World Value Survey)
-   - http://www.europeansocialsurvey.org/data/ (European Social Survey)
-   - http://www.pewglobal.org/category/datasets/ (Pew Institute)
-   
-- Other public repositories
-
-   - https://github.com/awesomedata/awesome-public-datasets
-   - http://www.kaggle.com
-   - Many further online repositories...
-
-- More data:
-
-   - Your supervisor might also have data that suits your needs!
-   - Some of the data sets used in class may be interesting to reanalyze
+# Inspiration {background-color="steelblue"}
 
 
 ## Where to get data?
 
-- Scraping primary sources (see extra tutorial)
+-   Publicly repositories of research data sets
 
-  - Press releases from party website
-  - Existing archives
-  - Scraping Tweets from Twitter
+    -   http://gesis.org (Archive for social sciences)
+    -   http://www.worldvaluessurvey.org/ (World Value Survey)
+    -   http://www.europeansocialsurvey.org/data/ (European Social Survey)
+    -   http://www.pewglobal.org/category/datasets/ (Pew Institute)
 
-- Proprietary texts from third parties:
+-   Other public repositories
 
-  - digital archives (LexisNexis, factiva, etc.)
-  - social media APIs
+    -   https://github.com/awesomedata/awesome-public-datasets
+    -   http://www.kaggle.com
+    -   Many further online repositories... (you only need to find them!)
+
+-   More data:
+
+    -   Your supervisor might also have data that suits your needs!
+    -   Some of the data sets used in class may be interesting to (re-)analyze (check out canvas!)
+
+## Where to get data?
+
+-   Scraping primary sources 
+
+    -   Press releases from party website (manually, or building a scraper)
+    -   Wikipedia articles (see scraping tutorial)
+    
+
+-   Proprietary texts from third parties:
+
+    -   digital archives (mediacloud, paperboy)
+    -   social media APIs (talk to your supervisors, but unfortunately, access is no longer easy!)
+    
+- Your own social media data
+
+    - You can collect your own whatsapp, tiktok, youtube, google data
+    - Depending on the research question, this can be interesting too!
+    
   
-  
+## Getting news articles with "mediacloud"
+
+
+- We can search for relevant news article URLs via the platform https://search.mediacloud.org/
+
+
+![](img/mediacloud.png)
+
+## Scraping with `paperboy`
+
+- Once we have relevant URLs, we can use the package `paperboy` to read the actual articles into R:
+
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+library(paperboy)
+
+# Get urls from mediacloud
+d <- read_csv("data/mediacloud_example.csv")
+
+# Provide urls to this function
+corp <- pb_deliver(d$url[1:4])
+
+# Resulting text corpus
+corp |> 
+  select(domain, datetime, headline, text)
+
+```
+
+
+## Getting Text conversations with `rwhatsapp`
+
+- It is very easy to download a whatsapp conversation
+
+- We simply have to export the conversation
+
+![](img/whatsapp.png){width="400"}
+
+
+## Getting Text conversations with `rwhatsapp`
+
+- Using the package `rwhatsapp`, we can easly read this into R to get an interesting corpus:
+
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+library(rwhatsapp)
+chat <- rwa_read("data/_chat.txt") |> 
+  select(-author)
+chat
+```
+
+
+
 ## Important aspects
 
-1. Try to formulate an appropriate research question that can be studied with the respective data set, text documents, tweets,...
+1.  Try to formulate an appropriate research question that can be studied with the respective data set, text documents, tweets,...
 
-2. Formulate hypothesis using theory and relevant literature
+2.  Formulate hypotheses using theory and relevant literature
 
-3. Test scales before using them
+3.  If you combined text with survey data, test scales before using them!
 
-4. Engage in descriptive analyses
+4.  Engage in descriptive analyses
 
-5. Visualize data
+5.  Visualize data
 
-6. Test assumptions if necessary
+6.  Test assumptions if necessary
 
-7. Put an emphasis on correctly report and interpret your results
+7.  Put an emphasis on correctly reporting and interpreting your methods and results
 
 
-## Idea 1 (Corporate Communication)
 
-- **Goal:** Investigating sentiment in Tweets about a company before and after a crisis
-- **Method:** Scraping tweets, manual coding of a subset, supervised machine learning afterwards
+# Some ideas {background-color="steelblue"}
+
+## Idea 1 (Political Communication)
+
+-   **Goal:** Investigating news stance towards Dutch politicians before and after Elections
+-   **Method:** Several different possibilities:
+
+      - Scraping Dutch news articles via mediacloud and paperboy
+      - Identifying politician per paragraph using dictionary approach
+      - Classifying stance (sentiment) towards politician using Transformer models
+      - Alternatively: Code ~1000 news paragraphs yourself and train a ML algorithm to detect sentiment
+      - Test for differences in sentiment before vs. after the election
+
+![](https://allaboutexpats.nl/wp-content/uploads/2023/11/Screen-Shot-2023-11-16-at-2.33.49-PM.png)
+
+## Idea 2 (corporate communication)
+
+-   Goal: Create algorithm that can predict sentiment of financial news sufficiently well
+-   Method: Comparing various supervised machine learning approaches and zero-shot learning 
+-   Data: https://www.kaggle.com/ankurzing/sentiment-analysis-for-financial-news
+
+    - Use the data set to build various classifier and compare their performance
+    - Scrape financial news from media cloud and paperboy 
+    - Use the classifier to predict sentiment
+    - Compare with Atteveldt et al., 2018
+
+![](https://images.pexels.com/photos/159888/pexels-photo-159888.jpeg)
+
+
+## Idea 3 (media psychology / political communication)
+
+-  Goal: Detect linguistic bias in specific news paper articles
+-  Method: using dictionary or zero-shot approaches to detect linguistic bias (e.g., gender-bias)
+
+    - Scraping the news articles via mediacloud and paperboy
+    - Build dictionary or classifier to detect biases
+    - Test differences between newspapers (e.g. with different ideologies)
+
+
+![](https://images.pexels.com/photos/9760258/pexels-photo-9760258.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2)
+
+## Idea 4 (political communication)
+
+-   **Goal:** Topic modeling based on 18 years of Australian News Headlines: How did topics change over time?
+-   **Method:** Zero-shot topic modelling with GPT or BERT
+-   **Data:** https://www.kaggle.com/therohk/million-headlines
+
+
+## Idea 5 (Corporate Communication)
+
+-   **Goal:** Investigating sentiment in Tweets/News coverage about a company before and after a crisis
+-   **Method:** Manual coding of a subset, supervised machine learning afterwards or zero-shot learning
+    
+    - We might have some data available for some cases
 
 ![](https://upload.wikimedia.org/wikipedia/commons/e/ef/Big_Tech_companies.jpg)
 
-## Idea 2 (Media Psychology)
 
-::: {.column width="45%"}
+## Idea 6 (media psychology)
 
-- **Goal:** Cross-country differences in values over time
-- **Methods:** Secondary data analysis of the world value survey data, time series analysis
-- **Data:** https://www.worldvaluessurvey.org/
-:::
+-  Goal: Does chatGPT reproduce biases and stereotypes?
+-  Method: Prompt GPT to write stories or headlines, gather output and text analyze these for stereotypes or biases
 
-::: {.column width="4%"}
-:::
-
-::: {.column width="45%"}
-![](img/countries.jpg)
-
-:::
-
-## Idea 3 (Political communication)
-
-::: {.column width="45%"}
-
-- **Goal:** Predicting sentiment toward corona measures based on party affiliation
-- **Method:** Scraping tweets, manual coding of sentiment, supervised machine learning, regression analysis
-
-:::
-
-::: {.column width="4%"}
-:::
-
-::: {.column width="45%"}
-
-![](img/rutte.png)
-
-:::
-
-## Idea 4 (corporate communication)
-
-- Goal: Create algorithm that can predict sentiment of financial news sufficiently well
-- Method: Comparing various supervised machine learning algorithms
-- Data: https://www.kaggle.com/ankurzing/sentiment-analysis-for-financial-news
+    - Create prompts that GPT might intepret in certain ways
+    - Prompt GPT systematically 
+    - Collect output and classify them using a BERT model (?)
+    - Test for systematic bias or stereotyping
 
 
-## Idea 5 (media psychology)
-
-- Goal: Assessing the factorial validity of the Big Five Personality inventory
-- Methods: Descriptive analyses, visualization, assumptions text, exploratory/confirmatory factor analyses
-- Data: https://www.kaggle.com/tunguz/big-five-personality-test
-
-![](https://upload.wikimedia.org/wikipedia/commons/1/1f/Big_five_gam.jpg)
+## Idea 7  
 
 
-## Idea 6 (political communication)
+- Goal: Use of emotions (or emojis) in whatsapp conversations
+- Method: Classifying emotions in whatsapp conversation (would require a bit more than just your own)
+
+    - Export whatsapp conversations and import into R with `rwhatsapp`
+    - Classify emotions / extract emojis and show differences in personalities, language use
+    - Alternatively use word-embeddings to compare similarity in language use across users/conversations...
+  
 
 
-- **Goal:** Comparing performance of different algorithms in predicting news categories
-- **Method:** Replication of Van Atteveldt et al (2021) based on HuffPost Articles, manual coding, dictionary approaches, supervised machine learning
-- **Data:** https://www.kaggle.com/rmisra/news-category-dataset
+## Other ideas
 
 
-## Idea 7 (corporate communication)
+- Analyzing your own data
+    
+    - You can easily export your netflix use data, spotify use data, google maps location data, your browser history and many more "trace" data
+    - Although the amount of individuals you can get data on my be limited, the data is nonetheless quite rich and can be interesting to analyze/explore
+    - The challenge will be to find a good research question!
+    
+    
+- Going beyond text analysis
 
-::: {.column width="45%"}
-
-- **Goal:** Predicting stock prices with sentiment expressed in tweets
-- **Method:** Merging information on stock prices of certain companies with Twitter data
-
-
-:::
-
-::: {.column width="4%"}
-:::
-
-::: {.column width="45%"}
-![](https://images.pexels.com/photos/6801648/pexels-photo-6801648.jpeg)
-
-:::
+    - You also learned a lot about data wrangling and visualization in this course
+    - You can also use this knowledge and engage in other type of data analyses
+    
+    - e.g., using world value survey data to show trends in values over time and across countries; secondary analyses of large-scale survey data (Pew Research, Gesis...)
 
 
-## Idea 8 (media psychology)
+# Further questions? {background-color="steelblue"}
 
-::: {.column width="45%"}
+# Thank you for your attention! {background-color="steelblue"}
 
-- **Goal:** Detect emotions in company tweets (or related to a certain event)
-- **Methods:** Emotion detection based on Emotion Sensor Data set
-- **Dictionary:** https://www.kaggle.com/iwilldoit/emotions-sensor-data-set
-
-:::
-
-::: {.column width="4%"}
-:::
-
-::: {.column width="45%"}
-
-![](https://images.pexels.com/photos/3812743/pexels-photo-3812743.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260)
-
-:::
-
-
-
-## Idea 9 (political communication)
-
-- **Goal:** Topic Modeling based on 18 years of Australian News Headlines
-- **Method:** Unsupervised topic modeling
-- **Data:** https://www.kaggle.com/therohk/million-headlines
-
-
-# Further questions?{background-color="steelblue"}
-
-# Thank you for your attention!{background-color="steelblue"}
+## {background-image="https://images.pexels.com/photos/6102000/pexels-photo-6102000.jpeg"}

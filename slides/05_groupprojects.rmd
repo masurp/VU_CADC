@@ -1,6 +1,6 @@
 ---
 title: "Computational Analysis of Digital Communication"
-subtitle: "Week 5: Group Research Projects"
+subtitle: "Week 6: Group Research Projects"
 author: ""
 institute: ""
 date: "Dr. Philipp K. Masur | p.k.masur@vu.nl"
@@ -33,9 +33,6 @@ output:
 
 ```
 
-# Fijne Sinterklaas!
-
-![](https://images.pexels.com/photos/5959468/pexels-photo-5959468.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260)
 
 ---
 
@@ -44,48 +41,62 @@ output:
 ![](https://miro.medium.com/max/400/1*V9iViGtxOnBE3_Y8SzIJCg.jpeg)
 ---
 
-class: inverse, center, middle
 
 # What was this course about?
 
-Getting an overview
+Recap and overview.
 
 
 ---
 
-# A General Model of Data Science
+# A General Text Classification Pipeline
 
-![](img/datascience_model.png)
+![](img/text_analysis_fundamentals/Slide01.png)
 
-_see Wickham & Grolemund, 2014_
 
----
 
 # Example: Political migration discourse on Facebook 
 
 
-1. Import: Scraping data from Facebook and importing it into R
+1. **Obtaining Text**: Scraping data from Facebook and importing it into R
 
-2. Tidy: Removing noise, summarizing data to creating a tidy data set
+2. **Feature Enginieering:** Removing noise, summarizing data to creating a tidy data set, transforming the data into a document-feature matrix 
 
-3. Transform: Transforming the data into a document-feature matrix and run a sentiment analysis to classify the tweets
+3. **Text classification:** Run a sentiment analysis to classify the tweets (using a dictionary approach)
 
-4. Model: Predicting sentiment towards migration with party ideology
+4. **Validation:** Assessing the classification result against a gold-standard
 
-5. Visualize: Plotting the relationship between sentiment and party ideology with ggplot2
 
-6. Communicate: Creating a table and figure and report results in text
+. . .
+
+
+5. **Substantive Analysis**: Predicting sentiment towards migration with party ideology
+
+6. **Visualize**: Plotting the relationship between sentiment and party ideology with ggplot2
+
+7. **Communicate**: Creating a table and figure and report results in the paper
+
+<br>
 
 _Heidenreich et al., 2019_
 
----
+
+# Example: Political migration discourse on Facebook
 
 
-class: inverse, center, middle
+::: {layout="[40, 60]"}
 
-# Recap
+![](img/heidenreich_table3.png)
+![](img/heidenreich_table4.png)
 
-What exactly did you learn in this (and previous) courses?
+:::
+
+
+
+
+# How does this course relate to the P1 course?
+
+Text classification and statistics
 ---
 
 # P1 Course: Research Methods in Communication Science
@@ -132,7 +143,6 @@ What exactly did you learn in this (and previous) courses?
 - **Data Visualization:** Creating insights with graphs and figures
     
     - Creating plots with ggplot2
-    - Guidelines for creating "good" graphs
 
 ]
 
@@ -148,6 +158,7 @@ What exactly did you learn in this (and previous) courses?
 
     - Dictionary Approaches
     - Supervised Machine Learning
+    - Large Language Models
 
 ]
 
@@ -190,7 +201,6 @@ We have created more knowledge clips and tutorials that you can work through by 
 
 ---
 
-class: inverse, center, middle
 
 # What happens now?
 
@@ -204,7 +214,7 @@ Small group research projects
 
 - You will conduct your own research projects
     
-    - Getting data
+    - Obtaining data
     - Preparing, coding, transforming....
     - Visualizing
     - Testing assumptions/hypotheses
@@ -459,11 +469,15 @@ Some ideas for your research projects
 ---
 
 
+
 class: inverse, center, middle
 
 # Further questions?
 
----
+
+
+## {background-image="https://images.pexels.com/photos/5959468/pexels-photo-5959468.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"}
+
 
 class: inverse, center, middle
 

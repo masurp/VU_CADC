@@ -393,39 +393,66 @@
   <p class="author">Dr.&nbsp;Philipp K. Masur</p>
 </section>
 
-<section id="you-survived-r-and-text-analysis" class="slide level2">
-<h2>You survived R and text analysis…</h2>
-
-<img data-src="https://miro.medium.com/max/400/1*V9iViGtxOnBE3_Y8SzIJCg.jpeg" class="r-stretch"></section>
-<section class="slide level2">
-
-</section>
 <section>
-<section id="what-was-this-course-about" class="title-slide slide level1 center" data-background-color="steelblue">
-<h1>What was this course about?</h1>
-
+<section id="what-was-this-first-part-of-the-course-about" class="title-slide slide level1 center" data-background-color="steelblue">
+<h1>What was this first part of the course about?</h1>
+<p>Recap and overview.</p>
 </section>
-<section id="a-general-model-of-data-science" class="slide level2">
-<h2>A General Model of Data Science</h2>
+<section id="a-general-text-classification-pipeline" class="slide level2">
+<h2>A General Text Classification Pipeline</h2>
 
-<img data-src="img/datascience_model.png" class="r-stretch"><p><em>see Wickham &amp; Grolemund, 2014</em></p>
-</section>
+<img data-src="img/text_analysis_fundamentals/Slide01.png" class="r-stretch"></section>
 <section id="example-political-migration-discourse-on-facebook" class="slide level2">
 <h2>Example: Political migration discourse on Facebook</h2>
 <ol type="1">
-<li><p>Import: Scraping data from Facebook and importing it into R</p></li>
-<li><p>Tidy: Removing noise, summarizing data to creating a tidy data set</p></li>
-<li><p>Transform: Transforming the data into a document-feature matrix and run a sentiment analysis to classify the tweets</p></li>
-<li><p>Model: Predicting sentiment towards migration with party ideology</p></li>
-<li><p>Visualize: Plotting the relationship between sentiment and party ideology with ggplot2</p></li>
-<li><p>Communicate: Creating a table and figure and report results in text</p></li>
+<li><p><strong>Obtaining Text</strong>: Scraping data from Facebook and importing it into R</p></li>
+<li><p><strong>Feature Engineering:</strong> Removing noise, summarizing data to creating a tidy data set, transforming the data into a document-feature matrix</p></li>
+<li><p><strong>Text classification:</strong> Run a sentiment analysis to classify the tweets (using a dictionary approach)</p></li>
+<li><p><strong>Validation:</strong> Assessing the classification result against a gold-standard</p></li>
 </ol>
+<div class="fragment">
+<ol start="5" type="1">
+<li><p><strong>Substantive Analysis</strong>: Predicting sentiment towards migration with party ideology</p></li>
+<li><p><strong>Visualize</strong>: Plotting the relationship between sentiment and party ideology with ggplot2</p></li>
+<li><p><strong>Communicate</strong>: Creating a table and figure and report results in the paper</p></li>
+</ol>
+<p><br></p>
 <p><em>Heidenreich et al., 2019</em></p>
+</div>
 </section>
-<section id="results-of-heidenreich-et-al." class="slide level2">
-<h2>Results of Heidenreich et al.</h2>
+<section id="example-political-migration-discourse-on-facebook-1" class="slide level2">
+<h2>Example: Political migration discourse on Facebook</h2>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="img/heidenreich_table3.png"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="img/heidenreich_table4.png"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="dictionary-approach" class="slide level2">
+<h2>Dictionary Approach</h2>
 
-<img data-src="img/heidenreich_table3.png" class="r-stretch"></section></section>
+<img data-src="img/text_analysis_fundamentals/Slide02.png" class="r-stretch"></section>
+<section id="classic-machine-learning" class="slide level2">
+<h2>Classic Machine Learning</h2>
+
+<img data-src="img/text_analysis_fundamentals/Slide03.png" class="r-stretch"></section>
+<section id="machine-learning-with-word-embeddings" class="slide level2">
+<h2>Machine Learning with Word-Embeddings</h2>
+
+<img data-src="img/text_analysis_fundamentals/Slide04.png" class="r-stretch"></section>
+<section id="large-language-models-with-fine-tuning" class="slide level2">
+<h2>Large Language Models with fine-tuning</h2>
+
+<img data-src="img/text_analysis_fundamentals/Slide05.png" class="r-stretch"></section>
+<section id="large-language-models-zero-shot-learning" class="slide level2">
+<h2>Large Language Models (zero-shot learning)</h2>
+
+<img data-src="img/text_analysis_fundamentals/Slide06.png" class="r-stretch"></section></section>
 <section>
 <section id="what-exactly-did-you-learn-in-this-and-previous-courses" class="title-slide slide level1 center" data-background-color="steelblue">
 <h1>What exactly did you learn in this (and previous) courses?</h1>
@@ -460,41 +487,41 @@
 </ul>
 </div>
 </section>
-<section id="in-r" class="slide level2" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">In R…</h2>
+<section id="example-regression-in-r" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Example: Regression in R…</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb1-1" class="hljs-ln-code"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2" class="hljs-ln-code"><a href="#cb1-2"></a>d <span class="ot">&lt;-</span> mtcars <span class="sc">%&gt;%</span> <span class="fu">select</span>(mpg, hp, wt)</span>
-<span id="cb1-3" class="hljs-ln-code"><a href="#cb1-3"></a>m <span class="ot">&lt;-</span> <span class="fu">lm</span>(mpg <span class="sc">~</span> hp, d)</span>
-<span id="cb1-4" class="hljs-ln-code"><a href="#cb1-4"></a><span class="fu">summary</span>(m)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1" data-code-line-numbers="true"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2"></a>d <span class="ot">&lt;-</span> mtcars <span class="sc">%&gt;%</span> <span class="fu">select</span>(mpg, hp, wt)</span>
+<span id="cb1-3"><a href="#cb1-3"></a>m <span class="ot">&lt;-</span> <span class="fu">lm</span>(mpg <span class="sc">~</span> hp, d)</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">summary</span>(m)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-lm(formula = mpg ~ hp, data = d)
-
-Residuals:
-    Min      1Q  Median      3Q     Max 
--5.7121 -2.1122 -0.8854  1.5819  8.2360 
-
-Coefficients:
-            Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) 30.09886    1.63392  18.421  &lt; 2e-16 ***
-hp          -0.06823    0.01012  -6.742 1.79e-07 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 3.863 on 30 degrees of freedom
-Multiple R-squared:  0.6024,    Adjusted R-squared:  0.5892 
-F-statistic: 45.46 on 1 and 30 DF,  p-value: 1.788e-07</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource output number-lines code-with-copy"><code class="sourceCode"><span id="cb2-1"><a href="#cb2-1"></a></span>
+<span id="cb2-2"><a href="#cb2-2"></a>Call:</span>
+<span id="cb2-3"><a href="#cb2-3"></a>lm(formula = mpg ~ hp, data = d)</span>
+<span id="cb2-4"><a href="#cb2-4"></a></span>
+<span id="cb2-5"><a href="#cb2-5"></a>Residuals:</span>
+<span id="cb2-6"><a href="#cb2-6"></a>    Min      1Q  Median      3Q     Max </span>
+<span id="cb2-7"><a href="#cb2-7"></a>-5.7121 -2.1122 -0.8854  1.5819  8.2360 </span>
+<span id="cb2-8"><a href="#cb2-8"></a></span>
+<span id="cb2-9"><a href="#cb2-9"></a>Coefficients:</span>
+<span id="cb2-10"><a href="#cb2-10"></a>            Estimate Std. Error t value Pr(&gt;|t|)    </span>
+<span id="cb2-11"><a href="#cb2-11"></a>(Intercept) 30.09886    1.63392  18.421  &lt; 2e-16 ***</span>
+<span id="cb2-12"><a href="#cb2-12"></a>hp          -0.06823    0.01012  -6.742 1.79e-07 ***</span>
+<span id="cb2-13"><a href="#cb2-13"></a>---</span>
+<span id="cb2-14"><a href="#cb2-14"></a>Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
+<span id="cb2-15"><a href="#cb2-15"></a></span>
+<span id="cb2-16"><a href="#cb2-16"></a>Residual standard error: 3.863 on 30 degrees of freedom</span>
+<span id="cb2-17"><a href="#cb2-17"></a>Multiple R-squared:  0.6024,    Adjusted R-squared:  0.5892 </span>
+<span id="cb2-18"><a href="#cb2-18"></a>F-statistic: 45.46 on 1 and 30 DF,  p-value: 1.788e-07</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </section>
 <section id="and-visualized" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">…and visualized</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb3-1" class="hljs-ln-code"><a href="#cb3-1"></a>d<span class="sc">$</span>predicted <span class="ot">&lt;-</span> <span class="fu">predict</span>(m)   </span>
+<div class="sourceCode cell-code" id="cb3" data-code-line-numbers="true"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb3-1" class="hljs-ln-code"><a href="#cb3-1"></a>d<span class="sc">$</span>predicted <span class="ot">&lt;-</span> <span class="fu">predict</span>(m)   </span>
 <span id="cb3-2" class="hljs-ln-code"><a href="#cb3-2"></a>d<span class="sc">$</span>residuals <span class="ot">&lt;-</span> <span class="fu">residuals</span>(m)</span>
 <span id="cb3-3" class="hljs-ln-code"><a href="#cb3-3"></a></span>
 <span id="cb3-4" class="hljs-ln-code"><a href="#cb3-4"></a><span class="fu">ggplot</span>(d, <span class="fu">aes</span>(<span class="at">x =</span> hp, <span class="at">y =</span> mpg)) <span class="sc">+</span></span>
@@ -507,7 +534,7 @@ F-statistic: 45.46 on 1 and 30 DF,  p-value: 1.788e-07</code></pre>
 <section id="and-visualized-1" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">…and visualized</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb4-1" class="hljs-ln-code"><a href="#cb4-1"></a>d<span class="sc">$</span>predicted <span class="ot">&lt;-</span> <span class="fu">predict</span>(m)   </span>
+<div class="sourceCode cell-code" id="cb4" data-code-line-numbers="true"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb4-1" class="hljs-ln-code"><a href="#cb4-1"></a>d<span class="sc">$</span>predicted <span class="ot">&lt;-</span> <span class="fu">predict</span>(m)   </span>
 <span id="cb4-2" class="hljs-ln-code"><a href="#cb4-2"></a>d<span class="sc">$</span>residuals <span class="ot">&lt;-</span> <span class="fu">residuals</span>(m)</span>
 <span id="cb4-3" class="hljs-ln-code"><a href="#cb4-3"></a></span>
 <span id="cb4-4" class="hljs-ln-code"><a href="#cb4-4"></a><span class="fu">ggplot</span>(d, <span class="fu">aes</span>(<span class="at">x =</span> hp, <span class="at">y =</span> mpg)) <span class="sc">+</span></span>
@@ -549,23 +576,58 @@ F-statistic: 45.46 on 1 and 30 DF,  p-value: 1.788e-07</code></pre>
 <ul>
 <li>Dictionary Approaches</li>
 <li>Supervised text classification</li>
-<li>Unsupervised text classification: Topic Modeling</li>
+<li>Word embeddings and Zero-Shot Classification With Large Language Models</li>
 </ul></li>
 </ul>
 </div>
-</section></section>
-<section>
-<section id="additional-methods" class="title-slide slide level1 center">
-<h1>Additional methods</h1>
-<p>We have created more knowledge clips and tutorials that you can work through by yourself. These tutorials cover some things that you already know (but haven’t done in R) and some things that might be interesting for the research projects:</p>
+</section>
+<section id="in-r" class="slide level2">
+<h2>In R…</h2>
+<div class="cell" data-r.options="{&quot;width&quot;:120}">
+<div class="sourceCode cell-code" id="cb5" data-code-line-numbers="true"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">library</span>(tidytext)</span>
+<span id="cb5-2"><a href="#cb5-2"></a>url <span class="ot">&lt;-</span> <span class="st">'https://bit.ly/2QoqUQS'</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>corp <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(url) <span class="sc">|&gt;</span> </span>
+<span id="cb5-4"><a href="#cb5-4"></a>  <span class="fu">unnest_tokens</span>(<span class="at">output =</span> word, <span class="at">input =</span> text) <span class="sc">|&gt;</span> </span>
+<span id="cb5-5"><a href="#cb5-5"></a>  <span class="fu">anti_join</span>(stop_words) <span class="sc">|&gt;</span> </span>
+<span id="cb5-6"><a href="#cb5-6"></a>  <span class="fu">group_by</span>(paragraph, word) <span class="sc">|&gt;</span> </span>
+<span id="cb5-7"><a href="#cb5-7"></a>  <span class="fu">summarize</span>(<span class="at">n =</span> <span class="fu">n</span>()) <span class="sc">|&gt;</span> </span>
+<span id="cb5-8"><a href="#cb5-8"></a>  <span class="fu">filter</span>(<span class="fu">n</span>() <span class="sc">&gt;</span> <span class="dv">100</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb5-9"><a href="#cb5-9"></a>  <span class="fu">cast_dfm</span>(<span class="at">document =</span> paragraph, <span class="at">term =</span> word, <span class="at">value =</span> n)</span>
+<span id="cb5-10"><a href="#cb5-10"></a>corp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource output number-lines code-with-copy"><code class="sourceCode"><span id="cb6-1"><a href="#cb6-1"></a>Document-feature matrix of: 436 documents, 28,071 features (96.80% sparse) and 0 docvars.</span>
+<span id="cb6-2"><a href="#cb6-2"></a>    features</span>
+<span id="cb6-3"><a href="#cb6-3"></a>docs 04 05 10 100th 11 11th 12 1787 1979 1980</span>
+<span id="cb6-4"><a href="#cb6-4"></a>   1  1  1  2     2  1    1  1    1    1    1</span>
+<span id="cb6-5"><a href="#cb6-5"></a>   2  0  0  0     0  0    0  1    0    0    0</span>
+<span id="cb6-6"><a href="#cb6-6"></a>   3  0  0  2     0  0    0  1    0    0    2</span>
+<span id="cb6-7"><a href="#cb6-7"></a>   4  0  0  0     0  0    2  0    0    0    0</span>
+<span id="cb6-8"><a href="#cb6-8"></a>   5  0  0  2     0  1    0  2    0    0    0</span>
+<span id="cb6-9"><a href="#cb6-9"></a>   6  0  0  2     0  2    1  1    0    0    0</span>
+<span id="cb6-10"><a href="#cb6-10"></a>[ reached max_ndoc ... 430 more documents, reached max_nfeat ... 28,061 more features ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</section>
+<section id="visualized" class="slide level2">
+<h2>Visualized</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7" data-code-line-numbers="true"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">library</span>(quanteda.textplots)</span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="fu">textplot_wordcloud</span>(corp, <span class="at">max_words =</span> <span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="05_groupprojects_files/figure-revealjs/unnamed-chunk-5-1.png" width="768" class="r-stretch"></section>
+<section id="additional-methods" class="slide level2">
+<h2>Additional methods</h2>
+<p>For the purpose of this course, we have created more knowledge clips and tutorials that you can work through by yourself (if necessary for the project at hand). These tutorials cover some things that you already know (but haven’t done in R) as well as some new methods that might be interesting for the research projects:</p>
 <div class="column" style="width:45%;">
 <ul>
 <li><p><strong>Test theory and factor analyses:</strong> Measuring abstract concepts</p>
 <ul>
 <li>Confirmatory factor analyses</li>
 <li>Exploratory factor analyses</li>
+<li>Item Responsy Theory (IRT) Analyses</li>
 </ul></li>
-<li><p><strong>Advanced statistical modeling</strong>: Dealing with non-normal data</p>
+<li><p><strong>Advanced statistical modeling</strong>:</p>
 <ul>
 <li>General linear model</li>
 <li>Multilevel Modeling</li>
@@ -578,47 +640,11 @@ F-statistic: 45.46 on 1 and 30 DF,  p-value: 1.788e-07</code></pre>
 </div>
 <div class="column" style="width:45%;">
 <ul>
-<li><p><strong>Web Scraping:</strong> Getting data from online sources</p></li>
-<li><p><strong>Advanced Text Analysis</strong>: Structural topic modeling</p></li>
+<li><strong>Web Scraping:</strong> Getting data from online sources</li>
+<li><strong>More Text Analysis</strong>: Unsupervised Machine Learning: Topic modeling</li>
 </ul>
 </div>
-</section>
-<section id="in-r-1" class="slide level2">
-<h2>In R…</h2>
-<div class="cell" data-r.options="{&quot;width&quot;:120}">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">library</span>(quanteda)</span>
-<span id="cb5-2"><a href="#cb5-2"></a>url <span class="ot">&lt;-</span> <span class="st">'https://bit.ly/2QoqUQS'</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a>corp <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(url) <span class="sc">%&gt;%</span> </span>
-<span id="cb5-4"><a href="#cb5-4"></a>  <span class="fu">mutate</span>(<span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
-<span id="cb5-5"><a href="#cb5-5"></a>  <span class="fu">corpus</span>(d, <span class="at">text_field =</span> <span class="st">'text'</span>, <span class="at">docid_field =</span> <span class="st">"id"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb5-6"><a href="#cb5-6"></a>  <span class="fu">tokens</span>(<span class="at">remove_punct =</span> T, <span class="at">remove_numbers =</span> T, <span class="at">remove_symbols =</span> T) <span class="sc">%&gt;%</span>   </span>
-<span id="cb5-7"><a href="#cb5-7"></a>  tokens_tolower <span class="sc">%&gt;%</span>                                                    </span>
-<span id="cb5-8"><a href="#cb5-8"></a>  <span class="fu">tokens_remove</span>(<span class="fu">stopwords</span>(<span class="st">'en'</span>)) <span class="sc">%&gt;%</span>                                     </span>
-<span id="cb5-9"><a href="#cb5-9"></a>  tokens_wordstem <span class="sc">%&gt;%</span></span>
-<span id="cb5-10"><a href="#cb5-10"></a>  dfm</span>
-<span id="cb5-11"><a href="#cb5-11"></a>corp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Document-feature matrix of: 23,469 documents, 16,032 features (99.78% sparse) and 4 docvars.
-    features
-docs embrac great satisfact opportun now present congratul favor prospect public
-   1      1     1         1        1   1       2         1     1        1      1
-   2      0     0         0        0   0       1         0     0        0      0
-   3      0     0         0        0   0       0         0     0        0      0
-   4      0     0         0        0   0       0         0     0        0      0
-   5      0     0         0        0   0       0         0     0        0      0
-   6      0     0         0        0   0       0         0     0        0      0
-[ reached max_ndoc ... 23,463 more documents, reached max_nfeat ... 16,022 more features ]</code></pre>
-</div>
-</div>
-</section>
-<section id="visualized" class="slide level2">
-<h2>Visualized</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">library</span>(quanteda.textplots)</span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="fu">textplot_wordcloud</span>(corp, <span class="at">max_words =</span> <span class="dv">50</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-</div>
-<img data-src="05_groupprojects_files/figure-revealjs/unnamed-chunk-5-1.png" width="480" class="r-stretch"></section></section>
+</section></section>
 <section>
 <section id="what-happens-now" class="title-slide slide level1 center" data-background-color="steelblue">
 <h1>What happens now?</h1>
@@ -632,20 +658,27 @@ docs embrac great satisfact opportun now present congratul favor prospect public
 <ul>
 <li>Getting data</li>
 <li>Preparing, coding, transforming….</li>
+<li>Classifying texts</li>
 <li>Visualizing</li>
 <li>Testing assumptions/hypotheses</li>
 </ul></li>
-<li><p>Teachers will supervise your progress and support you during practical sessions</p></li>
-<li><p>At the end, you will present your findings in a mini-conference (19th of December)</p></li>
+<li><p>Teachers will supervise your progress and support you during the practical sessions times</p></li>
+<li><p>At the end, you will present your findings at a mini-conference (18th of December)</p></li>
 </ul>
 </section>
 <section id="how-will-the-supervision-work" class="slide level2">
 <h2>How will the supervision work?</h2>
 <ul>
-<li><p>Each group will be assigned to a) a teacher (Kasper, Alberto, or Santiago) and b) a particular time slot (during the usual practical session times)</p></li>
+<li><p>Each group will be assigned to a) a teacher (Kasper, Emma or Roan) and b) a particular time slot (during the usual practical session times)</p></li>
 <li><p>You will have 15 minute time slots with your supervisor</p></li>
-<li><p>In the first supervision session, you will explore ideas and find a topic</p></li>
-<li><p>In the following sessions, we expect you to come prepared:</p>
+<li><p>The first supervision session is not on Tuesday, but on Thursday (so that you can go to the master thesis information session)</p></li>
+<li><p>Yet, until Tuesday night, you will need to send a short proposal for the research project to your teacher.</p>
+<ul>
+<li>What is the topic?</li>
+<li>What are your main research questions?</li>
+<li>What method are you planning to use?</li>
+</ul></li>
+<li><p>In the actual supervision sessions, we expect you to come prepared:</p>
 <ul>
 <li>Have concrete questions</li>
 <li>Have the analysis up and running on your computer, so that we can help with problems</li>
@@ -655,25 +688,22 @@ docs embrac great satisfact opportun now present congratul favor prospect public
 <section id="final-presentation-at-the-mini-conference" class="slide level2">
 <h2>Final presentation at the “mini-conference”</h2>
 <ul>
-<li><p>Time and Date: 19th December from 9:00 to 12:00</p>
+<li><p>This mini-conference is going to be a so-called “poster-market”</p></li>
+<li><p>You will create an academic poster (DIN A0) that we will put on the wall</p></li>
+<li><p>During the conference, everybody (including some colleagues) will be able to check out everybody’s project and discuss the results!</p></li>
+<li><p>Time and Date: 18th December from 9:30 to 11:30</p>
 <ul>
-<li>There will be two parallel sessions</li>
+<li>There will be three parallel sessions, but you can switch between them at all times</li>
 <li>More information soon (including exact schedule)</li>
 </ul></li>
-<li><p>You will give a 10-minute talk (including appropriate slides) in which you:</p>
-<ul>
-<li>introduce the research project (1-2 slides)</li>
-<li>describe theory and hypotheses (1 slide)</li>
-<li>explain the methods (1 slide)</li>
-<li>present the results (2 slides)</li>
-<li>discuss the findings (1-2 slides)</li>
-</ul></li>
-<li><p>You are required to hand in the RMarkdown, a compiled html output, and the slides beforehand (Sharp Deadline: 18th of December 2021 at 24:00)!</p></li>
 </ul>
 </section>
-<section id="visual-summary-poster" class="slide level2">
-<h2>Visual summary (Poster)</h2>
-<p>You are further required to create one summary poster that we will post on the course website:</p>
+<section id="poster-sessions" class="slide level2">
+<h2>Poster sessions</h2>
+
+<img data-src="https://live.staticflickr.com/65535/49127315191_95455d5cbd_b.jpg" class="r-stretch quarto-figure-center"><p class="caption">Source: ECMWF on Flickr</p></section>
+<section id="example-posters" class="slide level2">
+<h2>Example Posters</h2>
 <div class="column" style="width:45%;">
 <p><img data-src="https://masurp.github.io/VU_CADC/poster/rg4.png"></p>
 </div>
@@ -683,6 +713,93 @@ docs embrac great satisfact opportun now present congratul favor prospect public
 <div class="column" style="width:45%;">
 <p><img data-src="https://masurp.github.io/VU_CADC/poster/rg29.png"></p>
 </div>
+</section>
+<section id="what-is-a-poster" class="slide level2 smaller">
+<h2>What is a poster?</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Structural Elements:</strong></p>
+<ul>
+<li><p>Title:</p>
+<ul>
+<li>Clearly state the main idea of your research.</li>
+<li>List the names of all contributors under the title</li>
+</ul></li>
+<li><p>Introduction:</p>
+<ul>
+<li>Briefly introduce the background of your resear</li>
+<li>Clearly outline the goals/hypotheses of your project</li>
+</ul></li>
+<li><p>Methods:</p>
+<ul>
+<li>Describe your research methods concisely</li>
+<li>Use visuals like flowcharts or diagrams</li>
+</ul></li>
+<li><p>Results:</p>
+<ul>
+<li>Display key findings using graphs, charts, and tables.</li>
+<li>Focus on clarity and avoid overwhelming details.</li>
+</ul></li>
+<li><p>Discussion:</p>
+<ul>
+<li>Interpret your results and relate them to the research objectives.</li>
+<li>Discuss implications and potential applications.</li>
+</ul></li>
+<li><p>Reference</p></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><strong>Tips and Tricks for Design:</strong></p>
+<ul>
+<li><p>Visual Hierarchy:</p>
+<ul>
+<li>Prioritize information using font size, color, and layout.</li>
+<li>Guide the viewer’s eye through the content logically.</li>
+</ul></li>
+<li><p>Consistent and Balanced Style:</p>
+<ul>
+<li>Maintain a consistent font style and color scheme.</li>
+<li>Choose few, clear, ad readable fonts.</li>
+<li>Ensure a balanced layout that is not too crowded.</li>
+</ul></li>
+<li><p>Use of Images and Graphics:</p>
+<ul>
+<li>Include high-quality images, charts, and graphs.</li>
+</ul></li>
+<li><p>Color Scheme:</p>
+<ul>
+<li>Use a cohesive color scheme.</li>
+<li>Ensure good contrast between text and background colors.</li>
+</ul></li>
+<li><p>Limited Text:</p>
+<ul>
+<li>Keep text concise and to the point.</li>
+<li>Use bullet points and short phrases instead of dense paragraphs.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="two-more-examples" class="slide level2">
+<h2>Two more examples</h2>
+<div class="column" style="width:45%;">
+<p><img data-src="https://masurp.github.io/VU_CADC/poster/rg34.png"></p>
+</div>
+<div class="column" style="width:4%;">
+
+</div>
+<div class="column" style="width:45%;">
+<p><img data-src="https://masurp.github.io/VU_CADC/poster/rg20.png"></p>
+</div>
+</section>
+<section id="deadlines" class="slide level2">
+<h2>Deadlines</h2>
+<ul>
+<li><p>You are required to hand in the RMarkdown, a compiled html output beforehand (Sharp Deadline: 17th of December 2021 at 24:00)!</p></li>
+<li><p>If you want to have your poster printed by us, you need to submit it via mail as PDF to p.k.masur@vu.nl on Thursday, the 14th of December 2023 (at 24.00 latest). We need the Friday to actually print them.</p></li>
+<li><p>You can choose to print it yourself later, but unfortunately, we won’t be able to reimburse you then.</p></li>
+</ul>
+<p><br></p>
+<p>Any questions?</p>
 </section></section>
 <section>
 <section id="lets-build-groups" class="title-slide slide level1 center" data-background-color="steelblue">
@@ -722,144 +839,225 @@ docs embrac great satisfact opportun now present congratul favor prospect public
 <ul>
 <li>https://github.com/awesomedata/awesome-public-datasets</li>
 <li>http://www.kaggle.com</li>
-<li>Many further online repositories…</li>
+<li>Many further online repositories… (you only need to find them!)</li>
 </ul></li>
 <li><p>More data:</p>
 <ul>
 <li>Your supervisor might also have data that suits your needs!</li>
-<li>Some of the data sets used in class may be interesting to reanalyze</li>
+<li>Some of the data sets used in class may be interesting to (re-)analyze (check out canvas!)</li>
 </ul></li>
 </ul>
 </section>
 <section id="where-to-get-data-1" class="slide level2">
 <h2>Where to get data?</h2>
 <ul>
-<li><p>Scraping primary sources (see extra tutorial)</p>
+<li><p>Scraping primary sources</p>
 <ul>
-<li>Press releases from party website</li>
-<li>Existing archives</li>
-<li>Scraping Tweets from Twitter</li>
+<li>Press releases from party website (manually, or building a scraper)</li>
+<li>Wikipedia articles (see scraping tutorial)</li>
 </ul></li>
 <li><p>Proprietary texts from third parties:</p>
 <ul>
-<li>digital archives (LexisNexis, factiva, etc.)</li>
-<li>social media APIs</li>
+<li>digital archives (mediacloud, paperboy)</li>
+<li>social media APIs (talk to your supervisors, but unfortunately, access is no longer easy!)</li>
+</ul></li>
+<li><p>Your own social media data</p>
+<ul>
+<li>You can collect your own whatsapp, tiktok, youtube, google data</li>
+<li>Depending on the research question, this can be interesting too!</li>
 </ul></li>
 </ul>
+</section>
+<section id="getting-news-articles-with-mediacloud" class="slide level2">
+<h2>Getting news articles with “mediacloud”</h2>
+<ul>
+<li>We can search for relevant news article URLs via the platform https://search.mediacloud.org/</li>
+</ul>
+
+<img data-src="img/mediacloud.png" class="r-stretch"></section>
+<section id="scraping-with-paperboy" class="slide level2">
+<h2>Scraping with <code>paperboy</code></h2>
+<ul>
+<li>Once we have relevant URLs, we can use the package <code>paperboy</code> to read the actual articles into R:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8" data-code-line-numbers="true"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">library</span>(paperboy)</span>
+<span id="cb8-2"><a href="#cb8-2"></a></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="co"># Get urls from mediacloud</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a>d <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/mediacloud_example.csv"</span>)</span>
+<span id="cb8-5"><a href="#cb8-5"></a></span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="co"># Provide urls to this function</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a>corp <span class="ot">&lt;-</span> <span class="fu">pb_deliver</span>(d<span class="sc">$</span>url[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>])</span>
+<span id="cb8-8"><a href="#cb8-8"></a></span>
+<span id="cb8-9"><a href="#cb8-9"></a><span class="co"># Resulting text corpus</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a>corp <span class="sc">|&gt;</span> </span>
+<span id="cb8-11"><a href="#cb8-11"></a>  <span class="fu">select</span>(domain, datetime, headline, text)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource output number-lines code-with-copy"><code class="sourceCode"><span id="cb9-1"><a href="#cb9-1"></a># A tibble: 4 × 4</span>
+<span id="cb9-2"><a href="#cb9-2"></a>  domain            datetime            headline                           text </span>
+<span id="cb9-3"><a href="#cb9-3"></a>  &lt;chr&gt;             &lt;dttm&gt;              &lt;chr&gt;                              &lt;chr&gt;</span>
+<span id="cb9-4"><a href="#cb9-4"></a>1 amsterdamnews.net NA                  Storm Ciaran Whips Western Europe… "Voi…</span>
+<span id="cb9-5"><a href="#cb9-5"></a>2 nltimes.nl        NA                  About 100 Dutch climate activists… "Abo…</span>
+<span id="cb9-6"><a href="#cb9-6"></a>3 nrc.nl            2023-11-03 00:00:00 Wat vindt NRC | Omgang met AI zal… ""   </span>
+<span id="cb9-7"><a href="#cb9-7"></a>4 nu.nl             2023-11-02 15:20:54 Gaat klimaatverandering sneller d… "De …</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</section>
+<section id="getting-text-conversations-with-rwhatsapp" class="slide level2">
+<h2>Getting Text conversations with <code>rwhatsapp</code></h2>
+<ul>
+<li><p>It is very easy to download a whatsapp conversation</p></li>
+<li><p>We simply have to export the conversation</p></li>
+</ul>
+
+<img data-src="img/whatsapp.png" width="400" class="r-stretch"></section>
+<section id="getting-text-conversations-with-rwhatsapp-1" class="slide level2">
+<h2>Getting Text conversations with <code>rwhatsapp</code></h2>
+<ul>
+<li>Using the package <code>rwhatsapp</code>, we can easly read this into R to get an interesting corpus:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10" data-code-line-numbers="true"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">library</span>(rwhatsapp)</span>
+<span id="cb10-2"><a href="#cb10-2"></a>chat <span class="ot">&lt;-</span> <span class="fu">rwa_read</span>(<span class="st">"data/_chat.txt"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">select</span>(<span class="sc">-</span>author)</span>
+<span id="cb10-4"><a href="#cb10-4"></a>chat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource output number-lines code-with-copy"><code class="sourceCode"><span id="cb11-1"><a href="#cb11-1"></a># A tibble: 45 × 5</span>
+<span id="cb11-2"><a href="#cb11-2"></a>   time                text                             source emoji  emoji_name</span>
+<span id="cb11-3"><a href="#cb11-3"></a>   &lt;dttm&gt;              &lt;chr&gt;                            &lt;chr&gt;  &lt;list&gt; &lt;list&gt;    </span>
+<span id="cb11-4"><a href="#cb11-4"></a> 1 2023-11-28 20:52:12 "‎Messages and calls are end-to-… data/… &lt;NULL&gt; &lt;NULL&gt;    </span>
+<span id="cb11-5"><a href="#cb11-5"></a> 2 2023-11-28 20:52:12 "‎You created group “Replication… data/… &lt;NULL&gt; &lt;NULL&gt;    </span>
+<span id="cb11-6"><a href="#cb11-6"></a> 3 2023-11-28 20:52:34 "‎image omitted"                  data/… &lt;NULL&gt; &lt;NULL&gt;    </span>
+<span id="cb11-7"><a href="#cb11-7"></a> 4 2023-11-28 20:55:05 "Major changes to the table in … data/… &lt;NULL&gt; &lt;NULL&gt;    </span>
+<span id="cb11-8"><a href="#cb11-8"></a> 5 2023-11-28 20:57:53 "That's all I can manage tonigh… data/… &lt;chr&gt;  &lt;chr [1]&gt; </span>
+<span id="cb11-9"><a href="#cb11-9"></a> 6 2023-11-28 21:05:47 "Thanks and good to hear baby i… data/… &lt;NULL&gt; &lt;NULL&gt;    </span>
+<span id="cb11-10"><a href="#cb11-10"></a> 7 2023-11-29 10:12:05 "Looks good! I like it. A few n… data/… &lt;NULL&gt; &lt;NULL&gt;    </span>
+<span id="cb11-11"><a href="#cb11-11"></a> 8 2023-11-29 10:14:25 "But you even used the word \"g… data/… &lt;NULL&gt; &lt;NULL&gt;    </span>
+<span id="cb11-12"><a href="#cb11-12"></a> 9 2023-11-29 10:16:22 "Also I am not sure about the a… data/… &lt;NULL&gt; &lt;NULL&gt;    </span>
+<span id="cb11-13"><a href="#cb11-13"></a>10 2023-11-29 10:16:23 "See e.g., this paper's figure … data/… &lt;NULL&gt; &lt;NULL&gt;    </span>
+<span id="cb11-14"><a href="#cb11-14"></a># ℹ 35 more rows</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
 </section>
 <section id="important-aspects" class="slide level2">
 <h2>Important aspects</h2>
 <ol type="1">
 <li><p>Try to formulate an appropriate research question that can be studied with the respective data set, text documents, tweets,…</p></li>
-<li><p>Formulate hypothesis using theory and relevant literature</p></li>
-<li><p>Test scales before using them</p></li>
+<li><p>Formulate hypotheses using theory and relevant literature</p></li>
+<li><p>If you combined text with survey data, test scales before using them!</p></li>
 <li><p>Engage in descriptive analyses</p></li>
 <li><p>Visualize data</p></li>
 <li><p>Test assumptions if necessary</p></li>
-<li><p>Put an emphasis on correctly report and interpret your results</p></li>
+<li><p>Put an emphasis on correctly reporting and interpreting your methods and results</p></li>
 </ol>
+</section></section>
+<section>
+<section id="some-ideas" class="title-slide slide level1 center" data-background-color="steelblue">
+<h1>Some ideas</h1>
+
 </section>
-<section id="idea-1-corporate-communication" class="slide level2">
-<h2>Idea 1 (Corporate Communication)</h2>
+<section id="idea-1-political-communication" class="slide level2">
+<h2>Idea 1 (Political Communication)</h2>
 <ul>
-<li><strong>Goal:</strong> Investigating sentiment in Tweets about a company before and after a crisis</li>
-<li><strong>Method:</strong> Scraping tweets, manual coding of a subset, supervised machine learning afterwards</li>
+<li><p><strong>Goal:</strong> Investigating news stance towards Dutch politicians before and after Elections</p></li>
+<li><p><strong>Method:</strong> Several different possibilities:</p>
+<ul>
+<li>Scraping Dutch news articles via mediacloud and paperboy</li>
+<li>Identifying politician per paragraph using dictionary approach</li>
+<li>Classifying stance (sentiment) towards politician using Transformer models</li>
+<li>Alternatively: Code ~1000 news paragraphs yourself and train a ML algorithm to detect sentiment</li>
+<li>Test for differences in sentiment before vs.&nbsp;after the election</li>
+</ul></li>
+</ul>
+
+<img data-src="https://allaboutexpats.nl/wp-content/uploads/2023/11/Screen-Shot-2023-11-16-at-2.33.49-PM.png" class="r-stretch"></section>
+<section id="idea-2-corporate-communication" class="slide level2">
+<h2>Idea 2 (corporate communication)</h2>
+<ul>
+<li><p>Goal: Create algorithm that can predict sentiment of financial news sufficiently well</p></li>
+<li><p>Method: Comparing various supervised machine learning approaches and zero-shot learning</p></li>
+<li><p>Data: https://www.kaggle.com/ankurzing/sentiment-analysis-for-financial-news</p>
+<ul>
+<li>Use the data set to build various classifier and compare their performance</li>
+<li>Scrape financial news from media cloud and paperboy</li>
+<li>Use the classifier to predict sentiment</li>
+<li>Compare with Atteveldt et al., 2018</li>
+</ul></li>
+</ul>
+
+<img data-src="https://images.pexels.com/photos/159888/pexels-photo-159888.jpeg" class="r-stretch"></section>
+<section id="idea-3-media-psychology-political-communication" class="slide level2">
+<h2>Idea 3 (media psychology / political communication)</h2>
+<ul>
+<li><p>Goal: Detect linguistic bias in specific news paper articles</p></li>
+<li><p>Method: using dictionary or zero-shot approaches to detect linguistic bias (e.g., gender-bias)</p>
+<ul>
+<li>Scraping the news articles via mediacloud and paperboy</li>
+<li>Build dictionary or classifier to detect biases</li>
+<li>Test differences between newspapers (e.g.&nbsp;with different ideologies)</li>
+</ul></li>
+</ul>
+
+<img data-src="https://images.pexels.com/photos/9760258/pexels-photo-9760258.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1260&amp;h=750&amp;dpr=2" class="r-stretch"></section>
+<section id="idea-4-political-communication" class="slide level2">
+<h2>Idea 4 (political communication)</h2>
+<ul>
+<li><strong>Goal:</strong> Topic modeling based on 18 years of Australian News Headlines: How did topics change over time?</li>
+<li><strong>Method:</strong> Zero-shot topic modelling with GPT or BERT</li>
+<li><strong>Data:</strong> https://www.kaggle.com/therohk/million-headlines</li>
+</ul>
+</section>
+<section id="idea-5-corporate-communication" class="slide level2">
+<h2>Idea 5 (Corporate Communication)</h2>
+<ul>
+<li><p><strong>Goal:</strong> Investigating sentiment in Tweets/News coverage about a company before and after a crisis</p></li>
+<li><p><strong>Method:</strong> Manual coding of a subset, supervised machine learning afterwards or zero-shot learning</p>
+<ul>
+<li>We might have some data available for some cases</li>
+</ul></li>
 </ul>
 
 <img data-src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Big_Tech_companies.jpg" class="r-stretch"></section>
-<section id="idea-2-media-psychology" class="slide level2">
-<h2>Idea 2 (Media Psychology)</h2>
-<div class="column" style="width:45%;">
+<section id="idea-6-media-psychology" class="slide level2">
+<h2>Idea 6 (media psychology)</h2>
 <ul>
-<li><strong>Goal:</strong> Cross-country differences in values over time</li>
-<li><strong>Methods:</strong> Secondary data analysis of the world value survey data, time series analysis</li>
-<li><strong>Data:</strong> https://www.worldvaluessurvey.org/</li>
-</ul>
-</div>
-<div class="column" style="width:4%;">
-
-</div>
-<div class="column" style="width:45%;">
-<p><img data-src="img/countries.jpg"></p>
-</div>
-</section>
-<section id="idea-3-political-communication" class="slide level2">
-<h2>Idea 3 (Political communication)</h2>
-<div class="column" style="width:45%;">
+<li><p>Goal: Does chatGPT reproduce biases and stereotypes?</p></li>
+<li><p>Method: Prompt GPT to write stories or headlines, gather output and text analyze these for stereotypes or biases</p>
 <ul>
-<li><strong>Goal:</strong> Predicting sentiment toward corona measures based on party affiliation</li>
-<li><strong>Method:</strong> Scraping tweets, manual coding of sentiment, supervised machine learning, regression analysis</li>
-</ul>
-</div>
-<div class="column" style="width:4%;">
-
-</div>
-<div class="column" style="width:45%;">
-<p><img data-src="img/rutte.png"></p>
-</div>
-</section>
-<section id="idea-4-corporate-communication" class="slide level2">
-<h2>Idea 4 (corporate communication)</h2>
-<ul>
-<li>Goal: Create algorithm that can predict sentiment of financial news sufficiently well</li>
-<li>Method: Comparing various supervised machine learning algorithms</li>
-<li>Data: https://www.kaggle.com/ankurzing/sentiment-analysis-for-financial-news</li>
+<li>Create prompts that GPT might intepret in certain ways</li>
+<li>Prompt GPT systematically</li>
+<li>Collect output and classify them using a BERT model (?)</li>
+<li>Test for systematic bias or stereotyping</li>
+</ul></li>
 </ul>
 </section>
-<section id="idea-5-media-psychology" class="slide level2">
-<h2>Idea 5 (media psychology)</h2>
+<section id="idea-7" class="slide level2">
+<h2>Idea 7</h2>
 <ul>
-<li>Goal: Assessing the factorial validity of the Big Five Personality inventory</li>
-<li>Methods: Descriptive analyses, visualization, assumptions text, exploratory/confirmatory factor analyses</li>
-<li>Data: https://www.kaggle.com/tunguz/big-five-personality-test</li>
-</ul>
-
-<img data-src="https://upload.wikimedia.org/wikipedia/commons/1/1f/Big_five_gam.jpg" class="r-stretch"></section>
-<section id="idea-6-political-communication" class="slide level2">
-<h2>Idea 6 (political communication)</h2>
+<li><p>Goal: Use of emotions (or emojis) in whatsapp conversations</p></li>
+<li><p>Method: Classifying emotions in whatsapp conversation (would require a bit more than just your own)</p>
 <ul>
-<li><strong>Goal:</strong> Comparing performance of different algorithms in predicting news categories</li>
-<li><strong>Method:</strong> Replication of Van Atteveldt et al (2021) based on HuffPost Articles, manual coding, dictionary approaches, supervised machine learning</li>
-<li><strong>Data:</strong> https://www.kaggle.com/rmisra/news-category-dataset</li>
+<li>Export whatsapp conversations and import into R with <code>rwhatsapp</code></li>
+<li>Classify emotions / extract emojis and show differences in personalities, language use</li>
+<li>Alternatively use word-embeddings to compare similarity in language use across users/conversations…</li>
+</ul></li>
 </ul>
 </section>
-<section id="idea-7-corporate-communication" class="slide level2">
-<h2>Idea 7 (corporate communication)</h2>
-<div class="column" style="width:45%;">
+<section id="other-ideas" class="slide level2">
+<h2>Other ideas</h2>
 <ul>
-<li><strong>Goal:</strong> Predicting stock prices with sentiment expressed in tweets</li>
-<li><strong>Method:</strong> Merging information on stock prices of certain companies with Twitter data</li>
-</ul>
-</div>
-<div class="column" style="width:4%;">
-
-</div>
-<div class="column" style="width:45%;">
-<p><img data-src="https://images.pexels.com/photos/6801648/pexels-photo-6801648.jpeg"></p>
-</div>
-</section>
-<section id="idea-8-media-psychology" class="slide level2">
-<h2>Idea 8 (media psychology)</h2>
-<div class="column" style="width:45%;">
+<li><p>Analyzing your own data</p>
 <ul>
-<li><strong>Goal:</strong> Detect emotions in company tweets (or related to a certain event)</li>
-<li><strong>Methods:</strong> Emotion detection based on Emotion Sensor Data set</li>
-<li><strong>Dictionary:</strong> https://www.kaggle.com/iwilldoit/emotions-sensor-data-set</li>
-</ul>
-</div>
-<div class="column" style="width:4%;">
-
-</div>
-<div class="column" style="width:45%;">
-<p><img data-src="https://images.pexels.com/photos/3812743/pexels-photo-3812743.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"></p>
-</div>
-</section>
-<section id="idea-9-political-communication" class="slide level2">
-<h2>Idea 9 (political communication)</h2>
+<li>You can easily export your netflix use data, spotify use data, google maps location data, your browser history and many more “trace” data</li>
+<li>Although the amount of individuals you can get data on my be limited, the data is nonetheless quite rich and can be interesting to analyze/explore</li>
+<li>The challenge will be to find a good research question!</li>
+</ul></li>
+<li><p>Going beyond text analysis</p>
 <ul>
-<li><strong>Goal:</strong> Topic Modeling based on 18 years of Australian News Headlines</li>
-<li><strong>Method:</strong> Unsupervised topic modeling</li>
-<li><strong>Data:</strong> https://www.kaggle.com/therohk/million-headlines</li>
+<li><p>You also learned a lot about data wrangling and visualization in this course</p></li>
+<li><p>You can also use this knowledge and engage in other type of data analyses</p></li>
+<li><p>e.g., using world value survey data to show trends in values over time and across countries; secondary analyses of large-scale survey data (Pew Research, Gesis…)</p></li>
+</ul></li>
 </ul>
 </section></section>
 <section id="further-questions" class="title-slide slide level1 center" data-background-color="steelblue">
@@ -867,13 +1065,18 @@ docs embrac great satisfact opportun now present congratul favor prospect public
 
 </section>
 
+<section>
 <section id="thank-you-for-your-attention" class="title-slide slide level1 center" data-background-color="steelblue">
 <h1>Thank you for your attention!</h1>
+
+</section>
+<section id="section" class="slide level2" data-background-image="https://images.pexels.com/photos/6102000/pexels-photo-6102000.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1260&amp;h=750&amp;dpr=2">
+<h2></h2>
 
 <img src="img/logo.png" class="slide-logo r-stretch"><div class="footer footer-default">
 
 </div>
-</section>
+</section></section>
     </div>
   </div>
 
