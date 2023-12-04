@@ -393,10 +393,13 @@
   <p class="author">Dr.&nbsp;Philipp K. Masur</p>
 </section>
 
+<section id="section" class="slide level2" data-background-image="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*TozA-274Os-Z5mSLwdYkWw.png">
+<h2></h2>
+</section>
 <section>
 <section id="what-was-this-first-part-of-the-course-about" class="title-slide slide level1 center" data-background-color="steelblue">
 <h1>What was this first part of the course about?</h1>
-<p>Recap and overview.</p>
+
 </section>
 <section id="a-general-text-classification-pipeline" class="slide level2">
 <h2>A General Text Classification Pipeline</h2>
@@ -432,6 +435,10 @@
 </div>
 </div>
 </div>
+<ul>
+<li><p>In this case, the text classification via a dictionary approach was just a tool to get the data they needed</p></li>
+<li><p>The substantive analysis then used the labels that were created to assess the relationship between party ideology and sentiment towards migration</p></li>
+</ul>
 </section>
 <section id="dictionary-approach" class="slide level2">
 <h2>Dictionary Approach</h2>
@@ -449,13 +456,35 @@
 <h2>Large Language Models with fine-tuning</h2>
 
 <img data-src="img/text_analysis_fundamentals/Slide05.png" class="r-stretch"></section>
+<section id="example-corruption-in-austrian-news" class="slide level2">
+<h2>Example: Corruption in Austrian News</h2>
+<ol type="1">
+<li><p><strong>Obtaining Text</strong>: political news articles from six prominent Austrian news outlets spanning 2012 to 2021 via the API of the Austrian Press Agency</p></li>
+<li><p><strong>Feature Engineering:</strong> Used specific search strings previously validated by the Austrian National Election Study to identify relevant articles</p></li>
+<li><p><strong>Text classification:</strong> Used automated content analysis (using BERT) of political news articles from six prominent Austrian news outlets spanning 2012 to 2021 (n = 188,203) to scrutinize political actors’ visibility and favorability in news coverage; fine-tuned on an exisiting data set</p></li>
+<li><p><strong>Validation:</strong> Ran specific experiments to test the validity of the final model (accuracy = .77)</p></li>
+</ol>
+<div class="fragment">
+<ol start="5" type="1">
+<li><p><strong>Substantive Analysis</strong>: Difference-in-difference estimations to find out whether Kurz (Austrian chancellor at the time) was favored by certain media</p></li>
+<li><p><strong>Visualize</strong>: Plotting differences between time points using coefficient plots with ggplot2</p></li>
+<li><p><strong>Communicate</strong>: Creating report results in the paper</p></li>
+</ol>
+<p><br></p>
+<p><em>Baluff et al., 2023</em></p>
+</div>
+</section>
+<section id="example-corruption-in-austrian-news-1" class="slide level2">
+<h2>Example: Corruption in Austrian News</h2>
+
+<img data-src="img/kurz2.png" class="r-stretch"></section>
 <section id="large-language-models-zero-shot-learning" class="slide level2">
 <h2>Large Language Models (zero-shot learning)</h2>
 
 <img data-src="img/text_analysis_fundamentals/Slide06.png" class="r-stretch"></section></section>
 <section>
-<section id="what-exactly-did-you-learn-in-this-and-previous-courses" class="title-slide slide level1 center" data-background-color="steelblue">
-<h1>What exactly did you learn in this (and previous) courses?</h1>
+<section id="how-does-this-course-related-to-previous-courses" class="title-slide slide level1 center" data-background-color="steelblue">
+<h1>How does this course related to previous courses?</h1>
 
 </section>
 <section id="p1-research-methods-in-communication-science" class="slide level2">
@@ -640,8 +669,15 @@
 </div>
 <div class="column" style="width:45%;">
 <ul>
-<li><strong>Web Scraping:</strong> Getting data from online sources</li>
-<li><strong>More Text Analysis</strong>: Unsupervised Machine Learning: Topic modeling</li>
+<li><p><strong>Web Scraping:</strong> Getting data from online sources</p>
+<ul>
+<li>Using scrapers</li>
+<li>Using APIs</li>
+</ul></li>
+<li><p><strong>More Text Analysis</strong>: Unsupervised Machine Learning</p>
+<ul>
+<li>e.g., Topic modeling</li>
+</ul></li>
 </ul>
 </div>
 </section></section>
@@ -868,6 +904,14 @@
 </ul></li>
 </ul>
 </section>
+<section id="awesome-data-sets" class="slide level2">
+<h2>“Awesome” Data Sets</h2>
+<ul>
+<li><p>Check out this page: https://github.com/awesomedata/awesome-public-datasets</p></li>
+<li><p>There are tons of great data sets worth exploring for text analysis purposes</p></li>
+</ul>
+
+<img data-src="img/awesome-datasets.png" class="r-stretch"></section>
 <section id="getting-news-articles-with-mediacloud" class="slide level2">
 <h2>Getting news articles with “mediacloud”</h2>
 <ul>
@@ -1070,11 +1114,11 @@
 <h1>Thank you for your attention!</h1>
 
 </section>
-<section id="section" class="slide level2" data-background-image="https://images.pexels.com/photos/6102000/pexels-photo-6102000.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1260&amp;h=750&amp;dpr=2">
+<section id="section-1" class="slide level2" data-background-image="https://images.pexels.com/photos/6102000/pexels-photo-6102000.jpeg">
 <h2></h2>
 
 <img src="img/logo.png" class="slide-logo r-stretch"><div class="footer footer-default">
-
+<p>Computational Analysis of Digital Communication</p>
 </div>
 </section></section>
     </div>
@@ -1129,7 +1173,7 @@
         progress: true,
 
         // Display the page number of the current slide
-        slideNumber: false,
+        slideNumber: 'c/t',
 
         // 'all', 'print', or 'speaker'
         showSlideNumber: 'all',

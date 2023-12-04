@@ -7,6 +7,8 @@ format:
     theme: [default, theme.scss]
     logo: img/logo.png
     background-transition: fade
+    footer: Computational Analysis of Digital Communication
+    slide-number: c/t
     title-slide-attributes:
         data-background-image: https://storage.googleapis.com/exenzo-jobboard/bb/public/thumb/logo-jpg-57.jpg
         data-background-position: "top right"
@@ -16,10 +18,10 @@ editor: visual
 
 
 
+## {background-image="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*TozA-274Os-Z5mSLwdYkWw.png"}
+
 
 # What was this first part of the course about? {background-color="steelblue"}
-
-Recap and overview.
 
 
 ---
@@ -67,6 +69,11 @@ _Heidenreich et al., 2019_
 
 :::
 
+- In this case, the text classification via a dictionary approach was just a tool to get the data they needed
+
+- The substantive analysis then used the labels that were
+created to assess the relationship between party ideology and sentiment towards migration
+
 
 ## Dictionary Approach
 
@@ -86,11 +93,42 @@ _Heidenreich et al., 2019_
 
 ![](img/text_analysis_fundamentals/Slide05.png)
 
+## Example: Corruption in Austrian News
+
+
+1. **Obtaining Text**:  political news articles from six prominent Austrian news outlets spanning 2012 to 2021 via the API of the Austrian Press Agency
+
+2. **Feature Engineering:** Used specific search strings previously validated by the Austrian National Election Study to identify relevant articles
+
+3. **Text classification:** Used automated content analysis (using BERT) of political news articles from six prominent Austrian news outlets spanning 2012 to 2021 (n = 188,203) to scrutinize political actors' visibility and favorability in news coverage; fine-tuned on an exisiting data set
+
+4. **Validation:** Ran specific experiments to test the validity of the final model (accuracy = .77)
+
+
+. . .
+
+
+5. **Substantive Analysis**: Difference-in-difference estimations to find out whether Kurz (Austrian chancellor at the time) was favored by certain media
+
+6. **Visualize**: Plotting differences between time points using coefficient plots with ggplot2
+
+7. **Communicate**: Creating report results in the paper
+
+<br>
+
+_Baluff et al., 2023_
+
+
+## Example: Corruption in Austrian News
+
+![](img/kurz2.png)
+
+
 ## Large Language Models (zero-shot learning)
 
 ![](img/text_analysis_fundamentals/Slide06.png)
 
-# What exactly did you learn in this (and previous) courses? {background-color="steelblue"}
+# How does this course related to previous courses? {background-color="steelblue"}
 
 
 ## P1: Research Methods in Communication Science
@@ -261,7 +299,13 @@ For the purpose of this course, we have created more knowledge clips and tutoria
 
 ::: {.column width="45%"}
 -   **Web Scraping:** Getting data from online sources
--   **More Text Analysis**: Unsupervised Machine Learning: Topic modeling
+
+      - Using scrapers
+      - Using APIs
+      
+-   **More Text Analysis**: Unsupervised Machine Learning
+
+    - e.g., Topic modeling
 
 :::
 
@@ -491,6 +535,15 @@ Any questions?
     - You can collect your own whatsapp, tiktok, youtube, google data
     - Depending on the research question, this can be interesting too!
     
+    
+## "Awesome" Data Sets
+
+-   Check out this page: https://github.com/awesomedata/awesome-public-datasets
+
+- There are tons of great data sets worth exploring for text analysis purposes
+
+![](img/awesome-datasets.png)
+
   
 ## Getting news articles with "mediacloud"
 
