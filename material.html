@@ -13,7 +13,7 @@
 
 <title>Materials</title>
 
-<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.27/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
@@ -29,7 +29,7 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
@@ -146,11 +146,15 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.tab('show');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -179,8 +183,8 @@ $(document).ready(function () {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -188,16 +192,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -418,19 +415,9 @@ Science</h4>
 <li>Handouts:
 <ul>
 <li>Tidyverse I (<a
-href="https://vanatteveldt.shinyapps.io/tidy-1-select">online
-tutorial</a>, <a
-href="https://github.com/vanatteveldt/ccslearnr/blob/master/handouts/tidy-1-select.md">handout</a>,
-<a
-href="https://github.com/masurp/VU_CADC/blob/main/tutorials/R_basics_tidy-1-select.md">completed
-handout</a>)</li>
+href="https://github.com/vanatteveldt/ccslearnr/blob/master/handouts/tidy-1-select.md">handout</a>)</li>
 <li>Tidyverse II (<a
-href="https://vanatteveldt.shinyapps.io/tidy-summarize">online
-tutorial</a>, <a
-href="https://github.com/vanatteveldt/ccslearnr/blob/master/handouts/tidy-summarize.md">handout</a>,
-<a
-href="https://github.com/masurp/VU_CADC/blob/main/tutorials/R_basics_tidy-2-summarize.md">completed
-handout</a>)</li>
+href="https://github.com/vanatteveldt/ccslearnr/blob/master/handouts/tidy-summarize.md">handout</a>)</li>
 </ul></li>
 </ul>
 </div>
@@ -440,11 +427,7 @@ handout</a>)</li>
 <li>Handouts:
 <ul>
 <li>Data visualization (<a
-href="https://vanatteveldt.shinyapps.io/ggplot">online tutorial</a>, <a
-href="https://github.com/vanatteveldt/ccslearnr/blob/master/handouts/ggplot.md">handout</a>,
-<a
-href="https://github.com/masurp/VU_CADC/blob/main/tutorials/R_basics_ggplot.md">completed
-handout</a>)</li>
+href="https://github.com/vanatteveldt/ccslearnr/blob/master/handouts/ggplot.md">handout</a>)</li>
 </ul></li>
 </ul>
 </div>
@@ -504,10 +487,7 @@ class="section level4">
 <li>Handouts:
 <ul>
 <li>Basic Text Analysis using tidytext (<a
-href="https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_basics-of-text-analysis_2023.md">handout</a>,
-<a
-href="https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_basics-of-text-analysis_2023_complete.md">completed
-handout</a>)</li>
+href="https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_basics-of-text-analysis_2023.md">handout</a>)</li>
 </ul></li>
 </ul>
 </div>
@@ -517,10 +497,7 @@ handout</a>)</li>
 <li><p>Handouts:</p>
 <ul>
 <li>Dictionary Approaches using tidytext (<a
-href="https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_dictionary-approaches_2023.md">handout</a>,
-<a
-href="https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_dictionary-approaches_2023_complete.md">completed
-handout</a>)</li>
+href="https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_dictionary-approaches_2023.md">handout</a>)</li>
 </ul></li>
 </ul>
 </div>
@@ -564,10 +541,7 @@ Slides</a></li>
 <ul>
 <li>Supervised text classification using Naive Bayes, Logistic
 Regression and SVM (<a
-href="https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_supervised-text-classification_2013.md">handout</a>,
-<a
-href="https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_supervised-text-classification_2013_complete.md">completed
-handout</a>)</li>
+href="https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_supervised-text-classification_2013.md">handout</a>)</li>
 </ul></li>
 </ul>
 </div>
@@ -578,10 +552,7 @@ handout</a>)</li>
 <ul>
 <li>Supervised text classification with neural networks and grid
 searches (<a
-href="https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_supervised-text-classification-II_2023.md">handout</a>,
-<a
-href="https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_supervised-text-classification-II_2023_complete.md">completed
-handout</a>)</li>
+href="https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_supervised-text-classification-II_2023.md">handout</a>)</li>
 </ul></li>
 </ul>
 </div>
@@ -630,10 +601,7 @@ Slides</a></li>
 <li>Handouts:
 <ul>
 <li>Word-Embeddings and Text classification using Transformers (<a
-href="https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_LLM_word-embeddings-and-transformers.md">handout</a>,
-<a
-href="https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_LLM_word-embeddings-and-transformers_complete.md">handout
-completed</a>)</li>
+href="https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_LLM_word-embeddings-and-transformers.md">handout</a>)</li>
 </ul></li>
 </ul>
 </div>
@@ -643,10 +611,7 @@ completed</a>)</li>
 <li>Handouts:
 <ul>
 <li>Zero-Shot Classification using GPT (<a
-href="https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_LLM_zero-shot-classification.md">handout</a>,
-<a
-href="https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_LLM_zero-shot-classification_complete.md">handout
-completed</a>)</li>
+href="https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_LLM_zero-shot-classification.md">handout</a>)</li>
 </ul></li>
 </ul>
 </div>
@@ -681,10 +646,9 @@ Transformers</a> on Youtube (StatsQuest with Josh Starmer)</li>
 <ul>
 <li>Date and Time of the Exam
 <ul>
-<li><strong>Date:</strong> 1st December 2023</li>
+<li><strong>Date:</strong> 29th November 2024</li>
 <li><strong>Time:</strong> 08:30am</li>
-<li><strong>Location:</strong> (T) TenT blok 2 Rood (85) (T) TenT blok 5
-Wit (45)</li>
+<li><strong>Location:</strong> t.b.a</li>
 <li>Make sure to be there on time</li>
 </ul></li>
 <li>Format
@@ -802,10 +766,9 @@ class="section level4">
 <ul>
 <li><p>At a final “mini-conference”, you will present the findings of
 your research projects!</p></li>
-<li><p>Date: 18th December 2023</p></li>
-<li><p>Time: 09.00 to 12.00</p>
+<li><p>Date: 16th December 2023</p></li>
+<li><p>Time: 13.30 to 17.15</p>
 <ul>
-<li>There will be three parallel sessions</li>
 <li>More information soon (including exact schedule)</li>
 </ul></li>
 </ul>

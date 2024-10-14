@@ -45,13 +45,13 @@ In the third part of the course, students will work on their own research projec
 #### Practical Session 1: Data Wrangling
 
 - Handouts: 
-    - Tidyverse I ([online tutorial](https://vanatteveldt.shinyapps.io/tidy-1-select), [handout](https://github.com/vanatteveldt/ccslearnr/blob/master/handouts/tidy-1-select.md), [completed handout](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_basics_tidy-1-select.md))
-    - Tidyverse II ([online tutorial](https://vanatteveldt.shinyapps.io/tidy-summarize), [handout](https://github.com/vanatteveldt/ccslearnr/blob/master/handouts/tidy-summarize.md), [completed handout](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_basics_tidy-2-summarize.md))
+    - Tidyverse I ([handout](https://github.com/vanatteveldt/ccslearnr/blob/master/handouts/tidy-1-select.md))
+    - Tidyverse II ([handout](https://github.com/vanatteveldt/ccslearnr/blob/master/handouts/tidy-summarize.md))
     
 #### Practical Session 2: Data visualization
 
 - Handouts:
-    - Data visualization ([online tutorial](https://vanatteveldt.shinyapps.io/ggplot), [handout](https://github.com/vanatteveldt/ccslearnr/blob/master/handouts/ggplot.md), [completed handout](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_basics_ggplot.md))
+    - Data visualization ([handout](https://github.com/vanatteveldt/ccslearnr/blob/master/handouts/ggplot.md))
    
 #### Homework
 
@@ -85,13 +85,13 @@ In the third part of the course, students will work on their own research projec
 #### Practical Session 1
 
 - Handouts: 
-    - Basic Text Analysis using tidytext ([handout](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_basics-of-text-analysis_2023.md), [completed handout](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_basics-of-text-analysis_2023_complete.md))
+    - Basic Text Analysis using tidytext ([handout](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_basics-of-text-analysis_2023.md))
 
 #### Practical Session 2 
 
 - Handouts: 
 
-   - Dictionary Approaches using tidytext ([handout](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_dictionary-approaches_2023.md), [completed handout](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_dictionary-approaches_2023_complete.md))
+   - Dictionary Approaches using tidytext ([handout](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_dictionary-approaches_2023.md))
 
 #### Homework
 
@@ -115,12 +115,12 @@ In the third part of the course, students will work on their own research projec
 #### Practical Session 1
 
 - Handouts: 
-    - Supervised text classification using Naive Bayes, Logistic Regression and SVM ([handout](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_supervised-text-classification_2013.md), [completed handout](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_supervised-text-classification_2013_complete.md))
+    - Supervised text classification using Naive Bayes, Logistic Regression and SVM ([handout](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_supervised-text-classification_2013.md))
 
 #### Practical Session 2
 
 - Handouts:
-    - Supervised text classification with neural networks and grid searches ([handout](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_supervised-text-classification-II_2023.md), [completed handout](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_supervised-text-classification-II_2023_complete.md))
+    - Supervised text classification with neural networks and grid searches ([handout](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_supervised-text-classification-II_2023.md))
     
 
 #### Homework
@@ -147,12 +147,12 @@ In the third part of the course, students will work on their own research projec
 #### Practical Session 1
 
 - Handouts: 
-    - Word-Embeddings and Text classification using Transformers ([handout](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_LLM_word-embeddings-and-transformers.md), [handout completed](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_LLM_word-embeddings-and-transformers_complete.md))
+    - Word-Embeddings and Text classification using Transformers ([handout](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_LLM_word-embeddings-and-transformers.md))
 
 #### Practical Session 2
 
 - Handouts:
-    - Zero-Shot Classification using GPT ([handout](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_LLM_zero-shot-classification.md), [handout completed](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_LLM_zero-shot-classification_complete.md))
+    - Zero-Shot Classification using GPT ([handout](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_LLM_zero-shot-classification.md))
     
 
 #### Homework
@@ -173,9 +173,9 @@ In the third part of the course, students will work on their own research projec
 #### Exam week 
 
 - Date and Time of the Exam
-    - **Date:** 1st December 2023
+    - **Date:** 29th November 2024
     - **Time:** 08:30am
-    - **Location:** (T) TenT blok 2 Rood (85) (T) TenT blok 5 Wit (45)
+    - **Location:** t.b.a
     - Make sure to be there on time
     
 - Format
@@ -236,11 +236,10 @@ In the third part of the course, students will work on their own research projec
 
 - At a final "mini-conference", you will present the findings of your research projects!
 
-- Date: 18th December 2023
+- Date: 16th December 2023
 
-- Time: 09.00 to 12.00
+- Time: 13.30 to 17.15
 
-    - There will be three parallel sessions
     - More information soon (including exact schedule)
 
 <hr>
