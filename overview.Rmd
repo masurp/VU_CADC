@@ -13,13 +13,13 @@ library(tidyverse)
 library(knitr)
 library(kableExtra)
 tribble(~Class, ~Teacher, ~Time, ~Room,
-        "Lectures", "Dr. Philipp Masur", "Monday  9:00am", "Theater3-NU-2C33",
-        "Practical Session 1", "Roan Buma", "Tuesday, 9:00 & Thursday, 11:00", "HG-05A36",
-        "Practical Session 2", "Roan Buma", "Tuesday, 11:00 & Thursday, 09:00", "HG-05A36",
-        "Practical Session 3", "Dr. Kasper Welbers", "Tuesday, 9:00 & Thursday, 11:00", "HG-05A37",
-        "Practical Session 4", "Dr. Kasper Welbers", "Tuesday, 11:00 & Thursday, 9:00", "HG-05A37",
-        "Practical Session 5", "Emma Diel", "Tuesday, 9:00 & Thursday, 11:00", "HG-06A37",
-        "Practical Session 6", "Emma Diel", "Tuesday, 11:00 & Thursday, 09:00", "HG-06A37") %>%
+        "Lectures", "Dr. Philipp Masur", "Monday  13:30", "HG-05A00",
+        "Practical Session 1", "Roan Buma", "Tuesday, 9:00 & Thursday, 11:00", "HG-11A37",
+        "Practical Session 2", "Roan Buma", "Tuesday, 11:00 & Thursday, 09:00", "HG-11A37",
+        "Practical Session 3", "Dr. Kasper Welbers", "Tuesday, 9:00 & Thursday, 11:00", "HG-09A24 & OZW-4A03",
+        "Practical Session 4", "Dr. Kasper Welbers", "Tuesday, 11:00 & Thursday, 9:00", "HG-05A37 & OZW-4A03",
+        "Practical Session 5", "Emma Diel", "Tuesday, 9:00 & Thursday, 11:00", "HG-09A33 & HG-1G11",
+        "Practical Session 6", "Emma Diel", "Tuesday, 11:00 & Thursday, 09:00", "HG-06A37 & HG-1G11") %>%
   kable(format = "html") %>%
   kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive")) %>%
   kable_styling(fixed_thead = T) %>%
@@ -35,26 +35,26 @@ tribble(~Class, ~Teacher, ~Time, ~Room,
 
 ```{r, echo = F, message = F, warning = F}
 tribble(~Date, ~Week, ~Type, ~Content, ~Assignment,
-       "30/10/23", "1", "Lecture", "Introduction to Computational Methods in Communication Science", "",
-       "31/10/23", "1", "Practical session", "Data Wrangling using the tidyverse and tidytext", "",
-       "02/11/23" , "1", "Practical session",  "Exploratory Data Analysis and Data Visualization", "Homework Assignment 1",
-       "06/11/23", "2", "Lecture", "Automated Text Analysis and Dictionary Approaches", "",
-       "07/11/23", "2", "Practical session", "Basic Text Analysis using tidytext", "",
-       "09/11/23", "2" ,"Practical session", "Dictionary Approaches using tidytext", "Homework Assignment 2",
-       "13/11/23", "3", "Lecture", "Text Classification and Classic Machine Learning", "",
-       "14/11/23", "3", "Practical session", "Supervised text classification using Naive Bayes and SVM", "",
-       "16/11/23", "3", "Practical session", "Supervised text classification with neural networks", "Homework Assignment 3",
-       "20/11/23", "4", "Lecture", "Word Embeddings, Transformers and Large Language Models", "",
-       "21/11/23", "4", "Practical session", "Text classification using Transformers", "",
-       "23/11/23", "4", "Practical session", "Zero-Shot Classification using GPT-4", "Homework Assignment 4",
-       "01/12/23", "5", "Exam", "Multiple-Choice Exam (Content of Part I & II)", "",
-       "04/12/23", "6", "Lecture", "Summary and Introduction to Group Projects", "",
-       "05/12/23", "6", "Practical session", "Meeting with supervisor", "",
-       "07/12/23", "6", "Practical session", "Meeting with supervisor", "",
-       "11/12/23", "7", "No lecture", "", "",
-       "12/12/23", "7", "Practical session", "Meeting with supervisor", "",
-       "14/12/23", "7", "Practical session", "Meeting with supervisor", "",
-       "18/12/23", "8", "Conference", "Presentation of Group Projects", "10-min talk") %>%
+       "28/10/24", "1", "Lecture", "Introduction to Computational Methods in Communication Science", "",
+       "29/10/24", "1", "Practical session", "Data Wrangling using the tidyverse and tidytext", "",
+       "31/10/24" , "1", "Practical session",  "Exploratory Data Analysis and Data Visualization", "Homework Assignment 1",
+       "04/11/24", "2", "Lecture", "Automated Text Analysis and Dictionary Approaches", "",
+       "05/11/24", "2", "Practical session", "Basic Text Analysis using tidytext", "",
+       "07/11/24", "2" ,"Practical session", "Dictionary Approaches using tidytext", "Homework Assignment 2",
+       "11/11/24", "3", "Lecture", "Text Classification Using Machine Learning", "",
+       "12/11/24", "3", "Practical session", "Supervised text classification using Naive Bayes and neural networks", "",
+       "14/11/24", "3", "Practical session", "Supervised text classification with wordembeddings and  neural networks", "Homework Assignment 3",
+       "18/11/24", "4", "Lecture", "Transformers and Large Language Models", "",
+       "19/11/24", "4", "Practical session", "Zero-Shot Classification Using Transformers/GPT/llama", "",
+       "21/11/24", "4", "Practical session", "Few-Shot Classification Using GPT/llama", "Homework Assignment 4",
+       "29/11/24", "5", "Exam", "Multiple-Choice Exam (Content of Part I & II)", "",
+       "02/12/24", "6", "Lecture", "Summary and Introduction to Group Projects", "",
+       "03/12/24", "6", "Practical session", "Meeting with supervisor", "",
+       "05/12/24", "6", "Practical session", "Meeting with supervisor", "",
+       "09/12/24", "7", "No lecture", "", "",
+       "10/12/24", "7", "Practical session", "Meeting with supervisor", "",
+       "12/12/24", "7", "Practical session", "Meeting with supervisor", "",
+       "16/12/24", "8", "Conference", "Presentation of Group Projects", "10-min talk") %>%
   kable(format = "html") %>%
   kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive")) %>%
   kable_styling(fixed_thead = T) %>%

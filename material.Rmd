@@ -23,7 +23,7 @@ Before the first practical session, please make sure that you have R and Rstudio
 
 #### Familiarize yourself with the course
 
-Lectures are every *Monday* from 9-10.45 (see [overview](overview.html) for exact dates and times). In these lectures, a particular research problem will be introduced and we will discuss methodological solutions. We will get to know respective computational methods and contextualize them within the broader research process. Practical sessions are every **Tuesday* and *Thursday* between 9-10.45 or 11-12.45 (again see [overview](overview.html) for exact dates and times). For the practical sessions, the class will be split into 5-6 groups of equal size. In these practical sessions, we will work with RStudio and ran analyses on real-world data sets. We therefore engage in various data analytic exercises. We expect you to: 
+Lectures are every *Monday* from 13.30-15.15 (see [overview](overview.html) for exact dates and times). In these lectures, a particular research problem will be introduced and we will discuss methodological solutions. We will get to know respective computational methods and contextualize them within the broader research process. Practical sessions are every **Tuesday* and *Thursday* between 9-10.45 or 11-12.45 (again see [overview](overview.html) for exact dates and times). For the practical sessions, the class will be split into 6 groups of equal size. In these practical sessions, we will work with RStudio and ran analyses on real-world data sets. We therefore engage in various data analytic exercises. We expect you to: 
 
 - Bring your own computer
 - Run the scripts and work through the code 
@@ -40,18 +40,18 @@ In the third part of the course, students will work on their own research projec
 #### Lecture: Introduction to Computational Methods in Communication Science
 
 - Slides Lecture 1:
-    - [Download Slides](slides/01_introduction_2023.html)
+    - [Download Slides](not yet available)
 
 #### Practical Session 1: Data Wrangling
 
 - Handouts: 
-    - Tidyverse I ([handout](https://github.com/vanatteveldt/ccslearnr/blob/master/handouts/tidy-1-select.md))
-    - Tidyverse II ([handout](https://github.com/vanatteveldt/ccslearnr/blob/master/handouts/tidy-summarize.md))
+    - Tidyverse I (not yet available)
+    - Tidyverse II (not yet available)
     
 #### Practical Session 2: Data visualization
 
 - Handouts:
-    - Data visualization ([handout](https://github.com/vanatteveldt/ccslearnr/blob/master/handouts/ggplot.md))
+    - Data visualization (not yet available)
    
 #### Homework
 
@@ -80,19 +80,19 @@ In the third part of the course, students will work on their own research projec
 #### Lecture: Automated Text Analysis and Dictionary Approaches
 
 - Slides Lecture 2:
-    - [Download Slides](slides/02_textanalysis_2023.html)
+    - [Download Slides](not yet available)
 
 #### Practical Session 1
 
 - Handouts: 
-    - Basic Text Analysis using tidytext ([handout](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_basics-of-text-analysis_2023.md))
+    - Basic Text Analysis using tidytext (not yet available)
 
 #### Practical Session 2 
 
 - Handouts: 
 
-   - Dictionary Approaches using tidytext ([handout](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_dictionary-approaches_2023.md))
-
+   - Dictionary Approaches using tidytext (not yet available)
+   
 #### Homework
 
 - Complete this assignment (available on canvas in the module "Homework Templates & Datasets)
@@ -110,17 +110,17 @@ In the third part of the course, students will work on their own research projec
 #### Lecture: Text Classification and Classic Machine Learning
 
 - Slides Lecture 3:
-    - [Download Slides](slides/03_classicmachinelearning_2023.html)
+    - [Download Slides](not yet available)
 
 #### Practical Session 1
 
 - Handouts: 
-    - Supervised text classification using Naive Bayes, Logistic Regression and SVM ([handout](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_supervised-text-classification_2013.md))
+    - Supervised text classification using Naive Bayes and Neural Networks
 
 #### Practical Session 2
 
 - Handouts:
-    - Supervised text classification with neural networks and grid searches ([handout](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_supervised-text-classification-II_2023.md))
+    - Supervised text classification with word-embeddings and neural networks (not yet available)
     
 
 #### Homework
@@ -139,20 +139,20 @@ In the third part of the course, students will work on their own research projec
 
 ## Week 4
 
-#### Lecture: Word Embeddings, Transformers and Large Language Models
+#### Lecture: Transformers and Large Language Models
 
 - Slides Lecture 4:
-    - [Download Slides](slides/04_largelanguagemodels_2023.html)
+    - [Download Slides](not yet available)
 
 #### Practical Session 1
 
 - Handouts: 
-    - Word-Embeddings and Text classification using Transformers ([handout](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_LLM_word-embeddings-and-transformers.md))
+    - Zero-Shot Text classification using Transformers/GPT/LLama (not yet available)
 
 #### Practical Session 2
 
 - Handouts:
-    - Zero-Shot Classification using GPT ([handout](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_LLM_zero-shot-classification.md))
+    - Few-Shot Classification using GPT/Llama (not yet available)
     
 
 #### Homework

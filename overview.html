@@ -13,7 +13,7 @@
 
 <title>Course Overview</title>
 
-<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.27/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
@@ -143,11 +143,15 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.tab('show');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -176,8 +180,8 @@ $(document).ready(function () {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -185,16 +189,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -282,19 +279,19 @@ groups of equal size.</p>
 <p><br></p>
 <div id="rooms-and-times" class="section level2">
 <h2>Rooms and Times</h2>
-<table class="table table-striped table-hover table-condensed table-responsive table" style="margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
+<table class="table table-striped table-hover table-condensed table-responsive table" style="color: black; margin-left: auto; margin-right: auto; color: black; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;color: white !important;background-color: #39423E !important;">
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;color: white !important;background-color: rgba(57, 66, 62, 255) !important;">
 Class
 </th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;color: white !important;background-color: #39423E !important;">
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;color: white !important;background-color: rgba(57, 66, 62, 255) !important;">
 Teacher
 </th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;color: white !important;background-color: #39423E !important;">
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;color: white !important;background-color: rgba(57, 66, 62, 255) !important;">
 Time
 </th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;color: white !important;background-color: #39423E !important;">
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;color: white !important;background-color: rgba(57, 66, 62, 255) !important;">
 Room
 </th>
 </tr>
@@ -308,10 +305,10 @@ Lectures
 Dr. Philipp Masur
 </td>
 <td style="text-align:left;">
-Monday 9:00am
+Monday 13:30
 </td>
 <td style="text-align:left;">
-Theater3-NU-2C33
+HG-05A00
 </td>
 </tr>
 <tr>
@@ -325,7 +322,7 @@ Roan Buma
 Tuesday, 9:00 &amp; Thursday, 11:00
 </td>
 <td style="text-align:left;">
-HG-05A36
+HG-11A37
 </td>
 </tr>
 <tr>
@@ -339,7 +336,7 @@ Roan Buma
 Tuesday, 11:00 &amp; Thursday, 09:00
 </td>
 <td style="text-align:left;">
-HG-05A36
+HG-11A37
 </td>
 </tr>
 <tr>
@@ -353,7 +350,7 @@ Dr. Kasper Welbers
 Tuesday, 9:00 &amp; Thursday, 11:00
 </td>
 <td style="text-align:left;">
-HG-05A37
+HG-09A24 &amp; OZW-4A03
 </td>
 </tr>
 <tr>
@@ -367,7 +364,7 @@ Dr. Kasper Welbers
 Tuesday, 11:00 &amp; Thursday, 9:00
 </td>
 <td style="text-align:left;">
-HG-05A37
+HG-05A37 &amp; OZW-4A03
 </td>
 </tr>
 <tr>
@@ -381,7 +378,7 @@ Emma Diel
 Tuesday, 9:00 &amp; Thursday, 11:00
 </td>
 <td style="text-align:left;">
-HG-06A37
+HG-09A33 &amp; HG-1G11
 </td>
 </tr>
 <tr>
@@ -395,7 +392,7 @@ Emma Diel
 Tuesday, 11:00 &amp; Thursday, 09:00
 </td>
 <td style="text-align:left;">
-HG-06A37
+HG-06A37 &amp; HG-1G11
 </td>
 </tr>
 </tbody>
@@ -405,22 +402,22 @@ HG-06A37
 </div>
 <div id="overview" class="section level2">
 <h2>Overview</h2>
-<table class="table table-striped table-hover table-condensed table-responsive table" style="margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
+<table class="table table-striped table-hover table-condensed table-responsive table" style="color: black; margin-left: auto; margin-right: auto; color: black; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;color: white !important;background-color: #39423E !important;">
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;color: white !important;background-color: rgba(57, 66, 62, 255) !important;">
 Date
 </th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;color: white !important;background-color: #39423E !important;">
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;color: white !important;background-color: rgba(57, 66, 62, 255) !important;">
 Week
 </th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;color: white !important;background-color: #39423E !important;">
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;color: white !important;background-color: rgba(57, 66, 62, 255) !important;">
 Type
 </th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;color: white !important;background-color: #39423E !important;">
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;color: white !important;background-color: rgba(57, 66, 62, 255) !important;">
 Content
 </th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;color: white !important;background-color: #39423E !important;">
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;color: white !important;background-color: rgba(57, 66, 62, 255) !important;">
 Assignment
 </th>
 </tr>
@@ -433,7 +430,7 @@ Assignment
 </tr>
 <tr>
 <td style="text-align:left;width: 8em; font-weight: bold;padding-left: 2em;" indentlevel="1">
-30/10/23
+28/10/24
 </td>
 <td style="text-align:left;">
 1
@@ -449,7 +446,7 @@ Introduction to Computational Methods in Communication Science
 </tr>
 <tr>
 <td style="text-align:left;width: 8em; font-weight: bold;padding-left: 2em;" indentlevel="1">
-31/10/23
+29/10/24
 </td>
 <td style="text-align:left;">
 1
@@ -465,7 +462,7 @@ Data Wrangling using the tidyverse and tidytext
 </tr>
 <tr>
 <td style="text-align:left;width: 8em; font-weight: bold;padding-left: 2em;" indentlevel="1">
-02/11/23
+31/10/24
 </td>
 <td style="text-align:left;">
 1
@@ -482,7 +479,7 @@ Homework Assignment 1
 </tr>
 <tr>
 <td style="text-align:left;width: 8em; font-weight: bold;padding-left: 2em;" indentlevel="1">
-06/11/23
+04/11/24
 </td>
 <td style="text-align:left;">
 2
@@ -498,7 +495,7 @@ Automated Text Analysis and Dictionary Approaches
 </tr>
 <tr>
 <td style="text-align:left;width: 8em; font-weight: bold;padding-left: 2em;" indentlevel="1">
-07/11/23
+05/11/24
 </td>
 <td style="text-align:left;">
 2
@@ -514,7 +511,7 @@ Basic Text Analysis using tidytext
 </tr>
 <tr>
 <td style="text-align:left;width: 8em; font-weight: bold;padding-left: 2em;" indentlevel="1">
-09/11/23
+07/11/24
 </td>
 <td style="text-align:left;">
 2
@@ -536,7 +533,7 @@ Homework Assignment 2
 </tr>
 <tr>
 <td style="text-align:left;width: 8em; font-weight: bold;padding-left: 2em;" indentlevel="1">
-13/11/23
+11/11/24
 </td>
 <td style="text-align:left;">
 3
@@ -545,14 +542,14 @@ Homework Assignment 2
 Lecture
 </td>
 <td style="text-align:left;">
-Text Classification and Classic Machine Learning
+Text Classification Using Machine Learning
 </td>
 <td style="text-align:left;">
 </td>
 </tr>
 <tr>
 <td style="text-align:left;width: 8em; font-weight: bold;padding-left: 2em;" indentlevel="1">
-14/11/23
+12/11/24
 </td>
 <td style="text-align:left;">
 3
@@ -561,14 +558,14 @@ Text Classification and Classic Machine Learning
 Practical session
 </td>
 <td style="text-align:left;">
-Supervised text classification using Naive Bayes and SVM
+Supervised text classification using Naive Bayes and neural networks
 </td>
 <td style="text-align:left;">
 </td>
 </tr>
 <tr>
 <td style="text-align:left;width: 8em; font-weight: bold;padding-left: 2em;" indentlevel="1">
-16/11/23
+14/11/24
 </td>
 <td style="text-align:left;">
 3
@@ -577,7 +574,7 @@ Supervised text classification using Naive Bayes and SVM
 Practical session
 </td>
 <td style="text-align:left;">
-Supervised text classification with neural networks
+Supervised text classification with wordembeddings and neural networks
 </td>
 <td style="text-align:left;">
 Homework Assignment 3
@@ -585,7 +582,7 @@ Homework Assignment 3
 </tr>
 <tr>
 <td style="text-align:left;width: 8em; font-weight: bold;padding-left: 2em;" indentlevel="1">
-20/11/23
+18/11/24
 </td>
 <td style="text-align:left;">
 4
@@ -594,14 +591,14 @@ Homework Assignment 3
 Lecture
 </td>
 <td style="text-align:left;">
-Word Embeddings, Transformers and Large Language Models
+Transformers and Large Language Models
 </td>
 <td style="text-align:left;">
 </td>
 </tr>
 <tr>
 <td style="text-align:left;width: 8em; font-weight: bold;padding-left: 2em;" indentlevel="1">
-21/11/23
+19/11/24
 </td>
 <td style="text-align:left;">
 4
@@ -610,14 +607,14 @@ Word Embeddings, Transformers and Large Language Models
 Practical session
 </td>
 <td style="text-align:left;">
-Text classification using Transformers
+Zero-Shot Classification Using Transformers/GPT/llama
 </td>
 <td style="text-align:left;">
 </td>
 </tr>
 <tr>
 <td style="text-align:left;width: 8em; font-weight: bold;padding-left: 2em;" indentlevel="1">
-23/11/23
+21/11/24
 </td>
 <td style="text-align:left;">
 4
@@ -626,7 +623,7 @@ Text classification using Transformers
 Practical session
 </td>
 <td style="text-align:left;">
-Zero-Shot Classification using GPT-4
+Few-Shot Classification Using GPT/llama
 </td>
 <td style="text-align:left;">
 Homework Assignment 4
@@ -639,7 +636,7 @@ Homework Assignment 4
 </tr>
 <tr>
 <td style="text-align:left;width: 8em; font-weight: bold;padding-left: 4em;" indentlevel="2">
-01/12/23
+29/11/24
 </td>
 <td style="text-align:left;">
 5
@@ -660,7 +657,7 @@ Multiple-Choice Exam (Content of Part I &amp; II)
 </tr>
 <tr>
 <td style="text-align:left;width: 8em; font-weight: bold;padding-left: 2em;" indentlevel="1">
-04/12/23
+02/12/24
 </td>
 <td style="text-align:left;">
 6
@@ -676,7 +673,7 @@ Summary and Introduction to Group Projects
 </tr>
 <tr>
 <td style="text-align:left;width: 8em; font-weight: bold;padding-left: 2em;" indentlevel="1">
-05/12/23
+03/12/24
 </td>
 <td style="text-align:left;">
 6
@@ -692,7 +689,7 @@ Meeting with supervisor
 </tr>
 <tr>
 <td style="text-align:left;width: 8em; font-weight: bold;padding-left: 2em;" indentlevel="1">
-07/12/23
+05/12/24
 </td>
 <td style="text-align:left;">
 6
@@ -708,7 +705,7 @@ Meeting with supervisor
 </tr>
 <tr>
 <td style="text-align:left;width: 8em; font-weight: bold;padding-left: 2em;" indentlevel="1">
-11/12/23
+09/12/24
 </td>
 <td style="text-align:left;">
 7
@@ -723,7 +720,7 @@ No lecture
 </tr>
 <tr>
 <td style="text-align:left;width: 8em; font-weight: bold;padding-left: 2em;" indentlevel="1">
-12/12/23
+10/12/24
 </td>
 <td style="text-align:left;">
 7
@@ -739,7 +736,7 @@ Meeting with supervisor
 </tr>
 <tr>
 <td style="text-align:left;width: 8em; font-weight: bold;padding-left: 2em;" indentlevel="1">
-14/12/23
+12/12/24
 </td>
 <td style="text-align:left;">
 7
@@ -755,7 +752,7 @@ Meeting with supervisor
 </tr>
 <tr>
 <td style="text-align:left;width: 8em; font-weight: bold;padding-left: 2em;" indentlevel="1">
-18/12/23
+16/12/24
 </td>
 <td style="text-align:left;">
 8
