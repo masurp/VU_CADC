@@ -26,7 +26,7 @@ editor: visual
 
 # What can we learn from this much data? {background-color="steelblue"}
 
-## TIMELINE OF NATURAL LANGUAGE PROCESSING {transition="slide"}
+## TIMELINE OF NATURAL LANGUAGE PROCESSING
 
 ![](img/timeline/Slide1.png)
 
@@ -267,7 +267,7 @@ td {
 </style>
 ```
 | \#  | Characteristic | Description                                                                                                                                                                                                                                                                       |
-|---------------|:--------------|:-----------------------------------------|
+|-----------------|:----------------|:--------------------------------------|
 | 1   | Big            | The scale or volume of some current data sets is often impressive. However, big data sets are not an end in themselves, but they can enable certain kinds of research including the study of rare events, the estimation of heterogeneity, and the detection of small differences |
 | 2   | Always-on      | Many big data systems are constantly collecting data and thus enable to study unexpected events and allow for real-time measurement                                                                                                                                               |
 | 3   | Nonreactive    | Participants are generally not aware that their data are being captured or they have become so accustomed to this data collection that it no longer changes their behavior.                                                                                                       |
@@ -277,7 +277,7 @@ td {
 ## 10 Characteristics of Big Data
 
 | \#  | Characteristic                 | Description                                                                                                                                   |
-|----------------|:---------------|:--------------------------------------|
+|-----------------|:----------------|:-------------------------------------|
 | 6   | Nonrepresentative              | Most big datasets are nonetheless not representative of certain populations. Out-of-sample generalizations are hence difficult or impossible. |
 | 7   | Drifting                       | Many big data systems are changing constantly, thus making it difficult to study long-term trends                                             |
 | 8   | Algorithmically <br>confounded | Behavior in big data systems is not natural; it is driven by the engineering goals of the systems.                                            |
@@ -310,6 +310,7 @@ td {
 -   Data is often proprietary (not shared openly)
 -   Samples are often biased
 -   Often, data have only insufficient metadata
+-   Risks of no longer understanding the models we use (black box)
 :::
 :::
 
@@ -343,7 +344,7 @@ Computational communication science studies thus usually involve:
 
 (1) large and complex data set
 (2) consisting of digital traces and other "naturally occurring" data
-(3) requiring algorithmic solutions to analyze
+(3) requiring algorithmic solutions to analyze (e.g., machine learning, LLMs)
 (4) allowing the study of human communication by applying and testing communication theory
 :::
 
@@ -367,7 +368,7 @@ Computational communication science studies thus usually involve:
 
 -   (Online) Journalism
 
-    -   News coverage across decaces
+    -   News coverage across decades
     -   Gender equality
 :::
 :::
@@ -407,61 +408,8 @@ Computational communication science studies thus usually involve:
 :::
 :::
 
-## Example 3: Dutch Telegramsphere
 
-::: columns
-::: {.column width="50%"}
--   Simon et al. (2022) collected the full messaging history (N = 2,033,661) of 174 Dutch-language public Telegram chats/channels
-
--   Used state-of-the-art web-mining, neural topic modeling, and social network analysis techniques
-
--   Their findings raise concerns with respect to Telegram's polarization and radicalization capacity
-
--   They observed that Telegram users are active in and share content across different communities (see Figure on the right)
-:::
-
-::: {.column width="50%"}
-![](img/simon_figure3.png) [Topic similarity network]{style="font-size:0.65em;"}
-:::
-:::
-
-## Example 3: Dutch Telegramsphere
-
--   They further found that over time, conspiracy-themed, far-right activist, and COVID-19-sceptical communities dominated
-
-::: {layout="[49, 51]"}
-![Telegram user activity over time](img/simon_figure4.png)
-
-![The top 20 topics overtime](img/simon_figure5.png)
-:::
-
-## Example 4: Gender Stereotypes in Political News
-
-::: columns
-::: {.column width="40%"}
--   Andrich et al (2023) studied gender differences in political news coverage to determine whether the media employ stereotypical traits in portrayals of 1,095 U.S. politicians
-
--   The sample consisted of over 5 million U.S. news stories published from 2010 to 2020
-:::
-
-::: {.column width="60%"}
-![](img/andrich_fig1.jpeg)
-:::
-:::
-
--   They studied the media's attribution of gender-linked (feminine, masculine) and political (leadership, competence, integrity, empathy) traits to U.S. politicians
-
--   All three masculine traits were more strongly associated with male politicians, but only the feminine physical traits were more strongly associated with female politicians
-
-## Example 5: Gender representation in TV
-
--   Jürgens and colleagues (2021) investigated gender representations in over ten years of daytime TV programming
-
--   Usually, this would have required hours and hours (!) of manual coding (i.e., watching a hell lot of TV), but they used neural networks to automatically detect gender in shown faces
-
-![](img/juergen_face.png)
-
-## Example 5: Gender representation in TV
+## Example 3: Gender representation in TV
 
 ::: columns
 ::: {.column width="35%"}
@@ -475,136 +423,10 @@ Computational communication science studies thus usually involve:
 :::
 :::
 
-# Ethics of Computational Communication Research {background-color="steelblue"}
-
-Ethical challenges in using computational methods
-
-## Two (un-)ethical studies?
-
-::: columns
-::: {.column width="45%"}
-::: {style="background: #c3dbe6; padding: 15px; height: 10em; "}
-700,000 Facebook users were put into an experiment that may have altered their emotions. The participants did not give consent and the study was not subject to third party ethical oversight (Kramer et al., 2014)
-:::
-:::
-
-::: {.column width="5%"}
-:::
-
-::: {.column width="45%"}
-::: {style="background: #c3dbe6; padding: 15px; height: 10em;"}
-Researcher scraped students' data from Facebook, merged it with university records, used these data for research and then shared them with other researchers (Wimmer & Lewis, 2010).
-:::
-:::
-:::
-
-. . .
-
-<br>
-
-**Question:** Do you think these studies are problematic? If yes, why?
-
-## The "Facebook mood manipulation" study
-
--   Massive online experiment (N \~ 700k)
-
--   Main Research Question: Is emotion contagious?
-
--   Experimental groups: positive / negative / control
-
--   Stimulus: Hide (negative / positive / random) messages from FB timeline
-
--   Measurement / dependent variables: sentiment of posts by user
-
-<br><br>
-
-[Kramer et al., 2014]{style="font-size:0.65em;"}
-
-## Computational Method: Sentiment Analysis
-
-::: columns
-::: {.column width="45%"}
--   LIWC word list (Linguistic Inquiry and Word Count; Pennebaker et al.)
-
-    -   406 positive words: e.g., love, nice, sweet, etc.
-
-    -   399 negative words: e.g. hurt, ugly, nasty
-
--   Count occurrences of words in both categories, subtract negative from positive
-:::
-
-::: {.column width="5%"}
-:::
-
-::: {.column width="45%"}
-![](img/facebook_pnas.jpg)
-:::
-:::
-
-## Is this good science? Why not?
-
-. . .
-
--   Positive aspects
-    -   Potentially interesting research question
-    -   Actual behavior measured as well as self-report measures
-
-. . .
-
--   Problematic aspects
-    -   Not replicable
-    -   Low internal validity (sentiment even indicative of mood?)
-    -   Low measurement accuracy (are word counts indicative of sentiment?)
-
-. . .
-
--   Ethical issues
-    -   Overt manipulation of people's life
-    -   No informed consent and no debriefing
-
-## Ethical challenges in computational research (1)
-
-1.  **Privacy and Data Security:** A key ethical concern is the handling of personal data, including the risk of data breaches and misuse. When using proprietary software/algorithms, should we share personal data with the company behind it (e.g., OpenAI, Google)?
-
-2.  **Bias and Fairness:** Computational methods can inherit biases from the data they are trained on. This can result in unfair or discriminatory outcomes, especially when later applied to contexts like hiring, lending, and criminal justice. Addressing these biases remains an ongoing challenge. Validation is of utmost importance!
-
-3.  **Transparency and Accountability:** Many computational algorithms are complex and not easily understandable by humans. This lack of transparency can make it difficult to hold individuals or organizations accountable for the decisions made by these algorithms. Lack of explainability can lead to a lack of trust.
-
-4.  **Social Manipulation:** Computational methods can be used to manipulate public opinion or behavior, often in unethical ways (see Kramer et al.). This includes spreading misinformation or conducting social experiments without consent and debriefing.
-
-## Ethical challenges in computational research (2)
-
-5.  **Environmental Impact:** The massive computational power required for some methods, such as training deep learning models, can have a significant environmental impact, contributing to concerns about energy consumption and climate change.
-
-6.  **Ownership and Intellectual Property:** Questions of intellectual property rights, data and model ownership, and access to computational methods can raise more ethical issues. Some may argue that access to certain methods should be open to all (see also point 3 transparency), while others may seek to protect intellectual property (among other things, to e.g., prevent misuse).
-
-7.  **Ethical AI:** In the field of artificial intelligence (AI) and machine learning, ethical concerns often revolve around the development of AI systems that can make autonomous decisions. Ensuring these decisions align with human values is a significant challenge. Ethical dilemmas arise around the degree of control we should and are able to maintain over these systems and who should be responsible for their actions.
-
-<br>
-
-[see also van Atteveldt & Peng, 2018]{style="font-size:0.65em;"}
-
-## General ethical guidelines
-
-Salganik (2013) proposes the following four ethical guidelines for evaluating the ethical nature of a computational study. They are loosely based on the Belmont Report (1978), which is a fundamental document in prescribing ethical guidelines for the protection of human subjects of research:
-
--   **Respect for persons:** Treating people as autonomous and honoring their wishes
-
--   **Beneficence:** Understanding and improving the risk/benefit profile of a study
-
--   **Justice:** Risks and benefits should be evenly distributed among participants/research subjects
-
--   **Respect for law and public interest**: Respect privacy, copyright, and access rights
-
-<br><br> [Salganik, 2018, chap. 6]{style="font-size:0.65em;"}
-
-## Ethical principles for CCR
-
-![](img/ethical_guidelines.png)
 
 # Introduction to Automated Text Analysis {background-color="steelblue"}
 
-Understanding text as data!
+The core topic of this course!
 
 ## A "new" kind of data
 
@@ -746,12 +568,14 @@ A company owned by Thiel had lodged a consent application for a sprawling lodge 
 ## A short overview of linguistics
 
 ::: columns
-::: {.column width="45%"}
+::: {.column width="63%"}
 -   Each field studies a *different level* at which language exhibits organization
 
 -   When we engage in text analysis, we use these levels of organization to create language features (e.g., tokens, n-grams,...)
 
--   They often depend on the morphological characteristics of language, such as when text is broken into sequences of characters, words, sentences
+-   In classic machine learning, they often depend on the morphological characteristics of language, such as when text is broken into sequences of characters, words, sentences
+
+- In modern approaches (e.g. using LLMs), it also involves syntactical and pragmatic characteristics. IN case of audio-text transformation also phonetical or phonological characteristics!
 
 <br>
 
@@ -761,7 +585,7 @@ A company owned by Thiel had lodged a consent application for a sprawling lodge 
 ::: {.column width="5%"}
 :::
 
-::: {.column width="45%"}
+::: {.column width="32%"}
 | Subfield   | What does it focus on?                    |
 |:-----------|:------------------------------------------|
 | Phonetics  | Sounds that people use in language        |
@@ -781,18 +605,72 @@ A company owned by Thiel had lodged a consent application for a sprawling lodge 
 
 -   Yet, because the organization and the rules of language can be ambiguous, our ability to create text features for machine learning is constrained by the very nature of language
 
-<br><br>
+<br>
 
 <center>
 
 | Type of Feature | Example                                                    |
-|:-------------------|:---------------------------------------------------|
+|:--------------------|:--------------------------------------------------|
 | Sentence        | "Include Your Children When Baking Cookies"                |
 | Word            | "Include", "Your", "Children", "When", "Baking", "Cookies" |
 | Bigrams         | "Include", "Your Children", "When", "Baking Cookies"       |
 | n-grams         | "Include Your Children", "When Baking Cookies"             |
 
 </center>
+
+# From text to numbers
+
+In automated text classification, we use understandings of morphology (and other fields of linguistics) to break text into tokens and then represent these tokens as numbers, so that a computer can read them:
+
+
+![](img/text_as_data/text_01.png)
+
+
+# From text to numbers
+
+In automated text classification, we use understandings of morphology (and other fields of linguistics) to break text into tokens and then represent these tokens as numbers, so that a computer can read them:
+
+
+![](img/text_as_data/text_02.png)
+
+# From text to numbers
+
+In automated text classification, we use understandings of morphology (and other fields of linguistics) to break text into tokens and then represent these tokens as numbers, so that a computer can read them:
+
+
+![](img/text_as_data/text_03.png)
+
+
+# From text to numbers
+
+In automated text classification, we use understandings of morphology (and other fields of linguistics) to break text into tokens and then represent these tokens as numbers, so that a computer can read them:
+
+
+![](img/text_as_data/text_04.png)
+
+
+# From text to numbers
+
+In automated text classification, we use understandings of morphology (and other fields of linguistics) to break text into tokens and then represent these tokens as numbers, so that a computer can read them:
+
+
+![](img/text_as_data/text_05.png)
+
+
+# From text to numbers
+
+In automated text classification, we use understandings of morphology (and other fields of linguistics) to break text into tokens and then represent these tokens as numbers, so that a computer can read them:
+
+
+![](img/text_as_data/text_06.png)
+
+# From text to numbers
+
+In automated text classification, we use understandings of morphology (and other fields of linguistics) to break text into tokens and then represent these tokens as numbers, so that a computer can read them:
+
+
+![](img/text_as_data/text_07.png)
+
 
 # General Text Classification Workflow {background-color="steelblue"}
 
@@ -813,18 +691,18 @@ A Framework for this Course
 
 ![](img/text_analysis_fundamentals/obtainging_text.png){.absolute top="30" right="0" width="350"}
 
--   Publicly available data sets
+-   From publicly available data sets
 
     -   e.g.: Political texts, news from publisher / library
     -   Great if you can find it, often not available
 
--   Scraping primary sources
+-   By scraping primary sources
 
     -   e.g.: Press releases from party website, existing archives
     -   Writing scrapers can be trivial or very complex depending on web site
     -   Make sure to check legal issues
 
--   Proprietary texts from third parties
+-   Via proprietary texts from third parties
 
     -   e.g.: digital archives (LexisNexis, factiva etc.), social media APIs
     -   Often custom format, API restrictions, API changes
@@ -841,9 +719,9 @@ A Framework for this Course
     -   **feature creation:** breaking down text into the features that we want to analyze (so-called tokens such as words, sentence, bi-grams...)
     -   **feature transformation:** involves text cleaning such as stopword removal, stemming, normalization
     -   **feature selection:** frequency trimming
-    -   **creation of structured data:** e.g., a document-feature matrix (for classic ML approaches)
+    -   **creation of structured data:** translating tokens into vectors or numbers (e.g., a document-feature matrix for classic ML approaches or dense vector-matrices for deep learning
 
--   Modern approaches such require less and less feature engineering and at times, make it entirely obsolete
+-   Modern approaches such require less and less manual feature engineering and at times, make it entirely obsolete (because these models automatically "do it")
 
 ## (3) Text classification
 
@@ -851,7 +729,7 @@ A Framework for this Course
 
 <br>
 
-![](img/approaches.png)
+![](img/approaches2.png)
 
 ## (4) Validation
 
@@ -884,7 +762,7 @@ A Framework for this Course
 :::
 :::
 
-## A very small example {auto-animate="true"}
+## A very small example in R {auto-animate="true"}
 
 ```{r}
 #| echo: true
@@ -907,7 +785,7 @@ head(data)
 
 ```
 
-## A very small example {auto-animate="true"}
+## A very small example in R {auto-animate="true"}
 
 ```{r}
 #| echo: true
@@ -932,7 +810,7 @@ tokens <- data |>
 head(tokens, n = 10)
 ```
 
-## A very simple example: Dictionary approach x
+## A very simple example in R: Dictionary approach
 
 ```{r}
 #| echo: true
@@ -945,7 +823,7 @@ dictionary <- tibble(movie = c("film", "movie"),
 print(dictionary)
 ```
 
-## A very simple example: Dictionary approach {auto-animate="true"}
+## A very simple example in R: Dictionary approach {auto-animate="true"}
 
 ```{r}
 #| echo: true
@@ -998,6 +876,53 @@ results %>%
   spread(labels, scores)
 ```
 
+
+# Ethics of Computational Communication Research {background-color="steelblue"}
+
+Ethical challenges in using computational methods
+
+## Ethical challenges in computational research (1)
+
+1.  **Privacy and Data Security:** A key ethical concern is the handling of personal data, including the risk of data breaches and misuse. When using proprietary software/algorithms, should we share personal data with the company behind it (e.g., OpenAI, Google)?
+
+2.  **Bias and Fairness:** Computational methods can inherit biases from the data they are trained on. This can result in unfair or discriminatory outcomes, especially when later applied to contexts like hiring, lending, and criminal justice. Addressing these biases remains an ongoing challenge. Validation is of utmost importance!
+
+3.  **Transparency and Accountability:** Many computational algorithms are complex and not easily understandable by humans. This lack of transparency can make it difficult to hold individuals or organizations accountable for the decisions made by these algorithms. Lack of explainability can lead to a lack of trust.
+
+4.  **Social Manipulation:** Computational methods can be used to manipulate public opinion or behavior, often in unethical ways (see Kramer et al.). This includes spreading misinformation or conducting social experiments without consent and debriefing.
+
+## Ethical challenges in computational research (2)
+
+5.  **Environmental Impact:** The massive computational power required for some methods, such as training deep learning models, can have a significant environmental impact, contributing to concerns about energy consumption and climate change.
+
+6.  **Ownership and Intellectual Property:** Questions of intellectual property rights, data and model ownership, and access to computational methods can raise more ethical issues. Some may argue that access to certain methods should be open to all (see also point 3 transparency), while others may seek to protect intellectual property (among other things, to e.g., prevent misuse).
+
+7.  **Ethical AI:** In the field of artificial intelligence (AI) and machine learning, ethical concerns often revolve around the development of AI systems that can make autonomous decisions. Ensuring these decisions align with human values is a significant challenge. Ethical dilemmas arise around the degree of control we should and are able to maintain over these systems and who should be responsible for their actions.
+
+<br>
+
+[see also van Atteveldt & Peng, 2018]{style="font-size:0.65em;"}
+
+## General ethical guidelines
+
+Salganik (2013) proposes the following four ethical guidelines for evaluating the ethical nature of a computational study. They are loosely based on the Belmont Report (1978), which is a fundamental document in prescribing ethical guidelines for the protection of human subjects of research:
+
+-   **Respect for persons:** Treating people as autonomous and honoring their wishes
+
+-   **Beneficence:** Understanding and improving the risk/benefit profile of a study
+
+-   **Justice:** Risks and benefits should be evenly distributed among participants/research subjects
+
+-   **Respect for law and public interest**: Respect privacy, copyright, and access rights
+
+<br><br> [Salganik, 2018, chap. 6]{style="font-size:0.65em;"}
+
+## Ethical principles for CCR
+
+![](img/ethical_guidelines.png)
+
+
+
 # Formalities {background-color="steelblue"}
 
 How this course is going to work?
@@ -1006,7 +931,7 @@ How this course is going to work?
 
 |     Dr. Philipp K. Masur      |     | Dr. Kaspar Welbers  |     |     Emma Diel     |     |     Roan Buma     |
 |:---------:|-----------|:---------:|-----------|:---------:|-----------|:---------:|
-|     ![](img/philipp2.jpg)     |     | ![](img/kasper.jpg) |     | ![](img/emma.jpg) |     | ![](img/buma.jpg) |
+|     ![](https://dmb-lab.nl/wp-content/uploads/2024/07/AGU5929_Philipp-Masur.jpg)     |     | ![](https://dmb-lab.nl/wp-content/uploads/2024/07/AGU5119-Kasper-Welbers.jpg) |     | ![](https://research.vu.nl/files-asset/318853298/_AGU6410.jpg?w=160&f=webp) |     | ![](https://research.vu.nl/files-asset/321701863/_AGU6124.jpg?w=160&f=webp) |
 | Lecturer & Course Coordinator |     |       Teacher       |     |      Teacher      |     |      Teacher      |
 
 ## R help desk
@@ -1015,18 +940,12 @@ How this course is going to work?
 
 -   Because we work with code, tiny mistakes can produce errors.
 
--   If you have any problems related to installing software, running packages or code, or simply an error message you do not understand, you can address the R Help Desk:
+-   If you have any problems related to installing software, running packages or code, or simply an error message you do not understand, you can address the R Help Desk. 
 
-<br>
 
-**Office Hours:**
+- For office hours and how to get in contact with the R Help Desk, consult the course canvas page.
 
--   Mondays: 15:30 - 17:30
--   Wednesday: 11:15 - 13:15
 
-**Where:**
-
--   On Zoom (Link provided on Canvas)
 
 ## Information and Materials
 
@@ -1051,15 +970,15 @@ Communication and assignment submission via Canvas:
 
 ## Course Schedule
 
-![](img/schedule1.png)
+![](img/approaches/Slide2.png)
 
 ## Course Schedule
 
-![](img/schedule2.png)
+![](img/approaches/Slide3.png)
 
 ## Attendance
 
-You will realize that this course has a comparatively **steep learning curve**. We will learn about complex research papers and recreate their analyses in R. It is thus generally recommended to follow all lectures and practical sessions! Despite some initial challenges, you will also experience a lot of self-efficacy: Learning R and computational methods is very rewarding and at the end, you can be proud of what you have achieved!
+You will realize that this course has a comparatively **steep learning curve**. We will learn about research papers and recreate their analyses in R. It is thus generally recommended to follow all lectures and practical sessions! **BUT:** Despite some initial challenges, you will also experience a lot of self-efficacy: Learning R and computational methods is very rewarding and at the end, you can be proud of what you have achieved!
 
 <br>
 
@@ -1075,7 +994,7 @@ After the first two cycles, there will be a written exam (**40% of the final gra
 
 <br>
 
--   The exam will consist of \~28-36 multiple choice questions and \~6-10 open-ended questions
+-   The exam will consist of \~36 multiple choice questions and \~8 open-ended questions
 
 -   Exam questions will be based on **all material** discussed in the first two cycles, including lecture content, class materials, and required readings
 
