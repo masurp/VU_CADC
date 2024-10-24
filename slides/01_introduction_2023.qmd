@@ -24,22 +24,6 @@ editor: visual
 
 [Hilbert & Lopez, 2011]{style="font-size:0.6em;"}
 
-# What can we learn from this much data? {background-color="steelblue"}
-
-## TIMELINE OF NATURAL LANGUAGE PROCESSING
-
-![](img/timeline/Slide1.png)
-
-## TIMELINE OF NATURAL LANGUAGE PROCESSING {transition="slide"}
-
-![](img/timeline/Slide2.png)
-
-## TIMELINE OF NATURAL LANGUAGE PROCESSING {transition="slide"}
-
-![](img/timeline/Slide3.png)
-
-##  {background="#43464B" background-video="video/gpt.mov" background-video-loop="true" background-video-muted="true"}
-
 ## Much of what we know about human behavior...
 
 ::: columns
@@ -761,6 +745,22 @@ A Framework for this Course
 ![](https://miro.medium.com/v2/resize:fit:1400/1*fxiTNIgOyvAombPJx5KGeA.png){.absolute top="270" right="0" width="400"}
 :::
 :::
+
+## TIMELINE OF NATURAL LANGUAGE PROCESSING
+
+![](img/timeline/Slide1.png)
+
+## TIMELINE OF NATURAL LANGUAGE PROCESSING 
+
+![](img/timeline/Slide2.png)
+
+## TIMELINE OF NATURAL LANGUAGE PROCESSING 
+
+![](img/timeline/Slide3.png)
+
+##  {background="#43464B" background-video="video/gpt.mov" background-video-loop="true" background-video-muted="true"}
+
+
 
 ## A very small example in R {auto-animate="true"}
 
