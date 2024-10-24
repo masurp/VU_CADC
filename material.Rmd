@@ -40,7 +40,7 @@ In the third part of the course, students will work on their own research projec
 #### Lecture: Introduction to Computational Methods in Communication Science
 
 - Slides Lecture 1:
-    - [Download Slides](not yet available)
+    - [Download Slides](slides/01_introduction_2023.html)
 
 #### Practical Session 1: Data Wrangling
 
