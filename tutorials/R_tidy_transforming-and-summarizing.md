@@ -3,32 +3,22 @@ R Tidyverse: Data Transformation & Summarization
 Kasper Welbers, Wouter van Atteveldt & Philipp Masur
 2021-10
 
-- <a href="#introduction" id="toc-introduction">Introduction</a>
-  - <a href="#installing-tidyverse" id="toc-installing-tidyverse">Installing
-    tidyverse</a>
-- <a href="#tidyverse-basics" id="toc-tidyverse-basics">Tidyverse
-  basics</a>
-  - <a href="#reading-data" id="toc-reading-data">Reading data</a>
-  - <a href="#subsetting-with-filter"
-    id="toc-subsetting-with-filter">Subsetting with filter()</a>
-  - <a href="#selecting-certain-columns"
-    id="toc-selecting-certain-columns">Selecting certain columns</a>
-  - <a href="#sorting-with-arrange" id="toc-sorting-with-arrange">Sorting
-    with arrange()</a>
-  - <a href="#adding-or-transforming-variables-with-mutate"
-    id="toc-adding-or-transforming-variables-with-mutate">Adding or
-    transforming variables with mutate()</a>
-- <a href="#working-with-pipes" id="toc-working-with-pipes">Working with
-  Pipes</a>
-- <a href="#data-summarization" id="toc-data-summarization">Data
-  Summarization</a>
-  - <a href="#grouping-rows" id="toc-grouping-rows">Grouping rows</a>
-  - <a href="#summarizing" id="toc-summarizing">Summarizing</a>
-  - <a href="#using-mutate-with-group_by"
-    id="toc-using-mutate-with-group_by">Using mutate with group_by</a>
-  - <a href="#ungrouping" id="toc-ungrouping">Ungrouping</a>
-- <a href="#multiple-grouping-variables"
-  id="toc-multiple-grouping-variables">Multiple grouping variables</a>
+- [Introduction](#introduction)
+  - [Installing tidyverse](#installing-tidyverse)
+- [Tidyverse basics](#tidyverse-basics)
+  - [Reading data](#reading-data)
+  - [Subsetting with filter()](#subsetting-with-filter)
+  - [Selecting certain columns](#selecting-certain-columns)
+  - [Sorting with arrange()](#sorting-with-arrange)
+  - [Adding or transforming variables with
+    mutate()](#adding-or-transforming-variables-with-mutate)
+- [Working with Pipes](#working-with-pipes)
+- [Data Summarization](#data-summarization)
+  - [Grouping rows](#grouping-rows)
+  - [Summarizing](#summarizing)
+  - [Using mutate with group_by](#using-mutate-with-group_by)
+  - [Ungrouping](#ungrouping)
+  - [Multiple grouping variables](#multiple-grouping-variables)
 
 # Introduction
 
@@ -479,7 +469,7 @@ d2 %>%
 If you run the same command without the ungroup, what would the result
 be? Why?
 
-# Multiple grouping variables
+## Multiple grouping variables
 
 The above examples all used a single grouping variable, but you can also
 group by multiple columns. For example, I could compute average support

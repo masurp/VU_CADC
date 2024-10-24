@@ -45,13 +45,12 @@ In the third part of the course, students will work on their own research projec
 #### Practical Session 1: Data Wrangling
 
 - Handouts: 
-    - Tidyverse I (not yet available)
-    - Tidyverse II (not yet available)
+    - [Intro to the tidyverse](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_tidy_transforming-and-summarizing.md)
     
 #### Practical Session 2: Data visualization
 
 - Handouts:
-    - Data visualization (not yet available)
+    - [Data visualization](https://github.com/vanatteveldt/ccslearnr/blob/master/handouts/ggplot.md)
    
 #### Homework
 
@@ -80,7 +79,7 @@ In the third part of the course, students will work on their own research projec
 #### Lecture: Automated Text Analysis and Dictionary Approaches
 
 - Slides Lecture 2:
-    - [Download Slides](not yet available)
+    - [Download Slides] (not yet available)
 
 #### Practical Session 1
 
@@ -110,7 +109,7 @@ In the third part of the course, students will work on their own research projec
 #### Lecture: Text Classification and Classic Machine Learning
 
 - Slides Lecture 3:
-    - [Download Slides](not yet available)
+    - [Download Slides] (not yet available)
 
 #### Practical Session 1
 
@@ -142,7 +141,7 @@ In the third part of the course, students will work on their own research projec
 #### Lecture: Transformers and Large Language Models
 
 - Slides Lecture 4:
-    - [Download Slides](not yet available)
+    - [Download Slides] (not yet available)
 
 #### Practical Session 1
 

@@ -360,7 +360,7 @@ d2 %>%
 
 If you run the same command without the ungroup, what would the result be? Why?
 
-# Multiple grouping variables
+## Multiple grouping variables
 
 The above examples all used a single grouping variable, but you can also group by multiple columns.
 For example, I could compute average support per question and per population:
