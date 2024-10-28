@@ -842,11 +842,11 @@ Communication and assignment submission via Canvas:
 
 ## Course Schedule
 
-![](img/approaches/Slide2.png)
+![](img/approaches1.png)
 
 ## Course Schedule
 
-![](img/approaches/Slide3.png)
+![](img/approaches3.png)
 
 ## Attendance
 
@@ -890,18 +890,11 @@ After each week, students are required to hand in a "homework assignment", which
 
 ## Group presentation
 
-In the third cycle, students will be assigned to small working groups in which they independently conduct a research project. A final presentation on the 18th of December (09.00 to 12.00) will be graded per group (**30% of the final grade**).
+In the third cycle, students will be assigned to small working groups in which they independently conduct a research project. A final poster presentation on the 16th of December (most likely 09.00 to 12.00) will be graded per group (**30% of the final grade**).
 
 <br>
 
--   A 10-minute talk (including appropriate slides) in which you:
-    -   introduce the research project (1-2 slides)
-    -   describe theory and hypotheses (1 slide)
-    -   explain the methods (1 slide)
-    -   present the results (2 slides)
-    -   discuss the findings (1-2 slides)
-
-Students are required to hand in the slides (e.g., powerpoint) and analyses (again .rmd and .html) beforehand (Deadline: 17th of December 2021 at 24:00, hard deadline!)
+Students are required to hand in the poster (as PDF) and analyses (again .rmd and .html) beforehand (Deadline: 15th of December 2021 at 24:00, hard deadline!)
 
 # Questions? {background-color="steelblue"}
 
