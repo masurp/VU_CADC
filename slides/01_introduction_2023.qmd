@@ -126,6 +126,11 @@ With regard to the specific methods being taught in R, you will be able to...
     -   Bayesian Statistics
     -   Flexibility in Data Analysis
     -   Computational Methods and Machine Learning
+    
+- More info: www.philippmasur.de
+
+
+![](img/philipp.jpeg){.absolute bottom="150" right="100" width="300"}
 
 ## Content of this lecture {.smaller}
 
@@ -149,26 +154,31 @@ With regard to the specific methods being taught in R, you will be able to...
 
     2.3. Examples of Computational Communication Research
 
-3.  Ethics of Computational Communication Research
 
-    3.1. A Controversional Study (Kramer et al., 2014)
+3.  Introduction to Automated Text Analysis
 
-    3.2. Ethical Challenges
+    3.1. Text as Data
 
-    3.3. Practical Guidelines
+    3.2. The General Text Classification Pipeline
+    
+    3.3. Timeline of Natural Language Processing
+
+    3.3. A Small Example
+    
 :::
 
 ::: {.column width="5%"}
 :::
 
 ::: {.column width="45%"}
-4.  Introduction to Automated Text Analysis
 
-    4.1. Text as Data
+4.  Ethics of Computational Communication Research
 
-    4.2. The General Text Classification Pipeline
+    4.1. A Controversional Study (Kramer et al., 2014)
 
-    4.3. A Small Example
+    4.2. Ethical Challenges
+
+    4.3. Practical Guidelines
 
 5.  Course Formalities
 
@@ -251,7 +261,7 @@ td {
 </style>
 ```
 | \#  | Characteristic | Description                                                                                                                                                                                                                                                                       |
-|-----------------|:----------------|:--------------------------------------|
+|---------|:--------|:------------------------------------------------------|
 | 1   | Big            | The scale or volume of some current data sets is often impressive. However, big data sets are not an end in themselves, but they can enable certain kinds of research including the study of rare events, the estimation of heterogeneity, and the detection of small differences |
 | 2   | Always-on      | Many big data systems are constantly collecting data and thus enable to study unexpected events and allow for real-time measurement                                                                                                                                               |
 | 3   | Nonreactive    | Participants are generally not aware that their data are being captured or they have become so accustomed to this data collection that it no longer changes their behavior.                                                                                                       |
@@ -261,7 +271,7 @@ td {
 ## 10 Characteristics of Big Data
 
 | \#  | Characteristic                 | Description                                                                                                                                   |
-|-----------------|:----------------|:-------------------------------------|
+|------------|:-----------|:------------------------------------------------|
 | 6   | Nonrepresentative              | Most big datasets are nonetheless not representative of certain populations. Out-of-sample generalizations are hence difficult or impossible. |
 | 7   | Drifting                       | Many big data systems are changing constantly, thus making it difficult to study long-term trends                                             |
 | 8   | Algorithmically <br>confounded | Behavior in big data systems is not natural; it is driven by the engineering goals of the systems.                                            |
@@ -392,7 +402,6 @@ Computational communication science studies thus usually involve:
 :::
 :::
 
-
 ## Example 3: Gender representation in TV
 
 ::: columns
@@ -406,7 +415,6 @@ Computational communication science studies thus usually involve:
 ![](img/juergen_face2.png)
 :::
 :::
-
 
 # Introduction to Automated Text Analysis {background-color="steelblue"}
 
@@ -559,7 +567,7 @@ A company owned by Thiel had lodged a consent application for a sprawling lodge 
 
 -   In classic machine learning, they often depend on the morphological characteristics of language, such as when text is broken into sequences of characters, words, sentences
 
-- In modern approaches (e.g. using LLMs), it also involves syntactical and pragmatic characteristics. IN case of audio-text transformation also phonetical or phonological characteristics!
+-   In modern approaches (e.g. using LLMs), it also involves syntactical and pragmatic characteristics. IN case of audio-text transformation also phonetical or phonological characteristics!
 
 <br>
 
@@ -594,7 +602,7 @@ A company owned by Thiel had lodged a consent application for a sprawling lodge 
 <center>
 
 | Type of Feature | Example                                                    |
-|:--------------------|:--------------------------------------------------|
+|:-----------------|:-----------------------------------------------------|
 | Sentence        | "Include Your Children When Baking Cookies"                |
 | Word            | "Include", "Your", "Children", "When", "Baking", "Cookies" |
 | Bigrams         | "Include", "Your Children", "When", "Baking Cookies"       |
@@ -606,14 +614,11 @@ A company owned by Thiel had lodged a consent application for a sprawling lodge 
 
 In automated text classification, we use understandings of morphology (and other fields of linguistics) to break text into tokens and then represent these tokens as numbers, so that a computer can read them:
 
-
 ![](img/text_as_data/text_01.png)
-
 
 # From text to numbers
 
 In automated text classification, we use understandings of morphology (and other fields of linguistics) to break text into tokens and then represent these tokens as numbers, so that a computer can read them:
-
 
 ![](img/text_as_data/text_02.png)
 
@@ -621,30 +626,23 @@ In automated text classification, we use understandings of morphology (and other
 
 In automated text classification, we use understandings of morphology (and other fields of linguistics) to break text into tokens and then represent these tokens as numbers, so that a computer can read them:
 
-
 ![](img/text_as_data/text_03.png)
-
 
 # From text to numbers
 
 In automated text classification, we use understandings of morphology (and other fields of linguistics) to break text into tokens and then represent these tokens as numbers, so that a computer can read them:
-
 
 ![](img/text_as_data/text_04.png)
 
-
 # From text to numbers
 
 In automated text classification, we use understandings of morphology (and other fields of linguistics) to break text into tokens and then represent these tokens as numbers, so that a computer can read them:
-
 
 ![](img/text_as_data/text_05.png)
 
-
 # From text to numbers
 
 In automated text classification, we use understandings of morphology (and other fields of linguistics) to break text into tokens and then represent these tokens as numbers, so that a computer can read them:
-
 
 ![](img/text_as_data/text_06.png)
 
@@ -652,9 +650,7 @@ In automated text classification, we use understandings of morphology (and other
 
 In automated text classification, we use understandings of morphology (and other fields of linguistics) to break text into tokens and then represent these tokens as numbers, so that a computer can read them:
 
-
 ![](img/text_as_data/text_07.png)
-
 
 # General Text Classification Workflow {background-color="steelblue"}
 
@@ -750,132 +746,13 @@ A Framework for this Course
 
 ![](img/timeline/Slide1.png)
 
-## TIMELINE OF NATURAL LANGUAGE PROCESSING 
+## TIMELINE OF NATURAL LANGUAGE PROCESSING
 
 ![](img/timeline/Slide2.png)
 
-## TIMELINE OF NATURAL LANGUAGE PROCESSING 
+## TIMELINE OF NATURAL LANGUAGE PROCESSING
 
 ![](img/timeline/Slide3.png)
-
-##  {background="#43464B" background-video="video/gpt.mov" background-video-loop="true" background-video-muted="true"}
-
-
-
-## A very small example in R {auto-animate="true"}
-
-```{r}
-#| echo: true
-#| include: true
-#| code-line-numbers: true
-#| class-output: output
-# Loading package
-library(tidytext)
-
-# Raw text
-data <- tibble(
-  docs = c(1:4),
-  text = c("Computational methods include various approaches to text classification.",
-           "Oppenheimer is a 2023 biographical thriller film written and directed by Christopher Nolan.",
-           "Communication Science analyzes contents, uses, and consequences of media and communication.",
-           "Barbie is a 2023 fantasy comedy film directed by Greta Gerwig.")
-  )
-
-head(data)
-
-```
-
-## A very small example in R {auto-animate="true"}
-
-```{r}
-#| echo: true
-#| include: true
-#| code-line-numbers: true
-#| class-output: output
-# Loading package
-library(tidytext)
-
-# Raw text
-data <- tibble(
-  docs = c(1:4),
-  text = c("Computational methods include various approaches to text classification.",
-           "Oppenheimer is a 2023 biographical thriller film written and directed by Christopher Nolan.",
-           "Communication Science analyzes contents, uses, and consequences of media and communication.",
-           "Barbie is a 2023 fantasy comedy film directed by Greta Gerwig.")
-  )
-
-# Feature engineering
-tokens <- data |> 
-  unnest_tokens(word, text)
-head(tokens, n = 10)
-```
-
-## A very simple example in R: Dictionary approach
-
-```{r}
-#| echo: true
-#| include: true
-#| code-line-numbers: true
-#| class-output: output
-# Creating a simple dictionary
-dictionary <- tibble(movie = c("film", "movie"),
-                     methods = c("methods", "science"))
-print(dictionary)
-```
-
-## A very simple example in R: Dictionary approach {auto-animate="true"}
-
-```{r}
-#| echo: true
-#| include: true
-#| code-line-numbers: true
-#| class-output: output
-# Creating a simple dictionary
-dictionary <- tibble(movie = c("film", "movie"),
-                     methods = c("methods", "science"))
-print(dictionary)
-
-# Text classification
-tokens |>
-  left_join(dictionary |>
-  gather(label, word)) |>
-  group_by(docs, label) |>
-  summarize(n = n()) %>%
-  spread(label, n)
-```
-
-## Zero-shot classification with BERT transformer
-
-```{r, echo = F}
-load("data/results.RData")
-```
-
-```{r, eval = F}
-#| echo: true
-#| include: true
-#| code-line-numbers: true
-#| class-output: output
-library(ccsamsterdamR)
-
-# Test classification
-results <- text_zeroshot(data$text, labels = c("movie", "methods", "science"),
-                         url = "https://api-inference.huggingface.co/models/facebook/bart-large-mnli")
-results %>%
-  unnest(cols = c("labels", "scores")) %>%
-  as_tibble %>%
-  spread(labels, scores)
-```
-
-```{r, echo = F}
-#| code-line-numbers: true
-#| class-output: output
-#| output-location: fragment
-results %>%
-  unnest(cols = c("labels", "scores")) %>%
-  as_tibble %>%
-  spread(labels, scores)
-```
-
 
 # Ethics of Computational Communication Research {background-color="steelblue"}
 
@@ -921,18 +798,16 @@ Salganik (2013) proposes the following four ethical guidelines for evaluating th
 
 ![](img/ethical_guidelines.png)
 
-
-
 # Formalities {background-color="steelblue"}
 
 How this course is going to work?
 
 ## Teachers
 
-|     Dr. Philipp K. Masur      |     | Dr. Kaspar Welbers  |     |     Emma Diel     |     |     Roan Buma     |
+|                             Dr. Philipp K. Masur                             |     |                              Dr. Kaspar Welbers                               |     |                                  Emma<br>Diel                                  |     |                                  Roan<br>Buma                                  |
 |:---------:|-----------|:---------:|-----------|:---------:|-----------|:---------:|
-|     ![](https://dmb-lab.nl/wp-content/uploads/2024/07/AGU5929_Philipp-Masur.jpg)     |     | ![](https://dmb-lab.nl/wp-content/uploads/2024/07/AGU5119-Kasper-Welbers.jpg) |     | ![](https://research.vu.nl/files-asset/318853298/_AGU6410.jpg?w=160&f=webp) |     | ![](https://research.vu.nl/files-asset/321701863/_AGU6124.jpg?w=160&f=webp) |
-| Lecturer & Course Coordinator |     |       Teacher       |     |      Teacher      |     |      Teacher      |
+| ![](https://dmb-lab.nl/wp-content/uploads/2024/07/AGU5929_Philipp-Masur.jpg) |     | ![](https://dmb-lab.nl/wp-content/uploads/2024/07/AGU5119-Kasper-Welbers.jpg) |     | ![](https://research.vu.nl/files-asset/318853298/_AGU6410.jpg?w=160&f=webp) |     | ![](https://research.vu.nl/files-asset/321701863/_AGU6124.jpg?w=160&f=webp) |
+|                        Lecturer & Course Coordinator                         |     |                                    Teacher                                    |     |                                   Teacher                                   |     |                                   Teacher                                   |
 
 ## R help desk
 
@@ -940,12 +815,9 @@ How this course is going to work?
 
 -   Because we work with code, tiny mistakes can produce errors.
 
--   If you have any problems related to installing software, running packages or code, or simply an error message you do not understand, you can address the R Help Desk. 
+-   If you have any problems related to installing software, running packages or code, or simply an error message you do not understand, you can address the R Help Desk.
 
-
-- For office hours and how to get in contact with the R Help Desk, consult the course canvas page.
-
-
+-   For office hours and how to get in contact with the R Help Desk, consult the course canvas page.
 
 ## Information and Materials
 

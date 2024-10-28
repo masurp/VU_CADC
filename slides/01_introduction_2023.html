@@ -498,7 +498,9 @@ Dr.&nbsp;Philipp K. Masur
 <li>Flexibility in Data Analysis</li>
 <li>Computational Methods and Machine Learning</li>
 </ul></li>
+<li><p>More info: www.philippmasur.de</p></li>
 </ul>
+<p><img data-src="img/philipp.jpeg" class="absolute" style="bottom: 150px; right: 100px; width: 300px; "></p>
 </section>
 <section id="content-of-this-lecture" class="slide level2 smaller">
 <h2>Content of this lecture</h2>
@@ -514,19 +516,20 @@ Dr.&nbsp;Philipp K. Masur
 <p>2.1. Definition</p>
 <p>2.2. Typical Research Areas</p>
 <p>2.3. Examples of Computational Communication Research</p></li>
-<li><p>Ethics of Computational Communication Research</p>
-<p>3.1. A Controversional Study (Kramer et al., 2014)</p>
-<p>3.2. Ethical Challenges</p>
-<p>3.3. Practical Guidelines</p></li>
+<li><p>Introduction to Automated Text Analysis</p>
+<p>3.1. Text as Data</p>
+<p>3.2. The General Text Classification Pipeline</p>
+<p>3.3. Timeline of Natural Language Processing</p>
+<p>3.3. A Small Example</p></li>
 </ol>
 </div><div class="column" style="width:5%;">
 
 </div><div class="column" style="width:45%;">
 <ol start="4" type="1">
-<li><p>Introduction to Automated Text Analysis</p>
-<p>4.1. Text as Data</p>
-<p>4.2. The General Text Classification Pipeline</p>
-<p>4.3. A Small Example</p></li>
+<li><p>Ethics of Computational Communication Research</p>
+<p>4.1. A Controversional Study (Kramer et al., 2014)</p>
+<p>4.2. Ethical Challenges</p>
+<p>4.3. Practical Guidelines</p></li>
 <li><p>Course Formalities</p>
 <p>5.1. Introduction of Teachers</p>
 <p>5.2. Course Material and Schedule</p>
@@ -601,9 +604,9 @@ td {
 </style>
 <table>
 <colgroup>
-<col style="width: 23%">
-<col style="width: 23%">
-<col style="width: 53%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 75%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -645,9 +648,9 @@ td {
 <h2>10 Characteristics of Big Data</h2>
 <table>
 <colgroup>
-<col style="width: 23%">
-<col style="width: 23%">
-<col style="width: 52%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 67%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -833,12 +836,12 @@ td {
 <div class="sourceCode" id="cb1"><pre class="sourceCode numberSource output number-lines code-with-copy"><code class="sourceCode"><span id="cb1-1"><a href=""></a># A tibble: 6 × 5</span>
 <span id="cb1-2"><a href=""></a>     id condition sns_use well_being pers1</span>
 <span id="cb1-3"><a href=""></a>  &lt;int&gt; &lt;chr&gt;       &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt;</span>
-<span id="cb1-4"><a href=""></a>1     1 A            1.12      6.61   2.50</span>
-<span id="cb1-5"><a href=""></a>2     2 B            4.82      0.876  4.30</span>
-<span id="cb1-6"><a href=""></a>3     3 A            1.29      9.61   4.67</span>
-<span id="cb1-7"><a href=""></a>4     4 B            4.05      2.11   3.97</span>
-<span id="cb1-8"><a href=""></a>5     5 A            3.31     -0.262  1.29</span>
-<span id="cb1-9"><a href=""></a>6     6 B            1.95      0.626  3.88</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a href=""></a>1     1 A            1.84     -0.787  2.66</span>
+<span id="cb1-5"><a href=""></a>2     2 B            2.04     -0.709  3.40</span>
+<span id="cb1-6"><a href=""></a>3     3 A            4.24      4.12   1.45</span>
+<span id="cb1-7"><a href=""></a>4     4 B            3.22      4.30   4.10</span>
+<span id="cb1-8"><a href=""></a>5     5 A            1.70      4.76   4.61</span>
+<span id="cb1-9"><a href=""></a>6     6 B            1.36      3.60   3.17</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div><div class="column" style="width:5%;">
@@ -1002,8 +1005,8 @@ td {
 <center>
 <table>
 <colgroup>
-<col style="width: 29%">
-<col style="width: 70%">
+<col style="width: 25%">
+<col style="width: 75%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1176,147 +1179,7 @@ td {
 <section id="timeline-of-natural-language-processing-2" class="slide level2">
 <h2>TIMELINE OF NATURAL LANGUAGE PROCESSING</h2>
 
-<img data-src="img/timeline/Slide3.png" class="r-stretch"></section>
-<section id="section-2" class="slide level2" data-background="#43464B" data-background-video="video/gpt.mov" data-background-video-loop="true" data-background-video-muted="true">
-<h2></h2>
-</section>
-<section id="a-very-small-example-in-r" class="slide level2" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">A very small example in R</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="co"># Loading package</span></span>
-<span id="cb3-2"><a href=""></a><span class="fu">library</span>(tidytext)</span>
-<span id="cb3-3"><a href=""></a></span>
-<span id="cb3-4"><a href=""></a><span class="co"># Raw text</span></span>
-<span id="cb3-5"><a href=""></a>data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb3-6"><a href=""></a>  <span class="at">docs =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>),</span>
-<span id="cb3-7"><a href=""></a>  <span class="at">text =</span> <span class="fu">c</span>(<span class="st">"Computational methods include various approaches to text classification."</span>,</span>
-<span id="cb3-8"><a href=""></a>           <span class="st">"Oppenheimer is a 2023 biographical thriller film written and directed by Christopher Nolan."</span>,</span>
-<span id="cb3-9"><a href=""></a>           <span class="st">"Communication Science analyzes contents, uses, and consequences of media and communication."</span>,</span>
-<span id="cb3-10"><a href=""></a>           <span class="st">"Barbie is a 2023 fantasy comedy film directed by Greta Gerwig."</span>)</span>
-<span id="cb3-11"><a href=""></a>  )</span>
-<span id="cb3-12"><a href=""></a></span>
-<span id="cb3-13"><a href=""></a><span class="fu">head</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource output number-lines code-with-copy"><code class="sourceCode"><span id="cb4-1"><a href=""></a># A tibble: 4 × 2</span>
-<span id="cb4-2"><a href=""></a>   docs text                                                                    </span>
-<span id="cb4-3"><a href=""></a>  &lt;int&gt; &lt;chr&gt;                                                                   </span>
-<span id="cb4-4"><a href=""></a>1     1 Computational methods include various approaches to text classification.</span>
-<span id="cb4-5"><a href=""></a>2     2 Oppenheimer is a 2023 biographical thriller film written and directed b…</span>
-<span id="cb4-6"><a href=""></a>3     3 Communication Science analyzes contents, uses, and consequences of medi…</span>
-<span id="cb4-7"><a href=""></a>4     4 Barbie is a 2023 fantasy comedy film directed by Greta Gerwig.          </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-</section>
-<section id="a-very-small-example-in-r-1" class="slide level2" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">A very small example in R</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a><span class="co"># Loading package</span></span>
-<span id="cb5-2"><a href=""></a><span class="fu">library</span>(tidytext)</span>
-<span id="cb5-3"><a href=""></a></span>
-<span id="cb5-4"><a href=""></a><span class="co"># Raw text</span></span>
-<span id="cb5-5"><a href=""></a>data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb5-6"><a href=""></a>  <span class="at">docs =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>),</span>
-<span id="cb5-7"><a href=""></a>  <span class="at">text =</span> <span class="fu">c</span>(<span class="st">"Computational methods include various approaches to text classification."</span>,</span>
-<span id="cb5-8"><a href=""></a>           <span class="st">"Oppenheimer is a 2023 biographical thriller film written and directed by Christopher Nolan."</span>,</span>
-<span id="cb5-9"><a href=""></a>           <span class="st">"Communication Science analyzes contents, uses, and consequences of media and communication."</span>,</span>
-<span id="cb5-10"><a href=""></a>           <span class="st">"Barbie is a 2023 fantasy comedy film directed by Greta Gerwig."</span>)</span>
-<span id="cb5-11"><a href=""></a>  )</span>
-<span id="cb5-12"><a href=""></a></span>
-<span id="cb5-13"><a href=""></a><span class="co"># Feature engineering</span></span>
-<span id="cb5-14"><a href=""></a>tokens <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> </span>
-<span id="cb5-15"><a href=""></a>  <span class="fu">unnest_tokens</span>(word, text)</span>
-<span id="cb5-16"><a href=""></a><span class="fu">head</span>(tokens, <span class="at">n =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource output number-lines code-with-copy"><code class="sourceCode"><span id="cb6-1"><a href=""></a># A tibble: 10 × 2</span>
-<span id="cb6-2"><a href=""></a>    docs word          </span>
-<span id="cb6-3"><a href=""></a>   &lt;int&gt; &lt;chr&gt;         </span>
-<span id="cb6-4"><a href=""></a> 1     1 computational </span>
-<span id="cb6-5"><a href=""></a> 2     1 methods       </span>
-<span id="cb6-6"><a href=""></a> 3     1 include       </span>
-<span id="cb6-7"><a href=""></a> 4     1 various       </span>
-<span id="cb6-8"><a href=""></a> 5     1 approaches    </span>
-<span id="cb6-9"><a href=""></a> 6     1 to            </span>
-<span id="cb6-10"><a href=""></a> 7     1 text          </span>
-<span id="cb6-11"><a href=""></a> 8     1 classification</span>
-<span id="cb6-12"><a href=""></a> 9     2 oppenheimer   </span>
-<span id="cb6-13"><a href=""></a>10     2 is            </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-</section>
-<section id="a-very-simple-example-in-r-dictionary-approach" class="slide level2">
-<h2>A very simple example in R: Dictionary approach</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a><span class="co"># Creating a simple dictionary</span></span>
-<span id="cb7-2"><a href=""></a>dictionary <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">movie =</span> <span class="fu">c</span>(<span class="st">"film"</span>, <span class="st">"movie"</span>),</span>
-<span id="cb7-3"><a href=""></a>                     <span class="at">methods =</span> <span class="fu">c</span>(<span class="st">"methods"</span>, <span class="st">"science"</span>))</span>
-<span id="cb7-4"><a href=""></a><span class="fu">print</span>(dictionary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource output number-lines code-with-copy"><code class="sourceCode"><span id="cb8-1"><a href=""></a># A tibble: 2 × 2</span>
-<span id="cb8-2"><a href=""></a>  movie methods</span>
-<span id="cb8-3"><a href=""></a>  &lt;chr&gt; &lt;chr&gt;  </span>
-<span id="cb8-4"><a href=""></a>1 film  methods</span>
-<span id="cb8-5"><a href=""></a>2 movie science</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-</section>
-<section id="a-very-simple-example-in-r-dictionary-approach-1" class="slide level2" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">A very simple example in R: Dictionary approach</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href=""></a><span class="co"># Creating a simple dictionary</span></span>
-<span id="cb9-2"><a href=""></a>dictionary <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">movie =</span> <span class="fu">c</span>(<span class="st">"film"</span>, <span class="st">"movie"</span>),</span>
-<span id="cb9-3"><a href=""></a>                     <span class="at">methods =</span> <span class="fu">c</span>(<span class="st">"methods"</span>, <span class="st">"science"</span>))</span>
-<span id="cb9-4"><a href=""></a><span class="fu">print</span>(dictionary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource output number-lines code-with-copy"><code class="sourceCode"><span id="cb10-1"><a href=""></a># A tibble: 2 × 2</span>
-<span id="cb10-2"><a href=""></a>  movie methods</span>
-<span id="cb10-3"><a href=""></a>  &lt;chr&gt; &lt;chr&gt;  </span>
-<span id="cb10-4"><a href=""></a>1 film  methods</span>
-<span id="cb10-5"><a href=""></a>2 movie science</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href=""></a><span class="co"># Text classification</span></span>
-<span id="cb11-2"><a href=""></a>tokens <span class="sc">|&gt;</span></span>
-<span id="cb11-3"><a href=""></a>  <span class="fu">left_join</span>(dictionary <span class="sc">|&gt;</span></span>
-<span id="cb11-4"><a href=""></a>  <span class="fu">gather</span>(label, word)) <span class="sc">|&gt;</span></span>
-<span id="cb11-5"><a href=""></a>  <span class="fu">group_by</span>(docs, label) <span class="sc">|&gt;</span></span>
-<span id="cb11-6"><a href=""></a>  <span class="fu">summarize</span>(<span class="at">n =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
-<span id="cb11-7"><a href=""></a>  <span class="fu">spread</span>(label, n)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource output number-lines code-with-copy"><code class="sourceCode"><span id="cb12-1"><a href=""></a># A tibble: 4 × 4</span>
-<span id="cb12-2"><a href=""></a># Groups:   docs [4]</span>
-<span id="cb12-3"><a href=""></a>   docs methods movie `&lt;NA&gt;`</span>
-<span id="cb12-4"><a href=""></a>  &lt;int&gt;   &lt;int&gt; &lt;int&gt;  &lt;int&gt;</span>
-<span id="cb12-5"><a href=""></a>1     1       1    NA      7</span>
-<span id="cb12-6"><a href=""></a>2     2      NA     1     12</span>
-<span id="cb12-7"><a href=""></a>3     3       1    NA     10</span>
-<span id="cb12-8"><a href=""></a>4     4      NA     1     10</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-</section>
-<section id="zero-shot-classification-with-bert-transformer" class="slide level2">
-<h2>Zero-shot classification with BERT transformer</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href=""></a><span class="fu">library</span>(ccsamsterdamR)</span>
-<span id="cb13-2"><a href=""></a></span>
-<span id="cb13-3"><a href=""></a><span class="co"># Test classification</span></span>
-<span id="cb13-4"><a href=""></a>results <span class="ot">&lt;-</span> <span class="fu">text_zeroshot</span>(data<span class="sc">$</span>text, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"movie"</span>, <span class="st">"methods"</span>, <span class="st">"science"</span>),</span>
-<span id="cb13-5"><a href=""></a>                         <span class="at">url =</span> <span class="st">"https://api-inference.huggingface.co/models/facebook/bart-large-mnli"</span>)</span>
-<span id="cb13-6"><a href=""></a>results <span class="sc">%&gt;%</span></span>
-<span id="cb13-7"><a href=""></a>  <span class="fu">unnest</span>(<span class="at">cols =</span> <span class="fu">c</span>(<span class="st">"labels"</span>, <span class="st">"scores"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb13-8"><a href=""></a>  as_tibble <span class="sc">%&gt;%</span></span>
-<span id="cb13-9"><a href=""></a>  <span class="fu">spread</span>(labels, scores)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource output number-lines code-with-copy"><code class="sourceCode"><span id="cb14-1"><a href=""></a># A tibble: 4 × 4</span>
-<span id="cb14-2"><a href=""></a>  sequence                                                methods  movie science</span>
-<span id="cb14-3"><a href=""></a>  &lt;chr&gt;                                                     &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;</span>
-<span id="cb14-4"><a href=""></a>1 Barbie is a 2023 fantasy comedy film directed by Greta…  0.0293 0.968  0.00255</span>
-<span id="cb14-5"><a href=""></a>2 Communication Science analyzes contents, uses, and con…  0.0925 0.0167 0.891  </span>
-<span id="cb14-6"><a href=""></a>3 Computational methods include various approaches to te…  0.977  0.0120 0.0114 </span>
-<span id="cb14-7"><a href=""></a>4 Oppenheimer is a 2023 biographical thriller film writt…  0.0529 0.917  0.0300 </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-</section></section>
+<img data-src="img/timeline/Slide3.png" class="r-stretch"></section></section>
 <section>
 <section id="ethics-of-computational-communication-research" class="title-slide slide level1 center" data-background-color="steelblue">
 <h1>Ethics of Computational Communication Research</h1>
@@ -1379,9 +1242,9 @@ td {
 <th></th>
 <th style="text-align: center;">Dr.&nbsp;Kaspar Welbers</th>
 <th></th>
-<th style="text-align: center;">Emma Diel</th>
+<th style="text-align: center;">Emma<br>Diel</th>
 <th></th>
-<th style="text-align: center;">Roan Buma</th>
+<th style="text-align: center;">Roan<br>Buma</th>
 </tr>
 </thead>
 <tbody>
@@ -1495,7 +1358,7 @@ td {
 <h1>Questions?</h1>
 <p>If anything is unclear, do ask now.</p>
 </section>
-<section id="section-3" class="slide level2" data-background="#43464B" data-background-video="video/info.mp4" data-background-video-loop="true" data-background-video-muted="true">
+<section id="section-2" class="slide level2" data-background="#43464B" data-background-video="video/info.mp4" data-background-video-loop="true" data-background-video-muted="true">
 <h2></h2>
 </section>
 <section id="required-reading" class="slide level2">
