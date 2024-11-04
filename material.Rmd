@@ -45,12 +45,12 @@ In the third part of the course, students will work on their own research projec
 #### Practical Session 1: Data Wrangling
 
 - Handouts: 
-    - [Intro to the tidyverse](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_tidy_transforming-and-summarizing.md)
+    - [Intro to the tidyverse](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_tidy_transforming-and-summarizing.md) ([With Solutions](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_tidy_transforming-and-summarizing_complete.md))
     
 #### Practical Session 2: Data visualization
 
 - Handouts:
-    - [Data visualization](https://github.com/vanatteveldt/ccslearnr/blob/master/handouts/ggplot.md)
+    - [Data visualization](https://github.com/vanatteveldt/ccslearnr/blob/master/handouts/ggplot.md) ([With Solutions](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_basics_ggplot.md))
    
 #### Homework
 
