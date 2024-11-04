@@ -107,6 +107,11 @@ From raw text to numerical presentations of texts.
 
 ## A challenge at the beginning
 
+
+
+
+::: {.column width="58%"}
+
 -   Texts are strings composed of words, spaces, numbers, and punctation.
 
 -   Handling this type of complex, at times messy, data requires some thought and effort.
@@ -126,6 +131,19 @@ From raw text to numerical presentations of texts.
 text <- "To be, or not to be: that is the question." 
 print(text)
 ```
+
+:::
+
+
+::: {.column width="2%"}
+:::
+
+
+::: {.column width="37%"}
+
+![](img/text_to_data.jpg)
+
+:::
 
 ## From text to tokens {auto-animate="true"}
 
@@ -245,7 +263,7 @@ text_data$text |>
 <center>
 
 | Type of token | Example                                                                    |
-|:------------------|:----------------------------------------------------|
+|:-------------------|:---------------------------------------------------|
 | characters    | "I", "l", "o", "v", "e", "y", "o", "u", "v", "e", "r" ,"y",...             |
 | words         | "I", "love", "you", "very", "much"                                         |
 | sentences     | "I love you very much"                                                     |
@@ -293,7 +311,7 @@ hcandersen_en |>
   filter(word_n != 4) |>
   ggplot(aes(x = paste0(word_n, "-gram"), y = n, fill = word_n)) +
   geom_col(width = .5) +
-  geom_text(aes(label = n), color = "white", nudge_y = -180, size = 5) +
+  geom_text(aes(label = n), color = "white", nudge_y = -250, size = 5) +
   labs(x = "", y = "Number of unique n-grams",
        title = "Increase in vector space of tokens by n-gram",
        subtitle = "Text source: The Ugly Duckling by H.C. Andersen") +
@@ -336,7 +354,17 @@ print(tokens, n = 20)
 :::
 :::
 
-## How to present text numerically?
+
+## From tokens to numbers
+
+**Reminder:** In automated text classification, we need to break text into tokens and then represent these tokens as numbers, so that a computer can read them:
+
+![](img/text_as_data/text_07.png)
+
+
+
+
+## How to present text numerically using "tidytext"?
 
 ::: columns
 ::: {.column width="60%"}
@@ -1096,7 +1124,7 @@ ggplot(sotu_emo_time) +
 
 ## How can we develop a dictionary?
 
--   Define categories
+-   Defining categories/labels
 
 -   Inspecting keywords-in-context lists
 
@@ -1254,6 +1282,29 @@ What have we learned?
 -   We always need to validate our analysis using manually coded material!
 
 ##  {background-image="img/britishlibrary.jpg"}
+
+
+## Next week
+
+::: {.column width="45%"}
+- Introduction to supervised machine learning
+
+- Using neural networks for text classification
+
+- The idea of deep learning 
+
+- Better word representations using word-embeddings
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="45%"}
+![](img/vectorspace.jpg)
+
+
+:::
+
 
 ## Required Reading
 
