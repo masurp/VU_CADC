@@ -79,7 +79,7 @@ In the third part of the course, students will work on their own research projec
 #### Lecture: Automated Text Analysis and Dictionary Approaches
 
 - Slides Lecture 2:
-    - [Download Slides] (not yet available)
+    - [Download Slides](slides/02_textanalysis_2023.html)
 
 #### Practical Session 1
 
