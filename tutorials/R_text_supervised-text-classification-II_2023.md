@@ -1,7 +1,7 @@
-Supervised Text Classification II
+Supervised Text Classification
 ================
 Philipp K. Masur
-2023-11
+2024-11
 
 - [Introduction](#introduction)
 - [Preparation](#preparation)
@@ -20,6 +20,13 @@ Philipp K. Masur
   - [Grid search](#grid-search)
 
 # Introduction
+
+In supervised text classification, we train a statistical model on the
+*features* of our data (e.g. the word frequencies) to predict the
+*class* of our texts (e.g. the sentiment). As mentioned in the lecture,
+the general workflow can be visualized like this:
+
+![](img/Slide03.png)
 
 In this tutorial, we are going to further practice using different
 supervised learning approaches to classify/code text. We are also going
@@ -131,6 +138,8 @@ svm_workflow <- workflow() |>
   add_recipe(rec) |> 
   add_model(svm_linear(mode = "classification", 
                        engine = "LiblineaR"))
+
+# Fitting the SVM model
 m_svm <- fit(svm_workflow, data = training(split))
 
 # Neural network with workflow
@@ -140,9 +149,12 @@ mlp_spec <- mlp(epochs = 600,          # <- times that algorithm will work throu
                 learn_rate = 0.2) |>   # <- shrinkage
   set_engine("brulee") |>    # <- engine = R package
   set_mode("classification")
+
 mlp_workflow <- workflow() |> 
   add_recipe(rec) |> 
   add_model(mlp_spec)
+
+# Fitting the neural network
 m_mlp <- fit(mlp_workflow, data = training(split))
 ```
 
@@ -158,14 +170,28 @@ add labels, and plot results.
 predict_svm <- predict(m_svm, testing(split)) |>    
   bind_cols(select(testing(split), sentiment)) |>                    
   rename(predicted=.pred_class, actual=sentiment) 
+predict_svm
 
 # Testing the MLP
 predict_mlp <- predict(m_mlp, testing(split)) |>    
   bind_cols(select(testing(split), sentiment)) |>                    
   rename(predicted=.pred_class, actual=sentiment) 
+predict_mlp
+```
 
+Good. Both classifier predict the sentiment. Let’s investigate their
+performance:
+
+``` r
 # Set relevant performance scores
 class_metrics <- metric_set(accuracy, precision, recall, f_meas)
+
+predict_svm |> 
+  class_metrics(truth = actual, estimate = predicted)
+
+predict_mlp |> 
+  class_metrics(truth = actual, estimate = predicted)
+
 
 
 # Plot results
@@ -273,7 +299,7 @@ smaller scale for the neural network. Important:
 - The authors used a 5-fold cross-validation in their grid search. We
   will only do 2-fold cross-validation to shorten the computation time.
 
-- They probably explored more paramters, we will only investigate the
+- They probably explored more parameters, we will only investigate the
   following:
 
   - 600 to 1000 epochs (more vs less learning cycles)
@@ -313,9 +339,9 @@ metric of interest and create the 2-fold cross-validation split object.
 # Adjust parameter extremes
 mlp_param <- mlp_wflow_tune  |>  
   extract_parameter_set_dials() |> 
-  update(epochs = epochs(c(600, 1000)),
+  update(epochs = epochs(c(100, 600)),
          hidden_units = hidden_units(c(6, 18)),
-         penalty = penalty(c(-5, -2)))
+         penalty = penalty(c(-5, -1)))
 
 # Set metric of interest
 acc <- metric_set(accuracy)
@@ -339,14 +365,14 @@ cross-validation), resulting in 8 overall fits.
 ``` r
 # Check combinations
 mlp_param  |>  
-      grid_regular(levels = c(hidden_units = 3, penalty = 3, epochs = 2))
+      grid_regular(levels = c(hidden_units = 3, penalty = 2, epochs = 2))
 
-# Run the tuning process (lean back, this will take a while as 18 * 2 = 36 neural networks need to be trained)
+# Run the tuning process (lean back, this will take a while as 3*2*2*2 = 24 neural networks need to be trained)
 mlp_reg_tune <- mlp_wflow_tune  |> 
   tune_grid(
     resamples = twofold,
     grid = mlp_param  |>  
-      grid_regular(levels = c(hidden_units = 3, penalty = 3, epochs = 2)),
+      grid_regular(levels = c(hidden_units = 3, penalty = 2, epochs = 2)),
     metrics = acc
   )
 ```
@@ -364,17 +390,16 @@ mlp_reg_tune |>
 # Plot
 mlp_reg_tune |> 
   show_best(n = 32) |> 
-  ggplot(aes(x = factor(hidden_units), y = mean, 
-             color = factor(round(penalty, 7)), group = penalty)) +
+  ggplot(aes(x = factor(hidden_units), y = mean)) +
   geom_point() +
-  geom_line() +
-  facet_wrap(~epochs) +
+  geom_line(group = 1) +
+  facet_grid(penalty~epochs) +
   labs(x = "Number of nodes in hidden layer", y = "Accuracy",
        color = "Penalty")
 ```
 
 The best combination seems to be 12 nodes in the hidden layer, a penalty
-of 0.01 and 1000 epochs. Yet, we cannot get much closer to the value
+of 0.1 and 100 epochs. Yet, we cannot get much closer to the value
 reported by van Atteveldt and colleagues (again not too suprising, given
 their better approach to use a more advanced convolutional neural
 network).
