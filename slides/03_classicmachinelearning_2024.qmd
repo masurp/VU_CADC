@@ -1,0 +1,1703 @@
+---
+title: "Text Classification Using Classic Machine Learning"
+subtitle: "Week 3: Neural Networks and Word-Embeddings"
+author: "Dr. Philipp K. Masur"
+format:
+  revealjs: 
+    theme: [default, theme.scss]
+    logo: img/logo.png
+    background-transition: fade
+    footer: Computational Analysis of Digital Communication
+    slide-number: c/t
+    title-slide-attributes:
+        data-background-image: https://storage.googleapis.com/exenzo-jobboard/bb/public/thumb/logo-jpg-57.jpg
+        data-background-position: "top right"
+        data-background-size: auto
+editor: visual
+---
+
+{{< video https://youtu.be/Tsvxx-GGlTg?si=OcwjA1ktqX9TUK3c width="100%" height="100%" >}}
+
+## So what are we actually talking about?
+
+-   Machine learning is the study of computer algorithms that can **improve automatically** through experience and by the use of data
+
+-   The field originated in an environment where the available data, statistical methods, and computing power rapidly and simultaneously evolved
+
+-   Due to the "black box" nature of the algorithm's operations, it is often seen as a form of **artificial intelligence**
+
+![Source: qlik](https://www.qlik.com/us/-/media/images/global-us/site-content/augmented-analytics/machine-learning-vs-ai/machine-learning-diagram-image.png)
+
+## Some success stories
+
+![Source: Eschenzweig/Wikimedia](https://www.electricmotorengineering.com/files/2020/07/Autonomous-driving-Barcelona.jpg){style="float: right; padding-left: 40px;" width="400"}Successful machine learning in practical contexts:
+
+-   Identification of spam messages in mails
+-   Segmentation of customers for targeted advertising
+-   Weather forecasts and long-term climate changes
+-   Reduction of fraudulent credit card transactions
+-   Prediction of election outcomes
+-   Auto-piloting and self-driving cars
+-   Face recognition
+-   Optimization of energy use in homes and buildings
+-   Discovery of genetic sequences linked to diseases
+-   ....
+
+## Content of this lecture {.smaller}
+
+::: columns
+::: {.column width="45%"}
+1.  What is Machine Learning?
+
+    1.1. Concepts and Principles
+
+    1.2. The General Machine Learning Pipeline
+
+    1.3. Difference between Statistics and Machine Learning
+
+    1.4. Over- vs. underfitting
+
+    1.5. Training vs. Testing
+
+2.  Text Classification with Artificial Neural Networks
+
+    2.1. Overview of classic ML algorithms
+
+    2.2. General Idea behind Neural Networks
+
+    2.3. How A Neural Network Works
+
+    2.4. How A Neural Network Learns
+
+    2.5. Example using Actual Data
+:::
+
+::: {.column width="45%"}
+3.  More Complex Text Representations: Word-Embeddings
+
+    3.1. Basic Idea behind Vector-Representations
+
+    3.2. Similarity of Words and Texts
+
+    3.3. Using Pre-trained Word-Embeddings: GloVe
+
+4.  Text Classification with Word-Embeddings
+
+    4.1. Text Classification Pipeline with Word-Embeddings
+
+    4.2. Example with Actual Data
+
+    4.4. Fine-Tuning and Grid Search
+
+5.  Examples from the Literature
+
+    4.1. Incivility on Facebook (Su et al., 2018)
+
+    4.2. Electoral News Sharing (de León et al., 2021)
+
+6.  Summary and Conclusion
+:::
+:::
+
+# What is machine learning? {background-color="steelblue"}
+
+ Understanding Supervised Machine Learning Approaches
+
+## Deductive vs. inductive approaches
+
+-   In the previous lecture, we talked about deductive approaches (such as dictionary approaches)
+
+-   These are **deterministic** and are based on a priori text theory<br>(e.g., happy → positive, hate → negative)
+
+-   Yet, natural language is often ambiguous and a **probabilistic** coding may be better
+
+-   Dictionary-based or generally rule-based approaches are not very similar to manual coding; a human being assesses much more than just a list of words
+
+-   Inductive approaches promise to combine the scalability of automatic coding with the validity of manual coding
+
+## Supervised vs. Unsupervised Approaches
+
+![](img/approaches2.png)
+
+## Example of supervised text classification
+
+<center>![](img/ml_newspaper_example.png)</center>
+
+## General text classification pipeline
+
+![](img/text_analysis_fundamentals/Slide01.png)
+
+## Supervised Text Classification Pipeline
+
+![](img/text_analysis_fundamentals/Slide03.png)
+
+## Statistical Modeling vs. Supervised Machine learning
+
+::: columns
+::: {.column width="50%"}
+-   **Machine learning**, many people joke, is nothing but a fancy name for **statistics**.
+
+-   There is some truth to this: the term "logistic regression" will sound familiar to both statisticians and machine learning practitioners.
+
+-   Still, there are some differences between traditional statistical approaches and the machine learning approach, even if some of the same mathematical tools are used.
+:::
+
+::: {.column width="50%"}
+![Source: Demetri Pananos/stackoverflow](img/stats_vs_ml.png)
+:::
+:::
+
+## Statistical Modeling
+
+::: columns
+::: {.column width="50%"}
+-   Is about understanding the relationship between one (or several predictors) and an outcome variable
+
+-   Learn $f$ so you can predict $y$ from $x$:
+
+<center>$y = f(x)$</center>
+
+-   In a linear regression model, we aim to find the best fitting "line" that best predicts $y$ based on $x$:
+
+<center>$y = -0.16 + 2.31 * x + \epsilon$</center>
+
+-   In a typical communication science paper, we would say something like: when `x` increases by 1 unit,`y` increases by 2.31 units.
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="45%"}
+```{r, echo = F}
+#| fig-height: 5
+#| fig-width: 5
+set.seed(20)
+library(tidyverse)
+data <- tibble(x = rnorm(50, 3, 2),
+               y = 2*x + rnorm(50, 0, 4))
+ggplot(data, aes(x, y)) +
+  geom_point(size = 3, alpha = .5, color = "steelblue") +
+  geom_smooth(method = "lm", se = F, color = "grey30") +
+  theme_classic() 
+```
+:::
+:::
+
+## Machine Learning
+
+::: columns
+::: {.column width="50%"}
+-   Machine learning is less about understanding the relationship, but about maximizing prediction.
+
+-   A statistical model such as the one estimated can be used to predict most likely $y$ values based on new $x$ data.
+
+-   For example, despite not being in the data, $x = -1$ should be $y = -2.47$; $x = 5$ should be $y = 11.41$ based on the fitted line!
+
+-   In other words, machine learnings doesn't focus on explanation, but emphasizes prediction.
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="45%"}
+```{r, echo = F}
+#| fig-height: 5
+#| fig-width: 5
+ggplot(data, aes(x, y)) +
+  geom_point(size = 3, alpha = .5, color = "steelblue") +
+  geom_smooth(method = "lm", se = F, color = "grey30") +
+  theme_classic() +
+  geom_point(aes(x = -1, y = -2.477), shape = 1, size = 6, color = "darkred") +
+  geom_point(aes(x = 5, y = 11.41), shape = 1, size = 6, color = "darkred") +
+  geom_hline(yintercept = -2.477, linetype = "dashed", color = "grey") +
+  geom_vline(xintercept = -1, linetype = "dashed", color = "grey") +
+  geom_hline(yintercept = 11.41, linetype = "dashed", color = "grey") +
+  geom_vline(xintercept = 5, linetype = "dashed", color = "grey")
+```
+:::
+:::
+
+## Differences in language
+
+<center>
+
+![Source: van Atteveldt et al., 2021](img/lingo.png){width="75%"}
+
+</center>
+
+## Differences in Goals
+
+-   Goal of statistical modeling: explaining/understanding
+
+    -   Serves to make inferences about a population ("Does $X$ relate to $Y$?")
+    -   Doesn't use too many variables to avoid the difficulty of interpreting too many parameters
+    -   Requires interpretable parameters
+
+-   Goal of machine learning: best possible prediction
+
+    -   make generalizable predictions ("How to best predict $Y$?")
+    -   We do not care about the actual values of the coefficients, we just need them for our prediction.
+    -   In fact, in many machine learning models, we will have so many of them that we do not even bother to report them.
+
+. . .
+
+**Note:** Machine learning models often have 1000's of collinear independent variables and can have many latent variables!
+
+## Over- vs. underfit
+
+-   Problem in Machine Learning: Sufficiently complex algorithms can predict all training data perfectly
+
+-   But such an algorithm does not generalize to new data (the actual goal!)
+
+-   Essentially, we want the model to have a good fit to the data, but we also want it to not optimize on things that are specific to the training data set
+
+## Examplifying over- and underfit
+
+```{r, echo = F, fig.width = 10, fig.height = 5.2}
+library(tidyverse)
+library(ggthemes)
+set.seed(42)
+x <- runif(15, 1, 7)
+y <- x^3 + rnorm(15, 0, 10)
+
+ggplot(NULL, aes(x = x, y = y)) +
+  geom_point(alpha = .8, size = 3, color = "steelblue") +
+  #geom_smooth(method = "lm", se = F, color = "grey20") +
+  theme_grey(base_size = 14) +
+  labs(subtitle = "data: y = x^3  + e",
+       x = "", y = "") +
+  ylim(-50, 300) +
+  theme(plot.margin = unit(c(0, 3, 0, 3), units = "cm"))
+```
+
+## Linear fit (underfit)
+
+```{r, echo = F, fig.width = 10, fig.height = 5.2}
+ggplot(NULL, aes(x = x, y = y)) +
+  geom_point(alpha = .8, size = 3, color = "steelblue") +
+  geom_smooth(method = "lm", se = F, color = "grey20") +
+  theme_grey(base_size = 14) +
+  labs(subtitle = "data: y = x^3  + e, linear regression",
+       x = "", y = "")+
+  ylim(-50, 300) +
+  theme(plot.margin = unit(c(0, 3, 0, 3), units = "cm"))
+```
+
+## Overfit
+
+```{r, echo = F, fig.width = 10, fig.height = 5.2}
+ggplot(NULL, aes(x = x, y = y)) +
+  geom_point(alpha = .8, size = 3, color = "steelblue") +
+  theme_grey(base_size = 14) +
+  stat_smooth(method="lm", se = F, formula=y ~ poly(x, 9), color = "grey20") +
+  labs(subtitle = "data: y = x^3  + e, fit with 9-degree polynomial",
+       x = "", y = "")+
+  ylim(-50, 300) +
+  theme(plot.margin = unit(c(0, 3, 0, 3), units = "cm"))
+```
+
+## Good fit
+
+```{r, echo = F, fig.width = 10, fig.height = 5.2}
+ggplot(NULL, aes(x = x, y = y)) +
+  geom_point(alpha = .8, size = 3, color = "steelblue") +
+  theme_grey(base_size = 14) +
+  stat_smooth(formula = y ~ x^3, se = F, color = "grey20") +
+  labs(subtitle = "data: y = x^3  + e, exponential fit",
+       x = "", y = "")+
+  ylim(-50, 300) +
+  theme(plot.margin = unit(c(0, 3, 0, 3), units = "cm"))
+```
+
+## Preventing overfitting
+
+-   Regularization during fitting process
+
+    -   'Punish' complexity
+    -   Constrain flexibility
+    -   Removing noise
+
+-   Out-of-sample validation
+
+    -   To see whether a model generalizes to new data, simply test it on new data
+    -   This validation set clearly detects overfitting
+
+## Solution: Training and Testing
+
+::: {.column width="45%"}
+-   As models (almost) always overfit, it is clear that performance on only training data is not a good indicator of the real quality of the classifier
+
+-   The standard solution is to split the labeled data into a training and test data sets: This way, we can train the algorithm on one part and then evaluate its validity / performance on the held-out part of the data.
+
+-   We prevent overfit if the classifier still perform well on unseen data and not just on the training data!
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="45%"}
+![](https://labelyourdata.com/img/article-illustrations/splitting-data-set.png)
+:::
+
+-   In more elaborate scenarios, we distinguish in training, validation, and testing sets
+
+
+## Integrating testing in the pipeline
+
+![](img/testing_training.png)
+
+## Testing = Validation
+
+::: columns
+::: {.column width="70%"}
+-   Remember how we validated dictionary approaches?
+
+    -   We manually coded a small set of the text
+    -   Compared this gold standard to the dictionary result
+
+-   In supervised text classification, the procedure is similar
+
+    -   We use the classifier (trained on the training data) to predict the outcome in the test data
+    -   Because the test data is only a subset of our labeled data, it also contains the true outcome
+    -   We can compare the predicted with the actual outcome and compute the same performance scores (Accuracy, Precision,...)
+:::
+
+::: {.column width="30%"}
+![](img/validation_ml.png)
+:::
+:::
+
+# Text Classification with Artificial Neural Networks {background-color="steelblue"}
+
+Translating the Architecture of the Brain into Algorithmic Processing
+
+
+## Overview of different ML algorithms
+
+![](img/ML_algorithms.png)
+
+→ In the following, we will focus primarily on neural networks as the most advanced algorithm in ML, but note that we could easily use other algorithms as well
+
+## Data: Predicting Discipline From Abstracts
+
+-   For the remainder of this lecture, I will exemplify different approaches to supervised text classification using a data set that contains the title and abstract of scientific articles and their discipline.
+
+
+
+```{r,  R.options = list(width = 120)}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+#| output-location: fragment
+science_data <- read_csv("data/science.csv") |> 
+  filter(label != "biology" & label != "finance" & label != "mathematics")
+science_data |> 
+  select(id, label, title, text)
+
+```
+
+## Data: Overview of disciplines
+
+- The data contains articles from computer science, physics, and statistics
+
+- Our goal is to find a neural network archtecture that can label abstracts with these disciplines sufficiently well
+
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+#| output-location: column-fragment
+science_data |> 
+  group_by(label) |> 
+  tally() |> 
+  ggplot(aes(x = fct_reorder(label, n), y = n)) +
+  geom_col(fill = "steelblue") +
+  coord_flip() +
+  theme_minimal(base_size = 20) +
+  labs(x = "", y = "Number of articles")
+```
+
+## Creating training and testing data
+
+-   For the entire model fitting process, we are going to use the package `tidymodels`, which nicely intersects with the already known package `tidytext`
+
+-   Here, we can use the functions `initial_split` to split our data set. The functions `training` and `testing` create the actual data sets from the splits.
+
+::: {.column width="64%"}
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+library(tidymodels)
+
+# Set seed to insure replicability
+set.seed(42)
+
+# Create initial split proporations
+split <- initial_split(science_data, prop = .90)
+
+# Create training and test data
+train_data <- training(split)
+test_data <- testing(split)
+
+# Check
+tibble(dataset = c("training", "testing"),
+       n_songs = c(nrow(train_data), nrow(test_data)))
+```
+:::
+
+::: {.column width="35%"}
+![](img/training_vs_testing.png)
+:::
+
+## Feature Engineering
+
+::: {.column width="70%"}
+-   Classic machine learning models require a numerical representation of text (e.g., document-feature matrix)
+
+-   They further need the outcome variable that they should predict
+
+-   All text-preprocessing steps (e.g., stopword removal, stemming, lemmatization, frequency trimming, weighting, etc.) may change the performance, but no clear rules on what works and what does not
+
+-   Only solution: Trial and error!
+:::
+
+::: {.column width="28%"}
+![](img/trail_error.jpg)
+:::
+
+## Text Preprocessing with TidyText
+
+```{r, R.options = list(width = 120)}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+library(tidytext)
+
+# Text Preprocessing
+dfm_train <- train_data |>
+  unnest_tokens(word, text) |>                     # <-- Tokenization
+  anti_join(stop_words) |>                         # <-- Remove stop words
+  group_by(id, word) |>                            # <-- group by text and word
+  summarize(n = n()) |>                            # <-- count word frequencies
+  cast_dfm(document = id, term = word,  value = n) # <-- create DFM
+
+# Check
+dfm_train |> 
+  head()
+```
+
+## Alternative in tidymodels: Creating A "Recipe"
+
+```{r, R.options = list(width = 120)}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+library(textrecipes)
+
+# Create recipe for text preprocessing
+rec <- recipe(label ~ text, data = science_data) |>
+  step_tokenize(text, options = list(strip_punct = T, strip_numeric = T)) |>  # <-- Tokenization
+  step_stopwords(text, language = "en") |>                                    # <-- Remove stop words
+  step_tf(all_predictors())                                                   # <-- Create DFM
+
+# "Bake" (check) based on recipe to see text preprocessing
+rec |> 
+  prep(train_data) |>
+  bake(new_data=NULL)
+```
+
+## Workflow in Tidymodels
+
+::: columns
+::: {.column width="70%"}
+-   The collection `tidymodels` contains a variety of packages that facilitates and streamlines machine learning in R
+
+-   The basic procedure is the following:
+
+    1.  Create a **recipe** (this includes already a formula and all pre-processing steps)
+    2.  **Bake** training and testing data using the **recipe** (not explicitly necesssary)
+    3.  Create a designated **model function** (depending on what type of algorithm should be used)
+    4.  Bind all together using a **workflow**
+    5.  Fit the entire **workflow** and evaluate performance
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="28%"}
+![](https://rviews.rstudio.com/2020/04/21/the-case-for-tidymodels/tidymodels.png)
+:::
+:::
+
+## Setting up a recipe for our example
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+# Load specific support library
+library(textrecipes)
+
+# Create recipe
+rec <- recipe(label ~ text, data = science_data)                  # <-- predict binary_genre by text
+```
+
+## Setting up a recipe for our example {auto-animate="true"}
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+# Load specific support library
+library(textrecipes)
+
+# Create recipe
+rec <- recipe(label ~ text, data = science_data) |>               # <-- predict binary_genre by text
+  step_tokenize(text, options = list(strip_punct = T,             # <-- tokenize, remove punctuation
+                                     strip_numeric = T))          # <-- remove numbers
+```
+
+## Setting up a recipe for our example {auto-animate="true"}
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+# Load specific support library
+library(textrecipes)
+
+# Create recipe
+rec <- recipe(label ~ text, data = science_data) |>               # <-- predict binary_genre by text
+  step_tokenize(text, options = list(strip_punct = T,             # <-- tokenize, remove punctuation
+                                     strip_numeric = T)) |>       # <-- remove numbers
+  step_stopwords(text, language = "en") |>                        # <-- remove stopwords                 
+  step_tokenfilter(text, min_times = 20, max_tokens = 1000)       # <-- filter out rare words and use only top 1000                         
+```
+
+## Setting up a recipe for our example {auto-animate="true"}
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+# Load specific support library
+library(textrecipes)
+
+# Create recipe
+rec <- recipe(label ~ text, data = science_data) |>               # <-- predict binary_genre by text
+  step_tokenize(text, options = list(strip_punct = T,             # <-- tokenize, remove punctuation
+                                     strip_numeric = T)) |>       # <-- remove numbers
+  step_stopwords(text, language = "en") |>                        # <-- remove stopwords                 
+  step_tokenfilter(text, min_times = 20, max_tokens = 1000) |>    # <-- filter out rare words and use only top 1000               
+  step_tf(all_predictors())                                       # <-- create document-feature matrix
+```
+
+## Setting up a recipe for our example {auto-animate="true"}
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+# Load specific support library
+library(textrecipes)
+
+# Create recipe
+rec <- recipe(label ~ text, data = science_data) |>               # <-- predict binary_genre by text
+  step_tokenize(text, options = list(strip_punct = T,             # <-- tokenize, remove punctuation
+                                     strip_numeric = T)) |>       # <-- remove numbers
+  step_stopwords(text, language = "en") |>                        # <-- remove stopwords                 
+  step_tokenfilter(text, min_times = 20, max_tokens = 1000) |>    # <-- filter out rare words and use only top 1000               
+  step_tf(all_predictors())                                       # <-- create document-feature matrix
+
+# Small adaption to the recipe (for SVM and neural networks)
+rec_norm <- rec |> 
+  step_normalize(all_predictors())    
+```
+
+## Theoretical background
+
+-   An artificial neural network (ANN) models the relationship between a set of input signals and an output signal using a model derived from our understanding of the human brain
+
+-   Like a brain uses a network of interconnected cells called "neurons" (a) to provide fast learning capabilities, ANN uses a network of artificial neurons (b) to solves learning tasks
+
+![Source: Arthur Arnx/Medium](https://miro.medium.com/v2/resize:fit:850/1*30YDnisanIYRHpC-L2Br-g.png)
+
+## How does a neural network work?
+
+::: columns
+::: {.column width="50%"}
+![](img/neuralnetwork2.png)
+:::
+
+::: {.column width="50%"}
+-   The operation of an ANN is straightforward:
+
+    -   One enters variables as inputs (e.g., features of a text)
+    -   And after some calculations via different neurons, an output is returned (e.g. the word "politics")
+
+-   In the simplest form, neurons are stacked on top of one another and a neuron of colum `n` can only be connected to inputs from column `n-1` and provide outputs to neurons in column `n+1`
+
+-   Input data are passed through layered transformation until an output is reached
+:::
+:::
+
+## The Neuron as generalized linear model
+
+-   First, a neuron adds up the value of every neurons from the previous column it is connected to (here `x1`, `x2`, and `x3`)
+
+-   This value is multiplied, before being added, by another variable called "weight" (`w1`, `w2`, `w3`): the strength of connection between two neurons
+
+-   A bias value may be added (e.g., to regularize the network)
+
+-   After all those summations, the neuron finally applies a function called "activation function" to the obtained value
+
+![Source: Arthur Arnx/Medium](https://miro.medium.com/v2/resize:fit:1302/format:webp/1*UA30b0mJUPYoPvN8yJr2iQ.jpeg)
+
+## The activation function
+
+::: columns
+::: {.column width="50%"}
+-   The activation function serves to turn the total value calculated to a number between 0 and 1
+
+-   A threshold then defines at what value the function should "fire" the output to the next neuron (of course this can be probabilistic)
+
+-   We can choose from different activation functions; which works best is sometimes hard to tell
+:::
+
+::: {.column width="50%"}
+![Source: AI Wiki](img/activation-functions.jpg)
+:::
+:::
+
+## A multilayer Perceptron for our example
+
+![](img/neuralnet_01.png)
+
+## How the neural network learns
+
+-   ![Source: 3Blue1Brown](https://developer-blogs.nvidia.com/wp-content/uploads/2022/02/DS-Guide-to-Gradient-Descent_Pic5.gif){style="float:right; padding-left: 2em; padding-bottom: 2em;"}In a first try, the ANN randomly sets weights and thus can't get the right output (except with luck)
+
+-   If the (random) choice was a good one, actual parameters are kept and the next input is given. If the obtained output doesn't match the desired output, the weights are changed.
+
+-   To determine which weight is better to modify, a ANN uses **backpropagation**, which consists of "going back" on the neural network and inspect every connection to check how the output would behave according to a change on the weight
+
+-   The **learning rate** thereby determines the speed a neural network will learn, i.e., how it will modify a weight (e.g., little by little or by bigger steps).
+
+-   Learning rate and number of learning cycles (epochs) have to be set manually upfront!
+
+## Backpropagation in Detail: Random initialization
+
+![](img/neuralnet_02.png)
+
+## Backpropagation in Detail: Costs Function
+
+![](img/neuralnet_03.png)
+
+## Backpropagation in Detail: Adjusting weights
+
+![](img/neuralnet_04.png)
+
+## What did the neural network learn?
+
+-   It is hard to imagine how the network has learned that a certain combination of words corresponds to a certain label.
+
+-   In fact, we can only speculate that it might capture certain meaning by co-occurence of words, e.g., that certain words are representing machine learning and machine learning, in turn, is most likely to be within "computer science"
+
+## What a neural network might have learned...
+
+![](img/neuralnet_05.png)
+
+## What a neural network might have learned...
+
+![](img/neuralnet_06.png)
+
+## Fitting an artifical neural network {auto-animate="true"}
+
+```{r, echo = F}
+load("results/m_ann.Rdata")
+#save(m_ann, file = "results/m_ann.Rdata")
+```
+
+```{r, eval = F}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+# For replication purposes
+set.seed(42)
+
+# Specify multilayer perceptron
+nnet_spec <- 
+  mlp(epochs = 400,          # <- times that algorithm will work through train set
+      hidden_units = c(6),   # <- nodes in hidden units
+      penalty = 0.01,        # <- regularization
+      learn_rate = 0.2) |>   # <- shrinkage
+  set_engine("brulee") |>    # <- engine = R package
+  set_mode("classification")
+
+# Create workflow
+ann_workflow <- workflow() |>
+  add_recipe(rec_norm) |>    # Use updated recipe with normalization
+  add_model(nnet_spec)
+```
+
+## Fitting an artifical neural network {auto-animate="true"}
+
+```{r, echo = F}
+load("results/m_ann.Rdata")
+#save(m_ann, file = "results/m_ann.Rdata")
+```
+
+```{r, eval = F}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+# For replication purposes
+set.seed(42)
+
+# Specify multilayer perceptron
+nnet_spec <- 
+  mlp(epochs = 400,          # <- times that algorithm will work through train set
+      hidden_units = c(6),   # <- nodes in hidden units
+      penalty = 0.01,        # <- regularization
+      learn_rate = 0.2) |>   # <- shrinkage
+  set_engine("brulee") |>    # <- engine = R package
+  set_mode("classification") 
+
+# Create workflow
+ann_workflow <- workflow() |>
+  add_recipe(rec_norm) |>    # Use updated recipe with normalization
+  add_model(nnet_spec)
+
+# Fit model
+m_ann <- fit(ann_workflow, train_data)
+```
+
+## Predicting labels in the testing data
+
+-   We then use the resulting classifier (the neural network) to classify the test data and compare it with the actual labels
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+# Predict outcome in test data
+predict_ann <- predict(m_ann, new_data = test_data) %>%
+  bind_cols(test_data) |> 
+  mutate(truth = factor(label)) |> 
+  select(id, predicted = .pred_class, truth, title)
+
+# Check
+predict_ann |> 
+ head(n = 4)
+```
+
+-   In `tidymodels`, we have to define a set of measures that we want to compute based on the predictions in the test set.
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+# Define a set of performance scores to be computed
+class_metrics <- metric_set(accuracy, precision, recall, f_meas)
+```
+
+## Validation
+
+-   We then can inspect the confusion matrix
+
+-   We see here that it does get a lot of articles right, but there are also some false positives and false negatives
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+# Confusion matrix
+predict_ann |> 
+  conf_mat(truth = truth, estimate = predicted)
+```
+
+-   Based on the performance scores, we see that it actually doesn't perform bad at all
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+#| output-location: fragment
+# Performance score
+predict_ann |> 
+  class_metrics(truth = truth, estimate = predicted)
+```
+
+## Fitting a different model (e.g., SVM)
+
+-   With `tidymodels`, we can very easily use a different algorithm.
+
+-   Because we already set up a recipe that works with Support Vector Machines, the only thing we have to do is update the workflow and add the new model
+
+```{r, echo = F}
+load("results/m_svm.Rdata")
+#save(m_svm, file = "slides/results/m_svm.Rdata")
+```
+
+```{r, eval = F}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+library(LiblineaR)
+
+# Updating the workflow
+svm_workflow <- workflow() |>
+  add_recipe(rec_norm) |>                         # <-- Recipe remains the same!                
+  add_model(svm_linear(mode = "classification",   # <-- We just add a new model (e.g Support Vector Machines)
+                     engine = "LiblineaR"))
+
+# Fitting the SVM model
+m_svm <- fit(svm_workflow, data = train_data)
+```
+
+## Comparison of the previous approaches
+
+```{r, eval = T}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+#| output-location: column-fragment
+#| fig-width: 6
+#| fig-height: 7
+# Predict test data
+predict_svm <- predict(m_svm, new_data=test_data) |> 
+  bind_cols(test_data) |> 
+  mutate(truth = factor(label)) |> 
+  select(id, predicted = .pred_class, truth, title)
+
+# Combine predict data from SVM and neural network
+bind_rows(
+  # Compute class_metrics for SVM
+  predict_svm |> 
+    class_metrics(truth=truth, estimate=predicted) |>
+    mutate(algorithm = "support vector machines"),
+  # Compute class_metrics for NN
+  predict_ann |> 
+    class_metrics(truth=truth, estimate=predicted) |>
+    mutate(algorithm = "neural network")) |> 
+  # Plot comparison
+  ggplot(aes(x = .metric, y = .estimate, 
+             fill = algorithm)) +
+  geom_col(position=position_dodge(), alpha=.5) +
+  geom_text(aes(label = round(.estimate, 3)), 
+            position = position_dodge(width=1)) +
+  ylim(0, 1) +
+  coord_flip() +
+  scale_fill_brewer(palette = "Dark2") +
+  theme_minimal(base_size = 18) +
+  theme(legend.position = "bottom") +
+  labs(y = "Performance Score", x = "", fill = "")
+```
+
+# Break (5 Minutes) {background-color="black"}
+
+# Word-Embeddings {background-color="steelblue"}
+
+More Complex Text Representations
+
+## Rember: The initial problem of text analysis
+
+-   Computers don't read text, they only can deal with numbers
+
+-   For this reason, so far, we tokenized our texts (e.g., in words) and summarized their frequency across texts to create a document-feature matrix within the **bag-of-words model**
+
+![](img/simple_dfm.png)
+
+-   Such a text representation has some issues:
+
+    -   Treats words as equally important (→ requires removal of noise, stopwords...)
+    -   Ignores word order and context
+    -   Results in a sparse matrix (→ computationally expensive)
+
+## Alternative: Map words into a vector space
+
+![](img/word_embeddings1.png)
+
+## (Static) Word embeddings
+
+-   Word embeddings are a "learned" type of **word representation** that allows words with similar meaning to have a similar representation via a *k*-dimensional vector space
+
+-   The first core idea behind word embeddings is that the meaning of a word can be expressed using a relatively small embedding vector, generally consisting of around 300 numbers which can be interpreted as dimensions of meaning
+
+-   The second core idea is that these embedding vectors can be derived by scanning the context of each word in millions and millions of documents.
+
+-   This means that words that are used in similar ways in the training data result in similar representations, thereby capturing their similar meaning.
+
+## How do we get these "values" for each word?
+
+All word embedding methods learn a real-valued vector representation for a predefined fixed-sized vocabulary from a corpus of text:
+
+<br>
+
+1.  Via an embedding layer in a neural network designed for a particular downstream task
+
+2.  Learning word embeddings using a shallow neural network and context windows (e.g., **word2vec**)
+
+3.  Learning word embeddings by aggregating global word-word co-occurrence matrix (e.g., GloVe)
+
+## Pre-trained Word embeddings: GloVe
+
+-   GloVe captures global statistical information from a text corpus by looking at word co-occurrences across the entire corpus, not just in local contexts (like neighboring words):
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+#| # Download Global Vector Embeddings with 10.000 words and 50 dimensions
+glove_fn = "glove.6B.50d.10k.w2v.txt"
+url = glue::glue("https://cssbook.net/d/{glove_fn}")
+if (!file.exists(glove_fn)) 
+    download.file(url, glove_fn)
+
+# Data wrangling
+wv_tibble <- read_delim(glove_fn, skip=1, delim=" ", quote="", 
+    col_names = c("word", paste0("d", 1:50)))
+
+# 10 highest scoring words on dimension 1
+wv_tibble |> 
+  arrange(-d1) |> head()
+```
+
+## Words in a multidimensional vector space
+
+![](img/wordembedding_01.png)
+
+## Similar words have similar characteristics
+
+![](img/wordembedding_02.png)
+
+## Multidimensional vector space
+
+![](img/wordembedding_03.png)
+
+## Multidimensional vector space
+
+![](img/wordembedding_04.png)
+
+## Multidimensional vector space
+
+![](img/wordembedding_05.png)
+
+## Similarities between words
+
+With word-embeddings, we can compute similarity scores for word pairs, which proves the "encoding of meaning" in word-embeddings:
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+wv <- as.matrix(wv_tibble[-1])
+rownames(wv) <- wv_tibble$word
+wv <- wv / sqrt(rowSums(wv^2))
+wvector <- function(wv, word) wv[word,,drop=F]
+wv_similar <- function(wv, target, n=5) {
+  similarities = wv %*% t(target)
+  similarities |>  
+    as_tibble(rownames = "word") |> 
+    rename(similarity=2) |> 
+    arrange(-similarity) |>  
+    head(n=n)  
+}
+```
+
+::: columns
+::: {.column width="50%"}
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+#| output-location: fragment
+wv_similar(wv, wvector(wv, "basketball"))
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+#| output-location: fragment
+wv_similar(wv, wvector(wv, "netherlands"))
+```
+:::
+:::
+
+## Similarity of entire sentences or texts
+
+```{r}
+Sys.setenv(HF_API_TOKEN = "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")
+```
+
+But we can also generalize word embeddings to entire sentences (or even texts):
+
+```{r, R.options = list(width = 120)}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+library(ccsamsterdamR)
+
+# Example sentences
+movies <- tibble(sentences = c("This movie is great, I loved it.", 
+                               "The film was fantastic, a real treat!",
+                               "I did not like this movie, it was not great.",
+                               "Today, I went to the cinema and watched a movie",
+                               "I had pizza for lunch.",
+                               "Sometimes, when I read a book, I get completely lost."))
+                     
+# Get embeddings from a sentence transformer
+movie_embeddings <- hf_embeddings(txt = movies$sentences)
+
+# Each text has now 384 values
+movie_embeddings 
+```
+
+## The subtle similarity of some texts in the example
+
+-   We can see that text 2 is most similar to text 1: Both express a very similar sentiment, just with different words ("great" ≈ "fantastic"; "I loved it" ≈ "A real treat")
+
+-   Text 2 is still similar to text 3 (after all it is about movies), but less so compared to text 1 ("fantastic" is the opposite of "not great")
+
+-   Text 4 still shares similarities (the context is the cinema/watching movies), but text 5 is very different as it doesn't contain similar words and is not about similar things (except "I").
+
+-   Text 5 is very dissimilar to the others.
+
+```{r, R.options = list(width = 120)}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+# Similarity between 2nd and the other sentences
+movies |> 
+  mutate(similarity = as.matrix(movie_embeddings) %*% t(as.matrix(movie_embeddings)[2,, drop = F])) |> 
+  arrange(-similarity)
+
+```
+
+## Doing analysis with word-embedding themselves
+
+-   Based on vector-based computations, we can analyse semantic relationships
+
+-   This is a quite common approach by now in research on gender and other types of stereotypes
+
+![Source: https://developers.google.com](https://miro.medium.com/v2/resize:fit:2000/1*SYiW1MUZul1NvL1kc1RxwQ.png)
+
+## Example from the literature: Gender-Stereotypes
+
+-   ![](img/andrich_example.png){style="float: right; padding-left: 40px;" width="400"}Andrich et al. (2023) examine stereotypical traits in portrayals of 1,095 U.S. politicians.
+
+-   Analyzed 5 million U.S. news stories published from 2010 to 2020 to study gender-linked (feminine, masculine) and political (leadership, competence, integrity, empathy) traits
+
+-   Methodologically, they estimated word embeddings using the Continuous Bag of Words (CBOW) model, meaning that a target word (e.g., honest) is predicted from its context (e.g., Who thinks President Trump is \[target word\]?)
+
+-   Bias can thus be identified if e.g., gender-neutral words (e.g., competent) are closer to words that represent one gender (e.g., donald_trump) than to words that represent the opposite gender (e.g., hillary_clinton).
+
+## Results
+
+::: {layout="[49, 51]"}
+![](img/andrich_fig2.png)
+
+![](img/andrich_fig1.jpeg)
+:::
+
+-   All three masculine traits were more strongly associated with male politicians.
+
+-   In contrast, only the feminine physical traits were more strongly associated with female politicians.
+
+-   Differences remained stable across time.
+
+
+# Text Classification with Word-Embeddings {background-color="steelblue"}
+
+Improving Prediction by Using Word-Embeddings as Input Features
+
+## Word Embeddings as Input to classic ML models
+
+-   Word, sentence, or text embedding vectors can then be used as features in further text analysis tasks
+
+-   Think about the example we just investigated: The sentence embeddings did capture some difference between:
+
+    -   "The film was fantastic, a real treat!" (*positive*)
+    -   "I did not like this moive, it was not great." (*negative*)
+
+-   Approaches from the last lecture (classic machine learning) would have a hard time to detect the negation "not great".
+
+-   Yet, bear in mind: We do not actually know what the 100+ (often \>300) dimensions actually mean (→ we cannot look under the hood later!)
+
+## From Sparse to Dense Matrix Representation
+
+-   Using embedding vectors instead of word frequencies further has the advantages of strongly reducing the dimensionality of the DTM: instead of (tens of) thousands of columns for each unique word we only need hundreds of columns for the embedding vectors (→ dense instead of sparse)
+
+-   This means that further processing can be more efficient as fewer parameters need to be fit, or conversely that more complicated models can be used without blowing up the parameter space.
+
+## Text classification with Word-Embeddings
+
+![](img/text_analysis_fundamentals/Slide04.png)
+
+## Fitting a neural network on word-embeddings
+
+```{r, echo = F}
+#save(mlp_fit, file = "slides/results/mlp_fit.RData")
+load("results/mlp_fit.RData")
+```
+
+
+- To fit a neural network based on static word-embeddings (e.g., GloVe), we only need to adapt the recipe. 
+
+- Here, we do not need to engage in much preprocessing at all:
+
+```{r, eval=FALSE}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+# Load GloVe embeddings (50-dimensional)
+wv_tibble <- readr::read_delim("slides/GloVe 6B/glove.6B.300d.txt", 
+                               skip=1, delim=" ", quote="", col_names = c("word", paste0("d", 1:100)))
+
+# Set up the recipe for text preprocessing with GloVe embeddings
+text_rec <- recipe(label ~ text, data = science_data) |> 
+  step_tokenize(text) |> 
+  step_word_embeddings(text, embeddings = wv_tibble, aggregation = "mean") # <-- Here, I am adding the word-embeddings
+
+# Define the MLP model specification
+mlp_spec <-
+  mlp(epochs = 400,          # <- times that algorithm will work through train set
+      hidden_units = c(6),   # <- nodes in hidden units
+      penalty = 0.01,        # <- regularization
+      learn_rate = 0.2) |>   # <- shrinkage
+  set_engine("brulee") |>    # <-- engine = R package
+  set_mode("classification")
+
+# Create workflow
+mlp_wflow <- workflow()  |> 
+  add_recipe(text_rec) |> 
+  add_model(mlp_spec)
+
+# Fit the workflow on the training data
+mlp_fit <- mlp_wflow |> 
+  fit(data = train_data)
+```
+
+
+
+```{r, echo = F}
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+# Make predictions and evaluate on the test set
+predictions <- predict(mlp_fit, new_data = test_data) %>%
+  bind_cols(test_data)
+```
+
+## Comparison with the two previous approaches
+
+```{r, echo = F}
+# Combine predict data from SVM and neural network
+bind_rows(
+  # Compute class_metrics for SVM
+  predict_svm |> 
+    class_metrics(truth = truth,estimate = predicted) |>
+    mutate(algorithm = "support vector machines"),
+  # Compute class_metrics for NN
+  predict_ann |> 
+    class_metrics(truth = truth, estimate = predicted) |>
+    mutate(algorithm = "neural network"),
+  predictions |> 
+    mutate(label = factor(label)) |> 
+    class_metrics(truth = label, estimate = .pred_class) |>
+    mutate(algorithm = "neural network with word embeddings")) |> 
+  # Plot comparison
+  ggplot(aes(x = .metric, y = .estimate, 
+             fill = algorithm)) +
+  geom_col(position = position_dodge(), alpha = .5) +
+  geom_text(aes(label = round(.estimate, 3)), 
+            position = position_dodge(width = 1)) +
+  ylim(0, 1) +
+  coord_flip() +
+  scale_fill_brewer(palette = "Dark2") +
+  theme_minimal(base_size = 18) +
+  theme(legend.position = "bottom") +
+  labs(y = "Performance Score", x = "", fill = "")
+```
+
+## Fine-tuning preprocessing and hyperparameter
+
+-   You may have noticed that I always set some **hyperparameter** in all of the models
+
+-   There is no clear rule of how to set these parameters and their influence on performance is often unknown
+
+-   Using trail and error, we simply compare many different model specifications to find optimal hyperparameters
+
+-   Very good examples are the hyperparameters of support vector machines: it is hard to know how soft our margins should be and we may also be unsure about the right kernel , or in the case of a polynomial kernel, how many degrees we want to consider
+
+-   Similarly, we have to simply try out whether a neural network needs more than one hidden layer or how many nodes make sense, what learning rate works best, etc.
+
+-   Good machine learning practice is to conduct a so-called **grid-search**, i.e. systematically run combinations of different specifications (but computationally expensive!!!)
+
+[Hvitfeld & Silge (2021)]{style="font-size:0.6em;"}
+
+## Grid search for best neural network architecture {auto-animate="true"}
+
+```{r, echo = F}
+#save(mlp_reg_tune, file = "slides/results/mlp_reg_tune.RData")
+load("results/mlp_reg_tune.RData")
+```
+
+```{r, echo = F, eval = F}
+## Grid Search
+
+library(doParallel)
+
+# Set up parallel backend
+num_cores <- parallel::detectCores(logical = TRUE) - 4
+cl <- makeCluster(num_cores)
+registerDoParallel(cl)
+```
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+# First, we update our model specification
+mlp_spec <- mlp(hidden_units = tune(),   # <-- instead of fixed numbers, we set it to "tune"
+                penalty = tune(), 
+                epochs = tune(), 
+                learn_rate = tune()) |> 
+  set_engine("brulee", trace = 0) |>  
+  set_mode("classification")
+```
+
+## Grid Search: Setting specific parameters {auto-animate="true"}
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+# First, we update our model specification
+mlp_spec <- mlp(hidden_units = tune(),   # <-- instead of fixed numbers, we set it to "tune"
+                penalty = tune(), 
+                epochs = tune(), 
+                learn_rate = tune()) |> 
+  set_engine("brulee", trace = 0) |>  
+  set_mode("classification")
+  
+# Estract "dials" for parameter tuning
+mlp_param <- extract_parameter_set_dials(mlp_spec)
+
+# Simple combinatorial design
+mlp_param |> grid_regular(levels = c(hidden_units = 2, penalty = 2, epochs = 2, learn_rate = 2)) 
+```
+
+
+## Running the Grid Search
+
+```{r, eval=FALSE}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+# Combine the recipe and model into a workflow
+mlp_wflow <- workflow() %>%
+  add_recipe(text_rec) %>%
+  add_model(mlp_spec)
+
+# Set workflow with "dials"
+mlp_param <- mlp_wflow  |>  
+  extract_parameter_set_dials() |> 
+  update(epochs = epochs(c(100, 400)),
+         hidden_units = hidden_units(c(12, 64)),
+         penalty = penalty(c(-10, -1)),
+         learn_rate = learn_rate(range = c(-10, -1), trans = transform_log10()))
+
+# Set metric of interest
+acc <- metric_set(accuracy)
+
+# Define resampling strategy
+twofold <- vfold_cv(train_data, v = 2) 
+
+# Run the tuning process
+mlp_reg_tune <- mlp_wflow  |> 
+  tune_grid(
+    resamples = twofold,
+    grid = mlp_param  |>  
+      grid_regular(levels = c(hidden_units = 2, penalty = 2,   # <-- here, we set specific combination of parameters
+                              epochs = 2, learn_rate = 2)),    #     instead, we could also use the `grid_random()`function 
+    metrics = acc
+  )
+```
+
+## Evaluation
+
+-   The result of this tuning grid search is a table that shows the best combinations of parameters in descending order
+
+-   We can see here that 64 nodes, a very low penalty, a learning rate of 0.1 provides the best performance.
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+best_fit <- show_best(mlp_reg_tune, n = 48) |> 
+  select(-.estimator, -.config, -.metric) |> 
+  rename(accuracy = mean)
+best_fit
+```
+
+## Evaluation
+
+-   The effect of parameters becomes even more clear, when we visualize the grid search:
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+options(scipen = 999)
+autoplot(mlp_reg_tune)
+```
+
+## Fitting the best model
+
+```{r, echo = F}
+#save(mlp_fit_best, file = "slides/results/mlp_fit_best.RData")
+load("results/mlp_fit_best.RData")
+```
+
+```{r, eval = F}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+mlp_best <-
+  mlp(epochs = 400,           # <- times that algorithm will work through train set
+      hidden_units = c(64),   # <- nodes in hidden units
+      penalty = 0.001,        # <- regularization
+      learn_rate = 0.1) |>    # <- shrinkage
+  set_engine("brulee") |>     # <-- engine = R package
+  set_mode("classification")
+
+# Create workflow
+mlp_wflow_best <- workflow()  |> 
+  add_recipe(text_rec) |> 
+  add_model(mlp_best)
+
+# Fit the workflow on the training data
+mlp_fit_best <- mlp_wflow_best |> 
+  fit(data = train_data)
+```
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+# Make predictions and evaluate on the test set
+predictions_best <- predict(mlp_fit_best, new_data = test_data) %>%
+  bind_cols(test_data) |> 
+  mutate(label = factor(label))
+
+predictions_best |> 
+ class_metrics(truth = label, estimate = .pred_class)
+```
+
+## Comparison with other approaches
+
+```{r, echo = F}
+bind_rows(
+  # Compute class_metrics for SVM
+  predict_svm |> 
+    class_metrics(truth = truth,estimate = predicted) |>
+    mutate(algorithm = "SVM"),
+  # Compute class_metrics for NN
+  predict_ann |> 
+    class_metrics(truth = truth, estimate = predicted) |>
+    mutate(algorithm = "NN (with DTM)"),
+  predictions |> 
+    mutate(label = factor(label)) |> 
+    class_metrics(truth = label, estimate = .pred_class) |>
+    mutate(algorithm = "NN (with word embeddings)"),
+  predictions_best |> 
+    class_metrics(truth = label, estimate = .pred_class) |>
+    mutate(algorithm = "NN (with word embeddings, bestspecs)")) |> 
+  # Plot comparison
+  ggplot(aes(x = .metric, y = .estimate, 
+             fill = algorithm)) +
+  geom_col(position = position_dodge(), alpha = .5) +
+  geom_text(aes(label = round(.estimate, 3)), 
+            position = position_dodge(width = 1)) +
+  ylim(0, 1) +
+  coord_flip() +
+  scale_fill_brewer(palette = "Dark2") +
+  theme_minimal(base_size = 15) +
+  labs(y = "Performance Score", x = "", fill = "")
+```
+
+## General Drivers of model performance
+
+1.  Task difficulty
+
+2.  Amount of training data
+
+3.  Choice of features (n-grams, lemmata, etc)
+
+4.  Text preprocessing (e.g., exclude or include stopwords?)
+
+5.  Representation of text (tf, tf-idf, word-embedding)
+
+6.  Tuning of algorithm (what we just did in the grid search)
+
+## Impact of text preprocessing on performance?
+
+-   Scharkow ran a simple simulation study in which he systematically varied text preprocessing
+
+-   The classifier was always Naive Bayes, below we see the average difference in performance
+
+![](img/scharkow_table3.png)
+
+## Validity of different approaches
+
+-   Van Atteveldt et al. (2021) re-analysised data reported in Boukes et al. (2020) to understand the validity of different text classification approaches for sentiment analysis
+
+-   The data included news from a total of ten newspapers and five websites published between February 1 and July 7, 2015:
+
+    -   three quality newspapers (NRC Handelsblad, Trouw, de Volkskrant)
+    -   a financial newspaper (Financieel Dagblad)
+    -   three popular newspapers (Algemeen Dagblad, Metro, De Telegraaf)
+    -   three regional outlets (Dagblad van het Noorden, de Gelderlander, Noordhollands Dagblad)
+
+## Main results
+
+![](img/vanatteveldt_table2.png)
+
+# Examples from the literature {background-color="steelblue"}
+
+How Machine Learning is used in Communication Science
+
+## Example 1: Incivility in Facebook comments
+
+-   Su et al. (2018) examined the extent and patterns of incivility in the comment sections of 42 US news outlets' Facebook pages in 2015--2016
+
+-   News source outlets included
+
+    -   National-news outlets (e.g., ABC, CBS, CNN...)
+    -   Local-new outlets (e.g., The Denver Post, San Francisco Chronicle...)
+    -   Conservative and liberal partisan news outlets (e.g., Breitbart, The Daily Show...)
+
+-   Implemented a combination of manual coding and supervised machine learning to code:
+
+    -   Civility
+    -   Interpersonal rudeness
+    -   Personal rudeness
+    -   Impersonal extreme incivility
+    -   Personal extreme incivility
+
+## Results: Overall differences
+
+![](img/sug_fig2.png)
+
+## Example 2: Electoral news sharing in Mexico
+
+::: columns
+::: {.column width="85%"}
+-   de León et al. (2021) explored how elections transform news sharing behaviour on Facebook
+
+-   They investigated changes in news coverage and news sharing behaviour on Facebook
+
+    -   by comparing election and routine periods, and
+    -   by addressing the 'news gap' between preferences of journalists and news consumers on social media.
+
+-   Employed a novel data set of news articles (N = 83,054) in Mexico
+
+-   First coded 2,000 articles manually into topics (Politics, Crime and Disasters, Culture and Entertainment, Economic and Business, Sports, and Other), then used support vector machines to classify the rest
+:::
+
+::: {.column width="15%"}
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Flag_of_Mexico.svg/1024px-Flag_of_Mexico.svg.png)
+:::
+:::
+
+## Results
+
+-   During periods of heightened political activity, both the publication and dissemination of political news increases
+
+-   The gap between the news choices of journalists and consumers narrows, and increased political news sharing leading to a decrease in the sharing of other news.
+
+![](img/trilling_et_al.png)
+
+# Summary, Conclusion, and Outlook {background-color="steelblue"}
+
+Next week, we reach the present!
+
+## Machine Learning Text Classification Pipeline
+
+![](img/text_analysis_fundamentals/Slide03.png)
+
+## Machine Learning Text Classification Pipeline
+
+![](img/text_analysis_fundamentals/Slide04.png)
+
+## General considerations
+
+-   Machine learning in the social sciences generally used to solve an engineering problem
+
+-   Output of Machine Learning is input for "actual" statistical model (e.g., we classify text, but run an analysis of variance with the output)
+
+-   Ethical concerns
+
+    -   Is it okay to use a model we can't possibly understand (e.g., SVM, neural networks)?
+
+    -   If they lead to false positives or false negatives, which in turn discriminate someone or lead to bias, it is difficult to find the source and denote responsibility
+
+-   We always need to validate model on unseen and representative test data!
+
+-   Think before you run models or you will waste a lot of computational resources
+
+## Conclusion and outlook
+
+-   Classic machine learning is a useful tool for generalizing from a sample
+
+-   It is very useful to reduce the amount of manual coding needed
+
+-   Word-Embeddings are a dense representation of text that can improve speed and performance of standard ML approaches
+
+-   That said, the field has moved on and innovations are fast-paced these days:
+
+    -   Transfer Learning, Attention, Self-Attention.... (Next week!!!)
+
+# Thank you for your attention! {background-color="steelblue"}
+
+## Required Reading
+
+<br><br>
+
+van Atteveldt, W., van der Velden, M. A. C. G., & Boukes, M.. (2021). The Validity of Sentiment Analysis: Comparing Manual Annotation, Crowd-Coding, Dictionary Approaches, and Machine Learning Algorithms. Communication Methods and Measures, (15)2, 121-140, https://doi.org/10.1080/19312458.2020.1869198
+
+Su, L. Y.-F., Xenos, M. A., Rose, K. M., Wirz, C., Scheufele, D. A., & Brossard, D. (2018). Uncivil and personal? Comparing patterns of incivility in comments on the Facebook pages of news outlets. New Media & Society, 20(10), 3678--3699. https://doi.org/10.1177/1461444818757205
+
+<br>
+
+*(available on Canvas)*
+
+------------------------------------------------------------------------
+
+## References {.smaller}
+
+-   Boumans, J. W., & Trilling, D. (2016). Taking stock of the toolkit: An overview of relevant automated content analysis approaches and techniques for digital journalism scholars. Digital journalism, 4(1), 8-23.
+
+-   de León, E., Vermeer, S. & Trilling, D. (2023). Electoral news sharing: a study of changes in news coverage and Facebook sharing behaviour during the 2018 Mexican elections. Information, Communication & Society, 26(6), 1193-1209. https://doi.org/10.1080/1369118X.2021.1994629
+
+-   Hvitfeld, E. & Silge, J. (2021). Supervised Machine Learning for Text Analysis in R. CRC Press. https://smltar.com/
+
+-   Lantz, B. (2013). Machine learning in R. Packt Publishing Ltd.
+
+-   Scharkow, M. (2013). Thematic content analysis using supervised machine learning: An empirical evaluation using german online news. Quality & Quantity, 47(2), 761--773. https://doi.org/10.1007/s11135-011-9545-7
+
+-   Su, L. Y.-F., Xenos, M. A., Rose, K. M., Wirz, C., Scheufele, D. A., & Brossard, D. (2018). Uncivil and personal? Comparing patterns of incivility in comments on the Facebook pages of news outlets. New Media & Society, 20(10), 3678--3699. https://doi.org/10.1177/1461444818757205
+
+-   van Atteveldt, W., van der Velden, M. A. C. G., & Boukes, M.. (2021). The Validity of Sentiment Analysis: Comparing Manual Annotation, Crowd-Coding, Dictionary Approaches, and Machine Learning Algorithms. Communication Methods and Measures, (15)2, 121-140, https://doi.org/10.1080/19312458.2020.1869198
+
+## Example Exam Question (Multiple Choice)
+
+Van Atteveldt and colleagues (2020) tested the validity of various automated text analysis approaches. What was their main result?
+
+<br>
+
+A. English dictionaries performed better than Dutch dictionaries in classifying the sentiment of Dutch news paper headlines.
+
+B. Dictionary approaches were as good as machine learning approaches in classifying the sentiment of Dutch news paper headlines.
+
+C. Of all automated approaches, supervised machine learning approaches performed the best in classifying the sentiment of Dutch news paper headlines.
+
+D. Manual coding and supervised machine learning approaches performed similarly well in classifying the sentiment of Dutch news paper headlines.
+
+------------------------------------------------------------------------
+
+## Example Exam Question (Multiple Choice)
+
+Van Atteveldt and colleagues (2020) tested the validity of various automated text analysis approaches. What was their main result?
+
+<br>
+
+A. English dictionaries performed better than Dutch dictionaries in classifying the sentiment of Dutch news paper headlines.
+
+B. Dictionary approaches were as good as machine learning approaches in classifying the sentiment of Dutch news paper headlines.
+
+**C. Of all automated approaches, supervised machine learning approaches performed the best in classifying the sentiment of Dutch news paper headlines.**
+
+D. Manual coding and supervised machine learning approaches performed similarly well in classifying the sentiment of Dutch news paper headlines.
+
+## Example Exam Question (Multiple Choice)
+
+How are word embeddings learned?
+
+<br>
+
+A. By assigning random numerical values to each word
+
+B. By analyzing the pronunciation of words
+
+C. By scanning the context of each word in a large corpus of documents
+
+D. By counting the frequency of words in a given text
+
+## Example Exam Question (Multiple Choice)
+
+How are word embeddings learned?
+
+<br>
+
+A. By assigning random numerical values to each word
+
+B. By analyzing the pronunciation of words
+
+**C. By scanning the context of each word in a large corpus of documents**
+
+D. By counting the frequency of words in a given text
+
+## Example Exam Question (Open Format)
+
+Describe the typical process used in supervised text classification.
+
+. . .
+
+Any supervised machine learning procedure to analyze text usually contains at least 4 steps:
+
+1.  One has to manually code a small set of documents for whatever variable(s) you care about (e.g., topics, sentiment, source,...).
+
+2.  One has to train a machine learning model on the hand-coded /gold-standard data, using the variable as the outcome of interest and the text features of the documents as the predictors.
+
+3.  One has to evaluate the effectiveness of the machine learning model via cross-validation. This means one has to test the model test on new (held-out) data.
+
+4.  Once one has trained a model with sufficient predictive accuracy, precision and recall, one can apply the model to more documents that have never been hand-coded or use it for the purpose it was designed for (e.g., a spam filter detection software)
