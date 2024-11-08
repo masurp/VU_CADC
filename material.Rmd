@@ -114,12 +114,12 @@ In the third part of the course, students will work on their own research projec
 #### Practical Session 1
 
 - Handouts: 
-    - Supervised text classification using Naive Bayes and Neural Networks
+    - [Supervised text classification using Neural Networks](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_supervised-text-classification-II_2023.md)
 
 #### Practical Session 2
 
 - Handouts:
-    - Supervised text classification with word-embeddings and neural networks (not yet available)
+    - [Supervised text classification with word-embeddings and neural networks](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_LLM_word-embeddings_2024.md)
     
 
 #### Homework
