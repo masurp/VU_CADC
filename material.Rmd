@@ -84,13 +84,14 @@ In the third part of the course, students will work on their own research projec
 #### Practical Session 1
 
 - Handouts: 
-    - [Basic Text Analysis using tidytext](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_basics-of-text-analysis_2023.md)
+    - [Basic Text Analysis using tidytext](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_basics-of-text-analysis_2023.md) ([With Solutions](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_basics-of-text-analysis_2023_complete.md))
+   
 
 #### Practical Session 2 
 
 - Handouts: 
 
-   - [Dictionary Approaches using tidytext](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_dictionary-approaches_2023.md)
+   - [Dictionary Approaches using tidytext](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_dictionary-approaches_2023.md) ([With Solutions](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_dictionary-approaches_2023_complete.md))
    
 #### Homework
 
