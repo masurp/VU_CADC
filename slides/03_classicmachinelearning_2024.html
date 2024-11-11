@@ -411,7 +411,6 @@ Dr.&nbsp;Philipp K. Masur
 <h2>So what are we actually talking about?</h2>
 <ul>
 <li><p>Machine learning is the study of computer algorithms that can <strong>improve automatically</strong> through experience and by the use of data</p></li>
-<li><p>The field originated in an environment where the available data, statistical methods, and computing power rapidly and simultaneously evolved</p></li>
 <li><p>Due to the “black box” nature of the algorithm’s operations, it is often seen as a form of <strong>artificial intelligence</strong></p></li>
 </ul>
 
@@ -427,7 +426,6 @@ Dr.&nbsp;Philipp K. Masur
 <li>Prediction of election outcomes</li>
 <li>Auto-piloting and self-driving cars</li>
 <li>Face recognition</li>
-<li>Optimization of energy use in homes and buildings</li>
 <li>Discovery of genetic sequences linked to diseases</li>
 <li>….</li>
 </ul>
@@ -476,7 +474,7 @@ Dr.&nbsp;Philipp K. Masur
 <section id="deductive-vs.-inductive-approaches" class="slide level2">
 <h2>Deductive vs.&nbsp;inductive approaches</h2>
 <ul>
-<li><p>In the previous lecture, we talked about deductive approaches (such as dictionary approaches)</p></li>
+<li><p>In the previous lecture, we talked about deductive approaches (e.g., dictionary approaches)</p></li>
 <li><p>These are <strong>deterministic</strong> and are based on a priori text theory<br>(e.g., happy → positive, hate → negative)</p></li>
 <li><p>Yet, natural language is often ambiguous and a <strong>probabilistic</strong> coding may be better</p></li>
 <li><p>Dictionary-based or generally rule-based approaches are not very similar to manual coding; a human being assesses much more than just a list of words</p></li>
@@ -525,20 +523,20 @@ Dr.&nbsp;Philipp K. Masur
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
-<li><p>Is about understanding the relationship between one (or several predictors) and an outcome variable</p></li>
+<li><p>Is about understanding the relationship between one (or several) predictor(s) and an outcome variable</p></li>
 <li><p>Learn <span class="math inline">\(f\)</span> so you can predict <span class="math inline">\(y\)</span> from <span class="math inline">\(x\)</span>:</p></li>
 </ul>
 <center>
 <span class="math inline">\(y = f(x)\)</span>
 </center>
 <ul>
-<li>In a linear regression model, we aim to find the best fitting “line” that best predicts <span class="math inline">\(y\)</span> based on <span class="math inline">\(x\)</span>:</li>
+<li>In a linear regression model, we try to findt he best fitting “line” that best predicts <span class="math inline">\(y\)</span> based on <span class="math inline">\(x\)</span>:</li>
 </ul>
 <center>
 <span class="math inline">\(y = -0.16 + 2.31 * x + \epsilon\)</span>
 </center>
 <ul>
-<li>In a typical communication science paper, we would say something like: when <code>x</code> increases by 1 unit,<code>y</code> increases by 2.31 units.</li>
+<li>We then say: when <code>x</code> increases by 1 unit,<code>y</code> increases by 2.31 units.</li>
 </ul>
 </div><div class="column" style="width:5%;">
 
@@ -560,10 +558,10 @@ Dr.&nbsp;Philipp K. Masur
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
-<li><p>Machine learning is less about understanding the relationship, but about maximizing prediction.</p></li>
-<li><p>A statistical model such as the one estimated can be used to predict most likely <span class="math inline">\(y\)</span> values based on new <span class="math inline">\(x\)</span> data.</p></li>
-<li><p>For example, despite not being in the data, <span class="math inline">\(x = -1\)</span> should be <span class="math inline">\(y = -2.47\)</span>; <span class="math inline">\(x = 5\)</span> should be <span class="math inline">\(y = 11.41\)</span> based on the fitted line!</p></li>
-<li><p>In other words, machine learnings doesn’t focus on explanation, but emphasizes prediction.</p></li>
+<li><p>Machine learning less about not understanding, but about maximizing prediction</p></li>
+<li><p>A statistical model can be used to predict most likely <span class="math inline">\(y\)</span> values based on new <span class="math inline">\(x\)</span> data.</p></li>
+<li><p>For example, despite not being in the data, <span class="math inline">\(x = -1\)</span> should be <span class="math inline">\(y = -2.47\)</span>; <span class="math inline">\(x = 5\)</span> should be <span class="math inline">\(y = 11.41\)</span> based on the fitted line</p></li>
+<li><p>In other words, machine learning doesn’t focus on explanation, but emphasizes prediction</p></li>
 </ul>
 </div><div class="column" style="width:5%;">
 
@@ -603,20 +601,21 @@ Dr.&nbsp;Philipp K. Masur
 <li><p>Goal of machine learning: best possible prediction</p>
 <ul>
 <li>make generalizable predictions (“How to best predict <span class="math inline">\(Y\)</span>?”)</li>
-<li>We do not care about the actual values of the coefficients, we just need them for our prediction.</li>
-<li>In fact, in many machine learning models, we will have so many of them that we do not even bother to report them.</li>
+<li>We do not care about the actual values of the coefficients, we just need them for our prediction</li>
+<li>We will often have so many of them that we do not even bother to report them</li>
 </ul></li>
 </ul>
 <div class="fragment">
-<p><strong>Note:</strong> Machine learning models often have 1000’s of collinear independent variables and can have many latent variables!</p>
+<p><strong>Note:</strong> Machine learning models often have 1000’s of colinear independent variables and can have many latent variables!</p>
 </div>
 </section>
 <section id="over--vs.-underfit" class="slide level2">
 <h2>Over- vs.&nbsp;underfit</h2>
 <ul>
-<li><p>Problem in Machine Learning: Sufficiently complex algorithms can predict all training data perfectly</p></li>
-<li><p>But such an algorithm does not generalize to new data (the actual goal!)</p></li>
+<li><p>Problem in Machine Learning: Sufficiently complex algorithms can predict all training data <strong>perfectly</strong></p></li>
+<li><p>But such an algorithm does not generalize to new data</p></li>
 <li><p>Essentially, we want the model to have a good fit to the data, but we also want it to not optimize on things that are specific to the training data set</p></li>
+<li><p>Let’s try exemplify over vs.&nbsp;underfit with some simulated data!</p></li>
 </ul>
 </section>
 <section id="examplifying-over--and-underfit" class="slide level2">
@@ -655,9 +654,8 @@ Dr.&nbsp;Philipp K. Masur
 <h2>Solution: Training and Testing</h2>
 <div class="column" style="width:45%;">
 <ul>
-<li><p>As models (almost) always overfit, it is clear that performance on only training data is not a good indicator of the real quality of the classifier</p></li>
-<li><p>The standard solution is to split the labeled data into a training and test data sets: This way, we can train the algorithm on one part and then evaluate its validity / performance on the held-out part of the data.</p></li>
-<li><p>We prevent overfit if the classifier still perform well on unseen data and not just on the training data!</p></li>
+<li><p>As models (almost) always overfit, performance on only training data is not a good indicator of the real quality of the classifier</p></li>
+<li><p>The standard solution is to split the labeled data into a training and test data sets: We train the algorithm on one part and then evaluate its performance on the held-out part</p></li>
 </ul>
 </div>
 <div class="column" style="width:5%;">
@@ -684,11 +682,11 @@ Dr.&nbsp;Philipp K. Masur
 <li>We manually coded a small set of the text</li>
 <li>Compared this gold standard to the dictionary result</li>
 </ul></li>
-<li><p>In supervised text classification, the procedure is similar</p>
+<li><p>In supervised text classification, the procedure is similar:</p>
 <ul>
-<li>We use the classifier (trained on the training data) to predict the outcome in the test data</li>
+<li>We use the classifier, trained on the training data, to predict the outcome in the test data</li>
 <li>Because the test data is only a subset of our labeled data, it also contains the true outcome</li>
-<li>We can compare the predicted with the actual outcome and compute the same performance scores (Accuracy, Precision,…)</li>
+<li>We compare the predicted with the actual outcome and compute the performance scores (Accuracy, Precision,…)</li>
 </ul></li>
 </ul>
 </div><div class="column" style="width:30%;">
@@ -769,7 +767,7 @@ Dr.&nbsp;Philipp K. Masur
 <li><p>For the entire model fitting process, we are going to use the package <code>tidymodels</code>, which nicely intersects with the already known package <code>tidytext</code></p></li>
 <li><p>Here, we can use the functions <code>initial_split</code> to split our data set. The functions <code>training</code> and <code>testing</code> create the actual data sets from the splits.</p></li>
 </ul>
-<div class="column" style="width:70%;">
+<div class="column" style="width:64%;">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a><span class="fu">library</span>(tidymodels)</span>
 <span id="cb4-2"><a href=""></a></span>
@@ -795,7 +793,7 @@ Dr.&nbsp;Philipp K. Masur
 </div>
 </div>
 </div>
-<div class="column" style="width:28%;">
+<div class="column" style="width:35%;">
 <p><img data-src="img/training_vs_testing.png"></p>
 </div>
 </section>
@@ -805,7 +803,7 @@ Dr.&nbsp;Philipp K. Masur
 <ul>
 <li><p>Classic machine learning models require a numerical representation of text (e.g., document-feature matrix)</p></li>
 <li><p>They further need the outcome variable that they should predict</p></li>
-<li><p>All text-preprocessing steps (e.g., stopword removal, stemming, lemmatization, frequency trimming, weighting, etc.) may change the performance, but no clear rules on what works and what does not</p></li>
+<li><p>All text-preprocessing steps (e.g., stopword removal, stemming, frequency trimming,etc.) may change the performance, but no clear rules on what works and what does not</p></li>
 <li><p>Only solution: Trial and error!</p></li>
 </ul>
 </div>
@@ -890,11 +888,11 @@ Dr.&nbsp;Philipp K. Masur
 <li><p>The collection <code>tidymodels</code> contains a variety of packages that facilitates and streamlines machine learning in R</p></li>
 <li><p>The basic procedure is the following:</p>
 <ol type="1">
-<li>Create a <strong>recipe</strong> (this includes already a formula and all pre-processing steps)</li>
+<li>Create a <strong>recipe</strong> (a formula and all pre-processing steps)</li>
 <li><strong>Bake</strong> training and testing data using the <strong>recipe</strong> (not explicitly necesssary)</li>
-<li>Create a designated <strong>model function</strong> (depending on what type of algorithm should be used)</li>
+<li>Create a <strong>model function</strong> (depending on what type of algorithm should be used)</li>
 <li>Bind all together using a <strong>workflow</strong></li>
-<li>Fit the entire <strong>workflow</strong> and evaluate performance</li>
+<li><strong>Fit</strong> the entire <strong>workflow</strong> and evaluate performance</li>
 </ol></li>
 </ul>
 </div><div class="column" style="width:2%;">
@@ -977,8 +975,8 @@ Dr.&nbsp;Philipp K. Masur
 <section id="theoretical-background" class="slide level2">
 <h2>Theoretical background</h2>
 <ul>
-<li><p>An artificial neural network (ANN) models the relationship between a set of input signals and an output signal using a model derived from our understanding of the human brain</p></li>
-<li><p>Like a brain uses a network of interconnected cells called “neurons” (a) to provide fast learning capabilities, ANN uses a network of artificial neurons (b) to solves learning tasks</p></li>
+<li><p>An artificial neural network models the relationship between a set of input signals and an output signal using a model derived from our understanding of the human brain</p></li>
+<li><p>Like a brain uses a network of interconnected cells called “neurons” (a) to provide fast learning capabilities, a neural network uses a network of artificial neurons (b) to solves learning tasks</p></li>
 </ul>
 
 <img data-src="https://miro.medium.com/v2/resize:fit:850/1*30YDnisanIYRHpC-L2Br-g.png" class="r-stretch quarto-figure-center"><p class="caption">Source: Arthur Arnx/Medium</p></section>
@@ -989,23 +987,23 @@ Dr.&nbsp;Philipp K. Masur
 <p><img data-src="img/neuralnetwork2.png"></p>
 </div><div class="column" style="width:50%;">
 <ul>
-<li><p>The operation of an ANN is straightforward:</p>
+<li><p>The operation of an artificial neural network is straightforward:</p>
 <ul>
 <li>One enters variables as inputs (e.g., features of a text)</li>
 <li>And after some calculations via different neurons, an output is returned (e.g.&nbsp;the word “politics”)</li>
 </ul></li>
-<li><p>In the simplest form, neurons are stacked on top of one another and a neuron of colum <code>n</code> can only be connected to inputs from column <code>n-1</code> and provide outputs to neurons in column <code>n+1</code></p></li>
-<li><p>Input data are passed through layered transformation until an output is reached</p></li>
+<li><p>Neurons are stacked on top of one another and a neuron of colum <code>n</code> can only be connected to inputs from column <code>n-1</code> and provide outputs to neurons in column <code>n+1</code></p></li>
+<li><p>In other words, input data are passed through layered transformations until an output is reached</p></li>
 </ul>
 </div>
 </div>
 </section>
 <section id="the-neuron-as-generalized-linear-model" class="slide level2">
-<h2>The Neuron as generalized linear model</h2>
+<h2>The Neuron as Generalized Linear Model</h2>
 <ul>
-<li><p>First, a neuron adds up the value of every neurons from the previous column it is connected to (here <code>x1</code>, <code>x2</code>, and <code>x3</code>)</p></li>
-<li><p>This value is multiplied, before being added, by another variable called “weight” (<code>w1</code>, <code>w2</code>, <code>w3</code>): the strength of connection between two neurons</p></li>
-<li><p>A bias value may be added (e.g., to regularize the network)</p></li>
+<li><p>First, the value of each input neuron is multiplied by so-called “weight” (<code>w1</code>, <code>w2</code>, <code>w3</code>), which could be regarded as the strength of connection between two neurons</p></li>
+<li><p>Second, the neuron adds up the values of every input neuron from the previous column it is connected to (here <code>x1</code>, <code>x2</code>, and <code>x3</code>)</p></li>
+<li><p>Third, a bias value may be added (e.g., to regularize the network)</p></li>
 <li><p>After all those summations, the neuron finally applies a function called “activation function” to the obtained value</p></li>
 </ul>
 
@@ -1036,11 +1034,11 @@ Dr.&nbsp;Philipp K. Masur
 <section id="how-the-neural-network-learns" class="slide level2">
 <h2>How the neural network learns</h2>
 <ul>
-<li><p><img data-src="https://developer-blogs.nvidia.com/wp-content/uploads/2022/02/DS-Guide-to-Gradient-Descent_Pic5.gif" style="float:right; padding-left: 2em; padding-bottom: 2em;" alt="Source: 3Blue1Brown">In a first try, the ANN randomly sets weights and thus can’t get the right output (except with luck)</p></li>
-<li><p>If the (random) choice was a good one, actual parameters are kept and the next input is given. If the obtained output doesn’t match the desired output, the weights are changed.</p></li>
-<li><p>To determine which weight is better to modify, a ANN uses <strong>backpropagation</strong>, which consists of “going back” on the neural network and inspect every connection to check how the output would behave according to a change on the weight</p></li>
+<li><p><img data-src="https://developer-blogs.nvidia.com/wp-content/uploads/2022/02/DS-Guide-to-Gradient-Descent_Pic5.gif" style="float:right; padding-left: 2em; padding-bottom: 2em;" alt="Source: 3Blue1Brown">In a first try, the neural network randomly sets weights and thus can’t get the right output (except with luck)</p></li>
+<li><p>If the random choice was a good one, actual parameters are kept and the next input is given. If the obtained output doesn’t match the desired output, the weights are changed</p></li>
+<li><p>To determine which weight is better to modify, a neural network uses <strong>backpropagation</strong>, which consists of “going back” on the neural network and inspect every connection to check how the output would behave according to a change on the weight</p></li>
 <li><p>The <strong>learning rate</strong> thereby determines the speed a neural network will learn, i.e., how it will modify a weight (e.g., little by little or by bigger steps).</p></li>
-<li><p>Learning rate and number of learning cycles (epochs) have to be set manually upfront!</p></li>
+<li><p>Learning rate and number of learning cycles (so-called epochs) have to be set manually upfront!</p></li>
 </ul>
 </section>
 <section id="backpropagation-in-detail-random-initialization" class="slide level2">
@@ -1057,10 +1055,16 @@ Dr.&nbsp;Philipp K. Masur
 <img data-src="img/neuralnet_04.png" class="r-stretch"></section>
 <section id="what-did-the-neural-network-learn" class="slide level2">
 <h2>What did the neural network learn?</h2>
+<div class="columns">
+<div class="column" style="width:55%;">
 <ul>
 <li><p>It is hard to imagine how the network has learned that a certain combination of words corresponds to a certain label.</p></li>
 <li><p>In fact, we can only speculate that it might capture certain meaning by co-occurence of words, e.g., that certain words are representing machine learning and machine learning, in turn, is most likely to be within “computer science”</p></li>
 </ul>
+</div><div class="column" style="width:40%;">
+<p><img data-src="img/neuralnetworkimagine.jpg"></p>
+</div>
+</div>
 </section>
 <section id="what-a-neural-network-might-have-learned" class="slide level2">
 <h2>What a neural network might have learned…</h2>
@@ -1526,13 +1530,6 @@ Dr.&nbsp;Philipp K. Masur
 <li><p>Yet, bear in mind: We do not actually know what the 100+ (often &gt;300) dimensions actually mean (→ we cannot look under the hood later!)</p></li>
 </ul>
 </section>
-<section id="from-sparse-to-dense-matrix-representation" class="slide level2">
-<h2>From Sparse to Dense Matrix Representation</h2>
-<ul>
-<li><p>Using embedding vectors instead of word frequencies further has the advantages of strongly reducing the dimensionality of the DTM: instead of (tens of) thousands of columns for each unique word we only need hundreds of columns for the embedding vectors (→ dense instead of sparse)</p></li>
-<li><p>This means that further processing can be more efficient as fewer parameters need to be fit, or conversely that more complicated models can be used without blowing up the parameter space.</p></li>
-</ul>
-</section>
 <section id="text-classification-with-word-embeddings-1" class="slide level2">
 <h2>Text classification with Word-Embeddings</h2>
 
@@ -1571,24 +1568,6 @@ Dr.&nbsp;Philipp K. Masur
 <span id="cb37-25"><a href=""></a>mlp_fit <span class="ot">&lt;-</span> mlp_wflow <span class="sc">|&gt;</span> </span>
 <span id="cb37-26"><a href=""></a>  <span class="fu">fit</span>(<span class="at">data =</span> train_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<div class="sourceCode" id="cb38"><pre class="sourceCode numberSource output number-lines code-with-copy"><code class="sourceCode"><span id="cb38-1"><a href=""></a>                  Truth</span>
-<span id="cb38-2"><a href=""></a>Prediction         computer science physics statistics</span>
-<span id="cb38-3"><a href=""></a>  computer science              829      48        161</span>
-<span id="cb38-4"><a href=""></a>  physics                        21     522          7</span>
-<span id="cb38-5"><a href=""></a>  statistics                      0       0          0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell-output cell-output-stdout">
-<div class="sourceCode" id="cb39"><pre class="sourceCode numberSource output number-lines code-with-copy"><code class="sourceCode"><span id="cb39-1"><a href=""></a># A tibble: 4 × 3</span>
-<span id="cb39-2"><a href=""></a>  .metric   .estimator .estimate</span>
-<span id="cb39-3"><a href=""></a>  &lt;chr&gt;     &lt;chr&gt;          &lt;dbl&gt;</span>
-<span id="cb39-4"><a href=""></a>1 accuracy  multiclass     0.851</span>
-<span id="cb39-5"><a href=""></a>2 precision macro          0.874</span>
-<span id="cb39-6"><a href=""></a>3 recall    macro          0.630</span>
-<span id="cb39-7"><a href=""></a>4 f_meas    macro          0.905</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
 </section>
 <section id="comparison-with-the-two-previous-approaches" class="slide level2">
 <h2>Comparison with the two previous approaches</h2>
@@ -1599,9 +1578,7 @@ Dr.&nbsp;Philipp K. Masur
 <ul>
 <li><p>You may have noticed that I always set some <strong>hyperparameter</strong> in all of the models</p></li>
 <li><p>There is no clear rule of how to set these parameters and their influence on performance is often unknown</p></li>
-<li><p>Using trail and error, we simply compare many different model specifications to find optimal hyperparameters</p></li>
-<li><p>Very good examples are the hyperparameters of support vector machines: it is hard to know how soft our margins should be and we may also be unsure about the right kernel , or in the case of a polynomial kernel, how many degrees we want to consider</p></li>
-<li><p>Similarly, we have to simply try out whether a neural network needs more than one hidden layer or how many nodes make sense, what learning rate works best, etc.</p></li>
+<li><p>We have to simply try out whether a neural network needs more than one hidden layer or how many nodes make sense, what learning rate works best, etc.</p></li>
 <li><p>Good machine learning practice is to conduct a so-called <strong>grid-search</strong>, i.e.&nbsp;systematically run combinations of different specifications (but computationally expensive!!!)</p></li>
 </ul>
 <p><span style="font-size:0.6em;">Hvitfeld &amp; Silge (2021)</span></p>
@@ -1609,85 +1586,85 @@ Dr.&nbsp;Philipp K. Masur
 <section id="grid-search-for-best-neural-network-architecture" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Grid search for best neural network architecture</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb40-1" class="hljs-ln-code"><a href=""></a><span class="co"># First, we update our model specification</span></span>
-<span id="cb40-2" class="hljs-ln-code"><a href=""></a>mlp_spec <span class="ot">&lt;-</span> <span class="fu">mlp</span>(<span class="at">hidden_units =</span> <span class="fu">tune</span>(),   <span class="co"># &lt;-- instead of fixed numbers, we set it to "tune"</span></span>
-<span id="cb40-3" class="hljs-ln-code"><a href=""></a>                <span class="at">penalty =</span> <span class="fu">tune</span>(), </span>
-<span id="cb40-4" class="hljs-ln-code"><a href=""></a>                <span class="at">epochs =</span> <span class="fu">tune</span>(), </span>
-<span id="cb40-5" class="hljs-ln-code"><a href=""></a>                <span class="at">learn_rate =</span> <span class="fu">tune</span>()) <span class="sc">|&gt;</span> </span>
-<span id="cb40-6" class="hljs-ln-code"><a href=""></a>  <span class="fu">set_engine</span>(<span class="st">"brulee"</span>, <span class="at">trace =</span> <span class="dv">0</span>) <span class="sc">|&gt;</span>  </span>
-<span id="cb40-7" class="hljs-ln-code"><a href=""></a>  <span class="fu">set_mode</span>(<span class="st">"classification"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb38-1" class="hljs-ln-code"><a href=""></a><span class="co"># First, we update our model specification</span></span>
+<span id="cb38-2" class="hljs-ln-code"><a href=""></a>mlp_spec <span class="ot">&lt;-</span> <span class="fu">mlp</span>(<span class="at">hidden_units =</span> <span class="fu">tune</span>(),   <span class="co"># &lt;-- instead of fixed numbers, we set it to "tune"</span></span>
+<span id="cb38-3" class="hljs-ln-code"><a href=""></a>                <span class="at">penalty =</span> <span class="fu">tune</span>(), </span>
+<span id="cb38-4" class="hljs-ln-code"><a href=""></a>                <span class="at">epochs =</span> <span class="fu">tune</span>(), </span>
+<span id="cb38-5" class="hljs-ln-code"><a href=""></a>                <span class="at">learn_rate =</span> <span class="fu">tune</span>()) <span class="sc">|&gt;</span> </span>
+<span id="cb38-6" class="hljs-ln-code"><a href=""></a>  <span class="fu">set_engine</span>(<span class="st">"brulee"</span>, <span class="at">trace =</span> <span class="dv">0</span>) <span class="sc">|&gt;</span>  </span>
+<span id="cb38-7" class="hljs-ln-code"><a href=""></a>  <span class="fu">set_mode</span>(<span class="st">"classification"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="grid-search-setting-specific-parameters" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Grid Search: Setting specific parameters</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href=""></a><span class="co"># First, we update our model specification</span></span>
-<span id="cb41-2"><a href=""></a>mlp_spec <span class="ot">&lt;-</span> <span class="fu">mlp</span>(<span class="at">hidden_units =</span> <span class="fu">tune</span>(),   <span class="co"># &lt;-- instead of fixed numbers, we set it to "tune"</span></span>
-<span id="cb41-3"><a href=""></a>                <span class="at">penalty =</span> <span class="fu">tune</span>(), </span>
-<span id="cb41-4"><a href=""></a>                <span class="at">epochs =</span> <span class="fu">tune</span>(), </span>
-<span id="cb41-5"><a href=""></a>                <span class="at">learn_rate =</span> <span class="fu">tune</span>()) <span class="sc">|&gt;</span> </span>
-<span id="cb41-6"><a href=""></a>  <span class="fu">set_engine</span>(<span class="st">"brulee"</span>, <span class="at">trace =</span> <span class="dv">0</span>) <span class="sc">|&gt;</span>  </span>
-<span id="cb41-7"><a href=""></a>  <span class="fu">set_mode</span>(<span class="st">"classification"</span>)</span>
-<span id="cb41-8"><a href=""></a>  </span>
-<span id="cb41-9"><a href=""></a><span class="co"># Estract "dials" for parameter tuning</span></span>
-<span id="cb41-10"><a href=""></a>mlp_param <span class="ot">&lt;-</span> <span class="fu">extract_parameter_set_dials</span>(mlp_spec)</span>
-<span id="cb41-11"><a href=""></a></span>
-<span id="cb41-12"><a href=""></a><span class="co"># Simple combinatorial design</span></span>
-<span id="cb41-13"><a href=""></a>mlp_param <span class="sc">|&gt;</span> <span class="fu">grid_regular</span>(<span class="at">levels =</span> <span class="fu">c</span>(<span class="at">hidden_units =</span> <span class="dv">2</span>, <span class="at">penalty =</span> <span class="dv">2</span>, <span class="at">epochs =</span> <span class="dv">2</span>, <span class="at">learn_rate =</span> <span class="dv">2</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href=""></a><span class="co"># First, we update our model specification</span></span>
+<span id="cb39-2"><a href=""></a>mlp_spec <span class="ot">&lt;-</span> <span class="fu">mlp</span>(<span class="at">hidden_units =</span> <span class="fu">tune</span>(),   <span class="co"># &lt;-- instead of fixed numbers, we set it to "tune"</span></span>
+<span id="cb39-3"><a href=""></a>                <span class="at">penalty =</span> <span class="fu">tune</span>(), </span>
+<span id="cb39-4"><a href=""></a>                <span class="at">epochs =</span> <span class="fu">tune</span>(), </span>
+<span id="cb39-5"><a href=""></a>                <span class="at">learn_rate =</span> <span class="fu">tune</span>()) <span class="sc">|&gt;</span> </span>
+<span id="cb39-6"><a href=""></a>  <span class="fu">set_engine</span>(<span class="st">"brulee"</span>, <span class="at">trace =</span> <span class="dv">0</span>) <span class="sc">|&gt;</span>  </span>
+<span id="cb39-7"><a href=""></a>  <span class="fu">set_mode</span>(<span class="st">"classification"</span>)</span>
+<span id="cb39-8"><a href=""></a>  </span>
+<span id="cb39-9"><a href=""></a><span class="co"># Estract "dials" for parameter tuning</span></span>
+<span id="cb39-10"><a href=""></a>mlp_param <span class="ot">&lt;-</span> <span class="fu">extract_parameter_set_dials</span>(mlp_spec)</span>
+<span id="cb39-11"><a href=""></a></span>
+<span id="cb39-12"><a href=""></a><span class="co"># Simple combinatorial design</span></span>
+<span id="cb39-13"><a href=""></a>mlp_param <span class="sc">|&gt;</span> <span class="fu">grid_regular</span>(<span class="at">levels =</span> <span class="fu">c</span>(<span class="at">hidden_units =</span> <span class="dv">2</span>, <span class="at">penalty =</span> <span class="dv">2</span>, <span class="at">epochs =</span> <span class="dv">2</span>, <span class="at">learn_rate =</span> <span class="dv">2</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<div class="sourceCode" id="cb42"><pre class="sourceCode numberSource output number-lines code-with-copy"><code class="sourceCode"><span id="cb42-1"><a href=""></a># A tibble: 16 × 4</span>
-<span id="cb42-2"><a href=""></a>   hidden_units      penalty epochs learn_rate</span>
-<span id="cb42-3"><a href=""></a>          &lt;int&gt;        &lt;dbl&gt;  &lt;int&gt;      &lt;dbl&gt;</span>
-<span id="cb42-4"><a href=""></a> 1            1 0.0000000001      5      0.001</span>
-<span id="cb42-5"><a href=""></a> 2           10 0.0000000001      5      0.001</span>
-<span id="cb42-6"><a href=""></a> 3            1 1                 5      0.001</span>
-<span id="cb42-7"><a href=""></a> 4           10 1                 5      0.001</span>
-<span id="cb42-8"><a href=""></a> 5            1 0.0000000001    500      0.001</span>
-<span id="cb42-9"><a href=""></a> 6           10 0.0000000001    500      0.001</span>
-<span id="cb42-10"><a href=""></a> 7            1 1               500      0.001</span>
-<span id="cb42-11"><a href=""></a> 8           10 1               500      0.001</span>
-<span id="cb42-12"><a href=""></a> 9            1 0.0000000001      5      0.316</span>
-<span id="cb42-13"><a href=""></a>10           10 0.0000000001      5      0.316</span>
-<span id="cb42-14"><a href=""></a>11            1 1                 5      0.316</span>
-<span id="cb42-15"><a href=""></a>12           10 1                 5      0.316</span>
-<span id="cb42-16"><a href=""></a>13            1 0.0000000001    500      0.316</span>
-<span id="cb42-17"><a href=""></a>14           10 0.0000000001    500      0.316</span>
-<span id="cb42-18"><a href=""></a>15            1 1               500      0.316</span>
-<span id="cb42-19"><a href=""></a>16           10 1               500      0.316</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode numberSource output number-lines code-with-copy"><code class="sourceCode"><span id="cb40-1"><a href=""></a># A tibble: 16 × 4</span>
+<span id="cb40-2"><a href=""></a>   hidden_units      penalty epochs learn_rate</span>
+<span id="cb40-3"><a href=""></a>          &lt;int&gt;        &lt;dbl&gt;  &lt;int&gt;      &lt;dbl&gt;</span>
+<span id="cb40-4"><a href=""></a> 1            1 0.0000000001      5      0.001</span>
+<span id="cb40-5"><a href=""></a> 2           10 0.0000000001      5      0.001</span>
+<span id="cb40-6"><a href=""></a> 3            1 1                 5      0.001</span>
+<span id="cb40-7"><a href=""></a> 4           10 1                 5      0.001</span>
+<span id="cb40-8"><a href=""></a> 5            1 0.0000000001    500      0.001</span>
+<span id="cb40-9"><a href=""></a> 6           10 0.0000000001    500      0.001</span>
+<span id="cb40-10"><a href=""></a> 7            1 1               500      0.001</span>
+<span id="cb40-11"><a href=""></a> 8           10 1               500      0.001</span>
+<span id="cb40-12"><a href=""></a> 9            1 0.0000000001      5      0.316</span>
+<span id="cb40-13"><a href=""></a>10           10 0.0000000001      5      0.316</span>
+<span id="cb40-14"><a href=""></a>11            1 1                 5      0.316</span>
+<span id="cb40-15"><a href=""></a>12           10 1                 5      0.316</span>
+<span id="cb40-16"><a href=""></a>13            1 0.0000000001    500      0.316</span>
+<span id="cb40-17"><a href=""></a>14           10 0.0000000001    500      0.316</span>
+<span id="cb40-18"><a href=""></a>15            1 1               500      0.316</span>
+<span id="cb40-19"><a href=""></a>16           10 1               500      0.316</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </section>
 <section id="running-the-grid-search" class="slide level2">
 <h2>Running the Grid Search</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href=""></a><span class="co"># Combine the recipe and model into a workflow</span></span>
-<span id="cb43-2"><a href=""></a>mlp_wflow <span class="ot">&lt;-</span> <span class="fu">workflow</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb43-3"><a href=""></a>  <span class="fu">add_recipe</span>(text_rec) <span class="sc">%&gt;%</span></span>
-<span id="cb43-4"><a href=""></a>  <span class="fu">add_model</span>(mlp_spec)</span>
-<span id="cb43-5"><a href=""></a></span>
-<span id="cb43-6"><a href=""></a><span class="co"># Set workflow with "dials"</span></span>
-<span id="cb43-7"><a href=""></a>mlp_param <span class="ot">&lt;-</span> mlp_wflow  <span class="sc">|&gt;</span>  </span>
-<span id="cb43-8"><a href=""></a>  <span class="fu">extract_parameter_set_dials</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb43-9"><a href=""></a>  <span class="fu">update</span>(<span class="at">epochs =</span> <span class="fu">epochs</span>(<span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">400</span>)),</span>
-<span id="cb43-10"><a href=""></a>         <span class="at">hidden_units =</span> <span class="fu">hidden_units</span>(<span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">64</span>)),</span>
-<span id="cb43-11"><a href=""></a>         <span class="at">penalty =</span> <span class="fu">penalty</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">10</span>, <span class="sc">-</span><span class="dv">1</span>)),</span>
-<span id="cb43-12"><a href=""></a>         <span class="at">learn_rate =</span> <span class="fu">learn_rate</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">10</span>, <span class="sc">-</span><span class="dv">1</span>), <span class="at">trans =</span> <span class="fu">transform_log10</span>()))</span>
-<span id="cb43-13"><a href=""></a></span>
-<span id="cb43-14"><a href=""></a><span class="co"># Set metric of interest</span></span>
-<span id="cb43-15"><a href=""></a>acc <span class="ot">&lt;-</span> <span class="fu">metric_set</span>(accuracy)</span>
-<span id="cb43-16"><a href=""></a></span>
-<span id="cb43-17"><a href=""></a><span class="co"># Define resampling strategy</span></span>
-<span id="cb43-18"><a href=""></a>twofold <span class="ot">&lt;-</span> <span class="fu">vfold_cv</span>(train_data, <span class="at">v =</span> <span class="dv">2</span>) </span>
-<span id="cb43-19"><a href=""></a></span>
-<span id="cb43-20"><a href=""></a><span class="co"># Run the tuning process</span></span>
-<span id="cb43-21"><a href=""></a>mlp_reg_tune <span class="ot">&lt;-</span> mlp_wflow  <span class="sc">|&gt;</span> </span>
-<span id="cb43-22"><a href=""></a>  <span class="fu">tune_grid</span>(</span>
-<span id="cb43-23"><a href=""></a>    <span class="at">resamples =</span> twofold,</span>
-<span id="cb43-24"><a href=""></a>    <span class="at">grid =</span> mlp_param  <span class="sc">|&gt;</span>  </span>
-<span id="cb43-25"><a href=""></a>      <span class="fu">grid_regular</span>(<span class="at">levels =</span> <span class="fu">c</span>(<span class="at">hidden_units =</span> <span class="dv">2</span>, <span class="at">penalty =</span> <span class="dv">2</span>,   <span class="co"># &lt;-- here, we set specific combination of parameters</span></span>
-<span id="cb43-26"><a href=""></a>                              <span class="at">epochs =</span> <span class="dv">2</span>, <span class="at">learn_rate =</span> <span class="dv">2</span>)),    <span class="co">#     instead, we could also use the `grid_random()`function </span></span>
-<span id="cb43-27"><a href=""></a>    <span class="at">metrics =</span> acc</span>
-<span id="cb43-28"><a href=""></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href=""></a><span class="co"># Combine the recipe and model into a workflow</span></span>
+<span id="cb41-2"><a href=""></a>mlp_wflow <span class="ot">&lt;-</span> <span class="fu">workflow</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb41-3"><a href=""></a>  <span class="fu">add_recipe</span>(text_rec) <span class="sc">%&gt;%</span></span>
+<span id="cb41-4"><a href=""></a>  <span class="fu">add_model</span>(mlp_spec)</span>
+<span id="cb41-5"><a href=""></a></span>
+<span id="cb41-6"><a href=""></a><span class="co"># Set workflow with "dials"</span></span>
+<span id="cb41-7"><a href=""></a>mlp_param <span class="ot">&lt;-</span> mlp_wflow  <span class="sc">|&gt;</span>  </span>
+<span id="cb41-8"><a href=""></a>  <span class="fu">extract_parameter_set_dials</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb41-9"><a href=""></a>  <span class="fu">update</span>(<span class="at">epochs =</span> <span class="fu">epochs</span>(<span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">400</span>)),</span>
+<span id="cb41-10"><a href=""></a>         <span class="at">hidden_units =</span> <span class="fu">hidden_units</span>(<span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">64</span>)),</span>
+<span id="cb41-11"><a href=""></a>         <span class="at">penalty =</span> <span class="fu">penalty</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">10</span>, <span class="sc">-</span><span class="dv">1</span>)),</span>
+<span id="cb41-12"><a href=""></a>         <span class="at">learn_rate =</span> <span class="fu">learn_rate</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">10</span>, <span class="sc">-</span><span class="dv">1</span>), <span class="at">trans =</span> <span class="fu">transform_log10</span>()))</span>
+<span id="cb41-13"><a href=""></a></span>
+<span id="cb41-14"><a href=""></a><span class="co"># Set metric of interest</span></span>
+<span id="cb41-15"><a href=""></a>acc <span class="ot">&lt;-</span> <span class="fu">metric_set</span>(accuracy)</span>
+<span id="cb41-16"><a href=""></a></span>
+<span id="cb41-17"><a href=""></a><span class="co"># Define resampling strategy</span></span>
+<span id="cb41-18"><a href=""></a>twofold <span class="ot">&lt;-</span> <span class="fu">vfold_cv</span>(train_data, <span class="at">v =</span> <span class="dv">2</span>) </span>
+<span id="cb41-19"><a href=""></a></span>
+<span id="cb41-20"><a href=""></a><span class="co"># Run the tuning process</span></span>
+<span id="cb41-21"><a href=""></a>mlp_reg_tune <span class="ot">&lt;-</span> mlp_wflow  <span class="sc">|&gt;</span> </span>
+<span id="cb41-22"><a href=""></a>  <span class="fu">tune_grid</span>(</span>
+<span id="cb41-23"><a href=""></a>    <span class="at">resamples =</span> twofold,</span>
+<span id="cb41-24"><a href=""></a>    <span class="at">grid =</span> mlp_param  <span class="sc">|&gt;</span>  </span>
+<span id="cb41-25"><a href=""></a>      <span class="fu">grid_regular</span>(<span class="at">levels =</span> <span class="fu">c</span>(<span class="at">hidden_units =</span> <span class="dv">2</span>, <span class="at">penalty =</span> <span class="dv">2</span>,   <span class="co"># &lt;-- here, we set specific combination of parameters</span></span>
+<span id="cb41-26"><a href=""></a>                              <span class="at">epochs =</span> <span class="dv">2</span>, <span class="at">learn_rate =</span> <span class="dv">2</span>)),    <span class="co">#     instead, we could also use the `grid_random()`function </span></span>
+<span id="cb41-27"><a href=""></a>    <span class="at">metrics =</span> acc</span>
+<span id="cb41-28"><a href=""></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="evaluation" class="slide level2">
@@ -1697,30 +1674,30 @@ Dr.&nbsp;Philipp K. Masur
 <li><p>We can see here that 64 nodes, a very low penalty, a learning rate of 0.1 provides the best performance.</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href=""></a>best_fit <span class="ot">&lt;-</span> <span class="fu">show_best</span>(mlp_reg_tune, <span class="at">n =</span> <span class="dv">48</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb44-2"><a href=""></a>  <span class="fu">select</span>(<span class="sc">-</span>.estimator, <span class="sc">-</span>.config, <span class="sc">-</span>.metric) <span class="sc">|&gt;</span> </span>
-<span id="cb44-3"><a href=""></a>  <span class="fu">rename</span>(<span class="at">accuracy =</span> mean)</span>
-<span id="cb44-4"><a href=""></a>best_fit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href=""></a>best_fit <span class="ot">&lt;-</span> <span class="fu">show_best</span>(mlp_reg_tune, <span class="at">n =</span> <span class="dv">48</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb42-2"><a href=""></a>  <span class="fu">select</span>(<span class="sc">-</span>.estimator, <span class="sc">-</span>.config, <span class="sc">-</span>.metric) <span class="sc">|&gt;</span> </span>
+<span id="cb42-3"><a href=""></a>  <span class="fu">rename</span>(<span class="at">accuracy =</span> mean)</span>
+<span id="cb42-4"><a href=""></a>best_fit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<div class="sourceCode" id="cb45"><pre class="sourceCode numberSource output number-lines code-with-copy"><code class="sourceCode"><span id="cb45-1"><a href=""></a># A tibble: 16 × 7</span>
-<span id="cb45-2"><a href=""></a>   hidden_units      penalty epochs   learn_rate accuracy     n  std_err</span>
-<span id="cb45-3"><a href=""></a>          &lt;int&gt;        &lt;dbl&gt;  &lt;int&gt;        &lt;dbl&gt;    &lt;dbl&gt; &lt;int&gt;    &lt;dbl&gt;</span>
-<span id="cb45-4"><a href=""></a> 1           64 0.0000000001    400 0.1             0.856     2 0.00406 </span>
-<span id="cb45-5"><a href=""></a> 2           64 0.0000000001    100 0.1             0.856     2 0.000980</span>
-<span id="cb45-6"><a href=""></a> 3           12 0.0000000001    100 0.1             0.854     2 0.00406 </span>
-<span id="cb45-7"><a href=""></a> 4           64 0.1             400 0.1             0.784     2 0.00245 </span>
-<span id="cb45-8"><a href=""></a> 5           12 0.1             100 0.1             0.783     2 0.00287 </span>
-<span id="cb45-9"><a href=""></a> 6           12 0.1             400 0.1             0.782     2 0.00357 </span>
-<span id="cb45-10"><a href=""></a> 7           64 0.1             100 0.1             0.781     2 0.00371 </span>
-<span id="cb45-11"><a href=""></a> 8           12 0.0000000001    400 0.1             0.563     2 0.295   </span>
-<span id="cb45-12"><a href=""></a> 9           64 0.0000000001    400 0.0000000001    0.542     2 0.00154 </span>
-<span id="cb45-13"><a href=""></a>10           64 0.1             400 0.0000000001    0.435     2 0.106   </span>
-<span id="cb45-14"><a href=""></a>11           12 0.0000000001    100 0.0000000001    0.376     2 0.0277  </span>
-<span id="cb45-15"><a href=""></a>12           64 0.0000000001    100 0.0000000001    0.328     2 0.216   </span>
-<span id="cb45-16"><a href=""></a>13           12 0.0000000001    400 0.0000000001    0.327     2 0.216   </span>
-<span id="cb45-17"><a href=""></a>14           12 0.1             400 0.0000000001    0.230     2 0.119   </span>
-<span id="cb45-18"><a href=""></a>15           12 0.1             100 0.0000000001    0.228     2 0.120   </span>
-<span id="cb45-19"><a href=""></a>16           64 0.1             100 0.0000000001    0.110     2 0.00126 </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode numberSource output number-lines code-with-copy"><code class="sourceCode"><span id="cb43-1"><a href=""></a># A tibble: 16 × 7</span>
+<span id="cb43-2"><a href=""></a>   hidden_units      penalty epochs   learn_rate accuracy     n  std_err</span>
+<span id="cb43-3"><a href=""></a>          &lt;int&gt;        &lt;dbl&gt;  &lt;int&gt;        &lt;dbl&gt;    &lt;dbl&gt; &lt;int&gt;    &lt;dbl&gt;</span>
+<span id="cb43-4"><a href=""></a> 1           64 0.0000000001    400 0.1             0.856     2 0.00406 </span>
+<span id="cb43-5"><a href=""></a> 2           64 0.0000000001    100 0.1             0.856     2 0.000980</span>
+<span id="cb43-6"><a href=""></a> 3           12 0.0000000001    100 0.1             0.854     2 0.00406 </span>
+<span id="cb43-7"><a href=""></a> 4           64 0.1             400 0.1             0.784     2 0.00245 </span>
+<span id="cb43-8"><a href=""></a> 5           12 0.1             100 0.1             0.783     2 0.00287 </span>
+<span id="cb43-9"><a href=""></a> 6           12 0.1             400 0.1             0.782     2 0.00357 </span>
+<span id="cb43-10"><a href=""></a> 7           64 0.1             100 0.1             0.781     2 0.00371 </span>
+<span id="cb43-11"><a href=""></a> 8           12 0.0000000001    400 0.1             0.563     2 0.295   </span>
+<span id="cb43-12"><a href=""></a> 9           64 0.0000000001    400 0.0000000001    0.542     2 0.00154 </span>
+<span id="cb43-13"><a href=""></a>10           64 0.1             400 0.0000000001    0.435     2 0.106   </span>
+<span id="cb43-14"><a href=""></a>11           12 0.0000000001    100 0.0000000001    0.376     2 0.0277  </span>
+<span id="cb43-15"><a href=""></a>12           64 0.0000000001    100 0.0000000001    0.328     2 0.216   </span>
+<span id="cb43-16"><a href=""></a>13           12 0.0000000001    400 0.0000000001    0.327     2 0.216   </span>
+<span id="cb43-17"><a href=""></a>14           12 0.1             400 0.0000000001    0.230     2 0.119   </span>
+<span id="cb43-18"><a href=""></a>15           12 0.1             100 0.0000000001    0.228     2 0.120   </span>
+<span id="cb43-19"><a href=""></a>16           64 0.1             100 0.0000000001    0.110     2 0.00126 </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </section>
@@ -1730,47 +1707,47 @@ Dr.&nbsp;Philipp K. Masur
 <li>The effect of parameters becomes even more clear, when we visualize the grid search:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href=""></a><span class="fu">options</span>(<span class="at">scipen =</span> <span class="dv">999</span>)</span>
-<span id="cb46-2"><a href=""></a><span class="fu">autoplot</span>(mlp_reg_tune)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href=""></a><span class="fu">options</span>(<span class="at">scipen =</span> <span class="dv">999</span>)</span>
+<span id="cb44-2"><a href=""></a><span class="fu">autoplot</span>(mlp_reg_tune)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
 <img data-src="03_classicmachinelearning_2024_files/figure-revealjs/unnamed-chunk-45-1.png" width="960" class="r-stretch"></section>
 <section id="fitting-the-best-model" class="slide level2">
 <h2>Fitting the best model</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href=""></a>mlp_best <span class="ot">&lt;-</span></span>
-<span id="cb47-2"><a href=""></a>  <span class="fu">mlp</span>(<span class="at">epochs =</span> <span class="dv">400</span>,           <span class="co"># &lt;- times that algorithm will work through train set</span></span>
-<span id="cb47-3"><a href=""></a>      <span class="at">hidden_units =</span> <span class="fu">c</span>(<span class="dv">64</span>),   <span class="co"># &lt;- nodes in hidden units</span></span>
-<span id="cb47-4"><a href=""></a>      <span class="at">penalty =</span> <span class="fl">0.001</span>,        <span class="co"># &lt;- regularization</span></span>
-<span id="cb47-5"><a href=""></a>      <span class="at">learn_rate =</span> <span class="fl">0.1</span>) <span class="sc">|&gt;</span>    <span class="co"># &lt;- shrinkage</span></span>
-<span id="cb47-6"><a href=""></a>  <span class="fu">set_engine</span>(<span class="st">"brulee"</span>) <span class="sc">|&gt;</span>     <span class="co"># &lt;-- engine = R package</span></span>
-<span id="cb47-7"><a href=""></a>  <span class="fu">set_mode</span>(<span class="st">"classification"</span>)</span>
-<span id="cb47-8"><a href=""></a></span>
-<span id="cb47-9"><a href=""></a><span class="co"># Create workflow</span></span>
-<span id="cb47-10"><a href=""></a>mlp_wflow_best <span class="ot">&lt;-</span> <span class="fu">workflow</span>()  <span class="sc">|&gt;</span> </span>
-<span id="cb47-11"><a href=""></a>  <span class="fu">add_recipe</span>(text_rec) <span class="sc">|&gt;</span> </span>
-<span id="cb47-12"><a href=""></a>  <span class="fu">add_model</span>(mlp_best)</span>
-<span id="cb47-13"><a href=""></a></span>
-<span id="cb47-14"><a href=""></a><span class="co"># Fit the workflow on the training data</span></span>
-<span id="cb47-15"><a href=""></a>mlp_fit_best <span class="ot">&lt;-</span> mlp_wflow_best <span class="sc">|&gt;</span> </span>
-<span id="cb47-16"><a href=""></a>  <span class="fu">fit</span>(<span class="at">data =</span> train_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href=""></a>mlp_best <span class="ot">&lt;-</span></span>
+<span id="cb45-2"><a href=""></a>  <span class="fu">mlp</span>(<span class="at">epochs =</span> <span class="dv">400</span>,           <span class="co"># &lt;- times that algorithm will work through train set</span></span>
+<span id="cb45-3"><a href=""></a>      <span class="at">hidden_units =</span> <span class="fu">c</span>(<span class="dv">64</span>),   <span class="co"># &lt;- nodes in hidden units</span></span>
+<span id="cb45-4"><a href=""></a>      <span class="at">penalty =</span> <span class="fl">0.001</span>,        <span class="co"># &lt;- regularization</span></span>
+<span id="cb45-5"><a href=""></a>      <span class="at">learn_rate =</span> <span class="fl">0.1</span>) <span class="sc">|&gt;</span>    <span class="co"># &lt;- shrinkage</span></span>
+<span id="cb45-6"><a href=""></a>  <span class="fu">set_engine</span>(<span class="st">"brulee"</span>) <span class="sc">|&gt;</span>     <span class="co"># &lt;-- engine = R package</span></span>
+<span id="cb45-7"><a href=""></a>  <span class="fu">set_mode</span>(<span class="st">"classification"</span>)</span>
+<span id="cb45-8"><a href=""></a></span>
+<span id="cb45-9"><a href=""></a><span class="co"># Create workflow</span></span>
+<span id="cb45-10"><a href=""></a>mlp_wflow_best <span class="ot">&lt;-</span> <span class="fu">workflow</span>()  <span class="sc">|&gt;</span> </span>
+<span id="cb45-11"><a href=""></a>  <span class="fu">add_recipe</span>(text_rec) <span class="sc">|&gt;</span> </span>
+<span id="cb45-12"><a href=""></a>  <span class="fu">add_model</span>(mlp_best)</span>
+<span id="cb45-13"><a href=""></a></span>
+<span id="cb45-14"><a href=""></a><span class="co"># Fit the workflow on the training data</span></span>
+<span id="cb45-15"><a href=""></a>mlp_fit_best <span class="ot">&lt;-</span> mlp_wflow_best <span class="sc">|&gt;</span> </span>
+<span id="cb45-16"><a href=""></a>  <span class="fu">fit</span>(<span class="at">data =</span> train_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href=""></a><span class="co"># Make predictions and evaluate on the test set</span></span>
-<span id="cb48-2"><a href=""></a>predictions_best <span class="ot">&lt;-</span> <span class="fu">predict</span>(mlp_fit_best, <span class="at">new_data =</span> test_data) <span class="sc">%&gt;%</span></span>
-<span id="cb48-3"><a href=""></a>  <span class="fu">bind_cols</span>(test_data) <span class="sc">|&gt;</span> </span>
-<span id="cb48-4"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">label =</span> <span class="fu">factor</span>(label))</span>
-<span id="cb48-5"><a href=""></a></span>
-<span id="cb48-6"><a href=""></a>predictions_best <span class="sc">|&gt;</span> </span>
-<span id="cb48-7"><a href=""></a> <span class="fu">class_metrics</span>(<span class="at">truth =</span> label, <span class="at">estimate =</span> .pred_class)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href=""></a><span class="co"># Make predictions and evaluate on the test set</span></span>
+<span id="cb46-2"><a href=""></a>predictions_best <span class="ot">&lt;-</span> <span class="fu">predict</span>(mlp_fit_best, <span class="at">new_data =</span> test_data) <span class="sc">%&gt;%</span></span>
+<span id="cb46-3"><a href=""></a>  <span class="fu">bind_cols</span>(test_data) <span class="sc">|&gt;</span> </span>
+<span id="cb46-4"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">label =</span> <span class="fu">factor</span>(label))</span>
+<span id="cb46-5"><a href=""></a></span>
+<span id="cb46-6"><a href=""></a>predictions_best <span class="sc">|&gt;</span> </span>
+<span id="cb46-7"><a href=""></a> <span class="fu">class_metrics</span>(<span class="at">truth =</span> label, <span class="at">estimate =</span> .pred_class)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<div class="sourceCode" id="cb49"><pre class="sourceCode numberSource output number-lines code-with-copy"><code class="sourceCode"><span id="cb49-1"><a href=""></a># A tibble: 4 × 3</span>
-<span id="cb49-2"><a href=""></a>  .metric   .estimator .estimate</span>
-<span id="cb49-3"><a href=""></a>  &lt;chr&gt;     &lt;chr&gt;          &lt;dbl&gt;</span>
-<span id="cb49-4"><a href=""></a>1 accuracy  multiclass     0.869</span>
-<span id="cb49-5"><a href=""></a>2 precision macro          0.826</span>
-<span id="cb49-6"><a href=""></a>3 recall    macro          0.716</span>
-<span id="cb49-7"><a href=""></a>4 f_meas    macro          0.739</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode numberSource output number-lines code-with-copy"><code class="sourceCode"><span id="cb47-1"><a href=""></a># A tibble: 4 × 3</span>
+<span id="cb47-2"><a href=""></a>  .metric   .estimator .estimate</span>
+<span id="cb47-3"><a href=""></a>  &lt;chr&gt;     &lt;chr&gt;          &lt;dbl&gt;</span>
+<span id="cb47-4"><a href=""></a>1 accuracy  multiclass     0.869</span>
+<span id="cb47-5"><a href=""></a>2 precision macro          0.826</span>
+<span id="cb47-6"><a href=""></a>3 recall    macro          0.716</span>
+<span id="cb47-7"><a href=""></a>4 f_meas    macro          0.739</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </section>
@@ -1899,6 +1876,8 @@ Dr.&nbsp;Philipp K. Masur
 </section>
 <section id="conclusion-and-outlook" class="slide level2">
 <h2>Conclusion and outlook</h2>
+<div class="columns">
+<div class="column" style="width:55%;">
 <ul>
 <li><p>Classic machine learning is a useful tool for generalizing from a sample</p></li>
 <li><p>It is very useful to reduce the amount of manual coding needed</p></li>
@@ -1908,6 +1887,10 @@ Dr.&nbsp;Philipp K. Masur
 <li>Transfer Learning, Attention, Self-Attention…. (Next week!!!)</li>
 </ul></li>
 </ul>
+</div><div class="column" style="width:40%;">
+<p><img data-src="https://m.media-amazon.com/images/S/pv-target-images/c1294b151f242ffc3668e3526edd5a781bf18ac04ad25f68a2e48b58c05ef99f._SX1080_FMjpg_.jpg"></p>
+</div>
+</div>
 </section></section>
 <section>
 <section id="thank-you-for-your-attention" class="title-slide slide level1 center" data-background-color="steelblue">

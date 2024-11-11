@@ -22,8 +22,6 @@ editor: visual
 
 -   Machine learning is the study of computer algorithms that can **improve automatically** through experience and by the use of data
 
--   The field originated in an environment where the available data, statistical methods, and computing power rapidly and simultaneously evolved
-
 -   Due to the "black box" nature of the algorithm's operations, it is often seen as a form of **artificial intelligence**
 
 ![Source: qlik](https://www.qlik.com/us/-/media/images/global-us/site-content/augmented-analytics/machine-learning-vs-ai/machine-learning-diagram-image.png)
@@ -39,7 +37,6 @@ editor: visual
 -   Prediction of election outcomes
 -   Auto-piloting and self-driving cars
 -   Face recognition
--   Optimization of energy use in homes and buildings
 -   Discovery of genetic sequences linked to diseases
 -   ....
 
@@ -105,7 +102,7 @@ editor: visual
 
 ## Deductive vs. inductive approaches
 
--   In the previous lecture, we talked about deductive approaches (such as dictionary approaches)
+-   In the previous lecture, we talked about deductive approaches (e.g., dictionary approaches)
 
 -   These are **deterministic** and are based on a priori text theory<br>(e.g., happy → positive, hate → negative)
 
@@ -151,17 +148,17 @@ editor: visual
 
 ::: columns
 ::: {.column width="50%"}
--   Is about understanding the relationship between one (or several predictors) and an outcome variable
+-   Is about understanding the relationship between one (or several) predictor(s) and an outcome variable
 
 -   Learn $f$ so you can predict $y$ from $x$:
 
 <center>$y = f(x)$</center>
 
--   In a linear regression model, we aim to find the best fitting "line" that best predicts $y$ based on $x$:
+-   In a linear regression model, we try to findt he best fitting "line" that best predicts $y$ based on $x$:
 
 <center>$y = -0.16 + 2.31 * x + \epsilon$</center>
 
--   In a typical communication science paper, we would say something like: when `x` increases by 1 unit,`y` increases by 2.31 units.
+-   We then say: when `x` increases by 1 unit,`y` increases by 2.31 units.
 :::
 
 ::: {.column width="5%"}
@@ -187,13 +184,13 @@ ggplot(data, aes(x, y)) +
 
 ::: columns
 ::: {.column width="50%"}
--   Machine learning is less about understanding the relationship, but about maximizing prediction.
+-   Machine learning less about not understanding, but about maximizing prediction
 
--   A statistical model such as the one estimated can be used to predict most likely $y$ values based on new $x$ data.
+-   A statistical model can be used to predict most likely $y$ values based on new $x$ data.
 
--   For example, despite not being in the data, $x = -1$ should be $y = -2.47$; $x = 5$ should be $y = 11.41$ based on the fitted line!
+-   For example, despite not being in the data, $x = -1$ should be $y = -2.47$; $x = 5$ should be $y = 11.41$ based on the fitted line
 
--   In other words, machine learnings doesn't focus on explanation, but emphasizes prediction.
+-   In other words, machine learning doesn't focus on explanation, but emphasizes prediction
 :::
 
 ::: {.column width="5%"}
@@ -236,20 +233,22 @@ ggplot(data, aes(x, y)) +
 -   Goal of machine learning: best possible prediction
 
     -   make generalizable predictions ("How to best predict $Y$?")
-    -   We do not care about the actual values of the coefficients, we just need them for our prediction.
-    -   In fact, in many machine learning models, we will have so many of them that we do not even bother to report them.
+    -   We do not care about the actual values of the coefficients, we just need them for our prediction
+    -   We will often have so many of them that we do not even bother to report them
 
 . . .
 
-**Note:** Machine learning models often have 1000's of collinear independent variables and can have many latent variables!
+**Note:** Machine learning models often have 1000's of colinear independent variables and can have many latent variables!
 
 ## Over- vs. underfit
 
--   Problem in Machine Learning: Sufficiently complex algorithms can predict all training data perfectly
+-   Problem in Machine Learning: Sufficiently complex algorithms can predict all training data **perfectly**
 
--   But such an algorithm does not generalize to new data (the actual goal!)
+-   But such an algorithm does not generalize to new data
 
 -   Essentially, we want the model to have a good fit to the data, but we also want it to not optimize on things that are specific to the training data set
+
+- Let's try exemplify over vs. underfit with some simulated data!
 
 ## Examplifying over- and underfit
 
@@ -325,11 +324,10 @@ ggplot(NULL, aes(x = x, y = y)) +
 ## Solution: Training and Testing
 
 ::: {.column width="45%"}
--   As models (almost) always overfit, it is clear that performance on only training data is not a good indicator of the real quality of the classifier
+-   As models (almost) always overfit, performance on only training data is not a good indicator of the real quality of the classifier
 
--   The standard solution is to split the labeled data into a training and test data sets: This way, we can train the algorithm on one part and then evaluate its validity / performance on the held-out part of the data.
+-   The standard solution is to split the labeled data into a training and test data sets: We train the algorithm on one part and then evaluate its performance on the held-out part
 
--   We prevent overfit if the classifier still perform well on unseen data and not just on the training data!
 :::
 
 ::: {.column width="5%"}
@@ -355,11 +353,11 @@ ggplot(NULL, aes(x = x, y = y)) +
     -   We manually coded a small set of the text
     -   Compared this gold standard to the dictionary result
 
--   In supervised text classification, the procedure is similar
+-   In supervised text classification, the procedure is similar:
 
-    -   We use the classifier (trained on the training data) to predict the outcome in the test data
+    -   We use the classifier, trained on the training data, to predict the outcome in the test data
     -   Because the test data is only a subset of our labeled data, it also contains the true outcome
-    -   We can compare the predicted with the actual outcome and compute the same performance scores (Accuracy, Precision,...)
+    -   We compare the predicted with the actual outcome and compute the performance scores (Accuracy, Precision,...)
 :::
 
 ::: {.column width="30%"}
@@ -461,7 +459,7 @@ tibble(dataset = c("training", "testing"),
 
 -   They further need the outcome variable that they should predict
 
--   All text-preprocessing steps (e.g., stopword removal, stemming, lemmatization, frequency trimming, weighting, etc.) may change the performance, but no clear rules on what works and what does not
+-   All text-preprocessing steps (e.g., stopword removal, stemming, frequency trimming,etc.) may change the performance, but no clear rules on what works and what does not
 
 -   Only solution: Trial and error!
 :::
@@ -521,11 +519,11 @@ rec |>
 
 -   The basic procedure is the following:
 
-    1.  Create a **recipe** (this includes already a formula and all pre-processing steps)
+    1.  Create a **recipe** (a formula and all pre-processing steps)
     2.  **Bake** training and testing data using the **recipe** (not explicitly necesssary)
-    3.  Create a designated **model function** (depending on what type of algorithm should be used)
+    3.  Create a **model function** (depending on what type of algorithm should be used)
     4.  Bind all together using a **workflow**
-    5.  Fit the entire **workflow** and evaluate performance
+    5.  **Fit** the entire **workflow** and evaluate performance
 :::
 
 ::: {.column width="2%"}
@@ -628,9 +626,9 @@ rec_norm <- rec |>
 
 ## Theoretical background
 
--   An artificial neural network (ANN) models the relationship between a set of input signals and an output signal using a model derived from our understanding of the human brain
+-   An artificial neural network models the relationship between a set of input signals and an output signal using a model derived from our understanding of the human brain
 
--   Like a brain uses a network of interconnected cells called "neurons" (a) to provide fast learning capabilities, ANN uses a network of artificial neurons (b) to solves learning tasks
+-   Like a brain uses a network of interconnected cells called "neurons" (a) to provide fast learning capabilities, a neural network uses a network of artificial neurons (b) to solves learning tasks
 
 ![Source: Arthur Arnx/Medium](https://miro.medium.com/v2/resize:fit:850/1*30YDnisanIYRHpC-L2Br-g.png)
 
@@ -642,24 +640,25 @@ rec_norm <- rec |>
 :::
 
 ::: {.column width="50%"}
--   The operation of an ANN is straightforward:
+-   The operation of an artificial neural network is straightforward:
 
     -   One enters variables as inputs (e.g., features of a text)
     -   And after some calculations via different neurons, an output is returned (e.g. the word "politics")
 
--   In the simplest form, neurons are stacked on top of one another and a neuron of colum `n` can only be connected to inputs from column `n-1` and provide outputs to neurons in column `n+1`
+-   Neurons are stacked on top of one another and a neuron of colum `n` can only be connected to inputs from column `n-1` and provide outputs to neurons in column `n+1`
 
--   Input data are passed through layered transformation until an output is reached
+-   In other words, input data are passed through layered transformations until an output is reached
 :::
 :::
 
-## The Neuron as generalized linear model
+## The Neuron as Generalized Linear Model
 
--   First, a neuron adds up the value of every neurons from the previous column it is connected to (here `x1`, `x2`, and `x3`)
+-   First, the value of each input neuron is multiplied by so-called "weight" (`w1`, `w2`, `w3`), which could be regarded as the strength of connection between two neurons
 
--   This value is multiplied, before being added, by another variable called "weight" (`w1`, `w2`, `w3`): the strength of connection between two neurons
 
--   A bias value may be added (e.g., to regularize the network)
+- Second, the neuron adds up the values of every input neuron from the previous column it is connected to (here `x1`, `x2`, and `x3`)
+
+-  Third, a bias value may be added (e.g., to regularize the network)
 
 -   After all those summations, the neuron finally applies a function called "activation function" to the obtained value
 
@@ -687,15 +686,15 @@ rec_norm <- rec |>
 
 ## How the neural network learns
 
--   ![Source: 3Blue1Brown](https://developer-blogs.nvidia.com/wp-content/uploads/2022/02/DS-Guide-to-Gradient-Descent_Pic5.gif){style="float:right; padding-left: 2em; padding-bottom: 2em;"}In a first try, the ANN randomly sets weights and thus can't get the right output (except with luck)
+-   ![Source: 3Blue1Brown](https://developer-blogs.nvidia.com/wp-content/uploads/2022/02/DS-Guide-to-Gradient-Descent_Pic5.gif){style="float:right; padding-left: 2em; padding-bottom: 2em;"}In a first try, the neural network randomly sets weights and thus can't get the right output (except with luck)
 
--   If the (random) choice was a good one, actual parameters are kept and the next input is given. If the obtained output doesn't match the desired output, the weights are changed.
+-   If the random choice was a good one, actual parameters are kept and the next input is given. If the obtained output doesn't match the desired output, the weights are changed
 
--   To determine which weight is better to modify, a ANN uses **backpropagation**, which consists of "going back" on the neural network and inspect every connection to check how the output would behave according to a change on the weight
+-   To determine which weight is better to modify, a neural network uses **backpropagation**, which consists of "going back" on the neural network and inspect every connection to check how the output would behave according to a change on the weight
 
 -   The **learning rate** thereby determines the speed a neural network will learn, i.e., how it will modify a weight (e.g., little by little or by bigger steps).
 
--   Learning rate and number of learning cycles (epochs) have to be set manually upfront!
+-   Learning rate and number of learning cycles (so-called epochs) have to be set manually upfront!
 
 ## Backpropagation in Detail: Random initialization
 
@@ -711,9 +710,23 @@ rec_norm <- rec |>
 
 ## What did the neural network learn?
 
+::: columns
+::: {.column width="55%"}
 -   It is hard to imagine how the network has learned that a certain combination of words corresponds to a certain label.
 
 -   In fact, we can only speculate that it might capture certain meaning by co-occurence of words, e.g., that certain words are representing machine learning and machine learning, in turn, is most likely to be within "computer science"
+
+:::
+
+::: {.column width="40%"}
+
+
+
+![](img/neuralnetworkimagine.jpg)
+
+:::
+:::
+
 
 ## What a neural network might have learned...
 
@@ -1153,12 +1166,6 @@ Improving Prediction by Using Word-Embeddings as Input Features
 
 -   Yet, bear in mind: We do not actually know what the 100+ (often \>300) dimensions actually mean (→ we cannot look under the hood later!)
 
-## From Sparse to Dense Matrix Representation
-
--   Using embedding vectors instead of word frequencies further has the advantages of strongly reducing the dimensionality of the DTM: instead of (tens of) thousands of columns for each unique word we only need hundreds of columns for the embedding vectors (→ dense instead of sparse)
-
--   This means that further processing can be more efficient as fewer parameters need to be fit, or conversely that more complicated models can be used without blowing up the parameter space.
-
 ## Text classification with Word-Embeddings
 
 ![](img/text_analysis_fundamentals/Slide04.png)
@@ -1256,11 +1263,7 @@ bind_rows(
 
 -   There is no clear rule of how to set these parameters and their influence on performance is often unknown
 
--   Using trail and error, we simply compare many different model specifications to find optimal hyperparameters
-
--   Very good examples are the hyperparameters of support vector machines: it is hard to know how soft our margins should be and we may also be unsure about the right kernel , or in the case of a polynomial kernel, how many degrees we want to consider
-
--   Similarly, we have to simply try out whether a neural network needs more than one hidden layer or how many nodes make sense, what learning rate works best, etc.
+-   We have to simply try out whether a neural network needs more than one hidden layer or how many nodes make sense, what learning rate works best, etc.
 
 -   Good machine learning practice is to conduct a so-called **grid-search**, i.e. systematically run combinations of different specifications (but computationally expensive!!!)
 
@@ -1586,6 +1589,9 @@ Next week, we reach the present!
 
 ## Conclusion and outlook
 
+::: columns
+::: {.column width="55%"}
+
 -   Classic machine learning is a useful tool for generalizing from a sample
 
 -   It is very useful to reduce the amount of manual coding needed
@@ -1595,6 +1601,15 @@ Next week, we reach the present!
 -   That said, the field has moved on and innovations are fast-paced these days:
 
     -   Transfer Learning, Attention, Self-Attention.... (Next week!!!)
+    
+::: 
+::: {.column width="40%"}
+
+![](https://m.media-amazon.com/images/S/pv-target-images/c1294b151f242ffc3668e3526edd5a781bf18ac04ad25f68a2e48b58c05ef99f._SX1080_FMjpg_.jpg)
+
+
+:::
+:::
 
 # Thank you for your attention! {background-color="steelblue"}
 
