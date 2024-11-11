@@ -372,7 +372,7 @@ Translating the Architecture of the Brain into Algorithmic Processing
 
 ## Overview of different ML algorithms
 
-![](img/ML_algorithms.png)
+![](img/ml_algorithms.png)
 
 → In the following, we will focus primarily on neural networks as the most advanced algorithm in ML, but note that we could easily use other algorithms as well
 
