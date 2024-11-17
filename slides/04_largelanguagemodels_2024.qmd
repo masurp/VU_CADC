@@ -1,0 +1,1014 @@
+---
+title: "Transformers and Large Language Models"
+subtitle: "Week 4: Bert, Llama, GPT, and Co"
+author: "Dr. Philipp K. Masur"
+format:
+  revealjs: 
+    theme: [default, theme.scss]
+    logo: img/logo.png
+    background-transition: fade
+    footer: Computational Analysis of Digital Communication
+    slide-number: c/t
+    title-slide-attributes:
+        data-background-image: https://storage.googleapis.com/exenzo-jobboard/bb/public/thumb/logo-jpg-57.jpg
+        data-background-position: "top right"
+        data-background-size: auto
+editor: visual
+---
+
+##  {background="#43464B" background-image="img/GPT_viz_imagination.jpg"}
+
+## A Look Back at the Chronology of NLP
+
+![](img/timeline/Slide1b.png)
+
+## A Look Back at the Chronology of NLP
+
+![](img/timeline/Slide2b.png)
+
+## What we focus on today...
+
+![](img/timeline/Slide3b.png)
+
+## The classic machine learning approach
+
+-   A lot of different steps...
+
+-   Training takes a lot of data and time... and performance was still somewhat
+
+```{r, echo = F}
+library(tidyverse)
+science_data <- read_csv("data/science.csv") |>  filter(label != "biology" & label != "finance" & label != "mathematics")
+```
+
+```{r, eval = F}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+# Get data
+science_data <- read_csv("data/science.csv") |>  filter(label != "biology" & label != "finance" & label != "mathematics")
+
+# Create test and train data sets
+split <- initial_split(science_data, prop = .50)
+
+# Feature engineering
+rec <- recipe(sentiment ~ lemmata, data = science_data) |> 
+  step_tokenize(lemmata) |> 
+  step_tf(all_predictors())  |> 
+  step_normalize(all_predictors())
+
+# Setup algorithm/model
+mlp_spec <- mlp(epochs = 600, hidden_units = c(6),  
+                penalty = 0.01, learn_rate = 0.2) |>   
+  set_engine("brulee") |>    
+  set_mode("classification")
+
+# Create workflow
+mlp_workflow <- workflow() |> 
+  add_recipe(rec) |> 
+  add_model(mlp_spec)
+
+# Fit model
+m_mlp <- fit(mlp_workflow, data = training(split))
+```
+
+##  {background-image="https://ychef.files.bbci.co.uk/976x549/p01pqw85.jpg"}
+
+## What if things were easier?
+
+-   Wouldn't it be great if we would not have to wrangle with the data, not engage in any text preprocessing, and simply let the "computer" figure this out?
+
+-   In fact, aren't we living in times were we can simply ask the computer, similar as Theodore in the movie "Her"?
+
+```{r, eval = T}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+#| output-location: column-fragment
+library(tidyllm)
+library(glue)
+
+glue('Classify this scientific abstract: {abstract}
+
+     Pick one of the following fields.
+     Provide only the name of the field:
+     
+     Physics
+     Computer Science
+     Statistics', 
+     abstract = science_data$text[2]) |> 
+  llm_message() |> 
+  chat(ollama(.model = "llama3", .temperature = 0)) 
+```
+
+## Content of this Lecture {.smaller}
+
+::: columns
+::: {.column width="45%"}
+1.  Machine Learning vs. Deep Learning
+
+    1.1. Reminder: Text Classification Pipeline
+
+    1.2. How did the Field move on?
+
+2.  The Rise of Transformers and Transfer Learning
+
+    3.1. Overview
+
+    3.2. Transfer Learning
+
+    3.3. Architecture of the Transformer Model
+
+    3.4. The Transformer Text Classification Pipeline Using BERT
+
+3.  Large Language Models: BERT, Llama, GPT and Co
+
+    3.1. What are Large Language Models and Generative AI?
+
+    3.2. General Idea: Next-Token-Prediction
+
+    3.3. A Peek into the Architecture of GPT
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="45%"}
+4.  Using LLMs for Text Classification
+
+    4.1. Zero-Shot, One-Short, and Few-Shot Classification
+
+    4.2. Text Classification Using Llama and GPT
+
+    4.3. Validation, validation, validation!
+
+    4.4. Examples in the Literature
+
+5.  Summary and conclusion
+
+    5.1. State-of-the-Art in Classification
+
+    5.2. Ethical considerations
+
+    5.3. Conclusion
+:::
+:::
+
+# Machine Learning vs. Deep Learning {background-color="steelblue"}
+
+## Our Text Classification Pipeline
+
+![](img/text_analysis_fundamentals/Slide01.png)
+
+## Classic Machine Learning (1990-2013)
+
+![](img/text_analysis_fundamentals/Slide03.png)
+
+## Word-Embeddings (2013-2020)
+
+![](img/text_analysis_fundamentals/Slide04.png)
+
+## But Massive advancements in recent years
+
+1.  Massive advancement in how text can be represented at numbers
+
+    -   From simple word counts to word embeddings
+    -   From Static to contextual word embeddings
+    -   Increasingly better embedding of meaning
+
+2.  Pretraining and transfer learning
+
+    -   Word embeddings can be trained on large scale corpus
+    -   Pretrained word embeddings can fine-tuned (less training data) and then used for downstream tasks
+
+3.  Transformers and Generative AI
+
+    -   Larger and larger "language models"
+    -   New mechanisms for better embedding (e.g., Attention)
+    -   Conversational frameworks and Generative AI
+
+# The Rise of Transformers and Transfer Learning {.centered background-color="steelblue"}
+
+<center>![](https://pyxis.nymag.com/v1/imgs/7e2/b83/01a7d3094f5856a53f409a59b9d16e392e-22-transformers-fighting.2x.rhorizontal.w710.jpg){width="65%"}</center>
+
+## Origin of the Transformer
+
+-   Until 2017, the state-of-the-art for natural language processing was using a deep neural network (e.g., recurrent neural networks, long short-term memory and gated recurrent neural networks)
+
+-   In a preprint called "Attention is all you need", published in 2017 and cited more than 95,000 times, the team of Google Brain introduced the so-called **Transformer**
+
+-   It represents a neural network-type architecture that learns context and thus meaning by tracking relationships in sequential data like the words in this sentence
+
+![](img/transformer_paper.png)
+
+## What was so special about transformers?
+
+-   Transformer models apply an evolving set of mathematical techniques, called **attention** or **self-attention**, to detect subtle ways even distant data elements in a series influence and depend on each other.
+
+-   The proposed network structure had notable characteristics:
+
+    -   No need for recurrent or convolutional network structures
+    -   Based solely on attention mechanism (stacked on top of one another)
+    -   Required less training time (can be parallelized)
+
+-   It thereby outperformed prior state-of-the-art models in a variety of tasks
+
+-   The transformer architecture is the back-bone of all current large language models and so far drives the entire "AI revolution"
+
+## Overview of the architecture
+
+::: columns
+::: {.column width="60%"}
+-   The figure on the right represent an abstract overview of a transformer's architecture
+
+-   It can be used for next-token-predictions
+
+    -   classic example is translation: e.g., english-to-dutch
+    -   but also: question-to-answer, text-to-summary, sentence-to-next-word...
+    -   an thus also for text classification: text-to-label
+
+-   Although models can differ, they generally include:
+
+    -   An encoder-decoder framework
+    -   Word embeddings + positional embedding
+    -   Attention and self-attention modules
+
+[Vaswani et al. 2017]{style="font-size:0.55em;"}
+:::
+
+::: {.column width="40%"}
+![](img/transformer_architecture.png)
+:::
+:::
+
+## Basic Encoder-Decoder Framework (for Translation)
+
+![](img/transformer/Slide01.png)
+
+## Stacked Encoders and Decoders
+
+![](img/transformer/Slide02.png)
+
+## More elaborate encoding of words
+
+![Source: Alammar, 2018](img/transformer/Slide03.png)
+
+## Inside of an encoder and a decoder
+
+-   The word, position, and time signal embeddings are passed to the first encoder
+
+-   Here, they flow through a self-attention layer, which further refines the encoding by "looking at other words" as it encodes a specific word
+
+-   The outputs of the self-attention layer are fed to a feed-forward neural network.
+
+-   The decoder likewise has both layers as well, but also an extra attention layer that helps to focus on different parts of the input (e.g., the encoders outputs)
+
+![Source: Alammar, 2018](img/transformer/encoder-decoder.png)
+
+## Putting it all together
+
+![Source: Alammar, 2018](img/transformer/Slide10.png)
+
+## Different Types of Models for different tasks
+
+![](https://heidloff.net/assets/img/2023/02/transformers.png)
+
+## BERT vs. GPT (or Llama)
+
+-   Encoder-Decoder Transformers:
+
+    -   BART (Lewis et al., 2019): tanslation, but also text generation ,...
+
+-   Encoder-Only Transformer
+
+    -   BERT (Devlin et al., 2019): Embedding-only, then down-stream tasks...
+
+-   Decoder-Only Transformer:
+
+    -   GPT-series (OpenAI): Text generation, ...
+    -   Llama (Meta): Text generation...
+
+## Text Classification with Transformers, Encoder-Only
+
+![](img/text_analysis_fundamentals/Slide04.png)
+
+## Text Classification with Transformers, Decoder-Only
+
+![](img/text_analysis_fundamentals/Slide05.png)
+
+## Pre-training, Fine-tuning, and Transfer Learning
+
+-   Generally, transformer models are pre-trained using specific natural language processing tasks
+
+    -   Mask Language Modelling (LM): simply mask some percentage of the input tokens at random, and then predict those masked tokens
+    -   Next sentence prediction (NSP): predict sentence B from sentence A to model relationships between sentences
+
+-   The general idea was to use a pre-trained model and then "fine-tune" it on the specific tasks it is supposed to perform (e.g., annotating text with topics or sentiment)
+
+-   Although the transformer's architecture has made training more efficient (due to the ability to parallelize), it nonetheless requires significant computing power to fine-tune a model
+
+-   As pre-training often involves tasks that are different than what we want the model to do, this is often denoted as "transfer learning", thus a type of learning that transfers to other task as well
+
+-   As transformer-based models become larger and larger, the need for fine-tuning decreases as they already do well on down-stream tasks (e.g., using only prompt-engineering)
+
+# Very Large Language Models: Llama and GPT {.centered background-color="steelblue"}
+
+<center>
+
+![](img/GPT_viz_imagination.jpg){width="65%"}
+
+[Source: [Christian Behler on Medium](https://betterprogramming.pub/how-to-create-the-matrix-text-effect-with-javascript-325c6bb7d96e)]{style="font-size:55em;"}
+
+</center>
+
+## What are large language models
+
+-   A large language model (LLM) is a type of language model notable for its ability to achieve general-purpose language understanding and generation
+
+-   LLMs acquire these abilities by using massive amounts of data to learn billions of parameters during training and consuming large computational resources during their training and operation
+
+-   LLMs are still just a type of artificial neural networks (mainly transformers!) and are pretrained using self-supervised learning and semi-supervised learning (e.g., Mask Language Modelling)
+
+-   As so-called autoregressive language models, they take an **input text** and repeatedly **predicting the next token** or word
+
+## Current models
+
+<center>
+
+::: columns
+::: {.column width="10%"}
+![](https://cdn.prod.website-files.com/63da3362f67ed649a19489ea/65a762d88d34c9b08de34039_659f1e3a57ce506fbcc81b42_who%2520owns%2520chatgpt_logo.png)
+:::
+
+::: {.column width="10%"}
+![](https://beginswithai.com/wp-content/uploads/2024/06/claude-3.5-sonnet.png.webp)
+:::
+
+::: {.column width="10%"}
+![](https://kodexolabs.com/wp-content/uploads/2024/07/Llama-3.1.webp)
+:::
+
+::: {.column width="10%"}
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Google_Gemini_logo.svg/2560px-Google_Gemini_logo.svg.png)
+:::
+
+::: {.column width="10%"}
+![](https://upload.wikimedia.org/wikipedia/en/1/1f/LowRes_80dpi_Mistral_AI_Logo.png)
+:::
+
+::: {.column width="10%"}
+![](https://searchengineland.com/figz/wp-content/seloads/2019/10/GoogleBert_1920_3.jpg)
+:::
+
+::: {.column width="10%"}
+![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgg06dhS6iRpIv8hvyonlwncW-RC5n59E8vhaWRgIVqTP-Z1AbTBDtdJsX8ClDILimlGWlRAIORuZn8349TfUFmgqYyCRcoctTvNC_Kv70z41hCKd-0Fy4Ic4EgKyY0LxQ5rDt1eXi3jvEcTxgTC62glTl4e5Cffge50iiF0fxCBqmq9v-u7KTfIL4Lxb0/s1600/Gemma_social.png)
+:::
+:::
+
+</center>
+
+![](img/generativeAI2.png)
+
+## Next token prediction (as in GPT-2)
+
+![](img/gpt2-1.png)
+
+## Next token prediction (as in GPT-2)
+
+![](img/gpt2-2.png)
+
+## Next token prediction
+
+![](img/gpt2-3.png)
+
+## GPT-Series by OpenAI
+
+-   Generative Pre-trained Transformer (GPT), is a set of state-of-the-art large language model developed by OpenAI.
+
+-   Particularly GPT-3, released publicly in November 2022 together with a chat interface, caused a lot of public attention
+
+-   Millions of users in a very short amount of time (faster than Facebook, Instagram, TikTok, etc...), now 1.5 Billion users
+
+<center>![](https://i0.wp.com/chatgptdutch.org/wp-content/uploads/2023/08/cropped-chatgpt-icon-logo.png){width="50%"}</center>
+
+## Overview of the GPT-series by OpenAI
+
+![Source: Wikipedia](img/gpt-series.png)
+
+# A Peek into the Architecture of GPT {.centered background-color="steelblue"}
+
+## Next-token-Prediction based on input text
+
+![Source: Adapted from Alammar, 2018](img/transformer3/Slide1.png)
+
+## Intricate Meaning of Words
+
+
+![](img/harry1.png)
+
+
+## Intricate Meaning of Words
+
+
+![](img/harry2.png)
+
+    
+## Core Idea: Better Encoding
+
+-   Based on static word-embeddings (that we discussed in the last lecture), the word "Harry" would get the same embeddings vector, even though we clearly see that they refer to different persons
+
+-   The same is true for words like "mole" (which can refer to an animal or a little skin spot) or "model" (e.g., a fashion model vs. a computer model)
+
+-   LLMs like GPT work so well, because their architecture allows them to encode additional information into a token's embedding vector and take surrounding tokens into account
+
+-   This way, they learn which name (e.g., Harry) refers to which person or which word (e.g., model) refers to which meaning
+
+## A large neural network
+
+![Source: Alammar, 2018 and 3Blue1Brown, 2024](img/transformer3/Slide2.png)
+
+## Many Layers of Attention
+
+![Source: Alammar, 2018 and 3Blue1Brown, 2024](img/transformer3/Slide3.png)
+
+## Many Layers of Attention
+
+![Source: Alammar, 2018 and 3Blue1Brown, 2024](img/transformer3/Slide4.png)
+
+## General idea behind Attention
+
+-   In general terms, self-attention works encodes how similar each word is to all the words in the sentence, including itself
+
+-   Once the similarities are calculated, they are used to determine how the transformers should update the embeddings of each word
+
+![](img/transformer2/Slide2.png)
+
+## General idea behind Attention
+
+-   In general terms, self-attention works encodes how similar each word is to all the words in the sentence, including itself.
+
+-   Once the similarities are calculated, they are used to determine how the transformers should update the embeddings of each word
+
+![](img/transformer2/Slide3.png)
+
+## General idea behind Attention
+
+-   In general terms, self-attention works encodes how similar each word is to all the words in the sentence, including itself.
+
+-   Once the similarities are calculated, they are used to determine how the transformers should update the embeddings of each word
+
+![](img/transformer2/Slide5.png)
+
+## Attention in Detail
+
+![](img/transformer3/Slide5.png)
+
+## Attention in Detail
+
+![](img/transformer3/Slide6.png)
+
+## Attention in Detail: Static Embeddings
+
+![Inspiration: 3Blue1Brown, 2024](img/transformer3/Slide7.png)
+
+## Attention in Detail: Positional encoding
+
+![Inspiration: 3Blue1Brown, 2024](img/transformer3/Slide8.png)
+
+## Attention in Detail: Mechanism
+
+![Inspiration: 3Blue1Brown, 2024](img/transformer3/Slide9.png)
+
+## Attention in Detail: Mechanism
+
+![Inspiration: 3Blue1Brown, 2024](img/transformer3/Slide10.png)
+
+## Updating word embeddings in the k-dimensional space
+
+![](img/transformer3/Slide11.png)
+
+## Updating word embeddings in the k-dimensional space
+
+![Inspiration: 3Blue1Brown, 2024](img/transformer3/Slide12.png)
+
+## Updating word embeddings in the k-dimensional space
+
+![Inspiration: 3Blue1Brown, 2024](img/transformer3/Slide13.png)
+
+## Summary of the GPT Architecture
+
+-   This was only a very short peek into the architecture of GPT (and to degree also into large language models generally)
+
+-   Decoder-only model designed for text generation
+
+-   Based on static word-embedding that are updated via postional encoding and many attention layers that can even encode distant relationships between words and sentences
+
+-   In principle, just a lot of matrix algebra: We are constantly updating a multitude of vectors that represent words and their meaning in the context of a sentence and the entire text
+
+-   Now, we can ask how we can use these models for text classification tasks
+
+# Using LLMs for Text Classification {.centered background-color="steelblue"}
+
+## Text Classification with Large Language Models
+
+![](img/text_analysis_fundamentals/Slide06.png)
+
+## Zero-Shot, One-Shot, and Few-Shot Classification
+
+-   Classic machine learning models (last lecture) are typically trained on a specific set of classes, and their performance is evaluated on the same set of classes during testing
+
+-   LLMs have the ability to perform a task or make predictions on a set of classes that it has never seen or been explicitly trained on
+
+-   In other words, the model can generalize its pre-trained knowledge to new, unseen tasks without training for those tasks
+
+-   Depending on the type of **prompt engineering**, i.e., how we describe the task for the LLM, we differentiate three types of classifications:
+
+    -   Zero-Shot: No examples are given
+    -   One-Shot: One example is given
+    -   Few-Shot: More than one example is given
+
+-   It is not straight-forward which strategy works best for which task.
+
+-   At times, zero-shot classification works well as the model is not too tied to the examples
+
+
+## Overview of classification without training
+
+![](img/zero-shot.png)
+
+## How to work with LLMs
+
+-   There are generally three ways in which we can work with LLMs:
+
+    -   Assess open source models via the hugging face API (only smaller rates per minute, but still useful)
+    -   Assess models such as GPT via their respective API (limited rates per minute, and costs per token)
+    -   Download and use models via "ollama" on our own computer (requires some space and can be computationally intensive)
+
+-   In this course, we are going to "play around" with GPT-3.5 and GPT-4 via the OpenAI API and (if possible) via download small models via ollama
+
+    -   The package `tidyllm` provides a straightforward workflow that intersects with the tidy-style analyses that we already now
+    -   API for openAI will be provided by teachers
+    -   A tutorial on how to install ollama will be provided
+
+## A small example in `tidyllm`
+
+-   In the package `tidyllm`, we can create a prompt using the function \`llm_message()\`\`
+
+-   We then pass this prompt to a chat and specify the model we want to use (this can be a local model, like llama, or a model on a server, like GPT)
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+library(tidyverse)
+library(tidymodels)
+library(glue)
+library(tidyllm)
+
+llm_message("What is this sentence about: To be, or not to be: that is the question.") |> 
+  chat(ollama(.model = "llama3", .temperature = 0)) 
+
+```
+
+## Zero-Shot Classification: Prompt Engineering
+
+-   In a zero-shot classification framework, we simply provide the task.
+
+-   Additionally, we can give potential answer options, which help streamlining the code (otherwise, we get full text answers due to the next-token-prediction logic of LLMs!)
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+set.seed(42)
+
+# We create a small test data set
+test_data <- science_data |> 
+  sample_n(size = 100)
+
+# We create a codebook that includes all texts.
+codebook <- glue("Identify the discipline based on this abstract: {abstract}
+      
+                  Pick one of the following numerical codes from this list. 
+                  Respond only with the code!
+                  
+                  1 = Computer Science
+                  2 = Physics
+                  3 = Statistics",
+                  abstract = test_data$text)
+
+# Create a list of llm-message prompts
+classification_task <- map(codebook, llm_message)
+```
+
+-   We create a list that contains already all prompts with all texts
+
+## Zero-Shot Classification: Sequential Prompting
+
+```{r}
+#save(results_llama, file = "slides/results/results_llama.RData")
+load("results/results_llama.RData")
+```
+
+-   Next, we create a function that sends the message via the API to the relevant model
+
+-   Then, we use the function `pmap_dfr()` to "map" this function across our list of prompts
+
+```{r, eval = F}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+# Create a function that to map across the prompts
+classify_sequential_llama <- function(texts, message){
+    raw_code <- message |>
+        chat(ollama(.model = "llama3", .temperature = .0)) |>
+        get_reply() 
+    tibble(text = texts, label = raw_code) 
+}
+
+# Run the classification by sequentially prompting LLama3
+results_llama <- tibble(texts = test_data$text, 
+                        message = classification_task) |> 
+  pmap_dfr(classify_sequential_llama, .progress = T) 
+
+```
+
+As a result, we get a data set with the relevant code.
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+head(results_llama)
+```
+
+## Validation of our Classification with LLama3
+
+-   We can use the same functions from the `tidymodels` package to get our performance scores
+
+-   Llama3 actually does amazingly well on this task without any prior training!
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+# Create predict table
+predict_llama <- test_data |> 
+  bind_cols(results_llama |> select(predicted = label)) |> 
+  mutate(truth = factor(label), 
+          predicted = factor(case_when(predicted == 1 ~ "computer science",
+                                       predicted == 2 ~ "physics",
+                                       predicted == 3 ~ "statistics")))
+
+
+# Define performance scores
+class_metrics <- metric_set(accuracy, precision, recall, f_meas)
+
+# Check performance 
+predict_llama |> 
+  class_metrics(truth = truth, estimate = predicted)
+```
+
+## Testing with other models
+
+::: columns
+::: {.column width="48%"}
+```{r, echo = F}
+#save(predict_nn, file = "slides/results/predict_nn.RData")
+load("results/predict_nn.RData")
+#save(predict_gpt, file = "slides/results/predict_gpt.RData")
+load("results/predict_gpt.RData")
+  
+```
+
+Our neural network from last week:
+
+```{r, eval = F}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+# Create recipe
+rec <- recipe(label ~ text, 
+              data = science_data) |>               
+  step_tokenize(text, 
+                options = list(strip_punct = T,             
+                              strip_numeric = T)) |>       
+  step_stopwords(text, language = "en") |>                        
+  step_tokenfilter(text, min_times = 20, 
+                   max_tokens = 1000) |>                
+  step_tf(all_predictors()) |> 
+  step_normalize(all_predictors())   
+
+# Create workflow
+ann_workflow <- workflow() |>
+  add_recipe(rec_norm) |>    
+  add_model(nnet_spec)
+
+# Create predict table
+predict_nn <- predict(m_ann, test_data) |> 
+   bind_cols(test_data) |> 
+   mutate(truth = factor(label),
+          predicted = .pred_class)
+```
+:::
+
+::: {.column width="48%"}
+The same classification with GPT-4:
+
+```{r, eval = F}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+# Create a function that to map across the prompts
+classify_sequential_gpt4 <- function(texts,message){
+    raw_code <- message |>
+        chat(openai(.model = "gpt-4", 
+                    .temperature = .0)) |>
+        get_reply() 
+    tibble(text = texts, label = raw_code) 
+}
+
+# Run commands
+results_gpt <- tibble(texts = test_data$text, 
+                      message = classification_task) |> 
+  pmap_dfr(classify_sequential_gpt4, .progress = T) 
+
+# Create predict table
+predict_gpt <- test_data |> 
+  bind_cols(results_gpt |> 
+            select(predicted = label)) |> 
+  mutate(truth = factor(label), 
+          predicted = parse_number(predicted),
+          predicted = factor(case_when(predicted == 1 ~ "computer science",
+                                       predicted== 2 ~ "physics",
+                                       predicted == 3 ~ "statistics")))
+```
+:::
+:::
+
+## Comparison
+
+As we can see, both LLMs perform almost as good as out neural network, GPT-4 does even better, despite not having been trained on any of the data!
+
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+#| output-location: column-fragment
+#| fig-width: 9
+#| fig-height: 6.5
+bind_rows(
+   predict_llama |> 
+   class_metrics(truth = truth, 
+                 estimate = predicted) |> 
+   mutate(model = "LLM: llama3"),
+   predict_nn |> 
+   class_metrics(truth = truth, 
+                 estimate = predicted) |> 
+   mutate(model = "Neural Network"),
+   predict_gpt |> 
+   class_metrics(truth = truth, 
+                 estimate = predicted) |> 
+   mutate(model = "LLM: gpt-4")
+) |> 
+  ggplot(aes(x = .metric, y = .estimate, 
+             fill = model)) +
+  geom_col(position = position_dodge(), alpha = .5) +
+  geom_text(aes(label = round(.estimate, 3)), 
+            position = position_dodge(width = 1)) +
+  ylim(0, 1) +
+  coord_flip() +
+  scale_fill_brewer(palette = "Dark2") +
+  theme_minimal(base_size = 18) +
+  labs(y = "Performance Score", x = "", fill = "")
+```
+
+## Examples in the literature
+
+::: columns
+::: {.column width="80%"}
+-   Baluff et al. (2023) investigated a recent case of media capture, a mutually corrupting relationship between political actors and media organizations.
+
+-   This case involves former Austrian chancellor who allegedly colluded with a tabloid newspaper to receive better news coverage in exchange for increased ad placements by government institutions.
+
+-   They implemented automated content analysis (using BERT) of political news articles from six prominent Austrian news outlets spanning 2012 to 2021 (n = 188,203) and adopted a difference-in-differences approach to scrutinize political actors’ visibility and favorability in news coverage for patterns indicative of the alleged serious breach of professional political and journalistic norms.
+:::
+
+::: {.column width="20%"}
+![](https://upload.wikimedia.org/wikipedia/commons/8/82/Sebastian_Kurz_%282018-02-28%29_%28cropped%29.jpg)
+:::
+:::
+
+## Methods
+
+-   Used a German-language GottBERT model (Scheible et al., 2020) that they further fine-tuned for the task using publicly available data from the AUTNES Manual Content Analysis of the Media Coverage 2017 and 2019 (Galyga et al., 2022; Litvyak et al., 2022c)
+
+-   Comparatively difficult task, but were able to reach a satisfactory F1-Score of 0.77 (precision = 0.77, recall = 0.77).
+
+![](img/kurz1.png)
+
+## Findings
+
+-   The findings indicate a substantial increase in the news coverage of the former Austrian chancellor within the news outlet that is alleged to have received bribes.
+
+-   In contrast, several other political actors did not experience similar shifts in visibility nor are similar patterns identified in other media outlets.
+
+![](img/kurz2.png)
+
+# Summary and conclusion {background-color="steelblue"}
+
+## A Look Back at the Chronology of NLP
+
+![](img/timeline/Slide1b.png)
+
+## A Look Back at the Chronology of NLP
+
+![](img/timeline/Slide2b.png)
+
+## A Look Back at the Chronology of NLP
+
+![](img/timeline/Slide3b.png)
+
+## Explosion in model size?
+
+```{r, echo = F}
+#| fig.width: 8
+#| fig.height: 5
+options(scipen = 100000000)
+tibble(model = c("ELMo", "BERT-Large", "GPT-2", "Megatron-LM", "T5", "Turing NLG", "GPT-3", "Megatron-Turing NLG", "GPT-4"),
+       date = c("2018-02", "2018-10", "2019-02", "2019-08", "2019-09", "2020-02", "2020-07", "2021-10", "2023-03"),
+       size = c(94, 340, 1500, 8300, 11000, 17200, 175000, 530000, 1760000),
+       size_label = c("94M", "340M", "1.5B", "8.3B", "11B", "17.2B", "175B", "530B", "1.76T")) |> 
+  ggplot(aes(x = date, y = size)) +
+  geom_line(aes(group = 1), color = "grey10") +
+  geom_point(size = 3, color = "steelblue") +
+  geom_text(aes(label = size_label), nudge_y = -.15, nudge_x = .1, size = 3, color = "grey20") +
+  geom_text(aes(label = model), nudge_y = .2, nudge_x = -.25) +
+  scale_y_log10(breaks = scales::log_breaks()) +
+  theme_classic(base_size = 15) +
+  labs(x = "", y = "Model size (in Millions of Parameters)")
+```
+
+## Performance depends strongly on scale
+
+
+
+![Kaplan et al, 2020](img/scaling_law.png)
+
+- Performance depends strongly on scale, weakly on model shape
+
+- Model performance is mostly related toscale, which consists of three factors: 
+
+  - the number of model parameters (excluding embeddings)
+      
+  - the size of the dataset
+      
+  - the amount of compute used for training
+      
+- Within reasonable limits, performance depends very weakly on other architectural hyperparameters such as depth vs. width
+
+## Environmental Impact
+
+![](https://hai.stanford.edu/sites/default/files/inline-images/AIIndex_2023_StateofAI_Blog_4.jpg)
+
+## Ethical considerations
+
+-   Training large language models requires significant computational resources, contributing to a substantial carbon footprint. 
+
+-   LLMs can inherit and perpetuate biases present in their training data, which can result in the generation of biased or unfair content, reflecting and potentially amplifying societal biases and stereotypes.
+
+-   Developers and users must be aware of the potential for bias and take steps to mitigate it during model training and deployment.
+
+-   The fact that some LLMs are developed, trained, and employed behind closed doors causes yet another ethical dilemma in using them!
+
+
+## Reminder: Guidelines
+
+
+![](img/ethical_guidelines.png)
+
+## Conclusion
+
+-   Advancement in NLP and AI are fast-paced; difficult to keep up
+
+-   LLMs promise immense potential for communication research
+
+-   Yet, large language models can contain biases or even hallucinate!
+
+    -   Validation, validation, validation!
+    
+-   Also: We see already that more and more content online is AI-based. What does it mean if in the future, LLMs are trained on their own content?
+
+::: {layout="[32, 32, 32]"}
+![A.I (Steven Spielberg)](https://s3.amazonaws.com/static.rogerebert.com/uploads/review/primary_image/reviews/great-movie-ai-artificial-intelligence-2001/EB20110707REVIEWS08110709988AR.jpg)
+
+![Her (Spike Jones)](https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/ea5cab25137457.563425fa7c93f.png)
+
+![Ex Machina (Alex Garland)](https://www.azcentral.com/gcdn/-mm-/8595b75e3791fcb4aef999b94940f74898e5ea59/c=3-0-1591-897/local/-/media/2015/04/22/Phoenix/Phoenix/635653113360425789-alicia-vikander.jpg)
+:::
+
+## And it doesn't stop here...
+
+-   Large language models like "llava" can also identify and describe images...
+
+::: columns
+::: {.column width="28%"}
+![](img/england.jpeg)
+:::
+
+::: {.column width="70%"}
+```{r}
+#| echo: true
+#| include: true
+#| code-line-numbers: true
+#| class-output: output
+llm_message("Describe this picture? Can you guess where it was made?",
+                                 .imagefile = "img/england.jpeg") |>
+  chat(ollama(.model = "llava", .temperature = 0))
+```
+:::
+:::
+
+# Thank you for your attention! {background-color="steelblue"}
+
+## Required Reading
+
+<br><br>
+
+Kroon, A., Welbers, K., Trilling, D., & van Atteveldt, W. (2023). Advancing Automated Content Analysis for a New Era of Media Effects Research: The Key Role of Transfer Learning. Communication Methods and Measures, 1-21
+
+<br>
+
+*(available on Canvas)*
+
+------------------------------------------------------------------------
+
+## Reference {.smaller}
+
+-   Alammar, J. (2018). The illustrated Transformer. Retrieved from: https://jalammar.github.io/illustrated-transformer/
+
+-   Andrich, A., Bachl, M., & Domahidi, E. (2023). Goodbye, Gender Stereotypes? Trait Attributions to Politicians in 11 Years of News Coverage. Journalism & Mass Communication Quarterly, 100(3), 473-497. https://doi-org.vu-nl.idm.oclc.org/10.1177/10776990221142248
+
+-   Balluff, P., Eberl, J., Oberhänsli, S. J., Bernhard, J., Boomgaarden, H. G., Fahr, A., & Huber, M. (2023, September 15). The Austrian Political Advertisement Scandal: Searching for Patterns of "Journalism for Sale". https://doi.org/10.31235/osf.io/m5qx4
+
+-   Devlin, J., Chang, M. W., Lee, K., & Toutanova, K. (2018). Bert: Pre-training of deep bidirectional transformers for language understanding. arXiv preprint arXiv:1810.04805.
+
+-   Kaplan, J., McCandlish, S., Henighan, T., Brown, T. B., Chess, B., Child, R., ... & Amodei, D. (2020). Scaling laws for neural language models. arXiv preprint arXiv:2001.08361.
+
+-   Kroon, A., Welbers, K., Trilling, D., & van Atteveldt, W. (2023). Advancing Automated Content Analysis for a New Era of Media Effects Research: The Key Role of Transfer Learning. Communication Methods and Measures, 1-21
+
+-   Touvron, H., Lavril, T., Izacard, G., Martinet, X., Lachaux, M. A., Lacroix, T., ... & Lample, G. (2023). Llama: Open and efficient foundation language models. arXiv preprint arXiv:2302.13971.
+
+-   Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., ... & Polosukhin, I. (2017). Attention is all you need. Advances in neural information processing systems, 30.
+
+## Example Exam Question (Multiple Choice)
+
+How are word embeddings learned?
+
+<br>
+
+A. By assigning random numerical values to each word
+
+B. By analyzing the pronunciation of words
+
+C. By scanning the context of each word in a large corpus of documents
+
+D. By counting the frequency of words in a given text
+
+## Example Exam Question (Multiple Choice)
+
+How are word embeddings learned?
+
+<br>
+
+A. By assigning random numerical values to each word
+
+B. By analyzing the pronunciation of words
+
+**C. By scanning the context of each word in a large corpus of documents**
+
+D. By counting the frequency of words in a given text
+
+## Example Exam Question (Open Format)
+
+What does zero-shot learning refer to in the context of large language models?
+
+. . .
+
+<br>
+
+In the context of large language models, zero-shot learning refers to the ability of a model to perform a task or make predictions on a set of classes or concepts that it has never seen or been explicitly trained on. Essentially, the model can generalize its knowledge to new, unseen tasks without specific examples or training data for those tasks.
+
+In traditional machine learning, models are typically trained on a specific set of classes, and their performance is evaluated on the same set of classes during testing. Zero-shot learning extends this capability by allowing the model to handle tasks or categories that were not part of its training set.
+
+In the case of large language models like GPT-3, which is trained on a diverse range of internet text, zero-shot learning means the model can understand and generate relevant responses for queries or prompts related to concepts it hasn't been explicitly trained on. This is achieved through the model's ability to capture and generalize information from the vast and varied data it has been exposed to during training.
