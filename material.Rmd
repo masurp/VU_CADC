@@ -147,7 +147,7 @@ In the third part of the course, students will work on their own research projec
 #### Practical Session 1
 
 - Handouts: 
-    - Zero-Shot Text classification using Transformers/GPT/LLama (not yet available)
+    - [Zero-Shot Text classification using GPT and LLama](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_LLM_zero-shot-classification_2024.md)
 
 #### Practical Session 2
 
