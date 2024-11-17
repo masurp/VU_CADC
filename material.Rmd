@@ -132,7 +132,7 @@ In the third part of the course, students will work on their own research projec
 
 - Chapter 8 & 11 in [Computational Analysis of Communication](https://cssbook.net/) by Van Atteveldt et al. 
 - [Supervised Machine Learning for Text Analysis in R](https://smltar.com/) (Online Book on Machine Learning in R)
-- 3Blue1Brown: [What is a neural network?](https://www.youtube.com/watch?v=aircAruvnKk) (Fantastic explanation of basic principles!)
+- 3Blue1Brown: [What is a neural network?](https://www.youtube.com/watch?v=aircAruvnKk) (Fantastic explanation of basic principles by 3Blue1Brown)
 
 <br>
 <hr>
@@ -142,7 +142,7 @@ In the third part of the course, students will work on their own research projec
 #### Lecture: Transformers and Large Language Models
 
 - Slides Lecture 4:
-    - [Download Slides] (not yet available)
+    - [Download Slides](slides/04_largelanguagemodels_2024.html)
 
 #### Practical Session 1
 
@@ -163,7 +163,7 @@ In the third part of the course, students will work on their own research projec
 #### Additional resources: 
 
 - The "original" [transformer paper](https://arxiv.org/abs/1706.03762) by Vaswani et al. 2017.
-- A fun, but suprisingly detailed [Intro to Transformers](https://www.youtube.com/watch?v=zxQyTK8quyY&t=845sSt) on Youtube (StatsQuest with Josh Starmer)
+- A fun, but suprisingly detailed [Intro to GPT](https://youtu.be/wjZofJX0v4M?si=psd17zf5dA0W6EjK) on Youtube (3Blue1Brown)
 
 <br>
 <hr>
