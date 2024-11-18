@@ -26,11 +26,18 @@ With GPT being a generative pre-trained transformer which was trained on next-to
 
 # Preparation
 
-For this tutorial, we are again going to load the `tidyverse`, `tidytext` (for some visualizations), and a new package called `tidyllm`. This last package provides function for working with LLMs, whether local (via ollama) or via API (e.g., GPT from OpenAI) 
+For this tutorial, we are again going to load the `tidyverse`, `tidytext` (for some visualizations), `glue` (useful for glueing together different texts and objects) and a new package called `tidyllm`. This last package provides function for working with LLMs, whether local (via ollama) or via API (e.g., GPT from OpenAI). 
 
 ```{r}
 library(tidyverse)
 library(tidytext)
+library(glue)
+```
+
+Whereas the first three are available via CRAN and can be installed with `install.packages()`, we do want to install the latest development version, which has a slightly new framework. We can do this via the `remotes` package (see code below). 
+
+```{r}
+#remotes::install_github("edubruell/tidyllm")
 library(tidyllm)
 ```
 
@@ -68,9 +75,9 @@ To work with LLMs locally on our own computers, we need to install "Ollama", whi
 
 ## Installing Ollama and downloading a model
 
-You can download ollama here: https://ollama.com/. Click on the download button, choose the right operating system. Install the software after it has downloaded. Once we have installed it, we have to download a model. I have found it easiest to use the package `rollama` for this, which has a simple function called `pull_model()`. With the argument `model`, we can specify, which model we want to run. You can find a list of available models here: https://ollama.com/search. That said, I suggest to only download the `llama3.2:1b` model, which takes about 1GB on your computer and should run with most hardware. If you have enough space on your hardware and your computer has at least 12GB RAM (e.g., a newer macbook pro with M-chip), you could also download a larger model, e.g., `llama 3.2:3b` (~2GB) which should perform better. Only if you have a really strong computer, I would suggest to download `llama3.1:8b`, which already takes up 4.7GB on your harddrive. 
+You can download ollama here: https://ollama.com/. Click on the download button, choose the right operating system. Install the software after it has downloaded. Once we have installed it, we have to download a model. I have found it easiest to use the package `rollama` for this, which has a simple function called `pull_model()`. With the argument `model`, we can specify, which model we want to run.  You can find a list of available models here: https://ollama.com/search. That said, I suggest to only download the `llama3.2:1b` model, which takes about 1GB on your computer and should run with most hardware. If you have enough space on your hardware and your computer has at least 12GB RAM (e.g., a newer macbook pro with M-chip), you could also download a larger model, e.g., `llama 3.2:3b` (~2GB) which should perform better. Only if you have a really strong computer, I would suggest to download `llama3.1:8b`, which already takes up 4.7GB on your harddrive. 
 
-If none of this works for you or you don't want to download such a large model, you can skip to the part where we use GPT-3.5-turbo instead. 
+**Note:**  In the code below, please make sure to load the `rollama` model, pull the model that you want to download and then again `detach` the `rollama` package as it otherwise overwrites a function from the `tidyllm` package that we need. 
 
 
 ```{r, eval = F}
@@ -78,6 +85,8 @@ library(rollama)
 pull_model(model = "llama3.2:1b")
 detach("package:rollama", unload = TRUE)
 ```
+
+If none of this works for you or you don't want to download such a large model, you can skip to the part where we use GPT-3.5-turbo instead. 
 
 
 ## Simple Prompting
