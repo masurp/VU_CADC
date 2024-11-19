@@ -120,7 +120,7 @@ In the third part of the course, students will work on their own research projec
 #### Practical Session 2
 
 - Handouts:
-    - [Supervised text classification with word-embeddings and neural networks](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_LLM_word-embeddings_2024.md) ([Link to Online Tutorial](https://youtu.be/joLr1EfGfpI))([With Solutions](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_LLM_word-embeddings_2024_complete.md))
+    - [Supervised text classification with word-embeddings and neural networks](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_LLM_word-embeddings_2024.md) ([Link to Online Tutorial](https://youtu.be/joLr1EfGfpI)) ([With Solutions](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_LLM_word-embeddings_2024_complete.md))
     
 
 #### Homework
