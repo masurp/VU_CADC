@@ -110,17 +110,17 @@ In the third part of the course, students will work on their own research projec
 #### Lecture: Text Classification and Classic Machine Learning
 
 - Slides Lecture 3:
-    - [Download Slides](slides/03_classicmachinelearning_2024.html)
+    - [Download Slides](slides/03_classicmachinelearning_2024.html) 
 
 #### Practical Session 1
 
 - Handouts: 
-    - [Supervised text classification using Neural Networks](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_supervised-text-classification-II_2023.md)
+    - [Supervised text classification using Neural Networks](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_supervised-text-classification-II_2023.md) ([With Solutions](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_supervised-text-classification-II_2024_complete.md))
 
 #### Practical Session 2
 
 - Handouts:
-    - [Supervised text classification with word-embeddings and neural networks](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_LLM_word-embeddings_2024.md) ([Link to Online Tutorial](https://youtu.be/joLr1EfGfpI))
+    - [Supervised text classification with word-embeddings and neural networks](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_LLM_word-embeddings_2024.md) ([Link to Online Tutorial](https://youtu.be/joLr1EfGfpI))([With Solutions](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_LLM_word-embeddings_2024_complete.md))
     
 
 #### Homework
