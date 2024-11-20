@@ -152,7 +152,7 @@ In the third part of the course, students will work on their own research projec
 #### Practical Session 2
 
 - Handouts:
-    - [Few-Shot Classification using GPT/Llama]((https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text_LLM_few-shot-classification.md))
+    - [Few-Shot Classification using GPT/Llama](https://github.com/masurp/VU_CADC/blob/main/tutorials/R_text-LLM_few-shot-classification.md)
     
 
 #### Homework
