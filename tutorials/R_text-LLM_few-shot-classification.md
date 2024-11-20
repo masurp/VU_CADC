@@ -12,7 +12,7 @@ Philipp K. Masur
   texts](#classifying-more-than-a-couple-of-texts)
   - [Zero-Shot Classification](#zero-shot-classification)
   - [Validation](#validation)
-- [Classifying with some examples](#classifying-with-some-examples)
+- [Classifying with examples](#classifying-with-examples)
   - [One-Shot Classification](#one-shot-classification)
   - [Validation](#validation-1)
   - [Few-Shot Classification?](#few-shot-classification)
@@ -50,9 +50,9 @@ from the movie description.
 
 ``` r
 # Load data
-movies <- read_csv("tutorials/data/wiki_movie_plots_deduped.csv")
+movies <- read_csv("data/wiki_movie_plots_deduped.csv")
 movies |> 
-  head()
+  head(n = 2)
 ```
 
 Let’s also directly set the OpenAI API key so that we can use the GPT
@@ -161,7 +161,8 @@ movies_small |>
   group_by(title) |> 
   summarize(n = n()) |> 
   arrange(-n) |> 
-  mutate(gpt_tokens = n*1.6)
+  mutate(gpt_tokens = n*1.6) |> 
+  head()
 ```
 
 As you can see, we have movie plots that contain about 4,000 tokens but
@@ -233,7 +234,8 @@ Let’s check out some of the justifications:
 ``` r
 # Justifications
 head(predict_gpt) |> 
-  select(label, justification, text)
+  select(label, justification) |> 
+  head(n = 6)
 ```
 
 Looks good!
@@ -261,7 +263,7 @@ predict_gpt |>
 Pretty good performance overall already. But, can we perhaps further
 improve this?
 
-# Classifying with some examples
+# Classifying with examples
 
 As discussed in the lecture, we can sometimes boost performance by
 adding one (or more) example. We can achieve this by “stacking”
@@ -278,25 +280,19 @@ influence the next response. We thus provide a “better” prompt for the
 classification.
 
 ``` r
-llm_message(
-  glue("What is genre of this movie description: {description}
-      
-        Pick only one of the following codes from the following list. 
-        Only provide the code, nothing else.
-        
-        comedy, horror, or action", 
-        description = movies_small2$text[1])) |> 
-  llm_message(
-    "action", 
-    .role = "assistant") |>  # note the specific role for this answer!
-  llm_message(
-  glue("Now the genre of the following movie descriptions in the same way: {description}
+# First example
+llm_message(glue("What is genre of this movie description: {description}", 
+                description = movies_small2$text[1])) |> 
+# Answer by the model (assistant)
+llm_message("action", .role = "assistant") |>  # Note how we specify the role!
+# Actual tasks (here the next text)
+llm_message(glue("Now the genre of the following movie descriptions in the same way: {description}
                     
-       Again, pick only one of the following codes from the following list. 
-       Only provide the code, nothing else.
-           
-       comedy, horror, or action", 
-      description = movies_small2$text[2])) |> 
+                 Again, pick only one of the following codes from the following list. 
+                 Only provide the code, nothing else.
+                     
+                 comedy, horror, or action", 
+                 description = movies_small2$text[2])) |> 
    chat(openai(.model = "gpt-3.5-turbo",   
                     .temperature = .0))
 ```
@@ -309,14 +305,9 @@ actual classification and then we again `map` them together.
 
 ``` r
 # Example coding 
-example <- glue("What is genre of this movie description: {description}
-      
-                Pick only one of the following codes from the following list. 
-                Only provide the code, nothing else.
-                    
-                comedy, horror, or action", 
-                description = movies_small2$text[1]) |> 
-  llm_message() |> 
+example <- 
+  llm_message(glue("What is genre of this movie description: {description}", 
+                   description = movies_small2$text[1])) |> 
   llm_message("action", .role = "assistant")
 
 # The actual task (this should be familiar from zero-shotting)
@@ -333,7 +324,7 @@ oneshot_tasks <- map(classification_tasks, function(x) example |> llm_message(x)
 
 
 # Check
-oneshot_tasks
+oneshot_tasks[[1]]
 ```
 
 As we can see, the entire history is added to each individual prompt.
@@ -359,7 +350,7 @@ results_gpt_oneshot <- tibble(texts = movies_small2[2:20,]$text,
 
 ## Validation
 
-We check the performance as always
+We check the performance as always:
 
 ``` r
 # Bin prediction to gold standard

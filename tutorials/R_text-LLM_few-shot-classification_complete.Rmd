@@ -12,7 +12,7 @@ editor_options:
 
 
 ```{r, echo=F, message=F}
-knitr::opts_chunk$set(echo = TRUE, results = FALSE, eval = F, message = FALSE, warning = FALSE)
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 library(printr)
 ```
 
@@ -347,8 +347,77 @@ bind_rows(
 Can you extend this logic to a few-shot classification framework? This involves stacking even more llm_message on top of each other. Also: If you have a local model, does its performance also improve with more examples?
 
 ```{r}
-# Solution
+# Two examples
+examples <- 
+  llm_message(glue("What is genre of this movie description: {description}", 
+                  description = movies_small2$text[1])) |> 
+  llm_message("action", .role = "assistant") |> 
+  llm_message(glue("What is genre of this movie description: {description}", 
+                   description = movies_small2$text[2])) |> 
+  llm_message("comedy", .role = "assistant")
+
+classification_tasks <- glue("Now the genre of the following movie descriptions in the same way: {description}
+                             
+                             Pick only one of the following codes from the following list. 
+                             Only provide the code, nothing else.
+                                 
+                             comedy, horror, or action", 
+                   description = movies_small2$text[3:50])  # Start classification at 3 as first two are already used as examples!
+
+# Map tasks together
+fewshot_tasks <- map(classification_tasks, function(x) examples |> llm_message(x))
+
+
+# Check
+fewshot_tasks[[1]]
+
+#Function to classify all 50 texts
+classify_sequential_llama <- function(texts, message){
+    raw_code <- message |>
+        chat(ollama(.model = "llama3",      # I am using my bigger local model here, 
+                    .temperature = .0)) |>  # but feel free to use GPT or your smaller llama model
+        get_reply()
+    tibble(text = texts, label = raw_code) 
+}
+
+# Run classificatios
+results_llama_fewshot <- tibble(texts = movies_small2[3:50,]$text, 
+                                message = fewshot_tasks) |>  
+  pmap_dfr(classify_sequential_llama, .progress = T)
+
+
+# Bin prediction to gold standard
+predict_llama_fewshot <- results_llama_fewshot  |> 
+  select(label) |> 
+  mutate(label = tolower(label)) |> 
+  bind_cols(movies_small2[3:50,]) |> 
+  mutate(label = factor(label, levels = c("action", "comedy", "horror")),
+         genre = factor(genre, levels = c("action", "comedy", "horror")))
+
+
+# Check performance
+
+bind_rows(
+  predict_gpt |> 
+  class_metrics(truth = genre, estimate = label) |> 
+  mutate(type = "GPT, zero-shot"),
+  predict_gpt_oneshot |> 
+  class_metrics(truth = genre, estimate = label) |> 
+  mutate(type = "GPT, one-shot"),
+  predict_llama_fewshot |> 
+  class_metrics(truth = genre, estimate = label) |> 
+  mutate(type = "Llama3, few-shot")
+) |> 
+  ggplot(aes(x = .metric, y = .estimate, fill = type)) +
+  geom_col(position = position_dodge(width = 1)) +
+  geom_text(aes(label = round(.estimate, 2)), position = position_dodge(width = 1)) +
+  coord_flip() +
+  scale_fill_brewer(palette = "Spectral") +
+  ylim(0, 1) +
+  theme_minimal() +
+  labs(x = "", y = "Performance Score", fill = "")
 ```
 
 
+Here, we can see that with two examples (a few shot strategy), I seemingly can match the performance of GPT-3.5 with my much smaller local llama3 model!
 
