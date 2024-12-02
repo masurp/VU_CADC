@@ -201,7 +201,7 @@ In the third part of the course, students will work on their own research projec
 #### Additional methods and resources (handouts and video tutorials)
 
 - A general collection of diverse R tutorials
-    - [The CCS Amsterdam R course material](https://github.com/ccs-amsterdam/r-course-material) 
+    - [CCS Amsterdam R course material](https://github.com/ccs-amsterdam/r-course-material) 
     
 - Basic Statistics in R
     - [Basic Statistics (ANOVA, regression, t-test, etc.)](https://github.com/ccs-amsterdam/r-course-material/blob/master/tutorials/simple_modeling.md) ([Video tutorial](https://www.youtube.com/watch?v=1K3SKsEj9eI)) 
